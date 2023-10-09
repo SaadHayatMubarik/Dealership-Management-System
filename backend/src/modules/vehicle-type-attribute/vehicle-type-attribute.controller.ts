@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { VehicleTypeAttributeService } from './vehicle-type-attribute.service';
 import { VehicleTypeAttributeDto } from './vehicle-type-attribute.dto';
 import { VehicleTypeAttribute } from './Vehicle-type-attribute';
@@ -9,9 +9,14 @@ export class VehicleTypeAttributeController {
     constructor( private vehicleTypeAttributeService: VehicleTypeAttributeService )
     {}
 
-    // @Post('addVehicleTypeAttribute')
-    // addVehicleTypeAttribute(@Body() addVehicleTypeAttributeDto: VehicleTypeAttributeDto): Promise<VehicleTypeAttribute>{
-    //     return this.vehicleTypeAttributeService.addVehicleTypeAttribute(addVehicleTypeAttributeDto);
+    @Post('addVehicleTypeAttribute')
+    addVehicleTypeAttribute(@Body() addVehicleTypeAttributeDto: VehicleTypeAttributeDto): Promise<VehicleTypeAttribute>{
+        return this.vehicleTypeAttributeService.addVehicleTypeAttribute(addVehicleTypeAttributeDto);
+    }
+
+    // @Get('getVehicleTypeAttribute')
+    // getVehicleAttributeByType(@Body() addVehicleTypeAttributeDto: VehicleTypeAttributeDto): Promise<VehicleTypeAttribute[]>{
+    //     return this.vehicleTypeAttributeService.getVehicleAttributeByType(addVehicleTypeAttributeDto);
     // }
 
 }

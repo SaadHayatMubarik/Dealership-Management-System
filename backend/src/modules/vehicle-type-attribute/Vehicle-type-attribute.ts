@@ -14,13 +14,13 @@ export class VehicleTypeAttribute {
      @Column({ nullable: false })
      input_type: string;
 
-     @Column()
-     type_name: string;  
+     // @Column()
+     // type_name: string;  
 
      @OneToMany(() => MultiValueAttribute, (multiValueAttribute) => multiValueAttribute.vehicleTypeAttribute)
      multiValueAttributes: MultiValueAttribute[];
 
-     @ManyToOne(() => VehicleType, (vehicleType) => vehicleType.type_name)
+     @ManyToOne(() => VehicleType, (vehicleType) => vehicleType.vehicleTypeAttributes)
      vehicleType: VehicleType;
 
      // @Column()

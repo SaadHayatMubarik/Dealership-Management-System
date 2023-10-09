@@ -15,15 +15,15 @@ export class VehicleTypeController {
     }
 
     @Get('getVehicleType')
-    getVehicleType(vehicleTypeDto: VehicleTypeDto): Promise<VehicleType[]>{
-        return this.vehicleTypeService.getVehicleType(vehicleTypeDto);
+    getVehicleType(): Promise<VehicleType[]>{
+        return this.vehicleTypeService.getVehicleType();
     }
 
     @Delete('deleteVehicleType')
     @UsePipes(new ValidationPipe())
-    deleteVehicleType( vehicleType:string){
-        console.log(vehicleType + " 1");
-        return this.vehicleTypeService.deleteVehicleType(vehicleType);
+    deleteVehicleType(@Body() deleteVehicleTypeDto: VehicleTypeDto){
+        console.log(deleteVehicleTypeDto + " 1");
+        return this.vehicleTypeService.deleteVehicleType(deleteVehicleTypeDto);
     }
 
     // @Put('updateVehicleType')

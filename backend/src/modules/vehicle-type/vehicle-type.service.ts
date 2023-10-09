@@ -14,23 +14,25 @@ export class VehicleTypeService {
     ){}
 
     async addVehicleType (vehicleTypeDto: VehicleTypeDto): Promise<VehicleType>{
+        // console.log(vehicleTypeDto);
         const vehicleType = new VehicleType();
-        const {typeName} = vehicleTypeDto;
-        vehicleType.type_name = typeName;
-        // console.log(vehicleTypeDto.typeName);
+        const {type_name} = vehicleTypeDto;
+        vehicleType.type_name = type_name;
+        // console.log(typeName);
         await this.vehicleTypeRepositry.save(vehicleType);
         // console.log(vehicleType);
         return vehicleType;
     }
 
-    async getVehicleType (addVehicleTypeDto:VehicleTypeDto): Promise<VehicleType[]>
+    async getVehicleType (): Promise<VehicleType[]>
     {
         return await this.vehicleTypeRepositry.find();
     }
 
-    deleteVehicleType (vehicleType: string){
-        console.log(vehicleType + " 2");
-        return this.vehicleTypeRepositry.delete({ type_name: vehicleType });
+    deleteVehicleType (deleteVehicleTypeDto: VehicleTypeDto){
+        console.log(deleteVehicleTypeDto + " 2");
+        const { type_name} = deleteVehicleTypeDto;
+        return this.vehicleTypeRepositry.delete({ type_name });
     }
 
     // updateVehicleType (vehicleType: string){
