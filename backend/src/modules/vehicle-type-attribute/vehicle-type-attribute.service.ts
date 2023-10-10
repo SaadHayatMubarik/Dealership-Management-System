@@ -2,8 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { VehicleTypeAttribute } from './Vehicle-type-attribute';
 import { Repository } from 'typeorm';
-import { VehicleTypeAttributeDto } from './vehicle-type-attribute.dto';
+import { VehicleTypeAttributeDto } from './dto/vehicle-type-attribute.dto';
 import { VehicleType } from '../vehicle-type/Vehicle-type';
+import { GetVehicleTypeAttributeDto } from './dto/get-vehicle-type-attribute.dto';
 
 @Injectable()
 export class VehicleTypeAttributeService {
@@ -12,13 +13,13 @@ export class VehicleTypeAttributeService {
         @InjectRepository(VehicleTypeAttribute)
         private vehicleTypeAttributeRepositry: Repository<VehicleTypeAttribute>,
         @InjectRepository(VehicleType)
-        private vehcileTypeRepositry: Repository<VehicleType>,
+        private vehicleTypeRepositry: Repository<VehicleType>,
     ){}
 
     async addVehicleTypeAttribute (addVehicleTypeAttributeDto: VehicleTypeAttributeDto): Promise<VehicleTypeAttribute>{
         const vehicleTypeAttribute = new VehicleTypeAttribute();
         const { attributeName , inputType, typeName} = addVehicleTypeAttributeDto;
-        const queryBuilder = this.vehcileTypeRepositry.createQueryBuilder('vehicleType');
+        const queryBuilder = this.vehicleTypeRepositry.createQueryBuilder('vehicleType');
         const typeId = await queryBuilder
         .select('vehicleType.type_id')
         .where('vehicleType.type_name = :typeName', { typeName })
@@ -30,30 +31,26 @@ export class VehicleTypeAttributeService {
         return vehicleTypeAttribute;
     }
 
-    // async getVehicleTypeIdByName(typeName: string):Promise<VehicleType>{
-    //     const queryBuilder = this.vehcileTypeRepositry.createQueryBuilder('vehicleType');
-    //     const typeId = await queryBuilder
-    //     .select('vehicleType.type_id')
-    //     .where('vehicleType.type_name = :typeName', { typeName })
-    //     .getOne();
-    //     return typeId;
-    // }
+    async getVehicleAttributeByType(  getVehicleTypeAttributeDto: GetVehicleTypeAttributeDto): Promise<VehicleTypeAttribute[]>{
+        const { typeName } = getVehicleTypeAttributeDto;
+        const queryBuilder = this.vehicleTypeRepositry.createQueryBuilder('vehicleType');
+        const typeId = await queryBuilder
+        .select('vehicleType.type_id')
+        .where('vehicleType.type_name = :typeName', { typeName })
+        .getOne();
 
-    // async getVehicleAttributeByType(  addVehicleTypeAttributeDto: VehicleTypeAttributeDto): Promise<VehicleTypeAttribute[]>{
-    //     const { typeName } = addVehicleTypeAttributeDto;
-    //     const queryBuilderOne = this.vehcileTypeRepositry.createQueryBuilder('vehicleType');
-    //     const typeId = await queryBuilderOne
-    //     .select('vehicleType.type_id')
-    //     .where('vehicleType.type_name = :typeName', { typeName })
-    //     .getOne();
+        const id = typeId.type_id;
 
-    //     const queryBuilderTwo = this.vehcileTypeRepositry.createQueryBuilder('vehicleTypeAttribute');
-    //     const search = await queryBuilderTwo
-    //     .select('vehicleTypeAttribute.attribute_name')
-    //     .where('vehicleTypeAttribute.vehicleTypeTypeId = :typeId', { typeId })
-    //     .getMany();
-
+        const queryBuildertwo = this.vehicleTypeAttributeRepositry.createQueryBuilder('vehicleTypeAttribute')
+        .select('vehicleTypeAttribute.attribute_name')
+        .where('vehicleTypeAttribute.vehicleTypeTypeId = :id', { id });
         
-    //     return 
-    // }
+        const attributes = await queryBuildertwo.getRawMany();
+    return attributes;
+    }
+
+    deleteVehicleTypeAttributeByName(attributeName: string){
+        // console.log(attributeName);
+        return this.vehicleTypeAttributeRepositry.delete({ attribute_name: attributeName })
+    }
 }

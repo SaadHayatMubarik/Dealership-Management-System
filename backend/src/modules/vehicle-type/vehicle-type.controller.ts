@@ -9,8 +9,6 @@ export class VehicleTypeController {
     constructor(private vehicleTypeService: VehicleTypeService){    }
     @Post('addVehicleType')
     addVehicleType(@Body() addVehicleTypeDto: VehicleTypeDto): Promise<VehicleType> {
-        // console.log('addVehicleTypeDto', addVehicleTypeDto);
-        
         return this.vehicleTypeService.addVehicleType(addVehicleTypeDto)
     }
 
@@ -22,7 +20,6 @@ export class VehicleTypeController {
     @Delete('deleteVehicleType')
     @UsePipes(new ValidationPipe())
     deleteVehicleType(@Body() deleteVehicleTypeDto: VehicleTypeDto){
-        console.log(deleteVehicleTypeDto + " 1");
         return this.vehicleTypeService.deleteVehicleType(deleteVehicleTypeDto);
     }
 

@@ -30,7 +30,6 @@ export class VehicleTypeService {
     }
 
     deleteVehicleType (deleteVehicleTypeDto: VehicleTypeDto){
-        console.log(deleteVehicleTypeDto + " 2");
         const { type_name} = deleteVehicleTypeDto;
         return this.vehicleTypeRepositry.delete({ type_name });
     }

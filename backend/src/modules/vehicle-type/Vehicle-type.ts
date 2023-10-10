@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany, JoinTable } from "typeorm";
 import { VehicleTypeAttribute } from "../vehicle-type-attribute/Vehicle-type-attribute";
 import { Inventory } from "../inventory/Inventory";
 
@@ -11,6 +11,7 @@ export class VehicleType{
     @Column()
     type_name: string;
 
+    @JoinTable()
     @OneToMany(() => VehicleTypeAttribute, (vehicleTypeAttribute) => vehicleTypeAttribute.vehicleType)
     vehicleTypeAttributes: VehicleTypeAttribute[];
     

@@ -11,8 +11,8 @@ export class MultiValueAttribute{
     @Column()
     attribute_value: string;
 
-    @Column()
-    attribute_name: string;
+    // @Column()
+    // attribute_name: string;
 
     @ManyToOne(() => VehicleTypeAttribute, (vehicleTypeAttribute) => vehicleTypeAttribute.multiValueAttributes)
     vehicleTypeAttribute: VehicleTypeAttribute;
