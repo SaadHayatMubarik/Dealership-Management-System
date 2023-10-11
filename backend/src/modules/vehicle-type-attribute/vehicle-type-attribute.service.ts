@@ -24,8 +24,8 @@ export class VehicleTypeAttributeService {
         .select('vehicleType.type_id')
         .where('vehicleType.type_name = :typeName', { typeName })
         .getOne();
-        vehicleTypeAttribute.attribute_name = attributeName;
-        vehicleTypeAttribute.input_type = inputType;
+        vehicleTypeAttribute.attribute_name = attributeName.toLowerCase();
+        vehicleTypeAttribute.input_type = inputType.toLowerCase();
         vehicleTypeAttribute.vehicleType = typeId;
         await this.vehicleTypeAttributeRepositry.save(vehicleTypeAttribute);
         return vehicleTypeAttribute;
@@ -51,6 +51,6 @@ export class VehicleTypeAttributeService {
 
     deleteVehicleTypeAttributeByName(attributeName: string){
         // console.log(attributeName);
-        return this.vehicleTypeAttributeRepositry.delete({ attribute_name: attributeName })
+        return this.vehicleTypeAttributeRepositry.delete({ attribute_name: attributeName.toLowerCase() });
     }
 }

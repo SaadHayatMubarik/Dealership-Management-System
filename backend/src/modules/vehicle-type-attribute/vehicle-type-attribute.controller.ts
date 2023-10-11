@@ -27,5 +27,5 @@ export class VehicleTypeAttributeController {
         // console.log(attributeName);
         this.vehicleTypeAttributeService.deleteVehicleTypeAttributeByName(attributeName);
     }
-
+    
 }

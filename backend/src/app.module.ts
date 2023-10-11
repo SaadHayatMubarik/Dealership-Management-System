@@ -9,6 +9,7 @@ import { typeOrmConfig } from './typeorm/config/typeorm.config';
 import { VehicleTypeModule } from './modules/vehicle-type/vehicle-type.module';
 import { InventoryModule } from './modules/inventory/inventory.module';
 import { VehicleTypeAttributeModule } from './modules/vehicle-type-attribute/vehicle-type-attribute.module';
+import { MultiValueAttributeModule } from './modules/multi-value-attribute/multi-value-attribute.module';
 // import { VehicleTypeModule } from './entities/vehicle-type/vehicle-type.module';
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { VehicleTypeAttributeModule } from './modules/vehicle-type-attribute/veh
     InventoryModule,
     VehicleTypeModule,
     VehicleTypeAttributeModule,
+    MultiValueAttributeModule,
   ],
   // controllers: [AppController],
   // providers: [AppService, InventoryService],
