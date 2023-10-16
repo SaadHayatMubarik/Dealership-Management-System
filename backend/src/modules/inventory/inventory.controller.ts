@@ -8,8 +8,9 @@ import { VehicleType } from '../vehicle-type/Vehicle-type';
 export class InventoryController {
     constructor(private invenotryService: InventoryService){}
 
-    @Post()
+    @Post('addInventory')
     addInventory(@Body() addInventoryDto: AddInventoryDto): Promise<Inventory> {
+        console.log(addInventoryDto);
         return this.invenotryService.addInventory(addInventoryDto)
     }
 

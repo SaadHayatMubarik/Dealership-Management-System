@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsOptional } from "class-validator";
+import { IsNotEmpty, IsNumber, IsOptional } from "class-validator";
 
 export class AddInventoryDto{
     @IsNotEmpty()
@@ -14,8 +14,8 @@ export class AddInventoryDto{
     year: number;
 
     @IsOptional()
-    @IsNotEmpty()
-    chasis_no: string;
+    // @IsNotEmpty()
+    chasisNo: string;
 
     @IsNotEmpty()
     price: number;
@@ -24,20 +24,24 @@ export class AddInventoryDto{
     demand: number;
 
     @IsNotEmpty()
-    date_of_purchase: string;
+    dateOfPurchase: Date;
+
+    @IsNotEmpty()
+    dateOfSale: string;
 
     @IsNotEmpty()
     color: string;
 
     @IsNotEmpty()
-    engine_no: string;
+    engineNo: string;
 
     @IsNotEmpty()
     comments: string;
 
     @IsNotEmpty()
+    @IsNumber()
     grade: number;
 
     @IsOptional()
-    reg_no: string;
+    regNo: string;
 }

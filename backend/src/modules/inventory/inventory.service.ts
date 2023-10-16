@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ConsoleLogger, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Inventory } from './Inventory';
 import { Repository } from 'typeorm';
@@ -16,20 +16,23 @@ export class InventoryService {
 
     async addInventory (addInventoryDto: AddInventoryDto): Promise<Inventory>{
         const inventory = new Inventory();
-        const { make, model , variant , year , chasis_no , price , demand , date_of_purchase , color , engine_no , comments , grade } = addInventoryDto;
+        const { make, model , variant , year , chasisNo , price , demand , dateOfPurchase , color , engineNo , comments , grade , regNo } = addInventoryDto;
+        console.log(addInventoryDto.dateOfPurchase);
         inventory.make = make;
         inventory.model = model;
         inventory.variant = variant;
         inventory.year = year;
-        inventory.chasis_no = chasis_no;
+        inventory.chasis_no = chasisNo;
         inventory.price = price;
         inventory.demand = demand;
-        inventory.date_of_purchase = date_of_purchase;
+        inventory.date_of_purchase = dateOfPurchase;
         inventory.color = color;
-        inventory.engine_no = engine_no;
+        inventory.engine_no = engineNo;
         inventory.comments = comments;
         inventory.grade = grade;
-        inventory.status = InventoryStatus.UNDEFINED;
+        inventory.status = InventoryStatus.UNSOLD;
+        inventory.reg_no = regNo;
+        console.log(inventory);
         await this.inventoryRepository.save(inventory);
         return inventory;
     }

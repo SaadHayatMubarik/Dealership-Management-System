@@ -1,4 +1,15 @@
-import { Controller } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
+import { StockAttributeValueService } from './stock-attribute-value.service';
+import { StockAttributeValueDto } from './stock-attribute-value.dto';
+import { StockAttributeValue } from './Stock-attribute-value';
 
 @Controller('stock-attribute-value')
-export class StockAttributeValueController {}
+export class StockAttributeValueController {
+    constructor(private stockAttributeValueService: StockAttributeValueService)
+    {}
+
+    @Post('addStockAttributeValue')
+    addStockAttributeValue(@Body() addStockAttributeValueDto: StockAttributeValueDto): Promise<StockAttributeValue>{
+        return this.stockAttributeValueService.addStockAttributeValue(addStockAttributeValueDto);
+    }
+}

@@ -32,10 +32,10 @@ price: number;
 demand: number;
 
 @Column()
-date_of_purchase: string;
+date_of_purchase: Date;
 
 @Column({ nullable: true })
-date_sold: string;
+date_sold: Date;
 
 @Column()
 status: InventoryStatus;
@@ -49,10 +49,10 @@ engine_no: string;
 @Column()
 comments: string;
 
-@Column()
+@Column('decimal', { precision: 4, scale: 1 })
 grade: number;
 
-@Column()
+@Column({ nullable: true })
 reg_no: string;
 
 // @Column()
@@ -60,6 +60,6 @@ reg_no: string;
 @OneToOne(() => VehicleType, (vehicleType) => vehicleType.inventory)
 vehicleType: VehicleType;
 
-@OneToMany(() => StockAttributeValue, (stockAttributeValue) => stockAttributeValue.invenotry)
+@OneToMany(() => StockAttributeValue, (stockAttributeValue) => stockAttributeValue.inventory, { cascade: true } )
 stockAttributeValue: StockAttributeValue[];
 }

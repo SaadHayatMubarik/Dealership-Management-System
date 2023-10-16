@@ -13,7 +13,7 @@ export class StockAttributeValue{
     vehicleTypeAttribute: VehicleTypeAttribute;
 
     @ManyToOne(() => Inventory, (inventory) => inventory.stockAttributeValue)
-    invenotry: Inventory;
+    inventory: Inventory;
 
     @ManyToOne(() => MultiValueAttribute, (multiValueAttribute) => multiValueAttribute.stockAttributeValue)
     multiValueAttribute: MultiValueAttribute;
