@@ -1,0 +1,22 @@
+<div [ngClass]="{
+    'dialog-right-align': dialogAlign === 'right',
+    'dialog-left-align': dialogAlign === 'left',
+    'dialog-center-align': dialogAlign === 'center'
+  }">
+  <p-dialog [header]="title" [modal]="modal" [draggable]="draggable" [showHeader]="showHeader"
+    [dismissableMask]="dismissableMask" (onHide)="close()" [(visible)]="isDialogInitialized" [style]="dialogWidth">
+    <ng-content></ng-content>
+    <ng-template *ngIf="isShowFooter" pTemplate="footer">
+      <ng-content select="[extra-buttons]"></ng-content>
+
+      <div class="btn-group right">
+        <app-button styleClass="p-button-danger p-button-sm p-button-rounded" (onclick)="cancel()"
+          *ngIf="!hideCancelButton">Cancel
+        </app-button>
+        <app-button *ngIf="!hideOkButton" styleClass="p-button-success p-button-sm p-button-rounded"
+          (onclick)="ok()">{{ okButtonLabel }}
+        </app-button>
+      </div>
+    </ng-template>
+  </p-dialog>
+</div>

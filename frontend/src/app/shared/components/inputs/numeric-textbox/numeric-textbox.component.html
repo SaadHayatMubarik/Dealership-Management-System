@@ -1,0 +1,24 @@
+<p-inputNumber
+  #numericTextbox
+  [format]="format"
+  [step]="step"
+  [disabled]="disabled"
+  [placeholder]="placeholder"
+  [mode]="'decimal'"
+  class="numeric-control p-inputtext-sm"
+  [styleClass]="inputStyleClass"
+  [inputStyleClass]="inputStyleClass"
+  [inputStyle]="inputStyleClass"
+  [cssClass]="inputStyleClass"
+  [(ngModel)]="controlModel"
+  form-validator
+  [utilitiesSelectDirective]="validateControl"
+  (ngModelChange)="onModelChange($event)"
+  (onInput)="onInputChange($event.value)"
+  [ngModelOptions]="{ standalone: true }"
+  [disabled]="isReadOnly"
+  [useGrouping]="useGrouping"
+  [max]="max"
+  [min]="min"
+  [id]="id"
+  ></p-inputNumber>

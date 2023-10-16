@@ -1,0 +1,11 @@
+<p-autoComplete
+  [(ngModel)]="model"
+  [suggestions]="filteredData"
+  (completeMethod)="completeMethod($event)"
+  (onSelect)="valueChange()"
+  [field]="field"
+  [multiple]="multiple"
+  [dropdown]="dropdown"
+  [ngModelOptions]="{ standalone: true }"
+>
+</p-autoComplete>

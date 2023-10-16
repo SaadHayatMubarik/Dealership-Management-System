@@ -1,0 +1,49 @@
+<p-toast></p-toast>
+<div class="comp-content">
+  <div class="toolbar-header mb-3">
+    <div class="comp-title">
+      <h3>Vehicle Type</h3>
+    </div>
+    <div class="comp-btns">
+      <app-button label="New" styleClass="p-button-sm p-button-rounded" (onclick)="openModal()"></app-button>
+    </div>
+  </div>
+  <div class="middle-content w-o-tabs mt-3">
+    <div class="filter-row flex justify-content-between pt-3">
+
+    </div>
+    <app-datatable [data]="data" [cols]="columns" [globalFilterFields]="['']" [actions]="actions"></app-datatable>
+  </div>
+
+  <p-sidebar [(visible)]="modal" position="right" [style]="{ width: '90rem' }">
+    <div class="sidebar-main">
+      <div class="sidebar-header">
+        <div class="sh-title">
+          <h3>
+            {{vehicleType.vehicleTypeId > 0 ? 'Edit' : 'Add'}}
+            Vehicle Type
+          </h3>
+        </div>
+        <div class="sh-toolbar">
+        </div>
+      </div>
+      <div class="sidebar-content">
+        <div class="card-grey">
+
+          <div class="row-form grid">
+            <div class="col-4">
+              <div class="p-field">
+                <label>Name</label> <br>
+                <app-textbox [(controlModel)]="vehicleType.vehicleTypeName"></app-textbox>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-footer flex justify-content-end">
+        <app-button label="Save" styleClass="p-button-sm p-button-rounded" (onclick)="save()"></app-button>
+        
+      </div>
+    </div>
+  </p-sidebar>
+
