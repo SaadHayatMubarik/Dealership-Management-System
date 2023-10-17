@@ -44,12 +44,22 @@ export class ApiHelperService {
       .pipe(this.hookResponse(this));
   }
 
-  deleteData(vehicleTypeName: string): Observable<any> {
-    const path = `/vehicle-type/deleteVehicleType/${vehicleTypeName}`; // Adjust the path as per your API's endpoint
-    return this.http
-      .delete(`${environment.apiUrl}${path}`)
-      .pipe(this.hookResponse(this));
-  }
+    
+//   deleteVehicleType(path: string, typeName: string): Observable<any> {
+
+//     const params = new HttpParams().set('typeName', typeName); // You might need to modify this based on your API
+//     return this.http
+//       .delete(`${environment.apiUrl}${path}`, { params })
+//       .pipe(this.hookResponse(this));
+// }
+
+
+  // deleteData(vehicleTypeName: string): Observable<any> {
+  //   const path = `/vehicle-type/deleteVehicleType/${vehicleTypeName}`; // Adjust the path as per your API's endpoint
+  //   return this.http
+  //     .delete(`${environment.apiUrl}${path}`)
+  //     .pipe(this.hookResponse(this));
+  // }
 
   hookResponse(_this: this) {
     return (a: any) => {

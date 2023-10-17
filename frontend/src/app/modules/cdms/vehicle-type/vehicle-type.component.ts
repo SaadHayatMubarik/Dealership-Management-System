@@ -30,62 +30,82 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
   ngOnInit() {
     this.columns = [
       {
-        field: 'vehicleTypeId',
+        field: 'type_id',
         fieldTitle: 'Vehicle Type Id',
       },
       {
-        field: 'vehicleTypeName',
+        field: 'type_name',
         fieldTitle: 'Vehicle Type Name',
       },
     ];
     this.actions = [
       {
-        label: ' Edit',
-        icon: 'pi pi-pencil',
+        label: ' Delete',
+        icon: 'pi pi-trash',
         command: (event) => {
-          this.edit(event.vehicleTypeId);
+          // this.delete(event);
         },
       },
     ];
 
-
-    
+    this.get();
   }
 
-  edit(id: number) {}
+  // edit(id: number) {}
+  
 
   save() {
     if (this.vehicleType.vehicleTypeName != '') {
-      this.apiService.post('/vehicle-type/addVehicleType', this.vehicleType).subscribe({
-        next: (response) => {
-          console.log(this.vehicleType.vehicleTypeName)
-          this.closeModal();
-          // 
-          
-        },
-        error: () => {
-          console.log('toast call karwana');
-          
-        }
-      })
+      this.apiService
+        .post('/vehicle-type/addVehicleType', this.vehicleType)
+        .subscribe({
+          next: (response) => {
+            this.closeModal();
+           
+          },
+          error: () => {
+            
+          },
+        });
     }
   }
-  dataForDropdown: any[] = [];
   selectedItem: any;
 
   get() {
     this.apiService.get('/vehicle-type/getVehicleType').subscribe((data) => {
-      this.dataForDropdown = data;
+      this.data = data;
     });
   }
 
-  delete(){}
+
+
+//   delete(typeName: string): void {
+//     if (confirm('Are you sure you want to delete this item?')) {
+//         // const vehicleTypeName = JSON.parse(typeName);
+//         this.apiService.deleteVehicleType('/vehicle-type/deleteVehicleType', typeName)
+//             .subscribe({
+//                 next: (response) => {
+//                     this.get(); // Refresh the data after a successful delete
+//                 },
+//                 error: (error) => {
+//                     // Handle errors as needed
+//                     console.error('Error deleting vehicle type:', error);
+//                 },
+//             });
+//     }
+// }
 
 
 
- 
+
+
+
 
 }
+
+  
+
+
 
 
 
