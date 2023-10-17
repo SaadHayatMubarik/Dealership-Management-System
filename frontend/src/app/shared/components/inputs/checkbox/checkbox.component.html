@@ -1,0 +1,21 @@
+<div class="p-field-checkbox">
+  <p-checkbox
+    #checkbox
+    [ngClass]="cssClass"
+    [disabled]="disabled"
+    [(ngModel)]="controlModel"
+    (ngModelChange)="controlModelChange.emit(controlModel)"
+    form-validator
+    [utilitiesSelectDirective]="validateControl"
+    [value]="value"
+    [trueValue]="1"
+    [falseValue]="0"
+    [inputId]="id"
+    [binary]="isBinary"
+    
+    [name]="name"
+  >
+  </p-checkbox>
+  <label *ngIf="shouldIncludeLabel" [for]="id">{{ label }}</label>
+</div>
+<!-- (onChange)="valueChange($event)" -->

@@ -1,0 +1,20 @@
+<p-multiSelect
+  #list
+  [options]="data"
+  [showToggleAll]="toggleAll"
+  [virtualScroll]="true"
+  scrollHeight="250px"
+  [filter]="true"
+  [ngClass]="cssClass"
+  [optionLabel]="'label'"
+  (onChange)="onControlModelChange($event)"
+  [(ngModel)]="controlModel"
+  [defaultLabel]="placeholder"
+  display="chip"
+>
+  <ng-template let-data pTemplate="item">
+    <div class="country-item">
+      <div>{{ data.label }}</div>
+    </div>
+  </ng-template>
+</p-multiSelect>

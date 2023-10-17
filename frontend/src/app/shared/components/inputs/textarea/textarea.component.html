@@ -1,0 +1,13 @@
+<!--  [autoResize]="autoSize"
+-->
+<textarea
+  [rows]="rows"
+  pInputTextarea
+  [ngClass]="cssClass"
+  [placeholder]="placeholder"
+  [disabled]="disabled"
+  [(ngModel)]="controlModel"
+  [readonly]="isReadOnly"
+  (ngModelChange)="controlModelChange.emit(controlModel)"
+  style="width: 100%"
+></textarea>

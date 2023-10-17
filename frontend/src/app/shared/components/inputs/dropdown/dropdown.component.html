@@ -1,0 +1,24 @@
+<p-dropdown
+#dropdownElement
+[options]="filteredData"
+[(ngModel)]="controlModel"
+[optionLabel]="optionLabel"
+[optionValue]="optionValue"
+(ngModelChange)="valueChange($event)"
+[placeholder]="placeholder"
+[filter]="filter"
+[styleClass]="cssClass"
+[showClear]="showClear"
+[style]="style"
+[appendTo]="appendTo"
+[lazy]="false"
+(onFilter)="filterMethod($event)"
+[disabled]="disabled"
+form-validator
+[ngModelOptions]="{ standalone: true }"
+[utilitiesSelectDirective]="validateControl"
+ngDefaultControl
+>
+</p-dropdown>
+
+<!--  (onChange)="changeValue($event)" -->

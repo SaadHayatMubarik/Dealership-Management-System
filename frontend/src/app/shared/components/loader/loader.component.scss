@@ -1,0 +1,121 @@
+@keyframes square-spin {
+  25% {
+    -webkit-transform: rotateY(180deg) rotateY(0);
+    transform: rotateY(180deg) rotateY(0);
+  }
+
+  50% {
+    -webkit-transform: rotateY(180deg) rotateY(180deg);
+    transform: rotateY(180deg) rotateY(180deg);
+  }
+
+  75% {
+    -webkit-transform: rotateY(270deg) rotateY(270deg);
+    transform: rotateY(270deg) rotateY(270deg);
+  }
+
+  100% {
+    -webkit-transform: rotateY(360deg) rotateY(360deg);
+    transform: rotateY(360deg) rotateY(360deg);
+  }
+}
+
+$easeInOutQuint: cubic-bezier(0.86, 0, 0.07, 1);
+
+@keyframes animateWidth {
+  from {
+    width: 25%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes animateTransform {
+  from {
+    transform: translate(-75%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+.withRepaint {
+  height: auto;
+  background: #fff;
+  animation: animateWidth 2s alternate infinite $easeInOutQuint;
+  overflow: hidden;
+  display: block;
+}
+
+.custom-loader {
+  box-sizing: border-box;
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-shrink: 0;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: fixed;
+  background: rgba(255, 255, 255, 0.8);
+  z-index: 99;
+
+  .square-spin {
+    // -webkit-animation-fill-mode: both;
+    // animation-fill-mode: both;
+    max-width: 10rem;
+    position: relative;
+    z-index: 999;
+
+    // -webkit-animation: square-spin 5s 0s cubic-bezier(0, 0, 0, 0) infinite;
+    // animation: square-spin 5s 0s cubic-bezier(0, 0, 0, 0) infinite;
+  }
+}
+
+.preloader {
+  text-align: center;
+  box-sizing: border-box;
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-shrink: 0;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: fixed;
+  background: rgba(255, 255, 255, 0.8);
+  z-index: 99999;
+}
+svg {
+  width: 10rem;
+}
+svg #Path_10 {
+  stroke: #c22126;
+  animation: a-loader 5s infinite ease;
+  stroke-width: 0.0625rem;
+  stroke-dasharray: 450;
+  stroke-dashoffset: -450;
+}
+@keyframes a-loader {
+  40% {
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dashoffset: 0;
+    fill: transparent;
+  }
+  70% {
+    stroke-dashoffset: 0;
+    fill: #c22126;
+    transition: 0.15s fill;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    fill: #c22126;
+  }
+}

@@ -1,0 +1,16 @@
+<button
+  pButton
+  [class]="styleClass"
+  [ngClass]="btnClass"
+  (click)="onClick()"
+  [icon]="icon"
+  [disabled]="disabled"
+  [id]="id"
+  [pTooltip]="tooltip"
+  tooltipPosition="top"
+  [hideDelay]="hideDelay"
+  [label]="label"
+  name="name"
+>
+  <ng-content></ng-content>
+</button>

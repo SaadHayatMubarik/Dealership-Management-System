@@ -1,0 +1,43 @@
+<input
+  pInputText
+  [type]="type"
+  [disabled]="disabled"
+  [placeholder]="placeholder"
+  [ngClass]="cssClass"
+  [(ngModel)]="controlModel"
+  [max]="max"
+  [min]="min"
+  utilitiesSelectDirective="validateControl"
+  validateEmail="validateEmail"
+  [readonly]="isReadOnly"
+  [maxlength]="maxlength"
+  (ngModelChange)="onModelChange($event)"
+  (blur)="focusOut.emit($event)"
+  [id]="id"
+  [ngModelOptions]="{ standalone: true }"
+  *ngIf="!floatedPlaceholder"
+  class="p-inputtext-sm"
+  
+/>
+
+<span *ngIf="floatedPlaceholder" class="p-float-label">
+  <input
+    id="float-input-{{ genericId }}"
+    type="text"
+    name="name"
+    [max]="max"
+    [min]="min"
+    pInputText
+    [type]="type"
+    [disabled]="disabled"
+    [ngClass]="cssClass"
+    [(ngModel)]="controlModel"
+    utilitiesSelectDirective="validateControl"
+    validateEmail="validateEmail"
+    [readonly]="isReadOnly"
+    [maxlength]="maxlength"
+    (ngModelChange)="onModelChange($event)"
+    (blur)="focusOut.emit($event)"
+  />
+  <label for="float-input-{{ genericId }}">{{ floatedPlaceholder }}</label>
+</span>

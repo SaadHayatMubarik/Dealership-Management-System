@@ -1,0 +1,12 @@
+<div class="radio-control" *ngFor="let val of values; let index = index">
+  <input
+    (ngModelChange)="controlModelChange.emit($event)"
+    id="example{{ val.value + name + index }}"
+    [(ngModel)]="controlModel"
+    type="radio"
+    [name]="name"
+    [value]="val.value"
+    [disabled]="disabled"
+  />
+  <label for="example{{ val.value + name + index }}">{{ val.label }}</label>
+</div>

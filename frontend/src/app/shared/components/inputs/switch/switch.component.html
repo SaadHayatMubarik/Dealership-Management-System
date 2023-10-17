@@ -1,0 +1,12 @@
+<p-inputSwitch
+  [ngClass]="cssClass"
+  (onChange)="valueChange($event)"
+  [ngModelOptions]="{ standalone: true }"
+  [(ngModel)]="controlModel"
+  (ngModelChange)="controlModelChange.emit(controlModel)"
+  form-validator
+  [utilitiesSelectDirective]="validateControl"
+  [id]="id"
+  [disabled]="!isEditAllowed"
+>
+</p-inputSwitch>

@@ -1,0 +1,21 @@
+<!--  [utilitiesSelectDirective]="validateControl"
+-->
+<select
+  [id]="id"
+  [class]="class"
+  syccure-form-validator
+  utilitiesSelectDirective="validateControl"
+  SelectDirective
+  (change)="changed($event)"
+  [ngModel]="selectedData"
+  [disabled]="isDisabled"
+  (ngModelChange)="onModelChange($event)"
+  [ngModelOptions]="{ standalone: true }"
+>
+  <option *ngIf="showDefaultOption" [ngValue]="null">
+    {{ defaultOptionLabel }}
+  </option>
+  <option *ngFor="let opt of data" [ngValue]="opt.id">
+    {{ opt.name }}
+  </option>
+</select>

@@ -1,0 +1,21 @@
+<p-calendar
+  #datepicker
+  [ngClass]="cssClass"
+  [dateFormat]="dateFormat"
+  [view]="view"
+  [placeholder]="placeholder"
+  [(ngModel)]="controlModel"
+  form-validator
+  [validateControl]="validateControl"
+  (ngModelChange)="dateChanged()"
+  [showIcon]="true"
+  [timeOnly]="showTime" 
+  hourFormat="12"
+  [showButtonBar]="true"
+  [appendTo]="appendTo"
+  [disabled]="disabled"
+  [id]="id"
+  [styleClass]="showTime ? 'p-inputtext-sm p-calendar-timeonly' : 'p-inputtext-sm'"
+  [minDate]="minDate"
+  [maxDate]="maxDate"
+></p-calendar>

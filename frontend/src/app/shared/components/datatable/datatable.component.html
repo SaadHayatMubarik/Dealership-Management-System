@@ -1,0 +1,76 @@
+
+<p-table #dt [columns]="cols" [value]="data" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="paginator"
+    [rows]="rows" [showCurrentPageReport]="showCurrentPageReport"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [rowsPerPageOptions]="rowsPerPageOptions" [globalFilterFields]="globalFilterFields">
+
+    <ng-template pTemplate="caption">
+        <div class="flex">
+            <!-- <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt)"></button> -->
+            <span class="p-input-icon-left ml-auto">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="filterGlobal(dt, $event)" placeholder="Search keyword" />
+            </span>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th>
+                Sr #
+            </th>
+            <th *ngFor="let col of columns" [hidden]="col.isVisible != undefined && !col.isVisible">
+                {{ col.fieldTitle }}
+            </th>
+            <ng-container *ngIf="actions.length > 0">
+                <th>
+                    Actions
+                </th>
+            </ng-container>
+
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns" let-index="rowIndex">
+        <tr>
+            <td>
+                {{index+1}}
+            </td>
+            <td *ngFor="let col of columns" [hidden]="col.isVisible != undefined && !col.isVisible">
+                {{ parseFieldInData(rowData, col.field, col.type)  }}
+            </td>
+            <ng-container>
+                <td *ngIf="actions && actions.length > 0">
+                    <div class="action-dd" *ngIf="rowData && actions && actions.length > 0">
+                        <!-- <a *ngIf="action.isMenu" class="gridActionBtn text-primary text-underline cursor-pointer"
+                        (click)="toggleMenu(menu, $event, rowData)">
+                        Action<i class="fa-solid fa-chevron-down ml-2"></i>
+                    </a>
+        
+                    <p-tieredMenu #menu [popup]="true" appendTo="body" [model]="rowData.actions"></p-tieredMenu> -->
+
+                        <!-- <p-dialog *ngIf="show" [visible]="show">
+                    <ul class="menu">
+                        <li
+                        *ngFor="let action of selectedItem.actions"
+                        (click)="onActionSelected(action)"
+                        >
+                        {{ action.label }}
+                        </li>
+                    </ul>
+                    </p-dialog> -->
+                        <div class="actionHolder table">
+                            <app-button *ngFor="let item of actions; let index = index"
+                                styleClass="p-button-rounded p-button-outlined"
+                                (click)="onActionSelected(item, rowData)" [btnClass]="item.buttonClass || 'btn-icon'"
+                                [tooltip]="!item.isDescriptionField ? item.toolTip : rowData.description" style="padding-left: 5px;">
+                                <i [ngClass]="item.icon || 'pi pi-trash'"></i>
+                                &nbsp;{{ item.label }}
+                            </app-button>
+                            &nbsp;
+                        </div>
+                    </div>
+                </td>
+            </ng-container>
+        </tr>
+    </ng-template>
+</p-table>
