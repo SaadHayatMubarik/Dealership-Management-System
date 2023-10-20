@@ -3,6 +3,10 @@ export interface IVehicleType {
   vehicleTypeName: string;
 }
 
+export interface DeleteIVehicleType{
+  vehicleTypeName: string;
+}
+
 export interface IVehicleTypeAttribute {
   vehicleTypeAttributeId: number;
   attributeName: string;

@@ -17,7 +17,7 @@ export class VehicleTypeAttribute {
      // @Column()
      // type_name: string;  
 
-     @OneToMany(() => MultiValueAttribute, (multiValueAttribute) => multiValueAttribute.vehicleTypeAttribute)
+     @OneToMany(() => MultiValueAttribute, (multiValueAttribute) => multiValueAttribute.vehicleTypeAttribute, {cascade:true})
      multiValueAttributes: MultiValueAttribute[];
 
      @ManyToOne(() => VehicleType, (vehicleType) => vehicleType.vehicleTypeAttributes)

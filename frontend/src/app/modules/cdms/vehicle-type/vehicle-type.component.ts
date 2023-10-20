@@ -20,6 +20,7 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
     vehicleTypeId: 0,
     vehicleTypeName: '',
   };
+  
   columns: DataTableColumn[] = [];
   actions: IDataTableAction[] = [];
   data: IObject[] = [];
@@ -43,7 +44,7 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
         label: ' Delete',
         icon: 'pi pi-trash',
         command: (event) => {
-          // this.delete(event);
+          // this.delete( ); 
         },
       },
     ];
@@ -73,33 +74,29 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
 
   get() {
     this.apiService.get('/vehicle-type/getVehicleType').subscribe((data) => {
+      // console.log(data);
       this.data = data;
     });
   }
 
 
 
-//   delete(typeName: string): void {
-//     if (confirm('Are you sure you want to delete this item?')) {
-//         // const vehicleTypeName = JSON.parse(typeName);
-//         this.apiService.deleteVehicleType('/vehicle-type/deleteVehicleType', typeName)
-//             .subscribe({
-//                 next: (response) => {
-//                     this.get(); // Refresh the data after a successful delete
-//                 },
-//                 error: (error) => {
-//                     // Handle errors as needed
-//                     console.error('Error deleting vehicle type:', error);
-//                 },
-//             });
-//     }
-// }
-
-
-
-
-
-
+  delete(vehicleType: IVehicleType): void {
+    if (confirm('Are you sure you want to delete this item?')) {
+        // const vehicleTypeName = JSON.parse(typeName);  
+        console.log(vehicleType);
+        this.apiService.delete('/vehicle-type/' + this.vehicleType.vehicleTypeId)
+            .subscribe({
+                next: (response) => {
+                    this.get(); // Refresh the data after a successful delete
+                },
+                error: (error) => {
+                    // Handle errors as needed
+                    console.error('Error deleting vehicle type:', error);
+                },
+            });
+    }
+}
 
 }
 

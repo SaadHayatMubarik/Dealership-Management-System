@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { StockAttributeValueService } from './stock-attribute-value.service';
 import { StockAttributeValueDto } from './stock-attribute-value.dto';
 import { StockAttributeValue } from './Stock-attribute-value';
@@ -11,5 +11,10 @@ export class StockAttributeValueController {
     @Post('addStockAttributeValue')
     addStockAttributeValue(@Body() addStockAttributeValueDto: StockAttributeValueDto): Promise<StockAttributeValue>{
         return this.stockAttributeValueService.addStockAttributeValue(addStockAttributeValueDto);
+    }
+
+    @Get('/:inventoryId')
+    getStockAttributeValue(@Param('inventoryId') invetoryId: number): Promise<StockAttributeValue[]>{
+        return this.stockAttributeValueService.getStockAttributeValue(invetoryId);
     }
 }

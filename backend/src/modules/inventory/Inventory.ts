@@ -32,10 +32,10 @@ price: number;
 demand: number;
 
 @Column()
-date_of_purchase: Date;
+date_of_purchase: string;
 
 @Column({ nullable: true })
-date_sold: Date;
+date_sold: string;
 
 @Column()
 status: InventoryStatus;
@@ -49,7 +49,7 @@ engine_no: string;
 @Column()
 comments: string;
 
-@Column('decimal', { precision: 4, scale: 1 })
+@Column('decimal', { precision: 4, scale: 1 } )
 grade: number;
 
 @Column({ nullable: true })

@@ -1,9 +1,9 @@
 import { Body, Controller, Delete, Get, Param, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { VehicleTypeAttributeService } from './vehicle-type-attribute.service';
-import { VehicleTypeAttributeDto } from './dto/vehicle-type-attribute.dto';
 import { VehicleTypeAttribute } from './Vehicle-type-attribute';
 import { VehicleType } from '../vehicle-type/Vehicle-type';
 import { GetVehicleTypeAttributeDto } from './dto/get-vehicle-type-attribute.dto';
+import { AddVehicleTypeAttributeDto } from './dto/add-vehicle-type-attribute.dto';
 
 @Controller('vehicle-type-attribute')
 export class VehicleTypeAttributeController {
@@ -11,7 +11,7 @@ export class VehicleTypeAttributeController {
     {}
 
     @Post('addVehicleTypeAttribute')
-    addVehicleTypeAttribute(@Body() addVehicleTypeAttributeDto: VehicleTypeAttributeDto): Promise<VehicleTypeAttribute>{
+    addVehicleTypeAttribute(@Body() addVehicleTypeAttributeDto: AddVehicleTypeAttributeDto): Promise<VehicleTypeAttribute>{
         return this.vehicleTypeAttributeService.addVehicleTypeAttribute(addVehicleTypeAttributeDto);
     }
 

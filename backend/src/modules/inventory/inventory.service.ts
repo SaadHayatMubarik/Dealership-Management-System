@@ -16,26 +16,40 @@ export class InventoryService {
 
     async addInventory (addInventoryDto: AddInventoryDto): Promise<Inventory>{
         const inventory = new Inventory();
-        const { make, model , variant , year , chasisNo , price , demand , dateOfPurchase , color , engineNo , comments , grade , regNo } = addInventoryDto;
-        console.log(addInventoryDto.dateOfPurchase);
-        inventory.make = make;
-        inventory.model = model;
-        inventory.variant = variant;
+        const { make, model , variant , year , chasisNo , price , demand , dateOfPurchase , dateOfSale , color , engineNo , comments , grade , regNo, status } = addInventoryDto;
+        // console.log(addInventoryDto.dateOfPurchase);
+        inventory.make = make.toUpperCase();
+        inventory.model = model.toUpperCase();
+        inventory.variant = variant.toUpperCase();
         inventory.year = year;
-        inventory.chasis_no = chasisNo;
+        inventory.chasis_no = chasisNo.toUpperCase();
         inventory.price = price;
         inventory.demand = demand;
         inventory.date_of_purchase = dateOfPurchase;
-        inventory.color = color;
-        inventory.engine_no = engineNo;
-        inventory.comments = comments;
+        inventory.date_sold = dateOfSale;
+        inventory.color = color.toUpperCase();
+        inventory.engine_no = engineNo.toUpperCase();
+        inventory.comments = comments.toUpperCase();
         inventory.grade = grade;
         inventory.status = InventoryStatus.UNSOLD;
-        inventory.reg_no = regNo;
-        console.log(inventory);
+        inventory.reg_no = regNo.toUpperCase();
+        // console.log(inventory);
+        if (status.toUpperCase() === InventoryStatus.ON_ORDER){
+            inventory.status = InventoryStatus.ON_ORDER;
+        }
+        else if (status.toUpperCase() === InventoryStatus.SOLD){
+            inventory.status = InventoryStatus.SOLD;
+        }
         await this.inventoryRepository.save(inventory);
         return inventory;
     }
 
+    async getInventory(): Promise<Inventory[]>{
+        return await this.inventoryRepository.find();
+    }
+
+    deleteInventory(inventoryId: number){
+        return this.inventoryRepository.delete({ inventory_id: inventoryId });
+    }
     
 }

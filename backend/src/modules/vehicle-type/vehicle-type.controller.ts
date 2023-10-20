@@ -17,10 +17,10 @@ export class VehicleTypeController {
         return this.vehicleTypeService.getVehicleType();
     }
 
-    @Delete('deleteVehicleType')
+    @Delete('/:vehicleTypeId')
     @UsePipes(new ValidationPipe())
-    deleteVehicleType(@Body() deleteVehicleTypeDto: VehicleTypeDto){
-        return this.vehicleTypeService.deleteVehicleType(deleteVehicleTypeDto);
+    deleteVehicleType(@Param('vehicleTypeId') vehicleTypeId: number){
+        return this.vehicleTypeService.deleteVehicleType(vehicleTypeId);
     }
 
     // @Put('updateVehicleType')

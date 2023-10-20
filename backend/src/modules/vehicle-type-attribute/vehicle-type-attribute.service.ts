@@ -2,23 +2,29 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { VehicleTypeAttribute } from './Vehicle-type-attribute';
 import { Repository } from 'typeorm';
-import { VehicleTypeAttributeDto } from './dto/vehicle-type-attribute.dto';
 import { VehicleType } from '../vehicle-type/Vehicle-type';
 import { GetVehicleTypeAttributeDto } from './dto/get-vehicle-type-attribute.dto';
+import { AddVehicleTypeAttributeDto } from './dto/add-vehicle-type-attribute.dto';
+import { MultiValueAttribute } from '../multi-value-attribute/Multi-value-attribute';
 
 @Injectable()
 export class VehicleTypeAttributeService {
 
     constructor(
         @InjectRepository(VehicleTypeAttribute)
-        private vehicleTypeAttributeRepositry: Repository<VehicleTypeAttribute>,
+        private vehicleTypeAttributeRepository: Repository<VehicleTypeAttribute>,
         @InjectRepository(VehicleType)
         private vehicleTypeRepositry: Repository<VehicleType>,
+        @InjectRepository(MultiValueAttribute)
+        private multiValueAttributeRepository: Repository<MultiValueAttribute>,
     ){}
 
-    async addVehicleTypeAttribute (addVehicleTypeAttributeDto: VehicleTypeAttributeDto): Promise<VehicleTypeAttribute>{
+    async addVehicleTypeAttribute (addVehicleTypeAttributeDto: AddVehicleTypeAttributeDto): Promise<VehicleTypeAttribute>{
         const vehicleTypeAttribute = new VehicleTypeAttribute();
-        const { attributeName , inputType, typeName} = addVehicleTypeAttributeDto;
+        const multiValueAttribute = new MultiValueAttribute();
+        const { attributeName , inputType, typeName, attributeValue} = addVehicleTypeAttributeDto;
+
+        if ( await this.vehicleTypeAttributeRepository.exist({ where: { attribute_name: attributeName } }) == false ){
         const queryBuilder = this.vehicleTypeRepositry.createQueryBuilder('vehicleType');
         const typeId = await queryBuilder
         .select('vehicleType.type_id')
@@ -27,7 +33,19 @@ export class VehicleTypeAttributeService {
         vehicleTypeAttribute.attribute_name = attributeName.toLowerCase();
         vehicleTypeAttribute.input_type = inputType.toLowerCase();
         vehicleTypeAttribute.vehicleType = typeId;
-        await this.vehicleTypeAttributeRepositry.save(vehicleTypeAttribute);
+        await this.vehicleTypeAttributeRepository.save(vehicleTypeAttribute);
+            }
+        
+        const queryBuilderTwo = this.vehicleTypeAttributeRepository.createQueryBuilder('vehicleTypeAttribute');
+        const attributeId = await queryBuilderTwo
+        .select('vehicleTypeAttribute.attribute_id')
+        .where('vehicleTypeAttribute.attribute_name = :attributeName', { attributeName })
+        .getOne();
+        // const attributeId = await this.vehicleTypeAttributeRepository.count();
+        multiValueAttribute.vehicleTypeAttribute = attributeId ;
+        multiValueAttribute.attribute_value = attributeValue;
+        await this.multiValueAttributeRepository.save(multiValueAttribute);
+        
         return vehicleTypeAttribute;
     }
 
@@ -41,7 +59,7 @@ export class VehicleTypeAttributeService {
 
         const id = typeId.type_id;
 
-        const queryBuildertwo = this.vehicleTypeAttributeRepositry.createQueryBuilder('vehicleTypeAttribute')
+        const queryBuildertwo = this.vehicleTypeAttributeRepository.createQueryBuilder('vehicleTypeAttribute')
         .select('vehicleTypeAttribute.attribute_name')
         .where('vehicleTypeAttribute.vehicleTypeTypeId = :id', { id });
         
@@ -51,6 +69,6 @@ export class VehicleTypeAttributeService {
 
     deleteVehicleTypeAttributeByName(attributeName: string){
         // console.log(attributeName);
-        return this.vehicleTypeAttributeRepositry.delete({ attribute_name: attributeName.toLowerCase() });
+        return this.vehicleTypeAttributeRepository.delete({ attribute_name: attributeName.toLowerCase() });
     }
 }

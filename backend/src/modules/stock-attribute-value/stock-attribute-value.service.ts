@@ -20,30 +20,44 @@ export class StockAttributeValueService {
         @InjectRepository(VehicleTypeAttribute)
         private vehicleTypeAttributeRepository: Repository<VehicleTypeAttribute>
     ){}
+    
 
     async addStockAttributeValue(addStockAttributeValueDto: StockAttributeValueDto): Promise<StockAttributeValue>{
         const stockAttributeValue = new StockAttributeValue();
         const { attributeValue, attributeName } = addStockAttributeValueDto;
         const queryBuilder = this.multiValueAttributeRepository.createQueryBuilder('multiValueAttribute');
         const multiValueId = await queryBuilder
-        .select('multiValueAttribute.attribute_id')
-        .where('multiValueAttribute.attribute_name = :attributeValue', { attributeValue })
+        .select('multiValueAttribute.multi_value_id')
+        .where('multiValueAttribute.attribute_value = :attributeValue', { attributeValue })
         .getOne();
+        // console.log(multiValueId);
         stockAttributeValue.multiValueAttribute = multiValueId;
 
-        const queryBuilderTwo = this.vehicleTypeAttributeRepository.createQueryBuilder('multiValueAttribute');
+        const queryBuilderTwo = this.vehicleTypeAttributeRepository.createQueryBuilder('vehicleTypeAttribute');
         const attributeId = await queryBuilderTwo
-        .select('multiValueAttribute.vehicleTypeAttributeAttributeId')
-        .where('multiValueAttribute.attribute_name = :attributeName', { attributeName })
+        .select('vehicleTypeAttribute.attribute_id')
+        .where('vehicleTypeAttribute.attribute_name = :attributeName', { attributeName })
         .getOne();
         stockAttributeValue.vehicleTypeAttribute = attributeId;
-        const inventoryId = await this.inventoryRepository.count();
-        stockAttributeValue.inventory.inventory_id = inventoryId;
-
+        
+        const queryBuilderThree = this.inventoryRepository.createQueryBuilder('inventory');
+        const inventoryId = await queryBuilderThree
+      .select('COUNT(inventory.inventory_id)' , 'inventory_id')
+      .getRawOne();
+    //   console.log(inventoryId);
+      stockAttributeValue.inventory = inventoryId;
         await this.stockAttributeValueRepository.save(stockAttributeValue);
         return stockAttributeValue;
         
+    }
 
-        
+    async getStockAttributeValue(inventoryId: number): Promise<StockAttributeValue[]>{
+      const queryBuilder = this.vehicleTypeAttributeRepository.createQueryBuilder('stockAttributeValue');
+        const attributeId = await queryBuilder
+        .select('*')
+        .where('stockAttributeValue.inventoryInventoryId = :inventoryId', { inventoryId })
+        .getMany();
+        return
+        // stockAttributeValue.vehicleTypeAttribute = attributeId;
     }
 }

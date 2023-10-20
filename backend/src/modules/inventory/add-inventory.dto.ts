@@ -24,7 +24,7 @@ export class AddInventoryDto{
     demand: number;
 
     @IsNotEmpty()
-    dateOfPurchase: Date;
+    dateOfPurchase: string;
 
     @IsNotEmpty()
     dateOfSale: string;
@@ -42,6 +42,9 @@ export class AddInventoryDto{
     @IsNumber()
     grade: number;
 
+    @IsNotEmpty()
+    status: string;
+    
     @IsOptional()
     regNo: string;
 }

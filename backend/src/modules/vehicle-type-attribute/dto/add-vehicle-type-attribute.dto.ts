@@ -1,6 +1,5 @@
 import { IsNotEmpty } from "class-validator";
-
-export class VehicleTypeAttributeDto{
+export class AddVehicleTypeAttributeDto{
     @IsNotEmpty()
     attributeName: string;
 
@@ -10,4 +9,6 @@ export class VehicleTypeAttributeDto{
     @IsNotEmpty()
     typeName: string;
 
+    @IsNotEmpty()
+    attributeValue: string;
 }

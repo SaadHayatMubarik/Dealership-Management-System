@@ -9,29 +9,28 @@ export class VehicleTypeService {
 
     constructor(
         @InjectRepository(VehicleType)
-        private vehicleTypeRepositry: Repository<VehicleType>,
+        private vehicleTypeRepository: Repository<VehicleType>,
  
     ){}
 
     async addVehicleType (vehicleTypeDto: VehicleTypeDto): Promise<VehicleType>{
-        // console.log(vehicleTypeDto);
         const vehicleType = new VehicleType();
         const {vehicleTypeName} = vehicleTypeDto;
+        if ( await this.vehicleTypeRepository.exist({ where: { type_name: vehicleTypeName } }) == false ){
         vehicleType.type_name = vehicleTypeName;
-        // console.log(typeName);
-        await this.vehicleTypeRepositry.save(vehicleType);
+        await this.vehicleTypeRepository.save(vehicleType);
+        }
         // console.log(vehicleType);
         return vehicleType;
     }
 
     async getVehicleType (): Promise<VehicleType[]>
     {
-        return await this.vehicleTypeRepositry.find();
+        return await this.vehicleTypeRepository.find();
     }
 
-    deleteVehicleType (deleteVehicleTypeDto: VehicleTypeDto){
-        const { vehicleTypeName} = deleteVehicleTypeDto;
-        return this.vehicleTypeRepositry.delete({ type_name: vehicleTypeName});
+    deleteVehicleType (vehicleTypeId: number){
+        return this.vehicleTypeRepository.delete({ type_id: vehicleTypeId});
     }
 
     // updateVehicleType (vehicleType: string){
