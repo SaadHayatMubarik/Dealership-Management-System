@@ -2,8 +2,9 @@ import { Body, Controller, Delete, Get, Param, Post, UsePipes, ValidationPipe } 
 import { VehicleTypeAttributeService } from './vehicle-type-attribute.service';
 import { VehicleTypeAttribute } from './Vehicle-type-attribute';
 import { VehicleType } from '../vehicle-type/Vehicle-type';
-import { GetVehicleTypeAttributeDto } from './dto/get-vehicle-type-attribute.dto';
-import { AddVehicleTypeAttributeDto } from './dto/add-vehicle-type-attribute.dto';
+// import { GetVehicleTypeAttributeDto } from './dto/get-vehicle-type-attribute.dto';
+import { VehicleTypeAttributeDto } from './dto/vehicle-type-attribute.dto';
+import { MultiValueAttribute } from '../multi-value-attribute/Multi-value-attribute';
 
 @Controller('vehicle-type-attribute')
 export class VehicleTypeAttributeController {
@@ -11,12 +12,12 @@ export class VehicleTypeAttributeController {
     {}
 
     @Post('addVehicleTypeAttribute')
-    addVehicleTypeAttribute(@Body() addVehicleTypeAttributeDto: AddVehicleTypeAttributeDto): Promise<VehicleTypeAttribute>{
+    addVehicleTypeAttribute(@Body() addVehicleTypeAttributeDto: VehicleTypeAttributeDto): Promise<VehicleTypeAttribute>{
         return this.vehicleTypeAttributeService.addVehicleTypeAttribute(addVehicleTypeAttributeDto);
     }
 
     @Get('getVehicleTypeAttribute')
-    getVehicleAttributeByType(@Body() getVehicleTypeAttributeDto: GetVehicleTypeAttributeDto): Promise<VehicleTypeAttribute[]>{
+    getVehicleAttributeByType(@Body() getVehicleTypeAttributeDto: VehicleTypeAttributeDto): Promise<VehicleTypeAttribute[]>{
         console.log(getVehicleTypeAttributeDto);
         return this.vehicleTypeAttributeService.getVehicleAttributeByType(getVehicleTypeAttributeDto);
     }

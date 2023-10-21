@@ -1,4 +1,5 @@
-import { IsNotEmpty, IsNumber, IsOptional } from "class-validator";
+import { IsNotEmpty, IsNumber, IsOptional,IsEnum } from "class-validator";
+import { InventoryStatus } from "./inventory-status.enum";
 
 export class AddInventoryDto{
     @IsNotEmpty()
@@ -43,7 +44,8 @@ export class AddInventoryDto{
     grade: number;
 
     @IsNotEmpty()
-    status: string;
+    // @IsEnum(InventoryStatus, { default: InventoryStatus.UNSOLD})
+    status: InventoryStatus;
     
     @IsOptional()
     regNo: string;
