@@ -3,23 +3,23 @@ import { InventoryStatus } from "./inventory-status.enum";
 
 export class AddInventoryDto{
     @IsNotEmpty()
-    make: string;
+    vehicleMake: string;
 
     @IsNotEmpty()
-    model: string;
+    vehicleModel: string;
 
     @IsNotEmpty()
-    variant: string;
+    vehicleVariant: string;
 
     @IsNotEmpty()
-    year: number;
+    modelYear: number;
 
     @IsOptional()
     // @IsNotEmpty()
-    chasisNo: string;
+    vehicleChasisNo: string;
 
     @IsNotEmpty()
-    price: number;
+    costPrice: number;
 
     @IsNotEmpty()
     demand: number;
@@ -31,7 +31,7 @@ export class AddInventoryDto{
     dateOfSale: string;
 
     @IsNotEmpty()
-    color: string;
+    bodyColor: string;
 
     @IsNotEmpty()
     engineNo: string;
@@ -43,7 +43,8 @@ export class AddInventoryDto{
     @IsNumber()
     grade: number;
 
-    @IsNotEmpty()
+    // @IsNotEmpty()
+    @IsOptional()
     // @IsEnum(InventoryStatus, { default: InventoryStatus.UNSOLD})
     status: InventoryStatus;
     

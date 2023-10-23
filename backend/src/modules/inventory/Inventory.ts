@@ -37,7 +37,7 @@ date_of_purchase: string;
 @Column({ nullable: true })
 date_sold: string;
 
-@Column()
+@Column({ type:"enum", enum: InventoryStatus, default: InventoryStatus.UNSOLD })
 status: InventoryStatus;
 
 @Column()

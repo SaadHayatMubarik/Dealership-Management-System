@@ -16,30 +16,30 @@ export class InventoryService {
 
     async addInventory (addInventoryDto: AddInventoryDto): Promise<Inventory>{
         const inventory = new Inventory();
-        const { make, model , variant , year , chasisNo , price , demand , dateOfPurchase , dateOfSale , color , engineNo , comments , grade , regNo, status } = addInventoryDto;
+        const { vehicleMake, vehicleModel , vehicleVariant , modelYear , vehicleChasisNo , costPrice , demand , dateOfPurchase , dateOfSale , bodyColor , engineNo , comments , grade , regNo, status } = addInventoryDto;
         // console.log(addInventoryDto.dateOfPurchase);
-        inventory.make = make.toUpperCase();
-        inventory.model = model.toUpperCase();
-        inventory.variant = variant.toUpperCase();
-        inventory.year = year;
-        inventory.chasis_no = chasisNo.toUpperCase();
-        inventory.price = price;
+        inventory.make = vehicleMake.toUpperCase();
+        inventory.model = vehicleModel.toUpperCase();
+        inventory.variant = vehicleVariant.toUpperCase();
+        inventory.year = modelYear;
+        inventory.chasis_no = vehicleChasisNo.toUpperCase();
+        inventory.price = costPrice;
         inventory.demand = demand;
         inventory.date_of_purchase = dateOfPurchase;
         inventory.date_sold = dateOfSale;
-        inventory.color = color.toUpperCase();
+        inventory.color = bodyColor.toUpperCase();
         inventory.engine_no = engineNo.toUpperCase();
         inventory.comments = comments.toUpperCase();
         inventory.grade = grade;
-        inventory.status = InventoryStatus.UNSOLD;
+        inventory.status = status;
         inventory.reg_no = regNo.toUpperCase();
         // console.log(inventory);
-        if (status.toUpperCase() === InventoryStatus.ON_ORDER){
-            inventory.status = InventoryStatus.ON_ORDER;
-        }
-        else if (status.toUpperCase() === InventoryStatus.SOLD){
-            inventory.status = InventoryStatus.SOLD;
-        }
+        // if (status.toUpperCase() === InventoryStatus.ON_ORDER){
+        //     inventory.status = InventoryStatus.ON_ORDER;
+        // }
+        // else if (status.toUpperCase() === InventoryStatus.SOLD){
+        //     inventory.status = InventoryStatus.SOLD;
+        // }
         await this.inventoryRepository.save(inventory);
         return inventory;
     }
