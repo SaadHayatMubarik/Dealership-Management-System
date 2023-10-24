@@ -1,7 +1,178 @@
-<form action="">
-    <div class="form-group">
-        
+<p-toast></p-toast>
+<div class="comp-content">
+  <div class="toolbar-header mb-3">
+    <div class="comp-title">
+      <h3>Inventory</h3>
     </div>
+    <div class="comp-btns">
+      <app-button label="Add" styleClass="p-button-sm p-button-rounded" (onclick)="openModal()"></app-button>
+    </div>
+  </div>
+  <div class="middle-content w-o-tabs mt-3">
+    <div class="filter-row flex justify-content-between pt-3">
+    </div>
+    <app-datatable [data]="data" [cols]="columns" [globalFilterFields]="['type_name', 'type_id']" [actions]="actions"></app-datatable>
+  </div>
+  <p-sidebar [(visible)]="modal" position="right" [style]="{ width:'80rem'}">
+    <div class="sidebar-main">
+      <div class="sidebar-header">
+        <div class="sh-title">
+          <h3 style="text-align: center;">
+            Add Inventory
+          </h3>
+          <h5 style="text-align: center;">Vehicle Details</h5>
+          <br>
+        </div>
+        <div class="sh-toolbar">
+        </div>
+      </div>
+      <div class="sidebar-content">
+        <div class="card-grey padding">
+          <div class="row-form grid" >
+            <div class="col-4">
+              <div class="p-field">
+                <span class="p-float-label">
+                  <p-dropdown class="p-inputtext-lg" placeholder="Select a Vehicle Type" [options]="vehicleTypes" optionLabel="type_name"></p-dropdown>
+                  <label for="float-label">Vehicle Type</label>
+              </span>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="p-field">
+                <span class="p-float-label">
+                  <input class="p-inputtext-lg" pInputText  />
+                  <label htmlFor="username">Make</label>
+              </span>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="p-field">
+                <span class="p-float-label">
+                  <input class="p-inputtext-lg" pInputText/>
+                  <label htmlFor="username">Model</label>
+              </span>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="row-form grid">
+            <div class="col-4">
+              <div class="p-field">
+                <span class="p-float-label">
+                  <input class="p-inputtext-lg" pInputText/>
+                  <label htmlFor="username">Variant</label>
+              </span>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="p-field">
+                <span class="p-float-label">
+                  <input class="p-inputtext-lg" pInputText/>
+                  <label htmlFor="username">Chasis No</label>
+                </span>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="p-field">
+                <span class="p-float-label">
+                  <input class="p-inputtext-lg" pInputText/>
+                  <label for="float-label">Engine No</label>
+              </span>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="row-form grid">
+            <div class="col-4">
+              <div class="p-field">
+                <span class="p-float-label">
+                  <p-inputNumber class="p-inputtext-lg"  mode="currency" currency="PKR" locale="en-US"> </p-inputNumber>
+                  <label for="float-label">Cost Price</label>
+              </span>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="p-field">
+                <span class="p-float-label">
+                  <p-inputNumber class="p-inputtext-lg"  mode="currency" currency="PKR" locale="en-US"> </p-inputNumber>
+                  <label for="float-label">Demand</label>
+              </span>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="p-field">
+                <span class="p-float-label">
+                  <p-calendar [readonlyInput]="true" class="p-inputtext-lg" ></p-calendar>
+                  <label>Date Of Purcahse</label>
+              </span>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="row-form grid">
+            <div class="col-4">
+              <div class="p-field">
+                <span class="p-float-label">
+                  <input class="p-inputtext-lg" pInputText/>
+                  <label htmlFor="username">Body Color</label>
+              </span>
+              </div>
+            </div>
+            <div class="col-4">
+              <span class="p-float-label">
+                <p-dropdown [options]="status" class="p-inputtext-lg" placeholder="Select a Vehicle Type"></p-dropdown>
+                <label for="float-label">Status</label>
+            </span>
+            </div>
+            <div class="col-4">
+              <span class="p-float-label">
+                <input class="p-inputtext-lg" pInputText  />
+                <label for="float-label">Registration Number</label>
+            </span>
+            </div>
+          </div>
+           <br>
+           <div class="row-form grid">
+            <div class="col-8">
+              <span class="p-float-label">
+                <textarea id="float-input" rows="5" cols="80" pInputTextarea></textarea>
+                <label for="float-label">Other Details</label>
+            </span>
+            </div>
+            <div class="col-4">
+              <div class="p-field">
+                <label>Grade:</label>
+                <br>
+                <p-rating [stars]="5" [cancel]="false"></p-rating>
+              </div>
+            </div>    
+          </div>
+
+        </div>
+        <!-- <div class="container">
+          <h2>Upload Photos</h2>
+            <span>Choose Images To Upload:</span>
+            <div class="flex justify-content-space-between">
+            <p-fileUpload mode="basic" chooseLabel="Choose" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*"></p-fileUpload>
+            
+            <p-fileUpload mode="basic" chooseLabel="Upload" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*"></p-fileUpload>
+          </div>
+            <div class="image-preview-1">
+
+            </div>            
+        </div> -->
+        <br>
+      </div>
+      <div class="sidebar-footer flex justify-content-end">
+        <app-button label="Save" styleClass="p-button-sm p-button-rounded"></app-button>
+      </div>
+    </div>
+  </p-sidebar>
+</div>
 
 
-</form>
+
+
+
+
+

@@ -17,11 +17,11 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Home',
                 items: [
-                    { label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/'] }
+                    { label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/cdms/dashboard'] }
                 ]
             },
             {
-                label: 'Options',
+                label: 'Master Admin',
                 items: [
                     { label: 'Vehicle Type', 
                     icon: 'pi pi-fw  pi-truck', 

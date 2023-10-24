@@ -20,6 +20,7 @@ export class VehicleTypeAttributeService {
 
     async addVehicleTypeAttribute (addVehicleTypeAttributeDto: VehicleTypeAttributeDto): Promise<VehicleTypeAttribute>{
         const vehicleTypeAttribute = new VehicleTypeAttribute();
+
         const { vehicleAttributeName , attributeInputType, vehicleTypeId, vehicleAttributeValue } = addVehicleTypeAttributeDto;
 
         if ( await this.vehicleTypeAttributeRepository.exist({ where: { attribute_name: vehicleAttributeName } }) == false ){

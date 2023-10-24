@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from 'src/app/shared/base.component';
 import { takeUntil } from 'rxjs/operators';
+import { Output, EventEmitter } from '@angular/core';
 
 import {
   DataTableColumn,
@@ -21,6 +22,7 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
     vehicleTypeName: '',
   };
   
+
   columns: DataTableColumn[] = [];
   actions: IDataTableAction[] = [];
   data: IObject[] = [];
@@ -29,6 +31,9 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.getVehicleType();
+    
     this.columns = [
       {
         field: 'type_id',
@@ -38,47 +43,67 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
         field: 'type_name',
         fieldTitle: 'Vehicle Type Name',
       },
+      
     ];
     this.actions = [
       {
         label: ' Delete',
         icon: 'pi pi-trash',
         command: (event) => {
-          // this.delete( ); 
+          // this.delete({}); 
         },
       },
     ];
 
-    this.get();
+   
   }
 
-  // edit(id: number) {}
+ 
   
-
-  save() {
+  saveVehicleType() {
     if (this.vehicleType.vehicleTypeName != '') {
       this.apiService
         .post('/vehicle-type/addVehicleType', this.vehicleType)
         .subscribe({
           next: (response) => {
             this.closeModal();
-           
+            this.getVehicleType();
+            this.vehicleType.vehicleTypeName = "";
           },
           error: () => {
             
           },
+       
         });
     }
   }
-  selectedItem: any;
+  // selectedItem: any;
 
-  get() {
+  getVehicleType() {
     this.apiService.get('/vehicle-type/getVehicleType').subscribe((data) => {
       // console.log(data);
       this.data = data;
+      this.apiService.setVehicleTypes(data);
     });
   }
 
+
+
+//   delete(typeName: string): void {
+//     if (confirm('Are you sure you want to delete this vehicle type?')) {
+//       const deleteVehicleTypeDto = { vehicleTypeName: typeName };
+//       this.apiService.deleteVehicleType('/vehicle-type/deleteVehicleType', deleteVehicleTypeDto)
+//         .subscribe({
+//           next: (response) => {
+//             this.getVehicleType(); 
+//           },
+//           error: (error) => {
+            
+//             console.error('Error deleting vehicle type:', error);
+//           },
+//         });
+//     }
+//   }
 
 
   delete(vehicleType: IVehicleType): void {
@@ -88,7 +113,7 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
         this.apiService.delete('/vehicle-type/' + this.vehicleType.vehicleTypeId)
             .subscribe({
                 next: (response) => {
-                    this.get(); // Refresh the data after a successful delete
+                    this.getVehicleType(); // Refresh the data after a successful delete
                 },
                 error: (error) => {
                     // Handle errors as needed
@@ -101,9 +126,5 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
 }
 
   
-
-
-
-
-
+ 
 

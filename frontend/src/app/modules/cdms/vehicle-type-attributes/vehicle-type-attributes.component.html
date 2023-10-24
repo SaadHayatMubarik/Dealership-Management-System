@@ -1,3 +1,85 @@
-<p>
-  vehicle-type-attributes works!
-</p>
+
+
+
+<div class="comp-content">
+  <div class="toolbar-header mb-3">
+    <div class="comp-title">
+      <h3>Vehicle Type Attributes</h3>
+    </div>
+    <div class="comp-btns">
+      <app-button label="New" styleClass="p-button-sm p-button-rounded" (onclick)="openModal()"></app-button>
+    </div>
+  </div>
+
+  <div class="middle-content w-o-tabs mt-3">
+    <div class="filter-row flex justify-content-between pt-3">
+
+    </div>
+    <app-datatable [data]="data" [cols]="columns" [globalFilterFields]="['']" [actions]="actions"></app-datatable>
+  </div>
+
+  <p-sidebar [(visible)]="modal" position="right" [style]="{width: '80rem'}" >
+    <div class="sidebar-main">
+      <div class="sidebar-header">
+        <div class="sh-title">
+          <h3 style="text-align: center;">
+           Add Vehicle Type Attribute
+          </h3><br>
+        </div>
+        <div class="sh-toolbar">
+        </div>
+      </div>
+
+      <div class="sidebar-content">
+        <div class="card-grey">
+          <div class="row-form grid">
+            <div class="col-4">
+              <div class="p-field">
+               <label>Select a vehicle type for this attribute:</label> <br>
+                <p-dropdown [(ngModel)]="vehicleTypeAttribute.vehicleTypeId" [options]="vehicleTypes" optionLabel="type_name"></p-dropdown>
+                  <br>                
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="p-field">
+                <label>Attribute Name:</label> <br>
+                <app-textbox [(controlModel)]="vehicleTypeAttribute.vehicleAttributeName"></app-textbox><br>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="p-field">
+                <label>Select an input type:</label><br>
+                <p-dropdown
+                [options]="inputTypes"
+                [(ngModel)]="vehicleTypeAttribute.attributeInputType"
+                placeholder="Input type"
+              ></p-dropdown><br>
+              </div>  
+            </div>
+          </div>
+          <br>
+          <div class="row-form grid">
+            <div class="col-4">
+              <div class="p-field">
+                <label>Enter 1 or more Values:</label> <br>
+                  <p-chips [(ngModel)]="vehicleTypeAttribute.vehicleAttributeValue" separator="," placeholder="eg: red, green, yellow">
+                  </p-chips>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-footer flex justify-content-end">
+        <app-button label="Save" styleClass="p-button-sm p-button-rounded" (onclick)="saveVehicleTypeAttribute()" ></app-button>
+      </div>
+    </div>
+  </p-sidebar>  
+          
+          
+        
+        
+        
+
+
+      
+

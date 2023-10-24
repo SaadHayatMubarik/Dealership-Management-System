@@ -12,5 +12,4 @@ export class VehicleTypeAttributeDto{
     @IsNotEmpty()
     vehicleAttributeValue: string[];
 
-    
 }

@@ -143,7 +143,6 @@ export class BaseComponent {
 
   openModal() {
     this.modal = true;
-
   }
   closeModal() {
     this.modal = false;

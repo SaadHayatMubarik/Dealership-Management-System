@@ -8,11 +8,25 @@ export interface DeleteIVehicleType{
 }
 
 export interface IVehicleTypeAttribute {
-  vehicleTypeAttributeId: number;
-  attributeName: string;
-  inputType: string;
-  isRequired: boolean;
+  vehicleAttributeValue: string[];
+  vehicleAttributeName: string;
+  attributeInputType: string;
   vehicleTypeId: number;
 }
 
-export interface IInventory {}
+export interface IInventory {
+  vehicleMake: string;
+  vehicleModel: string;
+  vehicleVariant: string;
+  modelYear: number;
+  vehicleChasisNo: string;
+  costPrice: number;
+  demand: number;
+  dateOfPurchase: string;
+  dateOfSale: string;
+  bodyColor: string;
+  engineNo: string;
+  grade: number;
+  status: string;
+  regNo: string;
+}
