@@ -50,7 +50,7 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
         label: ' Delete',
         icon: 'pi pi-trash',
         command: (event) => {
-          // this.delete( ); 
+          // this.delete({}); 
         },
       },
     ];
