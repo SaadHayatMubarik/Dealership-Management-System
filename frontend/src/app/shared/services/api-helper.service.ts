@@ -38,7 +38,7 @@ export class ApiHelperService {
       .pipe(this.hookResponse(this));
   }
 
-  delete(path: any): Observable<any> {
+  delete(path: string): Observable<any> {
     return this.http
       .delete(`${environment.apiUrl}${path}`)
       .pipe(this.hookResponse(this));

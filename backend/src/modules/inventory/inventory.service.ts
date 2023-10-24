@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ConsoleLogger, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Inventory } from './Inventory';
 import { Repository } from 'typeorm';
@@ -16,23 +16,40 @@ export class InventoryService {
 
     async addInventory (addInventoryDto: AddInventoryDto): Promise<Inventory>{
         const inventory = new Inventory();
-        const { make, model , variant , year , chasis_no , price , demand , date_of_purchase , color , engine_no , comments , grade } = addInventoryDto;
-        inventory.make = make;
-        inventory.model = model;
-        inventory.variant = variant;
-        inventory.year = year;
-        inventory.chasis_no = chasis_no;
-        inventory.price = price;
+        const { vehicleMake, vehicleModel , vehicleVariant , modelYear , vehicleChasisNo , costPrice , demand , dateOfPurchase , dateOfSale , bodyColor , engineNo , comments , grade , regNo, status } = addInventoryDto;
+        // console.log(addInventoryDto.dateOfPurchase);
+        inventory.make = vehicleMake.toUpperCase();
+        inventory.model = vehicleModel.toUpperCase();
+        inventory.variant = vehicleVariant.toUpperCase();
+        inventory.year = modelYear;
+        inventory.chasis_no = vehicleChasisNo.toUpperCase();
+        inventory.price = costPrice;
         inventory.demand = demand;
-        inventory.date_of_purchase = date_of_purchase;
-        inventory.color = color;
-        inventory.engine_no = engine_no;
-        inventory.comments = comments;
+        inventory.date_of_purchase = dateOfPurchase;
+        inventory.date_sold = dateOfSale;
+        inventory.color = bodyColor.toUpperCase();
+        inventory.engine_no = engineNo.toUpperCase();
+        inventory.comments = comments.toUpperCase();
         inventory.grade = grade;
-        inventory.status = InventoryStatus.UNDEFINED;
+        inventory.status = status;
+        inventory.reg_no = regNo.toUpperCase();
+        // console.log(inventory);
+        // if (status.toUpperCase() === InventoryStatus.ON_ORDER){
+        //     inventory.status = InventoryStatus.ON_ORDER;
+        // }
+        // else if (status.toUpperCase() === InventoryStatus.SOLD){
+        //     inventory.status = InventoryStatus.SOLD;
+        // }
         await this.inventoryRepository.save(inventory);
         return inventory;
     }
 
+    async getInventory(): Promise<Inventory[]>{
+        return await this.inventoryRepository.find();
+    }
+
+    deleteInventory(inventoryId: number){
+        return this.inventoryRepository.delete({ inventory_id: inventoryId });
+    }
     
 }

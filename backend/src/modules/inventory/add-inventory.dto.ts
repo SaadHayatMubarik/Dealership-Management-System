@@ -1,43 +1,53 @@
-import { IsNotEmpty, IsOptional } from "class-validator";
+import { IsNotEmpty, IsNumber, IsOptional,IsEnum } from "class-validator";
+import { InventoryStatus } from "./inventory-status.enum";
 
 export class AddInventoryDto{
     @IsNotEmpty()
-    make: string;
+    vehicleMake: string;
 
     @IsNotEmpty()
-    model: string;
+    vehicleModel: string;
 
     @IsNotEmpty()
-    variant: string;
+    vehicleVariant: string;
 
     @IsNotEmpty()
-    year: number;
+    modelYear: number;
 
     @IsOptional()
-    @IsNotEmpty()
-    chasis_no: string;
+    // @IsNotEmpty()
+    vehicleChasisNo: string;
 
     @IsNotEmpty()
-    price: number;
+    costPrice: number;
 
     @IsNotEmpty()
     demand: number;
 
     @IsNotEmpty()
-    date_of_purchase: string;
+    dateOfPurchase: string;
 
     @IsNotEmpty()
-    color: string;
+    dateOfSale: string;
 
     @IsNotEmpty()
-    engine_no: string;
+    bodyColor: string;
+
+    @IsNotEmpty()
+    engineNo: string;
 
     @IsNotEmpty()
     comments: string;
 
     @IsNotEmpty()
+    @IsNumber()
     grade: number;
 
+    // @IsNotEmpty()
     @IsOptional()
-    reg_no: string;
+    // @IsEnum(InventoryStatus, { default: InventoryStatus.UNSOLD})
+    status: InventoryStatus;
+    
+    @IsOptional()
+    regNo: string;
 }

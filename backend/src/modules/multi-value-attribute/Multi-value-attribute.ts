@@ -18,6 +18,6 @@ export class MultiValueAttribute{
     @ManyToOne(() => VehicleTypeAttribute, (vehicleTypeAttribute) => vehicleTypeAttribute.multiValueAttributes)
     vehicleTypeAttribute: VehicleTypeAttribute;
 
-    @OneToMany(() => StockAttributeValue, (stockAttributeValue) => stockAttributeValue.multiValueAttribute)
+    @OneToMany(() => StockAttributeValue, (stockAttributeValue) => stockAttributeValue.multiValueAttribute, {cascade:true})
     stockAttributeValue: StockAttributeValue[];
 }

@@ -22,7 +22,7 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
     vehicleTypeName: '',
   };
   
- 
+
   columns: DataTableColumn[] = [];
   actions: IDataTableAction[] = [];
   data: IObject[] = [];
@@ -50,7 +50,7 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
         label: ' Delete',
         icon: 'pi pi-trash',
         command: (event) => {
-          this.delete(event);
+          // this.delete( ); 
         },
       },
     ];
@@ -81,27 +81,50 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
 
   getVehicleType() {
     this.apiService.get('/vehicle-type/getVehicleType').subscribe((data) => {
+      // console.log(data);
       this.data = data;
       this.apiService.setVehicleTypes(data);
     });
   }
 
 
-  delete(typeName: string): void {
-    if (confirm('Are you sure you want to delete this vehicle type?')) {
-      const deleteVehicleTypeDto = { vehicleTypeName: typeName };
-      this.apiService.deleteVehicleType('/vehicle-type/deleteVehicleType', deleteVehicleTypeDto)
-        .subscribe({
-          next: (response) => {
-            this.getVehicleType(); 
-          },
-          error: (error) => {
+
+//   delete(typeName: string): void {
+//     if (confirm('Are you sure you want to delete this vehicle type?')) {
+//       const deleteVehicleTypeDto = { vehicleTypeName: typeName };
+//       this.apiService.deleteVehicleType('/vehicle-type/deleteVehicleType', deleteVehicleTypeDto)
+//         .subscribe({
+//           next: (response) => {
+//             this.getVehicleType(); 
+//           },
+//           error: (error) => {
             
-            console.error('Error deleting vehicle type:', error);
-          },
-        });
+//             console.error('Error deleting vehicle type:', error);
+//           },
+//         });
+//     }
+//   }
+
+
+  delete(vehicleType: IVehicleType): void {
+    if (confirm('Are you sure you want to delete this item?')) {
+        // const vehicleTypeName = JSON.parse(typeName);  
+        console.log(vehicleType);
+        this.apiService.delete('/vehicle-type/' + this.vehicleType.vehicleTypeId)
+            .subscribe({
+                next: (response) => {
+                    this.getVehicleType(); // Refresh the data after a successful delete
+                },
+                error: (error) => {
+                    // Handle errors as needed
+                    console.error('Error deleting vehicle type:', error);
+                },
+            });
     }
-  }
+}
+
+}
+
   
  
-}
+

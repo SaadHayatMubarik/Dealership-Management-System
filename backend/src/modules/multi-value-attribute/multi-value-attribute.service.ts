@@ -16,19 +16,19 @@ export class MultiValueAttributeService {
         private vehicleTypeAttributeRepository: Repository<VehicleTypeAttribute>
     ){}
 
-    async addMultiValueAttributes(addMultiValueAttributeDto: MultiValueAttributeDto): Promise<MultiValueAttribute>{
-        const multiValueAttribute = new MultiValueAttribute();
-        const { attributeName, attributeValue } = addMultiValueAttributeDto;
-        const queryBuilder = this.vehicleTypeAttributeRepository.createQueryBuilder('vehicleTypeAttribute');
-        const attributeId = await queryBuilder
-        .select('vehicleTypeAttribute.attribute_id')
-        .where('vehicleTypeAttribute.attribute_name = :attributeName', { attributeName })
-        .getOne();
-        multiValueAttribute.vehicleTypeAttribute = attributeId;
-        multiValueAttribute.attribute_value = attributeValue;
-        await this.multiValueAttributeRepository.save(multiValueAttribute);
-        return multiValueAttribute;
-    }
+    // async addMultiValueAttributes(addMultiValueAttributeDto: MultiValueAttributeDto): Promise<MultiValueAttribute>{
+    //     const multiValueAttribute = new MultiValueAttribute();
+    //     const { attributeName, attributeValue } = addMultiValueAttributeDto;
+    //     const queryBuilder = this.vehicleTypeAttributeRepository.createQueryBuilder('vehicleTypeAttribute');
+    //     const attributeId = await queryBuilder
+    //     .select('vehicleTypeAttribute.attribute_id')
+    //     .where('vehicleTypeAttribute.attribute_name = :attributeName', { attributeName })
+    //     .getOne();
+    //     multiValueAttribute.vehicleTypeAttribute = attributeId;
+    //     multiValueAttribute.attribute_value = attributeValue;
+    //     await this.multiValueAttributeRepository.save(multiValueAttribute);
+    //     return multiValueAttribute;
+    // }
     // getAttributeType(addMultiValueAttributeDto: MultiValueAttributeDto){
     //     const { attributeName } = addMultiValueAttributeDto;
     //     const queryBuilder = this.vehicleTypeAttributeRepository.createQueryBuilder('vehicleTypeAttribute');

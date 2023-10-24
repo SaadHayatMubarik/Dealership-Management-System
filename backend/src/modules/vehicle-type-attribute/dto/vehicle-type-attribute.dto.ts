@@ -1,15 +1,16 @@
 import { IsNotEmpty } from "class-validator";
-
 export class VehicleTypeAttributeDto{
     @IsNotEmpty()
-    attributeName: string;
+    vehicleAttributeName: string;
 
     @IsNotEmpty()
-    inputType: string;
+    attributeInputType: string;
 
     @IsNotEmpty()
-    vehicleTypeName: string;
+    vehicleTypeId: number;
 
+    @IsNotEmpty()
+    vehicleAttributeValue: string[];
 
-
+    
 }

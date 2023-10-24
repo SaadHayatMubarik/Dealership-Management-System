@@ -8,10 +8,10 @@ export class MultiValueAttributeController {
     constructor( private multiValueAttributeService: MultiValueAttributeService)
     {}
 
-    @Post('addMultivalueAttribute')
-    addMultiValueAttribute(@Body() addMultiValueAttributeDto: MultiValueAttributeDto ): Promise<MultiValueAttribute>{
-        return this.multiValueAttributeService.addMultiValueAttributes(addMultiValueAttributeDto);
-    }
+    // @Post('addMultivalueAttribute')
+    // addMultiValueAttribute(@Body() addMultiValueAttributeDto: MultiValueAttributeDto ): Promise<MultiValueAttribute>{
+    //     return this.multiValueAttributeService.addMultiValueAttributes(addMultiValueAttributeDto);
+    // }
 
     @Get('/:attributeName')
     getMultiAttributeByAttributeId(@Param('attributeName') attributeName: string): Promise<MultiValueAttribute[]>{
