@@ -21,6 +21,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { CalendarModule } from 'primeng/calendar';
 import { RatingModule } from 'primeng/rating';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { FileUploadModule } from 'primeng/fileupload';
 
 
 
@@ -50,7 +51,8 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     InputNumberModule,
     CalendarModule,
     RatingModule,
-    InputTextareaModule
+    InputTextareaModule,
+    FileUploadModule
    
   ],
   providers: [],

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from 'src/app/shared/base.component';
 import { IVehicleTypeAttribute } from '../../interfaces/inventory';
-import { IVehicleType } from '../../interfaces/inventory';
 import { SelectItem } from 'primeng/api';
 
 
@@ -10,7 +9,6 @@ import {
   IDataTableAction,
   IObject,
 } from 'src/app/shared/interfaces/common';
-// import { IVehicleType } from '../../interfaces/inventory';
 
 import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
 
@@ -21,14 +19,13 @@ import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
 })
 export class VehicleTypeAttributesComponent  extends BaseComponent implements OnInit {
 
-  VehicleAttributeName: string = '';
+  // VehicleAttributeName: string = '';
 
   vehicleTypeAttribute: IVehicleTypeAttribute = {
-    vehicleTypeAttributeId: 0,
-    attributeValue: this.VehicleAttributeName,
-    attributeName: '',
-    inputType: '',
-    vehicleTypeName: '',
+    vehicleAttributeName:'',
+    attributeInputType:'',
+    vehicleAttributeValue:[],
+    vehicleTypeId:0
   };
 
 
@@ -38,7 +35,6 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
   columns: DataTableColumn[] = [];
   actions: IDataTableAction[] = [];
   data: IObject[] = [];
-  isRequired: string[] = ['YES', 'NO'];
   inputTypes: string[] = ['TEXT', 'NUMBER', 'DATE', 'DROPDOWN'];
   inputTypesOptions: SelectItem[] = [];
   
@@ -46,11 +42,6 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
   constructor(private readonly apiService: ApiHelperService){
     super()
     
-    this.inputTypesOptions = this.inputTypes.map((type) => ({
-      label: type,
-      value: type,
-    }));
- 
   }
 
 
@@ -62,7 +53,7 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
 
    this.columns = [ 
     {
-      field: 'type_name',
+      field: '',
       fieldTitle: 'Vehicle Type',
     },
     {
@@ -77,10 +68,7 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
         field: '',
         fieldTitle: 'Input Type',
       },
-      {
-        field: '',
-        fieldTitle: 'Is Required',
-      },
+    
     ];
     this.actions = [
       {
@@ -91,16 +79,43 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
         },
       },
     ];
+  }
 
-    
+  resetForm() {
+    this.vehicleTypeAttribute.vehicleAttributeName = "";
+    this.vehicleTypeAttribute.attributeInputType = '';
+    this.vehicleTypeAttribute.vehicleAttributeValue = [];
+    this.vehicleTypeAttribute.vehicleTypeId = 0;
+  }
+
+  getVehicleTypeAttribute(){
+    this.apiService.get('/vehicle-type-attribute/getVehicleTypeAttribute').subscribe((data) => {
+      // console.log(data);
+      this.data = data;
+    });
+
+  }
+
+  saveVehicleTypeAttribute() {
+    if (this.vehicleTypeAttribute.vehicleAttributeName !== '') {
+      this.apiService
+        .post('/vehicle-type-attribute/addVehicleTypeAttribute', this.vehicleTypeAttribute)
+        .subscribe({
+          next: (response) => {
+            this.closeModal();
+            this.resetForm;
+            this.getVehicleTypeAttribute;
+          },
+          error: () => {
+            console.log("unsucessful");
+            
+          },
+       
+        });
+    }
   }
 
  
-  saveVehicleTypeAttribute()
-  {
-   
-
-  }
 
 
 }

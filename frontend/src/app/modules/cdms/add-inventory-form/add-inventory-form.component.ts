@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from 'src/app/shared/base.component';
 
 import {
@@ -14,8 +14,30 @@ import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
   templateUrl: './add-inventory-form.component.html',
   styleUrls: ['./add-inventory-form.component.scss']
 })
-export class AddInventoryFormComponent extends BaseComponent{
+export class AddInventoryFormComponent extends BaseComponent implements OnInit{
 
+  vehicleInventory: IInventory = {
+    vehicleMake: '',
+    vehicleModel: '',
+    vehicleVariant:'',
+    modelYear: 0,
+    vehicleChasisNo:'',
+    costPrice: 0,
+    demand: 0,
+    dateOfPurchase:'',
+    dateOfSale: '',
+    bodyColor: '',
+    engineNo: '',
+    grade: 0,
+    status: '',
+    regNo: '',
+  };
+
+  
+ vehicleTypes: any[] = [];
+ status: string[] = ['Available', 'Unavailable', 'Upcoming'];
+
+ 
   columns: DataTableColumn[] = [];
   actions: IDataTableAction[] = [];
   data: IObject[] = [];
@@ -28,7 +50,7 @@ export class AddInventoryFormComponent extends BaseComponent{
 
   ngOnInit() {
 
-
+    this.vehicleTypes = this.apiService.getVehicleTypes();
     
     this.columns = [
       {

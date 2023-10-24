@@ -71,7 +71,7 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
             this.vehicleType.vehicleTypeName = "";
           },
           error: () => {
-
+            
           },
        
         });

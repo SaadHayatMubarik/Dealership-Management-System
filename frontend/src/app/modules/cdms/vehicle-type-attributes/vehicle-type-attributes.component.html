@@ -36,14 +36,14 @@
             <div class="col-4">
               <div class="p-field">
                <label>Select a vehicle type for this attribute:</label> <br>
-                <p-dropdown [options]="vehicleTypes" [(ngModel)]="vehicleTypeAttribute.vehicleTypeName" optionLabel="type_name"></p-dropdown>
+                <p-dropdown [(ngModel)]="vehicleTypeAttribute.vehicleTypeId" [options]="vehicleTypes" optionLabel="type_name"></p-dropdown>
                   <br>                
               </div>
             </div>
             <div class="col-4">
               <div class="p-field">
                 <label>Attribute Name:</label> <br>
-                <app-textbox [(controlModel)]=" vehicleTypeAttribute.attributeName"></app-textbox><br>
+                <app-textbox [(controlModel)]="vehicleTypeAttribute.vehicleAttributeName"></app-textbox><br>
               </div>
             </div>
             <div class="col-4">
@@ -51,7 +51,7 @@
                 <label>Select an input type:</label><br>
                 <p-dropdown
                 [options]="inputTypes"
-                [(ngModel)]="vehicleTypeAttribute.inputType"
+                [(ngModel)]="vehicleTypeAttribute.attributeInputType"
                 placeholder="Input type"
               ></p-dropdown><br>
               </div>  
@@ -62,7 +62,7 @@
             <div class="col-4">
               <div class="p-field">
                 <label>Enter 1 or more Values:</label> <br>
-                  <p-chips [(ngModel)]="vehicleTypeAttribute.attributeValue" separator="," placeholder="eg: red, green, yellow">
+                  <p-chips [(ngModel)]="vehicleTypeAttribute.vehicleAttributeValue" separator="," placeholder="eg: red, green, yellow">
                   </p-chips>
               </div>
             </div>
@@ -70,7 +70,7 @@
         </div>
       </div>
       <div class="sidebar-footer flex justify-content-end">
-        <app-button label="Save" styleClass="p-button-sm p-button-rounded" (onclick)="saveVehicleTypeAttribute" ></app-button>
+        <app-button label="Save" styleClass="p-button-sm p-button-rounded" (onclick)="saveVehicleTypeAttribute()" ></app-button>
       </div>
     </div>
   </p-sidebar>  

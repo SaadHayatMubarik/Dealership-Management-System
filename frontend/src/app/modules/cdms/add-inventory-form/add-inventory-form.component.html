@@ -32,7 +32,7 @@
             <div class="col-4">
               <div class="p-field">
                 <span class="p-float-label">
-                  <p-dropdown class="p-inputtext-lg" placeholder="Select a Vehicle Type" optionLabel="type_name"></p-dropdown>
+                  <p-dropdown class="p-inputtext-lg" placeholder="Select a Vehicle Type" [options]="vehicleTypes" optionLabel="type_name"></p-dropdown>
                   <label for="float-label">Vehicle Type</label>
               </span>
               </div>
@@ -120,7 +120,7 @@
             </div>
             <div class="col-4">
               <span class="p-float-label">
-                <p-dropdown class="p-inputtext-lg" placeholder="Select a Vehicle Type"></p-dropdown>
+                <p-dropdown [options]="status" class="p-inputtext-lg" placeholder="Select a Vehicle Type"></p-dropdown>
                 <label for="float-label">Status</label>
             </span>
             </div>
@@ -149,6 +149,19 @@
           </div>
 
         </div>
+        <!-- <div class="container">
+          <h2>Upload Photos</h2>
+            <span>Choose Images To Upload:</span>
+            <div class="flex justify-content-space-between">
+            <p-fileUpload mode="basic" chooseLabel="Choose" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*"></p-fileUpload>
+            
+            <p-fileUpload mode="basic" chooseLabel="Upload" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*"></p-fileUpload>
+          </div>
+            <div class="image-preview-1">
+
+            </div>            
+        </div> -->
+        <br>
       </div>
       <div class="sidebar-footer flex justify-content-end">
         <app-button label="Save" styleClass="p-button-sm p-button-rounded"></app-button>
