@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { ToastService } from './toast.service';
-import { VehicleTypeDto } from '../../../../../backend/src/modules/vehicle-type/vehicle-type.dto'
+// import { VehicleTypeDto } from '../../../../../backend/src/modules/vehicle-type/vehicle-type.dto'
 @Injectable({
   providedIn: 'root',
 })
@@ -44,11 +44,11 @@ export class ApiHelperService {
       .pipe(this.hookResponse(this));
   }
 
-  deleteVehicleType(path: string, deleteVehicleTypeDto: VehicleTypeDto): Observable<any> {
-    return this.http
-      .request('delete', `${environment.apiUrl}${path}`, { body: deleteVehicleTypeDto })
-      .pipe(this.hookResponse(this));
-  }
+  // deleteVehicleType(path: string, deleteVehicleTypeDto: VehicleTypeDto): Observable<any> {
+  //   return this.http
+  //     .request('delete', `${environment.apiUrl}${path}`, { body: deleteVehicleTypeDto })
+  //     .pipe(this.hookResponse(this));
+  // }
 
   hookResponse(_this: this) {
     return (a: any) => {
