@@ -11,9 +11,11 @@ import { AppSharedModule } from './shared/app.shared.module';
 
 
 
+
 @NgModule({
   declarations: [
-    AppComponent  
+    AppComponent,
+
   ],
   imports: [
     AppRoutingModule,
@@ -24,6 +26,7 @@ import { AppSharedModule } from './shared/app.shared.module';
     AppLayoutModule,
     AppSharedModule,
     CdmsModule,
+    
 
   ],
   providers: [],

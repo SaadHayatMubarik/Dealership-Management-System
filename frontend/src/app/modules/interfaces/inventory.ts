@@ -5,10 +5,25 @@ export interface IVehicleType {
 
 export interface IVehicleTypeAttribute {
   vehicleTypeAttributeId: number;
+  attributeValue:string;
   attributeName: string;
   inputType: string;
-  isRequired: boolean;
-  vehicleTypeId: number;
+  vehicleTypeName: string;
 }
 
-export interface IInventory {}
+export interface IInventory {
+vehicleTypeName: string;
+vehicleMake: string;
+vehicleModel: string;
+vehicleVariant: string;
+vehicleChasisNo: string;
+costPrice:number;
+demand: number;
+dateOfPurchase: Date;
+bodyColor: string;
+engineNo: string;
+comments: string;
+grade:number;
+status: string;
+regNo: string;
+}

@@ -13,6 +13,7 @@ import { AppMenuComponent } from './sidebar/app.menu.component';
 import { AppSidebarComponent } from './sidebar/app.sidebar.component';
 import { CommonModule } from '@angular/common';
 import { AppMenuitemComponent } from './sidebar/app.menuitem.component';
+import { LoginLayoutComponent } from './login-layout/login-layout.component';
 
 @NgModule({
     declarations: [
@@ -22,6 +23,7 @@ import { AppMenuitemComponent } from './sidebar/app.menuitem.component';
         AppMenuComponent,
         AppSidebarComponent,
         AppLayoutComponent,
+        LoginLayoutComponent,
     ],
     imports: [
         CommonModule,

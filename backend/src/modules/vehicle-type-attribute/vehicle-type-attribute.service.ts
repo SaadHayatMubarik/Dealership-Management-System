@@ -18,11 +18,11 @@ export class VehicleTypeAttributeService {
 
     async addVehicleTypeAttribute (addVehicleTypeAttributeDto: VehicleTypeAttributeDto): Promise<VehicleTypeAttribute>{
         const vehicleTypeAttribute = new VehicleTypeAttribute();
-        const { attributeName , inputType, typeName} = addVehicleTypeAttributeDto;
+        const { attributeName , inputType, vehicleTypeName} = addVehicleTypeAttributeDto;
         const queryBuilder = this.vehicleTypeRepositry.createQueryBuilder('vehicleType');
         const typeId = await queryBuilder
         .select('vehicleType.type_id')
-        .where('vehicleType.type_name = :typeName', { typeName })
+        .where('vehicleType.type_name = :typeName', { vehicleTypeName })
         .getOne();
         vehicleTypeAttribute.attribute_name = attributeName.toLowerCase();
         vehicleTypeAttribute.input_type = inputType.toLowerCase();

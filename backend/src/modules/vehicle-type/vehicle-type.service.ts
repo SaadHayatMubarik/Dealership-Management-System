@@ -38,3 +38,4 @@ export class VehicleTypeService {
     //     return this.vehicleTypeRepositry.update({ type_name: vehicleType });
     // }
 }
+ 

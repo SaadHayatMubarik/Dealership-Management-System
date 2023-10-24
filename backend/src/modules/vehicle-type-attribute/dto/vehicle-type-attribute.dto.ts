@@ -8,6 +8,8 @@ export class VehicleTypeAttributeDto{
     inputType: string;
 
     @IsNotEmpty()
-    typeName: string;
+    vehicleTypeName: string;
+
+
 
 }

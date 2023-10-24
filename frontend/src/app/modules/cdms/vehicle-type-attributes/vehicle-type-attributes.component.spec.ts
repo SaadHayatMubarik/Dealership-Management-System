@@ -4,6 +4,7 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { VehicleTypeAttributesComponent } from './vehicle-type-attributes.component';
+import { ButtonComponent } from 'src/app/shared/components/button/button.component';
 
 describe('VehicleTypeAttributesComponent', () => {
   let component: VehicleTypeAttributesComponent;
