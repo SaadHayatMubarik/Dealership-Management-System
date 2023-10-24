@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { MultiValueAttributeService } from './multi-value-attribute.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { MultiValueAttribute } from './Multi-value-attribute';
-import { VehicleTypeAttribute } from '../vehicle-type-attribute/Vehicle-type-attribute';
+import { MultiValueAttribute } from './entities/Multi-value-attribute';
+import { VehicleTypeAttribute } from '../vehicle-type-attribute/entities/Vehicle-type-attribute';
 import { MultiValueAttributeController } from './multi-value-attribute.controller';
 
 @Module({

@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { StockAttributeValue } from './Stock-attribute-value';
+import { StockAttributeValue } from './entities/Stock-attribute-value';
 import { Repository } from 'typeorm';
-import { MultiValueAttribute } from '../multi-value-attribute/Multi-value-attribute';
-import { StockAttributeValueDto } from './stock-attribute-value.dto';
-import { Inventory } from '../inventory/Inventory';
-import { VehicleTypeAttribute } from '../vehicle-type-attribute/Vehicle-type-attribute';
+import { MultiValueAttribute } from '../multi-value-attribute/entities/Multi-value-attribute';
+import { StockAttributeValueDto } from './dto/stock-attribute-value.dto';
+import { Inventory } from '../inventory/entities/Inventory';
+import { VehicleTypeAttribute } from '../vehicle-type-attribute/entities/Vehicle-type-attribute';
 
 @Injectable()
 export class StockAttributeValueService {

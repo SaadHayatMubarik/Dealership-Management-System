@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn, OneToOne, OneToMany } from "typeorm";
-import { VehicleType } from "../vehicle-type/Vehicle-type";
-import { StockAttributeValue } from "../stock-attribute-value/Stock-attribute-value";
-import { InventoryStatus } from "./inventory-status.enum";
+import { VehicleType } from "../../vehicle-type/entities/Vehicle-type";
+import { StockAttributeValue } from "../../stock-attribute-value/entities/Stock-attribute-value";
+import { InventoryStatus } from "../inventory-status.enum";
 
 
 @Entity({ name: 'inventory' })
@@ -37,7 +37,7 @@ date_of_purchase: string;
 @Column({ nullable: true })
 date_sold: string;
 
-@Column({ type:"enum", enum: InventoryStatus, default: InventoryStatus.UNSOLD })
+@Column({ type:"enum", enum: InventoryStatus, default: InventoryStatus.AVAILABLE })
 status: InventoryStatus;
 
 @Column()

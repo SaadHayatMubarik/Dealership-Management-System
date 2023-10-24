@@ -1,5 +1,5 @@
 export enum InventoryStatus {
     SOLD = 'SOLD' ,
-    UNSOLD = 'UNSOLD' ,
+    AVAILABLE = 'AVAILABLE' ,
     ON_ORDER = 'ON ORDER' 
 }

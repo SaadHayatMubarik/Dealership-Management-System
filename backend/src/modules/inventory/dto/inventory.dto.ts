@@ -1,7 +1,7 @@
 import { IsNotEmpty, IsNumber, IsOptional,IsEnum } from "class-validator";
-import { InventoryStatus } from "./inventory-status.enum";
+import { InventoryStatus } from "../inventory-status.enum";
 
-export class AddInventoryDto{
+export class InventoryDto{
     @IsNotEmpty()
     vehicleMake: string;
 

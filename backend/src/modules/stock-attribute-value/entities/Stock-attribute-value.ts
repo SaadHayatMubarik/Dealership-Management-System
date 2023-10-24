@@ -1,7 +1,7 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { VehicleTypeAttribute } from "../vehicle-type-attribute/Vehicle-type-attribute";
-import { Inventory } from "../inventory/Inventory";
-import { MultiValueAttribute } from "../multi-value-attribute/Multi-value-attribute";
+import { VehicleTypeAttribute } from "../../vehicle-type-attribute/entities/Vehicle-type-attribute";
+import { Inventory } from "../../inventory/entities/Inventory";
+import { MultiValueAttribute } from "../../multi-value-attribute/entities/Multi-value-attribute";
 
 @Entity({ name: 'Stock_Attribute_Value' })
 export class StockAttributeValue{

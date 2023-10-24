@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { StockAttributeValueService } from './stock-attribute-value.service';
-import { StockAttributeValueDto } from './stock-attribute-value.dto';
-import { StockAttributeValue } from './Stock-attribute-value';
+import { StockAttributeValueDto } from './dto/stock-attribute-value.dto';
+import { StockAttributeValue } from './entities/Stock-attribute-value';
 
 @Controller('stock-attribute-value')
 export class StockAttributeValueController {

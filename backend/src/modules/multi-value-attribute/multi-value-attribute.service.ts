@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { MultiValueAttribute } from './Multi-value-attribute';
+import { MultiValueAttribute } from './entities/Multi-value-attribute';
 import { Repository } from 'typeorm';
-import { VehicleTypeAttribute } from '../vehicle-type-attribute/Vehicle-type-attribute';
-import { MultiValueAttributeDto } from './multi-value-attribute.dto';
+import { VehicleTypeAttribute } from '../vehicle-type-attribute/entities/Vehicle-type-attribute';
+import { MultiValueAttributeDto } from './dto/multi-value-attribute.dto';
 
 
 @Injectable()

@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { VehicleTypeAttribute } from './Vehicle-type-attribute';
+import { VehicleTypeAttribute } from './entities/Vehicle-type-attribute';
 import { Repository } from 'typeorm';
-import { VehicleType } from '../vehicle-type/Vehicle-type';
+import { VehicleType } from '../vehicle-type/entities/Vehicle-type';
 import { VehicleTypeAttributeDto } from './dto/vehicle-type-attribute.dto';
-import { MultiValueAttribute } from '../multi-value-attribute/Multi-value-attribute';
+import { MultiValueAttribute } from '../multi-value-attribute/entities/Multi-value-attribute';
 
 @Injectable()
 export class VehicleTypeAttributeService {
@@ -52,14 +52,13 @@ export class VehicleTypeAttributeService {
         return vehicleTypeAttribute;
     }
 
-    async getVehicleAttributeByType(getVehicleTypeAttributeDto: VehicleTypeAttributeDto): Promise<VehicleTypeAttribute[]>{
-        const { vehicleTypeId,vehicleAttributeName,attributeInputType,vehicleAttributeValue } = getVehicleTypeAttributeDto;
+    async getVehicleAttributeByType(vehicleTypeIdParam: number): Promise<VehicleTypeAttributeDto[]>{
         const vehicleTypeAttribute = new VehicleTypeAttribute();
         const queryBuilder = this.vehicleTypeAttributeRepository.createQueryBuilder('vehicleTypeAttribute');
-        const attributes = await queryBuilder
-        .select('vehicleTypeAttribute.attribute_name')
-        .where('vehicleTypeAttribute.vehicleTypeTypeId = :vehicleTypeId', { vehicleTypeId })
-        .getMany();
+        // const attributes = await queryBuilder
+        // .select('vehicleTypeAttribute.attribute_name')
+        // .where('vehicleTypeAttribute.vehicleTypeTypeId = :vehicleTypeId', { vehicleTypeId })
+        // .getMany();
 
         // vehicleAttributeName = attributes
         // const queryBuildertwo = this.vehicleTypeAttributeRepository.createQueryBuilder('vehicleTypeAttribute')
@@ -67,7 +66,7 @@ export class VehicleTypeAttributeService {
         // .where('vehicleTypeAttribute.vehicleTypeTypeId = :id', { id });
         
         // const attribute = await queryBuildertwo.getRawMany();
-    return attributes;
+    return 
     }
 
     deleteVehicleTypeAttributeByName(attributeName: string){

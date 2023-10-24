@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { MultiValueAttributeService } from './multi-value-attribute.service';
-import { MultiValueAttributeDto } from './multi-value-attribute.dto';
-import { MultiValueAttribute } from './Multi-value-attribute';
+import { MultiValueAttributeDto } from './dto/multi-value-attribute.dto';
+import { MultiValueAttribute } from './entities/Multi-value-attribute';
 
 @Controller('multi-value-attribute')
 export class MultiValueAttributeController {

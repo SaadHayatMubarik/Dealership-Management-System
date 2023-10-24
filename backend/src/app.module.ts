@@ -8,7 +8,9 @@ import { VehicleTypeAttributeModule } from './modules/vehicle-type-attribute/veh
 import { MultiValueAttributeModule } from './modules/multi-value-attribute/multi-value-attribute.module';
 import { StockAttributeValueModule } from './modules/stock-attribute-value/stock-attribute-value.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { typeOrmConfig } from './modules/typeorm/config/typeorm.config';
+import { typeOrmConfig } from './typeorm/config/typeorm.config';
+// import { typeOrmConfig } from './modules/typeorm/config/typeorm.config';
+// import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot(typeOrmConfig),
@@ -17,6 +19,7 @@ import { typeOrmConfig } from './modules/typeorm/config/typeorm.config';
     VehicleTypeAttributeModule,
     MultiValueAttributeModule,
     StockAttributeValueModule,
+    // AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService]
