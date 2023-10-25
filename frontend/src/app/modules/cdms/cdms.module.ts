@@ -22,6 +22,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { RatingModule } from 'primeng/rating';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { FileUploadModule } from 'primeng/fileupload';
+import { SliderModule } from 'primeng/slider';
 
 
 
@@ -52,7 +53,8 @@ import { FileUploadModule } from 'primeng/fileupload';
     CalendarModule,
     RatingModule,
     InputTextareaModule,
-    FileUploadModule
+    FileUploadModule,
+    SliderModule
    
   ],
   providers: [],

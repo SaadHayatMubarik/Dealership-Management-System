@@ -142,12 +142,13 @@
             <div class="col-4">
               <div class="p-field">
                 <label>Grade:</label>
-                <br>
-                <p-rating [stars]="5" [cancel]="false"></p-rating>
-              </div>
+            <div>
+              <input type="number" pInputText [(ngModel)]="sliderValue" class="w-full" (input)="onInputChange($event)" />
+                <p-slider [(ngModel)]="sliderValue" [min]="0" [max]="5" [step]="0.5" class="w-full"></p-slider>
             </div>    
+              </div>
+            </div> 
           </div>
-
         </div>
         <!-- <div class="container">
           <h2>Upload Photos</h2>

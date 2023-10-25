@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from 'src/app/shared/base.component';
 import { IVehicleTypeAttribute } from '../../interfaces/inventory';
+import { IVehicleType } from '../../interfaces/inventory';
 import { SelectItem } from 'primeng/api';
 
 
@@ -9,7 +10,6 @@ import {
   IDataTableAction,
   IObject,
 } from 'src/app/shared/interfaces/common';
-
 import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
 
 @Component({
@@ -19,37 +19,56 @@ import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
 })
 export class VehicleTypeAttributesComponent  extends BaseComponent implements OnInit {
 
-  // VehicleAttributeName: string = '';
 
+ 
   vehicleTypeAttribute: IVehicleTypeAttribute = {
     vehicleAttributeName:'',
     attributeInputType:'',
     vehicleAttributeValue:[],
-    vehicleTypeId:0
+    vehicleType:''
   };
+
+  // vehicleType: IVehicleType = 
+  // {
+  //   vehicleTypeId : 0,
+  //   vehicleTypeName:''
+
+  // }
 
 
   vehicleTypes: any[] = [];
+  
+ 
+  // vehicleTypeinput: { label: string, value: number }[] = [];
+  
+
   
   
   columns: DataTableColumn[] = [];
   actions: IDataTableAction[] = [];
   data: IObject[] = [];
-  inputTypes: string[] = ['TEXT', 'NUMBER', 'DATE', 'DROPDOWN'];
-  inputTypesOptions: SelectItem[] = [];
+  inputTypes: any[] = ['TEXT', 'NUMBER', 'DATE', 'DROPDOWN'];
+
+
+ 
+  
   
   
   constructor(private readonly apiService: ApiHelperService){
     super()
-    
+   
+      
   }
 
 
   ngOnInit() 
 
   {
+   
+    this.vehicleTypes= this.apiService.getVehicleTypes();
+    
 
-    this.vehicleTypes = this.apiService.getVehicleTypes();
+    
 
    this.columns = [ 
     {
@@ -85,8 +104,10 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
     this.vehicleTypeAttribute.vehicleAttributeName = "";
     this.vehicleTypeAttribute.attributeInputType = '';
     this.vehicleTypeAttribute.vehicleAttributeValue = [];
-    this.vehicleTypeAttribute.vehicleTypeId = 0;
+    this.vehicleTypeAttribute.vehicleType = '';
   }
+
+  
 
   getVehicleTypeAttribute(){
     this.apiService.get('/vehicle-type-attribute/getVehicleTypeAttribute').subscribe((data) => {
@@ -95,7 +116,7 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
     });
 
   }
-
+ 
   saveVehicleTypeAttribute() {
     if (this.vehicleTypeAttribute.vehicleAttributeName !== '') {
       this.apiService
@@ -105,7 +126,8 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
             this.closeModal();
             this.resetForm;
             this.getVehicleTypeAttribute;
-            console.log(this.vehicleTypeAttribute)
+            console.log("successs");
+
           },
           error: () => {
             console.log("unsucessful");
