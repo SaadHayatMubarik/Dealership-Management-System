@@ -1,4 +1,5 @@
 import { IsNotEmpty } from "class-validator";
+import { VehicleType } from "src/modules/vehicle-type/entities/Vehicle-type";
 export class VehicleTypeAttributeDto{
     @IsNotEmpty()
     vehicleAttributeName: string;
@@ -7,7 +8,7 @@ export class VehicleTypeAttributeDto{
     attributeInputType: string;
 
     @IsNotEmpty()
-    vehicleTypeId: number;
+    vehicleTypeId: VehicleType;
 
     @IsNotEmpty()
     vehicleAttributeValue: string[];

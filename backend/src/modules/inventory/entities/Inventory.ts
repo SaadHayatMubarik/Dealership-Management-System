@@ -22,7 +22,7 @@ variant: string;
 @Column()
 year: number;
 
-@Column({ nullable: true })
+@Column({ nullable: true})
 chasis_no: string;
 
 @Column()

@@ -105,6 +105,7 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
             this.closeModal();
             this.resetForm;
             this.getVehicleTypeAttribute;
+            console.log(this.vehicleTypeAttribute)
           },
           error: () => {
             console.log("unsucessful");
