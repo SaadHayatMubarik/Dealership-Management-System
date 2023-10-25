@@ -13,7 +13,7 @@ export class VehicleTypeAttributeService {
         @InjectRepository(VehicleTypeAttribute)
         private vehicleTypeAttributeRepository: Repository<VehicleTypeAttribute>,
         @InjectRepository(VehicleType)
-        private vehicleTypeRepositry: Repository<VehicleType>,
+        private vehicleTypeRepository: Repository<VehicleType>,
         @InjectRepository(MultiValueAttribute)
         private multiValueAttributeRepository: Repository<MultiValueAttribute>,
     ){}
@@ -22,16 +22,17 @@ export class VehicleTypeAttributeService {
         const vehicleTypeAttribute = new VehicleTypeAttribute();
 
         const { vehicleAttributeName , attributeInputType, vehicleTypeId, vehicleAttributeValue } = addVehicleTypeAttributeDto;
-
+        
         if ( await this.vehicleTypeAttributeRepository.exist({ where: { attribute_name: vehicleAttributeName } }) == false ){
         vehicleTypeAttribute.attribute_name = vehicleAttributeName.toLowerCase();
         vehicleTypeAttribute.input_type = attributeInputType.toLowerCase();
-        const queryBuilder = this.vehicleTypeRepositry.createQueryBuilder('vehicleType');
+        const queryBuilder = this.vehicleTypeRepository.createQueryBuilder('vehicleType');
         const typeId = await queryBuilder
         .select('vehicleType.type_id')
         .where('vehicleType.type_id = :vehicleTypeId', { vehicleTypeId })
         .getOne();
-        vehicleTypeAttribute.vehicleType = typeId;
+
+        vehicleTypeAttribute.vehicleType =typeId;
         await this.vehicleTypeAttributeRepository.save(vehicleTypeAttribute);
         console.log(vehicleTypeAttribute);
             }

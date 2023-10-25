@@ -11,7 +11,7 @@ export interface IVehicleTypeAttribute {
   vehicleAttributeValue: string[];
   vehicleAttributeName: string;
   attributeInputType: string;
-  vehicleTypeId: number;
+  vehicleType: any;
 }
 
 export interface IInventory {

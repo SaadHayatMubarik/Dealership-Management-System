@@ -36,6 +36,22 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit{
   
  vehicleTypes: any[] = [];
  status: string[] = ['Available', 'Unavailable', 'Upcoming'];
+ sliderValue: number = 0; 
+
+ onInputChange(event: any) {
+  const inputValue = event.target.value;
+  const parsedValue = parseFloat(inputValue);
+  
+  if (!isNaN(parsedValue)) {
+    if (parsedValue > 5) {
+      this.sliderValue = 5; // Limit to a maximum value of 5
+    } else {
+      this.sliderValue = parsedValue;
+    }
+  } else {
+    this.sliderValue = 0; // Reset to 0 for non-numeric input
+  }
+}
 
  
   columns: DataTableColumn[] = [];
