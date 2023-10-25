@@ -21,18 +21,18 @@ export class VehicleTypeAttributeService {
     async addVehicleTypeAttribute (addVehicleTypeAttributeDto: VehicleTypeAttributeDto): Promise<VehicleTypeAttribute>{
         const vehicleTypeAttribute = new VehicleTypeAttribute();
 
-        const { vehicleAttributeName , attributeInputType, vehicleTypeId, vehicleAttributeValue } = addVehicleTypeAttributeDto;
+        const { vehicleAttributeName , attributeInputType, vehicleType, vehicleAttributeValue } = addVehicleTypeAttributeDto;
         
         if ( await this.vehicleTypeAttributeRepository.exist({ where: { attribute_name: vehicleAttributeName } }) == false ){
         vehicleTypeAttribute.attribute_name = vehicleAttributeName.toLowerCase();
         vehicleTypeAttribute.input_type = attributeInputType.toLowerCase();
-        const queryBuilder = this.vehicleTypeRepository.createQueryBuilder('vehicleType');
-        const typeId = await queryBuilder
-        .select('vehicleType.type_id')
-        .where('vehicleType.type_id = :vehicleTypeId', { vehicleTypeId })
-        .getOne();
+        // const queryBuilder = this.vehicleTypeRepository.createQueryBuilder('vehicleType');
+        // const typeId = await queryBuilder
+        // .select('vehicleType.type_id')
+        // .where('vehicleType.type_id = :vehicleTypeId', { vehicleTypeId })
+        // .getOne();
 
-        vehicleTypeAttribute.vehicleType =typeId;
+        vehicleTypeAttribute.vehicleType =vehicleType;
         await this.vehicleTypeAttributeRepository.save(vehicleTypeAttribute);
         console.log(vehicleTypeAttribute);
             }
