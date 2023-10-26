@@ -108,13 +108,30 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit{
   }
 
   
- onInputChange(event: any) {
+//  onInputChange(event: any) {
+//   const inputValue = event.target.value;
+//   const parsedValue = parseFloat(inputValue);
+  
+//   if (!isNaN(parsedValue)) {
+//     if (parsedValue > 5) {
+//       this.sliderValue = 5; // Limit to a maximum value of 5
+//     } else {
+//       this.sliderValue = parsedValue;
+//     }
+//   } else {
+//     this.sliderValue = 0; // Reset to 0 for non-numeric input
+//   }
+// }
+
+onInputChange(event: any) {
   const inputValue = event.target.value;
   const parsedValue = parseFloat(inputValue);
-  
+
   if (!isNaN(parsedValue)) {
-    if (parsedValue > 5) {
-      this.sliderValue = 5; // Limit to a maximum value of 5
+    if (parsedValue < 0) {
+      this.sliderValue = 0;
+    } else if (parsedValue > 5) {
+      this.sliderValue = 5;
     } else {
       this.sliderValue = parsedValue;
     }
@@ -122,6 +139,22 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit{
     this.sliderValue = 0; // Reset to 0 for non-numeric input
   }
 }
+
+onKeyDown(event: any) {
+  // Allow only numeric input and certain special keys (e.g., backspace, delete)
+  const key = event.key;
+
+  // Allow backspace and delete keys
+  if (key === 'Backspace' || key === 'Delete') {
+    return;
+  }
+
+  // Allow numeric digits and the decimal point
+  if (!/^\d*\.?\d*$/.test(key)) {
+    event.preventDefault();
+  }
+}
+
 
 onVehicleTypeChange(event: any) {
   if (event.value) {
