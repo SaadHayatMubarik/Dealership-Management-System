@@ -72,6 +72,7 @@ setVehicleTypes(data: any) {
 }
 
 getVehicleTypes() {
+  console.log(this.vehicleTypes);
   return this.vehicleTypes;
 }
 

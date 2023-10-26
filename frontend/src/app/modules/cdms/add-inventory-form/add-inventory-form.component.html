@@ -32,7 +32,7 @@
             <div class="col-4">
               <div class="p-field">
                 <span class="p-float-label">
-                  <p-dropdown class="p-inputtext-lg" placeholder="Select a Vehicle Type" [options]="vehicleTypes" optionLabel="type_name"></p-dropdown>
+                  <p-dropdown class="p-inputtext-lg" placeholder="Select a Vehicle Type" [options]="vehicleTypes" optionLabel="type_name" (onChange)="onVehicleTypeChange($event)"></p-dropdown>
                   <label for="float-label">Vehicle Type</label>
               </span>
               </div>
@@ -139,17 +139,17 @@
                 <label for="float-label">Other Details</label>
             </span>
             </div>
-            <div class="col-4">
+            <div class="col-3">
               <div class="p-field">
                 <label>Grade:</label>
-            <div>
               <input type="number" pInputText [(ngModel)]="sliderValue" class="w-full" (input)="onInputChange($event)" />
                 <p-slider [(ngModel)]="sliderValue" [min]="0" [max]="5" [step]="0.5" class="w-full"></p-slider>
-            </div>    
               </div>
             </div> 
           </div>
         </div>
+
+
         <!-- <div class="container">
           <h2>Upload Photos</h2>
             <span>Choose Images To Upload:</span>
@@ -162,10 +162,11 @@
 
             </div>            
         </div> -->
+       
         <br>
       </div>
       <div class="sidebar-footer flex justify-content-end">
-        <app-button label="Save" styleClass="p-button-sm p-button-rounded"></app-button>
+        <app-button label="Save" styleClass="p-button-sm p-button-rounded" (onclick)="save()"></app-button>
       </div>
     </div>
   </p-sidebar>
