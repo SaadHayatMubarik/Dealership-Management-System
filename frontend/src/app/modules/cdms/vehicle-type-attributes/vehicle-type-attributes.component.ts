@@ -28,13 +28,6 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
     vehicleType:''
   };
 
-  // vehicleType: IVehicleType = 
-  // {
-  //   vehicleTypeId : 0,
-  //   vehicleTypeName:''
-
-  // }
-
 
   vehicleTypes: any[] = [];
   
@@ -100,6 +93,7 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
     ];
   }
 
+  
   resetForm() {
     this.vehicleTypeAttribute.vehicleAttributeName = "";
     this.vehicleTypeAttribute.attributeInputType = '';
@@ -107,14 +101,11 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
     this.vehicleTypeAttribute.vehicleType = '';
   }
 
-  
-
   getVehicleTypeAttribute(){
     this.apiService.get('/vehicle-type-attribute/getVehicleTypeAttribute').subscribe((data) => {
       // console.log(data);
       this.data = data;
     });
-
   }
  
   saveVehicleTypeAttribute() {
@@ -123,8 +114,8 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
         .post('/vehicle-type-attribute/addVehicleTypeAttribute', this.vehicleTypeAttribute)
         .subscribe({
           next: (response) => {
+            this.resetForm();
             this.closeModal();
-            this.resetForm;
             this.getVehicleTypeAttribute;
             console.log("successs");
 
