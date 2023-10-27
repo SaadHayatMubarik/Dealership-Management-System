@@ -5,6 +5,7 @@ import { VehicleType } from '../vehicle-type/entities/Vehicle-type';
 // import { GetVehicleTypeAttributeDto } from './dto/get-vehicle-type-attribute.dto';
 import { VehicleTypeAttributeDto } from './dto/vehicle-type-attribute.dto';
 import { MultiValueAttribute } from '../multi-value-attribute/entities/Multi-value-attribute';
+import { GetVehicleTypeAttributeDto } from './dto/get-vehicle-type-attribute.dto';
 
 @Controller('vehicle-type-attribute')
 export class VehicleTypeAttributeController {
@@ -16,10 +17,10 @@ export class VehicleTypeAttributeController {
         return this.vehicleTypeAttributeService.addVehicleTypeAttribute(addVehicleTypeAttributeDto);
     }
 
-    @Get('/:vehicleTypeIdParam')
-    getVehicleAttributeByTypeId(@Param('vehicleTypeIdParam') vehicleTypeIdParam: number): Promise<VehicleTypeAttributeDto[]>{
+    @Get('getVehicleAttribute')
+    getVehicleAttribute(): Promise<GetVehicleTypeAttributeDto[]>{
         // console.log(getVehicleTypeAttributeDto);
-        return this.vehicleTypeAttributeService.getVehicleAttributeByType(vehicleTypeIdParam);
+        return this.vehicleTypeAttributeService.getVehicleAttributeByType();
     }
 
     @Delete('/:attributeName')

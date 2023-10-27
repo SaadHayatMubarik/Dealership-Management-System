@@ -12,7 +12,7 @@ export class VehicleType{
     type_name: string;
 
     @JoinTable()
-    @OneToMany(() => VehicleTypeAttribute, (vehicleTypeAttribute) => vehicleTypeAttribute.vehicleType, {cascade:true})
+    @OneToMany(() => VehicleTypeAttribute, (vehicleTypeAttribute) => vehicleTypeAttribute.vehicleType)
     vehicleTypeAttributes: VehicleTypeAttribute[];
     
     @OneToMany(() => Inventory, (inventory) => inventory.vehicleType)

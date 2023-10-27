@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { VehicleType } from '../vehicle-type/entities/Vehicle-type';
 import { VehicleTypeAttributeDto } from './dto/vehicle-type-attribute.dto';
 import { MultiValueAttribute } from '../multi-value-attribute/entities/Multi-value-attribute';
+import { GetVehicleTypeAttributeDto } from './dto/get-vehicle-type-attribute.dto';
 
 @Injectable()
 export class VehicleTypeAttributeService {
@@ -36,39 +37,49 @@ export class VehicleTypeAttributeService {
         await this.vehicleTypeAttributeRepository.save(vehicleTypeAttribute);
         console.log(vehicleTypeAttribute);
             }
-        
-        const queryBuilderTwo = this.vehicleTypeAttributeRepository.createQueryBuilder('vehicleTypeAttribute');
-        const attributeId = await queryBuilderTwo
-        .select('vehicleTypeAttribute.attribute_id')
-        .where('vehicleTypeAttribute.attribute_name = :vehicleAttributeName', { vehicleAttributeName })
-        .getOne();
+        // const attributeId = await this.vehicleTypeAttributeRepository.findOne({ where: { attribute_name: vehicleAttributeName } });
+        // console.log(attributeId);
+        // const queryBuilderTwo = this.vehicleTypeAttributeRepository.createQueryBuilder('vehicleTypeAttribute');
+        // const attributeId = await queryBuilderTwo
+        // .addSelect('*')
+        // .where('vehicleTypeAttribute.attribute_name = :vehicleAttributeName', { vehicleAttributeName })
+        // .getRa();
 
         for(let i=0; i<vehicleAttributeValue.length; i++){
         const multiValueAttribute = new MultiValueAttribute();
-        multiValueAttribute.vehicleTypeAttribute = attributeId ;
+        multiValueAttribute.vehicleTypeAttribute = await this.vehicleTypeAttributeRepository.findOne({ where: { attribute_name: vehicleAttributeName } }); ;
         multiValueAttribute.attribute_value = vehicleAttributeValue[i];
-        console.log(vehicleAttributeValue[i]);
+        // console.log(vehicleAttributeValue[i]);
+
         this.multiValueAttributeRepository.save(multiValueAttribute);
         }
         
         return vehicleTypeAttribute;
     }
 
-    async getVehicleAttributeByType(vehicleTypeIdParam: number): Promise<VehicleTypeAttributeDto[]>{
-        const vehicleTypeAttribute = new VehicleTypeAttribute();
-        const queryBuilder = this.vehicleTypeAttributeRepository.createQueryBuilder('vehicleTypeAttribute');
-        // const attributes = await queryBuilder
-        // .select('vehicleTypeAttribute.attribute_name')
-        // .where('vehicleTypeAttribute.vehicleTypeTypeId = :vehicleTypeId', { vehicleTypeId })
-        // .getMany();
-
+    async getVehicleAttributeByType(): Promise<GetVehicleTypeAttributeDto[]>{
+        // const 
+        // const vehicleTypeAttribute = new VehicleTypeAttribute();
+        // const {} = VehicleTypeAttributeDto
+        const getValue = this.multiValueAttributeRepository.createQueryBuilder('multiValueAttribute')
+        .leftJoin(VehicleTypeAttribute, 'vehicleTypeAttribute' ,'multiValueAttribute.vehicleTypeAttributeAttributeId = vehicleTypeAttribute.attribute_id')
+        .leftJoin(VehicleType, 'vehicleType', 'vehicleTypeAttribute.vehicleTypeTypeId = vehicleType.type_id ')
+        .select(['vehicleType.type_name as vehicleTypeName', 'vehicleTypeAttribute.attribute_name as vehicleAttributeName', 'multiValueAttribute.attribute_value as vehicleAttributeValue', 'vehicleTypeAttribute.input_type as attributeInputType']);
+        const result = await getValue.getRawMany();
         // vehicleAttributeName = attributes
         // const queryBuildertwo = this.vehicleTypeAttributeRepository.createQueryBuilder('vehicleTypeAttribute')
         // .select('vehicleTypeAttribute.attribute_name')
         // .where('vehicleTypeAttribute.vehicleTypeTypeId = :id', { id });
         
         // const attribute = await queryBuildertwo.getRawMany();
-    return 
+        // const transformedResult: GetVehicleTypeAttributeDto[] = result.map((item) => ({
+        //     id: item.,
+        //     name: item.name,
+        //     // Add other properties here
+        //   }));
+        // console.log(result
+
+    return result ;
     }
 
     deleteVehicleTypeAttributeByName(attributeName: string){
