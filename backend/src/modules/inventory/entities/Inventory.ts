@@ -60,6 +60,6 @@ reg_no: string;
 @OneToOne(() => VehicleType, (vehicleType) => vehicleType.inventory)
 vehicleType: VehicleType;
 
-@OneToMany(() => StockAttributeValue, (stockAttributeValue) => stockAttributeValue.inventory, { cascade: true } )
+@OneToMany(() => StockAttributeValue, (stockAttributeValue) => stockAttributeValue.inventory)
 stockAttributeValue: StockAttributeValue[];
 }
