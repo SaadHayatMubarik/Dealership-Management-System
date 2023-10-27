@@ -70,7 +70,5 @@ getVehicleTypes() {
   return this.vehicleTypes;
 }
 
-getVehicleTypezAttributes(vehicleTypeId: number) {
-  return this.http.get(`/api/vehicleAttributes/${vehicleTypeId}`);
-}
+
 }

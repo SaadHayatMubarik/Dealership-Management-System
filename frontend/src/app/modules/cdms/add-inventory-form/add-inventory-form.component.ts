@@ -56,7 +56,9 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit{
 
   ngOnInit() {
     
+    
     this.vehicleTypes = this.apiService.getVehicleTypes();
+    // this.onVehicleTypeSelected();
     
     this.columns = [
       {
@@ -136,24 +138,23 @@ onKeyDown(event: any) {
   }
 }
 
-//fucntion to store vehicle type id when selecting from dropdown.
+// fucntion to store vehicle type id when selecting from dropdown.
 onVehicleTypeChange(event: any) {
   if (event.value) {
     this.selectedVehicleTypeId = event.value;
-  //contains the entire selected vehicle type object 
+    console.log(this.selectedVehicleTypeId.type_id);
+    if (this.selectedVehicleTypeId.type_id) {
+      this.apiService.get(`/vehicle-type-attribute/${this.selectedVehicleTypeId.type_id}`).subscribe((attributes) => {
+        this.vehicleAttributes = attributes;
+        console.log(this.vehicleAttributes);
+      });
+    } else {
+      this.vehicleAttributes = [];
+    }
   }
 }
 
-onVehicleTypeSelected(){
-  if (this.selectedVehicleTypeId) {
-    this.apiService.get('').subscribe((attributes) => {
-      this.vehicleAttributes = attributes;
-    });
-  } else {
-    this.vehicleAttributes = [];
-  }
 
-}
 
 
 save(){

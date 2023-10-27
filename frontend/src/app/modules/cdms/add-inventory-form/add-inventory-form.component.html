@@ -148,38 +148,55 @@
             </div> 
           </div>
 
-          <!-- your-component.html -->
-<!-- <div *ngIf="vehicleAttributes">
-  <div *ngFor="let attribute of vehicleAttributes">
-    <div *ngIf="attribute.inputType === 'dropdown'">
-      <div class="p-field">
-        <span class="p-float-label">
-          <p-dropdown class="p-inputtext-lg" placeholder="Select {{ attribute.name }}" [options]="attribute.values"></p-dropdown>
-          <label for="float-label">{{ attribute.name }}</label>
-        </span>
+       <!-- adding dynamic form here-->
+
+       <div *ngIf="vehicleAttributes">
+        <div *ngFor="let attribute of vehicleAttributes">
+          <div *ngIf="attribute.attributeInputType === 'text'">
+            <div class="p-field">
+              <span class="p-float-label">
+                <input class="p-inputtext-lg"  pInputText />
+                <label for="float-label">{{ attribute.vehicleAttributeName}}</label>
+              </span>
+            </div>
+          </div>
+          <div *ngIf="attribute.attributeInputType === 'number'">
+            <div class="p-field">
+              <span class="p-float-label">
+                <input class="p-inputtext-lg" pInputText />
+                <label for="float-label">{{ attribute.vehicleAttributeName }}</label>
+              </span>
+            </div>
+          </div>
+          <div *ngIf="attribute.attributeInputType === 'dropdown'">
+            <div class="col-3">
+              <span class="p-float-label">
+                <p-dropdown class="p-inputtext-lg" placeholder="Select {{ attribute.vehicleAttributeName }}" [options]="attribute.values"></p-dropdown>
+                <label for="float-label">{{ attribute.vehicleAttributeName }}</label>
+              </span>
+            </div>
+          </div>
+       </div>
       </div>
-    </div>
-    <div *ngIf="attribute.inputType === 'number'">
-      <div class="p-field">
-        <span class="p-float-label">
-          <input class="p-inputtext-lg" pInputText />
-          <label htmlFor="username">{{ attribute.name }}</label>
-        </span>
-      </div>
-    </div>
-    <div *ngIf="attribute.inputType === 'string'">
-      <div class="p-field">
-        <span class="p-float-label">
-          <input class="p-inputtext-lg" pInputText />
-          <label htmlFor="username">{{ attribute.name }}</label>
-        </span>
-      </div>
-    </div>
- 
-  </div>
-</div> -->
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
         </div>
 
+          
 
         <!-- <div class="container">
           <h2>Upload Photos</h2>
