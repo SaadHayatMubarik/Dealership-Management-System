@@ -11,7 +11,7 @@
   <div class="middle-content w-o-tabs mt-3">
     <div class="filter-row flex justify-content-between pt-3">
     </div>
-    <app-datatable [data]="data" [cols]="columns" [globalFilterFields]="['type_name', 'type_id']" [actions]="actions"></app-datatable>
+    <app-datatable [data]="data" [cols]="columns" [globalFilterFields]="[]" [actions]="actions"></app-datatable>
   </div>
   <p-sidebar [(visible)]="modal" position="right" [style]="{ width:'80rem'}">
     <div class="sidebar-main">
@@ -147,6 +147,37 @@
               </div>
             </div> 
           </div>
+
+          <!-- your-component.html -->
+<!-- <div *ngIf="vehicleAttributes">
+  <div *ngFor="let attribute of vehicleAttributes">
+    <div *ngIf="attribute.inputType === 'dropdown'">
+      <div class="p-field">
+        <span class="p-float-label">
+          <p-dropdown class="p-inputtext-lg" placeholder="Select {{ attribute.name }}" [options]="attribute.values"></p-dropdown>
+          <label for="float-label">{{ attribute.name }}</label>
+        </span>
+      </div>
+    </div>
+    <div *ngIf="attribute.inputType === 'number'">
+      <div class="p-field">
+        <span class="p-float-label">
+          <input class="p-inputtext-lg" pInputText />
+          <label htmlFor="username">{{ attribute.name }}</label>
+        </span>
+      </div>
+    </div>
+    <div *ngIf="attribute.inputType === 'string'">
+      <div class="p-field">
+        <span class="p-float-label">
+          <input class="p-inputtext-lg" pInputText />
+          <label htmlFor="username">{{ attribute.name }}</label>
+        </span>
+      </div>
+    </div>
+ 
+  </div>
+</div> -->
         </div>
 
 

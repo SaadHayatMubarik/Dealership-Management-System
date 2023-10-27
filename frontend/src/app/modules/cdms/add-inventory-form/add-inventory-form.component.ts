@@ -34,10 +34,11 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit{
   };
 
   
- vehicleTypes: any[] = [];
- status: string[] = ['Available', 'Unavailable', 'Upcoming'];
+ vehicleTypes: any[] = []; //to populate dropdown of vehicle type
+ status: string[] = ['Available', 'Unavailable', 'Upcoming']; //to populate status dropdown
  sliderValue: number = 0; 
- selectedType: any;
+ selectedVehicleTypeId: any; //saving vehicle type id
+ vehicleAttributes: any[] = []; //to save vehicle type attributes 
 
  
  
@@ -54,7 +55,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit{
 
 
   ngOnInit() {
-
+    
     this.vehicleTypes = this.apiService.getVehicleTypes();
     
     this.columns = [
@@ -107,26 +108,10 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit{
    
   }
 
-  
-//  onInputChange(event: any) {
-//   const inputValue = event.target.value;
-//   const parsedValue = parseFloat(inputValue);
-  
-//   if (!isNaN(parsedValue)) {
-//     if (parsedValue > 5) {
-//       this.sliderValue = 5; // Limit to a maximum value of 5
-//     } else {
-//       this.sliderValue = parsedValue;
-//     }
-//   } else {
-//     this.sliderValue = 0; // Reset to 0 for non-numeric input
-//   }
-// }
-
+//to limit slider value from 0 to 5.
 onInputChange(event: any) {
   const inputValue = event.target.value;
   const parsedValue = parseFloat(inputValue);
-
   if (!isNaN(parsedValue)) {
     if (parsedValue < 0) {
       this.sliderValue = 0;
@@ -136,37 +121,43 @@ onInputChange(event: any) {
       this.sliderValue = parsedValue;
     }
   } else {
-    this.sliderValue = 0; // Reset to 0 for non-numeric input
+    this.sliderValue = 0; 
   }
 }
 
+// Allow only numeric input and certain special keys (e.g., backspace, delete) for slider
 onKeyDown(event: any) {
-  // Allow only numeric input and certain special keys (e.g., backspace, delete)
   const key = event.key;
-
-  // Allow backspace and delete keys
   if (key === 'Backspace' || key === 'Delete') {
     return;
   }
-
-  // Allow numeric digits and the decimal point
   if (!/^\d*\.?\d*$/.test(key)) {
     event.preventDefault();
   }
 }
 
-
+//fucntion to store vehicle type id when selecting from dropdown.
 onVehicleTypeChange(event: any) {
   if (event.value) {
-    // Extract the type_id from the selected object
-    this.selectedType = event.value;
-    // Now this.selectedType will contain the entire selected object
-    // You can access the type_id using this.selectedType.type_id
+    this.selectedVehicleTypeId = event.value;
+  //contains the entire selected vehicle type object 
   }
 }
 
+onVehicleTypeSelected(){
+  if (this.selectedVehicleTypeId) {
+    this.apiService.get('').subscribe((attributes) => {
+      this.vehicleAttributes = attributes;
+    });
+  } else {
+    this.vehicleAttributes = [];
+  }
+
+}
+
+
 save(){
-  console.log(this.selectedType.type_id);
+  // console.log(this.selectedType.type_id);
 }
 
 }

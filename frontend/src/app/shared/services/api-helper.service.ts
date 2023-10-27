@@ -44,12 +44,7 @@ export class ApiHelperService {
       .pipe(this.hookResponse(this));
   }
 
-  // deleteVehicleType(path: string, deleteVehicleTypeDto: VehicleTypeDto): Observable<any> {
-  //   return this.http
-  //     .request('delete', `${environment.apiUrl}${path}`, { body: deleteVehicleTypeDto })
-  //     .pipe(this.hookResponse(this));
-  // }
-
+ 
   hookResponse(_this: this) {
     return (a: any) => {
       return catchError((b: any) => {
@@ -72,8 +67,10 @@ setVehicleTypes(data: any) {
 }
 
 getVehicleTypes() {
-  console.log(this.vehicleTypes);
   return this.vehicleTypes;
 }
 
+getVehicleTypezAttributes(vehicleTypeId: number) {
+  return this.http.get(`/api/vehicleAttributes/${vehicleTypeId}`);
+}
 }

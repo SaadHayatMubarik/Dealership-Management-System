@@ -57,7 +57,7 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
   ngOnInit() 
 
   {
-   
+    this.getVehicleTypeAttribute();
     this.vehicleTypes= this.apiService.getVehicleTypes();
     
 
@@ -65,19 +65,19 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
 
    this.columns = [ 
     {
-      field: '',
-      fieldTitle: 'Vehicle Type',
+      field: 'vehicleTypeName',
+      fieldTitle: 'Vehicle Type Name',
     },
     {
-        field: '',
+        field: 'vehicleAttributeName',
         fieldTitle: 'Attribute Name',
       },
       {
-        field: '',
+        field: 'vehicleAttributeValue',
         fieldTitle: 'Attribute Value',
       },
       {
-        field: '',
+        field: 'attributeInputType',
         fieldTitle: 'Input Type',
       },
     
@@ -102,8 +102,7 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
   }
 
   getVehicleTypeAttribute(){
-    this.apiService.get('/vehicle-type-attribute/getVehicleTypeAttribute').subscribe((data) => {
-      // console.log(data);
+    this.apiService.get('/vehicle-type-attribute/getVehicleAttribute').subscribe((data) => {
       this.data = data;
     });
   }
