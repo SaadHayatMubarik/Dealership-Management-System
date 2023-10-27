@@ -23,6 +23,11 @@ export class VehicleTypeAttributeController {
         return this.vehicleTypeAttributeService.getVehicleAttributeByType();
     }
 
+    @Get('/:vehicleTypeId')
+    getVehicleAttributeById(@Param('vehicleTypeId') vehicleTypeId: number): Promise<GetVehicleTypeAttributeDto[]>{
+        return this.vehicleTypeAttributeService.getVehicleAttributeById(vehicleTypeId);
+    }
+
     @Delete('/:attributeName')
     @UsePipes(new ValidationPipe())
     deleteVehicleAttributeByName(@Param('attributeName') attributeName: string):void{

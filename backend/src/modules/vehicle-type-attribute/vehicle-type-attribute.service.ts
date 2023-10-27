@@ -58,28 +58,24 @@ export class VehicleTypeAttributeService {
     }
 
     async getVehicleAttributeByType(): Promise<GetVehicleTypeAttributeDto[]>{
-        // const 
-        // const vehicleTypeAttribute = new VehicleTypeAttribute();
-        // const {} = VehicleTypeAttributeDto
         const getValue = this.multiValueAttributeRepository.createQueryBuilder('multiValueAttribute')
         .leftJoin(VehicleTypeAttribute, 'vehicleTypeAttribute' ,'multiValueAttribute.vehicleTypeAttributeAttributeId = vehicleTypeAttribute.attribute_id')
         .leftJoin(VehicleType, 'vehicleType', 'vehicleTypeAttribute.vehicleTypeTypeId = vehicleType.type_id ')
         .select(['vehicleType.type_name as vehicleTypeName', 'vehicleTypeAttribute.attribute_name as vehicleAttributeName', 'multiValueAttribute.attribute_value as vehicleAttributeValue', 'vehicleTypeAttribute.input_type as attributeInputType']);
         const result = await getValue.getRawMany();
-        // vehicleAttributeName = attributes
-        // const queryBuildertwo = this.vehicleTypeAttributeRepository.createQueryBuilder('vehicleTypeAttribute')
-        // .select('vehicleTypeAttribute.attribute_name')
-        // .where('vehicleTypeAttribute.vehicleTypeTypeId = :id', { id });
-        
-        // const attribute = await queryBuildertwo.getRawMany();
-        // const transformedResult: GetVehicleTypeAttributeDto[] = result.map((item) => ({
-        //     id: item.,
-        //     name: item.name,
-        //     // Add other properties here
-        //   }));
-        // console.log(result
 
     return result ;
+    }
+
+    async getVehicleAttributeById(vehicleTypeId: number): Promise<GetVehicleTypeAttributeDto[]>{
+        const getValue =await this.multiValueAttributeRepository.createQueryBuilder('multiValueAttribute')
+        .leftJoin(VehicleTypeAttribute, 'vehicleTypeAttribute' ,'multiValueAttribute.vehicleTypeAttributeAttributeId = vehicleTypeAttribute.attribute_id')
+        .leftJoin(VehicleType, 'vehicleType', 'vehicleTypeAttribute.vehicleTypeTypeId = vehicleType.type_id ')
+        .select(['vehicleType.type_name as vehicleTypeName', 'vehicleTypeAttribute.attribute_name as vehicleAttributeName', 'multiValueAttribute.attribute_value as vehicleAttributeValue', 'vehicleTypeAttribute.input_type as attributeInputType'])
+        .where('vehicleType.type_id = :vehicleTypeId', { vehicleTypeId })
+        .getRawMany();
+
+        return getValue
     }
 
     deleteVehicleTypeAttributeByName(attributeName: string){
