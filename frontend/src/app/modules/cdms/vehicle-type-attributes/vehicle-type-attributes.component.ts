@@ -28,15 +28,9 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
     vehicleType:''
   };
 
-  // vehicleType: IVehicleType = 
-  // {
-  //   vehicleTypeId : 0,
-  //   vehicleTypeName:''
-
-  // }
-
 
   vehicleTypes: any[] = [];
+  selectedVehicleTypeAttributeName: any; //saving vehicle type attribute name
   
  
   // vehicleTypeinput: { label: string, value: number }[] = [];
@@ -64,7 +58,7 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
   ngOnInit() 
 
   {
-   
+    this.getVehicleTypeAttribute();
     this.vehicleTypes= this.apiService.getVehicleTypes();
     
 
@@ -72,19 +66,19 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
 
    this.columns = [ 
     {
-      field: '',
-      fieldTitle: 'Vehicle Type',
+      field: 'vehicleTypeName',
+      fieldTitle: 'Vehicle Type Name',
     },
     {
-        field: '',
+        field: 'vehicleAttributeName',
         fieldTitle: 'Attribute Name',
       },
       {
-        field: '',
+        field: 'vehicleAttributeValue',
         fieldTitle: 'Attribute Value',
       },
       {
-        field: '',
+        field: 'attributeInputType',
         fieldTitle: 'Input Type',
       },
     
@@ -93,13 +87,26 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
       {
         label: ' Delete',
         icon: 'pi pi-trash',
+        command: (event) => {
+          this.selectedVehicleTypeAttributeName = event.vehicleAttributeName;
+          console.log(this.selectedVehicleTypeAttributeName);
+            this.apiService.delete(`/vehicle-type-attribute/${this.selectedVehicleTypeAttributeName }`).subscribe(
+            (response) => {
+              console.log(`Attribute ${this.selectedVehicleTypeAttributeName } deleted.`);
+            });
+        },
+      },
+      {
+        label: 'Edit',
+        icon: 'pi pi-file-edit',
         command: () => {
-          // this.delete(Id);
+          ;
         },
       },
     ];
   }
 
+  
   resetForm() {
     this.vehicleTypeAttribute.vehicleAttributeName = "";
     this.vehicleTypeAttribute.attributeInputType = '';
@@ -107,14 +114,10 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
     this.vehicleTypeAttribute.vehicleType = '';
   }
 
-  
-
   getVehicleTypeAttribute(){
-    this.apiService.get('/vehicle-type-attribute/getVehicleTypeAttribute').subscribe((data) => {
-      // console.log(data);
+    this.apiService.get('/vehicle-type-attribute/getVehicleAttribute').subscribe((data) => {
       this.data = data;
     });
-
   }
  
   saveVehicleTypeAttribute() {
@@ -123,11 +126,9 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
         .post('/vehicle-type-attribute/addVehicleTypeAttribute', this.vehicleTypeAttribute)
         .subscribe({
           next: (response) => {
+            this.resetForm();
             this.closeModal();
-            this.resetForm;
-            this.getVehicleTypeAttribute;
             console.log("successs");
-
           },
           error: () => {
             console.log("unsucessful");
@@ -137,6 +138,23 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
         });
     }
   }
+
+  // deleteVehicleTypeAttribute(event: any)
+  // {
+  //   if (event.value) {
+  //     this.selectedVehicleTypeAttributeName = event.value;
+  //     console.log(this.selectedVehicleTypeAttributeName.type_id);
+  //     if (this.selectedVehicleTypeAttributeName.type_id) {
+  //       this.apiService.get(`/vehicle-type-attribute/${this.selectedVehicleTypeAttributeName.type_id}`).subscribe((attributes) => {
+  //         this.selectedVehicleTypeAttributeName = attributes;
+  //         console.log(this.selectedVehicleTypeAttributeName);
+  //       });
+  //     } else {
+  //       this.selectedVehicleTypeAttributeName = [];
+  //     }
+  //   }
+  // }
+
 
  
 
