@@ -30,6 +30,7 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
 
 
   vehicleTypes: any[] = [];
+  selectedVehicleTypeAttributeName: any; //saving vehicle type attribute name
   
  
   // vehicleTypeinput: { label: string, value: number }[] = [];
@@ -86,8 +87,20 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
       {
         label: ' Delete',
         icon: 'pi pi-trash',
+        command: (event) => {
+          this.selectedVehicleTypeAttributeName = event.vehicleAttributeName;
+          console.log(this.selectedVehicleTypeAttributeName);
+            this.apiService.delete(`/vehicle-type-attribute/${this.selectedVehicleTypeAttributeName }`).subscribe(
+            (response) => {
+              console.log(`Attribute ${this.selectedVehicleTypeAttributeName } deleted.`);
+            });
+        },
+      },
+      {
+        label: 'Edit',
+        icon: 'pi pi-file-edit',
         command: () => {
-          // this.delete(Id);
+          ;
         },
       },
     ];
@@ -125,6 +138,23 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
         });
     }
   }
+
+  // deleteVehicleTypeAttribute(event: any)
+  // {
+  //   if (event.value) {
+  //     this.selectedVehicleTypeAttributeName = event.value;
+  //     console.log(this.selectedVehicleTypeAttributeName.type_id);
+  //     if (this.selectedVehicleTypeAttributeName.type_id) {
+  //       this.apiService.get(`/vehicle-type-attribute/${this.selectedVehicleTypeAttributeName.type_id}`).subscribe((attributes) => {
+  //         this.selectedVehicleTypeAttributeName = attributes;
+  //         console.log(this.selectedVehicleTypeAttributeName);
+  //       });
+  //     } else {
+  //       this.selectedVehicleTypeAttributeName = [];
+  //     }
+  //   }
+  // }
+
 
  
 
