@@ -29,8 +29,8 @@ export class VehicleTypeService {
         return await this.vehicleTypeRepository.find();
     }
 
-    deleteVehicleType (vehicleTypeId: number){
-        return this.vehicleTypeRepository.delete({ type_id: vehicleTypeId});
+    deleteVehicleType (vehicleTypeName: string){
+        return this.vehicleTypeRepository.delete({ type_name: vehicleTypeName.toLowerCase()});
     }
 
     // updateVehicleType (vehicleType: string){

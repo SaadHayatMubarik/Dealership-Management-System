@@ -1,10 +1,17 @@
-// import { IsNotEmpty} from "class-validator";
-// export class CreateUserDto {
-//     @IsNotEmpty()
-//     username: string;
+import { IsNotEmpty} from "class-validator";
+import { UserRole } from "../user-role.enum";
+export class CreateUserDto {
+    @IsNotEmpty()
+    username: string;
 
-//     @IsNotEmpty()
-//     Password: string
+    @IsNotEmpty()
+    email: string;
+
+    @IsNotEmpty()
+    password: string;
+
+    @IsNotEmpty()
+    role: UserRole;
 
     
-// }
+}

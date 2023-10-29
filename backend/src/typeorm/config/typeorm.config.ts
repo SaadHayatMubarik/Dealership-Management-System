@@ -1,4 +1,5 @@
 import { TypeOrmModuleOptions } from "@nestjs/typeorm";
+import { User } from "src/modules/auth/entities/User";
 import { Inventory } from "src/modules/inventory/entities/Inventory";
 import { MultiValueAttribute } from "src/modules/multi-value-attribute/entities/Multi-value-attribute";
 import { StockAttributeValue } from "src/modules/stock-attribute-value/entities/Stock-attribute-value";
@@ -11,6 +12,6 @@ export const typeOrmConfig: TypeOrmModuleOptions  = {
     username: 'root',
     password: 'root',
     database: 'd_m_s',
-    entities: [Inventory, MultiValueAttribute, StockAttributeValue, VehicleType, VehicleTypeAttribute],
+    entities: [Inventory, MultiValueAttribute, StockAttributeValue, VehicleType, VehicleTypeAttribute,User],
     synchronize: false,
 }

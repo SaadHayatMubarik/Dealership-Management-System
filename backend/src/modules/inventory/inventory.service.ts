@@ -17,7 +17,6 @@ export class InventoryService {
     async addInventory (addInventoryDto: InventoryDto): Promise<Inventory>{
         const inventory = new Inventory();
         const { vehicleMake, vehicleModel , vehicleVariant , modelYear , vehicleChasisNo , costPrice , demand , dateOfPurchase , dateOfSale , bodyColor , engineNo , comments , grade , regNo, status } = addInventoryDto;
-        // console.log(addInventoryDto.dateOfPurchase);
         inventory.make = vehicleMake.toUpperCase();
         inventory.model = vehicleModel.toUpperCase();
         inventory.variant = vehicleVariant.toUpperCase();
@@ -41,6 +40,7 @@ export class InventoryService {
         //     inventory.status = InventoryStatus.SOLD;
         // }
         await this.inventoryRepository.save(inventory);
+        
         return inventory;
     }
 

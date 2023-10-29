@@ -1,26 +1,28 @@
-// import { Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
+import { CreateUserDto } from './dto/create-user.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { User } from './entities/User';
+import { Repository } from 'typeorm';
 // import { CreateAuthDto } from './dto/create-user.dto';
 // import { UpdateAuthDto } from './dto/update-user.dto';
 
-// @Injectable()
-// export class AuthService {
-//   create(createAuthDto: CreateAuthDto) {
-//     return 'This action adds a new auth';
-//   }
+@Injectable()
+export class AuthService {
+  constructor(
+    @InjectRepository(User)
+    private userRepository: Repository<User>,
+  ){}
+  async signUp(createUserDto: CreateUserDto): Promise<User>{
+    const { username, password, email, role } = createUserDto;
+    const user = new User();
+    user.user_name = username;
+    user.password = password;
+    user.email = email;
+    user.role = role;
+    return this.userRepository.save(user);
+  }
 
-//   findAll() {
-//     return `This action returns all auth`;
-//   }
-
-//   findOne(id: number) {
-//     return `This action returns a #${id} auth`;
-//   }
-
-//   update(id: number, updateAuthDto: UpdateAuthDto) {
-//     return `This action updates a #${id} auth`;
-//   }
-
-//   remove(id: number) {
-//     return `This action removes a #${id} auth`;
-//   }
-// }
+  async loginById(userName: string): Promise<User>{
+    return this.userRepository.findOne({where: {user_name: userName}});
+  }
+}
