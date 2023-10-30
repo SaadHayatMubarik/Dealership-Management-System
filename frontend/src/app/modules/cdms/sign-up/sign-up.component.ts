@@ -11,7 +11,7 @@ import { ISignUp } from '../../interfaces';
 })
 export class SignUpComponent {
 
-  userRoles: string[] = ["ADMIN"];
+  userRoles: any[] = ["ADMIN"];
   selectedUserRole: string = '';
   userName:string = '';
   password:string = '';
@@ -20,7 +20,7 @@ export class SignUpComponent {
  
   createUser: ISignUp = {
     username: '',
-    password: this.password,
+    password:'',
     email: '',
     role: ''
   };
