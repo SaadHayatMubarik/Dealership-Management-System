@@ -28,11 +28,11 @@ export class VehicleTypeAttributeController {
         return this.vehicleTypeAttributeService.getVehicleAttributeById(vehicleTypeId);
     }
 
-    @Delete('/:attributeName')
+    @Delete('/:selectedVehicleTypeAttributeName')
     @UsePipes(new ValidationPipe())
-    deleteVehicleAttributeByName(@Param('attributeName') attributeName: string):void{
+    deleteVehicleAttributeByName(@Param('selectedVehicleTypeAttributeName') selectedVehicleTypeAttributeName: string):void{
         // console.log(attributeName);
-        this.vehicleTypeAttributeService.deleteVehicleTypeAttributeByName(attributeName);
+        this.vehicleTypeAttributeService.deleteVehicleTypeAttributeByName(selectedVehicleTypeAttributeName);
     }
     
 }

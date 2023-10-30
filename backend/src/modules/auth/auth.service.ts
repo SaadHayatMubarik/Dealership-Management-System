@@ -24,5 +24,5 @@ export class AuthService {
 
   async loginById(userName: string): Promise<User>{
     return this.userRepository.findOne({where: {user_name: userName}});
-  }
+  } 
 }

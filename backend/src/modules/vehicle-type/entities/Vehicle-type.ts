@@ -12,7 +12,11 @@ export class VehicleType{
     type_name: string;
 
     @JoinTable()
-    @OneToMany(() => VehicleTypeAttribute, (vehicleTypeAttribute) => vehicleTypeAttribute.vehicleType)
+    @OneToMany(() => VehicleTypeAttribute, (vehicleTypeAttribute) => vehicleTypeAttribute.vehicleType,
+    {
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+    })
     vehicleTypeAttributes: VehicleTypeAttribute[];
     
     @OneToMany(() => Inventory, (inventory) => inventory.vehicleType)

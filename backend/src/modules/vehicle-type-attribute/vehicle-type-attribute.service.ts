@@ -35,7 +35,7 @@ export class VehicleTypeAttributeService {
 
         vehicleTypeAttribute.vehicleType =vehicleType;
         await this.vehicleTypeAttributeRepository.save(vehicleTypeAttribute);
-        console.log(vehicleTypeAttribute);
+        // console.log(vehicleTypeAttribute);
             }
         // const attributeId = await this.vehicleTypeAttributeRepository.findOne({ where: { attribute_name: vehicleAttributeName } });
         // console.log(attributeId);
@@ -78,8 +78,13 @@ export class VehicleTypeAttributeService {
         return getValue
     }
 
-    deleteVehicleTypeAttributeByName(attributeName: string){
+    async deleteVehicleTypeAttributeByName(attributeName: string){
         // console.log(attributeName);
+        const getId =await this.vehicleTypeAttributeRepository.createQueryBuilder('vehicleTypeAttribute')
+        .select('*')
+        .where('vehicleTypeAttribute.attribute_name = :attributeName',{ attributeName })
+        .getRawOne();
+        this.multiValueAttributeRepository.delete({vehicleTypeAttribute: getId});
         return this.vehicleTypeAttributeRepository.delete({ attribute_name: attributeName.toLowerCase() });
     }
 }

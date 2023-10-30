@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { MultiValueAttributeService } from './multi-value-attribute.service';
 import { MultiValueAttributeDto } from './dto/multi-value-attribute.dto';
 import { MultiValueAttribute } from './entities/Multi-value-attribute';
@@ -18,9 +18,15 @@ export class MultiValueAttributeController {
         return this.multiValueAttributeService.getMultiValueAttributeByAttributeId(attributeName);
     }
 
-    @Delete('/:attributeValue')
+    // @Delete('/:attributeValue')
+    // @UsePipes(new ValidationPipe())
+    // deleteMultiValueAttributeByValue(@Param('attributeValue') attributeValue: string):void{
+    //     this.multiValueAttributeService.deleteMultiValueAttributeByValue(attributeValue);
+    // }
+
+    @Patch('/attributeValue')
     @UsePipes(new ValidationPipe())
-    deleteMultiValueAttributeByValue(@Param('attributeValue') attributeValue: string):void{
-        this.multiValueAttributeService.deleteMultiValueAttributeByValue(attributeValue);
+    updateMultiValueAttributeByValue(@Param('attributeValue') attributeValue: string){
+        
     }
 }

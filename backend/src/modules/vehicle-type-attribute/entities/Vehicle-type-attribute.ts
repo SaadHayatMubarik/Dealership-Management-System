@@ -17,7 +17,10 @@ export class VehicleTypeAttribute {
      // @Column()
      // type_name: string;  
 
-     @OneToMany(() => MultiValueAttribute, (multiValueAttribute) => multiValueAttribute.vehicleTypeAttribute)
+     @OneToMany(() => MultiValueAttribute, (multiValueAttribute) => multiValueAttribute.vehicleTypeAttribute,{
+          onDelete: 'CASCADE',
+          onUpdate: 'CASCADE'
+      })
      @JoinColumn()
      multiValueAttributes: MultiValueAttribute[];
 
@@ -26,7 +29,10 @@ export class VehicleTypeAttribute {
 
      // @Column()
      // type_name: VehicleType;
-     @OneToMany(() => StockAttributeValue, (stockAttributeValue) => stockAttributeValue.vehicleTypeAttribute)
+     @OneToMany(() => StockAttributeValue, (stockAttributeValue) => stockAttributeValue.vehicleTypeAttribute,{
+          onDelete: 'CASCADE',
+          onUpdate: 'CASCADE'
+      })
      stockAttributeValue: StockAttributeValue[];
 
      
