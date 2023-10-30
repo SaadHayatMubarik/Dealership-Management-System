@@ -54,7 +54,7 @@ export class SignUpComponent {
   
   
   login(){
-   this.apiService.post('/auth/signUp',this.createUser)
+   this.apiService.post('/auth/signUp')
         .subscribe({
           next: (response) => {
            console.log("posted");
