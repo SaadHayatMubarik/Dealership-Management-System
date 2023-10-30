@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from 'src/app/shared/base.component';
 import { IVehicleTypeAttribute } from '../../interfaces/inventory';
-import { IVehicleType } from '../../interfaces/inventory';
-import { SelectItem } from 'primeng/api';
+import { ConfirmationService } from 'primeng/api';
+
 
 
 import {
@@ -48,7 +48,7 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
   
   
   
-  constructor(private readonly apiService: ApiHelperService){
+  constructor(private confirmationService: ConfirmationService, private readonly apiService: ApiHelperService){
     super()
    
       
@@ -95,9 +95,33 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
               console.log(`Attribute ${this.selectedVehicleTypeAttributeName } deleted.`);
             });
         },
-      },
+      },  
+      // {
+      //   label: ' Delete',
+      //   icon: 'pi pi-trash',
+      //   command: (event) => {
+      //     this.selectedVehicleTypeAttributeName = event.vehicleAttributeName;
+      //     console.log(this.selectedVehicleTypeAttributeName);
+      //     this.confirmationService.confirm({
+      //       header: 'Confirmation',
+      //       message: `Are you sure you want to delete ${this.selectedVehicleTypeAttributeName}?`,
+      //       icon: 'pi pi-exclamation-triangle',
+      //       accept: () => {
+      //         // User confirmed, proceed with deletion
+      //         this.apiService.delete(`/vehicle-type-attribute/${this.selectedVehicleTypeAttributeName}`).subscribe(
+      //           (response) => {
+                 
+      //           },
+      //           (error) => {
+      //             console.error('Error deleting attribute:', error);
+      //           }
+      //         );
+      //       }
+      //     });
+      //   },
+      // },
       {
-        label: 'Edit',
+        label: 'Update',
         icon: 'pi pi-file-edit',
         command: () => {
           ;
@@ -139,24 +163,6 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
     }
   }
 
-  // deleteVehicleTypeAttribute(event: any)
-  // {
-  //   if (event.value) {
-  //     this.selectedVehicleTypeAttributeName = event.value;
-  //     console.log(this.selectedVehicleTypeAttributeName.type_id);
-  //     if (this.selectedVehicleTypeAttributeName.type_id) {
-  //       this.apiService.get(`/vehicle-type-attribute/${this.selectedVehicleTypeAttributeName.type_id}`).subscribe((attributes) => {
-  //         this.selectedVehicleTypeAttributeName = attributes;
-  //         console.log(this.selectedVehicleTypeAttributeName);
-  //       });
-  //     } else {
-  //       this.selectedVehicleTypeAttributeName = [];
-  //     }
-  //   }
-  // }
-
-
- 
 
 
 }

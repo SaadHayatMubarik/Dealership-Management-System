@@ -13,8 +13,6 @@ export class LoginComponent{
 
 
 login(){
-  console.log("aljsbdas");
   this.router.navigate(['/dashboard']);
- 
 }
 }

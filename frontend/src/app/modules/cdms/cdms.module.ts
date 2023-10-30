@@ -23,6 +23,10 @@ import { RatingModule } from 'primeng/rating';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { FileUploadModule } from 'primeng/fileupload';
 import { SliderModule } from 'primeng/slider';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { Tooltip, TooltipModule } from 'primeng/tooltip';
 
 
 
@@ -33,7 +37,8 @@ import { SliderModule } from 'primeng/slider';
     AddInventoryFormComponent,
     VehicleTypeAttributesComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    SignUpComponent
   ],
   imports: [
     CdmsRoutingModule,
@@ -54,9 +59,14 @@ import { SliderModule } from 'primeng/slider';
     RatingModule,
     InputTextareaModule,
     FileUploadModule,
-    SliderModule
+    SliderModule,
+    ConfirmDialogModule,
+    TooltipModule
+    
    
   ],
-  providers: [],
+
+  providers: [ConfirmationService],
+  
 })
 export class CdmsModule { }
