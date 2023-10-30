@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, Param, Patch, Post, UsePipes, Validation
 import { MultiValueAttributeService } from './multi-value-attribute.service';
 import { MultiValueAttributeDto } from './dto/multi-value-attribute.dto';
 import { MultiValueAttribute } from './entities/Multi-value-attribute';
+import { User } from '../auth/entities/User';
 
 @Controller('multi-value-attribute')
 export class MultiValueAttributeController {
@@ -15,7 +16,7 @@ export class MultiValueAttributeController {
 
     @Get('/:attributeName')
     getMultiAttributeByAttributeId(@Param('attributeName') attributeName: string): Promise<MultiValueAttribute[]>{
-        return this.multiValueAttributeService.getMultiValueAttributeByAttributeId(attributeName);
+        return this.multiValueAttributeService.getMultiValueAttributeByAttributeName(attributeName);
     }
 
     // @Delete('/:attributeValue')
@@ -24,9 +25,9 @@ export class MultiValueAttributeController {
     //     this.multiValueAttributeService.deleteMultiValueAttributeByValue(attributeValue);
     // }
 
-    @Patch('/attributeValue')
+    @Patch('/updateAttributeValue')
     @UsePipes(new ValidationPipe())
-    updateMultiValueAttributeByValue(@Param('attributeValue') attributeValue: string){
-        
+    updateMultiValueAttributeByValue(@Body() updateAttributeValueDto: MultiValueAttributeDto): Promise<MultiValueAttribute>{
+        return this.multiValueAttributeService.updateMultValueAttributeByValue(updateAttributeValueDto);
     }
 }

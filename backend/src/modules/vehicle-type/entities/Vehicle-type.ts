@@ -1,8 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn, OneToMany, JoinTable } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany, JoinTable, Unique } from "typeorm";
 import { VehicleTypeAttribute } from "../../vehicle-type-attribute/entities/Vehicle-type-attribute";
 import { Inventory } from "../../inventory/entities/Inventory";
 
 @Entity({ name: 'Vehicle_Type' })
+@Unique(['type_name'])
 export class VehicleType{
 
     @PrimaryGeneratedColumn()

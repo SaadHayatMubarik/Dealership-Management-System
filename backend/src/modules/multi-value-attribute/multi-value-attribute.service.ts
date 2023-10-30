@@ -38,25 +38,35 @@ export class MultiValueAttributeService {
     //     .getOne();
     //     return inputType;
     // }
-    async getMultiValueAttributeByAttributeId(attributeName:string): Promise<MultiValueAttribute[]>{
-        const queryBuilder = this.vehicleTypeAttributeRepository.createQueryBuilder('vehicleTypeAttribute');
-        const attributeId = await queryBuilder
-        .select('vehicleTypeAttribute.attribute_id')
-        .where('vehicleTypeAttribute.attribute_name = :attributeName', { attributeName })
-        .getOne();
+    async getMultiValueAttributeByAttributeName(attributeName:string): Promise<MultiValueAttribute[]>{
+        // const queryBuilder = this.vehicleTypeAttributeRepository.createQueryBuilder('vehicleTypeAttribute');
+        // const attributeId = await queryBuilder
+        // .select('vehicleTypeAttribute.attribute_id')
+        // .where('vehicleTypeAttribute.attribute_name = :attributeName', { attributeName })
+        // .getOne();
 
-        const id = attributeId.attribute_id;
+        // const id = attributeId.attribute_id;
 
-        const queryBuildertwo = this.multiValueAttributeRepository.createQueryBuilder('multiValueAttribute')
-        .select('multiValueAttribute.attribute_value')
-        .where('multiValueAttribute.vehicleTypeAttributeAttributeId = :id', { id });
+        // const queryBuildertwo = this.multiValueAttributeRepository.createQueryBuilder('multiValueAttribute')
+        // .select('multiValueAttribute.attribute_value')
+        // .where('multiValueAttribute.vehicleTypeAttributeAttributeId = :id', { id });
         
-        const attributes = await queryBuildertwo.getRawMany();
+        // const attributes = await queryBuildertwo.getRawMany();
+       const attributes = await this.multiValueAttributeRepository.find({ where:
+         { vehicleTypeAttribute: await this.vehicleTypeAttributeRepository.findOne({ where: { attribute_name: attributeName } }) } })
     return attributes;
     }
 
     deleteMultiValueAttributeByValue(attributeValue: string){
         return this.multiValueAttributeRepository.delete({ attribute_value: attributeValue.toLowerCase() });
+    }
+
+    async updateMultValueAttributeByValue(updateAttributeValueDto: MultiValueAttributeDto): Promise<MultiValueAttribute>{
+        const { attributeName, attributeValue, newAttributeValue } = updateAttributeValueDto;
+        const attribute = await this.multiValueAttributeRepository.findOne({ where: {attribute_value: attributeValue,
+             vehicleTypeAttribute: await this.vehicleTypeAttributeRepository.findOne({ where: { attribute_name: attributeName }})}});
+        attribute.attribute_value = newAttributeValue;
+        return await this.multiValueAttributeRepository.save(attribute);
     }
     
 }
