@@ -7,6 +7,8 @@ import { LoginLayoutComponent } from 'src/app/shared/layout/login-layout/login-l
 import { LoginComponent } from './login/login.component';
 import { AppLayoutComponent } from 'src/app/shared/layout/app.layout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+
 
 
 const routes: Routes = [
@@ -16,8 +18,12 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: LoginComponent,
+        component: SignUpComponent,
       },
+      {
+        path: 'login',
+        component: LoginComponent, 
+      }
     ],
   },
   {

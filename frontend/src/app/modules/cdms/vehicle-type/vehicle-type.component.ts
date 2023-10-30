@@ -23,6 +23,8 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
   };
   
 
+  selectedVehicleTypeId : number = 0;
+
   columns: DataTableColumn[] = [];
   actions: IDataTableAction[] = [];
   data: IObject[] = [];
@@ -50,7 +52,12 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
         label: ' Delete',
         icon: 'pi pi-trash',
         command: (event) => {
-          // this.delete({}); 
+          this.selectedVehicleTypeId = event.type_id;
+          console.log(this.selectedVehicleTypeId );
+            this.apiService.delete(`/inventory/${this.selectedVehicleTypeId  }`).subscribe(
+            (response) => {
+              console.log(`Attribute ${this.selectedVehicleTypeId  } deleted.`);
+            }); 
         },
       },
     ];
