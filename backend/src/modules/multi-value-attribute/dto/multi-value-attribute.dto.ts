@@ -6,4 +6,7 @@ export class MultiValueAttributeDto{
 
     @IsNotEmpty()
     attributeName: string;
+
+    @IsNotEmpty()
+    newAttributeValue: string;
 }
