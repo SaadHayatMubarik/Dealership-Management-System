@@ -1,9 +1,11 @@
-import { Body,Post,Get,Delete,Param,Put, Controller,ValidationPipe, UsePipes } from '@nestjs/common';
+import { Body,Post,Get,Delete,Param,Put, Controller,ValidationPipe, UsePipes, UseGuards } from '@nestjs/common';
 import { VehicleTypeService } from './vehicle-type.service';
 import { VehicleType } from './entities/Vehicle-type';
 import { VehicleTypeDto } from './dto/vehicle-type.dto';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('vehicle-type')
+@UseGuards(AuthGuard())
 export class VehicleTypeController {
 
     constructor(private vehicleTypeService: VehicleTypeService){    }

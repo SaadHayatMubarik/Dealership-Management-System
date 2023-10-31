@@ -27,4 +27,12 @@ export class User {
         const hash = await bcrypt.hash(password, this.salt);
         return hash === this.password;
     }
+    async validateUserRole(role: string): Promise<boolean>{
+        let userType = false;
+        // const roles = this.role;
+        if (role === UserRole.ADMIN || UserRole.OWNER){
+             userType = true;
+        }
+        return userType;
+    }
 }
