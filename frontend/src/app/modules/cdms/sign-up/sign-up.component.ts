@@ -1,8 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { FormsModule, NgForm } from '@angular/forms';
+
 import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
+import { ToastService } from 'src/app/shared/services/toast.service';
+import {  MessageService } from 'primeng/api';
 import { ISignUp } from '../../interfaces';
+
+
 
 @Component({
   selector: 'app-sign-up',
@@ -11,12 +17,9 @@ import { ISignUp } from '../../interfaces';
 })
 export class SignUpComponent {
 
-  userRoles: any[] = ["ADMIN"];
-  selectedUserRole: string = '';
-  userName:string = '';
-  password:string = '';
-  email:string = '';
-
+  userRoles: any[] = ["ADMIN","MASTER ADMIN"];
+ 
+  
  
   createUser: ISignUp = {
     username: '',
@@ -25,36 +28,46 @@ export class SignUpComponent {
     role: ''
   };
 
+  @ViewChild ('f') signupForm!:NgForm;
 
+  constructor(private router: Router, 
+    private readonly apiService: ApiHelperService, 
+    private message:MessageService, 
+    private toast:ToastService) 
+    {
 
-  constructor(private router: Router, private readonly apiService: ApiHelperService) { }
+    }
   
 
 
+  onSubmit()
+  {
+    if(this.signupForm.valid && this.signupForm.value.password === this.signupForm.value.confirmPassword)
+    {
+      this.apiService.post('/auth/signUp',this.createUser).subscribe({
+        next: (response) => {
+         this.toast.showSuccess('Form Submitted');
+         setTimeout(() => {
+          this.router.navigate(['/login']);
+        }, 1000);
+         this.signupForm.resetForm();
+        },
+        error: () => {
+         this.toast.showError();
+        },
+      });
+    }
+   
+    else if(this.signupForm.value.password !== this.signupForm.value.confirmPassword)
+    this.toast.showInfo('Password Mismatched, Confirm Password Again.');
+  }
 
-  // userNameValidation(){
-  //   if(this.userName.length > 4 && this.userName.length < 20)
-  //   {
-  //     this.login();
-  //   }
-  //   else{
-  //     console.log("invalid username")
-  //   }
-  // }
-  // passwordValidation(){
-    
-  // }
   
   
-  // emailValidation(){}
-  // confirmPasswordValidation()
-  // {
-
-  // }
   
   
   login(){
-   this.apiService.post('/auth/signUp')
+   this.apiService.post('/auth/signUp',this.createUser)
         .subscribe({
           next: (response) => {
            console.log("posted");

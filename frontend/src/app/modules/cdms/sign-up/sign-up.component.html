@@ -1,5 +1,5 @@
 
-
+<p-toast position="top-center"></p-toast>
 <div class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
     <div class="flex flex-column align-items-center justify-content-center">
         <div style="border-radius:56px; padding:0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 30%);">
@@ -8,28 +8,102 @@
                    <h1>Sign Up</h1>
                 </div>
 
-                <div>
-                    <label class="block text-900 text-xl font-medium mb-2">Username</label>
-                    <input minlength="4" maxlength="20" pTooltip="length should be between 4-20 characters" type="text" pInputText placeholder="Enter Username" class="w-full md:w-30rem mb-5"
-                    [(ngModel)]="createUser.username" required="true">
+                <form (ngSubmit)="onSubmit()" #f="ngForm">
+                    <div id="user-Data"> 
+                        <div class="form-group">
+                           <label class="block text-900 text-xl font-medium mb-2">Username</label>
+                              <input name="username"
+                                pTooltip="length should be between 4-20 characters" 
+                                type="text" 
+                                pInputText
+                                placeholder="Enter Username" 
+                                class="w-full md:w-30rem mb-5"
+                                ngModel
+                                required
+                                minlength="4"
+                                maxlength="20"
+                                #username="ngModel"
+                                [(ngModel)]="createUser.username">
+                         <div class="icon">
+                           <span *ngIf="username.valid && username.touched"><i class="pi pi-check text-success"></i></span>
+                           <span *ngIf="!username.valid && username.touched"><i class="pi pi-times text-danger"></i></span>   
+                         </div>
+                        </div>
+                        
+                        
+                        <div class="form-group">  
+                          <label class="block text-900 text-xl font-medium mb-2">Email</label>
+                            <input type="text" 
+                             name="email"
+                             pInputText 
+                             placeholder="Enter Email Address" 
+                             class="w-full md:w-30rem mb-5" 
+                             style="padding:1rem;" 
+                             required="true" 
+                             ngModel
+                             required
+                             email
+                             #email="ngModel"
+                             [(ngModel)]="createUser.email"/>
+                             <div class="icon">
+                                <span *ngIf="email.valid && email.touched"><i class="pi pi-check text-success"></i></span>
+                                <span *ngIf="!email.valid && email.touched"><i class="pi pi-times text-danger"></i></span>   
+                              </div>
+                        </div>
+                        
+                        <div class="form-group">
+                           <label for="password1" class="block text-900 font-medium text-xl mb-2">Enter Password</label>
+                            <p-password 
+                             name="password"  
+                             pTooltip="Atleast one upper case, one lowercase, a number and special character required."     placeholder="Password" 
+                             styleClass="mb-5" 
+                             inputStyleClass="w-full p-3 md:w-30rem"
+                             ngModel
+                             pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$"
+                             required
+                             #password="ngModel"
+                             [(ngModel)]="createUser.password">
+                            </p-password>
+                            <div class="icon">
+                                <span *ngIf="password.valid && password.touched"><i class="pi pi-check text-success"></i></span>
+                                <span *ngIf="!password.valid && password.touched"><i class="pi pi-times text-danger"></i></span>   
+                              </div>
+                        </div>
+                        
 
-                    <label class="block text-900 text-xl font-medium mb-2">Email</label>
-                    <input type="text"  pInputText placeholder="Enter Email Address" class="w-full md:w-30rem mb-5" style="padding:1rem;" required="true" [(ngModel)]="createUser.email" />
-                    
-                    
-                    <label for="password1" class="block text-900 font-medium text-xl mb-2">Enter Password</label>
-                    <p-password id="password1" pTooltip="Atleast one upper case, one lowercase, a number and special character required." placeholder="Password" styleClass="mb-5" inputStyleClass="w-full p-3 md:w-30rem" required="true" [(ngModel)]="createUser.password" ></p-password>
-              
-                    <label class="block text-900 text-xl font-medium mb-2">Confirm Password</label>
-                    <p-password styleClass="mb-5" inputStyleClass="w-full p-3 md:w-30rem" placeholder="Enter Password Again"  [feedback]="false" required="true" ></p-password>
+                        <div class="form-group">
+                             <label class="block text-900 text-xl font-medium mb-2">Confirm Password</label>
+                              <p-password 
+                               name="confirmPassword" 
+                               styleClass="mb-5" 
+                               inputStyleClass="w-full p-3 md:w-30rem"
+                               placeholder="Enter Password Again" 
+                               [feedback]="false"
+                               ngModel
+                               #confirmPassword="ngModel">
+                              </p-password>
+                         </div>
 
-                    <label class="text-center block text-900 font-medium text-xl mb-2">Select Role</label>
-                    <p-dropdown class="flex flex-column align-items-center justify-content-center" [options]="userRoles" [(ngModel)]="createUser.role" ></p-dropdown>
-                   
+                        <div class="form-group"> 
+                            <label class="text-center block text-900 font-medium text-xl mb-2">Select Role</label>
+                            <p-dropdown 
+                             class="flex flex-column align-items-center justify-content-center" 
+                             [options]="userRoles" 
+                             ngModel
+                             [(ngModel)]="createUser.role">
+                            </p-dropdown>
+                        </div>
+                    </div>
                     <br><br>
-
-                    <button pButton pRipple label="Sign In" class="w-full p-3 text-x1" (click)="login()"></button>
-                </div>
+                 <button 
+                    pButton 
+                    pRipple 
+                    label="Sign In" 
+                    class="w-full p-3 text-x1" 
+                    type="submit" 
+                    [disabled]="!f.valid">
+                 </button>
+                </form>               
             </div>
         </div>
     </div>

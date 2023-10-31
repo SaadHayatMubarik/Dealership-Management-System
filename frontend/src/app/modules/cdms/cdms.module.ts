@@ -27,6 +27,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { Tooltip, TooltipModule } from 'primeng/tooltip';
+import { MessagesModule } from 'primeng/messages';
 
 
 
@@ -66,7 +67,9 @@ import { Tooltip, TooltipModule } from 'primeng/tooltip';
    
   ],
 
-  providers: [ConfirmationService],
+  providers: [ConfirmationService,
+               MessagesModule],
+
   
 })
 export class CdmsModule { }
