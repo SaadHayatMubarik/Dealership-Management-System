@@ -5,9 +5,12 @@ import { VehicleTypeAttributeController } from './vehicle-type-attribute.control
 import { VehicleTypeAttributeService } from './vehicle-type-attribute.service';
 import { VehicleType } from '../vehicle-type/entities/Vehicle-type';
 import { MultiValueAttribute } from '../multi-value-attribute/entities/Multi-value-attribute';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([VehicleTypeAttribute,VehicleType,MultiValueAttribute])],
+    imports: [TypeOrmModule.forFeature([VehicleTypeAttribute,VehicleType,MultiValueAttribute]),
+    AuthModule,
+],
     controllers: [VehicleTypeAttributeController],
     providers: [VehicleTypeAttributeService]
 })

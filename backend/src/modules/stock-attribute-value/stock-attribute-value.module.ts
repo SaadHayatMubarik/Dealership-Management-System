@@ -6,6 +6,7 @@ import { StockAttributeValue } from './entities/Stock-attribute-value';
 import { StockAttributeValueController } from './stock-attribute-value.controller';
 import { StockAttributeValueService } from './stock-attribute-value.service';
 import { Inventory } from '../inventory/entities/Inventory';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
     imports: [TypeOrmModule.forFeature([MultiValueAttribute,VehicleTypeAttribute,StockAttributeValue,Inventory])],

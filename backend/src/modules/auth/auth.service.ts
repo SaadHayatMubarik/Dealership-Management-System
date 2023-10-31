@@ -5,6 +5,8 @@ import * as bcrypt from 'bcrypt';
 import { User } from './entities/User';
 import { Repository } from 'typeorm';
 import { ValidateUserDto } from './dto/validate-user.dto';
+import { JwtService } from '@nestjs/jwt';
+import { JwtPayload } from './jwt-payload.interface';
 // import { CreateAuthDto } from './dto/create-user.dto';
 // import { UpdateAuthDto } from './dto/update-user.dto';
 
@@ -13,6 +15,7 @@ export class AuthService {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
+    private jwtService: JwtService,
   ){}
   async signUp(createUserDto: CreateUserDto): Promise<User>{
     const { username, password, email, role } = createUserDto;
@@ -40,12 +43,16 @@ export class AuthService {
     
   }
 
-  async login( validateUserDto: ValidateUserDto){
+  async login( validateUserDto: ValidateUserDto): Promise<{ accessToken: string }>{
     const username = await this.validateUserPassword(validateUserDto);
 
     if(!username){
       throw new UnauthorizedException('Invalidate credentials');
     }
+    const payload: JwtPayload = { username };
+    const accessToken = await this.jwtService.sign(payload);
+    // console.log(accessToken);
+    return { accessToken };
   } 
 
   private async hashPassword(password: string, salt: string): Promise<string>{
@@ -53,9 +60,9 @@ export class AuthService {
   }
 
   private async validateUserPassword( validateUserDto: ValidateUserDto ): Promise<string>{
-  const { username, Password } = validateUserDto
-  const user = await this.userRepository.findOne({where: { user_name: username }});
-  if (user && await user.validatePassword(Password)) {
+  const { username, password, role } = validateUserDto
+  const user = await this.userRepository.findOne({where: { user_name: username, role: role }});
+  if (user && await user.validatePassword(password) && user.validateUserRole(role)) {
     return user.user_name;
   }
   else {
@@ -63,4 +70,5 @@ export class AuthService {
   }
 
   }
+  
 }

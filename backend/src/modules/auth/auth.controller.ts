@@ -1,10 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ValidationPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ValidationPipe} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/User';
 import { ValidateUserDto } from './dto/validate-user.dto';
-// import { CreateAuthDto } from './dto/create-user.dto';
-// import { UpdateAuthDto } from './dto/update-user.dto';
+
 
 @Controller('auth')
 export class AuthController {
@@ -17,9 +16,11 @@ export class AuthController {
   }
 
   @Post('login')
-  login(@Body(ValidationPipe) validationUserDto: ValidateUserDto){
+  login(@Body(ValidationPipe) validationUserDto: ValidateUserDto): Promise<{ accessToken: string }> {
     return this.authService.login(validationUserDto);
   } 
+
+
 
   // @Get('/:username')
   // getUser(@Param('username') username: string): Promise<User> {

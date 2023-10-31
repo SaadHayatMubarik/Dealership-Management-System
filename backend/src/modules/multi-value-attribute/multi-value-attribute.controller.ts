@@ -1,10 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, UsePipes, ValidationPipe, UseGuards } from '@nestjs/common';
 import { MultiValueAttributeService } from './multi-value-attribute.service';
 import { MultiValueAttributeDto } from './dto/multi-value-attribute.dto';
 import { MultiValueAttribute } from './entities/Multi-value-attribute';
 import { User } from '../auth/entities/User';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('multi-value-attribute')
+@UseGuards(AuthGuard())
 export class MultiValueAttributeController {
     constructor( private multiValueAttributeService: MultiValueAttributeService)
     {}

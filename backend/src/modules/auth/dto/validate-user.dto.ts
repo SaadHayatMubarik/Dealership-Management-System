@@ -1,4 +1,5 @@
 import { IsNotEmpty, IsString, Matches, MaxLength, MinLength } from "class-validator";
+import { UserRole } from "../user-role.enum";
 
 export class ValidateUserDto {
 
@@ -14,7 +15,8 @@ export class ValidateUserDto {
     @MaxLength(20)
     @Matches(/((?=.*\d)|(?=.*W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/,
      { message: 'password is too weak' })
-    Password: string;
+    password: string;
 
+    role: UserRole;
 
 }
