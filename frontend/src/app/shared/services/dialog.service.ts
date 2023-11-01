@@ -1,5 +1,6 @@
 import { Injectable, TemplateRef } from '@angular/core';
-import { Subject } from 'rxjs';
+// import { Subject } from 'rxjs';
+
 export interface DialogSetting {
   content?: TemplateRef<any> | any;
   title?: string;
@@ -16,7 +17,7 @@ export class DialogControlService {
     width: 500,
   };
 
-  private destroyed$ = new Subject();
+  // private destroyed$ = new Subject();
 
   dialogInstance: any;
   private dialogService: any;

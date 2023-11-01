@@ -28,6 +28,8 @@ import { ConfirmationService } from 'primeng/api';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { Tooltip, TooltipModule } from 'primeng/tooltip';
 import { MessagesModule } from 'primeng/messages';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AccessDeniedComponent } from './access-denied/access-denied.component';
 
 
 
@@ -39,7 +41,9 @@ import { MessagesModule } from 'primeng/messages';
     VehicleTypeAttributesComponent,
     LoginComponent,
     DashboardComponent,
-    SignUpComponent
+    SignUpComponent,
+    PageNotFoundComponent,
+    AccessDeniedComponent
   ],
   imports: [
     CdmsRoutingModule,
@@ -67,8 +71,7 @@ import { MessagesModule } from 'primeng/messages';
    
   ],
 
-  providers: [ConfirmationService,
-               MessagesModule],
+  providers: [],
 
   
 })

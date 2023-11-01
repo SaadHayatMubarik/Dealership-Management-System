@@ -53,7 +53,10 @@ export class SignUpComponent {
          this.signupForm.resetForm();
         },
         error: () => {
-         this.toast.showError();
+          this.toast.showError();
+         setTimeout(() => {
+          this.router.navigate(['/not-found']);
+        }, 2000);
         },
       });
     }
@@ -62,10 +65,7 @@ export class SignUpComponent {
     this.toast.showInfo('Password Mismatched, Confirm Password Again.');
   }
 
-  
-  
-  
-  
+
   login(){
    this.apiService.post('/auth/signUp',this.createUser)
         .subscribe({

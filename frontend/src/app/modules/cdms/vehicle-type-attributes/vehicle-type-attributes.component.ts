@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ErrorHandler, OnInit } from '@angular/core';
 import { BaseComponent } from 'src/app/shared/base.component';
 import { IVehicleTypeAttribute } from '../../interfaces/inventory';
-import { ConfirmationService } from 'primeng/api';
+import { DialogControlService } from 'src/app/shared/services/dialog.service';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 
 
@@ -48,7 +49,9 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
   
   
   
-  constructor(private confirmationService: ConfirmationService, private readonly apiService: ApiHelperService){
+  constructor(private readonly apiService: ApiHelperService, 
+              private dialogService: DialogControlService ,
+              private toastService:ToastService) {
     super()
    
       
@@ -89,37 +92,25 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
         icon: 'pi pi-trash',
         command: (event) => {
           this.selectedVehicleTypeAttributeName = event.vehicleAttributeName;
-          console.log(this.selectedVehicleTypeAttributeName);
-            this.apiService.delete(`/vehicle-type-attribute/${this.selectedVehicleTypeAttributeName }`).subscribe(
-            (response) => {
-              console.log(`Attribute ${this.selectedVehicleTypeAttributeName } deleted.`);
-            });
-        },
-      },  
-      // {
-      //   label: ' Delete',
-      //   icon: 'pi pi-trash',
-      //   command: (event) => {
-      //     this.selectedVehicleTypeAttributeName = event.vehicleAttributeName;
-      //     console.log(this.selectedVehicleTypeAttributeName);
-      //     this.confirmationService.confirm({
-      //       header: 'Confirmation',
-      //       message: `Are you sure you want to delete ${this.selectedVehicleTypeAttributeName}?`,
-      //       icon: 'pi pi-exclamation-triangle',
-      //       accept: () => {
-      //         // User confirmed, proceed with deletion
-      //         this.apiService.delete(`/vehicle-type-attribute/${this.selectedVehicleTypeAttributeName}`).subscribe(
-      //           (response) => {
-                 
-      //           },
-      //           (error) => {
-      //             console.error('Error deleting attribute:', error);
-      //           }
-      //         );
-      //       }
-      //     });
-      //   },
-      // },
+             this.dialogService.confirm('Delete Record', 'Are you sure you want to delete this record?').then((confirmed) => 
+             { if (confirmed) {
+              this.apiService.delete(`/vehicle-type-attribute/${this.selectedVehicleTypeAttributeName}`).subscribe({
+                next: (response) => {
+                  this.toastService.showSuccess( `${this.selectedVehicleTypeAttributeName} attribute deleted.`);
+                },
+                error: () => 
+                {
+                  this.toastService.showError();
+                }
+              }
+                );
+              }
+              else{
+                  this.toastService.showInfo('Record not deleted.')
+              }
+            }
+             )}, 
+        },  
       {
         label: 'Update',
         icon: 'pi pi-file-edit',
@@ -152,13 +143,11 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
           next: (response) => {
             this.resetForm();
             this.closeModal();
-            console.log("successs");
+           this.toastService.showSuccess('New vehicle type attribute created.')
           },
           error: () => {
-            console.log("unsucessful");
-            
+           this.toastService.showError();
           },
-       
         });
     }
   }

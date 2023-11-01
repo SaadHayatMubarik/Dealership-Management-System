@@ -1,5 +1,4 @@
-
-
+<p-toast position="top-center"></p-toast>
 
 <div class="comp-content">
   <div class="toolbar-header mb-3">
@@ -15,7 +14,7 @@
     <div class="filter-row flex justify-content-between pt-3">
 
     </div>
-    <app-datatable [data]="data" [cols]="columns" [globalFilterFields]="['']" [actions]="actions"></app-datatable>
+    <app-datatable [data]="data" [cols]="columns" [globalFilterFields]="['vehicleTypeName','vehicleAttributeName','attributeInputType','vehicleAttributeValue']" [actions]="actions"></app-datatable>
   </div>
 
   <p-sidebar [(visible)]="modal" position="right" [style]="{width: '80rem'}" >

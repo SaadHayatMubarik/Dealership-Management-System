@@ -10,6 +10,8 @@ import {
 } from 'src/app/shared/interfaces/common';
 import { IVehicleType } from '../../interfaces/inventory';
 import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
+import { ToastService } from 'src/app/shared/services/toast.service';
+import { DialogControlService } from 'src/app/shared/services/dialog.service';
 
 @Component({
   selector: 'app-vehicle-type',
@@ -28,7 +30,7 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
   columns: DataTableColumn[] = [];
   actions: IDataTableAction[] = [];
   data: IObject[] = [];
-  constructor(private readonly apiService: ApiHelperService) {
+  constructor(private readonly apiService: ApiHelperService, private toast : ToastService, private dialogService: DialogControlService) {
     super();
   }
 
@@ -53,19 +55,33 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
         icon: 'pi pi-trash',
         command: (event) => {
           this.selectedVehicleTypeId = event.type_id;
-          console.log(this.selectedVehicleTypeId );
-            this.apiService.delete(`/inventory/${this.selectedVehicleTypeId  }`).subscribe(
-            (response) => {
-              console.log(`Attribute ${this.selectedVehicleTypeId  } deleted.`);
-            }); 
+          this.dialogService.confirm('Delete Record', 'Are you sure you want to delete this record?').then((confirmed) => 
+             { if (confirmed) {
+              this.apiService.delete(`/inventory/${this.selectedVehicleTypeId }`).subscribe({
+                next: (response) => {
+                  this.toast.showSuccess( "Vehicle Type Deleted.");
+                },
+                error: () => 
+                {
+                  this.toast.showError();
+                }
+              }
+                );
+              }
+              else{
+                  this.toast.showInfo('Record not deleted.')
+              }
+            }
+             )
+
+         
         },
       },
     ];
-
-   
   }
 
- 
+
+
   
   saveVehicleType() {
     if (this.vehicleType.vehicleTypeName != '') {
@@ -76,59 +92,23 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
             this.closeModal();
             this.getVehicleType();
             this.vehicleType.vehicleTypeName = "";
+            this.toast.showSuccess('New vehicle type created.')
           },
           error: () => {
-            
+            this.toast.showError();
           },
-       
         });
     }
   }
-  // selectedItem: any;
+  
 
   getVehicleType() {
     this.apiService.get('/vehicle-type/getVehicleType').subscribe((data) => {
-      // console.log(data);
       this.data = data;
       this.apiService.setVehicleTypes(data);
     });
   }
 
-
-
-//   delete(typeName: string): void {
-//     if (confirm('Are you sure you want to delete this vehicle type?')) {
-//       const deleteVehicleTypeDto = { vehicleTypeName: typeName };
-//       this.apiService.deleteVehicleType('/vehicle-type/deleteVehicleType', deleteVehicleTypeDto)
-//         .subscribe({
-//           next: (response) => {
-//             this.getVehicleType(); 
-//           },
-//           error: (error) => {
-            
-//             console.error('Error deleting vehicle type:', error);
-//           },
-//         });
-//     }
-//   }
-
-
-  delete(vehicleType: IVehicleType): void {
-    if (confirm('Are you sure you want to delete this item?')) {
-        // const vehicleTypeName = JSON.parse(typeName);  
-        console.log(vehicleType);
-        this.apiService.delete('/vehicle-type/' + this.vehicleType.vehicleTypeId)
-            .subscribe({
-                next: (response) => {
-                    this.getVehicleType(); // Refresh the data after a successful delete
-                },
-                error: (error) => {
-                    // Handle errors as needed
-                    console.error('Error deleting vehicle type:', error);
-                },
-            });
-    }
-}
 
 }
 

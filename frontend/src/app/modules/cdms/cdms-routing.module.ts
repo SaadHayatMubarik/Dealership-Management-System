@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { AppLayoutComponent } from 'src/app/shared/layout/app.layout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 
@@ -23,7 +24,12 @@ const routes: Routes = [
       {
         path: 'login',
         component: LoginComponent, 
-      }
+      },
+      {
+        path:'not-found',
+        component: PageNotFoundComponent
+      },
+  
     ],
   },
   {

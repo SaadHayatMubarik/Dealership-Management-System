@@ -93,6 +93,7 @@ export interface IEmployeeType extends IBase {
     employeeTypeId: number;
     employeeTypeName: string;
 }
+
 export interface ITaxSlab extends IBase {
     taxSlabId: number;
     fiscalYearId: number;
@@ -101,6 +102,7 @@ export interface ITaxSlab extends IBase {
     deductionPercentage: number;
     fixDeduction: number;
 }
+
 export interface IBpsVersion extends IBase {
     bpsVersionId: number;
     versionName: string;
