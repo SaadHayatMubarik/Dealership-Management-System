@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { FormsModule, NgForm } from '@angular/forms';
+import {  NgForm } from '@angular/forms';
 
 import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
@@ -15,9 +15,9 @@ import { ISignUp } from '../../interfaces';
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
-export class SignUpComponent {
+export class SignUpComponent  {
 
-  userRoles: any[] = ["ADMIN","MASTER ADMIN"];
+  userRoles: any[] = ["ADMIN"];
  
   
  
@@ -46,7 +46,7 @@ export class SignUpComponent {
     {
       this.apiService.post('/auth/signUp',this.createUser).subscribe({
         next: (response) => {
-         this.toast.showSuccess('Form Submitted');
+         this.toast.showSuccess('User Created');
          setTimeout(() => {
           this.router.navigate(['/login']);
         }, 1000);

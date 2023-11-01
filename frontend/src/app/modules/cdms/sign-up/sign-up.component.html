@@ -60,7 +60,7 @@
                              styleClass="mb-5" 
                              inputStyleClass="w-full p-3 md:w-30rem"
                              ngModel
-                             pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$"
+                             pattern="/((?=.\d)|(?=.*W+))(?![.\n])(?=.[A-Z])(?=.[a-z]).$/"
                              required
                              #password="ngModel"
                              [(ngModel)]="createUser.password">
