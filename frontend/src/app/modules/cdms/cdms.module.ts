@@ -13,7 +13,6 @@ import { VehicleTypeAttributesComponent } from './vehicle-type-attributes/vehicl
 import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
 import { PasswordModule } from 'primeng/password';
-import { LoginComponent } from './login/login.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ChipsModule } from 'primeng/chips';
@@ -24,12 +23,12 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { FileUploadModule } from 'primeng/fileupload';
 import { SliderModule } from 'primeng/slider';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ConfirmationService } from 'primeng/api';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { Tooltip, TooltipModule } from 'primeng/tooltip';
-import { MessagesModule } from 'primeng/messages';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
+import { LoginComponent } from './login/login.component';
+
 
 
 
@@ -39,11 +38,12 @@ import { AccessDeniedComponent } from './access-denied/access-denied.component';
     VehicleTypeComponent,
     AddInventoryFormComponent,
     VehicleTypeAttributesComponent,
-    LoginComponent,
     DashboardComponent,
     SignUpComponent,
     PageNotFoundComponent,
-    AccessDeniedComponent
+    AccessDeniedComponent,
+    LoginComponent,
+  
   ],
   imports: [
     CdmsRoutingModule,

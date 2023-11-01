@@ -6,8 +6,6 @@ export interface ISignUp{
 }
 
 export interface Ilogin{
-
     username:string;
     password:string;
-    _token:string;
 }

@@ -15,5 +15,4 @@ export const typeOrmConfig: TypeOrmModuleOptions  = {
     entities: [Inventory, MultiValueAttribute, StockAttributeValue, VehicleType, VehicleTypeAttribute,User],
     synchronize: false,
 
-    
 }
