@@ -78,6 +78,7 @@ export class SignUpComponent  {
           },
        
         });
+        // console.log(this.createUser);
     }
 
 
