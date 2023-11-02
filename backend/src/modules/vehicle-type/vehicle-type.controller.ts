@@ -5,7 +5,7 @@ import { VehicleTypeDto } from './dto/vehicle-type.dto';
 import { AuthGuard } from '@nestjs/passport';
 
 @Controller('vehicle-type')
-@UseGuards(AuthGuard())
+// @UseGuards(AuthGuard())
 export class VehicleTypeController {
 
     constructor(private vehicleTypeService: VehicleTypeService){    }

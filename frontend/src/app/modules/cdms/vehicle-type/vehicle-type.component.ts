@@ -105,7 +105,7 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
   getVehicleType() {
     this.apiService.get('/vehicle-type/getVehicleType').subscribe((data) => {
       this.data = data;
-      this.apiService.setVehicleTypes(data);
+      // this.apiService.setVehicleTypes(data);
     });
   }
 

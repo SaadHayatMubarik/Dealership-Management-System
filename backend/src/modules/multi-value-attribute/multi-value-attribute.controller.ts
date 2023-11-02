@@ -6,7 +6,7 @@ import { User } from '../auth/entities/User';
 import { AuthGuard } from '@nestjs/passport';
 
 @Controller('multi-value-attribute')
-@UseGuards(AuthGuard())
+// @UseGuards(AuthGuard())
 export class MultiValueAttributeController {
     constructor( private multiValueAttributeService: MultiValueAttributeService)
     {}

@@ -12,19 +12,18 @@ import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
 @Component({
   selector: 'app-add-inventory-form',
   templateUrl: './add-inventory-form.component.html',
-  styleUrls: ['./add-inventory-form.component.scss']
+  styleUrls: ['./add-inventory-form.component.scss'],
 })
-export class AddInventoryFormComponent extends BaseComponent implements OnInit{
-
+export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   vehicleInventory: IInventory = {
     vehicleMake: '',
     vehicleModel: '',
-    vehicleVariant:'',
+    vehicleVariant: '',
     modelYear: 0,
-    vehicleChasisNo:'',
+    vehicleChasisNo: '',
     costPrice: 0,
     demand: 0,
-    dateOfPurchase:'',
+    dateOfPurchase: '',
     dateOfSale: '',
     bodyColor: '',
     engineNo: '',
@@ -33,17 +32,12 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit{
     regNo: '',
   };
 
-  
- vehicleTypes: any[] = []; //to populate dropdown of vehicle type
- status: string[] = ['Available', 'Unavailable', 'Upcoming']; //to populate status dropdown
- sliderValue: number = 0; 
- selectedVehicleTypeId: any; //saving vehicle type id
- vehicleAttributes: any[] = []; //to save vehicle type attributes 
+  vehicleTypes: any[] = []; //to populate dropdown of vehicle type
+  status: string[] = ['Available', 'Unavailable', 'Upcoming']; //to populate status dropdown
+  sliderValue: number = 0;
+  selectedVehicleTypeId: any; //saving vehicle type id
+  vehicleAttributes: any[] = []; //to save vehicle type attributes
 
- 
- 
-
- 
   columns: DataTableColumn[] = [];
   actions: IDataTableAction[] = [];
   data: IObject[] = [];
@@ -51,15 +45,12 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit{
     super();
   }
 
-
-
-
   ngOnInit() {
-    
-    
-    this.vehicleTypes = this.apiService.getVehicleTypes();
+
+    this.getVehicleTypes();
+    // this.vehicleTypes = this.apiService.getVehicleTypes();
     // this.onVehicleTypeSelected();
-    
+
     this.columns = [
       {
         field: '',
@@ -94,71 +85,77 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit{
       {
         label: ' Delete',
         icon: 'pi pi-trash',
-        command: () => {
-          ;
-        },
+        command: () => {},
       },
       {
         label: 'Edit',
         icon: 'pi pi-file-edit',
-        command: () => {
-          ;
-        },
+        command: () => {},
       },
     ];
-
-   
   }
 
-//to limit slider value from 0 to 5.
-onInputChange(event: any) {
-  const inputValue = event.target.value;
-  const parsedValue = parseFloat(inputValue);
-  if (!isNaN(parsedValue)) {
-    if (parsedValue < 0) {
+  getVehicleTypes() {
+    this.apiService.get('/vehicle-type/getVehicleType').subscribe({
+      next: (response: IObject[]) => {
+        this.vehicleTypes = response;
+      },
+      error: () => {},
+    });
+  }
+
+  //to limit slider value from 0 to 5.
+  onInputChange(event: any) {
+    const inputValue = event.target.value;
+    const parsedValue = parseFloat(inputValue);
+    if (!isNaN(parsedValue)) {
+      if (parsedValue < 0) {
+        this.sliderValue = 0;
+      } else if (parsedValue > 5) {
+        this.sliderValue = 5;
+      } else {
+        this.sliderValue = parsedValue;
+      }
+    } else {
       this.sliderValue = 0;
-    } else if (parsedValue > 5) {
-      this.sliderValue = 5;
-    } else {
-      this.sliderValue = parsedValue;
-    }
-  } else {
-    this.sliderValue = 0; 
-  }
-}
-
-// Allow only numeric input and certain special keys (e.g., backspace, delete) for slider
-onKeyDown(event: any) {
-  const key = event.key;
-  if (key === 'Backspace' || key === 'Delete') {
-    return;
-  }
-  if (!/^\d*\.?\d*$/.test(key)) {
-    event.preventDefault();
-  }
-}
-
-// fucntion to store vehicle type id when selecting from dropdown.
-onVehicleTypeChange(event: any) {
-  if (event.value) {
-    this.selectedVehicleTypeId = event.value;
-    console.log(this.selectedVehicleTypeId.type_id);
-    if (this.selectedVehicleTypeId.type_id) {
-      this.apiService.get(`/vehicle-type-attribute/${this.selectedVehicleTypeId.type_id}`).subscribe((attributes) => {
-        this.vehicleAttributes = attributes;
-        console.log(this.vehicleAttributes);
-      });
-    } else {
-      this.vehicleAttributes = [];
     }
   }
-}
 
+  // Allow only numeric input and certain special keys (e.g., backspace, delete) for slider
+  onKeyDown(event: any) {
+    const key = event.key;
+    if (key === 'Backspace' || key === 'Delete') {
+      return;
+    }
+    if (!/^\d*\.?\d*$/.test(key)) {
+      event.preventDefault();
+    }
+  }
 
+  // fucntion to store vehicle type id when selecting from dropdown.
+  onVehicleTypeChange(event: any) {
+    if (event.value) {
+      this.selectedVehicleTypeId = event.value;
+      console.log(this.selectedVehicleTypeId.type_id);
+      if (this.selectedVehicleTypeId.type_id) {
+        this.apiService
+          .get(`/vehicle-type-attribute/${this.selectedVehicleTypeId.type_id}`)
+          .subscribe((attributes) => {
+            this.vehicleAttributes = attributes;
+            console.log(this.vehicleAttributes);
+          });
+      } else {
+        this.vehicleAttributes = [];
+      }
+    }
+  }
 
+  save() {
+    // console.log(this.selectedType.type_id);
+  }
 
-save(){
-  // console.log(this.selectedType.type_id);
-}
-
+  getOptions(attribute: any) {
+   
+   return attribute.multiValueAttributes.map((mv:IObject) => mv['attribute_value']) as string[]
+  }
 }

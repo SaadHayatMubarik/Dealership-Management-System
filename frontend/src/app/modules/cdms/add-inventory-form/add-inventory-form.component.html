@@ -152,26 +152,26 @@
             <div *ngIf="vehicleAttributes">
               <div class="row-form grid">
                 <div class="col-4" *ngFor="let attribute of vehicleAttributes; let i = index">
-                  <div *ngIf="attribute.attributeInputType === 'text'">
+                  <div *ngIf="attribute.input_type === 'text'">
                     <div class="p-field">
                       <span class="p-float-label">
                         <input class="p-inputtext-lg" pInputText />
-                        <label for="float-label">{{ attribute.vehicleAttributeName }}</label>
+                        <label for="float-label">{{ attribute.attribute_name }}</label>
                       </span>
                     </div>
                   </div>
-                  <div *ngIf="attribute.attributeInputType === 'number'">
+                  <div *ngIf="attribute.input_type === 'number'">
                     <div class="p-field">
                       <span class="p-float-label">
                         <input class="p-inputtext-lg" pInputText />
-                        <label for="float-label">{{ attribute.vehicleAttributeName }}</label>
+                        <label for="float-label">{{ attribute.attribute_name }}</label>
                       </span>
                     </div>
                   </div>
-                  <div *ngIf="attribute.attributeInputType === 'dropdown'">
+                  <div *ngIf="attribute.input_type === 'dropdown'">
                     <span class="p-float-label">
-                      <p-dropdown class="p-inputtext-lg" placeholder="Select {{ attribute.vehicleAttributeName }}" [options]="attribute.values"></p-dropdown>
-                      <label for="float-label">{{ attribute.vehicleAttributeName }}</label>
+                      <p-dropdown class="p-inputtext-lg" placeholder="Select {{ attribute.attribute_name }}" [options]="getOptions(attribute)" ></p-dropdown>
+                      <label for="float-label">{{ attribute.attribute_name }}</label>
                     </span>
                   </div>
                 </div>

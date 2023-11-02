@@ -9,7 +9,7 @@ import { GetVehicleTypeAttributeDto } from './dto/get-vehicle-type-attribute.dto
 import { AuthGuard } from '@nestjs/passport';
 
 @Controller('vehicle-type-attribute')
-@UseGuards(AuthGuard())
+// @UseGuards(AuthGuard())
 export class VehicleTypeAttributeController {
     constructor( private vehicleTypeAttributeService: VehicleTypeAttributeService )
     {}
@@ -26,7 +26,7 @@ export class VehicleTypeAttributeController {
     }
 
     @Get('/:vehicleTypeId')
-    getVehicleAttributeById(@Param('vehicleTypeId') vehicleTypeId: number): Promise<GetVehicleTypeAttributeDto[]>{
+    getVehicleAttributeById(@Param('vehicleTypeId') vehicleTypeId: number): Promise<VehicleTypeAttribute[]>{
         return this.vehicleTypeAttributeService.getVehicleAttributeById(vehicleTypeId);
     }
 

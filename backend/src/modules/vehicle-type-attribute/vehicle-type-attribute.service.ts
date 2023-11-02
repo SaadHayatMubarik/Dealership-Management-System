@@ -67,13 +67,14 @@ export class VehicleTypeAttributeService {
     return result ;
     }
 
-    async getVehicleAttributeById(vehicleTypeId: number): Promise<GetVehicleTypeAttributeDto[]>{
-        const getValue =await this.multiValueAttributeRepository.createQueryBuilder('multiValueAttribute')
-        .leftJoin(VehicleTypeAttribute, 'vehicleTypeAttribute' ,'multiValueAttribute.vehicleTypeAttributeAttributeId = vehicleTypeAttribute.attribute_id')
-        .leftJoin(VehicleType, 'vehicleType', 'vehicleTypeAttribute.vehicleTypeTypeId = vehicleType.type_id ')
-        .select(['vehicleType.type_name as vehicleTypeName', 'vehicleTypeAttribute.attribute_name as vehicleAttributeName', 'multiValueAttribute.attribute_value as vehicleAttributeValue', 'vehicleTypeAttribute.input_type as attributeInputType'])
-        .where('vehicleType.type_id = :vehicleTypeId', { vehicleTypeId })
-        .getRawMany();
+    async getVehicleAttributeById(vehicleTypeId: number): Promise<VehicleTypeAttribute[]>{
+        let getValue =await this.vehicleTypeAttributeRepository.find({
+            relations: ['multiValueAttributes'], // Specify the name of the relationship property
+          });
+
+        console.log('====================================');
+        console.log(getValue);
+        console.log('====================================');
 
         return getValue
     }

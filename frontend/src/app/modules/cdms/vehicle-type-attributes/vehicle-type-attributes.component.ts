@@ -62,7 +62,8 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
 
   {
     this.getVehicleTypeAttribute();
-    this.vehicleTypes= this.apiService.getVehicleTypes();
+    // this.vehicleTypes= this.apiService.getVehicleTypes();
+    this.getVehicleTypes();
     
 
     
@@ -144,6 +145,7 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
             this.resetForm();
             this.closeModal();
            this.toastService.showSuccess('New vehicle type attribute created.')
+           this.getVehicleTypeAttribute();
           },
           error: () => {
            this.toastService.showError();
@@ -153,7 +155,14 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
   }
 
 
-
+  getVehicleTypes() {
+    this.apiService.get('/vehicle-type/getVehicleType').subscribe({
+      next: (response: IObject[]) => {
+        this.vehicleTypes = response;
+      },
+      error: () => {},
+    });
+  }
 }
 
 

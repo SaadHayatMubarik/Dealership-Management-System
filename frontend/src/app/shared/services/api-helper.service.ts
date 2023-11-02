@@ -62,13 +62,8 @@ export class ApiHelperService {
 
   private vehicleTypes: any[] = [];
 
-setVehicleTypes(data: any) {
-  this.vehicleTypes = data;
-}
 
-getVehicleTypes() {
-  return this.vehicleTypes;
-}
+
 
 
 }
