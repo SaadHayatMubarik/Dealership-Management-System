@@ -33,6 +33,7 @@ export class ApiHelperService {
   }
 
   post(path: string, body: Object = {}): Observable<any> {
+    // console.log(body);
     return this.http
       .post(`${environment.apiUrl}${path}`, body)
       .pipe(this.hookResponse(this));
