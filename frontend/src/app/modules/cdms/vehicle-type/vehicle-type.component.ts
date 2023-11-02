@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from 'src/app/shared/base.component';
-import { takeUntil } from 'rxjs/operators';
-import { Output, EventEmitter } from '@angular/core';
+
 
 import {
   DataTableColumn,
@@ -55,10 +54,12 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
         icon: 'pi pi-trash',
         command: (event) => {
           this.selectedVehicleTypeId = event.type_id;
-          this.dialogService.confirm('Delete Record', 'Are you sure you want to delete this record?').then((confirmed) => 
-             { if (confirmed) {
+          
+
               this.apiService.delete(`/inventory/${this.selectedVehicleTypeId }`).subscribe({
                 next: (response) => {
+                  console.log(this.selectedVehicleTypeId);  
+                  this.getVehicleType();
                   this.toast.showSuccess( "Vehicle Type Deleted.");
                 },
                 error: () => 
@@ -67,12 +68,7 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
                 }
               }
                 );
-              }
-              else{
-                  this.toast.showInfo('Record not deleted.')
-              }
-            }
-             )
+
 
          
         },

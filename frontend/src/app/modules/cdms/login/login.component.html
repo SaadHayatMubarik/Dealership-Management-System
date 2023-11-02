@@ -1,3 +1,4 @@
+<p-toast position="top-center"></p-toast>
 
 <div class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
     <div class="flex flex-column align-items-center justify-content-center">
@@ -9,7 +10,7 @@
                     <span class="text-600 font-medium">Sign in to continue</span>
                 </div>
 
-               
+               <form (ngSubmit)="onLogin()" #login="ngForm">
                 <div>
                     <label for="username" class="block text-900 text-xl font-medium mb-2">Username</label>
                     <input type="text" 
@@ -21,6 +22,7 @@
                      minlength="4"
                      maxlength="20"
                      required
+                     [(ngModel)]="userData.username"
                      />
 
 
@@ -30,9 +32,11 @@
                     placeholder="Enter password" 
                     styleClass="mb-5" 
                     inputStyleClass="w-full p-3 md:w-30rem"
-                    pattern="/((?=.\d)|(?=.*W+))(?![.\n])(?=.[A-Z])(?=.[a-z]).$/"
+                    pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
                     required
-                    [toggleMask]="true">
+                    [toggleMask]="true"
+                    [(ngModel)]="userData.password">
+
                    </p-password>
                     
                     <div class="flex align-items-center justify-content-between mb-5 gap-5">
@@ -42,8 +46,14 @@
                         </div>
                         <a class="font-medium no-underline ml-2 text-right cursor-pointer" style="color: var(--primary-color)">Forgot password?</a>
                     </div>
-                    <button pButton pRipple label="Sign In" class="w-full p-3 text-x1" ></button>
+                    <button 
+                    pButton 
+                    pRipple 
+                    label="Sign In" 
+                    class="w-full p-3 text-x1" 
+                    type="submit"></button>
                 </div>
+            </form>
            
             </div>
         </div>

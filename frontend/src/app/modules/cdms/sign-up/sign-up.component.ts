@@ -17,7 +17,9 @@ import { ISignUp } from '../../interfaces';
 })
 export class SignUpComponent  {
 
-  userRoles: any[] = ["ADMIN"];
+  userRoles:  any[] = ['ADMIN'];
+  selectedRole: any;
+
  
   
  
@@ -25,7 +27,7 @@ export class SignUpComponent  {
     username: '',
     password:'',
     email: '',
-    role: ''
+    role: '',
   };
 
   @ViewChild ('f') signupForm!:NgForm;
@@ -44,18 +46,20 @@ export class SignUpComponent  {
   {
     if(this.signupForm.valid && this.signupForm.value.password === this.signupForm.value.confirmPassword)
     {
+      
       this.apiService.post('/auth/signUp',this.createUser).subscribe({
         next: (response) => {
+          this.signupForm.resetForm();
          this.toast.showSuccess('User Created');
          setTimeout(() => {
           this.router.navigate(['/login']);
         }, 1000);
-         this.signupForm.resetForm();
         },
         error: () => {
           this.toast.showError();
          setTimeout(() => {
           this.router.navigate(['/not-found']);
+         
         }, 2000);
         },
       });
@@ -63,24 +67,11 @@ export class SignUpComponent  {
    
     else if(this.signupForm.value.password !== this.signupForm.value.confirmPassword)
     this.toast.showInfo('Password Mismatched, Confirm Password Again.');
+    this.signupForm.value.confirmPassword = '';
   }
 
 
-  login(){
-   this.apiService.post('/auth/signUp',this.createUser)
-        .subscribe({
-          next: (response) => {
-           console.log("posted");
-           this.router.navigate(['/login']);
-          },
-          error: () => {
-            console.log("error");
-          },
-       
-        });
-        // console.log(this.createUser);
-    }
-
+ 
 
   }
 

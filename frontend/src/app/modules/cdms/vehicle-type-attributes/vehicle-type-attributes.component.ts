@@ -93,25 +93,24 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
         icon: 'pi pi-trash',
         command: (event) => {
           this.selectedVehicleTypeAttributeName = event.vehicleAttributeName;
-             this.dialogService.confirm('Delete Record', 'Are you sure you want to delete this record?').then((confirmed) => 
-             { if (confirmed) {
+           
               this.apiService.delete(`/vehicle-type-attribute/${this.selectedVehicleTypeAttributeName}`).subscribe({
                 next: (response) => {
+                  this.getVehicleTypes();
+                  this.getVehicleTypeAttribute();
                   this.toastService.showSuccess( `${this.selectedVehicleTypeAttributeName} attribute deleted.`);
+                  console.log("Deleted")
                 },
                 error: () => 
                 {
                   this.toastService.showError();
+                  console.log("error")
                 }
               }
                 );
               }
-              else{
-                  this.toastService.showInfo('Record not deleted.')
-              }
-            }
-             )}, 
-        },  
+             
+            },
       {
         label: 'Update',
         icon: 'pi pi-file-edit',

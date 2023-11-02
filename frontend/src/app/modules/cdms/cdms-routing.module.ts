@@ -9,6 +9,7 @@ import { AppLayoutComponent } from 'src/app/shared/layout/app.layout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AccessDeniedComponent } from './access-denied/access-denied.component';
 
 
 
@@ -28,6 +29,10 @@ const routes: Routes = [
       {
         path:'not-found',
         component: PageNotFoundComponent
+      },
+      {
+        path:'access-denied',
+        component: AccessDeniedComponent
       },
   
     ],

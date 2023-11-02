@@ -24,10 +24,33 @@ export class LoginComponent{
   @ViewChild ('login') loginForm!:NgForm;
 
   constructor(private readonly apiService: ApiHelperService ,
-    private router: Router, 
-    private toast: ToastService) { }
+    private router:Router, 
+    private toast:ToastService) { }
 
-    
+    onLogin()
+    {
+      if(this.loginForm.valid)
+      {
+        this.apiService.post('/auth/login',this.userData).subscribe({
+          next: (response) => {
+           this.toast.showSuccess('WELCOME');
+           setTimeout(() => {
+            this.router.navigate(['/dashboard']);
+          }, 1000);
+           this.loginForm.resetForm();
+          },
+          error: () => {
+            this.toast.showError('Access Denied');
+           setTimeout(() => {
+            this.router.navigate(['/access-denied']);
+          }, 2000);
+          },
+        });
+      }
+    }
+
+   
+  
     
 
 

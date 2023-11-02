@@ -68,8 +68,9 @@ export class VehicleTypeAttributeService {
     }
 
     async getVehicleAttributeById(vehicleTypeId: number): Promise<VehicleTypeAttribute[]>{
-        let getValue =await this.vehicleTypeAttributeRepository.find({
-            relations: ['multiValueAttributes'], // Specify the name of the relationship property
+        let getValue =await this.vehicleTypeAttributeRepository.find({ 
+            relations: ['multiValueAttributes'],
+            where: { vehicleType: await this.vehicleTypeRepository.find({ where: { type_id:vehicleTypeId } }) } // Specify the name of the relationship property
           });
 
         console.log('====================================');

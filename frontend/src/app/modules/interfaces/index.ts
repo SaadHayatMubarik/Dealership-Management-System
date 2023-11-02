@@ -2,7 +2,7 @@ export interface ISignUp{
     username: string;
     email: string;
     password: string;
-    role: any;
+    role: string;
 }
 
 export interface Ilogin{

@@ -15,23 +15,6 @@ export class BaseComponent {
   _defaultPageSize = 10;
 
 
-  // private _currentSort: IDataTableSortChangeEvent | null = null;
-
-  // get currentSort() {
-  //   let order = null;
-  //   if (typeof this._currentSort?.order == 'string') {
-  //     order = this._currentSort?.order as sortOrder;
-  //   }
-
-  //   order =
-  //     this._currentSort?.order && this._currentSort.order > 0 ? 'ASC' : 'DESC';
-
-  //   return { order: order as sortOrder, field: this._currentSort?.field };
-  // }
-
-  // set currentSort(data: IDataTableSortChangeEvent) {
-  //   this._currentSort = data;
-  // }
 
   dataTableSelectedFilters: IDataTableFilterChangeEvent[] = [];
 
@@ -89,7 +72,6 @@ export class BaseComponent {
     filter = '',
     currentPage: IDataTablePageChangeEvent = this.currentPage,
     filterInclude: string[] = this.include,
-    // currentSort = this.currentSort,
     dataTableFilter: string = this.mergeFilterParams(
       this.dataTableSelectedFilters
     ),
@@ -115,8 +97,7 @@ export class BaseComponent {
     }
 
     if (currentPage) {
-      // pageParam = pageParam !== '' ? `${pageParam}&` : '';
-      // pageParam += `pageNumber=${currentPage.pageNumber}&pageSize=${currentPage.pageSize}`;
+      
       pageParam = pageParam !== '' ? `${pageParam}&` : '';
       pageParam += `skip=${(currentPage.pageNumber - 1) * currentPage.pageSize
         }&top=${this.pageSize}`;
@@ -131,12 +112,7 @@ export class BaseComponent {
       pageParam += `include=${filterInclude}`;
     }
 
-    // if (currentSort?.field && currentSort?.order) {
-    //   pageParam = pageParam !== '' ? `${pageParam}&` : '';
-    //   pageParam += `orderBy=${currentSort?.field}`;
-    //   pageParam = pageParam !== '' ? `${pageParam}&` : '';
-    //   pageParam += `orderType=${currentSort?.order}`;
-    // }
+   
 
     return pageParam !== '' ? `?${pageParam}` : '';
   }
