@@ -8,6 +8,7 @@ import {  NgForm } from '@angular/forms';
 
 
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -19,13 +20,15 @@ export class LoginComponent{
   {
     username:'',
     password:'',
+    rememberMe:false,
   }
 
   @ViewChild ('login') loginForm!:NgForm;
 
   constructor(private readonly apiService: ApiHelperService ,
     private router:Router, 
-    private toast:ToastService) { }
+    private toast:ToastService,
+     ) { }
 
     onLogin()
     {
@@ -33,7 +36,11 @@ export class LoginComponent{
       {
         this.apiService.post('/auth/login',this.userData).subscribe({
           next: (response) => {
-           this.toast.showSuccess('WELCOME');
+          console.log(response);
+          // const jwtToken = response.accessToken;
+          // localStorage.setItem('jwtToken', jwtToken);
+           
+          this.toast.showSuccess('WELCOME');
            setTimeout(() => {
             this.router.navigate(['/dashboard']);
           }, 1000);

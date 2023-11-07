@@ -24,7 +24,7 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
   };
   
 
-  selectedVehicleTypeId : number = 0;
+  selectedVehicleTypeName: string = '';
 
   columns: DataTableColumn[] = [];
   actions: IDataTableAction[] = [];
@@ -53,12 +53,12 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
         label: ' Delete',
         icon: 'pi pi-trash',
         command: (event) => {
-          this.selectedVehicleTypeId = event.type_id;
+          this.selectedVehicleTypeName = event.type_name;
           
 
-              this.apiService.delete(`/inventory/${this.selectedVehicleTypeId }`).subscribe({
+              this.apiService.delete(`/vehicle-type/${this.selectedVehicleTypeName }`).subscribe({
                 next: (response) => {
-                  console.log(this.selectedVehicleTypeId);  
+                  console.log(this.selectedVehicleTypeName);  
                   this.getVehicleType();
                   this.toast.showSuccess( "Vehicle Type Deleted.");
                 },
@@ -101,7 +101,6 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
   getVehicleType() {
     this.apiService.get('/vehicle-type/getVehicleType').subscribe((data) => {
       this.data = data;
-      // this.apiService.setVehicleTypes(data);
     });
   }
 
