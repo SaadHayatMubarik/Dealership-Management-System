@@ -29,11 +29,11 @@ export class VehicleTypeAttribute {
 
      // @Column()
      // type_name: VehicleType;
-     @OneToMany(() => StockAttributeValue, (stockAttributeValue) => stockAttributeValue.vehicleTypeAttribute,{
-          onDelete: 'CASCADE',
-          onUpdate: 'CASCADE'
-      })
-     stockAttributeValue: StockAttributeValue[];
+     // @OneToMany(() => StockAttributeValue, (stockAttributeValue) => stockAttributeValue.vehicleTypeAttribute,{
+     //      onDelete: 'CASCADE',
+     //      onUpdate: 'CASCADE'
+     //  })
+     // stockAttributeValue: StockAttributeValue[];
 
      
 }

@@ -33,6 +33,7 @@ export class LoginComponent{
       {
         this.apiService.post('/auth/login',this.userData).subscribe({
           next: (response) => {
+            console.log(response); // display access token
            this.toast.showSuccess('WELCOME');
            setTimeout(() => {
             this.router.navigate(['/dashboard']);

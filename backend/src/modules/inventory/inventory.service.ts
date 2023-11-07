@@ -25,7 +25,7 @@ export class InventoryService {
         inventory.price = costPrice;
         inventory.demand = demand;
         inventory.date_of_purchase = dateOfPurchase;
-        inventory.date_sold = dateOfSale;
+        inventory.date_of_sale = dateOfSale;
         inventory.color = bodyColor.toUpperCase();
         inventory.engine_no = engineNo.toUpperCase();
         inventory.comments = comments.toUpperCase();

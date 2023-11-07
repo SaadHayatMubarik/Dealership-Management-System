@@ -9,7 +9,7 @@ export class MultiValueAttribute{
     @PrimaryGeneratedColumn()
     multi_value_id: number;
 
-    @Column()
+    @Column({ nullable: true })
     attribute_value: string;
 
     // @Column()

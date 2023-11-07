@@ -35,7 +35,7 @@ demand: number;
 date_of_purchase: string;
 
 @Column({ nullable: true })
-date_sold: string;
+date_of_sale: string;
 
 @Column({ type:"enum", enum: InventoryStatus, default: InventoryStatus.AVAILABLE })
 status: InventoryStatus;

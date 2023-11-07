@@ -38,7 +38,7 @@ export class StockAttributeValueService {
         .select('vehicleTypeAttribute.attribute_id')
         .where('vehicleTypeAttribute.attribute_name = :attributeName', { attributeName })
         .getOne();
-        stockAttributeValue.vehicleTypeAttribute = attributeId;
+        // stockAttributeValue.vehicleTypeAttribute = attributeId;
         
         const queryBuilderThree = this.inventoryRepository.createQueryBuilder('inventory');
         const inventoryId = await queryBuilderThree
