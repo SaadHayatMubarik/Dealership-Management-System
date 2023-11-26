@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { StockAttributeValue } from './entities/Stock-attribute-value';
 import { Repository } from 'typeorm';
-import { MultiValueAttribute } from '../multi-value-attribute/entities/Multi-value-attribute';
 import { StockAttributeValueDto } from './dto/stock-attribute-value.dto';
-import { Inventory } from '../inventory/entities/Inventory';
-import { VehicleTypeAttribute } from '../vehicle-type-attribute/entities/Vehicle-type-attribute';
+// import { Inventory } from '../inventory/entities/Inventory';
+import { StockAttributeValue } from './entity/Stock-attribute-value';
+import { VehicleTypeAttribute } from '../vehicle-type-attribute/entity/Vehicle-type-attribute';
+import { MultiValueAttribute } from '../multi-value-attribute/entity/Multi-value-attribute';
+import { Inventory } from '../inventory/entity/Inventory';
 
 @Injectable()
 export class StockAttributeValueService {
@@ -30,7 +31,6 @@ export class StockAttributeValueService {
         .select('multiValueAttribute.multi_value_id')
         .where('multiValueAttribute.attribute_value = :attributeValue', { attributeValue })
         .getOne();
-        // console.log(multiValueId);
         stockAttributeValue.multiValueAttribute = multiValueId;
 
         const queryBuilderTwo = this.vehicleTypeAttributeRepository.createQueryBuilder('vehicleTypeAttribute');
@@ -38,13 +38,11 @@ export class StockAttributeValueService {
         .select('vehicleTypeAttribute.attribute_id')
         .where('vehicleTypeAttribute.attribute_name = :attributeName', { attributeName })
         .getOne();
-        // stockAttributeValue.vehicleTypeAttribute = attributeId;
-        
+
         const queryBuilderThree = this.inventoryRepository.createQueryBuilder('inventory');
         const inventoryId = await queryBuilderThree
       .select('COUNT(inventory.inventory_id)' , 'inventory_id')
       .getRawOne();
-    //   console.log(inventoryId);
       stockAttributeValue.inventory = inventoryId;
         await this.stockAttributeValueRepository.save(stockAttributeValue);
         return stockAttributeValue;
@@ -58,6 +56,5 @@ export class StockAttributeValueService {
         .where('stockAttributeValue.inventoryInventoryId = :inventoryId', { inventoryId })
         .getMany();
         return
-        // stockAttributeValue.vehicleTypeAttribute = attributeId;
     }
 }

@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
 import { InventoryController } from './inventory.controller';
-import { Inventory } from './entities/Inventory';
+// import { Inventory } from './entities/Inventory';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { InventoryService } from './inventory.service';
+import { Inventory } from './entity/Inventory';
+// import { Showroom } from '../showroom/entity/Showroom';
 // import { VehicleType } from '../vehicle-type/Vehicle-type';
 // import { VehicleTypeModule } from '../vehicle-type/vehicle-type.module';
 @Module({

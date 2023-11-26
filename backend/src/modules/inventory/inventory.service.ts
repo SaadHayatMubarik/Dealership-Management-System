@@ -1,9 +1,10 @@
 import { ConsoleLogger, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Inventory } from './entities/Inventory';
+// import { Inventory } from './entities/Inventory';
 import { Repository } from 'typeorm';
 import { InventoryDto } from './dto/inventory.dto';
 import { InventoryStatus } from './inventory-status.enum';
+import { Inventory } from './entity/Inventory';
 
 @Injectable()
 export class InventoryService {

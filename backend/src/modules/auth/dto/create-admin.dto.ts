@@ -1,8 +1,7 @@
-import { IsNotEmpty,IsString, MinLength, MaxLength, IsEnum, Matches} from "class-validator";
+import { IsNotEmpty,IsString, MinLength, MaxLength, IsEnum, Matches, Length} from "class-validator";
 import { UserRole } from "../user-role.enum";
-import { Showroom } from "src/modules/showroom/entity/Showroom";
 // import { isString } from "util";
-export class CreateUserDto {
+export class CreateAdminDto {
     @IsString()
     @IsNotEmpty()
     @MinLength(4)
@@ -22,8 +21,23 @@ export class CreateUserDto {
     password: string;
 
     // @IsEnum({type:"enum", enum: UserRole, default: UserRole.EMPLOYEE})
-    role: UserRole;
+    // role: UserRole;
 
-    showroomId: number;
+    @IsNotEmpty()
+    @IsString()
+    showroomName: string;
+    
+    @IsNotEmpty()
+    showroomAddress: string;
+
+    @IsNotEmpty()
+    showroomCity: string;
+
+    @IsNotEmpty()
+    showroomState: string;
+
+    @IsNotEmpty()
+    @Length(11)
+    showroomContactNo: string;
     
 }

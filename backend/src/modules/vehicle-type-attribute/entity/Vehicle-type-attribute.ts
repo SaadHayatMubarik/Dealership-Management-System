@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany, JoinColumn} from "typeorm";
-import { VehicleType } from "../../vehicle-type/entities/Vehicle-type";
-import { MultiValueAttribute } from "../../multi-value-attribute/entities/Multi-value-attribute";
-import { StockAttributeValue } from "../../stock-attribute-value/entities/Stock-attribute-value";
+import { VehicleType } from "../../vehicle-type/entity/Vehicle-type";
+import { MultiValueAttribute } from "../../multi-value-attribute/entity/Multi-value-attribute";
+import { StockAttributeValue } from "../../stock-attribute-value/entity/Stock-attribute-value";
 
 @Entity({ name: 'Vehicle_Type_Attribute' })
 export class VehicleTypeAttribute {
@@ -17,14 +17,12 @@ export class VehicleTypeAttribute {
      // @Column()
      // type_name: string;  
 
-     @OneToMany(() => MultiValueAttribute, (multiValueAttribute) => multiValueAttribute.vehicleTypeAttribute,{
-          onDelete: 'CASCADE',
-          onUpdate: 'CASCADE'
-      })
+     @OneToMany(() => MultiValueAttribute, (multiValueAttribute) => multiValueAttribute.vehicleTypeAttribute)
      @JoinColumn()
      multiValueAttributes: MultiValueAttribute[];
 
-     @ManyToOne(() => VehicleType, (vehicleType) => vehicleType.vehicleTypeAttributes, {cascade:true})
+     @ManyToOne(() => VehicleType, (vehicleType) => vehicleType.vehicleTypeAttributes)
+     @JoinColumn()
      vehicleType: VehicleType;
 
      // @Column()
