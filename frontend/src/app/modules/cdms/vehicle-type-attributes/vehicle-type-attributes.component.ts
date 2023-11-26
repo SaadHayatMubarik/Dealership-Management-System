@@ -6,6 +6,7 @@ import { ToastService } from 'src/app/shared/services/toast.service';
 
 
 
+
 import {
   DataTableColumn,
   IDataTableAction,
@@ -16,7 +17,8 @@ import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
 @Component({
   selector: 'app-vehicle-type-attributes',
   templateUrl: './vehicle-type-attributes.component.html',
-  styleUrls: ['./vehicle-type-attributes.component.css']
+  styleUrls: ['./vehicle-type-attributes.component.css'],
+
 })
 export class VehicleTypeAttributesComponent  extends BaseComponent implements OnInit {
 
@@ -31,18 +33,14 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
 
 
   vehicleTypes: any[] = [];
-  selectedVehicleTypeAttributeName: any; //saving vehicle type attribute name
-  
- 
-  // vehicleTypeinput: { label: string, value: number }[] = [];
-  
-
+  selectedVehicleTypeAttributeName: any; 
+  inputTypes: any[] = ['TEXT', 'NUMBER', 'DATE', 'DROPDOWN'];
   
   
   columns: DataTableColumn[] = [];
   actions: IDataTableAction[] = [];
   data: IObject[] = [];
-  inputTypes: any[] = ['TEXT', 'NUMBER', 'DATE', 'DROPDOWN'];
+  
 
 
  
@@ -61,13 +59,13 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
   ngOnInit() 
 
   {
+
+    
+      
+    this.getVehicleTypes(); 
     this.getVehicleTypeAttribute();
-    // this.vehicleTypes= this.apiService.getVehicleTypes();
-    this.getVehicleTypes();
+   
     
-
-    
-
    this.columns = [ 
     {
       field: 'vehicleTypeName',
@@ -99,12 +97,10 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
                   this.getVehicleTypes();
                   this.getVehicleTypeAttribute();
                   this.toastService.showSuccess( `${this.selectedVehicleTypeAttributeName} attribute deleted.`);
-                  console.log("Deleted")
                 },
                 error: () => 
                 {
                   this.toastService.showError();
-                  console.log("error")
                 }
               }
                 );
@@ -114,7 +110,7 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
       {
         label: 'Update',
         icon: 'pi pi-file-edit',
-        command: () => {
+        command: (event) => {
           ;
         },
       },
@@ -122,11 +118,17 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
   }
 
   
-  resetForm() {
-    this.vehicleTypeAttribute.vehicleAttributeName = "";
-    this.vehicleTypeAttribute.attributeInputType = '';
-    this.vehicleTypeAttribute.vehicleAttributeValue = [];
-    this.vehicleTypeAttribute.vehicleType = '';
+
+
+  getVehicleTypes() {
+    this.apiService.get('/vehicle-type/getVehicleType').subscribe({
+      next: (response: IObject[]) => {
+        this.vehicleTypes = response;
+      },
+      error: () => {
+        this.toastService.showError();
+      },
+    });
   }
 
   getVehicleTypeAttribute(){
@@ -134,7 +136,16 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
       this.data = data;
     });
   }
+
  
+ 
+  resetForm() {
+    this.vehicleTypeAttribute.vehicleAttributeName = "";
+    this.vehicleTypeAttribute.attributeInputType = '';
+    this.vehicleTypeAttribute.vehicleAttributeValue = [];
+    this.vehicleTypeAttribute.vehicleType = '';
+  }
+
   saveVehicleTypeAttribute() {
     if (this.vehicleTypeAttribute.vehicleAttributeName !== '') {
       this.apiService
@@ -154,14 +165,7 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
   }
 
 
-  getVehicleTypes() {
-    this.apiService.get('/vehicle-type/getVehicleType').subscribe({
-      next: (response: IObject[]) => {
-        this.vehicleTypes = response;
-      },
-      error: () => {},
-    });
-  }
+
 }
 
 

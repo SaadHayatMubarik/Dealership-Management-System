@@ -17,7 +17,7 @@ import { ISignUp } from '../../interfaces';
 })
 export class SignUpComponent  {
 
-  userRoles:  any[] = ['ADMIN'];
+  userRoles:  any[] = ['Employee'];
   selectedRole: any;
 
  
@@ -49,7 +49,6 @@ export class SignUpComponent  {
       
       this.apiService.post('/auth/signUp',this.createUser).subscribe({
         next: (response) => {
-          this.signupForm.resetForm();
          this.toast.showSuccess('User Created');
          setTimeout(() => {
           this.router.navigate(['/login']);
@@ -69,9 +68,6 @@ export class SignUpComponent  {
     this.toast.showInfo('Password Mismatched, Confirm Password Again.');
     this.signupForm.value.confirmPassword = '';
   }
-
-
- 
 
   }
 

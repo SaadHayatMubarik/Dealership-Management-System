@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { ToastService } from './toast.service';
-// import { VehicleTypeDto } from '../../../../../backend/src/modules/vehicle-type/vehicle-type.dto'
+
 @Injectable({
   providedIn: 'root',
 })
@@ -33,7 +33,6 @@ export class ApiHelperService {
   }
 
   post(path: string, body: Object = {}): Observable<any> {
-    // console.log(body);
     return this.http
       .post(`${environment.apiUrl}${path}`, body)
       .pipe(this.hookResponse(this));

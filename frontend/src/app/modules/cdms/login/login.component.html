@@ -41,7 +41,7 @@
                     
                     <div class="flex align-items-center justify-content-between mb-5 gap-5">
                         <div class="flex align-items-center">
-                            <p-checkbox id="rememberme"  styleClass="mr-2" [binary]="true" inputId="binary"></p-checkbox>
+                            <p-checkbox id="rememberme" name="rememberMe" styleClass="mr-2" [binary]="true" [(ngModel)]="userData.rememberMe" inputId="binary"></p-checkbox>
                             <label for="rememberme">Remember me</label>
                         </div>
                         <a class="font-medium no-underline ml-2 text-right cursor-pointer" style="color: var(--primary-color)">Forgot password?</a>
@@ -51,6 +51,7 @@
                     pRipple 
                     label="Sign In" 
                     class="w-full p-3 text-x1" 
+                    [disabled]="!login.valid"
                     type="submit"></button>
                 </div>
             </form>
