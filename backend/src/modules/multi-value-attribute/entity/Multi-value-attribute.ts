@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany, JoinColumn } from "typeorm";
 // import { VehicleType } from "./Vehicle-type";
-import { VehicleTypeAttribute } from "../../vehicle-type-attribute/entities/Vehicle-type-attribute";
-import { StockAttributeValue } from "../../stock-attribute-value/entities/Stock-attribute-value";
+import { VehicleTypeAttribute } from "../../vehicle-type-attribute/entity/Vehicle-type-attribute";
+import { StockAttributeValue } from "../../stock-attribute-value/entity/Stock-attribute-value";
 
 @Entity({ name: 'Multi_Value_Attribute' })
 export class MultiValueAttribute{
@@ -9,13 +9,11 @@ export class MultiValueAttribute{
     @PrimaryGeneratedColumn()
     multi_value_id: number;
 
-    @Column()
+    @Column({ nullable: true })
     attribute_value: string;
 
-    // @Column()
-    // attribute_name: string;
 
-    @ManyToOne(() => VehicleTypeAttribute, (vehicleTypeAttribute) => vehicleTypeAttribute.multiValueAttributes, {cascade:true})
+    @ManyToOne(() => VehicleTypeAttribute, (vehicleTypeAttribute) => vehicleTypeAttribute.multiValueAttributes)
     @JoinColumn()
     vehicleTypeAttribute: VehicleTypeAttribute;
 

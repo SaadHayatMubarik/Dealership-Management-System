@@ -1,12 +1,9 @@
 import { Body, Controller, Delete, Get, Param, Post, UsePipes, ValidationPipe, UseGuards } from '@nestjs/common';
 import { VehicleTypeAttributeService } from './vehicle-type-attribute.service';
-import { VehicleTypeAttribute } from './entities/Vehicle-type-attribute';
-import { VehicleType } from '../vehicle-type/entities/Vehicle-type';
-// import { GetVehicleTypeAttributeDto } from './dto/get-vehicle-type-attribute.dto';
 import { VehicleTypeAttributeDto } from './dto/vehicle-type-attribute.dto';
-import { MultiValueAttribute } from '../multi-value-attribute/entities/Multi-value-attribute';
 import { GetVehicleTypeAttributeDto } from './dto/get-vehicle-type-attribute.dto';
 import { AuthGuard } from '@nestjs/passport';
+import { VehicleTypeAttribute } from './entity/Vehicle-type-attribute';
 
 @Controller('vehicle-type-attribute')
 // @UseGuards(AuthGuard())

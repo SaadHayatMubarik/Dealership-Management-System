@@ -41,6 +41,7 @@ export class LoginComponent{
           // localStorage.setItem('jwtToken', jwtToken);
            
           this.toast.showSuccess('WELCOME');
+
            setTimeout(() => {
             this.router.navigate(['/dashboard']);
           }, 1000);

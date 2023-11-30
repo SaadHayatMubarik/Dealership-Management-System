@@ -1,8 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn, OneToOne, OneToMany } from "typeorm";
-import { VehicleType } from "../../vehicle-type/entities/Vehicle-type";
-import { StockAttributeValue } from "../../stock-attribute-value/entities/Stock-attribute-value";
+import { Column, Entity, PrimaryGeneratedColumn, OneToOne, OneToMany, ManyToOne, ManyToMany } from "typeorm";
+import { VehicleType } from "../../vehicle-type/entity/Vehicle-type";
+import { StockAttributeValue } from "../../stock-attribute-value/entity/Stock-attribute-value";
 import { InventoryStatus } from "../inventory-status.enum";
-
 
 @Entity({ name: 'inventory' })
 export class Inventory {
@@ -35,7 +34,7 @@ demand: number;
 date_of_purchase: string;
 
 @Column({ nullable: true })
-date_sold: string;
+date_of_sale: string;
 
 @Column({ type:"enum", enum: InventoryStatus, default: InventoryStatus.AVAILABLE })
 status: InventoryStatus;
@@ -55,11 +54,12 @@ grade: number;
 @Column({ nullable: true })
 reg_no: string;
 
-// @Column()
-// vehicle_type_id: VehicleType;
 @OneToOne(() => VehicleType, (vehicleType) => vehicleType.inventory)
 vehicleType: VehicleType;
 
 @OneToMany(() => StockAttributeValue, (stockAttributeValue) => stockAttributeValue.inventory)
 stockAttributeValue: StockAttributeValue[];
+
+
+
 }

@@ -1,9 +1,10 @@
 import { ConsoleLogger, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Inventory } from './entities/Inventory';
+// import { Inventory } from './entities/Inventory';
 import { Repository } from 'typeorm';
 import { InventoryDto } from './dto/inventory.dto';
 import { InventoryStatus } from './inventory-status.enum';
+import { Inventory } from './entity/Inventory';
 
 @Injectable()
 export class InventoryService {
@@ -25,7 +26,7 @@ export class InventoryService {
         inventory.price = costPrice;
         inventory.demand = demand;
         inventory.date_of_purchase = dateOfPurchase;
-        inventory.date_sold = dateOfSale;
+        inventory.date_of_sale = dateOfSale;
         inventory.color = bodyColor.toUpperCase();
         inventory.engine_no = engineNo.toUpperCase();
         inventory.comments = comments.toUpperCase();

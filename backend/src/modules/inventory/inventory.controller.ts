@@ -1,9 +1,10 @@
 import { Body, Controller, Delete, Get, Param, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { InventoryService } from './inventory.service';
-import { Inventory } from './entities/Inventory';
+// import { Inventory } from './entities/Inventory';
 import { InventoryDto } from './dto/inventory.dto';
-import { VehicleType } from '../vehicle-type/entities/Vehicle-type';
+// import { VehicleType } from '../vehicle-type/entities/Vehicle-type';
 import { deepStrictEqual } from 'assert';
+import { Inventory } from './entity/Inventory';
 
 @Controller('inventory')
 export class InventoryController {

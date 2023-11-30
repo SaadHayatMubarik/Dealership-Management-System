@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { VehicleTypeAttribute } from './entities/Vehicle-type-attribute';
-import { Repository } from 'typeorm';
-import { VehicleType } from '../vehicle-type/entities/Vehicle-type';
+import { Equal, Repository } from 'typeorm';
 import { VehicleTypeAttributeDto } from './dto/vehicle-type-attribute.dto';
-import { MultiValueAttribute } from '../multi-value-attribute/entities/Multi-value-attribute';
 import { GetVehicleTypeAttributeDto } from './dto/get-vehicle-type-attribute.dto';
+import { VehicleType } from '../vehicle-type/entity/Vehicle-type';
+import { VehicleTypeAttribute } from './entity/Vehicle-type-attribute';
+import { MultiValueAttribute } from '../multi-value-attribute/entity/Multi-value-attribute';
 
 @Injectable()
 export class VehicleTypeAttributeService {
@@ -70,7 +70,7 @@ export class VehicleTypeAttributeService {
     async getVehicleAttributeById(vehicleTypeId: number): Promise<VehicleTypeAttribute[]>{
         let getValue =await this.vehicleTypeAttributeRepository.find({ 
             relations: ['multiValueAttributes'],
-            where: { vehicleType: await this.vehicleTypeRepository.find({ where: { type_id:vehicleTypeId } }) } // Specify the name of the relationship property
+            where: { vehicleType: Equal(await this.vehicleTypeRepository.find({ where: { type_id:vehicleTypeId } })) } // Specify the name of the relationship property
           });
 
         console.log('====================================');

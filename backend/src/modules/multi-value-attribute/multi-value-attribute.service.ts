@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { MultiValueAttribute } from './entities/Multi-value-attribute';
-import { Repository } from 'typeorm';
-import { VehicleTypeAttribute } from '../vehicle-type-attribute/entities/Vehicle-type-attribute';
+import { Equal, Repository } from 'typeorm';
 import { MultiValueAttributeDto } from './dto/multi-value-attribute.dto';
+import { MultiValueAttribute } from './entity/Multi-value-attribute';
+import { VehicleTypeAttribute } from '../vehicle-type-attribute/entity/Vehicle-type-attribute';
 
 
 @Injectable()
@@ -53,7 +53,7 @@ export class MultiValueAttributeService {
         
         // const attributes = await queryBuildertwo.getRawMany();
        const attributes = await this.multiValueAttributeRepository.find({ where:
-         { vehicleTypeAttribute: await this.vehicleTypeAttributeRepository.findOne({ where: { attribute_name: attributeName } }) } })
+         { vehicleTypeAttribute: Equal(await this.vehicleTypeAttributeRepository.findOne({ where: { attribute_name: attributeName } })) } })
     return attributes;
     }
 
@@ -64,7 +64,8 @@ export class MultiValueAttributeService {
     async updateMultValueAttributeByValue(updateAttributeValueDto: MultiValueAttributeDto): Promise<MultiValueAttribute>{
         const { attributeName, attributeValue, newAttributeValue } = updateAttributeValueDto;
         const attribute = await this.multiValueAttributeRepository.findOne({ where: {attribute_value: attributeValue,
-             vehicleTypeAttribute: await this.vehicleTypeAttributeRepository.findOne({ where: { attribute_name: attributeName }})}});
+             vehicleTypeAttribute:Equal(await this.vehicleTypeAttributeRepository.findOne({ where: { attribute_name: attributeName }}))
+            }});
         attribute.attribute_value = newAttributeValue;
         return await this.multiValueAttributeRepository.save(attribute);
     }
