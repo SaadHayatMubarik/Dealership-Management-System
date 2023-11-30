@@ -1,8 +1,13 @@
 export interface ISignUp{
+
     username: string;
     email: string;
     password: string;
-    role: string;
+    showroomName: string;
+    showroomCity: string;
+    showroomAddress: string;
+    showroomState: string;
+    showroomContactNo: number;
 }
 
 export interface Ilogin{

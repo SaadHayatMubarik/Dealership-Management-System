@@ -28,6 +28,8 @@ import { Tooltip, TooltipModule } from 'primeng/tooltip';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { LoginComponent } from './login/login.component';
+import { StepsModule } from 'primeng/steps';
+
 
 
 
@@ -43,7 +45,7 @@ import { LoginComponent } from './login/login.component';
     PageNotFoundComponent,
     AccessDeniedComponent,
     LoginComponent,
-  
+ 
   ],
   imports: [
     CdmsRoutingModule,
@@ -66,7 +68,9 @@ import { LoginComponent } from './login/login.component';
     FileUploadModule,
     SliderModule,
     ConfirmDialogModule,
-    TooltipModule
+    TooltipModule,
+    StepsModule,
+  
     
    
   ],

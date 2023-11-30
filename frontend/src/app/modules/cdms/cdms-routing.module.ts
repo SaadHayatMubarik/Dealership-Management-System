@@ -13,6 +13,7 @@ import { AccessDeniedComponent } from './access-denied/access-denied.component';
 
 
 
+
 const routes: Routes = [
   {
     path: '',
@@ -34,6 +35,7 @@ const routes: Routes = [
         path:'access-denied',
         component: AccessDeniedComponent
       },
+    
   
     ],
   },
