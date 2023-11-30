@@ -37,7 +37,7 @@ export class SignUpComponent  {
     email: '',
     showroomAddress:'',
     showroomCity:'',
-    showroomContactNo:'',
+    showroomContactNo:0,
     showroomName:'',
     showroomState:'',
 
@@ -121,34 +121,30 @@ export class SignUpComponent  {
   
 
 
-  onSubmit(){}
+  
 
-  // onSubmit()
-  // {
-  //   if(this.signupForm.valid && this.signupForm.value.password === this.signupForm.value.confirmPassword)
-  //   {
+  onSubmit()
+  {
+    if(this.AdminForm.valid && this.ShowroomForm.valid && this.AdminForm.value.password === this.AdminForm.value.confirmPassword)
+    {
       
-  //     this.apiService.post('/auth/signUp',this.createAdmin).subscribe({
-  //       next: (response) => {
-  //        this.toast.showSuccess('User Created');
-  //        setTimeout(() => {
-  //         this.router.navigate(['/login']);
-  //       }, 1000);
-  //       },
-  //       error: () => {
-  //         this.toast.showError();
-  //        setTimeout(() => {
-  //         this.router.navigate(['/not-found']);
-         
-  //       }, 2000);
-  //       },
-  //     });
-  //   }
+      this.apiService.post('/auth/createUser',this.createAdmin).subscribe({
+        next: (response) => {
+         this.toast.showSuccess('User Created');
+         setTimeout(() => {
+          this.router.navigate(['/login']);
+        }, 2000);
+        },
+        error: () => {
+          this.toast.showError();
+        },
+      });
+    }
    
-  //   else if(this.signupForm.value.password !== this.signupForm.value.confirmPassword)
-  //   this.toast.showInfo('Password Mismatched, Confirm Password Again.');
-  //   this.signupForm.value.confirmPassword = '';
-  // }
+    else if(this.AdminForm.value.password !== this.AdminForm.value.confirmPassword)
+    this.toast.showInfo('Password Mismatched, Confirm Password Again.');
+    this.AdminForm.value.confirmPassword = '';
+  }
 
   
 

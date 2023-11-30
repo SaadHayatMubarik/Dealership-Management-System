@@ -123,6 +123,7 @@
                     [showClear]="true"
                     placeholder="Select a State"
                     [(ngModel)]="createAdmin.showroomState"
+                    name="showroomState"
                 
                   ></p-dropdown>
                 </div>
@@ -136,13 +137,13 @@
                     >Showroom City</label
                   >
                   <p-dropdown
-                    name="cities"
+                    name="showroomCity"
                     placeholder="Select a City"
                     optionLabel="label"
                     [options]="cities"
                     optionValue="value"
                     [showClear]="true"
-                   
+                    [(ngModel)]="createAdmin.showroomCity"
                   ></p-dropdown>
                 </div>
 
@@ -236,14 +237,15 @@
         </div>
 
               <br />
-            </form>
-            <button
+              <button
               pButton
               pRipple
               label="Sign Up"
               class="w-full p-3 text-x1"
               type="submit"
             ></button>
+            </form>
+          
           </p-tabPanel>
         </p-tabView>
 
