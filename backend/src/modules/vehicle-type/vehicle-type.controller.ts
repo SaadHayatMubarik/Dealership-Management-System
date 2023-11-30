@@ -15,16 +15,17 @@ export class VehicleTypeController {
         return this.vehicleTypeService.addVehicleType(addVehicleTypeDto)
     }
 
-    @Get('getVehicleType/:showroomId')
+    @Get('/:showroomId')
     @UsePipes(new ValidationPipe())
-    getVehicleType(@Param('showroomID') showroomId: number ): Promise<VehicleType[]>{
+    getVehicleType(@Param('showroomId') showroomId: number ): Promise<VehicleType[]>{
+        // console.log( showroomId );
         return this.vehicleTypeService.getVehicleType(showroomId);
     }
 
-    @Delete('/:vehicleTypeName')
+    @Delete('/:vehicleTypeId')
     @UsePipes(new ValidationPipe())
-    deleteVehicleType(@Param('vehicleTypeName') vehicleTypeName: string){
-        return this.vehicleTypeService.deleteVehicleType(vehicleTypeName);
+    deleteVehicleType(@Param('vehicleTypeId') vehicleTypeId: number){
+        return this.vehicleTypeService.deleteVehicleType(vehicleTypeId);
     }
 
     // @Put('updateVehicleType')

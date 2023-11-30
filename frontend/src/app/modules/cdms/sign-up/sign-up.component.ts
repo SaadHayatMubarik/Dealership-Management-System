@@ -34,7 +34,7 @@ export class SignUpComponent  {
   createAdmin: ISignUp = {
     username: '',
     email: '',
-    password:'', 
+    password:'',
     showroomAddress:'',
     showroomCity:'',
     showroomContactNo:'',

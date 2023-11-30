@@ -24,9 +24,11 @@ export class VehicleTypeService {
 
     async addVehicleType (vehicleTypeDto: VehicleTypeDto): Promise<VehicleType>{
         const vehicleType = new VehicleType();
-        const {vehicleTypeName} = vehicleTypeDto;
-        if ( await this.vehicleTypeRepository.exist({ where: { type_name: vehicleTypeName } }) == false ){
+        const {vehicleTypeName, showroomId} = vehicleTypeDto;
+        // let showRoomData = await this.showroomRepository.findOne({where:{showroom_id:showroomId}});
+        if ( await this.vehicleTypeRepository.exist({ where: { type_name: vehicleTypeName, showroom: { showroom_id: showroomId }} }) == false ){
         vehicleType.type_name = vehicleTypeName;
+        vehicleType.showroom = await this.showroomRepository.findOne({ where: { showroom_id: showroomId } });
         await this.vehicleTypeRepository.save(vehicleType);
         }
         return vehicleType;
@@ -34,20 +36,20 @@ export class VehicleTypeService {
 
     async getVehicleType (showroomId: number): Promise<VehicleType[]>
     {
-        
-        const showroomObj = await this.showroomRepository.findOne({ where: { showroom_id: showroomId } });
-        return await this.vehicleTypeRepository.find({ where: { showroom: Equal(showroomObj) } });
+
+        // const showroomObj = await this.showroomRepository.findOne({ where: { showroom_id: showroomId } });
+        return await this.vehicleTypeRepository.find({ where: { showroom: { showroom_id: showroomId  } }});
                             
     }
 
-    async deleteVehicleType (vehicleTypeName: string){
+    async deleteVehicleType (vehicleTypeId: number){
         const getRecord =await this.vehicleTypeRepository.createQueryBuilder('vehicleType')
         .select('*')
-        .where('vehicleType.type_name = :vehicleTypeName',{ vehicleTypeName })
+        .where('vehicleType.type_id = :vehicleTypeId',{ vehicleTypeId })
         .getRawOne();
-        // this.multiValueAttributeRepository.delete( {vehicleTypeAttribute: await this.vehicleTypeAttributeRepository.findOne({ where: { vehicleType: getRecord } })});
+        this.multiValueAttributeRepository.delete( {vehicleTypeAttribute: Equal(await this.vehicleTypeAttributeRepository.findOne({ where: { vehicleType: getRecord } }))});
         this.vehicleTypeAttributeRepository.delete({vehicleType:getRecord});
-        return this.vehicleTypeRepository.delete({ type_name: vehicleTypeName.toLowerCase()});
+        return this.vehicleTypeRepository.delete({ type_id: vehicleTypeId});
     }
 
     // updateVehicleType (vehicleType: string){
