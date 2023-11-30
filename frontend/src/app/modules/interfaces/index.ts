@@ -7,7 +7,7 @@ export interface ISignUp{
     showroomCity: string;
     showroomAddress: string;
     showroomState: string;
-    showroomContactNo: number;
+    showroomContactNo: string;
 }
 
 export interface Ilogin{
