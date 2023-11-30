@@ -33,11 +33,11 @@ export class SignUpComponent  {
 
   createAdmin: ISignUp = {
     username: '',
-    password:'',
     email: '',
+    password:'', 
     showroomAddress:'',
     showroomCity:'',
-    showroomContactNo:0,
+    showroomContactNo:'',
     showroomName:'',
     showroomState:'',
 
@@ -128,15 +128,18 @@ export class SignUpComponent  {
     if(this.AdminForm.valid && this.ShowroomForm.valid && this.AdminForm.value.password === this.AdminForm.value.confirmPassword)
     {
       
-      this.apiService.post('/auth/createUser',this.createAdmin).subscribe({
+      this.apiService.post('/auth/signUp',this.createAdmin).subscribe({
         next: (response) => {
          this.toast.showSuccess('User Created');
+         console.log(response);
+         console.log(this.createAdmin);
          setTimeout(() => {
           this.router.navigate(['/login']);
         }, 2000);
         },
         error: () => {
-          this.toast.showError();
+          this.toast.showError( );
+          console.log(this.createAdmin);
         },
       });
     }
