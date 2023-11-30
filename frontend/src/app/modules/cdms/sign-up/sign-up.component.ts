@@ -3,10 +3,24 @@ import { Router } from '@angular/router';
 
 import {  NgForm } from '@angular/forms';
 
+
 import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
 import {  MessageService } from 'primeng/api';
 import { ISignUp } from '../../interfaces';
+
+
+interface State {
+  label: string;
+  value: string;
+}
+
+interface CityList {
+  label: string;
+  value: string;
+  
+}
+
 
 
 
@@ -17,57 +31,126 @@ import { ISignUp } from '../../interfaces';
 })
 export class SignUpComponent  {
 
-  userRoles:  any[] = ['Employee'];
-  selectedRole: any;
-
- 
-  
- 
-  createUser: ISignUp = {
+  createAdmin: ISignUp = {
     username: '',
     password:'',
     email: '',
-    role: '',
+    showroomAddress:'',
+    showroomCity:'',
+    showroomContactNo:'',
+    showroomName:'',
+    showroomState:'',
+
   };
 
-  @ViewChild ('f') signupForm!:NgForm;
+  @ViewChild ('showroomForm') ShowroomForm!:NgForm;
+  @ViewChild ('adminForm') AdminForm!:NgForm;
+  
 
   constructor(private router: Router, 
     private readonly apiService: ApiHelperService, 
     private message:MessageService, 
-    private toast:ToastService) 
+    private toast:ToastService,) 
     {
 
     }
   
 
+  states : State[] = [
+    { label: 'Sindh', value: 'Sindh' },
+    { label: 'Punjab', value: 'Punjab' },
+    { label: 'Balochistan', value: 'Balochistan' },
+    { label: 'KPK', value: 'KPK' }
+  ];
 
-  onSubmit()
-  {
-    if(this.signupForm.valid && this.signupForm.value.password === this.signupForm.value.confirmPassword)
-    {
-      
-      this.apiService.post('/auth/signUp',this.createUser).subscribe({
-        next: (response) => {
-         this.toast.showSuccess('User Created');
-         setTimeout(() => {
-          this.router.navigate(['/login']);
-        }, 1000);
-        },
-        error: () => {
-          this.toast.showError();
-         setTimeout(() => {
-          this.router.navigate(['/not-found']);
-         
-        }, 2000);
-        },
-      });
+  cities : CityList[] = [
+    { label: 'Lahore', value: 'Lahore' },
+    { label: 'Karachi', value: 'Karachi' },
+    { label: 'Multan', value: 'Multan' },
+    { label: 'Islamabad', value: 'Islamabad' }
+  ];
+
+  // citiesByState: CityList = {
+  //   Sindh: ['Karachi', 'Hyderabad', 'Sukkur'],
+  //   Punjab: ['Lahore', 'Faisalabad', 'Rawalpindi'],
+  //   Balochistan: ['Quetta', 'Gwadar', 'Khuzdar'],
+  //   KPK: ['Peshawar', 'Abbottabad', 'Swat']
+  // };
+
+
+ 
+
+  activeTabIndex = 0; // Track current active tab index
+  showSecondTab = false; // Initially disable the second tab
+
+//only number input in contact number field
+  onKeyDown(event: KeyboardEvent) {
+    const key = event.key;
+    if (key === 'Backspace' || key === 'Delete') {
+      return;
     }
-   
-    else if(this.signupForm.value.password !== this.signupForm.value.confirmPassword)
-    this.toast.showInfo('Password Mismatched, Confirm Password Again.');
-    this.signupForm.value.confirmPassword = '';
+    if (!/^\d*$/.test(key)) {
+      event.preventDefault();
+    }
   }
+
+  //populating cities dropdown based on the state selected
+  // onStateChange() {
+  //   console.log(this.createAdmin.showroomState)
+  //   if (this.createAdmin.showroomState in this.citiesByState) {
+  //     this.cities = this.citiesByState[this.createAdmin.showroomState];
+  //     console.log(this.cities)
+      
+  //   } else {
+  //     this.cities = [];
+  //   }
+  // }
+
+  //functionality when showroom form is validated and next is pressed
+  onNext(){
+  if(this.ShowroomForm.valid)
+  {
+        this.activeTabIndex = 1;
+        this.showSecondTab = true;
+  }
+
+  else {
+    this.toast.showError("Please fill all the fields");
+  }
+  }
+  
+
+
+  onSubmit(){}
+
+  // onSubmit()
+  // {
+  //   if(this.signupForm.valid && this.signupForm.value.password === this.signupForm.value.confirmPassword)
+  //   {
+      
+  //     this.apiService.post('/auth/signUp',this.createAdmin).subscribe({
+  //       next: (response) => {
+  //        this.toast.showSuccess('User Created');
+  //        setTimeout(() => {
+  //         this.router.navigate(['/login']);
+  //       }, 1000);
+  //       },
+  //       error: () => {
+  //         this.toast.showError();
+  //        setTimeout(() => {
+  //         this.router.navigate(['/not-found']);
+         
+  //       }, 2000);
+  //       },
+  //     });
+  //   }
+   
+  //   else if(this.signupForm.value.password !== this.signupForm.value.confirmPassword)
+  //   this.toast.showInfo('Password Mismatched, Confirm Password Again.');
+  //   this.signupForm.value.confirmPassword = '';
+  // }
+
+  
 
   }
 
