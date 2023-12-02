@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Ilogin } from '../../interfaces';
 
@@ -14,13 +14,24 @@ import {  NgForm } from '@angular/forms';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent{
+export class LoginComponent implements OnInit{
+
+
+  rememberMeChecked:boolean = false;
+  ngOnInit(){
+    const rememberedMeData = localStorage.getItem('userData');
+    if(rememberedMeData){
+      const data = JSON.parse(rememberedMeData);
+      this.rememberMeChecked = true;
+    }
+  }
+
 
   userData:Ilogin = 
   {
     username:'',
     password:'',
-    rememberMe:false,
+   
   }
 
   @ViewChild ('login') loginForm!:NgForm;
@@ -30,16 +41,27 @@ export class LoginComponent{
     private toast:ToastService,
      ) { }
 
+ 
+
+    
+
     onLogin()
     {
       if(this.loginForm.valid)
       {
+        if(this.rememberMeChecked)
+        {
+          localStorage.setItem('userData', JSON.stringify(this.userData));
+        }
+        else{
+          localStorage.removeItem('userData')
+        }
         this.apiService.post('/auth/login',this.userData).subscribe({
           next: (response) => {
-          console.log(response);
-          // const jwtToken = response.accessToken;
-          // localStorage.setItem('jwtToken', jwtToken);
-           
+          const jwtToken = response.accessToken;
+          const showroomId = response.showroom;
+          localStorage.setItem('jwtToken', jwtToken);
+          localStorage.setItem('Showroom Id', showroomId);
           this.toast.showSuccess('WELCOME');
 
            setTimeout(() => {
@@ -49,9 +71,6 @@ export class LoginComponent{
           },
           error: () => {
             this.toast.showError('Access Denied');
-           setTimeout(() => {
-            this.router.navigate(['/access-denied']);
-          }, 2000);
           },
         });
       }

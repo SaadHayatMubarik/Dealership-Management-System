@@ -130,14 +130,16 @@ export class SignUpComponent  {
       
       this.apiService.post('/auth/signUp',this.createAdmin).subscribe({
         next: (response) => {
-         this.toast.showSuccess('User Created');
-         console.log(response);
+         this.toast.showSuccess('User Created');       
+         console.log(this.createAdmin +"success");
          setTimeout(() => {
           this.router.navigate(['/login']);
         }, 2000);
         },
         error: () => {
-          this.toast.showError();
+          this.toast.showError( );
+          console.log(this.createAdmin+"failed");
+          
         },
       });
     }

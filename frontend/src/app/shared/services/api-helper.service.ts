@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
@@ -18,8 +18,27 @@ export class ApiHelperService {
 
   }
 
+  private addTokenHeader() : HttpHeaders{
+    const jwtToken = localStorage.getItem('jwtToken');
+
+    if (jwtToken) {
+      return new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`);
+    }
+    return new HttpHeaders();
+  }
+
+  private getRequestOptions(params: HttpParams = new HttpParams()): { headers: HttpHeaders; params: HttpParams } {
+    return {
+      headers: this.addTokenHeader() ,
+      params: params
+    };
+  }
+
+
+ 
+
   // one more layer of security can be added by encrypting request and decrypting response (weak layer)
-  get(path: string, params: HttpParams = new HttpParams()): Observable<any> {
+  get(path: string,  params: HttpParams = new HttpParams()): Observable<any> {
     return this.http
       .get(`${environment.apiUrl}${path}`, { params })
       .pipe(this.hookResponse(this));
@@ -27,33 +46,61 @@ export class ApiHelperService {
 
   put(path: string, body: Object = {}): Observable<any> {
     return this.http
-      .put(`${environment.apiUrl}${path}`, body)
+      .put(`${environment.apiUrl}${path}`, body, {headers: this.addTokenHeader()})
       .pipe(this.hookResponse(this));
 
   }
 
   post(path: string, body: Object = {}): Observable<any> {
     return this.http
-      .post(`${environment.apiUrl}${path}`, body)
+      .post(`${environment.apiUrl}${path}`, body, {headers: this.addTokenHeader()} )
       .pipe(this.hookResponse(this));
   }
 
   delete(path: string): Observable<any> {
     return this.http
-      .delete(`${environment.apiUrl}${path}`)
+      .delete(`${environment.apiUrl}${path}`, {headers: this.addTokenHeader()})
       .pipe(this.hookResponse(this));
   }
 
  
+  // hookResponse(_this: this) {
+  //   return (a: any) => {
+  //     return catchError((b: any) => {
+  //       if ([404, 500, 501, 400].indexOf(b.status) >=0 ) {
+  //         _this.toastService.showError(b.message);
+  //       } else if (b.status == 401) {
+  //         // AuthService.destroy();
+  //         // JwtService.destroy();
+  //         // this.router.navigate(['/', 'auth', 'login']);
+  //       }
+  //       return a;
+  //     })(a);
+  //   };
+  // }
+
   hookResponse(_this: this) {
     return (a: any) => {
       return catchError((b: any) => {
-        if ([404, 500, 501, 400].indexOf(b.status) >=0 ) {
-          _this.toastService.showError(b.message);
-        } else if (b.status == 401) {
-          // AuthService.destroy();
-          // JwtService.destroy();
-          // this.router.navigate(['/', 'auth', 'login']);
+        console.log(b.status);
+
+        switch (b.status) {
+          case 404:
+            this.router.navigate(['/', 'error-500']); // for time being jab tak apna nahi banwa lein
+            break;
+          case 500:
+            this.router.navigate(['/', 'error-500']);
+            break;
+          case 0:
+            this.router.navigate(['/', 'error-500']);
+            break;
+          case 401:
+            localStorage.removeItem('jwtToken');
+            this.toastService.showError('Session Expired. Please Login Again.')
+            this.router.navigate(['/login']);
+            
+            
+            break;
         }
         return a;
       })(a);
