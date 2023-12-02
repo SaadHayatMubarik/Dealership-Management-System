@@ -43,12 +43,9 @@ export class VehicleTypeService {
     }
 
     async deleteVehicleType (vehicleTypeId: number){
-        const getRecord =await this.vehicleTypeRepository.createQueryBuilder('vehicleType')
-        .select('*')
-        .where('vehicleType.type_id = :vehicleTypeId',{ vehicleTypeId })
-        .getRawOne();
-        this.multiValueAttributeRepository.delete( {vehicleTypeAttribute: Equal(await this.vehicleTypeAttributeRepository.findOne({ where: { vehicleType: getRecord } }))});
-        this.vehicleTypeAttributeRepository.delete({vehicleType:getRecord});
+        // const getRecord =await this.vehicleTypeRepository.findOne({ where: { type_id: vehicleTypeId } });
+       await this.multiValueAttributeRepository.delete( {vehicleTypeAttribute: { vehicleType: { type_id: vehicleTypeId } } });
+        this.vehicleTypeAttributeRepository.delete({vehicleType: { type_id: vehicleTypeId }});
         return this.vehicleTypeRepository.delete({ type_id: vehicleTypeId});
     }
 

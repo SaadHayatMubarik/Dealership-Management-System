@@ -27,30 +27,13 @@ export class VehicleTypeAttributeService {
         if ( await this.vehicleTypeAttributeRepository.exist({ where: { attribute_name: vehicleAttributeName } }) == false ){
         vehicleTypeAttribute.attribute_name = vehicleAttributeName.toLowerCase();
         vehicleTypeAttribute.input_type = attributeInputType.toLowerCase();
-        // const queryBuilder = this.vehicleTypeRepository.createQueryBuilder('vehicleType');
-        // const typeId = await queryBuilder
-        // .select('vehicleType.type_id')
-        // .where('vehicleType.type_id = :vehicleTypeId', { vehicleTypeId })
-        // .getOne();
-
         vehicleTypeAttribute.vehicleType =vehicleType;
         await this.vehicleTypeAttributeRepository.save(vehicleTypeAttribute);
-        // console.log(vehicleTypeAttribute);
             }
-        // const attributeId = await this.vehicleTypeAttributeRepository.findOne({ where: { attribute_name: vehicleAttributeName } });
-        // console.log(attributeId);
-        // const queryBuilderTwo = this.vehicleTypeAttributeRepository.createQueryBuilder('vehicleTypeAttribute');
-        // const attributeId = await queryBuilderTwo
-        // .addSelect('*')
-        // .where('vehicleTypeAttribute.attribute_name = :vehicleAttributeName', { vehicleAttributeName })
-        // .getRa();
-
         for(let i=0; i<vehicleAttributeValue.length; i++){
         const multiValueAttribute = new MultiValueAttribute();
         multiValueAttribute.vehicleTypeAttribute = await this.vehicleTypeAttributeRepository.findOne({ where: { attribute_name: vehicleAttributeName } }); ;
         multiValueAttribute.attribute_value = vehicleAttributeValue[i];
-        // console.log(vehicleAttributeValue[i]);
-
         this.multiValueAttributeRepository.save(multiValueAttribute);
         }
         

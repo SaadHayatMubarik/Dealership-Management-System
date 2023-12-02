@@ -25,6 +25,7 @@ export class VehicleTypeController {
     @Delete('/:vehicleTypeId')
     @UsePipes(new ValidationPipe())
     deleteVehicleType(@Param('vehicleTypeId') vehicleTypeId: number){
+        console.log(vehicleTypeId);
         return this.vehicleTypeService.deleteVehicleType(vehicleTypeId);
     }
 
