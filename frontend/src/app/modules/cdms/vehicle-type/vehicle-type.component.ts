@@ -11,6 +11,7 @@ import { IVehicleType } from '../../interfaces/inventory';
 import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
 import { DialogControlService } from 'src/app/shared/services/dialog.service';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-vehicle-type',
@@ -99,6 +100,9 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
   
 
   getVehicleType() {
+    // const headers = new HttpHeaders({
+    //   Authorization: `Bearer ${localStorage.getItem('jwtToken')}`
+    // });
     this.apiService.get('/vehicle-type/getVehicleType').subscribe((data) => {
       this.data = data;
     });

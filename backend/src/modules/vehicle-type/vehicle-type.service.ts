@@ -7,6 +7,7 @@ import { VehicleType } from './entity/Vehicle-type';
 import { VehicleTypeAttribute } from '../vehicle-type-attribute/entity/Vehicle-type-attribute';
 import { MultiValueAttribute } from '../multi-value-attribute/entity/Multi-value-attribute';
 import { Showroom } from '../showroom/entity/Showroom';
+import { User } from '../auth/entity/User';
 
 @Injectable()
 export class VehicleTypeService {
@@ -24,6 +25,7 @@ export class VehicleTypeService {
 
     async addVehicleType (vehicleTypeDto: VehicleTypeDto): Promise<VehicleType>{
         const vehicleType = new VehicleType();
+        // const userinfo = new User()
         const {vehicleTypeName, showroomId} = vehicleTypeDto;
         // let showRoomData = await this.showroomRepository.findOne({where:{showroom_id:showroomId}});
         if ( await this.vehicleTypeRepository.exist({ where: { type_name: vehicleTypeName, showroom: { showroom_id: showroomId }} }) == false ){

@@ -10,6 +10,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmConfig } from './typeorm/config/typeorm.config';
 import { AuthModule } from './modules/auth/auth.module';
 import { ShowroomModule } from './modules/showroom/showroom.module';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+// import { TokenExpirationInterceptor } from './token.expiration.interceptor';
+import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -23,6 +26,8 @@ import { ShowroomModule } from './modules/showroom/showroom.module';
     ShowroomModule,
   ],
   controllers: [AppController],
-  providers: [AppService]
+  providers: [
+    AppService,
+  ]
 })
 export class AppModule {}

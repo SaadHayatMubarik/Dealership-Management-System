@@ -6,6 +6,7 @@ import { ValidateUserDto } from './dto/validate-user.dto';
 import { User } from './entity/User';
 import { CreateAdminDto } from './dto/create-admin.dto';
 import { Showroom } from '../showroom/entity/Showroom';
+import { userInfo } from 'os';
 
 
 @Controller('auth')
@@ -25,6 +26,7 @@ export class AuthController {
 
   @Post('login')
   login(@Body(ValidationPipe) validationUserDto: ValidateUserDto): Promise<{ accessToken: string, showroom: any }> {
+    // console.log(validationUserDto);
     return this.authService.login(validationUserDto);
   } 
 
