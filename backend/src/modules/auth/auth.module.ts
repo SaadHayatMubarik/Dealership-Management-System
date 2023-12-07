@@ -28,10 +28,10 @@ import { TokenExpirationInterceptor } from './token.expiration.interceptor';
   providers: [
     AuthService,
     JwtStrategy,
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: TokenExpirationInterceptor,
-    }
+    // {
+    //   provide: APP_INTERCEPTOR,
+    //   useClass: TokenExpirationInterceptor,
+    // }
   ],
   exports:[
     JwtStrategy,

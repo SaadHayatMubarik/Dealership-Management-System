@@ -16,22 +16,22 @@ export class VehicleTypeAttributeController {
         return this.vehicleTypeAttributeService.addVehicleTypeAttribute(addVehicleTypeAttributeDto);
     }
 
-    @Get('getVehicleAttribute')
-    getVehicleAttribute(): Promise<GetVehicleTypeAttributeDto[]>{
+    @Get('getVehicleAttribute/:showroomId')
+    getVehicleAttribute(@Param('showroomId') showroomId: number): Promise<GetVehicleTypeAttributeDto[]>{
         // console.log(getVehicleTypeAttributeDto);
-        return this.vehicleTypeAttributeService.getVehicleAttributeByType();
+        return this.vehicleTypeAttributeService.getVehicleAttributeByType(showroomId);
     }
 
     @Get('/:vehicleTypeId')
     getVehicleAttributeById(@Param('vehicleTypeId') vehicleTypeId: number): Promise<VehicleTypeAttribute[]>{
+        console.log(vehicleTypeId);
         return this.vehicleTypeAttributeService.getVehicleAttributeById(vehicleTypeId);
     }
 
-    @Delete('/:selectedVehicleTypeAttributeName')
-    @UsePipes(new ValidationPipe())
-    deleteVehicleAttributeByName(@Param('selectedVehicleTypeAttributeName') selectedVehicleTypeAttributeName: string):void{
-        // console.log(attributeName);
-        this.vehicleTypeAttributeService.deleteVehicleTypeAttributeByName(selectedVehicleTypeAttributeName);
+    @Delete('/:vehicleTypeAttributeId')
+    deleteVehicleAttributeByName(@Param('vehicleTypeAttributeId') vehicleTypeAttributeId: number){
+        console.log(vehicleTypeAttributeId);
+       return this.vehicleTypeAttributeService.deleteVehicleTypeAttributeByName(vehicleTypeAttributeId);
     }
     
 }

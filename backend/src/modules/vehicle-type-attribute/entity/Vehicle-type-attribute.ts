@@ -22,7 +22,6 @@ export class VehicleTypeAttribute {
      multiValueAttributes: MultiValueAttribute[];
 
      @ManyToOne(() => VehicleType, (vehicleType) => vehicleType.vehicleTypeAttributes)
-     @JoinColumn()
      vehicleType: VehicleType;
 
      // @Column()

@@ -128,8 +128,9 @@ export class SignUpComponent  {
     if(this.AdminForm.valid && this.ShowroomForm.valid && this.AdminForm.value.password === this.AdminForm.value.confirmPassword)
     {
       
-      this.apiService.post('/auth/signUp',this.createAdmin).subscribe({
+      this.apiService.postLogin('/auth/signUp',this.createAdmin).subscribe({
         next: (response) => {
+          console.log('Response from server : ', response);
          this.toast.showSuccess('User Created');       
          console.log(this.createAdmin +"success");
          setTimeout(() => {

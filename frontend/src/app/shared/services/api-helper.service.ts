@@ -60,6 +60,12 @@ export class ApiHelperService {
       .pipe(this.hookResponse(this));
   }
 
+  postLogin(path: string, body: Object = {}): Observable<any> {
+    return this.http
+      .post(`${environment.apiUrl}${path}`, body)
+      .pipe(this.hookResponse(this));
+  }
+
   delete(path: string): Observable<any> {
     return this.http
       .delete(`${environment.apiUrl}${path}`, {headers: this.addTokenHeader()})

@@ -8,7 +8,7 @@ import { GetUser } from '../auth/get-user.decorator';
 import { User } from '../auth/entity/User';
 
 @Controller('vehicle-type')
-@UseGuards(AuthGuard())
+// @UseGuards(AuthGuard())
 export class VehicleTypeController {
 
     constructor(private vehicleTypeService: VehicleTypeService){    }
@@ -20,15 +20,15 @@ export class VehicleTypeController {
 
     @Get('/:showroomId')
     @UsePipes(new ValidationPipe())
-    getVehicleType(@GetUser() user: User,@Param('showroomId') showroomId: number ): Promise<VehicleType[]>{
+    getVehicleType(@Param('showroomId') showroomId: number ): Promise<VehicleType[]>{
         // console.log( showroomId );
         return this.vehicleTypeService.getVehicleType(showroomId);
     }
 
     @Delete('/:vehicleTypeId')
     @UsePipes(new ValidationPipe())
-    deleteVehicleType(@GetUser() user: User,@Param('vehicleTypeId') vehicleTypeId: number){
-        console.log(vehicleTypeId);
+    deleteVehicleType(@Param('vehicleTypeId') vehicleTypeId: number){
+        // console.log(vehicleTypeId);
         return this.vehicleTypeService.deleteVehicleType(vehicleTypeId);
     }
 

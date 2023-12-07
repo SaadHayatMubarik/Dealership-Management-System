@@ -56,11 +56,11 @@ export class LoginComponent implements OnInit{
         else{
           localStorage.removeItem('userData')
         }
-        console.log("-----------------------")
+        // console.log("-----------------------")
         // localStorage.clear();
-        this.apiService.post('/auth/login',this.userData).subscribe({
+        this.apiService.postLogin('/auth/login',this.userData).subscribe({
           next: (response) => {
-            // console.log(this.userData);
+            console.log(response);
           const jwtToken = response.accessToken;
           const showroomId = response.showroom;
           localStorage.setItem('jwtToken', jwtToken);
