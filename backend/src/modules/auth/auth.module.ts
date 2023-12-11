@@ -8,6 +8,9 @@ import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './jwt-strategy';
 import { User } from './entity/User';
 import { Showroom } from '../showroom/entity/Showroom';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { TokenExpirationInterceptor } from './token.expiration.interceptor';
+// import { TokenExpirationInterceptor } from 'src/token.expiration.interceptor';
 // import { Showroom } from '../showroom/entity/Showroom';
 
 @Module({
@@ -25,6 +28,10 @@ import { Showroom } from '../showroom/entity/Showroom';
   providers: [
     AuthService,
     JwtStrategy,
+    // {
+    //   provide: APP_INTERCEPTOR,
+    //   useClass: TokenExpirationInterceptor,
+    // }
   ],
   exports:[
     JwtStrategy,

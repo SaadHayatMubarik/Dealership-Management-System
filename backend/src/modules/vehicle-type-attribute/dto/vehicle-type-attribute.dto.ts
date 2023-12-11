@@ -14,4 +14,7 @@ export class VehicleTypeAttributeDto{
     @IsNotEmpty()
     vehicleAttributeValue: string[];
 
+    @IsNotEmpty()
+    showroomId: number;
+
 }

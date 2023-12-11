@@ -20,7 +20,7 @@ export class ApiHelperService {
 
   private addTokenHeader() : HttpHeaders{
     const jwtToken = localStorage.getItem('jwtToken');
-
+    // console.log(jwtToken)
     if (jwtToken) {
       return new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`);
     }
@@ -43,7 +43,7 @@ export class ApiHelperService {
   get(path: string,  params: HttpParams = new HttpParams()): Observable<any> {
     return this.http
       .get(`${environment.apiUrl}${path}`, { params })
-      .pipe(this.hookResponse(this));
+      // .pipe(this.hookResponse(this));
   }
 
   put(path: string, body: Object = {}): Observable<any> {
@@ -54,8 +54,17 @@ export class ApiHelperService {
   }
 
   post(path: string, body: Object = {}): Observable<any> {
+    // console.log(body);
+    const headers = this.addTokenHeader();
+    // console.log(headers);
     return this.http
-      .post(`${environment.apiUrl}${path}`, body, {headers: this.addTokenHeader()} )
+      .post(`${environment.apiUrl}${path}`, body, {headers} )
+      .pipe(this.hookResponse(this));
+  }
+
+  postLogin(path: string, body: Object = {}): Observable<any> {
+    return this.http
+      .post(`${environment.apiUrl}${path}`, body)
       .pipe(this.hookResponse(this));
   }
 
@@ -103,7 +112,8 @@ export class ApiHelperService {
             this.router.navigate(['/', 'error-500']);
             break;
           case 401:
-            localStorage.removeItem('jwtToken');
+            // localStorage.removeItem('jwtToken');
+            localStorage.clear();
             this.toastService.showError('Session Expired. Please Login Again.')
             this.router.navigate(['/login']);
             

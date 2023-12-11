@@ -4,6 +4,8 @@ import { VehicleTypeService } from './vehicle-type.service';
 import { VehicleTypeDto } from './dto/vehicle-type.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { VehicleType } from './entity/Vehicle-type';
+import { GetUser } from '../auth/get-user.decorator';
+import { User } from '../auth/entity/User';
 
 @Controller('vehicle-type')
 // @UseGuards(AuthGuard())
@@ -12,6 +14,7 @@ export class VehicleTypeController {
     constructor(private vehicleTypeService: VehicleTypeService){    }
     @Post('addVehicleType')
     addVehicleType(@Body() addVehicleTypeDto: VehicleTypeDto): Promise<VehicleType> {
+        // console.log(user.showroom.showroom_id);
         return this.vehicleTypeService.addVehicleType(addVehicleTypeDto)
     }
 
@@ -25,6 +28,7 @@ export class VehicleTypeController {
     @Delete('/:vehicleTypeId')
     @UsePipes(new ValidationPipe())
     deleteVehicleType(@Param('vehicleTypeId') vehicleTypeId: number){
+        // console.log(vehicleTypeId);
         return this.vehicleTypeService.deleteVehicleType(vehicleTypeId);
     }
 

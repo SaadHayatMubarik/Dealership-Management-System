@@ -85,8 +85,8 @@ export class AuthService {
     .select('showroomShowroomId') 
     .where('user.user_name = :username', {username})
     .getRawOne();                        
-
-    console.log(showroom);
+console.log(accessToken);
+    // console.log(showroom);
     return { accessToken, showroom };
   } 
 

@@ -4,7 +4,7 @@ import * as bcrypt from 'bcrypt';
 import { Showroom } from "src/modules/showroom/entity/Showroom";
 
 @Entity({ name: 'user' })
-@Unique(['user_name'])
+@Unique(['user_name', 'email'])
 export class User {
 
     @PrimaryGeneratedColumn()
