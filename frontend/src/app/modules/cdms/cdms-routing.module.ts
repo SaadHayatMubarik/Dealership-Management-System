@@ -10,6 +10,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
+import { SearchMarketComponent } from './search-market/search-market.component';
+import { MarketInventoryComponent } from './market-inventory/market-inventory.component';
 
 
 
@@ -58,6 +60,10 @@ const routes: Routes = [
     {
       path:'add-inventory', 
       component:AddInventoryFormComponent,
+    },
+    {
+      path:'market-search', 
+      component:SearchMarketComponent,
     },
     ],
   }, 

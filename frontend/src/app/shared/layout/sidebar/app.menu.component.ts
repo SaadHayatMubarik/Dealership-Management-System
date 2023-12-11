@@ -32,6 +32,9 @@ export class AppMenuComponent implements OnInit {
                     { label: 'Add Inventory', 
                     icon: 'pi pi-fw  pi-upload', 
                     routerLink: ['/cdms/add-inventory'] },
+                    { label: 'Search In Market', 
+                    icon: 'pi pi-fw pi-search', 
+                    routerLink: ['/cdms/market-search'] },
                 ],
                 
                 

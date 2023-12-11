@@ -27,6 +27,8 @@ export class ApiHelperService {
     return new HttpHeaders();
   }
 
+  
+
   private getRequestOptions(params: HttpParams = new HttpParams()): { headers: HttpHeaders; params: HttpParams } {
     return {
       headers: this.addTokenHeader() ,
@@ -62,6 +64,12 @@ export class ApiHelperService {
       .delete(`${environment.apiUrl}${path}`, {headers: this.addTokenHeader()})
       .pipe(this.hookResponse(this));
   }
+
+  // postLogin(path: string, body: Object = {}): Observable<any> {
+  //   return this.http
+  //     .post(`${environment.apiUrl}${path}`, body)
+  //     .pipe(this.hookResponse(this));
+  // }
 
  
   // hookResponse(_this: this) {

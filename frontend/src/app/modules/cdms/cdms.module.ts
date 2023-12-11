@@ -29,6 +29,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { LoginComponent } from './login/login.component';
 import { StepsModule } from 'primeng/steps';
+import { SearchMarketComponent } from './search-market/search-market.component';
+import { MarketInventoryComponent } from './market-inventory/market-inventory.component';
+
 
 
 
@@ -45,6 +48,8 @@ import { StepsModule } from 'primeng/steps';
     PageNotFoundComponent,
     AccessDeniedComponent,
     LoginComponent,
+    SearchMarketComponent,
+    MarketInventoryComponent,
  
   ],
   imports: [
@@ -70,6 +75,11 @@ import { StepsModule } from 'primeng/steps';
     ConfirmDialogModule,
     TooltipModule,
     StepsModule,
+   
+    
+    
+    
+    
   
     
    
