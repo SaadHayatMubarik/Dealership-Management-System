@@ -22,6 +22,7 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
   vehicleType: IVehicleType = {
     vehicleTypeId: 0,
     vehicleTypeName: '',
+    ShowroomId: 0
   };
   
 
@@ -37,6 +38,7 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
   ngOnInit() {
 
     this.getVehicleType();
+   
     
     this.columns = [
       {
@@ -97,14 +99,29 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
         });
     }
   }
+
+  getShowroomId(){
+    const showroomDataString = localStorage.getItem('Showroom Id');
+    if (showroomDataString !== null) {
+        const showroomData = JSON.parse(showroomDataString);
+        const showroomId = showroomData.showroomShowroomId;
+        console.log(showroomId);
+       
+    } else {
+       return console.log("api error");   
+    }
+  }
   
 
   getVehicleType() {
+    
     // const headers = new HttpHeaders({
     //   Authorization: `Bearer ${localStorage.getItem('jwtToken')}`
     // });
-    this.apiService.get('/vehicle-type/getVehicleType').subscribe((data) => {
+
+    this.apiService.get('/vehicle-type/{showroomId}' ).subscribe((data) => {
       this.data = data;
+      console.log(this.getShowroomId);
     });
   }
 

@@ -41,6 +41,7 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
   actions: IDataTableAction[] = [];
   data: IObject[] = [];
   
+  showroomID :any; 
 
 
  
@@ -61,7 +62,7 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
   {
 
     
-      
+    
     this.getVehicleTypes(); 
     this.getVehicleTypeAttribute();
    
@@ -132,7 +133,9 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
   }
 
   getVehicleTypeAttribute(){
-    this.apiService.get('/vehicle-type-attribute/getVehicleAttribute').subscribe((data) => {
+
+    
+    this.apiService.get('/vehicle-type-attribute/getVehicleAttribute' ).subscribe((data) => {
       this.data = data;
     });
   }
@@ -149,13 +152,14 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
   saveVehicleTypeAttribute() {
     if (this.vehicleTypeAttribute.vehicleAttributeName !== '') {
       this.apiService
-        .post('/vehicle-type-attribute/addVehicleTypeAttribute', this.vehicleTypeAttribute)
+        .post('/vehicle-type/addVehicleType', this.vehicleTypeAttribute)
         .subscribe({
           next: (response) => {
             this.resetForm();
             this.closeModal();
            this.toastService.showSuccess('New vehicle type attribute created.')
            this.getVehicleTypeAttribute();
+           console.log(this.vehicleTypeAttribute);
           },
           error: () => {
            this.toastService.showError();
