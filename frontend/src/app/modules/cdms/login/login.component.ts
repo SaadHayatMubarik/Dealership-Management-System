@@ -9,6 +9,8 @@ import {  NgForm } from '@angular/forms';
 
 
 
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -64,7 +66,7 @@ export class LoginComponent implements OnInit{
           const jwtToken = response.accessToken;
           const showroomId = response.showroom;
           localStorage.setItem('jwtToken', jwtToken);
-          localStorage.setItem('Showroom Id', showroomId);
+          localStorage.setItem('Showroom Id', showroomId['showroomShowroomId']);
           this.toast.showSuccess('WELCOME');
 
            setTimeout(() => {

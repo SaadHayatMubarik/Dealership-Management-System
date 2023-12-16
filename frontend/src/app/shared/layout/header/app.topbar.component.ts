@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { LayoutService } from '../service/app.layout.service';
 
+
 @Component({
     selector: 'app-topbar',
     templateUrl: './app.topbar.component.html'
@@ -18,13 +19,18 @@ export class AppTopBarComponent implements OnInit {
 
     companyName: string;
 
+
+
     constructor(public layoutService: LayoutService) {
         this.companyName = 'CDMS';
+
 
      }
     ngOnInit(): void {
         this.companyName = 'CDMS';
     }
 
+logout(){}
 
+changePassword(){}
 }

@@ -14,6 +14,8 @@ import { AppSidebarComponent } from './sidebar/app.sidebar.component';
 import { CommonModule } from '@angular/common';
 import { AppMenuitemComponent } from './sidebar/app.menuitem.component';
 import { LoginLayoutComponent } from './login-layout/login-layout.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { MenubarModule } from 'primeng/menubar';
 
 @NgModule({
     declarations: [
@@ -33,7 +35,9 @@ import { LoginLayoutComponent } from './login-layout/login-layout.component';
         InputSwitchModule,
         RippleModule,
         RouterModule,
-        AppConfigModule
+        AppConfigModule,
+        DropdownModule,
+        MenubarModule
     ],
     exports: [AppLayoutComponent]
 })

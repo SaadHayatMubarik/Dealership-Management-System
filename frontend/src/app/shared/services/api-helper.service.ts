@@ -20,12 +20,13 @@ export class ApiHelperService {
 
   private addTokenHeader() : HttpHeaders{
     const jwtToken = localStorage.getItem('jwtToken');
-    // console.log(jwtToken)
     if (jwtToken) {
       return new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`);
     }
     return new HttpHeaders();
   }
+
+  
 
   private getRequestOptions(params: HttpParams = new HttpParams()): { headers: HttpHeaders; params: HttpParams } {
     return {
@@ -72,6 +73,13 @@ export class ApiHelperService {
       .pipe(this.hookResponse(this));
   }
 
+
+  
+
+
+
+
+
  
   // hookResponse(_this: this) {
   //   return (a: any) => {
@@ -95,21 +103,18 @@ export class ApiHelperService {
 
         switch (b.status) {
           case 404:
-            this.router.navigate(['/', 'error-500']); // for time being jab tak apna nahi banwa lein
+            this.router.navigate(['/', 'error-500']); // for time being 
             break;
           case 500:
-            this.router.navigate(['/', 'error-500']);
+            this.router.navigate(['/', 'error-500']); // for time being 
             break;
           case 0:
-            this.router.navigate(['/', 'error-500']);
+            this.router.navigate(['/', 'error-500']); // for time being 
             break;
           case 401:
             // localStorage.removeItem('jwtToken');
             localStorage.clear();
-            this.toastService.showError('Session Expired. Please Login Again.')
             this.router.navigate(['/login']);
-            
-            
             break;
         }
         return a;
