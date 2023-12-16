@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany, JoinColumn} from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany, JoinColumn, JoinTable} from "typeorm";
 import { VehicleType } from "../../vehicle-type/entity/Vehicle-type";
 import { MultiValueAttribute } from "../../multi-value-attribute/entity/Multi-value-attribute";
 import { StockAttributeValue } from "../../stock-attribute-value/entity/Stock-attribute-value";
@@ -18,10 +18,10 @@ export class VehicleTypeAttribute {
      // type_name: string;  
 
      @OneToMany(() => MultiValueAttribute, (multiValueAttribute) => multiValueAttribute.vehicleTypeAttribute)
-     @JoinColumn()
+     // @JoinTable()
      multiValueAttributes: MultiValueAttribute[];
 
-     @ManyToOne(() => VehicleType, (vehicleType) => vehicleType.vehicleTypeAttributes)
+     @ManyToOne(() => VehicleType, (vehicleType) => vehicleType.vehicleTypeAttribute)
      vehicleType: VehicleType;
 
      // @Column()

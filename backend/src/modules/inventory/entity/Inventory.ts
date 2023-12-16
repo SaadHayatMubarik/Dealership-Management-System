@@ -2,6 +2,7 @@ import { Column, Entity, PrimaryGeneratedColumn, OneToOne, OneToMany, ManyToOne,
 import { VehicleType } from "../../vehicle-type/entity/Vehicle-type";
 import { StockAttributeValue } from "../../stock-attribute-value/entity/Stock-attribute-value";
 import { InventoryStatus } from "../inventory-status.enum";
+import { Showroom } from "src/modules/showroom/entity/Showroom";
 
 @Entity({ name: 'inventory' })
 export class Inventory {
@@ -60,6 +61,7 @@ vehicleType: VehicleType;
 @OneToMany(() => StockAttributeValue, (stockAttributeValue) => stockAttributeValue.inventory)
 stockAttributeValue: StockAttributeValue[];
 
-
+@ManyToOne(() => Showroom, (showroom) => showroom.inventories)
+showroom: Showroom;
 
 }

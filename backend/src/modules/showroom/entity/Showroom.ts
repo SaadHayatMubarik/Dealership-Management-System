@@ -1,4 +1,5 @@
 import { User } from "src/modules/auth/entity/User";
+import { Inventory } from "src/modules/inventory/entity/Inventory";
 import { VehicleType } from "src/modules/vehicle-type/entity/Vehicle-type";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
@@ -27,4 +28,7 @@ export class Showroom {
 
     @OneToMany(() => VehicleType, (vehicleType) => vehicleType.showroom)
     vehicleTypes: VehicleType[];
+
+    @OneToMany(() => Inventory, (inventory) => inventory.showroom)
+    inventories: Inventory[];
 }

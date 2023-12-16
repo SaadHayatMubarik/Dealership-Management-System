@@ -7,6 +7,9 @@ export class StockAttributeValue{
 
     @PrimaryGeneratedColumn()
     id: number;
+    
+    @Column()
+    value: string;
 
     @ManyToOne(() => Inventory, (inventory) => inventory.stockAttributeValue,{cascade:true})
     inventory: Inventory;

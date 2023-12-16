@@ -21,9 +21,7 @@ export class VehicleTypeAttributeService {
 
     async addVehicleTypeAttribute (addVehicleTypeAttributeDto: VehicleTypeAttributeDto): Promise<VehicleTypeAttribute>{
         const vehicleTypeAttribute = new VehicleTypeAttribute();
-
         const { vehicleAttributeName , attributeInputType, vehicleType, vehicleAttributeValue, showroomId } = addVehicleTypeAttributeDto;
-        // console.log(addVehicleTypeAttributeDto);
         if ( await this.vehicleTypeAttributeRepository.exist({ where: { attribute_name: vehicleAttributeName, vehicleType:{ showroom: { showroom_id: showroomId } } } }) == false ){
         vehicleTypeAttribute.attribute_name = vehicleAttributeName;
         vehicleTypeAttribute.input_type = attributeInputType.toLowerCase();
@@ -32,11 +30,10 @@ export class VehicleTypeAttributeService {
             }
         for(let i=0; i<vehicleAttributeValue.length; i++){
         const multiValueAttribute = new MultiValueAttribute();
-        multiValueAttribute.vehicleTypeAttribute = await this.vehicleTypeAttributeRepository.findOne({ where: { attribute_name: vehicleAttributeName } }); ;
+        multiValueAttribute.vehicleTypeAttribute = await this.vehicleTypeAttributeRepository.findOne({ where: { attribute_name: vehicleAttributeName,vehicleType:{ showroom:{ showroom_id:showroomId } }  } }); ;
         multiValueAttribute.attribute_value = vehicleAttributeValue[i];
         this.multiValueAttributeRepository.save(multiValueAttribute);
         }
-        
         return vehicleTypeAttribute;
     }
 
@@ -47,7 +44,6 @@ export class VehicleTypeAttributeService {
         .select(['vehicleType.type_name as vehicleTypeName', 'vehicleTypeAttribute.attribute_name as vehicleAttributeName', 'multiValueAttribute.attribute_value as vehicleAttributeValue', 'vehicleTypeAttribute.input_type as attributeInputType'])
         .where('vehicleType.showroomShowroomId = :showroomId',{showroomId});
         const result = await getValue.getRawMany();
-
     return result ;
     }
 
@@ -56,22 +52,10 @@ export class VehicleTypeAttributeService {
             relations: ['multiValueAttributes'],
             where: { vehicleType:{ type_id: vehicleTypeId } } // Specify the name of the relationship property
           });
-
-        console.log('====================================');
-        console.log(getValue);
-        console.log('====================================');
-
         return getValue
     }
 
     async deleteVehicleTypeAttributeByName(attributeId: number){
-        // console.log(attributeName);
-        // const getObj =await this.vehicleTypeAttributeRepository.createQueryBuilder('vehicleTypeAttribute')
-        // .select('*')
-        // .where('vehicleTypeAttribute.attribute_id = :attributeId',{ attributeId })
-        // .getRawOne();
-        // console.log(getObj);
-        // console.log(await this.multiValueAttributeRepository.find({where:{vehicleTypeAttribute: { attribute_id: attributeId }}}));
         await this.multiValueAttributeRepository.delete({vehicleTypeAttribute: { attribute_id: attributeId }});
         return this.vehicleTypeAttributeRepository.delete({ attribute_id: attributeId });
     }

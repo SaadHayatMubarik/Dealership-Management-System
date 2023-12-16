@@ -2,6 +2,7 @@ import { Column, Entity, PrimaryGeneratedColumn, OneToMany, ManyToOne, ManyToMan
 import { Inventory } from "../../inventory/entity/Inventory";
 import { VehicleTypeAttribute } from "src/modules/vehicle-type-attribute/entity/Vehicle-type-attribute";
 import { Showroom } from "src/modules/showroom/entity/Showroom";
+import { MultiValueAttribute } from "src/modules/multi-value-attribute/entity/Multi-value-attribute";
 
 @Entity({ name: 'Vehicle_Type' })
 export class VehicleType{
@@ -13,8 +14,8 @@ export class VehicleType{
     type_name: string;
 
     @OneToMany(() => VehicleTypeAttribute, (vehicleTypeAttribute) => vehicleTypeAttribute.vehicleType)
-    @JoinColumn()
-    vehicleTypeAttributes: VehicleTypeAttribute[];
+    // @JoinColumn()
+    vehicleTypeAttribute: VehicleTypeAttribute[];
     
     @OneToMany(() => Inventory, (inventory) => inventory.vehicleType)
     inventory: Inventory[];

@@ -25,10 +25,7 @@ export class VehicleTypeService {
 
     async addVehicleType (vehicleTypeDto: VehicleTypeDto): Promise<VehicleType>{
         const vehicleType = new VehicleType();
-        // const userinfo = new User()
         const {vehicleTypeName, showroomId} = vehicleTypeDto;
-        // console.log(vehicleTypeDto);
-        // let showRoomData = await this.showroomRepository.findOne({where:{showroom_id:showroomId}});
         if ( await this.vehicleTypeRepository.exist({ where: { type_name: vehicleTypeName, showroom: { showroom_id: showroomId }} }) == false ){
         vehicleType.type_name = vehicleTypeName;
         vehicleType.showroom = await this.showroomRepository.findOne({ where: { showroom_id: showroomId } });
@@ -39,17 +36,24 @@ export class VehicleTypeService {
 
     async getVehicleType (showroomId: number): Promise<VehicleType[]>
     {
-
-        // const showroomObj = await this.showroomRepository.findOne({ where: { showroom_id: showroomId } });
         return await this.vehicleTypeRepository.find({ where: { showroom: { showroom_id: showroomId  } }});
                             
     }
 
     async deleteVehicleType (vehicleTypeId: number){
-        // const getRecord =await this.vehicleTypeRepository.findOne({ where: { type_id: vehicleTypeId } });
-    //    await this.multiValueAttributeRepository.delete( {vehicleTypeAttribute: { vehicleType: { type_id: vehicleTypeId } } });
-    //    await this.vehicleTypeAttributeRepository.delete({vehicleType: { type_id: vehicleTypeId }});
-    //     return await this.vehicleTypeRepository.delete({ type_id: vehicleTypeId});
+        // write it better if have time
+        const vehicleType = await this.vehicleTypeRepository.createQueryBuilder('vehicleType')
+        .select('*')
+        .where('vehicleType.type_id = :vehicleTypeId', { vehicleTypeId })
+        .getRawOne();
+
+        const vehicleAttribute = await this.vehicleTypeAttributeRepository.createQueryBuilder('vehicleTypeAttribute')
+        .select('*')
+        .where('vehicleTypeAttribute.vehicleTypeTypeId = :vehicleTypeId', { vehicleTypeId })
+        .getRawOne();
+        await this.multiValueAttributeRepository.delete({ vehicleTypeAttribute: vehicleAttribute });
+        await this.vehicleTypeAttributeRepository.delete({ vehicleType:{ type_id:vehicleTypeId } });
+        return await this.vehicleTypeRepository.delete({ type_id: vehicleTypeId});
     }
 
     // updateVehicleType (vehicleType: string){
