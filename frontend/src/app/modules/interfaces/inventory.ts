@@ -1,17 +1,14 @@
 export interface IVehicleType {
-  vehicleTypeId: number;
   vehicleTypeName: string;
-  ShowroomId?: number;
+  showroomId: any;
 }
-
-
 
 export interface IVehicleTypeAttribute {
   vehicleAttributeValue: string[];
   vehicleAttributeName: string;
   attributeInputType: string;
   vehicleType: any;
-  ShowroomId?: number;
+  ShowroomId: any;
 }
 
 export interface IInventory {
@@ -29,5 +26,5 @@ export interface IInventory {
   grade: number;
   status: string;
   regNo: string;
-  ShowroomId?: number;
+  showroomId?: any;
 }

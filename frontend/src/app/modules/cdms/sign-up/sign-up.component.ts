@@ -56,19 +56,19 @@ export class SignUpComponent  {
     }
   
 
-  states : State[] = [
-    { label: 'Sindh', value: 'Sindh' },
-    { label: 'Punjab', value: 'Punjab' },
-    { label: 'Balochistan', value: 'Balochistan' },
-    { label: 'KPK', value: 'KPK' }
-  ];
+  // states : State[] = [
+  //   { label: 'Sindh', value: 'Sindh' },
+  //   { label: 'Punjab', value: 'Punjab' },
+  //   { label: 'Balochistan', value: 'Balochistan' },
+  //   { label: 'KPK', value: 'KPK' }
+  // ];
 
-  cities : CityList[] = [
-    { label: 'Lahore', value: 'Lahore' },
-    { label: 'Karachi', value: 'Karachi' },
-    { label: 'Multan', value: 'Multan' },
-    { label: 'Islamabad', value: 'Islamabad' }
-  ];
+  // cities : CityList[] = [
+  //   { label: 'Lahore', value: 'Lahore' },
+  //   { label: 'Karachi', value: 'Karachi' },
+  //   { label: 'Multan', value: 'Multan' },
+  //   { label: 'Islamabad', value: 'Islamabad' }
+  // ];
 
   // citiesByState: CityList = {
   //   Sindh: ['Karachi', 'Hyderabad', 'Sukkur'],
@@ -132,14 +132,13 @@ export class SignUpComponent  {
         next: (response) => {
           console.log('Response from server : ', response);
          this.toast.showSuccess('User Created');       
-         console.log(this.createAdmin +"success");
          setTimeout(() => {
           this.router.navigate(['/login']);
         }, 2000);
         },
         error: () => {
-          this.toast.showError( );
-          console.log(this.createAdmin+"failed");
+          this.toast.showError();
+         
           
         },
       });

@@ -116,7 +116,7 @@
                     class="block text-900 text-xl font-medium mb-2"
                     >Showroom State</label
                   >
-                  <p-dropdown
+                  <!-- <p-dropdown
                     optionLabel="label"
                     optionValue="value"
                     [options]="states"
@@ -125,10 +125,28 @@
                     [(ngModel)]="createAdmin.showroomState"
                     name="showroomState"
                 
-                  ></p-dropdown>
+                  ></p-dropdown> -->
+                  <input
+                  type="text"
+                  pInputText
+                  name="state"
+                  placeholder="Enter Showroom State"
+                  class="w-full md:w-30rem mb-5"
+                  style="padding: 1rem"
+                  required
+                  [(ngModel)]="createAdmin.showroomState"
+                  #state="ngModel"
+                />
+                <div class="icon">
+                  <span *ngIf="state.valid && state.touched"
+                    ><i class="pi pi-check text-success"></i
+                  ></span>
+                  <span *ngIf="!state.valid && state.touched"
+                    ><i class="pi pi-times text-danger"></i
+                  ></span>
                 </div>
 
-                <br>
+                </div>
              
                 <div class="form-group">
                   <label
@@ -136,7 +154,28 @@
                     class="block text-900 text-xl font-medium mb-2"
                     >Showroom City</label
                   >
-                  <p-dropdown
+                  <input
+                  type="text"
+                  pInputText
+                  name="city"
+                  placeholder="Enter Showroom City"
+                  class="w-full md:w-30rem mb-5"
+                  style="padding: 1rem"
+                  required
+                  [(ngModel)]="createAdmin.showroomCity"
+                  #city="ngModel"
+                />
+
+                <div class="icon">
+                  <span *ngIf="city.valid && city.touched"
+                    ><i class="pi pi-check text-success"></i
+                  ></span>
+                  <span *ngIf="!city.valid && city.touched"
+                    ><i class="pi pi-times text-danger"></i
+                  ></span>
+                </div>
+
+                  <!-- <p-dropdown
                     name="showroomCity"
                     placeholder="Select a City"
                     optionLabel="label"
@@ -144,7 +183,8 @@
                     optionValue="value"
                     [showClear]="true"
                     [(ngModel)]="createAdmin.showroomCity"
-                  ></p-dropdown>
+                  ></p-dropdown> -->
+
                 </div>
 
                 <br /><br />

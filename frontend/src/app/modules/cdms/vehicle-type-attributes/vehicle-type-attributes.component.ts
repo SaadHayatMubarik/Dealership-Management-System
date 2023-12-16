@@ -28,7 +28,8 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
     vehicleAttributeName:'',
     attributeInputType:'',
     vehicleAttributeValue:[],
-    vehicleType:''
+    vehicleType:'',
+    ShowroomId : localStorage.getItem("Showroom Id")
   };
 
 
@@ -122,20 +123,31 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
 
 
   getVehicleTypes() {
-    this.apiService.get('/vehicle-type/getVehicleType').subscribe({
+    this.apiService.get('/vehicle-type/${this.vehicleTypeAttribute.showroomId}').subscribe({
       next: (response: IObject[]) => {
         this.vehicleTypes = response;
+        console.log(this.vehicleTypes);
+        console.log(response);
+        console.log(this.vehicleTypeAttribute.ShowroomId)
       },
       error: () => {
         this.toastService.showError();
       },
     });
   }
+  
+
+  // getVehicleTypes(){
+  //   this.apiService.get('/vehicle-type/${this.vehicleTypeAttribute.showroomId}').subscribe((data) => {
+  //     this.vehicleTypes = data;
+  //     console.log(data);
+  //     console.log(this.vehicleTypes);
+  //     console.log(this.vehicleTypeAttribute.ShowroomId);
+  //   })
+  // }
 
   getVehicleTypeAttribute(){
-
-    
-    this.apiService.get('/vehicle-type-attribute/getVehicleAttribute' ).subscribe((data) => {
+    this.apiService.get('/vehicle-type-attribute/getVehicleAttribute').subscribe((data) => {
       this.data = data;
     });
   }
@@ -152,7 +164,7 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
   saveVehicleTypeAttribute() {
     if (this.vehicleTypeAttribute.vehicleAttributeName !== '') {
       this.apiService
-        .post('/vehicle-type/addVehicleType', this.vehicleTypeAttribute)
+        .post('/vehicle-type-attribute/addVehicleTypeAttribute', this.vehicleTypeAttribute)
         .subscribe({
           next: (response) => {
             this.resetForm();
