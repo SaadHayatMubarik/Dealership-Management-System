@@ -2,8 +2,13 @@ import { IsNotEmpty, IsNumber, IsOptional,IsEnum } from "class-validator";
 import { InventoryStatus } from "../inventory-status.enum";
 import { StockAttributeValue } from "src/modules/stock-attribute-value/entity/Stock-attribute-value";
 import { Showroom } from "src/modules/showroom/entity/Showroom";
+import { VehicleType } from "src/modules/vehicle-type/entity/Vehicle-type";
 
 export class InventoryDto{
+
+    @IsNotEmpty()
+    vehicleType: VehicleType;
+    
     @IsNotEmpty()
     vehicleMake: string;
 

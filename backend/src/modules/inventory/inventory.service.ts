@@ -26,7 +26,7 @@ export class InventoryService {
 
     async addInventory (addInventoryDto: InventoryDto): Promise<Inventory>{
         const inventory = new Inventory();
-        const { vehicleMake, vehicleModel , vehicleVariant , modelYear , vehicleChasisNo , costPrice , demand , dateOfPurchase , dateOfSale , bodyColor , engineNo , comments , grade , regNo, status, attributeValueId, value, showroomId } = addInventoryDto;
+        const { vehicleType, vehicleMake, vehicleModel , vehicleVariant , modelYear , vehicleChasisNo , costPrice , demand , dateOfPurchase , dateOfSale , bodyColor , engineNo , comments , grade , regNo, status, attributeValueId, value, showroomId } = addInventoryDto;
         inventory.make = vehicleMake.toUpperCase();
         inventory.model = vehicleModel.toUpperCase();
         inventory.variant = vehicleVariant.toUpperCase();
@@ -42,8 +42,11 @@ export class InventoryService {
         inventory.grade = grade;
         inventory.status = status;
         inventory.reg_no = regNo.toUpperCase();
+        inventory.vehicleType = vehicleType;
         inventory.showroom = await this.showroomRepository.findOne({ where: { showroom_id: showroomId } });
+        console.log(inventory);
         await this.inventoryRepository.save(inventory);
+        console.log("done");
         const count = await this.inventoryRepository.count({where:{ showroom:{ showroom_id:showroomId } }});
         for (let i=0; i<value.length; i++){
             const stockAttributeValue = new StockAttributeValue();

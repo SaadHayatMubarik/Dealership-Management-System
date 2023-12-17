@@ -12,7 +12,7 @@ export class InventoryController {
 
     @Post('addInventory')
     addInventory(@Body() addInventoryDto: InventoryDto): Promise<Inventory> {
-        // console.log(addInventoryDto);
+        console.log(addInventoryDto);
         return this.invenotryService.addInventory(addInventoryDto)
     }
 
