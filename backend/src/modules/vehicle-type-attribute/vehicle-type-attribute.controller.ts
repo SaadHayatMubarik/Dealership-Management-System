@@ -13,6 +13,7 @@ export class VehicleTypeAttributeController {
 
     @Post('addVehicleTypeAttribute')
     addVehicleTypeAttribute(@Body() addVehicleTypeAttributeDto: VehicleTypeAttributeDto): Promise<VehicleTypeAttribute>{
+        // console.log(addVehicleTypeAttributeDto);
         return this.vehicleTypeAttributeService.addVehicleTypeAttribute(addVehicleTypeAttributeDto);
     }
 

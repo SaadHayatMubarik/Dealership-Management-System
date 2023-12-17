@@ -14,7 +14,7 @@ export class VehicleTypeController {
     constructor(private vehicleTypeService: VehicleTypeService){    }
     @Post('addVehicleType')
     addVehicleType(@Body() addVehicleTypeDto: VehicleTypeDto): Promise<VehicleType> {
-        console.log(addVehicleTypeDto);
+        // console.log(addVehicleTypeDto);
         // console.log(user.showroom.showroom_id);
         return this.vehicleTypeService.addVehicleType(addVehicleTypeDto)
     }
