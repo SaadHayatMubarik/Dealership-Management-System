@@ -123,12 +123,12 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
 
 
   getVehicleTypes() {
-    this.apiService.get('/vehicle-type/${this.vehicleTypeAttribute.showroomId}').subscribe({
+    this.apiService.get(`/vehicle-type/${this.vehicleTypeAttribute.ShowroomId}`).subscribe({
       next: (response: IObject[]) => {
         this.vehicleTypes = response;
         console.log(this.vehicleTypes);
-        console.log(response);
-        console.log(this.vehicleTypeAttribute.ShowroomId)
+        // console.log(response);
+        // console.log(this.vehicleTypeAttribute.ShowroomId)
       },
       error: () => {
         this.toastService.showError();
