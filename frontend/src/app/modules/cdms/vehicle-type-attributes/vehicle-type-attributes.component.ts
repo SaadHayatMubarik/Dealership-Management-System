@@ -34,7 +34,7 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
 
 
   vehicleTypes: any[] = [];
-  selectedVehicleTypeAttributeName: any; 
+  selectedVehicleTypeAttributeId: any; 
   inputTypes: any[] = ['TEXT', 'NUMBER', 'DATE', 'DROPDOWN'];
   
   
@@ -85,6 +85,7 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
         field: 'attributeInputType',
         fieldTitle: 'Input Type',
       },
+      
     
     ];
     this.actions = [
@@ -92,17 +93,19 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
         label: ' Delete',
         icon: 'pi pi-trash',
         command: (event) => {
-          this.selectedVehicleTypeAttributeName = event.vehicleAttributeName;
-           
-              this.apiService.delete(`/vehicle-type-attribute/${this.selectedVehicleTypeAttributeName}`).subscribe({
+          this.selectedVehicleTypeAttributeId = event.attribute_id;
+              this.apiService.delete(`/vehicle-type-attribute/${this.selectedVehicleTypeAttributeId}`).subscribe({
                 next: (response) => {
                   this.getVehicleTypes();
                   this.getVehicleTypeAttribute();
-                  this.toastService.showSuccess( `${this.selectedVehicleTypeAttributeName} attribute deleted.`);
+                  this.toastService.showSuccess( `${this.selectedVehicleTypeAttributeId} attribute deleted.`);
+                  console.log(this.selectedVehicleTypeAttributeId);
+                  
                 },
                 error: () => 
                 {
                   this.toastService.showError();
+                  console.log(this.selectedVehicleTypeAttributeId);
                 }
               }
                 );
@@ -127,8 +130,7 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
       next: (response: IObject[]) => {
         this.vehicleTypes = response;
         console.log(this.vehicleTypes);
-        // console.log(response);
-        // console.log(this.vehicleTypeAttribute.ShowroomId)
+        
       },
       error: () => {
         this.toastService.showError();
@@ -147,8 +149,9 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
   // }
 
   getVehicleTypeAttribute(){
-    this.apiService.get('/vehicle-type-attribute/getVehicleAttribute').subscribe((data) => {
+    this.apiService.get(`/vehicle-type-attribute/getVehicleAttribute/${this.vehicleTypeAttribute.ShowroomId}`).subscribe((data) => {
       this.data = data;
+      console.log(this.data);
     });
   }
 
