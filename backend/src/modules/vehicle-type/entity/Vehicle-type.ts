@@ -14,7 +14,6 @@ export class VehicleType{
     type_name: string;
 
     @OneToMany(() => VehicleTypeAttribute, (vehicleTypeAttribute) => vehicleTypeAttribute.vehicleType)
-    // @JoinColumn()
     vehicleTypeAttribute: VehicleTypeAttribute[];
     
     @OneToMany(() => Inventory, (inventory) => inventory.vehicleType)

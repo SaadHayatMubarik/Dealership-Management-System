@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn, OneToOne, OneToMany, ManyToOne, ManyToMany } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, OneToOne, OneToMany, ManyToOne } from "typeorm";
 import { VehicleType } from "../../vehicle-type/entity/Vehicle-type";
 import { StockAttributeValue } from "../../stock-attribute-value/entity/Stock-attribute-value";
 import { InventoryStatus } from "../inventory-status.enum";
@@ -55,7 +55,7 @@ grade: number;
 @Column({ nullable: true })
 reg_no: string;
 
-@OneToOne(() => VehicleType, (vehicleType) => vehicleType.inventory)
+@ManyToOne(() => VehicleType, (vehicleType) => vehicleType.inventory)
 vehicleType: VehicleType;
 
 @OneToMany(() => StockAttributeValue, (stockAttributeValue) => stockAttributeValue.inventory)

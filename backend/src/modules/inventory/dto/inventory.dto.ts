@@ -22,7 +22,6 @@ export class InventoryDto{
     modelYear: number;
 
     @IsOptional()
-    // @IsNotEmpty()
     vehicleChasisNo: string;
 
     @IsNotEmpty()
@@ -34,7 +33,7 @@ export class InventoryDto{
     @IsNotEmpty()
     dateOfPurchase: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     dateOfSale: string;
 
     @IsNotEmpty()
@@ -43,7 +42,7 @@ export class InventoryDto{
     @IsNotEmpty()
     engineNo: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     comments: string;
 
     @IsNotEmpty()

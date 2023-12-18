@@ -44,15 +44,18 @@ export class InventoryService {
         inventory.reg_no = regNo.toUpperCase();
         inventory.vehicleType = vehicleType;
         inventory.showroom = await this.showroomRepository.findOne({ where: { showroom_id: showroomId } });
-        console.log(inventory);
+        // inventory.
+        // console.log(inventory);
         await this.inventoryRepository.save(inventory);
-        console.log("done");
+        const Id = await this.inventoryRepository.getId(inventory);
+        // console.log(Id);        
+        // console.log("done");
         const count = await this.inventoryRepository.count({where:{ showroom:{ showroom_id:showroomId } }});
         for (let i=0; i<value.length; i++){
             const stockAttributeValue = new StockAttributeValue();
             stockAttributeValue.value = value[i];
             stockAttributeValue.multiValueAttribute = await this.multiValueAttributeRepository.findOne({ where: { multi_value_id: attributeValueId[i] } })
-            stockAttributeValue.inventory = await this.inventoryRepository.findOne({where: { showroom:{ showroom_id: count } }});
+            stockAttributeValue.inventory = await this.inventoryRepository.findOne({where: { inventory_id:Id }});
             await this.stockValueAttributeRepository.save(stockAttributeValue);
         }
         return inventory;
