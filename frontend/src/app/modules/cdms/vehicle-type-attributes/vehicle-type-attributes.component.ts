@@ -93,7 +93,7 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
         label: ' Delete',
         icon: 'pi pi-trash',
         command: (event) => {
-          this.selectedVehicleTypeAttributeId = event.attribute_id;
+          this.selectedVehicleTypeAttributeId = event.vehicleAttributeId;
               this.apiService.delete(`/vehicle-type-attribute/${this.selectedVehicleTypeAttributeId}`).subscribe({
                 next: (response) => {
                   this.getVehicleTypes();
