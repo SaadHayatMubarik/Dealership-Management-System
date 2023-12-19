@@ -5,6 +5,7 @@ import { InventoryDto } from './dto/inventory.dto';
 // import { VehicleType } from '../vehicle-type/entities/Vehicle-type';
 import { deepStrictEqual } from 'assert';
 import { Inventory } from './entity/Inventory';
+import { GetInventroyDto } from './dto/getInventory.dto';
 
 @Controller('inventory')
 export class InventoryController {
@@ -16,9 +17,10 @@ export class InventoryController {
         return this.invenotryService.addInventory(addInventoryDto)
     }
 
-    @Get('getInventory')
-    getInventory(): Promise<Inventory[]>{
-        return this.invenotryService.getInventory();
+    @Get('getInventory/:showroomId/:status')
+    getInventory(@Param('showroomId') showroomId: number,@Param('status') status: String): Promise<GetInventroyDto[]>{
+        console.log(status,showroomId); 
+        return this.invenotryService.getInventory(status, showroomId);
     }
 
     @Delete('/:inventoryId')

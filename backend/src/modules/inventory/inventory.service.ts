@@ -9,6 +9,8 @@ import { Showroom } from '../showroom/entity/Showroom';
 import { StockAttributeValue } from '../stock-attribute-value/entity/Stock-attribute-value';
 import { MulterModule } from '@nestjs/platform-express';
 import { MultiValueAttribute } from '../multi-value-attribute/entity/Multi-value-attribute';
+import { GetInventroyDto } from './dto/getInventory.dto';
+import { VehicleType } from '../vehicle-type/entity/Vehicle-type';
 
 @Injectable()
 export class InventoryService {
@@ -61,8 +63,15 @@ export class InventoryService {
         return inventory;
     }
 
-    async getInventory(): Promise<Inventory[]>{
-        return await this.inventoryRepository.find();
+    async getInventory(status: String, showroomId: number): Promise<GetInventroyDto[]>{
+        // let vehicleStatus = status.toUpperCase();
+        const getData = this.inventoryRepository.createQueryBuilder('inventory')
+        // .leftJoin(VehicleType,'vehicleType', 'inventory.vehicleVehicleTypeId = vehicleType.type_id')
+        .select(['make as vehicleMake','model as vehicleModel', 'variant as vehicleVariant', 'year as modelYear','chasis_no as vehicleChasisNo','demand', 'color as bodyColor'])
+        .where('inventory.status = :status',{status})
+        .where('inventory.showroomShowroomId = :showroomId',{showroomId});
+        const result = await getData.getRawMany();
+        return result;
     }
 
     deleteInventory(inventoryId: number){
