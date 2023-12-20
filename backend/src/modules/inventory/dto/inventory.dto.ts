@@ -31,10 +31,10 @@ export class InventoryDto{
     demand: number;
 
     @IsNotEmpty()
-    dateOfPurchase: string;
+    dateOfPurchase: Date;
 
     @IsOptional()
-    dateOfSale: string;
+    dateOfSale: Date;
 
     @IsNotEmpty()
     bodyColor: string;
