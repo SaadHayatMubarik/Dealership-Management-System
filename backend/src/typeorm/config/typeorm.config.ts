@@ -15,10 +15,7 @@ export const typeOrmConfig: TypeOrmModuleOptions  = {
     password: 'root',
     database: 'd_m_s',
     entities: [Inventory, MultiValueAttribute, StockAttributeValue , VehicleType, VehicleTypeAttribute ,User,Showroom],
-<<<<<<< HEAD
     synchronize: false, 
 }
-=======
-    synchronize: true, 
-}
->>>>>>> f0c0a4afd2eaa05d096d9598f7038a634e9a5126
+
+

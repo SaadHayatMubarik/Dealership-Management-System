@@ -12,6 +12,7 @@ export interface IVehicleTypeAttribute {
 }
 
 export interface IInventory {
+  vehicleType:any;
   vehicleMake: string;
   vehicleModel: string;
   vehicleVariant: string;
@@ -23,11 +24,10 @@ export interface IInventory {
   dateOfSale: string;
   bodyColor: string;
   engineNo: string;
-  grade: number;
-  status: string;
-  regNo: string;
-  vehicleType:string;
   comments: string;
+  grade: number;
+  status: any;
+  regNo: string;
   showroomId: any;
 
   stockAttributeValue : IStockAttributeValue[];

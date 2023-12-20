@@ -241,39 +241,40 @@
 
 
        <!-- adding dynamic form here-->
-            <div *ngIf="vehicleAttributes">
+            <div *ngIf="">
               <div class="row-form grid">
-                <div class="col-4" *ngFor="let attribute of vehicleAttributes; let i = index">
-                  <div *ngIf="attribute.input_type === 'text'">
+                <div class="col-4" *ngFor="let attribute of vehicleInventory.stockAttributeValue; let i = index">
+                  <div *ngIf="attribute.vehicleTypeAttribute.attributeInputType === 'text'">
                     <div class="p-field">
                       <span class="p-float-label">
                         <input class="p-inputtext-lg"
                          pInputText
-                        
+                         [(ngModel)]="attribute.value" 
                          />
-                        <label for="float-label">{{ attribute.attribute_name }}</label>
+                        <label for="float-label">{{ attribute.vehicleTypeAttribute.vehicleAttributeName }}</label>
                       </span>
                     </div>
                   </div>
-                  <div *ngIf="attribute.input_type === 'number'">
+                  <div *ngIf="attribute.vehicleTypeAttribute.attributeInputType === 'number'">
                     <div class="p-field">
                       <span class="p-float-label">
                         <input class="p-inputtext-lg" 
                         pInputText 
-                       
+                        [(ngModel)]="attribute.value"  
                         />
-                        <label for="float-label">{{ attribute.attribute_name }}</label>
+                        <label for="float-label">{{attribute.vehicleTypeAttribute.vehicleAttributeName }}</label>
                       </span>
                     </div>
                   </div>
-                  <div *ngIf="attribute.input_type === 'dropdown'">
+                  <div *ngIf="attribute.vehicleTypeAttribute.attributeInputType === 'dropdown'">
                     <span class="p-float-label">                
                       <p-dropdown class="p-inputtext-lg" 
-                      placeholder="Select {{ attribute.attribute_name }}" 
+                      placeholder="Select {{ attribute.vehicleTypeAttribute.vehicleAttributeName}}" 
                       [options]="getOptions(attribute)" 
-                      
+                      [(ngModel)]="attribute.value" 
+              
                       ></p-dropdown>
-                      <label for="float-label">{{ attribute.attribute_name }}</label>
+                      <label for="float-label">{{ attribute.vehicleTypeAttribute.vehicleAttributeName}}</label>
                     </span>
                   </div>
                 </div>

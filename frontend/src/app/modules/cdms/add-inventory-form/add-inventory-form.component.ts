@@ -158,20 +158,44 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
         this.apiService
           .get(`/vehicle-type-attribute/${this.selectedVehicleTypeId.type_id}`)
           .subscribe((attributes: IVehicleTypeAttribute[]) => {
+            this.vehicleAttributes = attributes;
+            console.log(this.vehicleAttributes);
+            this.vehicleInventory.stockAttributeValue = [];
             let stockAttrVals: IStockAttributeValue[] = [];
             attributes.forEach((vta: IVehicleTypeAttribute) => {
               stockAttrVals.push({ id: 0,
                 value: '',
                 inventoryInventoryId:0,
                 multiValueAttributeMultiValueId:0,
-                vehicleTypeAttribute : vta,});
+                vehicleTypeAttribute : vta})
             });
+            this.vehicleInventory.stockAttributeValue = stockAttrVals;
+            console.log(this.vehicleInventory.stockAttributeValue);
           });
       } else {
-        this.vehicleAttributes = [];
+        console.log("error");
       }
     }
   }
+
+  // onVehicleTypeChange(event: any) {
+  //   if (event.value) {
+  //     this.selectedVehicleTypeId = event.value;
+  //     console.log(this.selectedVehicleTypeId.type_id);
+  //     if (this.selectedVehicleTypeId.type_id) {
+  //       this.apiService
+  //         .get(`/vehicle-type-attribute/${this.selectedVehicleTypeId.type_id}`)
+  //         .subscribe((attributes) => {
+  //           this.vehicleAttributes = attributes;
+  //           console.log(this.vehicleAttributes);
+  //         });
+  //     } else {
+  //       this.vehicleAttributes = [];
+  //     }
+  //   }
+  // }
+
+
 
   
 
