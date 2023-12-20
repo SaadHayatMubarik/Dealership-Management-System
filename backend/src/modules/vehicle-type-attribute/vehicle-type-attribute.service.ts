@@ -44,7 +44,7 @@ export class VehicleTypeAttributeService {
         const getValue = this.multiValueAttributeRepository.createQueryBuilder('multiValueAttribute')
         .leftJoin(VehicleTypeAttribute, 'vehicleTypeAttribute' ,'multiValueAttribute.vehicleTypeAttributeAttributeId = vehicleTypeAttribute.attribute_id')
         .leftJoin(VehicleType, 'vehicleType', 'vehicleTypeAttribute.vehicleTypeTypeId = vehicleType.type_id ')
-        .select(['vehicleTypeAttribute.attribute_id as vehicleAttributeId, vehicleType.type_name as vehicleTypeName', 'vehicleTypeAttribute.attribute_name as vehicleAttributeName', 'multiValueAttribute.attribute_value as vehicleAttributeValue', 'vehicleTypeAttribute.input_type as attributeInputType'])
+        .select(['vehicleTypeAttribute.attribute_id as vehicleAttributeId', 'vehicleType.type_name as vehicleTypeName', 'vehicleTypeAttribute.attribute_name as vehicleAttributeName', 'multiValueAttribute.attribute_value as vehicleAttributeValue', 'vehicleTypeAttribute.input_type as attributeInputType'])
         .where('vehicleType.showroomShowroomId = :showroomId',{showroomId});
         const result = await getValue.getRawMany();
         // console.log(result);

@@ -32,10 +32,10 @@ price: number;
 demand: number;
 
 @Column()
-date_of_purchase: string;
+date_of_purchase: Date;
 
 @Column({ nullable: true })
-date_of_sale: string;
+date_of_sale: Date;
 
 @Column({ type:"enum", enum: InventoryStatus, default: InventoryStatus.AVAILABLE })
 status: InventoryStatus;
