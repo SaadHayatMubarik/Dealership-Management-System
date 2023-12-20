@@ -26,5 +26,19 @@ export interface IInventory {
   grade: number;
   status: string;
   regNo: string;
-  showroomId?: any;
+  vehicleType:string;
+  comments: string;
+  showroomId: any;
+
+  stockAttributeValue : IStockAttributeValue[];
+
+}
+
+export interface IStockAttributeValue {
+  id: number;
+  value: any;
+  inventoryInventoryId:number;
+  multiValueAttributeMultiValueId:number;
+
+  vehicleTypeAttribute : IVehicleTypeAttribute;
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BaseComponent } from 'src/app/shared/base.component';
 
 import {
@@ -6,8 +6,15 @@ import {
   IDataTableAction,
   IObject,
 } from 'src/app/shared/interfaces/common';
-import { IInventory } from '../../interfaces/inventory';
+import {
+  IInventory,
+  IStockAttributeValue,
+  IVehicleTypeAttribute,
+} from '../../interfaces/inventory';
 import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
+import { ToastService } from 'src/app/shared/services/toast.service';
+
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-add-inventory-form',
@@ -30,6 +37,10 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
     grade: 0,
     status: '',
     regNo: '',
+    vehicleType: '',
+    comments: '',
+    showroomId: localStorage.getItem('Showroom Id'),
+    stockAttributeValue: [],
   };
 
   vehicleTypes: any[] = []; //to populate dropdown of vehicle type
@@ -41,12 +52,14 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   columns: DataTableColumn[] = [];
   actions: IDataTableAction[] = [];
   data: IObject[] = [];
-  constructor(private readonly apiService: ApiHelperService) {
+  constructor(
+    private readonly apiService: ApiHelperService,
+    private toast: ToastService
+  ) {
     super();
   }
 
   ngOnInit() {
-
     this.getVehicleTypes();
     // this.vehicleTypes = this.apiService.getVehicleTypes();
     // this.onVehicleTypeSelected();
@@ -55,6 +68,10 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
       {
         field: '',
         fieldTitle: 'Vehicle Type',
+      },
+      {
+        field: '',
+        fieldTitle: 'Chasiss Number',
       },
       {
         field: '',
@@ -76,10 +93,6 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
         field: '',
         fieldTitle: 'Status',
       },
-      {
-        field: '',
-        fieldTitle: 'Body Color',
-      },
     ];
     this.actions = [
       {
@@ -95,13 +108,17 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
     ];
   }
 
+  @ViewChild('Inventory') InventoryForm!: NgForm;
+
   getVehicleTypes() {
-    this.apiService.get('/vehicle-type/getVehicleType').subscribe({
-      next: (response: IObject[]) => {
-        this.vehicleTypes = response;
-      },
-      error: () => {},
-    });
+    this.apiService
+      .get(`/vehicle-type/${this.vehicleInventory.showroomId}`)
+      .subscribe({
+        next: (response: IObject[]) => {
+          this.vehicleTypes = response;
+        },
+        error: () => {},
+      });
   }
 
   //to limit slider value from 0 to 5.
@@ -140,9 +157,15 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
       if (this.selectedVehicleTypeId.type_id) {
         this.apiService
           .get(`/vehicle-type-attribute/${this.selectedVehicleTypeId.type_id}`)
-          .subscribe((attributes) => {
-            this.vehicleAttributes = attributes;
-            console.log(this.vehicleAttributes);
+          .subscribe((attributes: IVehicleTypeAttribute[]) => {
+            let stockAttrVals: IStockAttributeValue[] = [];
+            attributes.forEach((vta: IVehicleTypeAttribute) => {
+              stockAttrVals.push({ id: 0,
+                value: '',
+                inventoryInventoryId:0,
+                multiValueAttributeMultiValueId:0,
+                vehicleTypeAttribute : vta,});
+            });
           });
       } else {
         this.vehicleAttributes = [];
@@ -150,12 +173,29 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
     }
   }
 
-  save() {
-    // console.log(this.selectedType.type_id);
-  }
+  
 
   getOptions(attribute: any) {
-   
-   return attribute.multiValueAttributes.map((mv:IObject) => mv['attribute_value']) as string[]
+    return attribute.multiValueAttributes.map(
+      (mv: IObject) => mv['attribute_value']
+    ) as string[];
+  }
+
+  postInventory() {
+    if (this.InventoryForm.valid) {
+      this.apiService
+        .postLogin('/inventory/addInventory', this.vehicleInventory)
+        .subscribe({
+          next: (response) => {
+            console.log(this.vehicleInventory);
+            console.log(response);
+            this.toast.showSuccess('New Inventory Added');
+          },
+          error: () => {
+            this.toast.showError();
+            console.log(this.vehicleInventory);
+          },
+        });
+    }
   }
 }

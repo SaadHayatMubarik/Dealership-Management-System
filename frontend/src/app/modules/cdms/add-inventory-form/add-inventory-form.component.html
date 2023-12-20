@@ -14,6 +14,7 @@
     <app-datatable [data]="data" [cols]="columns" [globalFilterFields]="[]" [actions]="actions"></app-datatable>
   </div>
   <p-sidebar [(visible)]="modal" position="right" [style]="{ width:'80rem'}">
+    <form (ngSubmit)="postInventory()" #Inventory="ngForm">
     <div class="sidebar-main">
       <div class="sidebar-header">
         <div class="sh-title">
@@ -32,7 +33,14 @@
             <div class="col-4">
               <div class="p-field">
                 <span class="p-float-label">
-                  <p-dropdown class="p-inputtext-lg" placeholder="Select a Vehicle Type" [options]="vehicleTypes" optionLabel="type_name" (onChange)="onVehicleTypeChange($event)"></p-dropdown>
+                  <p-dropdown class="p-inputtext-lg" 
+                  placeholder="Select a Vehicle Type" 
+                  [options]="vehicleTypes" 
+                  optionLabel="type_name"
+                   (onChange)="onVehicleTypeChange($event)"
+                   name="vehicleType"
+                   [(ngModel)]="vehicleInventory.vehicleType"
+                   ></p-dropdown>
                   <label for="float-label">Vehicle Type</label>
               </span>
               </div>
@@ -40,7 +48,12 @@
             <div class="col-4">
               <div class="p-field">
                 <span class="p-float-label">
-                  <input class="p-inputtext-lg" pInputText  />
+                  <input 
+                  class="p-inputtext-lg"
+                   pInputText 
+                   name="make"
+                   [(ngModel)]="vehicleInventory.vehicleMake"
+                   />
                   <label htmlFor="username">Make</label>
               </span>
               </div>
@@ -48,7 +61,11 @@
             <div class="col-4">
               <div class="p-field">
                 <span class="p-float-label">
-                  <input class="p-inputtext-lg" pInputText/>
+                  <input class="p-inputtext-lg" 
+                  pInputText
+                  name="model"
+                  [(ngModel)]="vehicleInventory.vehicleModel"
+                  />
                   <label htmlFor="username">Model</label>
               </span>
               </div>
@@ -59,7 +76,11 @@
             <div class="col-4">
               <div class="p-field">
                 <span class="p-float-label">
-                  <input class="p-inputtext-lg" pInputText/>
+                  <input class="p-inputtext-lg"
+                   pInputText
+                   name="variant"
+                   [(ngModel)]="vehicleInventory.vehicleVariant"
+                   />
                   <label htmlFor="username">Variant</label>
               </span>
               </div>
@@ -67,7 +88,11 @@
             <div class="col-4">
               <div class="p-field">
                 <span class="p-float-label">
-                  <input class="p-inputtext-lg" pInputText/>
+                  <input class="p-inputtext-lg" 
+                  pInputText
+                  name="Chasis No"
+                  [(ngModel)]="vehicleInventory.vehicleChasisNo"
+                  />
                   <label htmlFor="username">Chasis No</label>
                 </span>
               </div>
@@ -75,7 +100,11 @@
             <div class="col-4">
               <div class="p-field">
                 <span class="p-float-label">
-                  <input class="p-inputtext-lg" pInputText/>
+                  <input class="p-inputtext-lg" 
+                  pInputText
+                  name="engineNo"
+                  [(ngModel)]="vehicleInventory.engineNo"
+                  />
                   <label for="float-label">Engine No</label>
               </span>
               </div>
@@ -86,7 +115,13 @@
             <div class="col-4">
               <div class="p-field">
                 <span class="p-float-label">
-                  <p-inputNumber class="p-inputtext-lg"  mode="currency" currency="PKR" locale="en-US"> </p-inputNumber>
+                  <p-inputNumber class="p-inputtext-lg" 
+                   mode="currency" 
+                   currency="PKR" 
+                   locale="en-US"
+                   name="costPrice"
+                   [(ngModel)]="vehicleInventory.costPrice"
+                   > </p-inputNumber>
                   <label for="float-label">Cost Price</label>
               </span>
               </div>
@@ -94,7 +129,13 @@
             <div class="col-4">
               <div class="p-field">
                 <span class="p-float-label">
-                  <p-inputNumber class="p-inputtext-lg"  mode="currency" currency="PKR" locale="en-US"> </p-inputNumber>
+                  <p-inputNumber class="p-inputtext-lg"  
+                  mode="currency"
+                   currency="PKR" 
+                   locale="en-US"
+                   name="demand"
+                   [(ngModel)]="vehicleInventory.demand"
+                   > </p-inputNumber>
                   <label for="float-label">Demand</label>
               </span>
               </div>
@@ -102,7 +143,11 @@
             <div class="col-4">
               <div class="p-field">
                 <span class="p-float-label">
-                  <p-calendar [readonlyInput]="true" class="p-inputtext-lg" ></p-calendar>
+                  <p-calendar [readonlyInput]="true" 
+                  class="p-inputtext-lg"
+                  name="date of purchase"
+                  [(ngModel)]="vehicleInventory.dateOfPurchase"
+                  ></p-calendar>
                   <label>Date Of Purcahse</label>
               </span>
               </div>
@@ -113,20 +158,34 @@
             <div class="col-4">
               <div class="p-field">
                 <span class="p-float-label">
-                  <input class="p-inputtext-lg" pInputText/>
+                  <input class="p-inputtext-lg" 
+                  pInputText
+                  name="color"
+                  [(ngModel)]="vehicleInventory.bodyColor"
+                  />
                   <label htmlFor="username">Body Color</label>
               </span>
               </div>
             </div>
             <div class="col-4">
               <span class="p-float-label">
-                <p-dropdown [options]="status" class="p-inputtext-lg" placeholder="Select a Vehicle Type"></p-dropdown>
+                <p-dropdown
+                 [options]="status" 
+                 class="p-inputtext-lg" 
+                 placeholder="Select a Vehicle Type"
+                 name="status"
+                  [(ngModel)]="vehicleInventory.status"
+                 ></p-dropdown>
                 <label for="float-label">Status</label>
             </span>
             </div>
             <div class="col-4">
               <span class="p-float-label">
-                <input class="p-inputtext-lg" pInputText  />
+                <input class="p-inputtext-lg" 
+                pInputText  
+                name="RegNo"
+                [(ngModel)]="vehicleInventory.regNo"
+                />
                 <label for="float-label">Registration Number</label>
             </span>
             </div>
@@ -135,18 +194,51 @@
            <div class="row-form grid">
             <div class="col-8">
               <span class="p-float-label">
-                <textarea id="float-input" rows="5" cols="80" pInputTextarea></textarea>
+                <textarea id="float-input" 
+                rows="5" cols="80" 
+                pInputTextarea
+                name="comments"
+                [(ngModel)]="vehicleInventory.comments"
+                ></textarea>
                 <label for="float-label">Other Details</label>
             </span>
             </div>
             <div class="col-3">
               <div class="p-field">
                 <label>Grade:</label>
-              <input type="number" pInputText [(ngModel)]="sliderValue" class="w-full" (input)="onInputChange($event)" (keydown)="onKeyDown($event)" [min]="0" [max]="5"/>
+              <input type="number" 
+              pInputText 
+              [(ngModel)]="sliderValue"
+               class="w-full" 
+               (input)="onInputChange($event)" 
+               (keydown)="onKeyDown($event)"
+                [min]="0" 
+                [max]="5"
+                name="grade"
+                [(ngModel)]="vehicleInventory.grade"
+                />
                 <p-slider [(ngModel)]="sliderValue" [min]="0" [max]="5" [step]="0.5" class="w-full"></p-slider>
               </div>
             </div> 
           </div>
+
+          <div class="row-form grid">
+            <div class="col-4">
+              <div class="p-field">
+                <span class="p-float-label">
+                  <input 
+                  class="p-inputtext-lg"
+                   pInputText 
+                   name="modelYear"
+                   [(ngModel)]="vehicleInventory.modelYear"
+                   />
+                  <label htmlFor="Model Year">Model Year</label>
+              </span>
+              </div>
+            </div>
+          </div>
+
+
 
        <!-- adding dynamic form here-->
             <div *ngIf="vehicleAttributes">
@@ -155,7 +247,10 @@
                   <div *ngIf="attribute.input_type === 'text'">
                     <div class="p-field">
                       <span class="p-float-label">
-                        <input class="p-inputtext-lg" pInputText />
+                        <input class="p-inputtext-lg"
+                         pInputText
+                        
+                         />
                         <label for="float-label">{{ attribute.attribute_name }}</label>
                       </span>
                     </div>
@@ -163,14 +258,21 @@
                   <div *ngIf="attribute.input_type === 'number'">
                     <div class="p-field">
                       <span class="p-float-label">
-                        <input class="p-inputtext-lg" pInputText />
+                        <input class="p-inputtext-lg" 
+                        pInputText 
+                       
+                        />
                         <label for="float-label">{{ attribute.attribute_name }}</label>
                       </span>
                     </div>
                   </div>
                   <div *ngIf="attribute.input_type === 'dropdown'">
                     <span class="p-float-label">                
-                      <p-dropdown class="p-inputtext-lg" placeholder="Select {{ attribute.attribute_name }}" [options]="getOptions(attribute)" ></p-dropdown>
+                      <p-dropdown class="p-inputtext-lg" 
+                      placeholder="Select {{ attribute.attribute_name }}" 
+                      [options]="getOptions(attribute)" 
+                      
+                      ></p-dropdown>
                       <label for="float-label">{{ attribute.attribute_name }}</label>
                     </span>
                   </div>
@@ -178,6 +280,8 @@
               </div>
             </div>
         </div>
+        
+        
         <!-- <div class="container">
           <h2>Upload Photos</h2>
             <span>Choose Images To Upload:</span>
@@ -194,11 +298,17 @@
         <br>
     </div>
       <div class="sidebar-footer flex justify-content-end">
-        <app-button label="Save" styleClass="p-button-sm p-button-rounded" (onclick)="save()"></app-button>
+        <app-button
+        type="submit"
+         label="Save" 
+         styleClass="p-button-sm p-button-rounded" 
+         ></app-button>
       </div>
     </div>
+  </form>
   </p-sidebar>
 </div>
+
 
 
 
