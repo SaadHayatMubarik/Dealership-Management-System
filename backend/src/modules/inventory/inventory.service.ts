@@ -74,6 +74,10 @@ export class InventoryService {
         return result;
     }
 
+    async getMarketInventory(): Promise<Inventory>{
+        return
+    }
+
     deleteInventory(inventoryId: number){
         return this.inventoryRepository.delete({ inventory_id: inventoryId });
     }
