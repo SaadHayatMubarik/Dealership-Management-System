@@ -39,6 +39,16 @@ export interface IStockAttributeValue {
   value: any;
   inventoryInventoryId:number;
   multiValueAttributeMultiValueId:number;
+  vehicleTypeAttribute: IVehicleTypeAttributeDto;
+}
 
-  vehicleTypeAttribute : IVehicleTypeAttribute;
+export interface IVehicleTypeAttributeDto {
+  attribute_id: number; 
+  attribute_name: number; 
+  input_type: string;
+  multiVals: IMultiValue[]; 
+}
+export interface IMultiValue {
+  attribute_value: string;
+  multi_value_id: number
 }

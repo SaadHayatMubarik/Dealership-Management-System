@@ -43,31 +43,20 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
   data: IObject[] = [];
   
   showroomID :any; 
-
-
- 
-  
-  
   
   constructor(private readonly apiService: ApiHelperService, 
               private dialogService: DialogControlService ,
               private toastService:ToastService) {
     super()
-   
       
   }
-
 
   ngOnInit() 
 
   {
-
-    
-    
     this.getVehicleTypes(); 
     this.getVehicleTypeAttribute();
    
-    
    this.columns = [ 
     {
       field: 'vehicleTypeName',
@@ -138,24 +127,12 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
     });
   }
   
-
-  // getVehicleTypes(){
-  //   this.apiService.get('/vehicle-type/${this.vehicleTypeAttribute.showroomId}').subscribe((data) => {
-  //     this.vehicleTypes = data;
-  //     console.log(data);
-  //     console.log(this.vehicleTypes);
-  //     console.log(this.vehicleTypeAttribute.ShowroomId);
-  //   })
-  // }
-
   getVehicleTypeAttribute(){
     this.apiService.get(`/vehicle-type-attribute/getVehicleAttribute/${this.vehicleTypeAttribute.ShowroomId}`).subscribe((data) => {
       this.data = data;
       console.log(this.data);
     });
   }
-
- 
  
   resetForm() {
     this.vehicleTypeAttribute.vehicleAttributeName = "";
@@ -183,7 +160,9 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
     }
   }
 
-
+  isDropdownSelected(): boolean {
+    return this.vehicleTypeAttribute.attributeInputType === 'DROPDOWN';
+  }
 
 }
 
