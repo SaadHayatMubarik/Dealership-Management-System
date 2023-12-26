@@ -35,6 +35,9 @@ export class AppMenuComponent implements OnInit {
                     { label: 'Search In Market', 
                     icon: 'pi pi-fw pi-search', 
                     routerLink: ['/cdms/market-search'] },
+                    { label: 'Manage Employee', 
+                    icon: 'pi pi-fw pi-users', 
+                    routerLink: ['/cdms/manage-employee'] },
                 ],
                 
                 

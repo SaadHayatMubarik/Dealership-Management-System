@@ -10,6 +10,16 @@ export interface ISignUp{
     showroomContactNo: string;
 }
 
+export interface IUser
+{
+user_name: string;
+email:string;
+password:string;
+role:string;
+showroomid: any;
+
+}
+
 export interface Ilogin{
     username:string;
     password:string;
