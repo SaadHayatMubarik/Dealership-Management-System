@@ -21,5 +21,5 @@ export class GetInventroyDto{
     demand: number;
 
     @IsNotEmpty()
-    bodyColor: string;
+    mileage: number;
 }

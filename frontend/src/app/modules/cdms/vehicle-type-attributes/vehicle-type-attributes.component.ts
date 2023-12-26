@@ -29,7 +29,7 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
     attributeInputType:'',
     vehicleAttributeValue:[],
     vehicleType:'',
-    ShowroomId : localStorage.getItem("Showroom Id")
+    ShowroomId : localStorage.getItem("Showroom Id"),
   };
 
 

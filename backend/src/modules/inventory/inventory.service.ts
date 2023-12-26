@@ -11,6 +11,7 @@ import { MulterModule } from '@nestjs/platform-express';
 import { MultiValueAttribute } from '../multi-value-attribute/entity/Multi-value-attribute';
 import { GetInventroyDto } from './dto/getInventory.dto';
 import { VehicleType } from '../vehicle-type/entity/Vehicle-type';
+import { GetInventoryByFilterDto } from './dto/getInventoryByFilter.dto';
 
 @Injectable()
 export class InventoryService {
@@ -28,7 +29,7 @@ export class InventoryService {
 
     async addInventory (addInventoryDto: InventoryDto): Promise<Inventory>{
         const inventory = new Inventory();
-        const { vehicleType, vehicleMake, vehicleModel , vehicleVariant , modelYear , vehicleChasisNo , costPrice , demand , dateOfPurchase , dateOfSale , bodyColor , engineNo , comments , grade , regNo, status, attributeValueId, value, showroomId } = addInventoryDto;
+        const { vehicleType, vehicleMake, vehicleModel , vehicleVariant , modelYear , vehicleChasisNo , costPrice , demand , dateOfPurchase , dateOfSale , bodyColor , engineNo , comments , grade , regNo, mileage, status, attributeValueId, value, showroomId } = addInventoryDto;
         inventory.make = vehicleMake.toUpperCase();
         inventory.model = vehicleModel.toUpperCase();
         inventory.variant = vehicleVariant.toUpperCase();
@@ -44,6 +45,7 @@ export class InventoryService {
         inventory.grade = grade;
         inventory.status = status;
         inventory.reg_no = regNo.toUpperCase();
+        inventory.mileage = mileage;
         inventory.vehicleType = vehicleType;
         inventory.showroom = await this.showroomRepository.findOne({ where: { showroom_id: showroomId } });
         // inventory.
@@ -67,15 +69,22 @@ export class InventoryService {
         // let vehicleStatus = status.toUpperCase();
         const getData = this.inventoryRepository.createQueryBuilder('inventory')
         // .leftJoin(VehicleType,'vehicleType', 'inventory.vehicleVehicleTypeId = vehicleType.type_id')
-        .select(['make as vehicleMake','model as vehicleModel', 'variant as vehicleVariant', 'year as modelYear','chasis_no as vehicleChasisNo','demand', 'color as bodyColor'])
+        .select(['make as vehicleMake','model as vehicleModel', 'variant as vehicleVariant', 'year as modelYear','chasis_no as vehicleChasisNo','demand', 'mileage'])
         .where('inventory.status = :status',{status})
         .where('inventory.showroomShowroomId = :showroomId',{showroomId});
         const result = await getData.getRawMany();
         return result;
     }
 
-    async getMarketInventory(): Promise<Inventory>{
-        return
+    async getMarketInventory(getInventoryByFilterDto: GetInventoryByFilterDto): Promise<GetInventroyDto[]>{
+        const { filterBy, Keyword, showroomId } = getInventoryByFilterDto;
+        const getData = this.inventoryRepository.createQueryBuilder('inventory')
+        .select(['make as vehicleMake','model as vehicleModel', 'variant as vehicleVariant', 'year as modelYear','chasis_no as vehicleChasisNo','demand', 'mileage'])
+        .where(`inventory.${filterBy} = :keyword`, {Keyword})
+        .andWhere('inventory.showroomShowroomId != :showroomId',{showroomId});
+
+        const result = await getData.getRawMany();
+        return result;
     }
 
     deleteInventory(inventoryId: number){

@@ -25,7 +25,7 @@ export class VehicleTypeAttributeController {
 
     @Get('/:vehicleTypeId')
     getVehicleAttributeById(@Param('vehicleTypeId') vehicleTypeId: number): Promise<VehicleTypeAttribute[]>{
-        // console.log(vehicleTypeId);
+        console.log(vehicleTypeId);
         return this.vehicleTypeAttributeService.getVehicleAttributeById(vehicleTypeId);
     }
 

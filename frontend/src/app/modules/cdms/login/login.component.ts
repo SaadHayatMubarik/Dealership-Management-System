@@ -33,7 +33,6 @@ export class LoginComponent implements OnInit{
   {
     username:'',
     password:'',
-   
   }
 
   @ViewChild ('login') loginForm!:NgForm;
