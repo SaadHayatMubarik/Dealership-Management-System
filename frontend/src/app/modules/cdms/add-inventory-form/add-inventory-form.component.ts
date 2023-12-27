@@ -10,6 +10,7 @@ import {
   IInventory,
   IStockAttributeValue,
   IVehicleTypeAttribute,
+  IVehicleTypeAttributeDto,
 } from '../../interfaces/inventory';
 import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
@@ -157,6 +158,33 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   //     if (this.selectedVehicleTypeId.type_id) {
   //       this.apiService
   //         .get(`/vehicle-type-attribute/${this.selectedVehicleTypeId.type_id}`)
+  //         .subscribe((attributes: IVehicleTypeAttributeDto[]) => {
+  //           this.vehicleAttributes = attributes;
+  //           console.log(this.vehicleAttributes);
+  //           this.vehicleInventory.stockAttributeValue = [];
+  //           let stockAttrVals: IStockAttributeValue[] = [];
+  //           attributes.forEach((vta: IVehicleTypeAttributeDto) => {
+  //             console.log('====================================');
+  //             console.log(vta);
+  //             console.log('====================================');
+  //             stockAttrVals.push({ id: 0, value: '', inventoryInventoryId: 0, multiValueAttributeMultiValueId: 0, vehicleTypeAttribute: vta })
+  //           });
+  //           this.vehicleInventory.stockAttributeValue = stockAttrVals;
+  //           console.log(this.vehicleInventory.stockAttributeValue);
+  //         });
+  //     } else {
+  //       console.log("error");
+  //     }
+  //   }
+  // }
+
+  // onVehicleTypeChange(event: any) {
+  //   if (event.value) {
+  //     this.selectedVehicleTypeId = event.value;
+  //     console.log(this.selectedVehicleTypeId.type_id);
+  //     if (this.selectedVehicleTypeId.type_id) {
+  //       this.apiService
+  //         .get(`/vehicle-type-attribute/${this.selectedVehicleTypeId.type_id}`)
   //         .subscribe((attributes: IVehicleTypeAttribute[]) => {
   //           this.vehicleAttributes = attributes;
   //           console.log(this.vehicleAttributes);
@@ -205,8 +233,25 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
     ) as string[];
   }
 
+  // getOptions(attribute: any) {
+  //   if (attribute && attribute.multiValueAttributes) {
+  //     return attribute.multiValueAttributes.map(
+  //       (mv: IObject) => mv['attribute_value']
+  //     ) as string[];
+  //   } 
+  //   else {
+  //     console.log('asihsa');
+  //     return ['a'];
+     
+  //   }
+  // }
+  
+
   postInventory() {
-    if (this.InventoryForm.valid) {
+    // if (this.InventoryForm.valid) {
+      console.log('====================================');
+      console.log('this.vehicleInventory', this.vehicleInventory);
+      console.log('====================================');
       this.apiService
         .postLogin('/inventory/addInventory', this.vehicleInventory)
         .subscribe({
@@ -220,6 +265,6 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
             console.log(this.vehicleInventory);
           },
         });
-    }
+    // }
   }
 }

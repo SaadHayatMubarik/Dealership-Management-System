@@ -25,13 +25,13 @@ export class VehicleTypeAttributeController {
 
     @Get('/:vehicleTypeId')
     getVehicleAttributeById(@Param('vehicleTypeId') vehicleTypeId: number): Promise<VehicleTypeAttribute[]>{
-        console.log(vehicleTypeId);
+        // console.log(vehicleTypeId);
         return this.vehicleTypeAttributeService.getVehicleAttributeById(vehicleTypeId);
     }
 
     @Delete('/:vehicleTypeAttributeId')
     deleteVehicleAttributeByName(@Param('vehicleTypeAttributeId') vehicleTypeAttributeId: number){
-        console.log(vehicleTypeAttributeId);
+        // console.log(vehicleTypeAttributeId);
        return this.vehicleTypeAttributeService.deleteVehicleTypeAttributeByName(vehicleTypeAttributeId);
     }
     
