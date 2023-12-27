@@ -12,6 +12,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { SearchMarketComponent } from './search-market/search-market.component';
 import { MarketInventoryComponent } from './market-inventory/market-inventory.component';
+import { ManageEmployeeComponent } from './manage-employee/manage-employee.component';
+import { IsAuthGuard } from 'src/app/shared/guard/auth.guard';
 
 
 
@@ -37,6 +39,7 @@ const routes: Routes = [
         path:'access-denied',
         component: AccessDeniedComponent
       },
+      
     
   
     ],
@@ -52,6 +55,7 @@ const routes: Routes = [
       ,{
       path: 'vehicle-type', 
       component: VehicleTypeComponent,
+      canActivate: [IsAuthGuard]
     },
     {
       path:'vehicle-type-attributes', 
@@ -65,6 +69,11 @@ const routes: Routes = [
       path:'market-search', 
       component:SearchMarketComponent,
     },
+    {
+      path:'manage-employee',
+      component: ManageEmployeeComponent
+    },
+
     ],
   }, 
   // {

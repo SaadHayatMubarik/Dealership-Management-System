@@ -31,6 +31,7 @@ import { LoginComponent } from './login/login.component';
 import { StepsModule } from 'primeng/steps';
 import { SearchMarketComponent } from './search-market/search-market.component';
 import { MarketInventoryComponent } from './market-inventory/market-inventory.component';
+import { ManageEmployeeComponent } from './manage-employee/manage-employee.component';
 
 
 
@@ -50,6 +51,7 @@ import { MarketInventoryComponent } from './market-inventory/market-inventory.co
     LoginComponent,
     SearchMarketComponent,
     MarketInventoryComponent,
+    ManageEmployeeComponent,
  
   ],
   imports: [

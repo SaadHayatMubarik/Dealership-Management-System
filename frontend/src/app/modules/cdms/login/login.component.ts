@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Ilogin } from '../../interfaces';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
@@ -40,6 +41,7 @@ export class LoginComponent implements OnInit{
   constructor(private readonly apiService: ApiHelperService ,
     private router:Router, 
     private toast:ToastService,
+    private auth:AuthService,
      ) { }
 
  
@@ -59,7 +61,7 @@ export class LoginComponent implements OnInit{
         }
         // console.log("-----------------------")
         // localStorage.clear();
-        this.apiService.postLogin('/auth/login',this.userData).subscribe({
+        this.auth.login('/auth/login',this.userData).subscribe({
           next: (response) => {
             console.log(response);
           const jwtToken = response.accessToken;
