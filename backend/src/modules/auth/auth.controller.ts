@@ -7,6 +7,7 @@ import { User } from './entity/User';
 import { CreateAdminDto } from './dto/create-admin.dto';
 import { Showroom } from '../showroom/entity/Showroom';
 import { userInfo } from 'os';
+import { GetUserDto } from './dto/get-user.dto';
 
 
 @Controller('auth')
@@ -31,8 +32,8 @@ export class AuthController {
     return this.authService.login(validationUserDto);
   } 
 
-  @Get('getUsers')
-  getUsers(){
-
+  @Get('getUsers/:showroomId')
+  getUsers(@Param('showroomId') showroomId: number): Promise<GetUserDto[]>{
+    return this.authService.getUsers(showroomId);
   }
 }

@@ -1,6 +1,8 @@
 import { IsNotEmpty, IsOptional } from "class-validator";
 
 export class GetInventroyDto{
+    @IsNotEmpty()
+    inventoryId: number;
 
     @IsNotEmpty()
     vehicleMake: string;

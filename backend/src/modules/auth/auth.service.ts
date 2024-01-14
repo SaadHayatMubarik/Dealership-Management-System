@@ -11,6 +11,7 @@ import { User } from './entity/User';
 import { CreateAdminDto } from './dto/create-admin.dto';
 import { Showroom } from '../showroom/entity/Showroom';
 import { UserRole } from './user-role.enum';
+import { GetUserDto } from './dto/get-user.dto';
 // import { CreateAuthDto } from './dto/create-user.dto';
 // import { UpdateAuthDto } from './dto/update-user.dto';
 
@@ -89,6 +90,14 @@ export class AuthService {
 //     console.log(showroom);
     return { accessToken, showroom };
   } 
+
+  async getUsers(showroomId: number):Promise<GetUserDto[]>{
+    const getData = this.userRepository.createQueryBuilder('user')
+    .select(['user_id as userId','user_name as username','email','role'])
+    .where('user.showroomShowroomId = :showroomId',{showroomId});
+    const result = await getData.getRawMany();
+    return result;
+  }
 
   private async hashPassword(password: string, salt: string): Promise<string>{
     return bcrypt.hash(password,salt);
