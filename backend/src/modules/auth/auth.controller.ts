@@ -31,4 +31,8 @@ export class AuthController {
     return this.authService.login(validationUserDto);
   } 
 
+  @Get('getUsers')
+  getUsers(){
+
+  }
 }

@@ -6,7 +6,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { VehicleTypeAttribute } from './entity/Vehicle-type-attribute';
 
 @Controller('vehicle-type-attribute')
-// @UseGuards(AuthGuard())
+@UseGuards(AuthGuard())
 export class VehicleTypeAttributeController {
     constructor( private vehicleTypeAttributeService: VehicleTypeAttributeService )
     {}

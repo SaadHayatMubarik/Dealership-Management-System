@@ -18,7 +18,7 @@ export class ApiHelperService {
 
   }
 
-  private addTokenHeader() : HttpHeaders{
+  private addTokenHeader(): HttpHeaders {
     const jwtToken = localStorage.getItem('jwtToken');
     if (jwtToken) {
       return new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`);
@@ -26,28 +26,28 @@ export class ApiHelperService {
     return new HttpHeaders();
   }
 
-  
+
 
   private getRequestOptions(params: HttpParams = new HttpParams()): { headers: HttpHeaders; params: HttpParams } {
     return {
-      headers: this.addTokenHeader() ,
+      headers: this.addTokenHeader(),
       params: params
     };
   }
 
 
- 
+
 
   // one more layer of security can be added by encrypting request and decrypting response (weak layer)
-  get(path: string,  params: HttpParams = new HttpParams()): Observable<any> {
+  get(path: string, params: HttpParams = new HttpParams()): Observable<any> {
     return this.http
-      .get(`${environment.apiUrl}${path}`, { params })
-      // .pipe(this.hookResponse(this));
+      .get(`${environment.apiUrl}${path}`, { params, headers: this.addTokenHeader() })
+    .pipe(this.hookResponse(this));
   }
 
   put(path: string, body: Object = {}): Observable<any> {
     return this.http
-      .put(`${environment.apiUrl}${path}`, body, {headers: this.addTokenHeader()})
+      .put(`${environment.apiUrl}${path}`, body, { headers: this.addTokenHeader() })
       .pipe(this.hookResponse(this));
 
   }
@@ -57,7 +57,7 @@ export class ApiHelperService {
     const headers = this.addTokenHeader();
     // console.log(headers);
     return this.http
-      .post(`${environment.apiUrl}${path}`, body, {headers} )
+      .post(`${environment.apiUrl}${path}`, body, { headers })
       .pipe(this.hookResponse(this));
   }
 
@@ -69,18 +69,18 @@ export class ApiHelperService {
 
   delete(path: string): Observable<any> {
     return this.http
-      .delete(`${environment.apiUrl}${path}`, {headers: this.addTokenHeader()})
+      .delete(`${environment.apiUrl}${path}`, { headers: this.addTokenHeader() })
       .pipe(this.hookResponse(this));
   }
 
 
-  
 
 
 
 
 
- 
+
+
   // hookResponse(_this: this) {
   //   return (a: any) => {
   //     return catchError((b: any) => {

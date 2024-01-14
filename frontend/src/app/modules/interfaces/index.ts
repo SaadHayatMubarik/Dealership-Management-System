@@ -12,11 +12,11 @@ export interface ISignUp{
 
 export interface IUser
 {
-user_name: string;
+username: string;
 email:string;
 password:string;
 role:string;
-showroomid: any;
+showroomId: any;
 
 }
 

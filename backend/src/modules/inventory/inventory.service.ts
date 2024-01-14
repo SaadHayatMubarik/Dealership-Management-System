@@ -29,7 +29,7 @@ export class InventoryService {
 
     async addInventory (addInventoryDto: InventoryDto): Promise<Inventory>{
         const inventory = new Inventory();
-        const { vehicleType, vehicleMake, vehicleModel , vehicleVariant , modelYear , vehicleChasisNo , costPrice , demand , dateOfPurchase , dateOfSale , bodyColor , engineNo , comments , grade , regNo, mileage, status, attributeValueId, value, showroomId } = addInventoryDto;
+        const { vehicleType, vehicleMake, vehicleModel , vehicleVariant , modelYear , vehicleChasisNo , costPrice , demand , dateOfPurchase , dateOfSale , bodyColor , engineNo , comments , grade , regNo, mileage, status, showroomId, value, attributeValueId } = addInventoryDto;
         inventory.make = vehicleMake.toUpperCase();
         inventory.model = vehicleModel.toUpperCase();
         inventory.variant = vehicleVariant.toUpperCase();
