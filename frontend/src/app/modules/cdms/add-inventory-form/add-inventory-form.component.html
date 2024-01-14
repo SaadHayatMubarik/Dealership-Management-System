@@ -272,6 +272,7 @@
 <br>
        <!-- adding dynamic form here-->
             <div *ngIf="vehicleInventory.stockAttributeValue.length > 0">
+               <h5 style="text-align: center;">Additional Details</h5> <br>
               <div class="row-form grid">
                 <div class="col-4" *ngFor="let attribute of vehicleInventory.stockAttributeValue; let i = index">
                   <div *ngIf="attribute.vehicleTypeAttribute.input_type === 'text'">

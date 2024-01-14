@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { LayoutService } from '../service/app.layout.service';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class AppTopBarComponent implements OnInit {
 
 
 
-    constructor(public layoutService: LayoutService) {
+    constructor(public layoutService: LayoutService, readonly authService: AuthService) {
         this.companyName = 'CDMS';
 
 
@@ -30,7 +31,9 @@ export class AppTopBarComponent implements OnInit {
         this.companyName = 'CDMS';
     }
 
-logout(){}
+logout(){
+    this.authService.logout();
+}
 
 changePassword(){}
 }
