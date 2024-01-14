@@ -143,6 +143,9 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
 
   saveVehicleTypeAttribute() {
     if (this.vehicleTypeAttribute.vehicleAttributeName !== '') {
+      if(this.vehicleTypeAttribute.attributeInputType != 'DROPDOWN'){
+        this.vehicleTypeAttribute.vehicleAttributeValue[0] = '';
+      }
       this.apiService
         .post('/vehicle-type-attribute/addVehicleTypeAttribute', this.vehicleTypeAttribute)
         .subscribe({

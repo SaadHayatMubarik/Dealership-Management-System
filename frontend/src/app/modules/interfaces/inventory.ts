@@ -28,13 +28,15 @@ export interface IInventory {
   grade: number;
   status: any;
   regNo: string;
+  mileage:number;
   showroomId: any;
-
+  attributeValueId:number[];
+  value: string[];
   stockAttributeValue : IStockAttributeValue[];
 
 }
 
-export interface IStockAttributeValue {
+export interface IStockAttributeValue {  // zaid kaa kaam
   id: number;
   value: any;
   inventoryInventoryId:number;

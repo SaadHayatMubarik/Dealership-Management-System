@@ -22,15 +22,15 @@ export class ManageEmployeeComponent extends BaseComponent implements OnInit {
 
 
   user: IUser = {
-    user_name: '',
+    username: '',
     email: '',
     password:'',
     role:'',
-    showroomid: localStorage.getItem('Showroom Id'),
+    showroomId: localStorage.getItem('Showroom Id'),
 
   };
 
-  roles : string[] = ['admin', 'Inventory-Manager', 'Accounts-Manager'];
+  roles : string[] = ['ADMIN', 'EMPLOYEE', 'OWNER'];
   
 
   columns: DataTableColumn[] = [];

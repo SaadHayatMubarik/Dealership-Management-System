@@ -56,13 +56,16 @@ export class InventoryDto{
     
     @IsOptional()
     regNo: string;
+
+    @IsNotEmpty()
+    mileage: number;
     
     @IsNotEmpty()
     showroomId: number;
 
     @IsNotEmpty()
-    value:string[];
+    attributeValueId:number[];
 
     @IsNotEmpty()
-    attributeValueId: number[];
+    value:string[];
 }

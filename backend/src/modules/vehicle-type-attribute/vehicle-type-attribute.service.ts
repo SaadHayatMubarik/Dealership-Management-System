@@ -48,7 +48,7 @@ export class VehicleTypeAttributeService {
         .where('vehicleType.showroomShowroomId = :showroomId',{showroomId});
         const result = await getValue.getRawMany();
         // console.log(result);
-    return result ;
+    return result;
     }
 
     async getVehicleAttributeById(vehicleTypeId: number): Promise<VehicleTypeAttribute[]>{
@@ -56,7 +56,7 @@ export class VehicleTypeAttributeService {
             relations: ['multiValueAttributes'],
             where: { vehicleType:{ type_id: vehicleTypeId } } // Specify the name of the relationship property
           });
-        return getValue
+        return getValue;
     }
 
     async deleteVehicleTypeAttributeByName(attributeId: number){

@@ -40,12 +40,16 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
     regNo: '',
     vehicleType: '',
     comments: '',
+    mileage: 0,
     showroomId: localStorage.getItem('Showroom Id'),
+    value:[],
+    attributeValueId:[],
     stockAttributeValue: [],
   };
 
+
   vehicleTypes: any[] = []; //to populate dropdown of vehicle type
-  status: string[] = ['Available', 'Unavailable', 'Upcoming']; //to populate status dropdown
+  status: string[] = ['Available', 'Sold', 'On Order']; //to populate status dropdown
   sliderValue: number = 0;
   selectedVehicleTypeId: any; //saving vehicle type id
   vehicleAttributes: any[] = []; //to save vehicle type attributes
@@ -154,7 +158,6 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   onVehicleTypeChange(event: any) {
     if (event.value) {
       this.selectedVehicleTypeId = event.value;
-      console.log(this.selectedVehicleTypeId.type_id);
       if (this.selectedVehicleTypeId.type_id) {
         this.apiService
           .get(`/vehicle-type-attribute/${this.selectedVehicleTypeId.type_id}`)
@@ -163,20 +166,49 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
             console.log(this.vehicleAttributes);
             this.vehicleInventory.stockAttributeValue = [];
             let stockAttrVals: IStockAttributeValue[] = [];
+            console.log('====================================');
             attributes.forEach((vta: IVehicleTypeAttributeDto) => {
-              console.log('====================================');
               console.log(vta);
-              console.log('====================================');
-              stockAttrVals.push({ id: 0, value: '', inventoryInventoryId: 0, multiValueAttributeMultiValueId: 0, vehicleTypeAttribute: vta })
+              stockAttrVals.push({ id: 0, value: '', inventoryInventoryId:0, multiValueAttributeMultiValueId:0, vehicleTypeAttribute: vta })
+              console.log(vta.multiVals);
             });
+            console.log('====================================');
+          
             this.vehicleInventory.stockAttributeValue = stockAttrVals;
-            console.log(this.vehicleInventory.stockAttributeValue);
           });
       } else {
         console.log("error");
       }
     }
   }
+
+  // onVehicleTypeChange(event: any) {
+  //   if (event.value) {
+  //     this.selectedVehicleTypeId = event.value;
+  //     console.log(this.selectedVehicleTypeId.type_id);
+  //     if (this.selectedVehicleTypeId.type_id) {
+  //       this.apiService
+  //         .get(`/vehicle-type-attribute/${this.selectedVehicleTypeId.type_id}`)
+  //         .subscribe((attributes: IVehicleTypeAttribute[]) => {
+  //           this.vehicleAttributes = attributes;
+  //           console.log(this.vehicleAttributes);
+  //           this.vehicleInventory.stockAttributeValue = [];
+  //           let stockAttrVals: IStockAttributeValue[] = [];
+  //           attributes.forEach((vta: IVehicleTypeAttribute) => {
+  //             stockAttrVals.push({ id: 0,
+  //               value: '',
+  //               inventoryInventoryId:0,
+  //               multiValueAttributeMultiValueId:0,
+  //               vehicleTypeAttribute : vta})
+  //           });
+  //           this.vehicleInventory.stockAttributeValue = stockAttrVals;
+  //           console.log(this.vehicleInventory.stockAttributeValue);
+  //         });
+  //     } else {
+  //       console.log("error");
+  //     }
+  //   }
+  // }
 
   // onVehicleTypeChange(event: any) {
   //   if (event.value) {
@@ -221,15 +253,15 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
 
   postInventory() {
     // if (this.InventoryForm.valid) {
-      console.log('====================================');
+      // console.log('====================================');
       console.log('this.vehicleInventory', this.vehicleInventory);
-      console.log('====================================');
+      // console.log('====================================');
       this.apiService
         .postLogin('/inventory/addInventory', this.vehicleInventory)
         .subscribe({
           next: (response) => {
-            console.log(this.vehicleInventory);
-            console.log(response);
+            // console.log(this.vehicleInventory);
+            // console.log(response);
             this.toast.showSuccess('New Inventory Added');
           },
           error: () => {

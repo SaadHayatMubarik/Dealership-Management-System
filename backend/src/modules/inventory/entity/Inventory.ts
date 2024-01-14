@@ -55,6 +55,9 @@ grade: number;
 @Column({ nullable: true })
 reg_no: string;
 
+@Column()
+mileage: number;
+
 @ManyToOne(() => VehicleType, (vehicleType) => vehicleType.inventory)
 vehicleType: VehicleType;
 

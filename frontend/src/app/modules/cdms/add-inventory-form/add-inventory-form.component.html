@@ -158,6 +158,18 @@
             <div class="col-4">
               <div class="p-field">
                 <span class="p-float-label">
+                  <p-calendar [readonlyInput]="true" 
+                  class="p-inputtext-lg"
+                  name="date of sale"
+                  [(ngModel)]="vehicleInventory.dateOfSale"
+                  ></p-calendar>
+                  <label>Date Of Sale</label>
+              </span>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="p-field">
+                <span class="p-float-label">
                   <input class="p-inputtext-lg" 
                   pInputText
                   name="color"
@@ -168,6 +180,7 @@
               </div>
             </div>
             <div class="col-4">
+              <div class="p-field">
               <span class="p-float-label">
                 <p-dropdown
                  [options]="status" 
@@ -177,9 +190,14 @@
                   [(ngModel)]="vehicleInventory.status"
                  ></p-dropdown>
                 <label for="float-label">Status</label>
-            </span>
+              </span>
+              </div>
             </div>
+          </div>
+          <br>
+          <div class="row-form grid">
             <div class="col-4">
+              <div class="p-field">
               <span class="p-float-label">
                 <input class="p-inputtext-lg" 
                 pInputText  
@@ -189,40 +207,18 @@
                 <label for="float-label">Registration Number</label>
             </span>
             </div>
-          </div>
-           <br>
-           <div class="row-form grid">
-            <div class="col-8">
-              <span class="p-float-label">
-                <textarea id="float-input" 
-                rows="5" cols="80" 
-                pInputTextarea
-                name="comments"
-                [(ngModel)]="vehicleInventory.comments"
-                ></textarea>
-                <label for="float-label">Other Details</label>
-            </span>
             </div>
-            <div class="col-3">
+            <div class="col-4">
               <div class="p-field">
-                <label>Grade:</label>
-              <input type="number" 
-              pInputText 
-              [(ngModel)]="sliderValue"
-               class="w-full" 
-               (input)="onInputChange($event)" 
-               (keydown)="onKeyDown($event)"
-                [min]="0" 
-                [max]="5"
-                name="grade"
-                [(ngModel)]="vehicleInventory.grade"
-                />
-                <p-slider [(ngModel)]="sliderValue" [min]="0" [max]="5" [step]="0.5" class="w-full"></p-slider>
+                <span class="p-float-label">
+                  <p-inputNumber class="p-inputtext-lg" 
+                   name="milage"
+                   [(ngModel)]="vehicleInventory.mileage"
+                   > </p-inputNumber>
+                  <label for="float-label">Mileage</label>
+              </span>
               </div>
-            </div> 
-          </div>
-
-          <div class="row-form grid">
+            </div>
             <div class="col-4">
               <div class="p-field">
                 <span class="p-float-label">
@@ -237,9 +233,43 @@
               </div>
             </div>
           </div>
-
-
-
+            <br>
+            <div class="row-form grid">
+            <div class="col-8">
+              <div class="p-field">
+              <span class="p-float-label">
+                <textarea id="float-input" 
+                rows="5" cols="80" 
+                pInputTextarea
+                name="comments"
+                [(ngModel)]="vehicleInventory.comments"
+                ></textarea>
+                <label for="float-label">Other Details</label>
+            </span>
+            </div>
+          </div>
+          <!-- </div> -->
+          <!-- <br> -->
+          
+            <div class="col-3">
+              <div class="p-field">
+                <label>Grade*</label>
+              <input type="number" 
+              pInputText 
+              [(ngModel)]="sliderValue"
+               class="w-full" 
+               (input)="onInputChange($event)" 
+               (keydown)="onKeyDown($event)"
+                [min]="0" 
+                [max]="5"
+                name="grade"
+                [(ngModel)]="vehicleInventory.grade"
+                />
+                <!-- <p-slider [(ngModel)]="sliderValue" [min]="0" [max]="5" [step]="0.5" class="w-full"></p-slider> -->
+              </div>
+            </div> 
+          </div>
+<br>
        <!-- adding dynamic form here-->
             <div *ngIf="vehicleInventory.stockAttributeValue.length > 0">
                <h5 style="text-align: center;">Additional Details</h5> <br>
@@ -265,6 +295,18 @@
                         [(ngModel)]="attribute.value" 
                         name="Dynamic Form2" 
                         />
+                        <label for="float-label">{{attribute.vehicleTypeAttribute.attribute_name }}</label>
+                      </span>
+                    </div>
+                  </div>
+                  <div *ngIf="attribute.vehicleTypeAttribute.input_type === 'date'">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <p-calendar [readonlyInput]="true" 
+                        class="p-inputtext-lg"
+                        name="Dynamic Form3"
+                        [(ngModel)]="attribute.value"
+                        ></p-calendar>
                         <label for="float-label">{{attribute.vehicleTypeAttribute.attribute_name }}</label>
                       </span>
                     </div>

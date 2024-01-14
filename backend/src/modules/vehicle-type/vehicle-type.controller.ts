@@ -8,7 +8,7 @@ import { GetUser } from '../auth/get-user.decorator';
 import { User } from '../auth/entity/User';
 
 @Controller('vehicle-type')
-// @UseGuards(AuthGuard())
+@UseGuards(AuthGuard())
 export class VehicleTypeController {
 
     constructor(private vehicleTypeService: VehicleTypeService){    }
