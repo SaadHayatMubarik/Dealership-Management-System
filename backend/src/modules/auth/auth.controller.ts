@@ -1,7 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, ValidationPipe} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from './dto/create-user.dto';
-// import { User } from './entities/User';
 import { ValidateUserDto } from './dto/validate-user.dto';
 import { User } from './entity/User';
 import { CreateAdminDto } from './dto/create-admin.dto';

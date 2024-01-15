@@ -3,10 +3,10 @@ import { IsNotEmpty } from "class-validator";
 export class GetInventoryByFilterDto{
 
     @IsNotEmpty()
-    filterBy: string;
+    filterBy: string[];
 
     @IsNotEmpty()
-    Keyword: any;
+    Keyword: any[];
 
     @IsNotEmpty()
     showroomId: number;

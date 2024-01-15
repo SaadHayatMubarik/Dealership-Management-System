@@ -17,10 +17,14 @@ export class InventoryController {
         console.log(addInventoryDto);
         return this.inventoryService.addInventory(addInventoryDto)
     }
+    @Get('getInventory/:inventoryID')
+    getInventoryDetail(@Param('inventoryId') inventoryId: number): Promise<Inventory>{
+        return this.inventoryService.getInventoryDetails(inventoryId);
+    }
 
     @Get('getInventory/:showroomId/:status')
     getInventory(@Param('showroomId') showroomId: number,@Param('status') status: String): Promise<GetInventroyDto[]>{
-        console.log(status,showroomId); 
+        // console.log(status,showroomId); 
         return this.inventoryService.getInventory(status, showroomId);
     }
 
