@@ -10,7 +10,7 @@ import { GetInventoryByFilterDto } from './dto/getInventoryByFilter.dto';
 import { AuthGuard } from '@nestjs/passport';
 
 @Controller('inventory')
-@UseGuards(AuthGuard())
+// @UseGuards(AuthGuard())
 export class InventoryController {
     constructor(private inventoryService: InventoryService){}
 

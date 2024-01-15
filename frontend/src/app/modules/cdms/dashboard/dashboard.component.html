@@ -72,9 +72,72 @@
         <a [routerLink]="['/cdms/market-search']">View More</a>
     </div>
     
-        <div class="grid">
+        <!-- <div class="grid">
+            <div class="col-12 lg:col-6 xl:col-4">
+                <div class="card mb-0 color">
+                    <div class="flex justify-content-between mb-3">
+                        <div>
+                            <h3>2023 Toyota Crown Limited</h3>
+                        </div>
+                    </div>
 
-            <!-- <div class="col-12 lg:col-6 xl:col-4">
+                    <div class="car-details">
+                       
+                        <img src="../../../../assets/demo/images/car.jpg" alt="Car Image" class="car-image">
+                  
+                        <p>2.5-liter 4-Cylinder Hybrid, ECVT with All-Wheel Drive (AWD)</p>
+                       
+                        <hr class="divider">
+                  
+                        <p >Price: <span id="priceColor"> PKR </span> 1,234,567
+                        <br>
+                        Mileage: 20,00
+                        </p>
+                        
+                        <div style="text-align: center;">
+                        <button pButton  label="View Deatils" style="background-color: rgb(225, 10, 29);"></button>
+                    </div>
+                      </div>
+
+                </div>
+             </div>
+   
+            </div> -->
+
+            <div class="grid">
+                <div class="col-12 lg:col-6 xl:col-4" *ngFor="let vehicle of vehicleDetails; let i = index">
+                  <div class="card mb-0 color">
+                    <div class="flex justify-content-between mb-3">
+                      <div>
+                        <h3>{{ vehicle.modelYear }} {{ vehicle.vehicleMake }} {{ vehicle.vehicleModel }} {{ vehicle.vehicleVariant }}</h3>
+                      </div>
+                    </div>
+              
+                    <div class="car-details">
+                      <img src="../../../../assets/demo/images/car.jpg" alt="Car Image" class="car-image">
+                      <hr class="divider">
+                      
+                      <p>Price: <span id="priceColor"> PKR {{ vehicle.demand | number:'1.0-0' }}</span>
+                        <br>
+                        Mileage: {{ vehicle.mileage }} Km
+                    </p>
+                      <div style="text-align: center;">
+                        <button pButton label="View Details" style="background-color: rgb(225, 10, 29);"></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>    
+        </div>    
+
+    
+
+        
+        
+
+  <!-- <div class="col-12 lg:col-6 xl:col-4">
                 <div class="card mb-0 color">
                     <div class="justify-content-between mb-3">
                         <div>
@@ -148,33 +211,7 @@
             </div> -->
 
 
-            <div class="col-12 lg:col-6 xl:col-4">
-                <div class="card mb-0 color">
-                    <div class="flex justify-content-between mb-3">
-                        <div>
-                            <h3>2023 Toyota Crown Limited</h3>
-                        </div>
-                    </div>
-
-                    <div class="car-details">
-                       
-                        <img src="../../../../assets/demo/images/car.jpg" alt="Car Image" class="car-image">
-                  
-                        <p>2.5-liter 4-Cylinder Hybrid, ECVT with All-Wheel Drive (AWD)</p>
-                       
-                        <hr class="divider">
-                  
-                        <p >Price: <span id="priceColor"> PKR </span> 1,234,567</p>
-                        
-                        <div style="text-align: center;">
-                        <button pButton  label="View Deatils" style="background-color: rgb(225, 10, 29);"></button>
-                    </div>
-                      </div>
-
-                </div>
-             </div>
-
-             <!-- <div class="col-12 lg:col-6 xl:col-4">
+            <!-- <div class="col-12 lg:col-6 xl:col-4">
                 <div class="card mb-0 color">
                     <div class="flex justify-content-between mb-3">
                         <div>
@@ -203,13 +240,3 @@
 
                 </div>
              </div> -->
-   
-            </div>
-            </div>    
-        </div>    
-
-    
-
-        
-        
-

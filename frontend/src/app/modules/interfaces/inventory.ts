@@ -36,6 +36,20 @@ export interface IInventory {
 
 }
 
+export interface IVehicleDetails {
+  
+  inventoryId: number;
+  vehicleMake: string;
+  vehicleModel: string;
+  vehicleVariant: string;
+  modelYear: number;
+  demand: number;
+  mileage: number;
+  
+  
+  
+}
+
 export interface IStockAttributeValue {  // zaid kaa kaam
   id: number;
   value: any;
