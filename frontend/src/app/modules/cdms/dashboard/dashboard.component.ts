@@ -31,7 +31,7 @@ export class DashboardComponent extends BaseComponent implements OnInit {
 
 
 getVehicleDetails(){
-  this.apiService.get(`/inventory/getMarketInventory`).subscribe((data) => {
+  this.apiService.get(`/inventory/getMarketInventory/{showroomId}`).subscribe((data) => {
     this.data = data;
     console.log(data);
   });
