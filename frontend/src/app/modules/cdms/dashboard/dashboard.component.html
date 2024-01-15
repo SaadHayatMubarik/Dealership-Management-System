@@ -69,13 +69,13 @@
 
     <div class="flex justify-content-between">
         <h4>Search In Market</h4>
-        <a href="#" >View More</a>
+        <a [routerLink]="['/cdms/market-search']">View More</a>
     </div>
     
        <!-- filters -->
         <div class="grid">
 
-            <div class="col-12 lg:col-6 xl:col-4">
+            <!-- <div class="col-12 lg:col-6 xl:col-4">
                 <div class="card mb-0 color">
                     <div class="justify-content-between mb-3">
                         <div>
@@ -145,10 +145,8 @@
                     <div style="text-align: center;">
                         <button pButton  label="Search" style="background-color: rgb(225, 10, 29);"></button>
                     </div>
-                </div>
-          
-                
-            </div>
+                </div>              
+            </div> -->
 
 
             <div class="col-12 lg:col-6 xl:col-4">
@@ -180,35 +178,37 @@
 
                 </div>
              </div>
-   
-            <div class="col-12 lg:col-6 xl:col-4">
+
+             <!-- <div class="col-12 lg:col-6 xl:col-4">
                 <div class="card mb-0 color">
                     <div class="flex justify-content-between mb-3">
                         <div>
                             <h3>2023 Toyota Crown Limited</h3>
                         </div>
-                    </div> 
-                        <div class="car-details">
-                            <!-- Car Image -->
-                            <img src="../../../../assets/demo/images/car.jpg" alt="Car Image" class="car-image">
-                      
-                            <!-- Specifications -->
-                            <p>2.5-liter 4-Cylinder Hybrid, ECVT with All-Wheel Drive (AWD)</p>
-                      
-                            <!-- Horizontal Line -->
-                            <hr class="divider">
-                      
-                            <!-- Price -->
-                            <p >Price: <span id="priceColor"> PKR </span> 1,234,567</p>
-                      
-                            <!-- View Details Button -->
-                            <div style="text-align: center;">
-                            <button pButton  label="View Deatils" style="background-color: rgb(225, 10, 29);"></button>
-                        </div>
-                          </div>
-                        
                     </div>
+
+                    <div class="car-details">
+                        
+                        <img src="../../../../assets/demo/images/car.jpg" alt="Car Image" class="car-image">
+                  
+                      
+                        <p>2.5-liter 4-Cylinder Hybrid, ECVT with All-Wheel Drive (AWD)</p>
+                  
+                        
+                        <hr class="divider">
+                  
+                        
+                        <p >Price: <span id="priceColor"> PKR </span> 1,234,567</p>
+                  
+                       
+                        <div style="text-align: center;">
+                        <button pButton  label="View Deatils" style="background-color: rgb(225, 10, 29);"></button>
+                    </div>
+                      </div>
+
                 </div>
+             </div> -->
+   
             </div>
             </div>    
         </div>    
