@@ -84,9 +84,9 @@ export class InventoryService {
         // const { filterBy, Keyword, showroomId } = getInventoryByFilterDto;
         const getData = this.inventoryRepository.createQueryBuilder('inventory')
         .select(['inventory_id as  inventoryId','make as vehicleMake','model as vehicleModel', 'variant as vehicleVariant', 'year as modelYear','demand', 'mileage'])
-        // .where(`inventory.${filterBy} = :keyword`, {Keyword})
-        .andWhere('inventory.showroomShowroomId != :showroomId',{showroomId});
+        .where('inventory.showroomShowroomId != :showroomId',{showroomId});
         const result = await getData.getRawMany();
+        // console.log(result);
         return result;
     }
 

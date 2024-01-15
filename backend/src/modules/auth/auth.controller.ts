@@ -8,6 +8,7 @@ import { Showroom } from '../showroom/entity/Showroom';
 import { userInfo } from 'os';
 import { GetUserDto } from './dto/get-user.dto';
 import { AuthGuard } from '@nestjs/passport';
+import { UserRole } from './user-role.enum';
 
 
 @Controller('auth')
@@ -29,7 +30,7 @@ export class AuthController {
   }
 
   @Post('login')
-  login(@Body(ValidationPipe) validationUserDto: ValidateUserDto): Promise<{ accessToken: string, showroom: number }> {
+  login(@Body(ValidationPipe) validationUserDto: ValidateUserDto): Promise<{ accessToken: string, showroom: number, role:UserRole }> {
     // console.log(validationUserDto);
     return this.authService.login(validationUserDto);
   } 

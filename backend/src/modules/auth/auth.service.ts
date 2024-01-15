@@ -75,9 +75,8 @@ export class AuthService {
     
   }
 
-  async login( validateUserDto: ValidateUserDto): Promise<{ accessToken: string, showroom: number }>{
+  async login( validateUserDto: ValidateUserDto): Promise<{ accessToken: string, showroom: number, role:UserRole}>{
     const username = await this.validateUserPassword(validateUserDto);
-
     if(!username){
       throw new UnauthorizedException('Invalidate credentials');
     }
@@ -86,10 +85,14 @@ export class AuthService {
     const showroom = await this.userRepository.createQueryBuilder('user')
     .select('showroomShowroomId') 
     .where('user.user_name = :username', {username})
-    .getRawOne();                        
+    .getRawOne();  
+    const role = await this.userRepository.createQueryBuilder('user')
+    .select('role') 
+    .where('user.user_name = :username', {username})
+    .getRawOne();                       
 // console.log(accessToken);
 //     console.log(showroom);
-    return { accessToken, showroom };
+    return { accessToken, showroom, role };
   } 
 
   async getUsers(showroomId: number):Promise<GetUserDto[]>{

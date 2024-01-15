@@ -52,7 +52,7 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component:DashboardComponent,
-        canActivate: [IsAuthGuard]
+        // canActivate: [IsAuthGuard]
         
       }
       ,{
@@ -70,6 +70,7 @@ const routes: Routes = [
     {
       path:'market-search', 
       component:SearchMarketComponent,
+      canActivate: [IsAuthGuard]
     },
     {
       path:'manage-employee',
@@ -77,7 +78,8 @@ const routes: Routes = [
     },
     {
       path:'view-showroom',
-      component: ViewShowroomComponent
+      component: ViewShowroomComponent,
+      canActivate: [IsAuthGuard]
     }
 
     ],
