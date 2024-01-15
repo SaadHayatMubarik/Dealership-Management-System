@@ -68,7 +68,7 @@
     <div class="card">
 
     <div class="flex justify-content-between">
-        <h4>Search In Market</h4>
+        <h4>Recently Added In Market</h4>
         <a [routerLink]="['/cdms/market-search']">View More</a>
     </div>
     
@@ -105,7 +105,7 @@
             </div> -->
 
             <div class="grid">
-                <div class="col-12 lg:col-6 xl:col-4" *ngFor="let vehicle of vehicleDetails; let i = index">
+                <div class="col-12 lg:col-6 xl:col-4" *ngFor="let vehicle of vehicleDetails.slice().reverse().slice(0, 3); let i = index">
                   <div class="card mb-0 color">
                     <div class="flex justify-content-between mb-3">
                       <div>
@@ -120,6 +120,7 @@
                       <p>Price: <span id="priceColor"> PKR {{ vehicle.demand | number:'1.0-0' }}</span>
                         <br>
                         Mileage: {{ vehicle.mileage }} Km
+                        
                     </p>
                       <div style="text-align: center;">
                         <button pButton label="View Details" style="background-color: rgb(225, 10, 29);"></button>
