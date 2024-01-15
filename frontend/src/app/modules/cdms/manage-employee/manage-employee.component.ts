@@ -46,6 +46,8 @@ export class ManageEmployeeComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
 
+    // this.getemployee();
+
     this.columns = [
       {
         field: '',
@@ -96,5 +98,16 @@ export class ManageEmployeeComponent extends BaseComponent implements OnInit {
 
   }
 
+  // getemployee(){
+  //   this.apiService
+  //   .get(`/vehicle-type/${this.vehicleInventory.showroomId}`)
+  //   .subscribe({
+  //     next: (response: IObject[]) => {
+  //       this.vehicleTypes = response;
+  //     },
+  //     error: () => {},
+  //   });
+
+  // }
 
 }

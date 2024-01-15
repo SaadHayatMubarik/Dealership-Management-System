@@ -1,0 +1,21 @@
+
+.color:hover {
+    background-color: rgb(249, 250, 249);
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .divider {
+    width: 100%;
+    border-top: 1px solid #ccc;
+    margin: 10px 0;
+  }
+
+  .car-image {
+   
+    max-width: 100%; 
+    border-radius: 8px;
+  }
+  
+  #priceColor{
+   color: rgb(0,100,0);
+  }

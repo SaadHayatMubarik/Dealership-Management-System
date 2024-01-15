@@ -24,14 +24,14 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { SliderModule } from 'primeng/slider';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { SignUpComponent } from './sign-up/sign-up.component';
-import { Tooltip, TooltipModule } from 'primeng/tooltip';
+import {  TooltipModule } from 'primeng/tooltip';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { LoginComponent } from './login/login.component';
 import { StepsModule } from 'primeng/steps';
 import { SearchMarketComponent } from './search-market/search-market.component';
-import { MarketInventoryComponent } from './market-inventory/market-inventory.component';
 import { ManageEmployeeComponent } from './manage-employee/manage-employee.component';
+import { FieldsetModule } from 'primeng/fieldset';
 
 
 
@@ -50,7 +50,6 @@ import { ManageEmployeeComponent } from './manage-employee/manage-employee.compo
     AccessDeniedComponent,
     LoginComponent,
     SearchMarketComponent,
-    MarketInventoryComponent,
     ManageEmployeeComponent,
  
   ],
@@ -77,6 +76,9 @@ import { ManageEmployeeComponent } from './manage-employee/manage-employee.compo
     ConfirmDialogModule,
     TooltipModule,
     StepsModule,
+    FieldsetModule,
+
+   
    
     
     
