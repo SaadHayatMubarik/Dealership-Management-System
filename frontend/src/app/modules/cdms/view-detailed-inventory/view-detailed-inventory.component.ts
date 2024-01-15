@@ -34,6 +34,7 @@ inventoryId : number = 0;
 
     this.route.params.subscribe(params => {
       this.inventoryId = params['inventoryId']; 
+      console.log(this.inventoryId);
     });
 
 
@@ -52,11 +53,13 @@ inventoryId : number = 0;
     // });
     this.apiService.get(`/inventory/getInventoryDetails/${this.inventoryId}`).subscribe((data) => {
       this.data = data;
-      console.log(data.mileage);
+      console.log(data);
+      console.log('api working');
       console.log(this.data);
     });
-
   }
+
+  
 
 
 

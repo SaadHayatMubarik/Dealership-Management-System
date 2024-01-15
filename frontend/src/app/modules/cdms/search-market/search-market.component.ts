@@ -32,7 +32,6 @@ export class SearchMarketComponent extends BaseComponent implements OnInit{
 
   ngOnInit() {
     this.getVehicleDetails();
-
   }
 
 
@@ -47,9 +46,7 @@ export class SearchMarketComponent extends BaseComponent implements OnInit{
   } 
 
   redirect(inventoryId:string){
-
     this.router.navigate(['/detail-view', inventoryId]);
-    console.log(inventoryId);
   }
 
   

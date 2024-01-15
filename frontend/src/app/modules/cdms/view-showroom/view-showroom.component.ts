@@ -61,7 +61,6 @@ export class ViewShowroomComponent extends BaseComponent implements OnInit {
 
   getShowrooms(){
     this.apiService.get(`/showroom/showroomDetails/${this.showroomId}`).subscribe((data) => {
-      console.log(data);
       this.data = data;
   })
 }
