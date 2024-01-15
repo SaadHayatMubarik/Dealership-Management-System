@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from 'src/app/shared/base.component';
+import { Router } from '@angular/router';
 import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
 
 import {
@@ -16,7 +17,7 @@ import { IVehicleDetails } from '../../interfaces/inventory';
 })
 export class SearchMarketComponent extends BaseComponent implements OnInit{
 
-  constructor(private apiService: ApiHelperService){
+  constructor(private apiService: ApiHelperService, private router: Router){
     super()
   }
 
@@ -32,33 +33,6 @@ export class SearchMarketComponent extends BaseComponent implements OnInit{
   ngOnInit() {
     this.getVehicleDetails();
 
-    // this.columns = [
-    //   {
-    //     field: '',
-    //     fieldTitle: 'Showroom Name',
-    //   },
-    //   {
-    //     field: '',
-    //     fieldTitle: 'Showroom State',
-    //   },
-    //   {
-    //     field: '',
-    //     fieldTitle: 'Showroom City',
-    //   },
-    //   {
-    //     field: '',
-    //     fieldTitle: 'Showroom Address',
-    //   },
-      
-    // ];
-    // this.actions = [
-     
-    //   {
-    //     label: 'View',
-    //     icon: 'pi pi-file-view',
-    //     command: () => {},
-    //   },
-    // ];
   }
 
 
@@ -68,10 +42,15 @@ export class SearchMarketComponent extends BaseComponent implements OnInit{
     .subscribe((attributes: IVehicleDetails[]) => {
       this.vehicleDetails = attributes;
       attributes.forEach((vehicleDetails: IVehicleDetails) => {
-        console.log(vehicleDetails.vehicleMake);
       });
     });
   } 
+
+  redirect(inventoryId:string){
+
+    this.router.navigate(['/detail-view', inventoryId]);
+    console.log(inventoryId);
+  }
 
   
 

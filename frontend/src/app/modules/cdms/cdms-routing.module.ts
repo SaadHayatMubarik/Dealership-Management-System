@@ -14,6 +14,7 @@ import { SearchMarketComponent } from './search-market/search-market.component';
 import { ManageEmployeeComponent } from './manage-employee/manage-employee.component';
 import { IsAuthGuard } from 'src/app/shared/guard/auth.guard';
 import { ViewShowroomComponent } from './view-showroom/view-showroom.component';
+import { ViewDetailedInventoryComponent } from './view-detailed-inventory/view-detailed-inventory.component';
 
 
 
@@ -70,7 +71,7 @@ const routes: Routes = [
     {
       path:'market-search', 
       component:SearchMarketComponent,
-      canActivate: [IsAuthGuard]
+     
     },
     {
       path:'manage-employee',
@@ -79,7 +80,11 @@ const routes: Routes = [
     {
       path:'view-showroom',
       component: ViewShowroomComponent,
-      canActivate: [IsAuthGuard]
+      
+    },
+    {
+      path:'detail-view/:inventoryId',
+      component: ViewDetailedInventoryComponent,
     }
 
     ],

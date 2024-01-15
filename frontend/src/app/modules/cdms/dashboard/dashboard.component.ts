@@ -75,6 +75,9 @@ getVehicleDetails() {
   });
 } 
 
+redirect(){
+  this.router.navigate(['/detail-view']);
+}
 
 
  

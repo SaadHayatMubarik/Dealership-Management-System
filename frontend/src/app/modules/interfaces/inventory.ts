@@ -35,6 +35,25 @@ export interface IInventory {
   stockAttributeValue : IStockAttributeValue[];
 
 }
+export interface IInventoryDetails{
+inventory_id: number,
+  make: string,
+  model: string,
+  variant: string,
+  year: number,
+  chasis_no: string,
+  price: number,
+  demand: number,
+  date_of_purchase:string,
+  date_of_sale: string,
+  status: any,
+  color: string,
+  engine_no: string,
+  comments:string,
+  grade: number,
+  reg_no: string,
+  mileage: number
+}
 
 export interface IVehicleDetails {
   
@@ -44,10 +63,7 @@ export interface IVehicleDetails {
   vehicleVariant: string;
   modelYear: number;
   demand: number;
-  mileage: number;
-  
-  
-  
+  mileage: number; 
 }
 
 export interface IStockAttributeValue {  // zaid kaa kaam
