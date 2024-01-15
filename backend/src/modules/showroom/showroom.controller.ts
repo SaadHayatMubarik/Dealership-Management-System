@@ -5,7 +5,7 @@ import { AuthGuard } from '@nestjs/passport';
 // import { ShowroomService } from './showroom.service';
 
 @Controller('showroom')
-@UseGuards(AuthGuard())
+// @UseGuards(AuthGuard())
 export class ShowroomController {
     constructor(private readonly showRoomService: ShowroomService) {}
 @Get('showroomDetails/:showroomId')
