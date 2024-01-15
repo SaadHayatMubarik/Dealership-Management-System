@@ -46,16 +46,18 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: AppLayoutComponent, // Use the new layout component for login
+    component: AppLayoutComponent,
+     // Use the new layout component for login
     children: [
       {
         path: 'dashboard',
-        component:DashboardComponent
+        component:DashboardComponent,
+        canActivate: [IsAuthGuard]
+        
       }
       ,{
       path: 'vehicle-type', 
       component: VehicleTypeComponent,
-      canActivate: [IsAuthGuard]
     },
     {
       path:'vehicle-type-attributes', 

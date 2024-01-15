@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ValidationPipe} from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ValidationPipe, UseGuards} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { ValidateUserDto } from './dto/validate-user.dto';
@@ -7,9 +7,11 @@ import { CreateAdminDto } from './dto/create-admin.dto';
 import { Showroom } from '../showroom/entity/Showroom';
 import { userInfo } from 'os';
 import { GetUserDto } from './dto/get-user.dto';
+import { AuthGuard } from '@nestjs/passport';
 
 
 @Controller('auth')
+
 export class AuthController {
   constructor(private authService: AuthService) {}
 

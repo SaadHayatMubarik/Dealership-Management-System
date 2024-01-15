@@ -101,7 +101,6 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
   getVehicleType() {
     this.apiService.get(`/vehicle-type/${this.vehicleType.showroomId}`).subscribe((data) => {
       this.data = data;
-   
     });
   }
 

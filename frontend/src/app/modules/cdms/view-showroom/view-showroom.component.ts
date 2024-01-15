@@ -7,6 +7,8 @@ import {
   IObject,
 } from 'src/app/shared/interfaces/common';
 
+import { ApiHelperService } from 'src/app/shared/services/api-helper.service'; 
+
 
 @Component({
   selector: 'app-view-showroom',
@@ -18,37 +20,52 @@ export class ViewShowroomComponent extends BaseComponent implements OnInit {
   columns: DataTableColumn[] = [];
   actions: IDataTableAction[] = [];
   data: IObject[] = [];
+   showroomId = localStorage.getItem("Showroom Id");
+  
+  constructor(private readonly apiService: ApiHelperService)
+  {
+    super()
+  }
+ 
 
 
   ngOnInit() {
 
+    this.getShowrooms();
+
     this.columns = [
       {
-        field: '',
+        field: 'showroom_name',
         fieldTitle: 'Showroom Name',
       },
       {
-        field: '',
+        field: 'state',
         fieldTitle: 'Showroom State',
       },
       {
-        field: '',
+        field: 'city',
         fieldTitle: 'Showroom City',
       },
       {
-        field: '',
+        field: 'address',
         fieldTitle: 'Showroom Address',
+      },
+      {
+        field: 'contact_no',
+        fieldTitle: 'Contact Number',
       },
       
     ];
-    this.actions = [
-     
-      {
-        label: 'View',
-        icon: 'pi pi-file-view',
-        command: () => {},
-      },
-    ];
+   
   }
 
+  getShowrooms(){
+    this.apiService.get(`/showroom/showroomDetails/${this.showroomId}`).subscribe((data) => {
+      console.log(data);
+      this.data = data;
+  })
 }
+
+
+}
+
