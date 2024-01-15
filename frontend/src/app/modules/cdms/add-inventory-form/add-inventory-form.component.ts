@@ -257,6 +257,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
             // console.log(this.vehicleInventory);
             // console.log(response);
             this.toast.showSuccess('New Inventory Added');
+            this.closeModal();
           },
           error: () => {
             this.toast.showError();
