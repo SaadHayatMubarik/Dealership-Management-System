@@ -15,7 +15,7 @@ export class AuthController {
 
   @Post('createUser')
   createUser(@Body(ValidationPipe) createUserDto: CreateUserDto): Promise<User> {
-    // console.log(createUserDto);
+    console.log(createUserDto);
     return this.authService.createUser(createUserDto);
   }
 

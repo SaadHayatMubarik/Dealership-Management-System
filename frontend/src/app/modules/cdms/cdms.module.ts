@@ -32,6 +32,7 @@ import { StepsModule } from 'primeng/steps';
 import { SearchMarketComponent } from './search-market/search-market.component';
 import { ManageEmployeeComponent } from './manage-employee/manage-employee.component';
 import { FieldsetModule } from 'primeng/fieldset';
+import { ViewShowroomComponent } from './view-showroom/view-showroom.component';
 
 
 
@@ -51,6 +52,7 @@ import { FieldsetModule } from 'primeng/fieldset';
     LoginComponent,
     SearchMarketComponent,
     ManageEmployeeComponent,
+    ViewShowroomComponent,
  
   ],
   imports: [

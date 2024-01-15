@@ -29,14 +29,21 @@ export class AppMenuComponent implements OnInit {
                     { label: 'Vehicle Type Attributes', 
                     icon: 'pi pi-fw  pi-car', 
                     routerLink: ['/cdms/vehicle-type-attributes'] },
-                    { label: 'Add Inventory', 
+                    { label: 'Inventory', 
                     icon: 'pi pi-fw  pi-upload', 
-                    routerLink: ['/cdms/add-inventory'] },
+                    routerLink: ['/cdms/add-inventory'] },  
+                ],
+            },
+            {
+                label: 'Market',
+                items: [
                     { label: 'Search In Market', 
                     icon: 'pi pi-fw pi-search', 
                     routerLink: ['/cdms/market-search'] },
-                   
-                ],
+                    { label: 'View Showrooms', 
+                    icon: 'pi pi-fw pi-building', 
+                    routerLink: ['/cdms/view-showroom'] },
+                ]
             },
             {
                 label: 'Manage Employee',
