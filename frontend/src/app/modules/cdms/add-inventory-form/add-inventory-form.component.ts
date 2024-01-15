@@ -66,50 +66,44 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
     this.getVehicleTypes();
+    this.getInventory();
     // this.vehicleTypes = this.apiService.getVehicleTypes();
     // this.onVehicleTypeSelected();
 
     this.columns = [
       {
-        field: '',
-        fieldTitle: 'Vehicle Type',
-      },
-      {
-        field: '',
+        field: 'vehicleChasisNo',
         fieldTitle: 'Chasiss Number',
       },
       {
-        field: '',
+        field: 'vehicleMake',
         fieldTitle: 'Make',
       },
       {
-        field: '',
+        field: 'vehicleModel',
         fieldTitle: 'Model',
       },
       {
-        field: '',
+        field: 'vehicleVariant',
         fieldTitle: 'Variant',
       },
       {
-        field: '',
+        field: 'demand',
         fieldTitle: 'Demand',
       },
       {
-        field: '',
-        fieldTitle: 'Status',
+        field: 'mileage',
+        fieldTitle: 'Mileage',
       },
     ];
     this.actions = [
       {
         label: ' Delete',
         icon: 'pi pi-trash',
-        command: () => {},
-      },
-      {
-        label: 'Edit',
-        icon: 'pi pi-file-edit',
-        command: () => {},
-      },
+        command: (event) => {
+          console.log(event. inventoryId);
+        },
+      }
     ];
   }
 
@@ -271,4 +265,13 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
         });
     // }
   }
+
+  getInventory(){
+    this.apiService.get(`/inventory/getInventory/${this.vehicleInventory.showroomId}/{status}`).subscribe((data) => {
+      this.data = data;
+      console.log(this.data);
+    });
+
+  }
+
 }

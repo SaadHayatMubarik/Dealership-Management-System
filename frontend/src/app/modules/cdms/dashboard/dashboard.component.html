@@ -61,16 +61,160 @@
     </div>
 </div>
 
+
+
+
 <div class="col-12 xl:col-12">
     <div class="card">
-        <h5>Search In Market</h5>
-    
-        <div class="middle-content w-o-tabs mt-3">
-            <div class="filter-row flex justify-content-between pt-3">
-            </div>
-            <app-datatable></app-datatable>
-          </div>
-           
-      
+
+    <div class="flex justify-content-between">
+        <h4>Search In Market</h4>
+        <a href="#" >View More</a>
     </div>
+    
+       <!-- filters -->
+        <div class="grid">
+
+            <div class="col-12 lg:col-6 xl:col-4">
+                <div class="card mb-0 color">
+                    <div class="justify-content-between mb-3">
+                        <div>
+                            <h4>Filters</h4>
+                        </div>
+                        
+                        <p-fieldset legend="Showroom City" [toggleable]="true" [collapsed]="true" >
+                            <div class="p-grid p-dir-col">
+                                <div class="p-col">
+                                  <label for="showroomCity">Select City:</label>
+                                  <br>
+                                  <p-dropdown id="showroomCity" placeholder="Select City"></p-dropdown>
+                                </div>
+                              </div>
+                        </p-fieldset>
+
+                        <p-fieldset legend="Price Range" [toggleable]="true" [collapsed]="true">
+                            <div>
+                                <div class="p-col p-dir-col">
+                                  <label for="minPrice">Min Price:</label>
+                                  <p-inputNumber id="minPrice"  mode="currency" currency="USD"></p-inputNumber>
+                                </div>
+                                <br>
+                                <div class="p-col">
+                                  <label for="maxPrice">Max Price:</label>
+                                  <p-inputNumber id="maxPrice" mode="currency" currency="USD"></p-inputNumber>
+                                </div>
+                              </div>
+                        </p-fieldset>
+
+                        <p-fieldset legend="Variant" [toggleable]="true" [collapsed]="true">
+                            <p>
+                                abcd
+                            </p>
+                        </p-fieldset>
+
+                        <p-fieldset legend="Grade" [toggleable]="true" [collapsed]="true">    
+                                  <p-rating id="carGrade" [cancel]="false"></p-rating>
+                        </p-fieldset>
+
+                        <p-fieldset legend="Color" [toggleable]="true" [collapsed]="true">
+                            <p>
+                                abcd
+                            </p>
+                        </p-fieldset>
+
+                        <p-fieldset legend="Year" [toggleable]="true" [collapsed]="true">
+                            <div class="p-grid p-dir-col">
+                                <div class="p-col">
+                                    <p-checkbox name="year" value="All"  label="All"></p-checkbox>
+                                  </div>
+                                  <br>
+                                <div class="p-col">
+                                  <p-checkbox name="year" value="2023"  label="2023"></p-checkbox>
+                                </div>
+                                <br>
+                                <div class="p-col">
+                                  <p-checkbox name="year" value="2024"  label="2024"></p-checkbox>
+                                </div>
+                                <br>
+                                <div class="p-col">
+                                    <p-checkbox name="year" value="2023"  label="2023"></p-checkbox>
+                                  </div>
+                              </div>
+                        </p-fieldset>
+                    </div>
+                    <div style="text-align: center;">
+                        <button pButton  label="Search" style="background-color: rgb(225, 10, 29);"></button>
+                    </div>
+                </div>
+          
+                
+            </div>
+
+
+            <div class="col-12 lg:col-6 xl:col-4">
+                <div class="card mb-0 color">
+                    <div class="flex justify-content-between mb-3">
+                        <div>
+                            <h3>2023 Toyota Crown Limited</h3>
+                        </div>
+                    </div>
+
+                    <div class="car-details">
+                        <!-- Car Image -->
+                        <img src="../../../../assets/demo/images/car.jpg" alt="Car Image" class="car-image">
+                  
+                        <!-- Specifications -->
+                        <p>2.5-liter 4-Cylinder Hybrid, ECVT with All-Wheel Drive (AWD)</p>
+                  
+                        <!-- Horizontal Line -->
+                        <hr class="divider">
+                  
+                        <!-- Price -->
+                        <p >Price: <span id="priceColor"> PKR </span> 1,234,567</p>
+                  
+                        <!-- View Details Button -->
+                        <div style="text-align: center;">
+                        <button pButton  label="View Deatils" style="background-color: rgb(225, 10, 29);"></button>
+                    </div>
+                      </div>
+
+                </div>
+             </div>
+   
+            <div class="col-12 lg:col-6 xl:col-4">
+                <div class="card mb-0 color">
+                    <div class="flex justify-content-between mb-3">
+                        <div>
+                            <h3>2023 Toyota Crown Limited</h3>
+                        </div>
+                    </div> 
+                        <div class="car-details">
+                            <!-- Car Image -->
+                            <img src="../../../../assets/demo/images/car.jpg" alt="Car Image" class="car-image">
+                      
+                            <!-- Specifications -->
+                            <p>2.5-liter 4-Cylinder Hybrid, ECVT with All-Wheel Drive (AWD)</p>
+                      
+                            <!-- Horizontal Line -->
+                            <hr class="divider">
+                      
+                            <!-- Price -->
+                            <p >Price: <span id="priceColor"> PKR </span> 1,234,567</p>
+                      
+                            <!-- View Details Button -->
+                            <div style="text-align: center;">
+                            <button pButton  label="View Deatils" style="background-color: rgb(225, 10, 29);"></button>
+                        </div>
+                          </div>
+                        
+                    </div>
+                </div>
+            </div>
+            </div>    
+        </div>    
+
+    
+
+        
+        
 

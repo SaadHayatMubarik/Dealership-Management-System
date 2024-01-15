@@ -11,7 +11,6 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { SearchMarketComponent } from './search-market/search-market.component';
-import { MarketInventoryComponent } from './market-inventory/market-inventory.component';
 import { ManageEmployeeComponent } from './manage-employee/manage-employee.component';
 import { IsAuthGuard } from 'src/app/shared/guard/auth.guard';
 

@@ -115,6 +115,8 @@ export class ApiHelperService {
             // localStorage.removeItem('jwtToken');
             localStorage.clear();
             this.router.navigate(['/login']);
+            console.log("no access");
+            this.toastService.showError("Access Denied. Please Login.");
             break;
         }
         return a;

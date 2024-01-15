@@ -21,7 +21,7 @@ export class AppMenuComponent implements OnInit {
                 ]
             },
             {
-                label: 'Master Admin',
+                label: 'Manage Inventory',
                 items: [
                     { label: 'Vehicle Type', 
                     icon: 'pi pi-fw  pi-truck', 
@@ -35,13 +35,17 @@ export class AppMenuComponent implements OnInit {
                     { label: 'Search In Market', 
                     icon: 'pi pi-fw pi-search', 
                     routerLink: ['/cdms/market-search'] },
-                    { label: 'Manage Employee', 
+                   
+                ],
+            },
+            {
+                label: 'Manage Employee',
+                items: [
+                    { label: 'Add Employee', 
                     icon: 'pi pi-fw pi-users', 
                     routerLink: ['/cdms/manage-employee'] },
-                ],
-                
-                
-            }
+                ]
+            },
         ];
     }
 }
