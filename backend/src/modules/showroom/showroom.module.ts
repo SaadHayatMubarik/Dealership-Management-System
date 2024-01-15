@@ -6,7 +6,7 @@ import { Showroom } from './entity/Showroom';
 // import { ShowRoom } from './entity/Showroom';
 
 @Module({
-  // imports: [TypeOrmModule.forFeature([Showroom])],
+  imports: [TypeOrmModule.forFeature([Showroom])],
   providers: [ShowroomService],
   controllers: [ShowroomController]
 })
