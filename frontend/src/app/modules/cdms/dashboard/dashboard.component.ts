@@ -75,8 +75,8 @@ getVehicleDetails() {
   });
 } 
 
-redirect(){
-  this.router.navigate(['/detail-view']);
+redirect(inventoryId:string){
+  this.router.navigate(['/detail-view', inventoryId]);
 }
 
 
