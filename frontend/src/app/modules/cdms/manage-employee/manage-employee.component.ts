@@ -49,11 +49,7 @@ export class ManageEmployeeComponent extends BaseComponent implements OnInit {
 
     this.columns = [
       {
-        field: 'user_id',
-        fieldTitle: 'User Id',
-      },
-      {
-        field: 'user_name',
+        field: 'username',
         fieldTitle: 'User Name',
       },
       {
@@ -72,11 +68,11 @@ export class ManageEmployeeComponent extends BaseComponent implements OnInit {
         icon: 'pi pi-trash',
         command: () => {},
       },
-      {
-        label: 'Edit',
-        icon: 'pi pi-file-edit',
-        command: () => {},
-      },
+      // {
+      //   label: 'Edit',
+      //   icon: 'pi pi-file-edit',
+      //   command: () => {},
+      // },
     ];
 
   }
@@ -106,16 +102,10 @@ export class ManageEmployeeComponent extends BaseComponent implements OnInit {
   getemployee(){
     this.apiService
     .get(`/auth/getUsers/${this.user.showroomId}`)
-    .subscribe({
-      next: (response: IObject[]) => {
-       console.log(response);
-       console.log('success');
-      },
-      error: () => {
-        console.log('error');
-      },
-    });
-
-  }
+    .subscribe((data) => {
+    this.data = data;
+   
+  });
+}
 
 }
