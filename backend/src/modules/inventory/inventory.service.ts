@@ -76,8 +76,8 @@ export class InventoryService {
         return result;
     }
 
-    async getInventoryDetails(inventoryID: number): Promise<Inventory>{
-        return await this.inventoryRepository.findOne({where: {inventory_id: inventoryID}});
+    async getInventoryDetails(inventoryId: number): Promise<Inventory>{
+        return await this.inventoryRepository.findOne({where: {inventory_id: inventoryId}});
     }
 
     async getMarketInventory(showroomId: number): Promise<GetInventroyDto[]>{

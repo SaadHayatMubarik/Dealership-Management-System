@@ -19,8 +19,9 @@ export class InventoryController {
         console.log(addInventoryDto);
         return this.inventoryService.addInventory(addInventoryDto)
     }
-    @Get('getInventoryDetails/:inventoryID')
+    @Get('getInventoryDetails/:inventoryId')
     getInventoryDetail(@Param('inventoryId') inventoryId: number): Promise<Inventory>{
+        console.log(inventoryId);
         return this.inventoryService.getInventoryDetails(inventoryId);
     }
 
