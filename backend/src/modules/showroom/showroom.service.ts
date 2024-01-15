@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 // import { ShowRoom } from './entity/Showroom';
-import { Repository } from 'typeorm';
+import { Not, Repository } from 'typeorm';
 import { Showroom } from './entity/Showroom';
 
 @Injectable()
@@ -12,6 +12,6 @@ export class ShowroomService {
         private showroomRepository: Repository<Showroom>
     ){}
     async getShowroom(showroomId: number): Promise<Showroom[]>{
-        return this.showroomRepository.find({where:{}})
+        return this.showroomRepository.find({where:{showroom_id: Not(showroomId)}});
     }
 }
