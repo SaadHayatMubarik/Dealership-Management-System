@@ -3,19 +3,18 @@
 
   <div class="flex justify-content-between">
       <h4>Search In Market</h4>
-      <a href="#" >View More</a>
+      <br> 
   </div>
-  
-     <!-- filters -->
-      <div class="grid">
 
-          <div class="col-12 lg:col-6 xl:col-4">
+  <div class="grid">
+    <div class="flex col-12 lg:col-12 xl:col-12">
               <div class="card mb-0 color">
                   <div class="justify-content-between mb-3">
                       <div>
                           <h4>Filters</h4>
                       </div>
-                      
+                     
+                      <div class="flex"> 
                       <p-fieldset legend="Showroom City" [toggleable]="true" [collapsed]="true" >
                           <div class="p-grid p-dir-col">
                               <div class="p-col">
@@ -75,74 +74,47 @@
                                 </div>
                             </div>
                       </p-fieldset>
+                    </div>
                   </div>
-                  <div style="text-align: center;">
+                  <br>
+                  <div class="flex justify-content-center align-items-center ">
                       <button pButton  label="Search" style="background-color: rgb(225, 10, 29);"></button>
                   </div>
+              </div>  
+          </div>
+  </div>
+  
+     <!-- filters -->
+      <div class="grid">
+        <div class="col-12 lg:col-6 xl:col-4" *ngFor="let vehicle of vehicleDetails; let i = index">
+            <div class="card mb-0 color">
+              <div class="flex justify-content-between mb-3">
+                <div>
+                  <h3>{{ vehicle.modelYear }} {{ vehicle.vehicleMake }} {{ vehicle.vehicleModel }} {{ vehicle.vehicleVariant }}</h3>
+                </div>
               </div>
         
-              
+              <div class="car-details">
+                <img src="../../../../assets/demo/images/car.jpg" alt="Car Image" class="car-image">
+                <hr class="divider">
+                
+                <p>Price: <span id="priceColor"> PKR {{ vehicle.demand | number:'1.0-0' }}</span>
+                  <br>
+                  Mileage: {{ vehicle.mileage }} Km
+                  
+              </p>
+                <div style="text-align: center;">
+                  <button pButton label="View Details" style="background-color: rgb(225, 10, 29);"></button>
+                </div>
+              </div>
+            </div>
           </div>
 
+          
 
-          <div class="col-12 lg:col-6 xl:col-4">
-              <div class="card mb-0 color">
-                  <div class="flex justify-content-between mb-3">
-                      <div>
-                          <h3>2023 Toyota Crown Limited</h3>
-                      </div>
-                  </div>
 
-                  <div class="car-details">
-                      <!-- Car Image -->
-                      <img src="../../../../assets/demo/images/car.jpg" alt="Car Image" class="car-image">
-                
-                      <!-- Specifications -->
-                      <p>2.5-liter 4-Cylinder Hybrid, ECVT with All-Wheel Drive (AWD)</p>
-                
-                      <!-- Horizontal Line -->
-                      <hr class="divider">
-                
-                      <!-- Price -->
-                      <p >Price: <span id="priceColor"> PKR </span> 1,234,567</p>
-                
-                      <!-- View Details Button -->
-                      <div style="text-align: center;">
-                      <button pButton  label="View Deatils" style="background-color: rgb(225, 10, 29);"></button>
-                  </div>
-                    </div>
-
-              </div>
-           </div>
+          
  
-          <div class="col-12 lg:col-6 xl:col-4">
-              <div class="card mb-0 color">
-                  <div class="flex justify-content-between mb-3">
-                      <div>
-                          <h3>2023 Toyota Crown Limited</h3>
-                      </div>
-                  </div> 
-                      <div class="car-details">
-                          <!-- Car Image -->
-                          <img src="../../../../assets/demo/images/car.jpg" alt="Car Image" class="car-image">
-                    
-                          <!-- Specifications -->
-                          <p>2.5-liter 4-Cylinder Hybrid, ECVT with All-Wheel Drive (AWD)</p>
-                    
-                          <!-- Horizontal Line -->
-                          <hr class="divider">
-                    
-                          <!-- Price -->
-                          <p >Price: <span id="priceColor"> PKR </span> 1,234,567</p>
-                    
-                          <!-- View Details Button -->
-                          <div style="text-align: center;">
-                          <button pButton  label="View Deatils" style="background-color: rgb(225, 10, 29);"></button>
-                      </div>
-                        </div>
-                      
-                  </div>
-              </div>
           </div>
           </div>    
       </div>    
