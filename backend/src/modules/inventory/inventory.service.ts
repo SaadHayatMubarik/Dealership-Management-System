@@ -80,11 +80,11 @@ export class InventoryService {
         return await this.inventoryRepository.findOne({where: {inventory_id: inventoryID}});
     }
 
-    async getMarketInventory(getInventoryByFilterDto: GetInventoryByFilterDto): Promise<GetInventroyDto[]>{
-        const { filterBy, Keyword, showroomId } = getInventoryByFilterDto;
+    async getMarketInventory(showroomId: number): Promise<GetInventroyDto[]>{
+        // const { filterBy, Keyword, showroomId } = getInventoryByFilterDto;
         const getData = this.inventoryRepository.createQueryBuilder('inventory')
         .select(['inventory_id as  inventoryId','make as vehicleMake','model as vehicleModel', 'variant as vehicleVariant', 'year as modelYear','demand', 'mileage'])
-        .where(`inventory.${filterBy} = :keyword`, {Keyword})
+        // .where(`inventory.${filterBy} = :keyword`, {Keyword})
         .andWhere('inventory.showroomShowroomId != :showroomId',{showroomId});
         const result = await getData.getRawMany();
         return result;

@@ -15,6 +15,7 @@ import { AuthGuard } from '@nestjs/passport';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
+  @UseGuards(AuthGuard())
   @Post('createUser')
   createUser(@Body(ValidationPipe) createUserDto: CreateUserDto): Promise<User> {
     console.log(createUserDto);
@@ -33,8 +34,13 @@ export class AuthController {
     return this.authService.login(validationUserDto);
   } 
 
+  @UseGuards(AuthGuard())
   @Get('getUsers/:showroomId')
   getUsers(@Param('showroomId') showroomId: number): Promise<GetUserDto[]>{
     return this.authService.getUsers(showroomId);
+  }
+  @Delete('deleteUser/:userId')
+  deleteUser(@Param('userId') userId: number){
+    return this.authService.deleteUser(userId);
   }
 }

@@ -68,6 +68,7 @@ export class ManageEmployeeComponent extends BaseComponent implements OnInit {
         icon: 'pi pi-trash',
         command: () => {},
       },
+
     ];
 
   }
@@ -95,9 +96,13 @@ export class ManageEmployeeComponent extends BaseComponent implements OnInit {
   }
 
   getemployee(){
-    this.apiService.get(`/auth/getUsers/${this.user.showroomId}`).subscribe((data) => {
-      this.data = data;
-    });
-  }
+
+    this.apiService
+    .get(`/auth/getUsers/${this.user.showroomId}`)
+    .subscribe((data) => {
+    this.data = data;
+   
+  });
+}
 
 }

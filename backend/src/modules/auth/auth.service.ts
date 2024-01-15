@@ -12,6 +12,7 @@ import { CreateAdminDto } from './dto/create-admin.dto';
 import { Showroom } from '../showroom/entity/Showroom';
 import { UserRole } from './user-role.enum';
 import { GetUserDto } from './dto/get-user.dto';
+import { get } from 'http';
 // import { CreateAuthDto } from './dto/create-user.dto';
 // import { UpdateAuthDto } from './dto/update-user.dto';
 
@@ -96,7 +97,12 @@ export class AuthService {
     .select(['user_id as userId','user_name as username','email','role'])
     .where('user.showroomShowroomId = :showroomId',{showroomId});
     const result = await getData.getRawMany();
+    console.log(result);
     return result;
+  }
+
+  async deleteUser(userId: number){
+    return this.userRepository.delete({user_id:userId});
   }
 
   private async hashPassword(password: string, salt: string): Promise<string>{

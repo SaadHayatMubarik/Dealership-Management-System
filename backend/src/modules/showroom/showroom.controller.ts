@@ -1,9 +1,11 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, UseGuards } from '@nestjs/common';
 import { ShowroomService } from './showroom.service';
 import { Showroom } from './entity/Showroom';
+import { AuthGuard } from '@nestjs/passport';
 // import { ShowroomService } from './showroom.service';
 
 @Controller('showroom')
+@UseGuards(AuthGuard())
 export class ShowroomController {
     constructor(private readonly showRoomService: ShowroomService) {}
 @Get('showroomDetails/:showroomId')
