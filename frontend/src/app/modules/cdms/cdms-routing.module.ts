@@ -13,6 +13,7 @@ import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { SearchMarketComponent } from './search-market/search-market.component';
 import { ManageEmployeeComponent } from './manage-employee/manage-employee.component';
 import { IsAuthGuard } from 'src/app/shared/guard/auth.guard';
+import { ViewShowroomComponent } from './view-showroom/view-showroom.component';
 
 
 
@@ -72,6 +73,10 @@ const routes: Routes = [
       path:'manage-employee',
       component: ManageEmployeeComponent
     },
+    {
+      path:'view-showroom',
+      component: ViewShowroomComponent
+    }
 
     ],
   }, 

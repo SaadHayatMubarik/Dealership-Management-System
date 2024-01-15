@@ -11,7 +11,7 @@ import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
 
 import { NgForm } from '@angular/forms';
-import { Locale } from 'moment';
+
 
 @Component({
   selector: 'app-manage-employee',
@@ -27,7 +27,6 @@ export class ManageEmployeeComponent extends BaseComponent implements OnInit {
     password:'',
     role:'',
     showroomId: localStorage.getItem('Showroom Id'),
-
   };
 
   roles : string[] = ['ADMIN', 'EMPLOYEE', 'OWNER'];
@@ -46,22 +45,27 @@ export class ManageEmployeeComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
 
-    // this.getemployee();
+    this.getemployee();
 
     this.columns = [
       {
-        field: '',
+        field: 'user_id',
+        fieldTitle: 'User Id',
+      },
+      {
+        field: 'user_name',
         fieldTitle: 'User Name',
       },
       {
-        field: '',
+        field: 'email',
         fieldTitle: 'Email',
       },
       {
-        field: '',
+        field: 'role',
         fieldTitle: 'Role',
       },
       ];
+
     this.actions = [
       {
         label: ' Delete',
@@ -96,18 +100,22 @@ export class ManageEmployeeComponent extends BaseComponent implements OnInit {
     }
 
 
+
   }
 
-  // getemployee(){
-  //   this.apiService
-  //   .get(`/vehicle-type/${this.vehicleInventory.showroomId}`)
-  //   .subscribe({
-  //     next: (response: IObject[]) => {
-  //       this.vehicleTypes = response;
-  //     },
-  //     error: () => {},
-  //   });
+  getemployee(){
+    this.apiService
+    .get(`/auth/getUsers/${this.user.showroomId}`)
+    .subscribe({
+      next: (response: IObject[]) => {
+       console.log(response);
+       console.log('success');
+      },
+      error: () => {
+        console.log('error');
+      },
+    });
 
-  // }
+  }
 
 }
