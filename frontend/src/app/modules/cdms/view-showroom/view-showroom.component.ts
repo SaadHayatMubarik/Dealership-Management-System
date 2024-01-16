@@ -54,7 +54,6 @@ export class ViewShowroomComponent extends BaseComponent implements OnInit {
         field: 'contact_no',
         fieldTitle: 'Contact Number',
       },
-      
     ];
    
   }

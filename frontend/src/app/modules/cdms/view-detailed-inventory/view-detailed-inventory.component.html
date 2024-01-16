@@ -1,1 +1,44 @@
 
+<p-splitter [panelSizes]="[30,70]" [style]="{ height: '657px' }">
+    <ng-template pTemplate>
+        <div class="col align-items-center justify-content-center">
+            <h4 class="text-center mb-4">Vehicle Details</h4>
+
+    <p><strong>Make:</strong>{{ vehicleDetails.make }}</p>
+      <p><strong>Model:</strong> {{ vehicleDetails.model}}</p>
+      <p><strong>Variant:</strong> {{ vehicleDetails.variant }}</p>
+      <p><strong>Year:</strong> {{ vehicleDetails.year }}</p>
+      <p><strong>Chassis No:</strong> {{ vehicleDetails.chasis_no }}</p>
+      <p><strong>Price:</strong> {{ vehicleDetails.price}}</p>
+      <p><strong>Demand:</strong> {{ vehicleDetails.demand }}</p>
+      <p><strong>Date of Purchase:</strong>  {{ vehicleDetails.date_of_purchase}}</p>
+      <p><strong>Date of Sale:</strong> {{ vehicleDetails.date_of_sale }}</p>
+      <p><strong>Status:</strong> {{ vehicleDetails.status }}</p>
+      <p><strong>Color:</strong> {{ vehicleDetails.color }}</p>
+      <p><strong>Engine No:</strong> {{ vehicleDetails.engine_no }}</p>
+      <p><strong>Grade:</strong> {{ vehicleDetails.grade }}</p>
+      <p><strong>Registration No:</strong> {{ vehicleDetails.reg_no }}</p>
+      <p><strong>Mileage:</strong> {{ vehicleDetails.mileage }}</p>
+      <p><strong>Comments:</strong>{{ vehicleDetails.comments }}</p>
+          </div>
+    </ng-template>
+    <ng-template pTemplate>
+        <div class="mx-auto mt-3">
+            <div class=" align-items-center justify-content-center">
+            <h4 class="text-center mb-7">Vehicle Gallery</h4>
+            <p-galleria [value]="images" [showIndicators]="true" [showThumbnails]="false" [containerStyle]="{ 'max-width': '640px' }">
+                <ng-template pTemplate="item" let-item>
+                  <img [src]="item.itemImageSrc" style="width: 100%; display: block;" />
+                </ng-template>
+              </p-galleria>
+        </div>       
+
+    </div>
+    </ng-template>
+</p-splitter>
+
+
+    
+       
+   
+       

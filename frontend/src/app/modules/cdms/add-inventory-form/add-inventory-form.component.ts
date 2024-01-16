@@ -49,10 +49,12 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
 
 
   vehicleTypes: any[] = []; //to populate dropdown of vehicle type
-  status: string[] = ['Available', 'Sold', 'On Order']; //to populate status dropdown
+  status: string[] = ['AVAILABLE', 'SOLD', 'ON ORDER']; //to populate status dropdown
   sliderValue: number = 0;
   selectedVehicleTypeId: any; //saving vehicle type id
   vehicleAttributes: any[] = []; //to save vehicle type attributes
+  inventoryId : number = 0;
+  selectedTabIndex: number = 0;
 
   columns: DataTableColumn[] = [];
   actions: IDataTableAction[] = [];
@@ -65,8 +67,9 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.onTabChange({ index: this.selectedTabIndex });
     this.getVehicleTypes();
-    this.getInventory();
+    // this.getInventory();
     // this.vehicleTypes = this.apiService.getVehicleTypes();
     // this.onVehicleTypeSelected();
 
@@ -101,7 +104,32 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
         label: ' Delete',
         icon: 'pi pi-trash',
         command: (event) => {
-          console.log(event. inventoryId);
+          this.inventoryId =event.inventoryId;
+          this.apiService.delete(`/inventory/${this.inventoryId}`).subscribe({
+            next: (response) => {
+              this.getInventory();
+              this.toast.showSuccess(`Inventory Id: ${this.inventoryId} record deleted.`);   
+            },
+            error: () => 
+            {
+              this.toast.showError('System Error');
+            }
+          }
+            );
+        },
+      },
+      {
+        label: 'Update',
+        icon: 'pi pi-file-edit',
+        command: (event) => {
+          
+        },
+      },
+      {
+        label: 'View',
+        icon: 'pi pi-eye',
+        command: (event) => {
+          
         },
       }
     ];
@@ -176,50 +204,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
     }
   }
 
-  // onVehicleTypeChange(event: any) {
-  //   if (event.value) {
-  //     this.selectedVehicleTypeId = event.value;
-  //     console.log(this.selectedVehicleTypeId.type_id);
-  //     if (this.selectedVehicleTypeId.type_id) {
-  //       this.apiService
-  //         .get(`/vehicle-type-attribute/${this.selectedVehicleTypeId.type_id}`)
-  //         .subscribe((attributes: IVehicleTypeAttribute[]) => {
-  //           this.vehicleAttributes = attributes;
-  //           console.log(this.vehicleAttributes);
-  //           this.vehicleInventory.stockAttributeValue = [];
-  //           let stockAttrVals: IStockAttributeValue[] = [];
-  //           attributes.forEach((vta: IVehicleTypeAttribute) => {
-  //             stockAttrVals.push({ id: 0,
-  //               value: '',
-  //               inventoryInventoryId:0,
-  //               multiValueAttributeMultiValueId:0,
-  //               vehicleTypeAttribute : vta})
-  //           });
-  //           this.vehicleInventory.stockAttributeValue = stockAttrVals;
-  //           console.log(this.vehicleInventory.stockAttributeValue);
-  //         });
-  //     } else {
-  //       console.log("error");
-  //     }
-  //   }
-  // }
 
-  // onVehicleTypeChange(event: any) {
-  //   if (event.value) {
-  //     this.selectedVehicleTypeId = event.value;
-  //     console.log(this.selectedVehicleTypeId.type_id);
-  //     if (this.selectedVehicleTypeId.type_id) {
-  //       this.apiService
-  //         .get(`/vehicle-type-attribute/${this.selectedVehicleTypeId.type_id}`)
-  //         .subscribe((attributes) => {
-  //           this.vehicleAttributes = attributes;
-  //           console.log(this.vehicleAttributes);
-  //         });
-  //     } else {
-  //       this.vehicleAttributes = [];
-  //     }
-  //   }
-  // }
 
 
 
@@ -246,16 +231,13 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   
 
   postInventory() {
-    // if (this.InventoryForm.valid) {
-      // console.log('====================================');
+   
       console.log('this.vehicleInventory', this.vehicleInventory);
-      // console.log('====================================');
+      
       this.apiService
         .postLogin('/inventory/addInventory', this.vehicleInventory)
         .subscribe({
           next: (response) => {
-            // console.log(this.vehicleInventory);
-            // console.log(response);
             this.toast.showSuccess('New Inventory Added');
             this.closeModal();
           },
@@ -264,15 +246,20 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
             console.log(this.vehicleInventory);
           },
         });
-    // }
+   
+  }
+
+  onTabChange(event: any) {
+    this.selectedTabIndex = event.index;
+    this.getInventory();
   }
 
   getInventory(){
-    this.apiService.get(`/inventory/getInventory/${this.vehicleInventory.showroomId}/{status}`).subscribe((data) => {
+    this.apiService.get(`/inventory/getInventory/${this.vehicleInventory.showroomId}/${this.status[this.selectedTabIndex]}`).subscribe((data) => {
       this.data = data;
       console.log(this.data);
+      console.log(this.status[this.selectedTabIndex]);
     });
-
   }
 
 }

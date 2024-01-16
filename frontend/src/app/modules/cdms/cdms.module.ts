@@ -34,6 +34,9 @@ import { ManageEmployeeComponent } from './manage-employee/manage-employee.compo
 import { FieldsetModule } from 'primeng/fieldset';
 import { ViewShowroomComponent } from './view-showroom/view-showroom.component';
 import { ViewDetailedInventoryComponent } from './view-detailed-inventory/view-detailed-inventory.component';
+import { SplitterModule } from 'primeng/splitter';
+import { GalleriaModule } from 'primeng/galleria';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 
@@ -55,6 +58,7 @@ import { ViewDetailedInventoryComponent } from './view-detailed-inventory/view-d
     ManageEmployeeComponent,
     ViewShowroomComponent,
     ViewDetailedInventoryComponent,
+    ChangePasswordComponent,
  
   ],
   imports: [
@@ -81,6 +85,10 @@ import { ViewDetailedInventoryComponent } from './view-detailed-inventory/view-d
     TooltipModule,
     StepsModule,
     FieldsetModule,
+    SplitterModule,
+    GalleriaModule,
+    
+
 
    
    

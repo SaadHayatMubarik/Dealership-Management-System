@@ -35,6 +35,8 @@ export class ManageEmployeeComponent extends BaseComponent implements OnInit {
   columns: DataTableColumn[] = [];
   actions: IDataTableAction[] = [];
   data: IObject[] = [];
+  userId : number = 0;
+  userName : string = '';
 
   @ViewChild ('userForm') userForm!:NgForm;
 
@@ -66,7 +68,22 @@ export class ManageEmployeeComponent extends BaseComponent implements OnInit {
       {
         label: ' Delete',
         icon: 'pi pi-trash',
-        command: () => {},
+        command: (event) => {
+         this.userId = event.userId;
+         this.userName = event.username
+         this.apiService.delete(`/auth/deleteUser/${this.userId}`).subscribe({
+           next: (response) => {
+             this. getemployee();
+             this.toast.showSuccess(`${this.userName} record deleted.`);   
+           },
+           error: () => 
+           {
+             this.toast.showError('System Error');
+           }
+         }
+           );
+
+        },
       },
 
     ];

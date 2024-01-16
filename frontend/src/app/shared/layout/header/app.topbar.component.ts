@@ -2,13 +2,15 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { LayoutService } from '../service/app.layout.service';
 import { AuthService } from '../../services/auth.service';
+import { BaseComponent } from '../../base.component';
+import { Router } from '@angular/router';
 
 
 @Component({
     selector: 'app-topbar',
     templateUrl: './app.topbar.component.html'
 })
-export class AppTopBarComponent implements OnInit {
+export class AppTopBarComponent extends BaseComponent implements OnInit {
 
     items!: MenuItem[];
 
@@ -22,18 +24,22 @@ export class AppTopBarComponent implements OnInit {
 
 
 
-    constructor(public layoutService: LayoutService, readonly authService: AuthService) {
-        this.companyName = 'CDMS';
-
+    constructor(public layoutService: LayoutService, 
+        readonly authService: AuthService, 
+        private router: Router) {
+        super();
+        this.companyName = 'DMS';
 
      }
     ngOnInit(): void {
-        this.companyName = 'CDMS';
+        this.companyName = 'DMS';
     }
 
 logout(){
     this.authService.logout();
 }
 
-changePassword(){}
+redirect(){
+    // this.router.navigate(['/detail-view');
+}
 }

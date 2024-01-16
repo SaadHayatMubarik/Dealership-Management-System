@@ -42,8 +42,6 @@ export class DashboardComponent extends BaseComponent implements OnInit {
   ngOnInit(){
     this.getVehicleDetails();
 
-
-
   }
 
 
@@ -75,8 +73,8 @@ getVehicleDetails() {
   });
 } 
 
-redirect(){
-  this.router.navigate(['/detail-view']);
+redirect(inventoryId:string){
+  this.router.navigate(['/detail-view', inventoryId]);
 }
 
 

@@ -13,10 +13,34 @@
     </button>
 
     <div #topbarmenu class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
+        <button class="p-link layout-topbar-button" (click)="redirect()">
+            <i class=" pi pi-lock-open"></i>
+        </button>
+    </div>
+
+    <p-sidebar [(visible)]="modal" position="right" [style]="{ width:'80rem'}" dismissable="true">
+        <div class="sidebar-main">
+            <div class="sidebar-header">
+                <div class="sh-title">
+            <h3 style="text-align: center;">
+              Change Password
+            </h3>
+            <br>
+          </div>
+        </div>
+    </div>
+    
+    </p-sidebar>
+
+    <div #topbarmenu class="layout-topbar-menu ml-2" [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
         <button class="p-link layout-topbar-button" (click)="logout()">
             <i class=" pi pi-sign-out"></i>
         </button>
+
+        
     </div>
+
+   
 
     
 
