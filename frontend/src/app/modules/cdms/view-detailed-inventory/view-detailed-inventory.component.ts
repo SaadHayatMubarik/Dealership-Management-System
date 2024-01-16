@@ -31,10 +31,10 @@ images: any[] = [
 
 
   ngOnInit() {
-   
 
     this.route.params.subscribe(params => {
       this.inventoryId = params['inventoryId']; 
+      this.getvehicleDetail();
       console.log(this.inventoryId);
     });
 
