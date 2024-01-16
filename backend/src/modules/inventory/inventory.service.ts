@@ -77,7 +77,7 @@ export class InventoryService {
     }
 
     async getInventoryDetails(inventoryId: number): Promise<Inventory>{
-        return await this.inventoryRepository.findOne({where: {inventory_id: inventoryId}});
+        return await this.inventoryRepository.findOne({relations:['showroom'],where: {inventory_id: inventoryId}});
     }
 
     async getMarketInventory(showroomId: number): Promise<GetInventroyDto[]>{
