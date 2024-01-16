@@ -1,11 +1,4 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
-/* eslint-disable @typescript-eslint/ban-types */
-/* eslint-disable no-case-declarations */
-/* eslint-disable @angular-eslint/no-output-on-prefix */
-/**
- * @author Emad Khan
- * @file Libs UI Control IpaasDatatable Component
- */
+
 import {
   Component, Input, OnInit
 } from '@angular/core';

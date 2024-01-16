@@ -11,7 +11,23 @@
   <div class="middle-content w-o-tabs mt-3">
     <div class="filter-row flex justify-content-between pt-3">
     </div>
-    <app-datatable [data]="data" [cols]="columns" [globalFilterFields]="['vehicleMake','vehicleModel','vehicleVariant','vehicleChasisNo']" [actions]="actions"></app-datatable>
+
+    <p-tabView (onChange)="onTabChange($event)" [(activeIndex)]="selectedTabIndex" orientation="right">
+      <p-tabPanel header="Available">
+        <app-datatable [data]="data" [cols]="columns" [globalFilterFields]="['vehicleMake','vehicleModel','vehicleVariant','vehicleChasisNo']" [actions]="actions"></app-datatable>
+      </p-tabPanel>
+      <p-tabPanel header="Sold">
+        <app-datatable [data]="data" [cols]="columns" [globalFilterFields]="['vehicleMake','vehicleModel','vehicleVariant','vehicleChasisNo']" [actions]="actions"></app-datatable>
+      </p-tabPanel>
+      <p-tabPanel header="On Order">
+        <app-datatable [data]="data" [cols]="columns" [globalFilterFields]="['vehicleMake','vehicleModel','vehicleVariant','vehicleChasisNo']" [actions]="actions"></app-datatable>
+      </p-tabPanel>
+
+    </p-tabView>
+  
+  
+  
+  
   </div>
   <p-sidebar [(visible)]="modal" position="right" [style]="{ width:'80rem'}">
     <form (ngSubmit)="postInventory()" #Inventory="ngForm">

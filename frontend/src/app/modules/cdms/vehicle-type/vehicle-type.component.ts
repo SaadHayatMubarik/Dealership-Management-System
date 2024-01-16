@@ -55,15 +55,13 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
         command: (event) => {
           this.selectedVehicleTypeId = event.type_id;
               this.apiService.delete(`/vehicle-type/${this.selectedVehicleTypeId}`).subscribe({
-                next: (response) => {
-                  console.log(this.selectedVehicleTypeId);  
+                next: (response) => { 
                   this.getVehicleType();
                   this.toast.showSuccess("Vehicle Type Deleted.");
                 },
                 error: () => 
                 {
-                  console.log(this.selectedVehicleTypeId);  
-                  this.toast.showError();
+                  this.toast.showError('Using type in inventory. Record cant be deleted!');
                 }
               }
                 );         

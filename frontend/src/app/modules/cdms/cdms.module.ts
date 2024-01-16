@@ -36,6 +36,7 @@ import { ViewShowroomComponent } from './view-showroom/view-showroom.component';
 import { ViewDetailedInventoryComponent } from './view-detailed-inventory/view-detailed-inventory.component';
 import { SplitterModule } from 'primeng/splitter';
 import { GalleriaModule } from 'primeng/galleria';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 
@@ -57,6 +58,7 @@ import { GalleriaModule } from 'primeng/galleria';
     ManageEmployeeComponent,
     ViewShowroomComponent,
     ViewDetailedInventoryComponent,
+    ChangePasswordComponent,
  
   ],
   imports: [

@@ -16,6 +16,7 @@ import { AppMenuitemComponent } from './sidebar/app.menuitem.component';
 import { LoginLayoutComponent } from './login-layout/login-layout.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { MenubarModule } from 'primeng/menubar';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
     declarations: [
@@ -37,7 +38,8 @@ import { MenubarModule } from 'primeng/menubar';
         RouterModule,
         AppConfigModule,
         DropdownModule,
-        MenubarModule
+        MenubarModule,
+        DialogModule,
     ],
     exports: [AppLayoutComponent]
 })
