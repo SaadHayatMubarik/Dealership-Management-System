@@ -35,8 +35,8 @@ export class AuthController {
     return this.authService.login(validationUserDto);
   } 
 
-  @Post('changePassword/:accessToken')
-  changePassword(@Param('accessToken') accessToken: string): Promise<{ accessToken: string }>{
+  @Post('changePassword/:accessToken/:oldPassword')
+  changePassword(@Param('accessToken') accessToken: string, @Param('oldPassword') oldPassword: string): Promise<{ accessToken: string }>{
     return this.authService.changePassword(accessToken);
   }
 

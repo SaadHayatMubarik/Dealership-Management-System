@@ -50,18 +50,23 @@ export class AuthService {
   }
   async createUser(createUserDto: CreateUserDto): Promise<User>{
     const { username, password, email, role, showroomId } = createUserDto;
-
+    let roles = [UserRole.Admin,UserRole.InventoryEmployee,UserRole.SalesEmployee];
     // const salt = 
     // console.log(salt);
+    // console.log(roles);
     const user = new User();
     user.user_name = username;
     user.salt = await bcrypt.genSalt();
     user.password = await this.hashPassword(password,user.salt);
     // console.log(user.password);
     user.email = email;
-    user.role = role;
+    for(let i=0; i<roles.length; i++){
+if(role == roles[i]){
+  user.role = role;
+}
+    }
+    // console.log(user.role);
     user.showroom = await this.showroomRepository.findOne({ where: { showroom_id: showroomId } });
-    
     try{
       return  await this.userRepository.save(user);
     } catch (error) {
