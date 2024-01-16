@@ -71,7 +71,7 @@ export class InventoryService {
         // .leftJoin(VehicleType,'vehicleType', 'inventory.vehicleVehicleTypeId = vehicleType.type_id')
         .select(['inventory_id as inventoryId','make as vehicleMake','model as vehicleModel', 'variant as vehicleVariant', 'year as modelYear','chasis_no as vehicleChasisNo','demand', 'mileage'])
         .where('inventory.status = :status',{status})
-        .where('inventory.showroomShowroomId = :showroomId',{showroomId});
+        .andWhere('inventory.showroomShowroomId = :showroomId',{showroomId});
         const result = await getData.getRawMany();
         return result;
     }

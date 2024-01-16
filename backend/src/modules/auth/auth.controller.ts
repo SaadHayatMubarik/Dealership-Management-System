@@ -35,6 +35,8 @@ export class AuthController {
     return this.authService.login(validationUserDto);
   } 
 
+  
+
   @UseGuards(AuthGuard())
   @Get('getUsers/:showroomId')
   getUsers(@Param('showroomId') showroomId: number): Promise<GetUserDto[]>{
