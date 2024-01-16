@@ -30,5 +30,8 @@ export class GetInventroyDto{
     comments: string;
 
     @IsNotEmpty()
+    grade: number
+
+    @IsNotEmpty()
     vehicleType: string;
 }
