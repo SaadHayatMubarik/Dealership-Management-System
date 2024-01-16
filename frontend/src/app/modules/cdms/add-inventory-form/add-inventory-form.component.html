@@ -12,7 +12,7 @@
     <div class="filter-row flex justify-content-between pt-3">
     </div>
 
-    <p-tabView (onChange)="onTabChange($event)" [(activeIndex)]="selectedTabIndex" orientation="right">
+    <p-tabView (onChange)="onTabChange($event)" [(activeIndex)]="selectedTabIndex" >
       <p-tabPanel header="Available">
         <app-datatable [data]="data" [cols]="columns" [globalFilterFields]="['vehicleMake','vehicleModel','vehicleVariant','vehicleChasisNo']" [actions]="actions"></app-datatable>
       </p-tabPanel>

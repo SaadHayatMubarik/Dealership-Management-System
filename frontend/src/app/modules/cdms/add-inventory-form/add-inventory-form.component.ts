@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BaseComponent } from 'src/app/shared/base.component';
+import { Router } from '@angular/router';
 
 import {
   DataTableColumn,
@@ -61,7 +62,9 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   data: IObject[] = [];
   constructor(
     private readonly apiService: ApiHelperService,
-    private toast: ToastService
+    private toast: ToastService,
+    private router: Router
+
   ) {
     super();
   }
@@ -129,7 +132,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
         label: 'View',
         icon: 'pi pi-eye',
         command: (event) => {
-          
+          this.router.navigate(['/detail-view', event.inventoryId]);
         },
       }
     ];

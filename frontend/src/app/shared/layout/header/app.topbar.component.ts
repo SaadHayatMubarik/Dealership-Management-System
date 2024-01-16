@@ -40,6 +40,6 @@ logout(){
 }
 
 redirect(){
-    // this.router.navigate(['/detail-view');
+    this.router.navigate(['change-password']);
 }
 }

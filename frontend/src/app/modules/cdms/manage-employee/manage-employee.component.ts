@@ -29,7 +29,7 @@ export class ManageEmployeeComponent extends BaseComponent implements OnInit {
     showroomId: localStorage.getItem('Showroom Id'),
   };
 
-  roles : string[] = ['ADMIN', 'EMPLOYEE', 'OWNER'];
+  roles : string[] = ['ADMIN', 'SALES EMPLOYEE','INVENTORY EMPLOYEE'];
   
 
   columns: DataTableColumn[] = [];
