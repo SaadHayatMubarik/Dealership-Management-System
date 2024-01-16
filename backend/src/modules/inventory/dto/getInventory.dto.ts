@@ -1,4 +1,5 @@
 import { IsNotEmpty, IsOptional } from "class-validator";
+import { VehicleType } from "src/modules/vehicle-type/entity/Vehicle-type";
 
 export class GetInventroyDto{
     @IsNotEmpty()
@@ -27,4 +28,7 @@ export class GetInventroyDto{
 
     @IsNotEmpty()
     comments: string;
+
+    @IsNotEmpty()
+    vehicleType: string;
 }

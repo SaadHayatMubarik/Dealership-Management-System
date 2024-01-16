@@ -33,6 +33,7 @@ export class InventoryController {
 
     @Get('getMarketInventory/:showroomId/:status')
     getMarketInventory(@Param('showroomId') showroomId: number, @Param('status') status: String): Promise <GetInventroyDto[]>{
+        // console.log(showroomId,status)
         return this.inventoryService.getMarketInventory(showroomId,status);
     }
 

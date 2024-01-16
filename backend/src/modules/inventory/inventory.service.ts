@@ -68,7 +68,6 @@ export class InventoryService {
     async getInventory(status: String, showroomId: number): Promise<GetInventroyDto[]>{
         // let vehicleStatus = status.toUpperCase();
         const getData = this.inventoryRepository.createQueryBuilder('inventory')
-        // .leftJoin(VehicleType,'vehicleType', 'inventory.vehicleVehicleTypeId = vehicleType.type_id')
         .select(['inventory_id as inventoryId','make as vehicleMake','model as vehicleModel', 'variant as vehicleVariant', 'year as modelYear','chasis_no as vehicleChasisNo','demand', 'mileage'])
         .where('inventory.status = :status',{status})
         .andWhere('inventory.showroomShowroomId = :showroomId',{showroomId});
@@ -81,11 +80,13 @@ export class InventoryService {
     }
 
     async getMarketInventory(showroomId: number, status:String): Promise<GetInventroyDto[]>{
+        // console.log(showroomId,status)
         // const { filterBy, Keyword, showroomId } = getInventoryByFilterDto;
         const getData = this.inventoryRepository.createQueryBuilder('inventory')
-        .select(['inventory_id as  inventoryId','make as vehicleMake','model as vehicleModel', 'variant as vehicleVariant', 'year as modelYear','demand', 'mileage', 'comments'])
-        .where('inventory.showroomShowroomId != :showroomId',{showroomId})
-        .andWhere('inventory.status = :status',{status});
+        .leftJoin(VehicleType,'vehicleType', 'inventory.vehicleTypeTypeId = vehicleType.type_id')
+        .select(['inventory_id as  inventoryId','make as vehicleMake','model as vehicleModel', 'variant as vehicleVariant', 'year as modelYear','demand', 'mileage', 'comments', 'vehicleType.type_name as vehicleType'])
+        .where('inventory.status = :status',{status})
+        .andWhere('inventory.showroomShowroomId != :showroomId',{showroomId});
         const result = await getData.getRawMany();
         // console.log(result);
         return result;
