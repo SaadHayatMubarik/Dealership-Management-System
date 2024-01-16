@@ -31,9 +31,9 @@ export class InventoryController {
         return this.inventoryService.getInventory(status, showroomId);
     }
 
-    @Get('getMarketInventory/:showroomId')
-    getMarketInventory(@Param('showroomId') showroomId: number): Promise <GetInventroyDto[]>{
-        return this.inventoryService.getMarketInventory(showroomId);
+    @Get('getMarketInventory/:showroomId/:status')
+    getMarketInventory(@Param('showroomId') showroomId: number, @Param('status') status: String): Promise <GetInventroyDto[]>{
+        return this.inventoryService.getMarketInventory(showroomId,status);
     }
 
     @Delete('/:inventoryId')

@@ -22,7 +22,7 @@ export class User {
     @Column()
     salt: string;
 
-    @Column({ type:"enum", enum: UserRole, default: UserRole.EMPLOYEE })
+    @Column({ type:"enum", enum: UserRole, default: UserRole.SalesEmployee })
     role: UserRole;
 
     @ManyToOne(() => Showroom, (showroom) => showroom.users)
@@ -35,7 +35,7 @@ export class User {
     async validateUserRole(role: string): Promise<boolean>{
         let userType = false;
         // const roles = this.role;
-        if (role == UserRole.ADMIN || UserRole.OWNER || UserRole.EMPLOYEE){
+        if (role == UserRole.Admin || UserRole.InventoryEmployee || UserRole.SalesEmployee){
              userType = true;
         }
         return userType;

@@ -43,7 +43,7 @@ export class AuthService {
     user.salt = await bcrypt.genSalt();
     user.password = await this.hashPassword(password,user.salt);
     user.email = email;
-    user.role = UserRole.ADMIN;
+    user.role = UserRole.Admin;
     user.showroom = showroom;
     return await this.userRepository.save(user);
     }
@@ -75,9 +75,10 @@ export class AuthService {
     
   }
 
-//   async changePassword(accessToken: string): Promise<accessToken>{
-// return 
-//   }
+  async changePassword(accessToken: string): Promise<{ accessToken: string }>{
+    
+return 
+  }
 
 
   async login( validateUserDto: ValidateUserDto): Promise<{ accessToken: string, showroom: number, role:UserRole}>{
@@ -105,7 +106,7 @@ export class AuthService {
     .select(['user_id as userId','user_name as username','email','role'])
     .where('user.showroomShowroomId = :showroomId',{showroomId});
     const result = await getData.getRawMany();
-    console.log(result);
+    // console.log(result);
     return result;
   }
 

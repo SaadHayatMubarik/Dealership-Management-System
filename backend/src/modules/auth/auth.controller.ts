@@ -19,7 +19,7 @@ export class AuthController {
   @UseGuards(AuthGuard())
   @Post('createUser')
   createUser(@Body(ValidationPipe) createUserDto: CreateUserDto): Promise<User> {
-    console.log(createUserDto);
+    // console.log(createUserDto);
     return this.authService.createUser(createUserDto);
   }
 
@@ -35,7 +35,12 @@ export class AuthController {
     return this.authService.login(validationUserDto);
   } 
 
-  
+  @Post('changePassword/:accessToken')
+  changePassword(@Param('accessToken') accessToken: string): Promise<{ accessToken: string }>{
+    return this.authService.changePassword(accessToken);
+  }
+
+
 
   @UseGuards(AuthGuard())
   @Get('getUsers/:showroomId')
