@@ -38,7 +38,6 @@ export interface IInventory {
 
 
 export interface IVehicleDetails {
-  
   inventoryId: number;
   vehicleMake: string;
   vehicleModel: string;

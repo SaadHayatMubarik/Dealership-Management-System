@@ -10,6 +10,7 @@ import {
 import { IVehicleDetails } from '../../interfaces/inventory';
 
 
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -25,41 +26,10 @@ export class DashboardComponent extends BaseComponent implements OnInit {
    showroomId = localStorage.getItem("Showroom Id");
    vehicleDetails: any[] = [];
    
-  //  vehicleDetails : IVehicleDetails = {
-  //   inventoryId: 0,
-  //   vehicleMake: '',
-  //   vehicleModel: '',
-  //   vehicleVariant: '',
-  //   modelYear:0,
-  //   demand: 0,
-  //   mileage:0,
-  //  };
- 
-    
- 
-   
   
   ngOnInit(){
     this.getVehicleDetails();
-
   }
-
-
-// getVehicleDetails(){
-//   this.apiService.get(`/inventory/getMarketInventory/${this.showroomId}`).subscribe((data) => {
-//     this.vehicleDetails = data;
-//     console.log(this.vehicleDetails);
-//   });
-// }
-
-// getVehicleDetails() {
-//   this.apiService.get(`/inventory/getMarketInventory/${this.showroomId}`).subscribe((data: IVehicleDetails) => {
-//     this.vehicleDetails = data;
-//     console.log('Vehicle Details:', this.vehicleDetails);
-//   });
-// } 
-
-
 
 getVehicleDetails() {
   this.apiService
@@ -77,8 +47,6 @@ redirect(inventoryId:string){
   this.router.navigate(['/detail-view', inventoryId]);
 }
 
-
- 
 } 
 
 

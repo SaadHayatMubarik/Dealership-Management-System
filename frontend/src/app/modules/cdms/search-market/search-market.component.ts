@@ -25,9 +25,10 @@ export class SearchMarketComponent extends BaseComponent implements OnInit{
   columns: DataTableColumn[] = [];
   actions: IDataTableAction[] = [];
   data: IObject[] = [];
-  vehicleDetails: any[] = [];
+  // vehicleDetails: any[] = [];
   showroomId = localStorage.getItem("Showroom Id");
   
+  vehicleDetails: IVehicleDetails[] = []; 
 
 
   ngOnInit() {
@@ -41,6 +42,7 @@ export class SearchMarketComponent extends BaseComponent implements OnInit{
     .subscribe((attributes: IVehicleDetails[]) => {
       this.vehicleDetails = attributes;
       attributes.forEach((vehicleDetails: IVehicleDetails) => {
+        console.log(vehicleDetails);
       });
     });
   } 

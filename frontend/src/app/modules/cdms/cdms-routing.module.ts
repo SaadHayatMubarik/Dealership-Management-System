@@ -15,6 +15,7 @@ import { ManageEmployeeComponent } from './manage-employee/manage-employee.compo
 import { IsAuthGuard } from 'src/app/shared/guard/auth.guard';
 import { ViewShowroomComponent } from './view-showroom/view-showroom.component';
 import { ViewDetailedInventoryComponent } from './view-detailed-inventory/view-detailed-inventory.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 
@@ -85,6 +86,10 @@ const routes: Routes = [
     {
       path:'detail-view/:inventoryId',
       component: ViewDetailedInventoryComponent,
+    },
+    {
+      path:'change-password',
+      component: ChangePasswordComponent,
     }
 
     ],

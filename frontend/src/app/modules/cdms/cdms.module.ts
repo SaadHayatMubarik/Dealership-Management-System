@@ -37,6 +37,9 @@ import { ViewDetailedInventoryComponent } from './view-detailed-inventory/view-d
 import { SplitterModule } from 'primeng/splitter';
 import { GalleriaModule } from 'primeng/galleria';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { DataViewModule } from 'primeng/dataview';
+
+
 
 
 
@@ -87,18 +90,9 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     FieldsetModule,
     SplitterModule,
     GalleriaModule,
+    DataViewModule,
     
 
-
-   
-   
-    
-    
-    
-    
-  
-    
-   
   ],
 
   providers: [],
