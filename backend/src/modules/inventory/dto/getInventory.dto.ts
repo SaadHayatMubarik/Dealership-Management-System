@@ -24,4 +24,7 @@ export class GetInventroyDto{
 
     @IsNotEmpty()
     mileage: number;
+
+    @IsNotEmpty()
+    comments: string;
 }
