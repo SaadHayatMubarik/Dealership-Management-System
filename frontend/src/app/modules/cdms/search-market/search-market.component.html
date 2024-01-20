@@ -25,7 +25,7 @@
               <i class="pi pi-search"></i>
               <input type="search" pInputText placeholder="Search by Model">
             </span>
-            <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+            <!-- <p-dataViewLayoutOptions></p-dataViewLayoutOptions> -->
           </div>
         </ng-template>
         <br><br>
@@ -40,22 +40,34 @@
               <div class="card m-3 border-1 surface-border" style="width: 350px;" >
                 <div class="flex flex-wrap gap-2 align-items-center justify-content-between mb-2">
                   <div class="flex align-items-center">
-                    <i class="pi pi-tag mr-2"></i>
-                    <span class="font-semibold">{{ vehicleDetails.vehicleModel }}</span>
+                    <i class="pi pi-car mr-2"></i>
+                    <span class="font-semibold">{{ vehicleDetails.vehicleType}}</span>
                   </div>
-                  <span [class]="'product-badge status-' + vehicleDetails.vehicleMake.toLowerCase()">
-                    {{ vehicleDetails.mileage }}</span>
+                  <span [class]="'product-badge'">
+                    In Stock</span>
                 </div>
                 <div class="flex flex-column align-items-center text-center mb-3">
-                  <img src="../../../../assets/demo/images/car.jpg" class="w-9 shadow-2 my-3 mx-0"/>
-                  <div class="text-2xl font-bold">{{ vehicleDetails.Model }}</div>
-                  <div class="mb-3">{{ vehicleDetails.demand }}</div>
-                  <p-rating [ngModel]="vehicleDetails.rating" [readonly]="true" [cancel]="false"></p-rating>
+                  <img src="../../../../assets/demo/images/car.jpg" class="w-12 shadow-2 my-3 mx-0"/>
+                  <!-- <div class="text-2xl font-bold">{{ vehicleDetails.Model }}</div> -->
+                  <div class="mb-3"><p>
+                    {{ vehicleDetails.vehicleMake }}  {{ vehicleDetails.vehicleModel }} {{ vehicleDetails.vehicleVariant }}
+                    <br>
+                    {{ '"' + vehicleDetails.comments + '"' }}
+                  </p>
+                  </div>
+                  <p-rating [ngModel]="vehicleDetails.grade" [readonly]="true" [cancel]="false"></p-rating>
+                  <br>
+                  <div class="mr-auto text-left">
+                    <p>
+                      
+                      <br>
+                      <b> Year: </b> {{ vehicleDetails.modelYear }}
+                    </p>
+                  </div>
                 </div>
                 <div class="flex align-items-center justify-content-between">
-                  <span class="text-2xl font-semibold">${{ vehicleDetails.demand }}</span>
-                  
-                  <p-button icon="pi pi-eye" [disabled]="vehicleDetails.modelYear === '2010'"></p-button>
+                  <span class="text-2xl font-semibold">PKR {{ vehicleDetails.demand }}</span>
+                  <p-button icon="pi pi-eye" (onClick)="redirect(vehicleDetails.inventoryId)"></p-button>
                 </div>
               </div>
             </div>

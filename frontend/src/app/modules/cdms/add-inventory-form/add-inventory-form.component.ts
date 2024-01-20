@@ -214,7 +214,10 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   
 
   getOptions(attribute: any) {
-    return attribute.multiValueAttributes.map(
+    console.log('====================================');
+    console.log('attribute', attribute);
+    console.log('====================================');
+    return attribute.vehicleTypeAttribute.multiValueAttributes.map(
       (mv: IObject) => mv['attribute_value']
     ) as string[];
   }
@@ -236,7 +239,6 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   postInventory() {
    
       console.log('this.vehicleInventory', this.vehicleInventory);
-      
       this.apiService
         .postLogin('/inventory/addInventory', this.vehicleInventory)
         .subscribe({

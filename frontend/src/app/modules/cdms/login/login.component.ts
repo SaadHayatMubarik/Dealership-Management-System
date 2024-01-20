@@ -69,9 +69,12 @@ export class LoginComponent implements OnInit{
             console.log(response);
           const jwtToken = response.accessToken;
           const showroomId = response.showroom;
+          const role = response.role;
           localStorage.setItem('jwtToken', jwtToken);
           localStorage.setItem('Showroom Id', showroomId['showroomShowroomId']);
+          localStorage.setItem('userRole', role['role']);
           this.toast.showSuccess('WELCOME');
+          // this.auth.autoLogout(36000);
 
            setTimeout(() => {
             this.router.navigate(['/dashboard']);
@@ -83,11 +86,14 @@ export class LoginComponent implements OnInit{
           },
         });
       }
+
     }
 
-   
-  
-    
+    // onLogin(){
+    //   if(this.loginForm.valid){
+    //     this.auth.login('/auth/login', this.userData);
+    //     console.log("working")
+    //   }
+      
+    }
 
-
-}

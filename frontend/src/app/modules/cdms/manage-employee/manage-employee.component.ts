@@ -99,7 +99,8 @@ export class ManageEmployeeComponent extends BaseComponent implements OnInit {
             console.log(this.user);
             console.log(response);
             this.closeModal();
-            this.toast.showSuccess('New User.')
+            this.toast.showSuccess('New User.');
+            this.getemployee();
           },
           error: () => {
             this.toast.showError();

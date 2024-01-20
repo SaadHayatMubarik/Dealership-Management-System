@@ -29,6 +29,7 @@ export class SearchMarketComponent extends BaseComponent implements OnInit{
   showroomId = localStorage.getItem("Showroom Id");
   
   vehicleDetails: IVehicleDetails[] = []; 
+  status : string = "AVAILABLE";
 
 
   ngOnInit() {
@@ -38,7 +39,7 @@ export class SearchMarketComponent extends BaseComponent implements OnInit{
 
   getVehicleDetails() {
     this.apiService
-    .get(`/inventory/getMarketInventory/${this.showroomId}`)
+    .get(`/inventory/getMarketInventory/${this.showroomId}/${this.status}`)
     .subscribe((attributes: IVehicleDetails[]) => {
       this.vehicleDetails = attributes;
       attributes.forEach((vehicleDetails: IVehicleDetails) => {
