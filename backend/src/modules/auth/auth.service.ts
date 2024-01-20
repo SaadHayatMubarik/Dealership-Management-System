@@ -80,13 +80,25 @@ if(role == roles[i]){
     
   }
 
-  async changePassword(accessToken: string): Promise<{ accessToken: string }>{
-    
-return 
+  async changePassword(userId: number,newPassword: string, oldPassword: string){
+    if (await this.userRepository.exist({where:{user_id:userId}}) == true){
+      const user = await this.userRepository.findOne({where:{user_id:userId}});  
+      if(await user.validatePassword(oldPassword)){
+        const newSalt = await bcrypt.genSalt();
+      const newHash = await this.hashPassword(newPassword,newSalt);
+      
+      await this.userRepository.update({user_id: userId},{salt: newSalt});
+      return  await this.userRepository.update({user_id: userId},{password: newHash});
+      }
+      else{
+        throw new ConflictException('password does not match');
+      }
+    }
+
   }
 
 
-  async login( validateUserDto: ValidateUserDto): Promise<{ accessToken: string, showroom: number, role:UserRole}>{
+  async login( validateUserDto: ValidateUserDto): Promise<{ userId: number ,accessToken: string, showroom: number, role:UserRole}>{
     const username = await this.validateUserPassword(validateUserDto);
     if(!username){
       throw new UnauthorizedException('Invalidate credentials');
@@ -100,10 +112,14 @@ return
     const role = await this.userRepository.createQueryBuilder('user')
     .select('role') 
     .where('user.user_name = :username', {username})
-    .getRawOne();                       
+    .getRawOne();      
+    const userId = await this.userRepository.createQueryBuilder('user')
+    .select('user_id') 
+    .where('user.user_name = :username', {username})
+    .getRawOne();    
 // console.log(accessToken);
 //     console.log(showroom);
-    return { accessToken, showroom, role };
+    return { userId,accessToken, showroom, role };
   } 
 
   async getUsers(showroomId: number):Promise<GetUserDto[]>{

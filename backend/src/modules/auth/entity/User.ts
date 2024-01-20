@@ -40,6 +40,9 @@ export class User {
         }
         return userType;
     }
+    async comparePassword(password: string): Promise<boolean> {
+        return await bcrypt.compare(password, this.password);
+      }
 }
 
 

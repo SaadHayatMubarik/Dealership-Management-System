@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ValidationPipe, UseGuards} from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch,Headers, Param, Delete, ValidationPipe, UseGuards} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { ValidateUserDto } from './dto/validate-user.dto';
@@ -19,7 +19,6 @@ export class AuthController {
   @UseGuards(AuthGuard())
   @Post('createUser')
   createUser(@Body(ValidationPipe) createUserDto: CreateUserDto): Promise<User> {
-    // console.log(createUserDto);
     return this.authService.createUser(createUserDto);
   }
 
@@ -30,14 +29,14 @@ export class AuthController {
   }
 
   @Post('login')
-  login(@Body(ValidationPipe) validationUserDto: ValidateUserDto): Promise<{ accessToken: string, showroom: number, role:UserRole }> {
+  login(@Body(ValidationPipe) validationUserDto: ValidateUserDto): Promise<{ userId: number, accessToken: string, showroom: number, role:UserRole }> {
     // console.log(validationUserDto);
     return this.authService.login(validationUserDto);
   } 
 
-  @Post('changePassword/:accessToken/:oldPassword')
-  changePassword(@Param('accessToken') accessToken: string, @Param('oldPassword') oldPassword: string): Promise<{ accessToken: string }>{
-    return this.authService.changePassword(accessToken);
+  @Patch('changePassword/:newPassword/:oldPassword/:userId')
+  changePassword(@Param('newPassword') newPassword: string, @Param('oldPassword') oldPassword: string, @Param('userId') userId: number){
+    return this.authService.changePassword(userId,newPassword,oldPassword);
   }
 
 
