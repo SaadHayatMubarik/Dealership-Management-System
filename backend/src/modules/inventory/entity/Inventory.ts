@@ -67,4 +67,7 @@ stockAttributeValue: StockAttributeValue[];
 @ManyToOne(() => Showroom, (showroom) => showroom.inventories)
 showroom: Showroom;
 
+// @OneToMany(() => Notification, (notification) => notification)
+// notifications: Notification[];
+
 }
