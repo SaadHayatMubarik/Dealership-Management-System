@@ -36,6 +36,7 @@
                     <input
                     type="username"
                     pInputText
+                    pTooltip="Should contain atleast 4 characters"
                     class="w-full md:w-20rem mb-5"
                     style="padding: 1rem"
                     minlength="4"
@@ -44,6 +45,7 @@
                     [(ngModel)]="user.username"
                   />
                   </div> 
+               
                   
               <div class="p-field">
                 <label>Email:</label> <br>
@@ -52,6 +54,7 @@
                   type="email"
                   pInputText
                   class="w-full md:w-20rem mb-5"
+                  pTooltip="Please enter valid email"
                   style="padding: 1rem"
                   required
                   email
@@ -71,6 +74,7 @@
                 [toggleMask]="false"
                 [(ngModel)]="user.password"
                 [feedback]="false"
+                pTooltip="Atleast one upper case, one lowercase, a number or special character required."
               >
               </p-password>
               </div>
