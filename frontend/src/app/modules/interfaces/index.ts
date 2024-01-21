@@ -25,3 +25,9 @@ export interface Ilogin{
     password:string;
     // rememberMe?: boolean;
 }
+
+export interface IChangePassword{
+   
+    oldPassword: string;
+    newPassword: string;
+}

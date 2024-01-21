@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { ToastService } from './toast.service';
 
+
 @Injectable({
   providedIn: 'root',
 })
@@ -13,7 +14,7 @@ export class ApiHelperService {
   constructor(
     private readonly http: HttpClient,
     private readonly router: Router,
-    private readonly toastService: ToastService
+    private readonly toastService: ToastService,
   ) {
 
   }
@@ -67,34 +68,13 @@ export class ApiHelperService {
       .pipe(this.hookResponse(this));
   }
 
+ 
+
   delete(path: string): Observable<any> {
     return this.http
       .delete(`${environment.apiUrl}${path}`, { headers: this.addTokenHeader() })
       .pipe(this.hookResponse(this));
   }
-
-
-
-
-
-
-
-
-
-  // hookResponse(_this: this) {
-  //   return (a: any) => {
-  //     return catchError((b: any) => {
-  //       if ([404, 500, 501, 400].indexOf(b.status) >=0 ) {
-  //         _this.toastService.showError(b.message);
-  //       } else if (b.status == 401) {
-  //         // AuthService.destroy();
-  //         // JwtService.destroy();
-  //         // this.router.navigate(['/', 'auth', 'login']);
-  //       }
-  //       return a;
-  //     })(a);
-  //   };
-  // }
 
   hookResponse(_this: this) {
     return (a: any) => {

@@ -8,11 +8,20 @@ import { ActivatedRouteSnapshot, CanActivateChildFn, RouterState, RouterStateSna
 })
 
 export class AuthGuard  {
-    canActivate( route: ActivatedRouteSnapshot,
+    constructor(private router: Router)
+    {}
+    canActivate( 
+        
+        route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot) : boolean{  
-    return true;
-}
-}
+        
+            return true; // User has the required role, allow access
+          } 
+            
+          }
+  
+
+
 
 export const IsAuthGuard: CanActivateChildFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) : boolean => { 
     return inject(AuthGuard).canActivate(route, state);

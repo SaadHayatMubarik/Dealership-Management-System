@@ -33,19 +33,52 @@
             <div class="col-4">
                 <div class="p-field">
                     <label>Username:</label> <br>
-                    <app-textbox [(controlModel)]="user.username"></app-textbox><br>
+                    <input
+                    type="username"
+                    pInputText
+                    pTooltip="Should contain atleast 4 characters"
+                    class="w-full md:w-20rem mb-5"
+                    style="padding: 1rem"
+                    minlength="4"
+                    maxlength="20"
+                    required
+                    [(ngModel)]="user.username"
+                  />
                   </div> 
-                  <br>
+               
+                  
               <div class="p-field">
                 <label>Email:</label> <br>
-                <app-textbox [(controlModel)]="user.email"></app-textbox><br>
+                <div class="p-field">
+                  <input
+                  type="email"
+                  pInputText
+                  class="w-full md:w-20rem mb-5"
+                  pTooltip="Please enter valid email"
+                  style="padding: 1rem"
+                  required
+                  email
+                  [(ngModel)]="user.email"
+                />
+                </div> 
               </div>
-              <br>
+             
+
               <div class="p-field">
                 <label>Password:</label> <br>
-                <app-textbox [(controlModel)]="user.password"></app-textbox><br>
+                <p-password
+                styleClass="mb-5"
+                inputStyleClass="w-full p-3 md:w-20rem"
+                pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
+                required
+                [toggleMask]="false"
+                [(ngModel)]="user.password"
+                [feedback]="false"
+                pTooltip="Atleast one upper case, one lowercase, a number or special character required."
+              >
+              </p-password>
               </div>
-              <br>
+             
 
               <div class="p-field">
                 <p-dropdown [options]="roles" [(ngModel)]="user.role"  [showClear]="true" placeholder="Select a Role"></p-dropdown>

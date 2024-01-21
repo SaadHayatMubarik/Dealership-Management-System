@@ -25,6 +25,7 @@ export class DashboardComponent extends BaseComponent implements OnInit {
    data: IObject[] = [];
    showroomId = localStorage.getItem("Showroom Id");
    vehicleDetails: any[] = [];
+   status : string = "AVAILABLE";
    
   
   ngOnInit(){
@@ -33,7 +34,7 @@ export class DashboardComponent extends BaseComponent implements OnInit {
 
 getVehicleDetails() {
   this.apiService
-  .get(`/inventory/getMarketInventory/${this.showroomId}`)
+  .get(`/inventory/getMarketInventory/${this.showroomId}/${this.status}`)
   .subscribe((attributes: IVehicleDetails[]) => {
     this.vehicleDetails = attributes;
     console.log(this.vehicleDetails);

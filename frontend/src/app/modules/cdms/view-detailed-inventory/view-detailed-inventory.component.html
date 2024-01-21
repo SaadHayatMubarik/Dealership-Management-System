@@ -1,5 +1,5 @@
 
-<p-splitter [panelSizes]="[30,70]" [style]="{ height: '657px' }">
+<!-- <p-splitter [panelSizes]="[30,70]" [style]="{ height: '657px' }">
     <ng-template pTemplate>
         <div class="col align-items-center justify-content-center">
             <h4 class="text-center mb-4">Vehicle Details</h4>
@@ -35,7 +35,130 @@
 
     </div>
     </ng-template>
-</p-splitter>
+</p-splitter> -->
+
+
+<div class="row flex">
+    <!-- First Card -->
+    <div  class="card col d-flex flex-column align-items-center justify-content-center">
+        <div class="text-center mb-4">
+            <h4> {{ vehicleDetails.model }}  {{ vehicleDetails.make }} {{ vehicleDetails.year }} </h4>
+        </div>
+        <div class="mx-auto mt-3">
+            <div class=" align-items-center justify-content-center center">
+            <p-galleria [value]="images" [showIndicators]="true" [showThumbnails]="false" [containerStyle]="{ 'max-width': '600px', 'display': 'flex', 'justify-content': 'center' }">
+                <ng-template pTemplate="item" let-item>
+                  <img [src]="item.itemImageSrc" style="width: 100%; margin: 0 auto;" />
+                </ng-template>
+              </p-galleria>
+        </div>   
+    </div>
+
+    
+        <div class= "flex mt-4">
+            <div style="flex: 1; text-align: center; border: 1px solid black; padding: 10px; border-radius: 3px;"> 
+                <i class="pi pi-dollar" style="color: slateblue; font-size: 30px;" ></i>
+                <br><br>
+                <p>{{ vehicleDetails.demand | number: '1.0-0' }}</p>
+            </div>
+
+            <div style="flex: 1; text-align: center; border: 1px solid black; padding: 10px; border-radius: 3px;">
+                <i class="pi pi-calendar" style="color: slateblue; font-size: 30px;" ></i>
+                <br><br>
+                <p>{{ vehicleDetails.year}}</p>
+            </div>
+
+            <div style="flex: 1; text-align: center; border: 1px solid black; padding: 10px; border-radius: 3px;">
+                <i class="pi pi-star" style="color: slateblue; font-size: 30px;" ></i>
+                <br><br>
+                <p>{{ vehicleDetails.grade}}</p>
+            </div>
+
+            <div style="flex: 1; text-align: center; border: 1px solid black; padding: 10px; border-radius: 3px;">
+                <i class="pi pi-bolt" style="color: slateblue; font-size: 30px;" ></i>
+                <br><br>
+                <p>{{ vehicleDetails.mileage | number: '1.0-0'}} Km</p>
+            </div>
+        </div>
+
+   
+    </div>
+  
+    <!-- Second Card -->
+    <div >
+      <div class=" ml-3 card col align-items-center justify-content-center" style="width: 500px; height: 130px;">
+        <div style="display: flex; justify-content: center; align-items: center; ">
+            <h5>Request Vehicle Sale</h5>
+          </div>
+          <div class="mt-2 text-center">
+            <button pButton pRipple label="Send Request" class="p-button-success" style="width: 200px;"></button>
+          </div>
+        
+    </div>
+
+    
+      <div class=" ml-3 card col align-items-center justify-content-center" style="width: 500px; height: 320px;">
+        <div class="text-center mb-5">
+            <h4> Showroom Details </h4>
+        </div>
+        <div class= >
+        <p><strong>Showroom Name:</strong> {{ vehicleDetails.showroom.showroom_name}}</p>
+        <p><strong>State:</strong> {{ vehicleDetails.showroom.state}}</p>
+        <p><strong>City:</strong> {{ vehicleDetails.showroom.city }}</p>
+        <p><strong>Address:</strong> {{ vehicleDetails.showroom.address}}</p>
+        <p><strong>Contact No:</strong> {{ vehicleDetails.showroom.contact_no}}</p>
+      
+    </div>
+    </div>  
+
+</div>
+  </div>
+
+  <div class="row flex">
+    <div class="col-7 mb-3">
+      <div class="card d-flex flex-column align-items-center justify-content-center" style="height: 530px;">
+        <div class="text-center mb-5">
+          <h4>Vehicle Details</h4>
+        </div>
+        <div class="">
+          <p><strong>Make:</strong> {{ vehicleDetails.showroom.showroom_name}}</p>
+          <p><strong>Model:</strong> {{ vehicleDetails.showroom.state}}</p>
+          <p><strong>Variant:</strong> {{ vehicleDetails.showroom.city }}</p>
+          <p><strong>Chasis_No:</strong> {{ vehicleDetails.showroom.address}}</p>
+          <p><strong>Status:</strong> {{ vehicleDetails.showroom.contact_no}}</p>
+          <p><strong>Registration No:</strong> {{ vehicleDetails.showroom.contact_no}}</p>
+          <p><strong>Demand:</strong> {{ vehicleDetails.showroom.contact_no}}</p>
+          <p><strong>Date Of Purchase:</strong> {{ vehicleDetails.date_of_purchase}}</p>
+          <p><strong>Status:</strong> {{ vehicleDetails.showroom.contact_no}}</p>
+          <p><strong>Color:</strong> {{ vehicleDetails.showroom.contact_no}}</p>
+          <p><strong>Comments:</strong> {{ vehicleDetails.showroom.contact_no}}</p>
+          <div class="mt-2 text-center">
+            <button pButton pRipple label="View Documents"  style="width: 200px;"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+
+  </div>
+  
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+
+
 
 
     
