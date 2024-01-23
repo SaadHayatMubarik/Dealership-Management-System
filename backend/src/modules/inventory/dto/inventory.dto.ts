@@ -64,8 +64,9 @@ export class InventoryDto{
     showroomId: number;
 
     @IsNotEmpty()
-    attributeValueId:number[];
+    value: string[];
 
     @IsNotEmpty()
-    value:string[];
+    attributeValueId: number[];
+    // stockValueAttributes: StockAttributeValue[];
 }

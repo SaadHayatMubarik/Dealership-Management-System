@@ -47,7 +47,7 @@ export interface IVehicleDetails {
   mileage: number; 
 }
 
-export interface IStockAttributeValue {  // zaid kaa kaam
+export interface IStockAttributeValue {  
   id: number;
   value: any;
   inventoryInventoryId:number;
