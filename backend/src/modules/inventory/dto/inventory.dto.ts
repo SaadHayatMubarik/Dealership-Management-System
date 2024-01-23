@@ -39,7 +39,7 @@ export class InventoryDto{
     @IsNotEmpty()
     bodyColor: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     engineNo: string;
 
     @IsOptional()
@@ -64,9 +64,6 @@ export class InventoryDto{
     showroomId: number;
 
     @IsNotEmpty()
-    value: string[];
+    stockAttributeValue: StockAttributeValue[];
 
-    @IsNotEmpty()
-    attributeValueId: number[];
-    // stockValueAttributes: StockAttributeValue[];
 }

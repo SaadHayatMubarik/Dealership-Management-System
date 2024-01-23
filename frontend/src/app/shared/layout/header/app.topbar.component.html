@@ -13,7 +13,7 @@
     </button>
 
     <div #topbarmenu class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
-        <button class="p-link layout-topbar-button" (click)="redirect()">
+        <button class="p-link layout-topbar-button" (click)="redirect()" pTooltip="change password">
             <i class=" pi pi-lock-open"></i>
         </button>
     </div>
@@ -33,7 +33,7 @@
     </p-sidebar>
 
     <div #topbarmenu class="layout-topbar-menu ml-2" [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
-        <button class="p-link layout-topbar-button" (click)="logout()">
+        <button class="p-link layout-topbar-button" (click)="logout()" pTooltip="logout">
             <i class=" pi pi-sign-out"></i>
         </button>
 

@@ -43,7 +43,7 @@ status: InventoryStatus;
 @Column()
 color: string;
 
-@Column()
+@Column({ nullable: true })
 engine_no: string;
 
 @Column()

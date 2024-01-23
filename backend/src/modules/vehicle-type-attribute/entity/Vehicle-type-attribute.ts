@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany, JoinColumn, JoinTable} from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany, JoinColumn, JoinTable, OneToOne} from "typeorm";
 import { VehicleType } from "../../vehicle-type/entity/Vehicle-type";
 import { MultiValueAttribute } from "../../multi-value-attribute/entity/Multi-value-attribute";
 import { StockAttributeValue } from "../../stock-attribute-value/entity/Stock-attribute-value";
@@ -24,13 +24,14 @@ export class VehicleTypeAttribute {
      @ManyToOne(() => VehicleType, (vehicleType) => vehicleType.vehicleTypeAttribute)
      vehicleType: VehicleType;
 
+
      // @Column()
      // type_name: VehicleType;
-     // @OneToMany(() => StockAttributeValue, (stockAttributeValue) => stockAttributeValue.vehicleTypeAttribute,{
-     //      onDelete: 'CASCADE',
-     //      onUpdate: 'CASCADE'
-     //  })
-     // stockAttributeValue: StockAttributeValue[];
+     @OneToMany(() => StockAttributeValue, (stockAttributeValue) => stockAttributeValue.vehicleTypeAttribute,{
+          // onDelete: 'CASCADE',
+          // onUpdate: 'CASCADE'
+      })
+     stockAttributeValue: StockAttributeValue[];
 
      
 }
