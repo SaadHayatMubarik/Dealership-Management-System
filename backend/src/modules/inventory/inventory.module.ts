@@ -8,11 +8,12 @@ import { Showroom } from '../showroom/entity/Showroom';
 import { VehicleType } from '../vehicle-type/entity/Vehicle-type';
 import { StockAttributeValue } from '../stock-attribute-value/entity/Stock-attribute-value';
 import { MultiValueAttribute } from '../multi-value-attribute/entity/Multi-value-attribute';
+import { VehicleTypeAttribute } from '../vehicle-type-attribute/entity/Vehicle-type-attribute';
 // import { Showroom } from '../showroom/entity/Showroom';
 // import { VehicleType } from '../vehicle-type/Vehicle-type';
 // import { VehicleTypeModule } from '../vehicle-type/vehicle-type.module';
 @Module({
-  imports: [TypeOrmModule.forFeature([Inventory,Showroom,VehicleType,StockAttributeValue,MultiValueAttribute])],
+  imports: [TypeOrmModule.forFeature([Inventory,Showroom,VehicleType,StockAttributeValue,MultiValueAttribute,VehicleTypeAttribute])],
   controllers: [InventoryController],
   providers: [InventoryService]
 })

@@ -47,8 +47,8 @@ images: any[] = [
   .subscribe(
     (data) => {
       this.vehicleDetails = data;
+      console.log(this.vehicleDetails);
       console.log(this.vehicleDetails.demand);
-      console.log(this.vehicleDetails );
     }
   );
   }

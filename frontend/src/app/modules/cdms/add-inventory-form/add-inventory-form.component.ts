@@ -110,8 +110,8 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
           this.inventoryId =event.inventoryId;
           this.apiService.delete(`/inventory/${this.inventoryId}`).subscribe({
             next: (response) => {
-              this.getInventory();
               this.toast.showSuccess(`Inventory Id: ${this.inventoryId} record deleted.`);   
+              this.getInventory();
             },
             error: () => 
             {
@@ -119,13 +119,6 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
             }
           }
             );
-        },
-      },
-      {
-        label: 'Update',
-        icon: 'pi pi-file-edit',
-        command: (event) => {
-          
         },
       },
       {
@@ -245,6 +238,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
           next: (response) => {
             this.toast.showSuccess('New Inventory Added');
             this.closeModal();
+            this.getInventory();
           },
           error: () => {
             this.toast.showError();

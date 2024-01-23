@@ -29,14 +29,16 @@ export class VehicleTypeAttributeService {
         if ( await this.vehicleTypeAttributeRepository.exist({ where: { attribute_name: vehicleAttributeName, vehicleType:vehicleType } }) == false ){
         await this.vehicleTypeAttributeRepository.save(vehicleTypeAttribute);
             }
+
         for(let i=0; i<vehicleAttributeValue.length; i++){
-            if ( await this.multiValueAttributeRepository.exist({ where:{ attribute_value: vehicleAttributeValue[i], vehicleTypeAttribute:vehicleTypeAttribute } }) == false ){
+            if ( await this.multiValueAttributeRepository.exist({ where:{ attribute_value: vehicleAttributeValue[i], vehicleTypeAttribute:vehicleTypeAttribute } }) == false  ){
         const multiValueAttribute = new MultiValueAttribute();
         multiValueAttribute.vehicleTypeAttribute = await this.vehicleTypeAttributeRepository.findOne({ where: { attribute_name: vehicleAttributeName,vehicleType:vehicleType  } }); ;
         multiValueAttribute.attribute_value = vehicleAttributeValue[i];
         this.multiValueAttributeRepository.save(multiValueAttribute);
             }
-        }
+        
+    }
         return vehicleTypeAttribute;
     }
 
@@ -45,6 +47,7 @@ export class VehicleTypeAttributeService {
         .leftJoin(VehicleTypeAttribute, 'vehicleTypeAttribute' ,'multiValueAttribute.vehicleTypeAttributeAttributeId = vehicleTypeAttribute.attribute_id')
         .leftJoin(VehicleType, 'vehicleType', 'vehicleTypeAttribute.vehicleTypeTypeId = vehicleType.type_id ')
         .select(['vehicleTypeAttribute.attribute_id as vehicleAttributeId', 'vehicleType.type_name as vehicleTypeName', 'vehicleTypeAttribute.attribute_name as vehicleAttributeName', 'multiValueAttribute.attribute_value as vehicleAttributeValue', 'vehicleTypeAttribute.input_type as attributeInputType'])
+        .select()
         .where('vehicleType.showroomShowroomId = :showroomId',{showroomId});
         const result = await getValue.getRawMany();
         // console.log(result);

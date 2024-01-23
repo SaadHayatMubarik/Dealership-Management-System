@@ -46,9 +46,9 @@ export class ApiHelperService {
     .pipe(this.hookResponse(this));
   }
 
-  put(path: string, body: Object = {}): Observable<any> {
+  put(path: string, params: HttpParams = new HttpParams()): Observable<any> {
     return this.http
-      .put(`${environment.apiUrl}${path}`, body, { headers: this.addTokenHeader() })
+      .patch(`${environment.apiUrl}${path}`, { params, headers: this.addTokenHeader() })
       .pipe(this.hookResponse(this));
 
   }

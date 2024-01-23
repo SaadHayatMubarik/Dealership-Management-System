@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Query, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { InventoryService } from './inventory.service';
 // import { Inventory } from './entities/Inventory';
 import { InventoryDto } from './dto/inventory.dto';
@@ -8,6 +8,7 @@ import { Inventory } from './entity/Inventory';
 import { GetInventroyDto } from './dto/getInventory.dto';
 import { GetInventoryByFilterDto } from './dto/getInventoryByFilter.dto';
 import { AuthGuard } from '@nestjs/passport';
+import { InventoryStatus } from './inventory-status.enum';
 
 @Controller('inventory')
 // @UseGuards(AuthGuard())
@@ -32,9 +33,10 @@ export class InventoryController {
     }
 
     @Get('getMarketInventory/:showroomId/:status')
-    getMarketInventory(@Param('showroomId') showroomId: number, @Param('status') status: String): Promise <GetInventroyDto[]>{
+    getMarketInventory(@Param('showroomId') showroomId:number, @Param('status') status: InventoryStatus): Promise <GetInventroyDto[]>{
+        // console.log(getInventoryByFilterDto);
         // console.log(showroomId,status)
-        return this.inventoryService.getMarketInventory(showroomId,status);
+        return this.inventoryService.getMarketInventory(showroomId, status);
     }
 
     @Delete('/:inventoryId')

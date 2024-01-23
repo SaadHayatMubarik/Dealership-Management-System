@@ -97,7 +97,7 @@
     </div>
 
     
-      <div class=" ml-3 card col align-items-center justify-content-center" style="width: 500px; height: 320px;">
+      <div class=" ml-3 card col d-flex flex-column align-items-center justify-content-center" style="width: 500px; height: 70%;">
         <div class="text-center mb-5">
             <h4> Showroom Details </h4>
         </div>
@@ -115,31 +115,29 @@
   </div>
 
   <div class="row flex">
-    <div class="col-7 mb-3">
-      <div class="card d-flex flex-column align-items-center justify-content-center" style="height: 530px;">
+    <div class="col-7 mb-3 card col d-flex flex-column align-items-center justify-content-center"style="padding: 0; ">
+      <div class="card d-flex flex-column align-items-center justify-content-center" style=" width: 100%;">
         <div class="text-center mb-5">
           <h4>Vehicle Details</h4>
         </div>
         <div class="">
-          <p><strong>Make:</strong> {{ vehicleDetails.showroom.showroom_name}}</p>
-          <p><strong>Model:</strong> {{ vehicleDetails.showroom.state}}</p>
-          <p><strong>Variant:</strong> {{ vehicleDetails.showroom.city }}</p>
-          <p><strong>Chasis_No:</strong> {{ vehicleDetails.showroom.address}}</p>
-          <p><strong>Status:</strong> {{ vehicleDetails.showroom.contact_no}}</p>
-          <p><strong>Registration No:</strong> {{ vehicleDetails.showroom.contact_no}}</p>
-          <p><strong>Demand:</strong> {{ vehicleDetails.showroom.contact_no}}</p>
+          <p><strong>Make:</strong> {{ vehicleDetails.make}}</p>
+          <p><strong>Model:</strong> {{ vehicleDetails.model}}</p>
+          <p><strong>Variant:</strong> {{ vehicleDetails.variant }}</p>
+          <p><strong>Chasis_No:</strong> {{ vehicleDetails.chasis_no}}</p>
+          <p><strong>Status:</strong> {{ vehicleDetails.status}}</p>
+          <p><strong>Registration No:</strong> {{ vehicleDetails.reg_no}}</p>
+          <p><strong>Demand:</strong> {{ vehicleDetails.demand  | number: '1.0-0'}}</p>
           <p><strong>Date Of Purchase:</strong> {{ vehicleDetails.date_of_purchase}}</p>
-          <p><strong>Status:</strong> {{ vehicleDetails.showroom.contact_no}}</p>
-          <p><strong>Color:</strong> {{ vehicleDetails.showroom.contact_no}}</p>
-          <p><strong>Comments:</strong> {{ vehicleDetails.showroom.contact_no}}</p>
+          <p><strong>Status:</strong> {{ vehicleDetails.status}}</p>
+          <p><strong>Color:</strong> {{ vehicleDetails.color}}</p>
+          <p><strong>Comments:</strong> {{ vehicleDetails.comments}}</p>
           <div class="mt-2 text-center">
             <button pButton pRipple label="View Documents"  style="width: 200px;"></button>
           </div>
         </div>
       </div>
     </div>
-  
-
   </div>
   
   

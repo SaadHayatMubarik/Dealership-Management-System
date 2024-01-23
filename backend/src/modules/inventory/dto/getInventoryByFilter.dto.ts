@@ -1,13 +1,14 @@
-import { IsNotEmpty } from "class-validator";
+import { IsNotEmpty, IsOptional } from "class-validator";
+import { InventoryStatus } from "../inventory-status.enum";
 
 export class GetInventoryByFilterDto{
 
     @IsNotEmpty()
-    filterBy: string[];
+    status?: InventoryStatus;
+
+    @IsOptional()
+    Keyword?: string;
 
     @IsNotEmpty()
-    Keyword: any[];
-
-    @IsNotEmpty()
-    showroomId: number;
+    showroomId?: number;
 }
