@@ -135,6 +135,10 @@ if(role == roles[i]){
     return this.userRepository.delete({user_id:userId});
   }
 
+  async updateUserDetails(){
+    
+  }
+
   private async hashPassword(password: string, salt: string): Promise<string>{
     return bcrypt.hash(password,salt);
   }

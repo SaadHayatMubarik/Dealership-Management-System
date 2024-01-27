@@ -1,4 +1,4 @@
-import { Body,Post,Get,Delete,Param,Put, Controller,ValidationPipe, UsePipes, UseGuards } from '@nestjs/common';
+import { Body,Post,Get,Delete,Param,Put, Controller,ValidationPipe, UsePipes, UseGuards, Patch } from '@nestjs/common';
 import { VehicleTypeService } from './vehicle-type.service';
 // import { VehicleType } from './entities/Vehicle-type';
 import { VehicleTypeDto } from './dto/vehicle-type.dto';
@@ -8,7 +8,7 @@ import { GetUser } from '../auth/get-user.decorator';
 import { User } from '../auth/entity/User';
 
 @Controller('vehicle-type')
-@UseGuards(AuthGuard())
+// @UseGuards(AuthGuard())
 export class VehicleTypeController {
 
     constructor(private vehicleTypeService: VehicleTypeService){    }
@@ -33,9 +33,9 @@ export class VehicleTypeController {
         return this.vehicleTypeService.deleteVehicleType(vehicleTypeId);
     }
 
-    // @Put('updateVehicleType')
-    // updateVehicleType(@Param('vehicleType',ValidationPipe) vehicleType:string){
-    //     return this.vehicleTypeService.updateVehicleType(vehicleType);
-    // }
+    @Patch('updateVehicleType/:vehicleType/:vehicleId')
+    updateVehicleType(@Param('vehicleType',ValidationPipe) vehicleType:string, @Param('vehicleId') vehicleId: number){
+        return this.vehicleTypeService.updateVehicleType(vehicleType,vehicleId);
+    }
 
 }

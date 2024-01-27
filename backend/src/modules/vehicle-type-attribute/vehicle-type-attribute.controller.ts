@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, UsePipes, ValidationPipe, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, UsePipes, ValidationPipe, UseGuards, Patch } from '@nestjs/common';
 import { VehicleTypeAttributeService } from './vehicle-type-attribute.service';
 import { VehicleTypeAttributeDto } from './dto/vehicle-type-attribute.dto';
 import { GetVehicleTypeAttributeDto } from './dto/get-vehicle-type-attribute.dto';
@@ -34,5 +34,10 @@ export class VehicleTypeAttributeController {
         // console.log(vehicleTypeAttributeId);
        return this.vehicleTypeAttributeService.deleteVehicleTypeAttributeByName(vehicleTypeAttributeId);
     }
+
+    // @Patch('updateVehicleTypeAttribute')
+    // updateVehicleTypeAttribute(@Body()updateVehicleTypeAttributeDto : UpdateVehicleTypeAttributeDto) {
+
+    // }
     
 }

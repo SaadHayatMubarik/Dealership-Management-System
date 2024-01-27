@@ -56,8 +56,9 @@ export class VehicleTypeService {
         return await this.vehicleTypeRepository.delete({ type_id: vehicleTypeId});
     }
 
-    // updateVehicleType (vehicleType: string){
-    //     return this.vehicleTypeRepositry.update({ type_name: vehicleType });
-    // }
+    updateVehicleType (vehicleType: string, vehicleId: number){
+        this.vehicleTypeRepository.update({type_id:vehicleId},{ type_name: vehicleType });
+        return "updated successfully !";
+    }
 }
  

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Equal, Repository } from 'typeorm';
+import { Equal, FindOptionsWhere, Repository } from 'typeorm';
 import { VehicleTypeAttributeDto } from './dto/vehicle-type-attribute.dto';
 import { GetVehicleTypeAttributeDto } from './dto/get-vehicle-type-attribute.dto';
 import { VehicleType } from '../vehicle-type/entity/Vehicle-type';
@@ -25,15 +25,16 @@ export class VehicleTypeAttributeService {
         vehicleTypeAttribute.attribute_name = vehicleAttributeName;
         vehicleTypeAttribute.input_type = attributeInputType.toLowerCase();
         vehicleTypeAttribute.vehicleType =vehicleType;
-        // console.log(vehicleTypeAttribute);
-        if ( await this.vehicleTypeAttributeRepository.exist({ where: { attribute_name: vehicleAttributeName, vehicleType:vehicleType } }) == false ){
+        // console.log(vehicleTypeAttribute.vehicleType);
+        const typeId = await this.vehicleTypeRepository.getId(vehicleType);
+        if ( await this.vehicleTypeAttributeRepository.exist({ where: { attribute_name: vehicleAttributeName, vehicleType:{type_id:typeId} } }) == false ){
         await this.vehicleTypeAttributeRepository.save(vehicleTypeAttribute);
             }
-
+            const Id = await this.vehicleTypeAttributeRepository.getId(vehicleTypeAttribute);
         for(let i=0; i<vehicleAttributeValue.length; i++){
-            if ( await this.multiValueAttributeRepository.exist({ where:{ attribute_value: vehicleAttributeValue[i], vehicleTypeAttribute:vehicleTypeAttribute } }) == false  ){
+            if ( await this.multiValueAttributeRepository.exist({ where:{ attribute_value: vehicleAttributeValue[i], vehicleTypeAttribute:{ attribute_id: Id } }}) == false  ){
         const multiValueAttribute = new MultiValueAttribute();
-        multiValueAttribute.vehicleTypeAttribute = await this.vehicleTypeAttributeRepository.findOne({ where: { attribute_name: vehicleAttributeName,vehicleType:vehicleType  } }); ;
+        multiValueAttribute.vehicleTypeAttribute = await this.vehicleTypeAttributeRepository.findOne({ where: { attribute_name: vehicleAttributeName,vehicleType:{type_id:typeId}  } }); 
         multiValueAttribute.attribute_value = vehicleAttributeValue[i];
         this.multiValueAttributeRepository.save(multiValueAttribute);
             }

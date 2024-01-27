@@ -102,13 +102,13 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
               }
              
             },
-      {
-        label: 'Update',
-        icon: 'pi pi-file-edit',
-        command: (event) => {
+      // {
+      //   label: 'Update',
+      //   icon: 'pi pi-file-edit',
+      //   command: (event) => {
           
-        },
-      },
+      //   },
+      // },
     ];
   }
 

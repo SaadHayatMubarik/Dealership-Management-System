@@ -15,12 +15,12 @@ export class Notification {
     @Column()
     date: Date;
 
-    // @ManyToOne(() => Inventory, (inventory) => inventory.notifications)
-    // inventory: Inventory;
+    @ManyToOne(() => Inventory, (inventory) => inventory.notifications)
+    inventory: Inventory;
 
-    // @OneToOne(() => Showroom, (showroom) => showroom.notification)
-    // senderShowroom: Showroom;
+    @ManyToOne(() => Showroom, (showroom) => showroom.senderNotification)
+    senderShowroom: Showroom;
 
-    // @OneToOne(() => Showroom, (showroom) => showroom.notification)
+    // @OneToOne(() => Showroom, (showroom) => showroom.receiverNotification)
     // receiverShowroom: Showroom;
 }

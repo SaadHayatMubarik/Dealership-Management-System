@@ -39,6 +39,10 @@ export class AuthController {
     return this.authService.changePassword(userId,newPassword,oldPassword);
   }
 
+  @Patch('updateUserDetails')
+  updateUserDetails(@Body() getUserDto:GetUserDto){
+    return this.authService.updateUserDetails();
+  }
 
 
   @UseGuards(AuthGuard())
