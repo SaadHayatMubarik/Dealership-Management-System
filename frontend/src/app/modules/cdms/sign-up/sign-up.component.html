@@ -42,6 +42,7 @@
                     required
                     [(ngModel)]="createAdmin.showroomName"
                     #name="ngModel"
+                    pattern="^\S(?:\s*\S)*$"
                   />
                   <div class="icon">
                     <span *ngIf="name.valid && name.touched"
@@ -69,6 +70,7 @@
                     required
                     [(ngModel)]="createAdmin.showroomAddress"
                     #address="ngModel"
+                    pattern="^\S(?:\s*\S)*$"
                   />
                   <div class="icon">
                     <span *ngIf="address.valid && address.touched"
@@ -99,6 +101,7 @@
                     (keydown)="onKeyDown($event)"
                     [(ngModel)]="createAdmin.showroomContactNo"
                     #contact="ngModel"
+                    pattern="^(03\d{9}|021\d{8})$"
                   />
                   <div class="icon">
                     <span *ngIf="contact.valid && contact.touched"
@@ -136,6 +139,11 @@
                   required
                   [(ngModel)]="createAdmin.showroomState"
                   #state="ngModel"
+                  minlength="3"
+                  maxlength="19"
+                  pattern="^\S(?:\s*\S)*$"
+                  
+                  
                 />
                 <div class="icon">
                   <span *ngIf="state.valid && state.touched"
@@ -164,6 +172,9 @@
                   required
                   [(ngModel)]="createAdmin.showroomCity"
                   #city="ngModel"
+                  minlength="3"
+                  maxlength="40"
+                  pattern="^\S(?:\s*\S)*$"
                 />
 
                 <div class="icon">
@@ -200,7 +211,8 @@
             </div>
           </p-tabPanel>
 
-          <p-tabPanel header="Admin Details" [disabled]="!showSecondTab">
+          <p-tabPanel header="Admin Details" >
+            <!-- [disabled]="!showSecondTab" -->
             <form (ngSubmit)="onSubmit()" #adminForm="ngForm">
                     <div class="form-group">
                 <label class="block text-900 text-xl font-medium mb-2">Username</label>
@@ -215,6 +227,7 @@
                      minlength="4"
                      maxlength="20"
                      #username="ngModel"
+                     pattern="^[A-Za-z0-9_-]+$"
                      [(ngModel)]="createAdmin.username">
               <div class="icon">
                 <span *ngIf="username.valid && username.touched"><i class="pi pi-check text-success"></i></span>
@@ -225,7 +238,7 @@
 
              <div class="form-group">  
               <label class="block text-900 text-xl font-medium mb-2">Email</label>
-                <input type="text" 
+                <input type="email" 
                  name="email"
                  pInputText 
                  placeholder="Enter Email Address" 
@@ -237,6 +250,7 @@
                  email
                  pTooltip="Enter a valid email."
                  #email="ngModel"
+                 pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
                  [(ngModel)]="createAdmin.email"/>
                  <div class="icon">
                     <span *ngIf="email.valid && email.touched"><i class="pi pi-check text-success"></i></span>
