@@ -44,7 +44,7 @@ export class AuthService {
         this.router.navigate(['/login']);
         localStorage.removeItem('jwtToken');
         localStorage.removeItem('Showroom Id');
-        sessionStorage.removeItem('user Id')
+        localStorage.removeItem('user Id')
 
         if (this.tokenExpirationTimer)
         {

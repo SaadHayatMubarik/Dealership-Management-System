@@ -42,6 +42,7 @@
                     required
                     [(ngModel)]="createAdmin.showroomName"
                     #name="ngModel"
+                    pattern="^\S(?:\s*\S)*$"
                   />
                   <div class="icon">
                     <span *ngIf="name.valid && name.touched"
@@ -69,6 +70,7 @@
                     required
                     [(ngModel)]="createAdmin.showroomAddress"
                     #address="ngModel"
+                    pattern="^\S(?:\s*\S)*$"
                   />
                   <div class="icon">
                     <span *ngIf="address.valid && address.touched"
@@ -99,6 +101,7 @@
                     (keydown)="onKeyDown($event)"
                     [(ngModel)]="createAdmin.showroomContactNo"
                     #contact="ngModel"
+                    pattern="^(03\d{9}|021\d{8})$"
                   />
                   <div class="icon">
                     <span *ngIf="contact.valid && contact.touched"
@@ -116,16 +119,7 @@
                     class="block text-900 text-xl font-medium mb-2"
                     >Showroom State</label
                   >
-                  <!-- <p-dropdown
-                    optionLabel="label"
-                    optionValue="value"
-                    [options]="states"
-                    [showClear]="true"
-                    placeholder="Select a State"
-                    [(ngModel)]="createAdmin.showroomState"
-                    name="showroomState"
-                
-                  ></p-dropdown> -->
+
                   <input
                   type="text"
                   pInputText
@@ -136,6 +130,9 @@
                   required
                   [(ngModel)]="createAdmin.showroomState"
                   #state="ngModel"
+                  minlength="3"
+                  maxlength="19"
+                  pattern="^\S(?:\s*\S)*$"
                 />
                 <div class="icon">
                   <span *ngIf="state.valid && state.touched"
@@ -164,6 +161,9 @@
                   required
                   [(ngModel)]="createAdmin.showroomCity"
                   #city="ngModel"
+                  minlength="3"
+                  maxlength="40"
+                  pattern="^\S(?:\s*\S)*$"
                 />
 
                 <div class="icon">
@@ -175,20 +175,16 @@
                   ></span>
                 </div>
 
-                  <!-- <p-dropdown
-                    name="showroomCity"
-                    placeholder="Select a City"
-                    optionLabel="label"
-                    [options]="cities"
-                    optionValue="value"
-                    [showClear]="true"
-                    [(ngModel)]="createAdmin.showroomCity"
-                  ></p-dropdown> -->
-
+                <div class="flex align-items-center justify-content-between mb-5 gap-5">
+                  <a class="font-medium no-underline text-right cursor-pointer ml-auto"
+                     style="color: var(--primary-color)"
+                     (click)="navigateTologIn()"
+                     >
+                    Log In?
+                  </a>
                 </div>
 
-                <br /><br />
-
+                </div>
                 <button
                   pButton
                   pRipple
@@ -200,7 +196,8 @@
             </div>
           </p-tabPanel>
 
-          <p-tabPanel header="Admin Details" [disabled]="!showSecondTab">
+          <p-tabPanel header="Admin Details"   [disabled]="!showSecondTab">
+          
             <form (ngSubmit)="onSubmit()" #adminForm="ngForm">
                     <div class="form-group">
                 <label class="block text-900 text-xl font-medium mb-2">Username</label>
@@ -215,6 +212,7 @@
                      minlength="4"
                      maxlength="20"
                      #username="ngModel"
+                     pattern="^[A-Za-z0-9_-]+$"
                      [(ngModel)]="createAdmin.username">
               <div class="icon">
                 <span *ngIf="username.valid && username.touched"><i class="pi pi-check text-success"></i></span>
@@ -225,7 +223,7 @@
 
              <div class="form-group">  
               <label class="block text-900 text-xl font-medium mb-2">Email</label>
-                <input type="text" 
+                <input type="email" 
                  name="email"
                  pInputText 
                  placeholder="Enter Email Address" 
@@ -237,6 +235,7 @@
                  email
                  pTooltip="Enter a valid email."
                  #email="ngModel"
+                 pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
                  [(ngModel)]="createAdmin.email"/>
                  <div class="icon">
                     <span *ngIf="email.valid && email.touched"><i class="pi pi-check text-success"></i></span>
@@ -276,7 +275,15 @@
              </p-password>
         </div>
 
-              <br />
+        <div class="flex align-items-center justify-content-between mb-5 gap-5">
+          <a class="font-medium no-underline text-right cursor-pointer ml-auto"
+             style="color: var(--primary-color)"
+             (click)="navigateTologIn()"
+             >
+            Log In?
+          </a>
+        </div>
+
               <button
               pButton
               pRipple

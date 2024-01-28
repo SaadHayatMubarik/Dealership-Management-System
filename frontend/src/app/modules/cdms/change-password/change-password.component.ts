@@ -36,7 +36,7 @@ export class ChangePasswordComponent {
   changePassword(){
     // console.log("working")
     if (this.checkPassword === this.change_Password.newPassword && (this.change_Password.oldPassword || this.change_Password.newPassword || this.checkPassword !== ''))  {
-      this.apiService.put(`/auth/changePassword/${this.change_Password.newPassword}/${this.change_Password.oldPassword}/${sessionStorage.getItem('user Id')}`)
+      this.apiService.put(`/auth/changePassword/${this.change_Password.newPassword}/${this.change_Password.oldPassword}/${localStorage.getItem('user Id')}`)
       .subscribe(
          (response) => {
           this.toast.showSuccess('Password changed Successfully');

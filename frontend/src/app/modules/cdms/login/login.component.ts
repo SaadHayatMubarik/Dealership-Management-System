@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit{
           localStorage.setItem('jwtToken', jwtToken);
           localStorage.setItem('Showroom Id', showroomId['showroomShowroomId']);
           localStorage.setItem('userRole', role['role']);
-          sessionStorage.setItem('user Id', userId['user_id']);
+          localStorage.setItem('user Id', userId['user_id']);
           this.toast.showSuccess('WELCOME');
           // this.auth.autoLogout(36000);
 
