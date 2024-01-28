@@ -119,16 +119,7 @@
                     class="block text-900 text-xl font-medium mb-2"
                     >Showroom State</label
                   >
-                  <!-- <p-dropdown
-                    optionLabel="label"
-                    optionValue="value"
-                    [options]="states"
-                    [showClear]="true"
-                    placeholder="Select a State"
-                    [(ngModel)]="createAdmin.showroomState"
-                    name="showroomState"
-                
-                  ></p-dropdown> -->
+
                   <input
                   type="text"
                   pInputText
@@ -142,8 +133,6 @@
                   minlength="3"
                   maxlength="19"
                   pattern="^\S(?:\s*\S)*$"
-                  
-                  
                 />
                 <div class="icon">
                   <span *ngIf="state.valid && state.touched"
@@ -186,20 +175,16 @@
                   ></span>
                 </div>
 
-                  <!-- <p-dropdown
-                    name="showroomCity"
-                    placeholder="Select a City"
-                    optionLabel="label"
-                    [options]="cities"
-                    optionValue="value"
-                    [showClear]="true"
-                    [(ngModel)]="createAdmin.showroomCity"
-                  ></p-dropdown> -->
-
+                <div class="flex align-items-center justify-content-between mb-5 gap-5">
+                  <a class="font-medium no-underline text-right cursor-pointer ml-auto"
+                     style="color: var(--primary-color)"
+                     (click)="navigateTologIn()"
+                     >
+                    Log In?
+                  </a>
                 </div>
 
-                <br /><br />
-
+                </div>
                 <button
                   pButton
                   pRipple
@@ -211,8 +196,8 @@
             </div>
           </p-tabPanel>
 
-          <p-tabPanel header="Admin Details" >
-            <!-- [disabled]="!showSecondTab" -->
+          <p-tabPanel header="Admin Details"   [disabled]="!showSecondTab">
+          
             <form (ngSubmit)="onSubmit()" #adminForm="ngForm">
                     <div class="form-group">
                 <label class="block text-900 text-xl font-medium mb-2">Username</label>
@@ -290,7 +275,15 @@
              </p-password>
         </div>
 
-              <br />
+        <div class="flex align-items-center justify-content-between mb-5 gap-5">
+          <a class="font-medium no-underline text-right cursor-pointer ml-auto"
+             style="color: var(--primary-color)"
+             (click)="navigateTologIn()"
+             >
+            Log In?
+          </a>
+        </div>
+
               <button
               pButton
               pRipple

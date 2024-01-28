@@ -55,6 +55,9 @@ export class SignUpComponent  {
 
     }
   
+    navigateTologIn() {
+      this.router.navigate(['/login']); 
+    }
 
   // states : State[] = [
   //   { label: 'Sindh', value: 'Sindh' },
