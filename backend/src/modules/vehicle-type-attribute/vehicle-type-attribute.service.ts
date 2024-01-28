@@ -6,6 +6,7 @@ import { GetVehicleTypeAttributeDto } from './dto/get-vehicle-type-attribute.dto
 import { VehicleType } from '../vehicle-type/entity/Vehicle-type';
 import { VehicleTypeAttribute } from './entity/Vehicle-type-attribute';
 import { MultiValueAttribute } from '../multi-value-attribute/entity/Multi-value-attribute';
+import { UpdateVehicleTypeAttributeDto } from './dto/update-vehicle-type-attribute.dto';
 
 @Injectable()
 export class VehicleTypeAttributeService {
@@ -66,5 +67,8 @@ export class VehicleTypeAttributeService {
     async deleteVehicleTypeAttributeByName(attributeId: number){
         await this.multiValueAttributeRepository.delete({vehicleTypeAttribute: { attribute_id: attributeId }});
         return this.vehicleTypeAttributeRepository.delete({ attribute_id: attributeId });
+    }
+    async updateVehicleTypeAttribute(updateVehicleTypeAttributeDto : UpdateVehicleTypeAttributeDto){
+        
     }
 }

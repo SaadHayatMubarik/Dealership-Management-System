@@ -13,6 +13,7 @@ import { Showroom } from '../showroom/entity/Showroom';
 import { UserRole } from './user-role.enum';
 import { GetUserDto } from './dto/get-user.dto';
 import { get } from 'http';
+import { UpdateUserDto } from './dto/update-user.dto';
 // import { CreateAuthDto } from './dto/create-user.dto';
 // import { UpdateAuthDto } from './dto/update-user.dto';
 
@@ -135,8 +136,15 @@ if(role == roles[i]){
     return this.userRepository.delete({user_id:userId});
   }
 
-  async updateUserDetails(){
-    
+  async updateUserDetails(updateUserDto:UpdateUserDto){
+    const { userId,username, email, role } = updateUserDto;
+    if(username)
+    await this.userRepository.update({user_id:userId},{user_name:username});
+    if (email)
+    await this.userRepository.update({user_id:userId},{email:email});
+    if (role)
+    await this.userRepository.update({user_id:userId},{role:role});
+  return 'Successfully updated the details';
   }
 
   private async hashPassword(password: string, salt: string): Promise<string>{

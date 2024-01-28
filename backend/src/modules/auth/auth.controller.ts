@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch,Headers, Param, Delete, ValidationPipe, UseGuards} from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch,Headers, Param, Delete, ValidationPipe, UseGuards, Query} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { ValidateUserDto } from './dto/validate-user.dto';
@@ -9,6 +9,7 @@ import { userInfo } from 'os';
 import { GetUserDto } from './dto/get-user.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { UserRole } from './user-role.enum';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 
 @Controller('auth')
@@ -40,8 +41,8 @@ export class AuthController {
   }
 
   @Patch('updateUserDetails')
-  updateUserDetails(@Body() getUserDto:GetUserDto){
-    return this.authService.updateUserDetails();
+  updateUserDetails(@Body() updateUserDto:UpdateUserDto){
+    return this.authService.updateUserDetails(updateUserDto);
   }
 
 
@@ -54,4 +55,5 @@ export class AuthController {
   deleteUser(@Param('userId') userId: number){
     return this.authService.deleteUser(userId);
   }
+  
 }

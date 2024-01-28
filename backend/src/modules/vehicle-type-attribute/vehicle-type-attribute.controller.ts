@@ -4,6 +4,7 @@ import { VehicleTypeAttributeDto } from './dto/vehicle-type-attribute.dto';
 import { GetVehicleTypeAttributeDto } from './dto/get-vehicle-type-attribute.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { VehicleTypeAttribute } from './entity/Vehicle-type-attribute';
+import { UpdateVehicleTypeAttributeDto } from './dto/update-vehicle-type-attribute.dto';
 
 @Controller('vehicle-type-attribute')
 @UseGuards(AuthGuard())
@@ -35,9 +36,9 @@ export class VehicleTypeAttributeController {
        return this.vehicleTypeAttributeService.deleteVehicleTypeAttributeByName(vehicleTypeAttributeId);
     }
 
-    // @Patch('updateVehicleTypeAttribute')
-    // updateVehicleTypeAttribute(@Body()updateVehicleTypeAttributeDto : UpdateVehicleTypeAttributeDto) {
-
-    // }
+    @Patch('updateVehicleTypeAttribute')
+    updateVehicleTypeAttribute(@Body()updateVehicleTypeAttributeDto : UpdateVehicleTypeAttributeDto) {
+        return this.vehicleTypeAttributeService.updateVehicleTypeAttribute(updateVehicleTypeAttributeDto);
+    }
     
 }
