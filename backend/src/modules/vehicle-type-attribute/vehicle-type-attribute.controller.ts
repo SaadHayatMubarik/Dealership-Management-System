@@ -7,7 +7,7 @@ import { VehicleTypeAttribute } from './entity/Vehicle-type-attribute';
 import { UpdateVehicleTypeAttributeDto } from './dto/update-vehicle-type-attribute.dto';
 
 @Controller('vehicle-type-attribute')
-@UseGuards(AuthGuard())
+// @UseGuards(AuthGuard())
 export class VehicleTypeAttributeController {
     constructor( private vehicleTypeAttributeService: VehicleTypeAttributeService )
     {}
@@ -38,6 +38,7 @@ export class VehicleTypeAttributeController {
 
     @Patch('updateVehicleTypeAttribute')
     updateVehicleTypeAttribute(@Body()updateVehicleTypeAttributeDto : UpdateVehicleTypeAttributeDto) {
+        console.log(updateVehicleTypeAttributeDto);
         return this.vehicleTypeAttributeService.updateVehicleTypeAttribute(updateVehicleTypeAttributeDto);
     }
     

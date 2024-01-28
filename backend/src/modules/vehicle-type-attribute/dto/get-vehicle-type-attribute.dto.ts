@@ -10,7 +10,7 @@ export class GetVehicleTypeAttributeDto{
     attributeInputType: string;
 
     @IsNotEmpty()
-    vehicleAttributeValue: string;
+    vehicleAttributeValue: string[];
 
     @IsNotEmpty()
     vehicleTypeName: string;
