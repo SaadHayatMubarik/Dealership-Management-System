@@ -56,26 +56,26 @@
 
     
         <div class= "flex mt-4">
-            <div style="flex: 1; text-align: center; border: 1px solid black; padding: 10px; border-radius: 3px;"> 
-                <i class="pi pi-dollar" style="color: slateblue; font-size: 30px;" ></i>
+            <div style="flex: 1; text-align: center; border: 1px solid lightgrey; border-right: none; padding: 10px; border-radius: 3px;"> 
+                <i class="pi pi-money-bill" style="color: slateblue; font-size: 30px;" ></i>
                 <br><br>
                 <p>{{ vehicleDetails.demand | number: '1.0-0' }}</p>
             </div>
 
-            <div style="flex: 1; text-align: center; border: 1px solid black; padding: 10px; border-radius: 3px;">
+            <div style="flex: 1; text-align: center; border: 1px solid lightgrey; border-right: none; padding: 10px; border-radius: 3px;">
                 <i class="pi pi-calendar" style="color: slateblue; font-size: 30px;" ></i>
                 <br><br>
                 <p>{{ vehicleDetails.year}}</p>
             </div>
 
-            <div style="flex: 1; text-align: center; border: 1px solid black; padding: 10px; border-radius: 3px;">
+            <div style="flex: 1; text-align: center; border: 1px solid lightgrey; border-right: none; padding: 10px; border-radius: 3px;">
                 <i class="pi pi-star" style="color: slateblue; font-size: 30px;" ></i>
                 <br><br>
                 <p>{{ vehicleDetails.grade}}</p>
             </div>
 
-            <div style="flex: 1; text-align: center; border: 1px solid black; padding: 10px; border-radius: 3px;">
-                <i class="pi pi-bolt" style="color: slateblue; font-size: 30px;" ></i>
+            <div style="flex: 1; text-align: center; border: 1px solid lightgrey; padding: 10px; border-radius: 3px;">
+                <i class="pi pi-clock" style="color: slateblue; font-size: 30px;" ></i>
                 <br><br>
                 <p>{{ vehicleDetails.mileage | number: '1.0-0'}} Km</p>
             </div>
@@ -91,7 +91,11 @@
             <h5>Request Vehicle Sale</h5>
           </div>
           <div class="mt-2 text-center">
-            <button pButton pRipple label="Send Request" class="p-button-success" style="width: 200px;"></button>
+            <button pButton pRipple label="Send Request"
+             class="p-button-success" 
+             [disabled]="disableButton()"
+             style="width: 200px;"
+             ></button>
           </div>
         
     </div>

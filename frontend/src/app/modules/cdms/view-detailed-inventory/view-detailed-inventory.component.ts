@@ -35,7 +35,6 @@ images: any[] = [
     this.route.params.subscribe(params => {
       this.inventoryId = params['inventoryId']; 
       this.getvehicleDetail();
-      console.log(this.inventoryId);
     });
 
     this.getvehicleDetail();
@@ -47,11 +46,31 @@ images: any[] = [
   .subscribe(
     (data) => {
       this.vehicleDetails = data;
-      console.log(this.vehicleDetails);
-      console.log(this.vehicleDetails.demand);
+// <<<<<<< HEAD
+//       //  this.disableButton();
+// =======
+//       console.log(this.vehicleDetails);
+//       console.log(this.vehicleDetails.demand);
+// >>>>>>> adf8b96a2e878a0bd51a8d37865c8a07df19cd3a
     }
   );
   }
+
+  disableButton(){
+    
+    const vehicleShowroomId = this.vehicleDetails.showroom.showroom_id;
+    console.log(vehicleShowroomId);
+   
+    if (this.showroomId == vehicleShowroomId)
+    {
+      return true;
+    }
+    else{
+      return false;
+    }
+
+  }
+
   
 }
 

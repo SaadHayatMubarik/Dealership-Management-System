@@ -66,6 +66,7 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
               }
                 );         
         },
+        
       },
     ];
   }

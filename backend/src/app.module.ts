@@ -13,6 +13,9 @@ import { ShowroomModule } from './modules/showroom/showroom.module';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 // import { TokenExpirationInterceptor } from './token.expiration.interceptor';
 import { JwtService } from '@nestjs/jwt';
+import { NotificationModule } from './modules/notification/notification.module';
+import { CustomerService } from './modules/customer/customer.service';
+import { CustomerModule } from './modules/customer/customer.module';
 
 @Module({
   imports: [
@@ -24,6 +27,8 @@ import { JwtService } from '@nestjs/jwt';
     StockAttributeValueModule,
     AuthModule,
     ShowroomModule,
+    NotificationModule,
+    CustomerModule
   ],
   controllers: [AppController],
   providers: [

@@ -65,4 +65,5 @@ export class InventoryDto{
 
     @IsNotEmpty()
     stockAttributeValue: StockAttributeValue[];
+
 }

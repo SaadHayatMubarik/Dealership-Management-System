@@ -186,7 +186,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
             let stockAttrVals: IStockAttributeValue[] = [];
             console.log('====================================');
             attributes.forEach((vta: IVehicleTypeAttributeDto) => {
-              console.log(vta);
+              // console.log(vta);
               stockAttrVals.push({ id: 0, value: '', inventoryInventoryId:0, multiValueAttributeMultiValueId:0, vehicleTypeAttribute: vta })
               console.log(vta.multiVals);
             });
@@ -207,9 +207,9 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   
 
   getOptions(attribute: any) {
-    console.log('====================================');
+    // console.log('====================================');
     console.log('attribute', attribute);
-    console.log('====================================');
+    // console.log('====================================');
     return attribute.vehicleTypeAttribute.multiValueAttributes.map(
       (mv: IObject) => mv['attribute_value']
     ) as string[];

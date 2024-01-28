@@ -9,13 +9,13 @@ export class StockAttributeValueController {
     constructor(private stockAttributeValueService: StockAttributeValueService)
     {}
 
-    @Post('addStockAttributeValue')
-    addStockAttributeValue(@Body() addStockAttributeValueDto: StockAttributeValueDto): Promise<StockAttributeValue>{
-        return this.stockAttributeValueService.addStockAttributeValue(addStockAttributeValueDto);
-    }
+    // @Post('addStockAttributeValue')
+    // addStockAttributeValue(@Body() addStockAttributeValueDto: StockAttributeValueDto): Promise<StockAttributeValue>{
+    //     return this.stockAttributeValueService.addStockAttributeValue(addStockAttributeValueDto);
+    // }
 
-    @Get('/:inventoryId')
-    getStockAttributeValue(@Param('inventoryId') invetoryId: number): Promise<StockAttributeValue[]>{
-        return this.stockAttributeValueService.getStockAttributeValue(invetoryId);
-    }
+    // @Get('/:inventoryId')
+    // getStockAttributeValue(@Param('inventoryId') invetoryId: number): Promise<StockAttributeValue[]>{
+    //     return this.stockAttributeValueService.getStockAttributeValue(invetoryId);
+    // }
 }

@@ -24,8 +24,10 @@ export class InventoryService {
         private inventoryRepository: Repository<Inventory>,
         @InjectRepository(Showroom)
         private showroomRepository: Repository<Showroom>,
-        @InjectRepository(MultiValueAttribute)
-        private multiValueAttributeRepository : Repository <MultiValueAttribute> ,
+        // @InjectRepository(MultiValueAttribute)
+        // private multiValueAttributeRepository : Repository <MultiValueAttribute> ,
+        @InjectRepository(VehicleType)
+        private vehicleTypeRepository: Repository<VehicleType>,
         @InjectRepository(StockAttributeValue)
         private stockValueAttributeRepository: Repository <StockAttributeValue>,
         @InjectRepository(VehicleTypeAttribute)
@@ -54,20 +56,21 @@ export class InventoryService {
         inventory.vehicleType = vehicleType;
         inventory.showroom = await this.showroomRepository.findOne({ where: { showroom_id: showroomId } });
 
-        console.log('stockValueAttribute', stockAttributeValue);
+        // console.log('stockValueAttribute', stockAttributeValue);
 
         await this.inventoryRepository.save(inventory);
 
-        const Id = await this.inventoryRepository.getId(inventory);
+        const inventoryId = await this.inventoryRepository.getId(inventory);
 
-        let inventoryObj = await this.inventoryRepository.findOne({where:{inventory_id:Id}})
-
+        let inventoryObj = await this.inventoryRepository.findOne({where:{inventory_id:inventoryId}})
+        const typeId = await this.vehicleTypeRepository.getId(vehicleType);
         for (let i=0; i<stockAttributeValue.length; i++){ 
 
             const stockAttributeattrValue = new StockAttributeValue();
             stockAttributeattrValue.value = stockAttributeValue[i].value;
-            console.log(vehicleType);
-            stockAttributeattrValue.vehicleTypeAttribute = await this.vehicleTypeAttribute.findOne({where:{vehicleType:vehicleType}});
+            // console.log(vehicleType);
+            
+            stockAttributeattrValue.vehicleTypeAttribute = await this.vehicleTypeAttribute.findOne({where:{vehicleType:{type_id:typeId}}});
             stockAttributeattrValue.inventory = inventoryObj;
             // console.log(inventory)
             await this.stockValueAttributeRepository.save(stockAttributeattrValue);

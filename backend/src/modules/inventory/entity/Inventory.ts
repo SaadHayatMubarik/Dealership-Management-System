@@ -3,6 +3,7 @@ import { VehicleType } from "../../vehicle-type/entity/Vehicle-type";
 import { StockAttributeValue } from "../../stock-attribute-value/entity/Stock-attribute-value";
 import { InventoryStatus } from "../inventory-status.enum";
 import { Showroom } from "src/modules/showroom/entity/Showroom";
+import { Notification } from "src/modules/notification/entity/Notification";
 
 @Entity({ name: 'inventory' })
 export class Inventory {
@@ -66,5 +67,8 @@ stockAttributeValue: StockAttributeValue[];
 
 @ManyToOne(() => Showroom, (showroom) => showroom.inventories)
 showroom: Showroom;
+
+@OneToOne(() => Notification, (notification) => notification)
+notifications: Notification;
 
 }

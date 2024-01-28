@@ -15,8 +15,8 @@ export class StockAttributeValue{
     @ManyToOne(() => Inventory, (inventory) => inventory.stockAttributeValue,{cascade:true})
     inventory: Inventory;
 
-    @ManyToOne(() => MultiValueAttribute, (multiValueAttribute) => multiValueAttribute.stockAttributeValue,{cascade:true})
-    multiValueAttribute: MultiValueAttribute;
+    // @ManyToOne(() => MultiValueAttribute, (multiValueAttribute) => multiValueAttribute.stockAttributeValue,{cascade:true})
+    // multiValueAttribute: MultiValueAttribute;
 
     @ManyToOne(() => VehicleTypeAttribute, (vehicleTypeAttribute) => vehicleTypeAttribute.stockAttributeValue)
     vehicleTypeAttribute: VehicleTypeAttribute;
