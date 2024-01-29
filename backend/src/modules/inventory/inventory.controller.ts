@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Query, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { InventoryService } from './inventory.service';
 // import { Inventory } from './entities/Inventory';
 import { InventoryDto } from './dto/inventory.dto';
@@ -9,6 +9,7 @@ import { GetInventroyDto } from './dto/getInventory.dto';
 import { GetInventoryByFilterDto } from './dto/getInventoryByFilter.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { InventoryStatus } from './inventory-status.enum';
+import { UpdateInventoryDto } from './dto/updateInventory.dto';
 
 @Controller('inventory')
 // @UseGuards(AuthGuard())
@@ -41,7 +42,12 @@ export class InventoryController {
 
     @Delete('/:inventoryId')
     @UsePipes(new ValidationPipe())
-    deleteInventory(@Param('inventoryId') inventoryId: number):void{
-        this.inventoryService.deleteInventory(inventoryId);
+    deleteInventory(@Param('inventoryId') inventoryId: number){
+        return this.inventoryService.deleteInventory(inventoryId);
+    }
+
+    @Put('updateInventory')
+    updateInventory(@Body() updateInventoryDto: UpdateInventoryDto){
+        return this.inventoryService.updateInventory(updateInventoryDto);
     }
 }
