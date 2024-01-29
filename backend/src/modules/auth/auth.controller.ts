@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch,Headers, Param, Delete, ValidationPipe, UseGuards, Query} from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch,Headers, Param, Delete, ValidationPipe, UseGuards, Query, Put} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { ValidateUserDto } from './dto/validate-user.dto';
@@ -40,7 +40,7 @@ export class AuthController {
     return this.authService.changePassword(userId,newPassword,oldPassword);
   }
 
-  @Patch('updateUserDetails')
+  @Put('updateUserDetails')
   updateUserDetails(@Body() updateUserDto:UpdateUserDto){
     return this.authService.updateUserDetails(updateUserDto);
   }
