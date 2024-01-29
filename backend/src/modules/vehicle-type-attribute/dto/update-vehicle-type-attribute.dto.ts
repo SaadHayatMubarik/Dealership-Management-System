@@ -5,8 +5,8 @@ export class UpdateVehicleTypeAttributeDto{
     vehicleAttributeId: number;
     
     @IsOptional()
-    vehicleAttributeName: string;
+    vehicleAttributeName?: string;
 
-    @IsOptional()
-    vehicleAttributeValue: string[];
+    // @IsOptional()
+    // vehicleAttributeValue?: string[];
 }
