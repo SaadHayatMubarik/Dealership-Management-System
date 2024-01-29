@@ -19,7 +19,7 @@
       <div class="sidebar-header">
         <div class="sh-title">
           <h3 style="text-align: center;">
-            Vehicle Type
+            Vehicle Type Add
           </h3>
         </div>
         <div class="sh-toolbar">
@@ -27,7 +27,6 @@
       </div>
       <div class="sidebar-content">
         <div class="card-grey">
-
           <div class="row-form grid">
             <div class="col-4">
               <div class="p-field">
@@ -43,5 +42,36 @@
       </div>
     </div>
   </p-sidebar>
+
+
+  <p-sidebar *ngIf="updateSidebarVisible" [(visible)]="updateSidebarVisible" position="right" [style]="{ width:'20rem'}">
+    <div class="sidebar-main">
+      <div class="sidebar-header">
+        <div class="sh-title">
+          <h3 style="text-align: center;">
+            Vehicle Type Update
+          </h3>
+        </div>
+        <div class="sh-toolbar">
+        </div>
+      </div>
+      <div class="sidebar-content">
+        <div class="card-grey">
+          <div class="row-form grid">
+            <div class="col-4">
+              <div class="p-field">
+                <label>Name</label> <br>
+                <app-textbox [(controlModel)]="updatedName"></app-textbox>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-footer flex justify-content-end">
+         <app-button label="Update" styleClass="p-button-sm p-button-rounded" (onclick)="updateVehicleType()"></app-button>
+      </div>
+    </div>
+  </p-sidebar>
+
 </div>
 

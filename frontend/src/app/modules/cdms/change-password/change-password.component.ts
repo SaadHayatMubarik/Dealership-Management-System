@@ -28,13 +28,10 @@ export class ChangePasswordComponent {
     this.checkPassword = '';
     this.change_Password.oldPassword = '';
     this.change_Password.newPassword = '';
-  
-   
   }
 
 
   changePassword(){
-    // console.log("working")
     if (this.checkPassword === this.change_Password.newPassword && (this.change_Password.oldPassword || this.change_Password.newPassword || this.checkPassword !== ''))  {
       this.apiService.put(`/auth/changePassword/${this.change_Password.newPassword}/${this.change_Password.oldPassword}/${localStorage.getItem('user Id')}`)
       .subscribe(

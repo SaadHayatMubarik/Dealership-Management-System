@@ -11,6 +11,7 @@ import { IVehicleType } from '../../interfaces/inventory';
 import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
 import { DialogControlService } from 'src/app/shared/services/dialog.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -26,11 +27,18 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
   
 
   selectedVehicleTypeId: string = '';
+  updatedName: string = '';
+  modalVisible = false;
+  updateSidebarVisible = false;
+
 
   columns: DataTableColumn[] = [];
   actions: IDataTableAction[] = [];
   data: IObject[] = [];
-  constructor(private readonly apiService: ApiHelperService, private toast : ToastService, private dialogService: DialogControlService) {
+  constructor(private readonly apiService: ApiHelperService, 
+    private toast : ToastService, 
+    private dialogService: DialogControlService, 
+    private router: Router) {
     super();
   }
 
@@ -67,13 +75,20 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
                 );         
         },
         
+        
       },
+      {
+        label: 'Update',
+        icon: 'pi pi-file-edit',
+        command: (event) => {
+          this.selectedVehicleTypeId = event.type_id;
+          this.updateSidebarVisible = true;
+        },
+      },
+
     ];
   }
 
-
-
-  
   saveVehicleType() {
     if (this.vehicleType.vehicleTypeName != '') {
       this.apiService
@@ -94,17 +109,36 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
     }
   }
 
-
-  
-
   getVehicleType() {
     this.apiService.get(`/vehicle-type/${this.vehicleType.showroomId}`).subscribe((data) => {
       this.data = data;
     });
   }
 
-
+  updateVehicleType(){
+    this.apiService.put(`/vehicle-type/updateVehicleType/${this.updatedName}/${this.selectedVehicleTypeId}`).subscribe(
+       (response) => {
+        this.toast.showSuccess('Updated Successfully');
+        this.updateSidebarVisible =false;
+        console.log(response);
+      },
+      (error) => {
+        this.toast.showError();
+        this.updateSidebarVisible =false;
+        console.log(error);
+      }
+    )
+  }
 }
+
+
+
+    
+    
+
+    
+ 
+
 
   
  

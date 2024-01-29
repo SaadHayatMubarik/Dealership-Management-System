@@ -57,7 +57,7 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
     this.getVehicleTypes(); 
     this.getVehicleTypeAttribute();
    
-   this.columns = [ 
+   this.columns = [
     {
       field: 'vehicleTypeName',
       fieldTitle: 'Vehicle Type Name',
@@ -77,6 +77,7 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
       
     
     ];
+
     this.actions = [
       {
         label: ' Delete',
@@ -102,17 +103,18 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
               }
              
             },
-      // {
-      //   label: 'Update',
-      //   icon: 'pi pi-file-edit',
-      //   command: (event) => {
+      {
+        label: 'Update',
+        icon: 'pi pi-file-edit',
+        command: (event) => {
           
-      //   },
-      // },
+        },
+      },
     ];
   }
 
-  
+
+
 
 
   getVehicleTypes() {
