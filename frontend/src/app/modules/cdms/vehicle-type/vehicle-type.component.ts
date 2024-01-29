@@ -116,7 +116,7 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
   }
 
   updateVehicleType(){
-    this.apiService.put(`/vehicle-type/updateVehicleType/${this.updatedName}/${this.selectedVehicleTypeId}`).subscribe(
+    this.apiService.patch(`/vehicle-type/updateVehicleType/${this.updatedName}/${this.selectedVehicleTypeId}`).subscribe(
        (response) => {
         this.toast.showSuccess('Updated Successfully');
         this.updateSidebarVisible =false;
