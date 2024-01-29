@@ -33,9 +33,10 @@ export class VehicleTypeController {
         return this.vehicleTypeService.deleteVehicleType(vehicleTypeId);
     }
 
-    @Patch('updateVehicleType/:vehicleTypeName/:vehicleTypeId')
-    updateVehicleType(@Param('vehicleType',ValidationPipe) vehicleType:string, @Param('vehicleId') vehicleId: number){
-        return this.vehicleTypeService.updateVehicleType(vehicleType,vehicleId);
+    @Patch('updateVehicleType/:updatedType/:vehicleId')
+    updateVehicleType(@Param('updatedType',ValidationPipe) updatedType:string, @Param('vehicleId') vehicleId: number){
+        // console.log(updatedType, "===============",vehicleId);
+        return this.vehicleTypeService.updateVehicleType(updatedType,vehicleId);
     }
 
 }
