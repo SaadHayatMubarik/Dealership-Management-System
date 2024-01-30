@@ -59,34 +59,10 @@ export class SignUpComponent  {
       this.router.navigate(['/login']); 
     }
 
-  // states : State[] = [
-  //   { label: 'Sindh', value: 'Sindh' },
-  //   { label: 'Punjab', value: 'Punjab' },
-  //   { label: 'Balochistan', value: 'Balochistan' },
-  //   { label: 'KPK', value: 'KPK' }
-  // ];
-
-  // cities : CityList[] = [
-  //   { label: 'Lahore', value: 'Lahore' },
-  //   { label: 'Karachi', value: 'Karachi' },
-  //   { label: 'Multan', value: 'Multan' },
-  //   { label: 'Islamabad', value: 'Islamabad' }
-  // ];
-
-  // citiesByState: CityList = {
-  //   Sindh: ['Karachi', 'Hyderabad', 'Sukkur'],
-  //   Punjab: ['Lahore', 'Faisalabad', 'Rawalpindi'],
-  //   Balochistan: ['Quetta', 'Gwadar', 'Khuzdar'],
-  //   KPK: ['Peshawar', 'Abbottabad', 'Swat']
-  // };
-
-
- 
-
   activeTabIndex = 0; // Track current active tab index
   showSecondTab = false; // Initially disable the second tab
 
-//only number input in contact number field
+
   onKeyDown(event: KeyboardEvent) {
     const key = event.key;
     if (key === 'Backspace' || key === 'Delete') {
@@ -97,19 +73,6 @@ export class SignUpComponent  {
     }
   }
 
-  //populating cities dropdown based on the state selected
-  // onStateChange() {
-  //   console.log(this.createAdmin.showroomState)
-  //   if (this.createAdmin.showroomState in this.citiesByState) {
-  //     this.cities = this.citiesByState[this.createAdmin.showroomState];
-  //     console.log(this.cities)
-      
-  //   } else {
-  //     this.cities = [];
-  //   }
-  // }
-
-  //functionality when showroom form is validated and next is pressed
   onNext(){
   if(this.ShowroomForm.valid)
   {
@@ -121,10 +84,6 @@ export class SignUpComponent  {
     this.toast.showError("Please fill all the fields");
   }
   }
-  
-
-
-  
 
   onSubmit()
   {
@@ -141,8 +100,6 @@ export class SignUpComponent  {
         },
         error: () => {
           this.toast.showError();
-         
-          
         },
       });
     }
@@ -151,9 +108,6 @@ export class SignUpComponent  {
     this.toast.showInfo('Password Mismatched, Confirm Password Again.');
     this.AdminForm.value.confirmPassword = '';
   }
-
-  
-
   }
 
 

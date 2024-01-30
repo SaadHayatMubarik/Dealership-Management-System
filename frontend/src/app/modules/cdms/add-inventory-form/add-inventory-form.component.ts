@@ -56,6 +56,12 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   vehicleAttributes: any[] = []; //to save vehicle type attributes
   inventoryId : number = 0;
   selectedTabIndex: number = 0;
+  sellerCategory: string[] = ["CUSTOMER", "AGENT", "DEALERSHIP"];
+  investor_name: string[] = ["Salman", "Haris"];
+  selectedSellerCategory: string = '';
+  investorName: string = '';
+  selectedOption: string = '';
+  investorForms: any[] = [];
 
   columns: DataTableColumn[] = [];
   actions: IDataTableAction[] = [];
@@ -171,6 +177,22 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
       event.preventDefault();
     }
   }
+
+
+  addInvestorForm() {
+    // Add a new form to the array
+    this.investorForms.push({});
+  }
+
+  removeInvestorForm() {
+    // Remove the last form from the array
+    if (this.investorForms.length > 0) {
+      this.investorForms.pop();
+    }
+  }
+
+
+
 
   // fucntion to store vehicle type id when selecting from dropdown.
   onVehicleTypeChange(event: any) {

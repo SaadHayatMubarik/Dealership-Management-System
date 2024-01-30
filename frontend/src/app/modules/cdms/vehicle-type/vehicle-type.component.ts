@@ -116,7 +116,6 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
   }
 
   updateVehicleType(){
-
     console.log(this.updatedName,"---------------------",this.selectedVehicleTypeId);
     this.apiService.patch(`/vehicle-type/updateVehicleType/${this.updatedName}/${this.selectedVehicleTypeId}`).subscribe(
        (next) => {
@@ -125,11 +124,6 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
         console.log(next);
         this.getVehicleType();
       },
-      (error) => {
-        this.toast.showError();
-        this.updateSidebarVisible =false;
-        console.log(error);
-      }
     )
   }
 }
