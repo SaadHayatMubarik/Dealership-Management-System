@@ -13,9 +13,10 @@ import { ShowroomModule } from './modules/showroom/showroom.module';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 // import { TokenExpirationInterceptor } from './token.expiration.interceptor';
 import { JwtService } from '@nestjs/jwt';
-import { NotificationModule } from './modules/notification/notification.module';
+// import { NotificationModule } from './modules/notification/notification.module';
 import { CustomerService } from './modules/customer/customer.service';
 import { CustomerModule } from './modules/customer/customer.module';
+import { NotificationModule } from './modules/notification/notification.module';
 
 @Module({
   imports: [
@@ -28,7 +29,7 @@ import { CustomerModule } from './modules/customer/customer.module';
     AuthModule,
     ShowroomModule,
     NotificationModule,
-    CustomerModule
+    CustomerModule,
   ],
   controllers: [AppController],
   providers: [
