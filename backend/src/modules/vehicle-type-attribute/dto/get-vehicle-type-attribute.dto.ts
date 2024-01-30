@@ -10,6 +10,9 @@ export class GetVehicleTypeAttributeDto{
     attributeInputType: string;
 
     @IsNotEmpty()
+    multiValueId: number[];
+    
+    @IsNotEmpty()
     vehicleAttributeValue: string[];
 
     @IsNotEmpty()

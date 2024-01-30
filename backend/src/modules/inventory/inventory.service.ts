@@ -15,6 +15,7 @@ import { GetInventoryByFilterDto } from './dto/getInventoryByFilter.dto';
 import { identity } from 'rxjs';
 import { VehicleTypeAttribute } from '../vehicle-type-attribute/entity/Vehicle-type-attribute';
 import { privateDecrypt } from 'crypto';
+import { UpdateInventoryDto } from './dto/updateInventory.dto';
 
 @Injectable()
 export class InventoryService {
@@ -121,6 +122,55 @@ export class InventoryService {
     deleteInventory(inventoryId: number){
          this.stockValueAttributeRepository.delete({inventory:{inventory_id:inventoryId}})
         return this.inventoryRepository.delete({ inventory_id: inventoryId });
+    }
+
+    async updateInventory(updateInventoryDto: UpdateInventoryDto){
+        const { vehicleVariant, vehicleModel, vehicleMake, vehicleChasisNo, status, comments, bodyColor, costPrice, dateOfPurchase, dateOfSale, demand, engineNo, grade, inventoryId, mileage, modelYear, regNo, vehicleType } = updateInventoryDto;
+        if(vehicleVariant)
+        await this.inventoryRepository.update({inventory_id:inventoryId},{variant:vehicleVariant});
+        if(vehicleModel)
+        await this.inventoryRepository.update({inventory_id:inventoryId}, {model:vehicleModel}); 
+        if(vehicleMake)
+        await this.inventoryRepository.update({inventory_id:inventoryId}, {make:vehicleMake});  
+        if(vehicleChasisNo)
+        await this.inventoryRepository.update({inventory_id:inventoryId}, {chasis_no:vehicleChasisNo});
+        if(status)
+        await this.inventoryRepository.update({inventory_id:inventoryId}, {status:status});
+        if(comments)
+        await this.inventoryRepository.update({inventory_id:inventoryId},{comments:comments});
+        if(bodyColor)
+        await this.inventoryRepository.update({inventory_id:inventoryId},{color:bodyColor});
+        if(costPrice)
+        await this.inventoryRepository.update({inventory_id:inventoryId},{price:costPrice});
+        if(demand)
+        await this.inventoryRepository.update({inventory_id:inventoryId},{demand:demand});
+        if(dateOfPurchase)
+        await this.inventoryRepository.update({inventory_id:inventoryId},{date_of_purchase:dateOfPurchase});
+        if(dateOfSale)
+        await this.inventoryRepository.update({inventory_id:inventoryId},{date_of_sale:dateOfSale});
+        if(engineNo)
+        await this.inventoryRepository.update({inventory_id:inventoryId},{engine_no:engineNo});
+        if(grade)
+        await this.inventoryRepository.update({inventory_id:inventoryId},{grade:grade});
+        if(mileage)
+        await this.inventoryRepository.update({inventory_id:inventoryId},{mileage:mileage});
+        if(modelYear)
+        await this.inventoryRepository.update({inventory_id:inventoryId},{mileage:mileage});
+        if(regNo)
+        await this.inventoryRepository.update({inventory_id:inventoryId},{reg_no:regNo});
+        if(vehicleType)
+        await this.inventoryRepository.update({inventory_id:inventoryId},{vehicleType:vehicleType});
+    //     if(value){
+    //     // const getData: StockAttributeValue[] = await this.stockValueAttributeRepository.createQueryBuilder('stockValueAttribute')
+    //     // .select('*')
+    //     // .where('stockValueAttribute.inventoryInventoryId = :inventoryId',{inventoryId})
+    //     // .getMany();
+    // // const result = await getData.getRawMany();
+    // // const array: StockAttributeValue[] = getData.toArray();
+    //     for(let i=0; i<value.length; i++){
+    //     await this.stockValueAttributeRepository.update({id:},{value:value[i]});
+    //     }
+    // }
     }
     
 }

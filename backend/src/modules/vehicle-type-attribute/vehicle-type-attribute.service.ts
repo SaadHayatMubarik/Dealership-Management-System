@@ -48,7 +48,7 @@ export class VehicleTypeAttributeService {
         const getValue = this.multiValueAttributeRepository.createQueryBuilder('multiValueAttribute')
         .leftJoin(VehicleTypeAttribute, 'vehicleTypeAttribute' ,'multiValueAttribute.vehicleTypeAttributeAttributeId = vehicleTypeAttribute.attribute_id')
         .leftJoin(VehicleType, 'vehicleType', 'vehicleTypeAttribute.vehicleTypeTypeId = vehicleType.type_id ')
-        .select(['vehicleTypeAttribute.attribute_id as vehicleAttributeId', 'vehicleType.type_name as vehicleTypeName', 'vehicleTypeAttribute.attribute_name as vehicleAttributeName', 'multiValueAttribute.attribute_value as vehicleAttributeValue', 'vehicleTypeAttribute.input_type as attributeInputType'])
+        .select(['vehicleTypeAttribute.attribute_id as vehicleAttributeId', 'vehicleType.type_name as vehicleTypeName', 'vehicleTypeAttribute.attribute_name as vehicleAttributeName', 'multiValueAttribute.attribute_id as multiValueId', 'multiValueAttribute.attribute_value as vehicleAttributeValue', 'vehicleTypeAttribute.input_type as attributeInputType'])
         // .where('multiValueAttribute.vehicleTypeAttributeAttributeName = :vehicleTypeName',{})
         .where('vehicleType.showroomShowroomId = :showroomId',{showroomId});
         const result = await getValue.getRawMany();
@@ -69,18 +69,14 @@ export class VehicleTypeAttributeService {
         return this.vehicleTypeAttributeRepository.delete({ attribute_id: attributeId });
     }
     async updateVehicleTypeAttribute(updateVehicleTypeAttributeDto : UpdateVehicleTypeAttributeDto){
-        const { vehicleAttributeId, vehicleAttributeName } = updateVehicleTypeAttributeDto;
+        const { vehicleAttributeId, vehicleAttributeName, multiValue, multiValueId } = updateVehicleTypeAttributeDto;
         if(vehicleAttributeName)
         await this.vehicleTypeAttributeRepository.update({attribute_id:vehicleAttributeId},{attribute_name: vehicleAttributeName});
-    // if(vehicleAttributeValue){
-    //     for(let i=0; i<vehicleAttributeValue.length; i++){
-    //         if ( await this.multiValueAttributeRepository.exist({ where:{ attribute_value: vehicleAttributeValue[i], vehicleTypeAttribute:{ attribute_id: vehicleAttributeId} }}) == false  ){
-    //             console.log(vehicleAttributeValue[i])
-    //     await this.multiValueAttributeRepository.update({vehicleTypeAttribute:{attribute_id:vehicleAttributeId}},{attribute_value:vehicleAttributeValue[i]});
-    //         }
-        
-    // }
-    // }
+    if(multiValue){
+            if ( await this.multiValueAttributeRepository.exist({ where:{ attribute_value: multiValue, multi_value_id:multiValueId}}) == false  ){
+        await this.multiValueAttributeRepository.update({multi_value_id:multiValueId},{attribute_value:multiValue});
+            }
+    }
     return "updated successfully";
     }
 

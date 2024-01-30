@@ -1,7 +1,14 @@
 import { IsNotEmpty, IsOptional } from "class-validator";
 
 export class UpdateVehicleTypeAttributeDto{
-    @IsNotEmpty()
+
+    @IsOptional()
+    multiValueId: number;
+
+    @IsOptional()
+    multiValue: string;
+
+    @IsOptional()
     vehicleAttributeId: number;
     
     @IsOptional()

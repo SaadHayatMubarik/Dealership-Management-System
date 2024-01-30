@@ -116,12 +116,12 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
   }
 
   updateVehicleType(){
-    console.log(this.updatedName,"---------------------",this.selectedVehicleTypeId);
+    // console.log(this.updatedName,"---------------------",this.selectedVehicleTypeId);
     this.apiService.patch(`/vehicle-type/updateVehicleType/${this.updatedName}/${this.selectedVehicleTypeId}`).subscribe(
        (next) => {
         this.toast.showSuccess('Updated Successfully');
         this.updateSidebarVisible =false;
-        console.log(next);
+        // console.log(next);
         this.getVehicleType();
       },
     )
