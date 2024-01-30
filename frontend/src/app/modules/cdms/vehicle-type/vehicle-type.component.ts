@@ -121,14 +121,9 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
        (next) => {
         this.toast.showSuccess('Updated Successfully');
         this.updateSidebarVisible =false;
-        // console.log(next);
+        console.log(next);
         this.getVehicleType();
       },
-      (error) => {
-        this.toast.showError();
-        this.updateSidebarVisible =false;
-        console.log(error);
-      }
     )
   }
 }
