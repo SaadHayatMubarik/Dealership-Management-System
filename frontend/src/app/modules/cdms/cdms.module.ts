@@ -38,6 +38,7 @@ import { SplitterModule } from 'primeng/splitter';
 import { GalleriaModule } from 'primeng/galleria';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { DataViewModule } from 'primeng/dataview';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 
 
@@ -91,6 +92,9 @@ import { DataViewModule } from 'primeng/dataview';
     SplitterModule,
     GalleriaModule,
     DataViewModule,
+    RadioButtonModule,
+    
+
     
 
   ],
