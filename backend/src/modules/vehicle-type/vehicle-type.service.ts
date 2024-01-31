@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Equal, Repository } from 'typeorm';
 import { VehicleTypeDto } from './dto/vehicle-type.dto';
@@ -56,8 +56,10 @@ export class VehicleTypeService {
         return await this.vehicleTypeRepository.delete({ type_id: vehicleTypeId});
     }
 
-    updateVehicleType (updatedType: string, vehicleId: number){
-        this.vehicleTypeRepository.update({type_id:vehicleId},{ type_name: updatedType });
+    async updateVehicleType (updatedType: string, vehicleId: number){
+        const type: VehicleType = await this.vehicleTypeRepository.findOneBy({type_id:vehicleId});
+        if(type.type_name !==  updatedType) 
+        await this.vehicleTypeRepository.update({type_id:vehicleId},{ type_name: updatedType });
         return "updated successfully !";
     }
 }

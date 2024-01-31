@@ -6,6 +6,7 @@ import { Repository } from 'typeorm';
 import { Inventory } from '../inventory/entity/Inventory';
 import { Showroom } from '../showroom/entity/Showroom';
 import { Notification } from './entity/Notification';
+import { NotificationStatus } from './notification-status.enum';
 
 @Injectable()
 export class NotificationService {
@@ -27,7 +28,18 @@ export class NotificationService {
         return await this.notficationRepository.save(notification);
     } 
 
-    // async getRequest(): Promise<Notification>{
+    async getRequest(showroomId: number, status: string): Promise<Notification[]>{
+         if(status.toLowerCase() == "sent")
+        return await this.notficationRepository.find({relations:['inventory','senderShowroom'],where:{senderShowroom:{showroom_id:showroomId}}});
+        if(status.toLowerCase() == "received")
+        return await this.notficationRepository.find({relations:['inventory.showroom'],where:{inventory:{showroom:{showroom_id:showroomId}}}});
+    }
 
+    // async getRequestReceive(showroomId: number): Promise<Notification[]>{
+    //     return await this.notficationRepository.find({relations:['inventory.showroom'],where:{inventory:{showroom:{showroom_id:showroomId}}}});
     // }
+
+    async updateRequestStatus(notificationId: number, updatedStatus:NotificationStatus){
+        return  await this.notficationRepository.update({notification_id:notificationId} ,{ status : updatedStatus})
+    }
 }

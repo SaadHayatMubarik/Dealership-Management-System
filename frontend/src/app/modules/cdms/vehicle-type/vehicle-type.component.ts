@@ -26,8 +26,8 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
   };
   
 
-  selectedVehicleTypeId: string = '';
-  updatedName: string = '';
+  vehicleId: string = '';
+  updatedType: string = '';
   modalVisible = false;
   updateSidebarVisible = false;
 
@@ -61,8 +61,8 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
         label: ' Delete',
         icon: 'pi pi-trash',
         command: (event) => {
-          this.selectedVehicleTypeId = event.type_id;
-              this.apiService.delete(`/vehicle-type/${this.selectedVehicleTypeId}`).subscribe({
+          this.vehicleId = event.type_id;
+              this.apiService.delete(`/vehicle-type/${this.vehicleId}`).subscribe({
                 next: (response) => { 
                   this.getVehicleType();
                   this.toast.showSuccess("Vehicle Type Deleted.");
@@ -81,7 +81,7 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
         label: 'Update',
         icon: 'pi pi-file-edit',
         command: (event) => {
-          this.selectedVehicleTypeId = event.type_id;
+          this.vehicleId = event.type_id;
           this.updateSidebarVisible = true;
         },
       },
@@ -116,8 +116,8 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
   }
 
   updateVehicleType(){
-    // console.log(this.updatedName,"---------------------",this.selectedVehicleTypeId);
-    this.apiService.patch(`/vehicle-type/updateVehicleType/${this.updatedName}/${this.selectedVehicleTypeId}`).subscribe(
+    console.log(this.updatedType,"---------------------",this.vehicleId);
+    this.apiService.patch(`/vehicle-type/updateVehicleType/${this.updatedType}/${this.vehicleId}`).subscribe(
        (next) => {
         this.toast.showSuccess('Updated Successfully');
         this.updateSidebarVisible =false;

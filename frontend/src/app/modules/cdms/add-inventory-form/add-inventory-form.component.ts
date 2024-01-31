@@ -52,7 +52,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   vehicleTypes: any[] = []; //to populate dropdown of vehicle type
   status: string[] = ['AVAILABLE', 'SOLD', 'ON ORDER']; //to populate status dropdown
   sliderValue: number = 0;
-  selectedVehicleTypeId: any; //saving vehicle type id
+  vehicleId: any; //saving vehicle type id
   vehicleAttributes: any[] = []; //to save vehicle type attributes
   inventoryId : number = 0;
   selectedTabIndex: number = 0;
@@ -197,10 +197,10 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   // fucntion to store vehicle type id when selecting from dropdown.
   onVehicleTypeChange(event: any) {
     if (event.value) {
-      this.selectedVehicleTypeId = event.value;
-      if (this.selectedVehicleTypeId.type_id) {
+      this.vehicleId = event.value;
+      if (this.vehicleId.type_id) {
         this.apiService
-          .get(`/vehicle-type-attribute/${this.selectedVehicleTypeId.type_id}`)
+          .get(`/vehicle-type-attribute/${this.vehicleId.type_id}`)
           .subscribe((attributes: IVehicleTypeAttributeDto[]) => {
             this.vehicleAttributes = attributes;
             console.log(this.vehicleAttributes);
