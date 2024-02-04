@@ -1,4 +1,4 @@
-import { ConsoleLogger, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 // import { Inventory } from './entities/Inventory';
 import { Repository } from 'typeorm';
@@ -7,14 +7,14 @@ import { InventoryStatus } from './inventory-status.enum';
 import { Inventory } from './entity/Inventory';
 import { Showroom } from '../showroom/entity/Showroom';
 import { StockAttributeValue } from '../stock-attribute-value/entity/Stock-attribute-value';
-import { MulterModule } from '@nestjs/platform-express';
-import { MultiValueAttribute } from '../multi-value-attribute/entity/Multi-value-attribute';
+// import { MulterModule } from '@nestjs/platform-express';
+// import { MultiValueAttribute } from '../multi-value-attribute/entity/Multi-value-attribute';
 import { GetInventroyDto } from './dto/getInventory.dto';
 import { VehicleType } from '../vehicle-type/entity/Vehicle-type';
-import { GetInventoryByFilterDto } from './dto/getInventoryByFilter.dto';
-import { identity } from 'rxjs';
+// import { GetInventoryByFilterDto } from './dto/getInventoryByFilter.dto';
+// import { identity } from 'rxjs';
 import { VehicleTypeAttribute } from '../vehicle-type-attribute/entity/Vehicle-type-attribute';
-import { privateDecrypt } from 'crypto';
+// import { privateDecrypt } from 'crypto';
 import { UpdateInventoryDto } from './dto/updateInventory.dto';
 
 @Injectable()

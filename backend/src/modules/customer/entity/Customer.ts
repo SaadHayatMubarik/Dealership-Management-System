@@ -1,6 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { CustomerType } from "../customer-type.enum";
 import { CustomerCatagory } from "../customer-catagory.enum";
+import { Inventory } from "src/modules/inventory/entity/Inventory";
 
 @Entity({ name: 'customer' })
 export class Customer {
@@ -34,5 +35,7 @@ export class Customer {
     @Column()
     province: string;
     
+    @OneToMany(() => Inventory, (inventory) => inventory)
+    inventories: Inventory[];
 
 }
