@@ -1,5 +1,6 @@
 export enum CustomerCatagory {
     AGENT = 'AGENT',
     DEALERSHIP = 'DEALERSHIP',
-    CUSTOMER = 'CUSTOMER'
+    CUSTOMER = 'CUSTOMER',
+    IMPORTED = 'IMPORTED'
 }

@@ -1,7 +1,8 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { CustomerType } from "../customer-type.enum";
 import { CustomerCatagory } from "../customer-catagory.enum";
 import { Inventory } from "src/modules/inventory/entity/Inventory";
+import { Showroom } from "src/modules/showroom/entity/Showroom";
 
 @Entity({ name: 'customer' })
 export class Customer {
@@ -18,7 +19,7 @@ export class Customer {
     type: CustomerType;
 
     @Column()
-    cnic: number;
+    cnic: string;
 
     @Column()
     phone_number: string;
@@ -35,7 +36,10 @@ export class Customer {
     @Column()
     province: string;
     
-    @OneToMany(() => Inventory, (inventory) => inventory)
+    @OneToMany(() => Inventory, (inventory) => inventory.customer)
     inventories: Inventory[];
+
+    @ManyToOne(() => Showroom, (showroom) => showroom.customers)
+    showroom: Showroom;
 
 }
