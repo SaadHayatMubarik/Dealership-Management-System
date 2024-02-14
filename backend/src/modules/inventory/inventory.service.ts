@@ -16,6 +16,10 @@ import { VehicleType } from '../vehicle-type/entity/Vehicle-type';
 import { VehicleTypeAttribute } from '../vehicle-type-attribute/entity/Vehicle-type-attribute';
 // import { privateDecrypt } from 'crypto';
 import { UpdateInventoryDto } from './dto/updateInventory.dto';
+import { Customer } from '../customer/entity/Customer';
+import { CustomerType } from '../customer/customer-type.enum';
+import { Investment } from '../investment/entity/Investment';
+import { Investor } from '../investor/entity/Investor';
 
 @Injectable()
 export class InventoryService {
@@ -32,12 +36,32 @@ export class InventoryService {
         @InjectRepository(StockAttributeValue)
         private stockValueAttributeRepository: Repository <StockAttributeValue>,
         @InjectRepository(VehicleTypeAttribute)
-        private vehicleTypeAttribute: Repository <VehicleTypeAttribute>
+        private vehicleTypeAttribute: Repository <VehicleTypeAttribute>,
+        @InjectRepository(Customer)
+        private customerRepository: Repository <Customer>,
+        @InjectRepository(Investment)
+        private investmentRepository: Repository <Investment>,
+        // @InjectRepository(Investor)
+        // private investorRepository: Repository <Investor>
     ){}
 
     async addInventory (addInventoryDto: InventoryDto): Promise<Inventory>{
+        const { vehicleType, vehicleMake, vehicleModel , vehicleVariant , modelYear , vehicleChasisNo , costPrice , demand , dateOfPurchase , dateOfSale , bodyColor , engineNo , comments , grade , regNo, mileage, status, showroomId, stockAttributeValue, customerCategory, name, contactNo, customerEmail, province, city, address, cnic, investor, investmentPercentage } = addInventoryDto;
+        const customer = new Customer();
+        customer.catagory = customerCategory;
+        customer.name = name;
+        customer.phone_number = contactNo;
+        customer.email = customerEmail;
+        customer.province = province;
+        customer.city = city;
+        customer.address = address;
+        customer.cnic = cnic;
+        customer.type = CustomerType.SELLER;
+        // customer.inventories = 
+        await this.customerRepository.save(customer);
+
+        const customerId = await this.customerRepository.getId(customer);
         const inventory = new Inventory();
-        const { vehicleType, vehicleMake, vehicleModel , vehicleVariant , modelYear , vehicleChasisNo , costPrice , demand , dateOfPurchase , dateOfSale , bodyColor , engineNo , comments , grade , regNo, mileage, status, showroomId,stockAttributeValue } = addInventoryDto;
         inventory.make = vehicleMake.toUpperCase();
         inventory.model = vehicleModel.toUpperCase();
         inventory.variant = vehicleVariant.toUpperCase();
@@ -56,7 +80,7 @@ export class InventoryService {
         inventory.mileage = mileage;
         inventory.vehicleType = vehicleType;
         inventory.showroom = await this.showroomRepository.findOne({ where: { showroom_id: showroomId } });
-
+        inventory.customer = await this.customerRepository.findOne({ where: { customer_id:customerId } });
         // console.log('stockValueAttribute', stockAttributeValue);
 
         await this.inventoryRepository.save(inventory);
@@ -75,8 +99,15 @@ export class InventoryService {
             stockAttributeattrValue.inventory = inventoryObj;
             // console.log(inventory)
             await this.stockValueAttributeRepository.save(stockAttributeattrValue);
-
-            
+        }
+        
+    
+        for(let i=0; i<investor.length; i++){
+            const investment = new Investment();
+            investment.investment_percentage = investmentPercentage[i];
+            investment.investment_date = new Date();
+            investment.investor = investor[i];
+            investment.inventory = inventoryObj;
         }
         return inventory;
     }

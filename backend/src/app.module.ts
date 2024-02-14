@@ -17,6 +17,10 @@ import { JwtService } from '@nestjs/jwt';
 import { CustomerService } from './modules/customer/customer.service';
 import { CustomerModule } from './modules/customer/customer.module';
 import { NotificationModule } from './modules/notification/notification.module';
+import { Investment } from './modules/investment/entity/Investment';
+import { InvestmentModule } from './modules/investment/investment.module';
+import { InvestorModule } from './modules/investor/investor.module';
+import { PictureModule } from './modules/picture/picture.module';
 
 @Module({
   imports: [
@@ -29,6 +33,9 @@ import { NotificationModule } from './modules/notification/notification.module';
     AuthModule,
     ShowroomModule,
     NotificationModule,
+    InvestmentModule,
+    InvestorModule,
+    PictureModule,
     CustomerModule,
   ],
   controllers: [AppController],

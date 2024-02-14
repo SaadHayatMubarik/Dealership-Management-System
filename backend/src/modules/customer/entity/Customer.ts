@@ -18,7 +18,7 @@ export class Customer {
     type: CustomerType;
 
     @Column()
-    cnic: number;
+    cnic: string;
 
     @Column()
     phone_number: string;

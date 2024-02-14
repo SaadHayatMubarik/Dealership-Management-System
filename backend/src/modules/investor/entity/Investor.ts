@@ -1,5 +1,6 @@
 import { Investment } from "src/modules/investment/entity/Investment";
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Showroom } from "src/modules/showroom/entity/Showroom";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({ name: 'investor' })
 export class Investor{
@@ -18,6 +19,9 @@ capital_amount: string;
 
 @Column()
 profit: string;
+
+@ManyToOne(() => Showroom, (showroom) => showroom.investors)
+showroom: Showroom;
 
 @OneToMany(() => Investment, (investment) => investment.investor)
 investments:  Investment[];
