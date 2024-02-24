@@ -74,7 +74,7 @@ showroom: Showroom;
 @OneToOne(() => Notification, (notification) => notification)
 notifications: Notification;
 
-@OneToOne(() => Customer, (customer) => customer.inventories)
+@ManyToOne(() => Customer, (customer) => customer.inventories)
 customer: Customer;
 
 @OneToMany(() => Investment, (investment) => investment.inventory)

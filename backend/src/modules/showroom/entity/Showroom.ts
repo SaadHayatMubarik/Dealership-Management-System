@@ -4,6 +4,8 @@ import { VehicleType } from "src/modules/vehicle-type/entity/Vehicle-type";
 import { Notification } from "src/modules/notification/entity/Notification";
 import { Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Investor } from "src/modules/investor/entity/Investor";
+import { Customer } from "src/modules/customer/entity/Customer";
+
 
 @Entity({ name: 'Showroom' })
 export class Showroom {
@@ -39,7 +41,11 @@ export class Showroom {
 
     // @OneToMany(() => Notification, (notification)  => notification.senderShowroom)
     // receiverNotification: Notification[];
-
     @OneToMany(() => Investor, (investor) => investor.showroom)
     investors: Investor[];
+
+
+    @OneToMany(() => Customer, (customer) => customer.showroom)
+    customers: Customer[];
+
 }

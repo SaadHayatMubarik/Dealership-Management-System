@@ -37,6 +37,9 @@ import { PictureModule } from './modules/picture/picture.module';
     InvestorModule,
     PictureModule,
     CustomerModule,
+    InvestmentModule,
+    InvestorModule,
+    PictureModule
   ],
   controllers: [AppController],
   providers: [

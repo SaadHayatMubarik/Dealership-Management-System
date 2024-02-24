@@ -15,14 +15,20 @@ investor_name:  string;
 cnic: string;
 
 @Column()
-capital_amount: string;
+phone: string;
 
 @Column()
-profit: string;
+capital_amount: number;
 
-@ManyToOne(() => Showroom, (showroom) => showroom.investors)
-showroom: Showroom;
+@Column()
+profit: number;
+
+// @ManyToOne(() => Showroom, (showroom) => showroom.investors)
+// showroom: Showroom;
 
 @OneToMany(() => Investment, (investment) => investment.investor)
 investments:  Investment[];
+
+@ManyToOne(() => Showroom, (showroom) => showroom.investors)
+showroom: Showroom;
 }
