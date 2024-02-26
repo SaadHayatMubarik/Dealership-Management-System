@@ -17,10 +17,10 @@ cnic: string;
 @Column()
 phone: string;
 
-@Column()
+@Column({ default: '0' })
 capital_amount: number;
 
-@Column()
+@Column({ default: '0' })
 profit: number;
 
 // @ManyToOne(() => Showroom, (showroom) => showroom.investors)

@@ -1,4 +1,4 @@
-import { IsNotEmpty } from "class-validator";
+import { IsNotEmpty, IsOptional } from "class-validator";
 
 export class InvestorDto{
     @IsNotEmpty()
@@ -10,10 +10,10 @@ export class InvestorDto{
     @IsNotEmpty()
     phone: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     capitalAmount: number;
 
-    @IsNotEmpty()
+    @IsOptional()
     profit: number;
 
     @IsNotEmpty()
