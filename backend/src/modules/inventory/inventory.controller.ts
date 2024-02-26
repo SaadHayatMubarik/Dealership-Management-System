@@ -10,6 +10,8 @@ import { GetInventoryByFilterDto } from './dto/getInventoryByFilter.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { InventoryStatus } from './inventory-status.enum';
 import { UpdateInventoryDto } from './dto/updateInventory.dto';
+import { InvestorDto } from './dto/investor.dto';
+import { CustomerDto } from './dto/customer.dto';
 
 @Controller('inventory')
 // @UseGuards(AuthGuard())
@@ -17,9 +19,8 @@ export class InventoryController {
     constructor(private inventoryService: InventoryService){}
 
     @Post('addInventory')
-    addInventory(@Body() addInventoryDto: InventoryDto): Promise<Inventory> {
-        // console.log(addInventoryDto);
-        return this.inventoryService.addInventory(addInventoryDto)
+    addInventory(@Body() addInventoryDto: InventoryDto, @Body() addInvestorDto:InvestorDto, @Body() addCustomerDto:CustomerDto ): Promise<Inventory> {
+        return this.inventoryService.addInventory(addInventoryDto,addInvestorDto,addCustomerDto)
     }
     @Get('getInventoryDetails/:inventoryId')
     getInventoryDetail(@Param('inventoryId') inventoryId: number): Promise<Inventory>{

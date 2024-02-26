@@ -6,6 +6,7 @@ import { Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typ
 import { Investor } from "src/modules/investor/entity/Investor";
 import { Customer } from "src/modules/customer/entity/Customer";
 
+
 @Entity({ name: 'Showroom' })
 export class Showroom {
     @PrimaryGeneratedColumn()
@@ -42,6 +43,7 @@ export class Showroom {
     // receiverNotification: Notification[];
     @OneToMany(() => Investor, (investor) => investor.showroom)
     investors: Investor[];
+
 
     @OneToMany(() => Customer, (customer) => customer.showroom)
     customers: Customer[];
