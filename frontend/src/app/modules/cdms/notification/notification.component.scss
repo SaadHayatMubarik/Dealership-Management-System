@@ -1,0 +1,22 @@
+.notification-tile {
+    border-bottom: 2px solid #e1dfdf; /* Border only at the bottom */
+    margin: 5px 0; /* Add margin for spacing */
+    padding: 10px; /* Add padding for content spacing */
+}
+
+
+.notification-header {
+    // font-weight: bold;
+    font-size: larger;
+    margin-bottom: 5px;
+}
+
+.notification-time {
+    color: #888;
+}
+
+.notification-actions {
+    margin-top: 10px;
+}
+
+

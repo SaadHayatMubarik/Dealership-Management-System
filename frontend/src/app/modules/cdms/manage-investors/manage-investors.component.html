@@ -1,9 +1,10 @@
+
 <p-toast position="top-center"></p-toast>
 
 <div class="comp-content">
   <div class="toolbar-header mb-3">
     <div class="comp-title">
-      <h3>Manage Employee</h3>
+      <h3>Manage Investor</h3>
     </div>
     <div class="comp-btns">
       <app-button label="New" styleClass="p-button-sm p-button-rounded" (onclick)="openModal()"></app-button>
@@ -14,7 +15,7 @@
     <div class="filter-row flex justify-content-between pt-3">
 
     </div>
-    <app-datatable [data]="data" [cols]="columns" [globalFilterFields]="['vehicleTypeName','vehicleAttributeName','attributeInputType','vehicleAttributeValue']" [actions]="actions"></app-datatable>
+    <app-datatable [data]="data" [cols]="columns" [globalFilterFields]="[]" [actions]="actions"></app-datatable>
   </div>
 
   <p-sidebar [(visible)]="modal" position="right" [style]="{width: '40% '}" >
@@ -22,7 +23,7 @@
       <div class="sidebar-header">
         <div class="sh-title">
           <h3 style="text-align: center;">
-          Add User
+          Add Investor
           </h3><br>
         </div>
       </div>
@@ -32,67 +33,63 @@
           <div class="row-form grid">
             <div class="col-4">
                 <div class="p-field">
-                    <label>Username:</label> <br>
+                    <label>Full Name:</label> <br>
                     <input
                     type="username"
                     pInputText
-                    pTooltip="Should contain atleast 4 characters"
                     class="w-full md:w-20rem mb-5"
                     style="padding: 1rem"
                     minlength="4"
-                    maxlength="20"
+                    maxlength="30"
                     required
-                    [(ngModel)]="user.username"
+                    [(ngModel)]="investor.name"
+                    (keypress)="validateAlphabeticInput($event)"
+                    pattern="^\S(?:\s*\S)*$"
                   />
                   </div> 
                
                   
               <div class="p-field">
-                <label>Email:</label> <br>
+                <label>Cnic:</label> <br>
                 <div class="p-field">
                   <input
-                  type="email"
+                  type="text"
                   pInputText
                   class="w-full md:w-20rem mb-5"
-                  pTooltip="Please enter valid email"
                   style="padding: 1rem"
                   required
-                  email
-                  [(ngModel)]="user.email"
+                  minlength="13"
+                  maxlength="13"
+                  pattern="[0-9]{13}"
+                  [(ngModel)]="investor.cnic"
+                  (keypress)="validateNumericInput($event)"
                 />
                 </div> 
               </div>
              
 
               <div class="p-field">
-                <label>Password:</label> <br>
-                <p-password
-                styleClass="mb-5"
-                inputStyleClass="w-full p-3 md:w-20rem"
-                pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
-                required
-                [toggleMask]="false"
-                [(ngModel)]="user.password"
-                [feedback]="false"
-                pTooltip="Atleast one upper case, one lowercase, a number and a special character required."
-              >
-              </p-password>
-              </div>
-             
-
-              <div class="p-field">
-                <p-dropdown [options]="roles" [(ngModel)]="user.role"  [showClear]="true" placeholder="Select a Role"></p-dropdown>
-              </div>
-
-            
+                <label>Phone Number</label> <br>
+                <input
+                    type="text"
+                    pInputText
+                    class="w-full md:w-20rem mb-5"
+                    style="padding: 1rem"
+                    required
+                    minlength="11"
+                    maxlength="11"
+                    [(ngModel)]="investor.phone_no"
+                    pattern="^(03\d{9})$"
+                    (keypress)="validateNumericInput($event)"
+                  />
+              </div> 
             </div>
           </div>
           <br>
-         
         </div>
       </div>
       <div class="sidebar-footer flex justify-content-end">
-        <app-button label="Save" styleClass="p-button-sm p-button-rounded" (onclick)="onSubmit()" ></app-button>
+        <app-button label="Save" styleClass="p-button-sm p-button-rounded" ></app-button>
       </div>
     </div>
   </p-sidebar>  

@@ -39,6 +39,10 @@ import { GalleriaModule } from 'primeng/galleria';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { DataViewModule } from 'primeng/dataview';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { DialogModule } from 'primeng/dialog';
+import { NotificationComponent } from './notification/notification.component';
+import { ManageInvestorsComponent } from './manage-investors/manage-investors.component';
+
 
 
 
@@ -63,6 +67,8 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     ViewShowroomComponent,
     ViewDetailedInventoryComponent,
     ChangePasswordComponent,
+    NotificationComponent,
+    ManageInvestorsComponent,
  
   ],
   imports: [
@@ -93,9 +99,8 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     GalleriaModule,
     DataViewModule,
     RadioButtonModule,
-    
+    DialogModule,
 
-    
 
   ],
 

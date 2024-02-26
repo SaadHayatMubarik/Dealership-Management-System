@@ -1,0 +1,59 @@
+<div class="col-12 xl:col-12">
+  <div class="card">
+    <div class="flex justify-content-between">
+      <h4>Notifications</h4>
+      <a [routerLink]="['/cdms/dashboard']">Go Back</a>
+    </div>
+    <div class="grid">
+      <div class="col-12 lg:col-6 xl:col-12">
+        <div class="card mb-0 color">
+          <p-tabView>
+            <p-tabPanel header="Recieved">
+              <div class="notification-tile">
+                <div class="notification-header">
+                  <b>Showroom Name</b>
+                  <span> has sent you a request to sell this car </span>
+                  <b>Car Name</b>
+                </div>
+                <div class="notification-details">
+                  <span class="notification-time"
+                    >Date & Time: [Date & Time]</span
+                  >
+                </div>
+                <div class="notification-actions">
+                  <p-button>Accept</p-button>
+                  <p-button
+                    severity="danger"
+                    class="ml-2"
+                  >Reject</p-button>
+                  <a [routerLink]="['/cdms/dashboard']" style="float: right"
+                    >View Car Details</a
+                  >
+                </div>
+              </div>
+            </p-tabPanel>
+            <p-tabPanel header="Sent">
+                <div class="notification-tile">
+                    <div class="notification-header">
+                      <b>Showroom Name</b>
+                      <span> has sent you a request to sell this car </span>
+                      <b>Car Name</b>
+                    </div>
+                    <div class="notification-details">
+                      <span class="notification-time"
+                        >Date & Time: [Date & Time]</span
+                      >
+                    </div>
+                    <br>
+                    <div class="notification-details">
+                        <span class="notification-time"
+                          >Date & Time: [Date & Time]</span
+                        >
+                      </div>
+                  </div> </p-tabPanel>
+          </p-tabView>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

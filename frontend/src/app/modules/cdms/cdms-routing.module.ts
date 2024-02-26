@@ -16,7 +16,8 @@ import { IsAuthGuard } from 'src/app/shared/guard/auth.guard';
 import { ViewShowroomComponent } from './view-showroom/view-showroom.component';
 import { ViewDetailedInventoryComponent } from './view-detailed-inventory/view-detailed-inventory.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
-
+import { NotificationComponent } from './notification/notification.component';
+import { ManageInvestorsComponent } from './manage-investors/manage-investors.component'; 
 
 
 
@@ -90,15 +91,22 @@ const routes: Routes = [
     {
       path:'change-password',
       component: ChangePasswordComponent,
-    }
+    },
+    {
+      path:'notification',
+      component: NotificationComponent,
+    },
+    {
+      path:'investors',
+      component: ManageInvestorsComponent,
+    },
+
+
 
     ],
   }, 
   // {
-
-
-  
-  
+ 
 ];
 
 

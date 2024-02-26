@@ -108,9 +108,6 @@ export class ManageEmployeeComponent extends BaseComponent implements OnInit {
           },
         });
     }
-
-
-
   }
 
   getemployee(){

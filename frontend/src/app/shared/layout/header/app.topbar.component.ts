@@ -21,6 +21,7 @@ export class AppTopBarComponent extends BaseComponent implements OnInit {
     @ViewChild('topbarmenu') menu!: ElementRef;
 
     companyName: string;
+    displayModal: boolean = false;
 
 
 
@@ -42,4 +43,9 @@ logout(){
 redirect(){
     this.router.navigate(['change-password']);
 }
+
+toNotification(){
+    this.router.navigate(['notification']);
+}
+
 }
