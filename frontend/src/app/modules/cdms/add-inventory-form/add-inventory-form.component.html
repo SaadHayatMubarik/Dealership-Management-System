@@ -522,10 +522,7 @@
                 <div class="sh-title">
                   <h5 style="text-align: center;"> Investor Details</h5>
                   <br>
-                </div>
-                <p-button icon="pi pi-plus" (click)="addInvestorForm()"></p-button>
-                <p-button severity="danger" class="ml-2" icon="pi pi-minus"  (click)="removeInvestorForm()"></p-button>
-              </div>
+                
               <br><br>
 
              <div class= "investor_form" *ngFor="let form of investorForms; let i = index">
@@ -540,11 +537,11 @@
                      name="investor Name"
                      [(ngModel)]="investorName"
                      ></p-dropdown>
-                    <label for="float-label">Investor Name</label>
+                    <label for="float-label">Investor Name*</label>
                   </span>
                   </div>
                 </div>
-                <div class="col-4">
+                <!-- <div class="col-4">
                   <div class="p-field">
                     <div class="flex flex-wrap gap-3">
                       <div class="flex align-items-center">
@@ -560,43 +557,55 @@
                       </div>   
                   </div>
                   </div>
-                </div>
+                </div> -->
 
                 <div class="col-4">
                   <div class="p-field">
                   <span class="p-float-label">
                     <input class="p-inputtext-lg" 
                     pInputText
-                    name="totalInvestment"
+                    name="percentage"
                     required
                     />
-                    <label for="float-label">Enter
-                      {{ selectedOption === 'Amount' ? 'Amount' : selectedOption === 'Percentage' ? 'Percentage' : '' }}
+                    <label for="float-label">Enter percentage %*
+                      <!-- {{ selectedOption === 'Amount' ? 'Amount' : selectedOption === 'Percentage' ? 'Percentage' : '' }}% -->
                     </label>  
                                  
                   </span>
                   </div>
                 </div>
-              </div>
 
 
-              <div class="row-form grid" >
-                <div class="col-4">
-                  <div class="p-field">
-                  <span class="p-float-label">
-                      <input class="p-inputtext-lg" 
-                      pInputText
-                      name="totalInvestment"
-                      required
-                      />
-                    <label for="float-label">Total Investment</label>
-                  </span>
-                  </div>
-                </div>
-              </div>
+              <!-- <div class="row-form grid" > -->
+                
+              <!-- </div> -->
+            </div>
               <br>
+            </div>
+            <div class="row-form grid" >
+              <div class="col-4">
+              <div class="buttons">
+            <p-button icon="pi pi-plus" (click)="addInvestorForm()"></p-button>
+            <p-button severity="danger" class="ml-2" icon="pi pi-minus"  (click)="removeInvestorForm()"></p-button>
+          </div>
+            <!-- <br><br> -->
+          </div>
+            <div class="col-4">
+              <div class="p-field">
+              <span class="p-float-label">
+                  <input class="p-inputtext-lg" 
+                  pInputText
+                  name="totalInvestment"
+                  required
+                  disabled
+                  />
+                <label for="float-label">Remaining Percentage %</label>
+              </span>
+              </div>
+            </div>
+            </div>
+          </div>
             </div> 
-              
               </div>
             </div>
       </p-tabPanel>
