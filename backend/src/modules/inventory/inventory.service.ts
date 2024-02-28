@@ -19,8 +19,8 @@ import { UpdateInventoryDto } from './dto/updateInventory.dto';
 import { Customer } from '../customer/entity/Customer';
 import { CustomerType } from '../customer/customer-type.enum';
 import { Investment } from '../investment/entity/Investment';
-import { InvestorDto } from './dto/investor.dto';
-import { CustomerDto } from './dto/customer.dto';
+// import { InvestorDto } from './dto/investor.dto';
+// import { CustomerDto } from './dto/customer.dto';
 
 
 @Injectable()
@@ -46,13 +46,17 @@ export class InventoryService {
         private  investmentRepository: Repository <Investment>
     ){}
 
-    async addInventory (addInventoryDto: InventoryDto, addInvestorDto: InvestorDto, addCustomerDto: CustomerDto): Promise<Inventory>{
-        const { vehicleType, vehicleMake, vehicleModel , vehicleVariant , modelYear , vehicleChasisNo , costPrice , demand , dateOfPurchase , dateOfSale , bodyColor , engineNo , comments , grade , regNo, mileage, status, showroomId,stockAttributeValue } = addInventoryDto;
-        const { investor, investmentPercentage } = addInvestorDto;
-        const { customerCategory, name, contactNo, customerEmail, province, city, address, cnic } = addCustomerDto;
+    async addInventory (addInventoryDto: InventoryDto): Promise<Inventory>{
+        const { vehicleType, vehicleMake, vehicleModel , vehicleVariant , modelYear ,
+             vehicleChasisNo , costPrice , demand , dateOfPurchase , dateOfSale ,
+              bodyColor , engineNo , comments , grade , regNo, mileage, status,
+               showroomId ,stockAttributeValue , address , city , cnic , contactNo ,
+               customerCategory ,customerEmail, investmentPercentage,investor,customerName,province } = addInventoryDto;
+        // const { investor, investmentPercentage } = addInvestorDto;
+        // const { customerCategory, name, contactNo, customerEmail, province, city, address, cnic } = addCustomerDto;
         const customer = new Customer();
         customer.catagory = customerCategory;
-        customer.name = name;
+        customer.name = customerName;
         customer.type = CustomerType.SELLER;
 // >>>>>>> 369659bcb1e74e283bcdf50739feaf63c2d2346b
         customer.phone_number = contactNo;

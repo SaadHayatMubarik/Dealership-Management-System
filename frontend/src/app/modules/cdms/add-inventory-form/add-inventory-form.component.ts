@@ -46,13 +46,25 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
     value:[],
     attributeValueId:[],
     stockAttributeValue: [],
+    customerCategory: '',
+    customerName: '',
+    contactNo: '',
+    customerEmail: '',
+    province: '',
+    city: '',
+    address: '',
+    cnic: '',
+    investor: [],
+    investmentPercentage: []
   };
 
   activeTabIndex = 0; // Track current active tab index
   showSecondTab = false; // Initially disable the second tab
   vehicleTypes: any[] = []; //to populate dropdown of vehicle type
+  investors: any[] = []; // To store list of Investors for whom inventory is added
   status: string[] = ['AVAILABLE', 'SOLD', 'ON ORDER']; //to populate status dropdown
   sliderValue: number = 0;
+  investorId: any; //saving investor id
   vehicleId: any; //saving vehicle type id
   vehicleAttributes: any[] = []; //to save vehicle type attributes
   inventoryId : number = 0;
@@ -79,6 +91,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   ngOnInit() {
     this.onTabChange({ index: this.selectedTabIndex });
     this.getVehicleTypes();
+    this.getInvestors();
     // this.getInventory();
     // this.vehicleTypes = this.apiService.getVehicleTypes();
     // this.onVehicleTypeSelected();
@@ -152,6 +165,21 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
       });
   }
 
+  getInvestors() {
+        this.apiService
+        .get(`/investor/getInvestor/${this.vehicleInventory.showroomId}`)
+        .subscribe({
+          next: (response: IObject[]) => {
+            this.investors = response;
+          },
+          complete: () => {
+          }
+        })
+      
+    }
+  
+
+
   //to limit slider value from 0 to 5.
   onInputChange(event: any) {
     const inputValue = event.target.value;
@@ -192,7 +220,6 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
       this.investorForms.pop();
     }
   }
-
 
 
 

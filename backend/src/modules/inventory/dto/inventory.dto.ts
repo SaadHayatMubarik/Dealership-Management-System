@@ -68,5 +68,33 @@ export class InventoryDto{
     @IsNotEmpty()
     stockAttributeValue: StockAttributeValue[];
 
-    
+    @IsNotEmpty()
+    customerCategory: CustomerCatagory;
+
+    @IsNotEmpty()
+    customerName: string;
+
+    @IsNotEmpty()
+    contactNo: string;
+
+    @IsNotEmpty()
+    customerEmail: string;
+
+    @IsNotEmpty()
+    province: string;
+
+    @IsNotEmpty()
+    city: string;
+
+    @IsNotEmpty()
+    address: string;
+
+    @IsOptional()
+    cnic: string;
+
+    @IsNotEmpty()
+    investor: Investor[];
+
+    @IsNotEmpty()
+    investmentPercentage: number[];
 }
