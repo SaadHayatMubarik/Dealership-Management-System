@@ -48,7 +48,8 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
     stockAttributeValue: [],
   };
 
-
+  activeTabIndex = 0; // Track current active tab index
+  showSecondTab = false; // Initially disable the second tab
   vehicleTypes: any[] = []; //to populate dropdown of vehicle type
   status: string[] = ['AVAILABLE', 'SOLD', 'ON ORDER']; //to populate status dropdown
   sliderValue: number = 0;
@@ -138,7 +139,8 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   }
 
   @ViewChild('Inventory') InventoryForm!: NgForm;
-
+  @ViewChild('Seller') SellerForm!: NgForm;
+  
   getVehicleTypes() {
     this.apiService
       .get(`/vehicle-type/${this.vehicleInventory.showroomId}`)
@@ -222,12 +224,6 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
     }
   }
 
-
-
-
-
-  
-
   getOptions(attribute: any) {
     // console.log('====================================');
     console.log('attribute', attribute);
@@ -237,25 +233,24 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
     ) as string[];
   }
 
-  // getOptions(attribute: any) {
-  //   if (attribute && attribute.multiValueAttributes) {
-  //     return attribute.multiValueAttributes.map(
-  //       (mv: IObject) => mv['attribute_value']
-  //     ) as string[];
-  //   } 
-  //   else {
-  //     console.log('asihsa');
-  //     return ['a'];
-     
-  //   }
-  // }
+
+  onNext(){
+    if(this.InventoryForm.valid)
+    {
+          this.activeTabIndex = 1;
+          this.showSecondTab = true;
+    }
   
+    else {
+      this.toast.showError("Please fill all the fields");
+    }
+    }
 
   postInventory() {
    
       console.log('this.vehicleInventory', this.vehicleInventory);
       this.apiService
-        .postLogin('/inventory/addInventory', this.vehicleInventory)
+        .postLogin('/inventory/addInventory', this.vehicleInventory,)
         .subscribe({
           next: (response) => {
             this.toast.showSuccess('New Inventory Added');
@@ -278,7 +273,6 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   getInventory(){
     this.apiService.get(`/inventory/getInventory/${this.vehicleInventory.showroomId}/${this.status[this.selectedTabIndex]}`).subscribe((data) => {
       this.data = data;
-      console.log(this.data);
       console.log(this.status[this.selectedTabIndex]);
     });
   }

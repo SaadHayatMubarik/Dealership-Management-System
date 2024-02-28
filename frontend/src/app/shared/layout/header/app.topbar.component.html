@@ -16,12 +16,8 @@
         <button class="p-link layout-topbar-button" (click)="redirect()" pTooltip="change password">
             <i class=" pi pi-lock-open"></i>
         </button>
-    </div>
-
-
-
-    <div #topbarmenu class="layout-topbar-menu ml-2" [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
-        <button class="p-link layout-topbar-button">
+       
+        <button class="p-link layout-topbar-button" (click)="toNotification()" >
             <i class="pi pi-bell text-3xl" pBadge value="5"></i>
         </button>
        
@@ -29,13 +25,8 @@
             <i class=" pi pi-sign-out"></i>
         </button>
        
-
-        
     </div>
-
-   
-
-    
 
     
 </div>
+

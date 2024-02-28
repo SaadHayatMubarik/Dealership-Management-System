@@ -20,6 +20,14 @@ showroomId: any;
 
 }
 
+export interface IInvestor{
+name: string;
+cnic:string;
+phone_no:string;
+showroomId: any;
+
+}
+
 export interface Ilogin{
     username:string;
     password:string;

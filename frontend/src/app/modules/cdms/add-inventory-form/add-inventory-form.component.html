@@ -31,9 +31,9 @@
   </div>
   <p-sidebar [(visible)]="modal" position="right" [style]="{ width:'80rem'}">
 
-    <p-tabView>
+    <p-tabView [(activeIndex)]="activeTabIndex">
       <p-tabPanel header="Vehicle Details">
-        <form (ngSubmit)="postInventory()" #Inventory="ngForm">
+        <form (ngSubmit)="onNext()" #Inventory="ngForm">
           <div class="sidebar-main">
             <div class="sidebar-header">
               <div class="sh-title">
@@ -59,6 +59,7 @@
                          (onChange)="onVehicleTypeChange($event)"
                          name="vehicleType"
                          [(ngModel)]="vehicleInventory.vehicleType"
+                         [required]="true"
                          ></p-dropdown>
                         <label for="float-label">Vehicle Type*</label>
                     </span>
@@ -211,6 +212,7 @@
                        placeholder="Select a Vehicle Type"
                        name="status"
                         [(ngModel)]="vehicleInventory.status"
+                        [required]="true"
                        ></p-dropdown>
                       <label for="float-label">Status*</label>
                     </span>
@@ -370,8 +372,7 @@
             <div class="sidebar-footer flex justify-content-end">
               <app-button
               type="submit"
-               label="Save" 
-               
+               label="Next" 
                styleClass="p-button-sm p-button-rounded" 
                ></app-button>
             </div>
@@ -379,14 +380,9 @@
         </form>
       </p-tabPanel>
       
-      
-      
-      
-      
-      
-      
-      <p-tabPanel header="Seller Details">
-
+      <p-tabPanel header="Seller Details" [disabled]="!showSecondTab">
+        
+      <form (ngSubmit)="postInventory()" #Seller="ngForm"> 
         <div class="sidebar-main">
           <div class="sidebar-header">
             <div class="sh-title">
@@ -394,11 +390,6 @@
                 Add Inventory
               </h3>
               <h5 style="text-align: center;"> Seller Details</h5>
-
-            
-            
-             
-              
               <br>
             </div>
             <div class="sh-toolbar">
@@ -517,6 +508,7 @@
                   </div>
                 </div>
               </div>
+           
               <br>
               <div class="sidebar-header">
                 <div class="sh-title">
@@ -608,6 +600,7 @@
             </div> 
               </div>
             </div>
+            </form>
       </p-tabPanel>
       </p-tabView> 
   </p-sidebar>

@@ -46,13 +46,20 @@ export class AppMenuComponent implements OnInit {
                 ]
             },
             {
-                label: 'Manage Employee',
+                label: 'Management',
                 items: [
-                    { label: 'Add Employee', 
+                    { label: 'Manage Users', 
                     icon: 'pi pi-fw pi-users', 
                     routerLink: ['/cdms/manage-employee'] },
-                ]
+                   
+                    { label: 'Manage Investors', 
+                    icon: 'pi pi-fw pi-money-bill', 
+                    routerLink: ['/cdms/investors'] },
+                ],
+                
             },
+            
+            
         ];
     }
 }
