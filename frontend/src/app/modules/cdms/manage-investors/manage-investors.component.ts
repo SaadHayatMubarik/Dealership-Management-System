@@ -38,7 +38,11 @@ export class ManageInvestorsComponent extends BaseComponent implements OnInit{
     super();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getinvestors();
+
+
+  }
 
 
   validateNumericInput(event: KeyboardEvent) {
@@ -63,7 +67,7 @@ validateAlphabeticInput(event: KeyboardEvent) {
 onSubmit(){
   {
     this.apiService
-      .post('', this.investor)
+      .post('/investor/addInvestor', this.investor)
       .subscribe({
         next: (response) => {
           console.log(this.investor);
@@ -81,7 +85,7 @@ onSubmit(){
 }
 
 getinvestors(){
-  this.apiService.get(`/auth/getUsers/${this.investor.showroomId}`).subscribe((data) => {
+  this.apiService.get(`/investor/getInvestor/${this.investor.showroomId}`).subscribe((data) => {
     this.data = data;
   });
 }
