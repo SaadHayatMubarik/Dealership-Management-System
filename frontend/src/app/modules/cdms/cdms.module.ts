@@ -30,7 +30,7 @@ import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { LoginComponent } from './login/login.component';
 import { StepsModule } from 'primeng/steps';
 import { SearchMarketComponent } from './search-market/search-market.component';
-import { ManageEmployeeComponent } from './manage-employee/manage-employee.component';
+import { ManageEmployeeComponent } from './manage-user/manage-employee.component';
 import { FieldsetModule } from 'primeng/fieldset';
 import { ViewShowroomComponent } from './view-showroom/view-showroom.component';
 import { ViewDetailedInventoryComponent } from './view-detailed-inventory/view-detailed-inventory.component';

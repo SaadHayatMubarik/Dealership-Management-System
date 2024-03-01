@@ -12,6 +12,7 @@ import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
 import { DialogControlService } from 'src/app/shared/services/dialog.service';
 import { Router } from '@angular/router';
+import { FormControl } from '@angular/forms';
 
 
 @Component({
@@ -41,6 +42,9 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
     private router: Router) {
     super();
   }
+//   public noWhitespaceValidator(control: FormControl) {
+//     return (control.value || '').trim().length? null : { 'whitespace': true };       
+// }
 
   ngOnInit() {
 
@@ -90,7 +94,7 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
   }
 
   saveVehicleType() {
-    if (this.vehicleType.vehicleTypeName != '') {
+    if (this.vehicleType.vehicleTypeName != "^\S+$" ) {
       this.apiService
         .post('/vehicle-type/addVehicleType', this.vehicleType)
         .subscribe({
@@ -116,16 +120,24 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
   }
 
   updateVehicleType(){
-    console.log(this.updatedType,"---------------------",this.vehicleId);
+    // console.log(this.updatedType);
+    if (this.vehicleType.vehicleTypeName != "^\S+$" ){
+    // console.log(this.updatedType,"---------------------",this.vehicleId);
     this.apiService.patch(`/vehicle-type/updateVehicleType/${this.updatedType}/${this.vehicleId}`).subscribe(
-       (next) => {
+       response => {
+        console.log(response);
+        this.closeModal();
         this.toast.showSuccess('Updated Successfully');
         this.updateSidebarVisible =false;
-        console.log(next);
+        // console.log(next);
         this.getVehicleType();
       },
+      error => {
+        this.toast.showError("field is empty");
+      }
     )
   }
+}
 }
 
 
