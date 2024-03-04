@@ -41,7 +41,6 @@ export class ManageInvestorsComponent extends BaseComponent implements OnInit{
   ngOnInit() {
     this.getinvestors();
 
-
   }
 
 

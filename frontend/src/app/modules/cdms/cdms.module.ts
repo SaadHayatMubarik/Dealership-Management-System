@@ -42,6 +42,7 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { DialogModule } from 'primeng/dialog';
 import { NotificationComponent } from './notification/notification.component';
 import { ManageInvestorsComponent } from './manage-investors/manage-investors.component';
+import { ManageCustomerComponent } from './manage-customer/manage-customer.component';
 
 
 
@@ -69,6 +70,7 @@ import { ManageInvestorsComponent } from './manage-investors/manage-investors.co
     ChangePasswordComponent,
     NotificationComponent,
     ManageInvestorsComponent,
+    ManageCustomerComponent,
  
   ],
   imports: [

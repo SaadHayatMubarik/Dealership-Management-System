@@ -18,6 +18,7 @@ import { ViewDetailedInventoryComponent } from './view-detailed-inventory/view-d
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { NotificationComponent } from './notification/notification.component';
 import { ManageInvestorsComponent } from './manage-investors/manage-investors.component'; 
+import { ManageCustomerComponent } from './manage-customer/manage-customer.component';
 
 
 
@@ -100,6 +101,10 @@ const routes: Routes = [
       path:'investors',
       component: ManageInvestorsComponent,
     },
+    {
+      path: 'customers', 
+      component: ManageCustomerComponent
+    }
 
 
 

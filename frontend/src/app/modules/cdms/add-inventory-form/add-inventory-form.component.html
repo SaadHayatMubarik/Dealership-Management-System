@@ -12,7 +12,8 @@
     <div class="filter-row flex justify-content-between pt-3">
     </div>
 
-    <p-tabView (onChange)="onTabChange($event)" [(activeIndex)]="selectedTabIndex" >
+    <p-tabView (onChange)="onTabChange($event)" [(activeIndex)]="selectedTabIndex">   
+  
       <p-tabPanel header="Available">
         <app-datatable [data]="data" [cols]="columns" [globalFilterFields]="['vehicleMake','vehicleModel','vehicleVariant','vehicleChasisNo']" [actions]="actions"></app-datatable>
       </p-tabPanel>
@@ -31,7 +32,7 @@
   </div>
   <p-sidebar [(visible)]="modal" position="right" [style]="{ width:'80rem'}">
 
-    <p-tabView [(activeIndex)]="activeTabIndex">
+    <p-tabView [(activeIndex)]="activeTabIndex" >  
       <p-tabPanel header="Vehicle Details">
         <form (ngSubmit)="onNext()" #Inventory="ngForm">
           <div class="sidebar-main">
@@ -380,7 +381,8 @@
         </form>
       </p-tabPanel>
       
-      <p-tabPanel header="Seller Details" [disabled]="!showSecondTab">
+      <p-tabPanel header="Seller Details" >   <!-- [disabled]="!showSecondTab" -->
+      
         
       <form (ngSubmit)="postInventory()" #Seller="ngForm"> 
         <div class="sidebar-main">

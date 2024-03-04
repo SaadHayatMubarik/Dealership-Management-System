@@ -25,6 +25,17 @@ name: string;
 cnic:string;
 phone_no:string;
 showroomId: any;
+}
+
+export interface ISeller{
+    category:string;
+    name: String;
+    phone_no:number;
+    email:string;
+    province:string;
+    City:string;
+    address:string;
+    showroomId:any;
 
 }
 
