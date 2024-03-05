@@ -1,0 +1,183 @@
+
+<p-toast position="top-center"></p-toast>
+
+<div class="comp-content">
+  <div class="toolbar-header mb-3">
+    <div class="comp-title">
+      <h3>Manage Customer</h3>
+    </div>
+    <div class="comp-btns">
+      <app-button label="New" styleClass="p-button-sm p-button-rounded" (onclick)="openModal()"></app-button>
+    </div>
+  </div>
+
+  <!-- <div class="middle-content w-o-tabs mt-3">
+    <div class="filter-row flex justify-content-between pt-3">
+
+    </div>
+    <app-datatable [data]="data" [cols]="columns" [globalFilterFields]="[]" [actions]="actions"></app-datatable>
+  </div> -->
+
+  <p-tabView (onChange)="onTabChange($event)" [(activeIndex)]="selectedTabIndex">   
+    <p-tabPanel header="Dealership">
+      <app-datatable [data]="data" [cols]="columns" [globalFilterFields]="[]" [actions]="actions"></app-datatable>
+    </p-tabPanel>
+    <p-tabPanel header="Agent">
+      <app-datatable [data]="data" [cols]="columns" [globalFilterFields]="[]" [actions]="actions"></app-datatable>
+    </p-tabPanel>
+    <p-tabPanel header="Customer">
+      <app-datatable [data]="data" [cols]="columns" [globalFilterFields]="[]" [actions]="actions"></app-datatable>
+    </p-tabPanel>
+
+  </p-tabView>
+
+  <p-sidebar [(visible)]="modal" position="right" [style]="{width: '55rem'}" >
+    <form  #Seller="ngForm"> 
+        <div class="sidebar-main">
+          <div class="sidebar-header">
+            <div class="sh-title">
+              <h5 style="text-align: center;"> Seller Details</h5>
+              <br>
+            </div>
+            <div class="sh-toolbar">
+              </div>
+            </div>
+          </div>
+          <div class="sidebar-content">
+            <div class="card-grey padding">
+              <div class="row-form grid" >
+                <div class="col-4">
+                  <div class="p-field">
+                  <span class="p-float-label">
+                    <p-dropdown
+                     [options]="sellerCategory" 
+                     class="p-inputtext-lg" 
+                     placeholder="Select a Vehicle Type"
+                     name="seller_category"
+                   
+                     ></p-dropdown>
+                    <label for="float-label">Seller Category</label>
+                  </span>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="p-field">
+                    <span class="p-float-label">
+                      <input 
+                      class="p-inputtext-lg"
+                       pInputText 
+                       name="category"
+                       required
+                       [(ngModel)]="selectedSellerCategory"
+                    
+                       />
+                       <label htmlFor="customerName">
+                        {{ selectedSellerCategory === 'AGENT' ? 'Agent' : selectedSellerCategory === 'CUSTOMER' ? 'Customer' : selectedSellerCategory === 'DEALERSHIP' ? 'Dealership' : '' }} Name
+                      </label>
+                  </span>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="p-field">
+                    <span class="p-float-label">
+                      <input class="p-inputtext-lg" 
+                      pInputText
+                      name="name"
+                      required
+                    
+                      />
+                      <label htmlFor="username">Contact Number</label>
+                  </span>
+                  </div>
+                </div>
+              </div>
+              <br>
+              <div class="row-form grid">
+                <div class="col-4">
+                  <div class="p-field">
+                    <span class="p-float-label">
+                      <input class="p-inputtext-lg"
+                      required
+                       pInputText
+                       name="email"
+                    
+                       />
+                      <label htmlFor="username">Email</label>
+                  </span>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="p-field">
+                    <span class="p-float-label">
+                      <input class="p-inputtext-lg" 
+                      pInputText
+                      name="Chasis No"
+                    
+                      />
+                      <label htmlFor="username">Province</label>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="p-field">
+                    <span class="p-float-label">
+                      <input class="p-inputtext-lg" 
+                      pInputText
+                      name="engineNo"
+                   
+                      />
+                      <label for="float-label">City</label>
+                  </span>
+                  </div>
+                </div>
+              </div>
+              <br>
+              <div class="row-form grid">
+                <div class="col-4">
+                  <div class="p-field">
+                    <span class="p-float-label">
+                      <input class="p-inputtext-lg" 
+                      pInputText
+                      name="engineNo"
+                      />
+                      <label for="float-label">Address</label>
+                  </span>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="p-field" *ngIf="selectedSellerCategory === 'AGENT' || selectedSellerCategory === 'CUSTOMER'">
+                    <span class="p-float-label">
+                      <input class="p-inputtext-lg" 
+                      pInputText
+                      name="engineNo"
+                     
+                      />
+                      <label for="float-label">CNIC</label>
+                  </span>
+                  </div>
+                </div>
+              </div>
+           
+              <br>
+            
+              </div>
+            </div>
+            <div class="sidebar-footer flex justify-content-end">
+              <app-button
+              type="submit"
+               label="save" 
+               styleClass="p-button-sm p-button-rounded" 
+               ></app-button>
+            </div>
+            </form>
+  </p-sidebar>  
+          
+          
+        
+        
+        
+
+
+      
+
+

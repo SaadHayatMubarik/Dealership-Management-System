@@ -8,7 +8,7 @@ export class InvestorDto{
     cnic: string;
 
     @IsNotEmpty()
-    phone: string;
+    phoneNo: string;
 
     @IsOptional()
     capitalAmount: number;

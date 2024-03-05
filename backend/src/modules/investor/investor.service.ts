@@ -16,13 +16,13 @@ export class InvestorService {
     ){}
 
     async addInvestor(addInvestorDto:InvestorDto): Promise<Investor>{
-        const { capitalAmount, cnic, investorName, phone, profit, showroomId } = addInvestorDto;
+        const { capitalAmount, cnic, investorName, phoneNo, profit, showroomId } = addInvestorDto;
         const investor = new Investor();
-        investor.capital_amount = capitalAmount;
+        // investor.capital_amount = capitalAmount;
         investor.cnic = cnic;
         investor.investor_name = investorName;
-        investor.phone = phone;
-        investor.profit = profit;
+        investor.phone = phoneNo;
+        // investor.profit = profit;
         investor.showroom = await this.showroomRepository.findOneBy({showroom_id: showroomId});
        return await this.investorRepository.save(investor);
     }
