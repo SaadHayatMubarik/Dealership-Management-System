@@ -41,6 +41,38 @@ export class ManageInvestorsComponent extends BaseComponent implements OnInit{
   ngOnInit() {
     this.getinvestors();
 
+    this.columns = [
+      {
+        field: 'investorName',
+        fieldTitle: 'Name',
+      },
+      {
+        field: 'phoneNo',
+        fieldTitle: 'Phone Number',
+      },
+      {
+        field: 'cnic',
+        fieldTitle: 'Cnic',
+      },
+   
+    ];
+    this.actions = [
+      {
+        label: ' Delete',
+        icon: 'pi pi-trash',
+        command: (event) => {
+        
+            },
+          },
+     
+      {
+        label: 'View',
+        icon: 'pi pi-eye',
+        command: () => {
+        },
+      }
+    ];
+
   }
 
 
