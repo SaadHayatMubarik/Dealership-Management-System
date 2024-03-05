@@ -21,9 +21,12 @@ showroomId: any;
 }
 
 export interface IInvestor{
-name: string;
+
+investorName: string;
 cnic:string;
-phone_no:string;
+phoneNo:string;
+capitalAmount?: number;
+profit?:number;
 showroomId: any;
 }
 
@@ -42,7 +45,6 @@ export interface ISeller{
 export interface Ilogin{
     username:string;
     password:string;
-    // rememberMe?: boolean;
 }
 
 export interface IChangePassword{
