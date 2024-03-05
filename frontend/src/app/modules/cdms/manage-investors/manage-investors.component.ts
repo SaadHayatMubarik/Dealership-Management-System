@@ -85,6 +85,7 @@ onSubmit(){
 
 getinvestors(){
   this.apiService.get(`/investor/getInvestor/${this.investor.showroomId}`).subscribe((data) => {
+    console.log(data);
     this.data = data;
   });
 }
