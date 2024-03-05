@@ -57,7 +57,7 @@ export class AppMenuComponent implements OnInit {
                     routerLink: ['/cdms/investors'] },
 
                     { label: 'Manage Customers', 
-                    icon: 'pi pi-fw pi-money-bill', 
+                    icon: 'pi pi-fw pi-dollar', 
                     routerLink: ['/cdms/customers'] },
                 ],
                 

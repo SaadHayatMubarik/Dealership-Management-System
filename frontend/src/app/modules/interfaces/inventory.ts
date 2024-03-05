@@ -70,6 +70,7 @@ export interface IVehicleTypeAttributeDto {
   input_type: string;
   multiVals: IMultiValue[]; 
 }
+
 export interface IMultiValue {
   attribute_value: string;
   multi_value_id: number

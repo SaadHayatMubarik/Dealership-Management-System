@@ -22,9 +22,9 @@ import { NgForm } from '@angular/forms';
 export class ManageInvestorsComponent extends BaseComponent implements OnInit{
 
   investor: IInvestor = {
-    name: '',
+    investorName: '',
     cnic: '',
-    phone_no:'',
+    phoneNo:'',
     showroomId: localStorage.getItem('Showroom Id'),
   };
 
