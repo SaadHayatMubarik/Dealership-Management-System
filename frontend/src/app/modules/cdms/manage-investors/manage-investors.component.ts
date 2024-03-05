@@ -43,11 +43,11 @@ export class ManageInvestorsComponent extends BaseComponent implements OnInit{
 
     this.columns = [
       {
-        field: 'investorName',
+        field: 'investor_name',
         fieldTitle: 'Name',
       },
       {
-        field: 'phoneNo',
+        field: 'phone',
         fieldTitle: 'Phone Number',
       },
       {
