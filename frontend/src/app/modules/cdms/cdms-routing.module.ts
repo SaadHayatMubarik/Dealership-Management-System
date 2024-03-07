@@ -19,6 +19,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { NotificationComponent } from './notification/notification.component';
 import { ManageInvestorsComponent } from './manage-investors/manage-investors.component'; 
 import { ManageCustomerComponent } from './manage-customer/manage-customer.component';
+import { SellInventoryComponent } from './sell-inventory/sell-inventory.component'; 
 
 
 
@@ -104,7 +105,12 @@ const routes: Routes = [
     {
       path: 'customers', 
       component: ManageCustomerComponent
-    }
+    },
+    {
+      path: 'sell-inventory', 
+      component: SellInventoryComponent
+    },
+    
 
 
 

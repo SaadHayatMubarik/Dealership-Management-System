@@ -15,6 +15,7 @@ export class InvestorController {
 
     @Get('getInvestor/:showroomId')
     getInvestor(@Param('showroomId') showroomId:number): Promise<Investor[]>{
+        console.log(showroomId);
         return this.investorService.getInvestor(showroomId);
     }
 

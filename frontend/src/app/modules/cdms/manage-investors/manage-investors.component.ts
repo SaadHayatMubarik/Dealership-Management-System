@@ -14,12 +14,15 @@ import { NgForm } from '@angular/forms';
 
 
 
+
 @Component({
   selector: 'app-manage-investors',
   templateUrl: './manage-investors.component.html',
   styleUrls: ['./manage-investors.component.scss']
 })
 export class ManageInvestorsComponent extends BaseComponent implements OnInit{
+
+
 
   investor: IInvestor = {
     investorName: '',
@@ -75,6 +78,8 @@ export class ManageInvestorsComponent extends BaseComponent implements OnInit{
 
   }
 
+  @ViewChild('investor') investorForm!: NgForm;
+
 
   validateNumericInput(event: KeyboardEvent) {
     // Get the character being typed
@@ -96,22 +101,23 @@ validateAlphabeticInput(event: KeyboardEvent) {
 }
 
 onSubmit(){
-  {
+  if(this.investorForm.valid){
     this.apiService
-      .post('/investor/addInvestor', this.investor)
-      .subscribe({
-        next: (response) => {
-          console.log(this.investor);
-          console.log(response);
-          this.closeModal();
-          this.toast.showSuccess('New User.');
-          this.getinvestors();
-        },
-        error: () => {
-          this.toast.showError();
-          console.log(this.investor);
-        },
-      });
+    .post('/investor/addInvestor', this.investor)
+    .subscribe({
+      next: (response) => {
+        console.log(this.investor);
+        console.log(response);
+        this.closeModal();
+        this.toast.showSuccess('New User.');
+        this.getinvestors();
+      },
+      error: () => {
+        this.toast.showError();
+        console.log(this.investor);
+      },
+    });
+
   }
 }
 

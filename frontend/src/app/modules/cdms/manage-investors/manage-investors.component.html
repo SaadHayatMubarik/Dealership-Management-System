@@ -1,104 +1,114 @@
 
-<p-toast position="top-center"></p-toast>
+  <p-toast position="top-center"></p-toast>
 
-<div class="comp-content">
-  <div class="toolbar-header mb-3">
-    <div class="comp-title">
-      <h3>Manage Investor</h3>
-    </div>
-    <div class="comp-btns">
-      <app-button label="New" styleClass="p-button-sm p-button-rounded" (onclick)="openModal()"></app-button>
-    </div>
-  </div>
-
-  <div class="middle-content w-o-tabs mt-3">
-    <div class="filter-row flex justify-content-between pt-3">
-
-    </div>
-    <app-datatable [data]="data" [cols]="columns" [globalFilterFields]="[]" [actions]="actions"></app-datatable>
-  </div>
-
-  <p-sidebar [(visible)]="modal" position="right" [style]="{width: '40% '}" >
-    <div class="sidebar-main">
-      <div class="sidebar-header">
-        <div class="sh-title">
-          <h3 style="text-align: center;">
-          Add Investor
-          </h3><br>
-        </div>
+  <div class="comp-content">
+    <div class="toolbar-header mb-3">
+      <div class="comp-title">
+        <h3>Manage Investor</h3>
       </div>
+      <div class="comp-btns">
+        <app-button label="New" styleClass="p-button-sm p-button-rounded" (onclick)="openModal()"></app-button>
+      </div>
+    </div>
 
-      <div class="sidebar-content">
-        <div class="card-grey">
-          <div class="row-form grid">
-            <div class="col-4">
+    <div class="middle-content w-o-tabs mt-3">
+      <div class="filter-row flex justify-content-between pt-3">
+
+      </div>
+      <app-datatable [data]="data" [cols]="columns" [globalFilterFields]="[]" [actions]="actions"></app-datatable>
+    </div>
+
+    <p-sidebar [(visible)]="modal" position="right" [style]="{width: '40% '}" >
+      <div class="sidebar-main">
+        <div class="sidebar-header">
+          <div class="sh-title">
+            <h3 style="text-align: center;">
+            Add Investor
+            </h3><br>
+          </div>
+        </div>
+        
+        <form (ngSubmit)="onSubmit()" #investorForm="ngForm">
+        <div class="sidebar-content">
+          <div class="card-grey">
+            <div class="row-form grid">
+              <div class="col-4">
+                  <div class="p-field">
+                      <label>Full Name:</label> <br>
+                      <input
+                      name="name"
+                      pInputText
+                      class="w-full md:w-20rem mb-5"
+                      style="padding: 1rem"
+                      minlength="4"
+                      maxlength="30"
+                      required
+                      [(ngModel)]="investor.investorName"
+                      (keypress)="validateAlphabeticInput($event)"
+                      pattern="^\S(?:\s*\S)*$"
+                      
+                    />
+                    </div> 
+                
+                    
                 <div class="p-field">
-                    <label>Full Name:</label> <br>
+                  <label>Cnic:</label> <br>
+                  <div class="p-field">
                     <input
-                    type="username"
-                    pInputText
-                    class="w-full md:w-20rem mb-5"
-                    style="padding: 1rem"
-                    minlength="4"
-                    maxlength="30"
-                    required
-                    [(ngModel)]="investor.investorName"
-                    (keypress)="validateAlphabeticInput($event)"
-                    pattern="^\S(?:\s*\S)*$"
-                  />
-                  </div> 
-               
-                  
-              <div class="p-field">
-                <label>Cnic:</label> <br>
-                <div class="p-field">
-                  <input
-                  type="text"
-                  pInputText
-                  class="w-full md:w-20rem mb-5"
-                  style="padding: 1rem"
-                  required
-                  minlength="13"
-                  maxlength="13"
-                  pattern="[0-9]{13}"
-                  [(ngModel)]="investor.cnic"
-                  (keypress)="validateNumericInput($event)"
-                />
-                </div> 
-              </div>
-             
-
-              <div class="p-field">
-                <label>Phone Number</label> <br>
-                <input
+                    name="cnic"
                     type="text"
                     pInputText
                     class="w-full md:w-20rem mb-5"
                     style="padding: 1rem"
                     required
-                    minlength="11"
-                    maxlength="11"
-                    [(ngModel)]="investor.phoneNo"
-                    pattern="^(03\d{9})$"
+                    minlength="13"
+                    maxlength="13"
+                    pattern="[0-9]{13}"
+                    [(ngModel)]="investor.cnic"
                     (keypress)="validateNumericInput($event)"
                   />
-              </div> 
+                  </div> 
+                </div>
+              
+
+                <div class="p-field">
+                  <label>Phone Number</label> <br>
+                  <input
+                      name="phone number"
+                      type="text"
+                      pInputText
+                      class="w-full md:w-20rem mb-5"
+                      style="padding: 1rem"
+                      required
+                      minlength="11"
+                      maxlength="11"
+                      [(ngModel)]="investor.phoneNo"
+                      pattern="^(03\d{9})$"
+                      (keypress)="validateNumericInput($event)"
+                    />
+                </div> 
+              </div>
             </div>
+            <br>
           </div>
-          <br>
         </div>
-      </div>
-      <div class="sidebar-footer flex justify-content-end">
-        <app-button label="Save" styleClass="p-button-sm p-button-rounded" (click) = 'onSubmit()' ></app-button>
-      </div>
-    </div>
-  </p-sidebar>  
-          
-          
-        
-        
-        
-
-
+        <div class="sidebar-footer flex justify-content-end">
+        <app-button
+        label="Save"
+        styleClass="p-button-sm p-button-rounded"
+        type="submit"
+        ></app-button>
+        </div>
+      </form>
       
+      </div>
+    </p-sidebar>  
+            
+            
+          
+          
+          
+
+
+        
 

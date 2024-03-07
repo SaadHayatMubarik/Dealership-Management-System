@@ -43,6 +43,7 @@ import { DialogModule } from 'primeng/dialog';
 import { NotificationComponent } from './notification/notification.component';
 import { ManageInvestorsComponent } from './manage-investors/manage-investors.component';
 import { ManageCustomerComponent } from './manage-customer/manage-customer.component';
+import { SellInventoryComponent } from './sell-inventory/sell-inventory.component';
 
 
 
@@ -71,6 +72,7 @@ import { ManageCustomerComponent } from './manage-customer/manage-customer.compo
     NotificationComponent,
     ManageInvestorsComponent,
     ManageCustomerComponent,
+    SellInventoryComponent,
  
   ],
   imports: [

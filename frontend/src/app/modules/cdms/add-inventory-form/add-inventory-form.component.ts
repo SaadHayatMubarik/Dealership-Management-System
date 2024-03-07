@@ -304,4 +304,6 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
     });
   }
 
+
+
 }
