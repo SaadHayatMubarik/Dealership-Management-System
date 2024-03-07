@@ -12,7 +12,7 @@ export class Showroom {
     @PrimaryGeneratedColumn()
     showroom_id: number;
 
-    @Column({ unique: true })
+    @Column()
     showroom_name: string;
 
     @Column()
