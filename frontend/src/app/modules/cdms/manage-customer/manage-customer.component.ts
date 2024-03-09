@@ -19,8 +19,7 @@ import { ToastService } from 'src/app/shared/services/toast.service';
 })
 export class ManageCustomerComponent extends BaseComponent implements OnInit {
 
-  customer: ISeller = {
-
+  seller: ISeller = {
     name:'',
     category:'',
     phone_no:0,
@@ -129,8 +128,8 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
   // }
 
   getCustomer(){
-    console.log(this.customer.category);
-    this.apiService.get(`/customer/getCustomer/${this.customer.showroomId}/${this.sellerCategory[this.selectedTabIndex]}`).subscribe((data) => {
+    console.log(this.seller.category);
+    this.apiService.get(`/customer/getCustomer/${this.seller.showroomId}/${this.sellerCategory[this.selectedTabIndex]}`).subscribe((data) => {
       console.log(data);
       this.data = data;
     });

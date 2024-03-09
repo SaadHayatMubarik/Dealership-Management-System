@@ -5,120 +5,215 @@
       <h3>Inventory</h3>
     </div>
     <div class="comp-btns">
-      <app-button label="Add" styleClass="p-button-sm p-button-rounded" (onclick)="openModal()"></app-button>
-      <app-button label="Sell" class="ml-1" styleClass="p-button-sm p-button-rounded p-button-danger" 
-      routerLink="/sell-inventory"></app-button>
+      <app-button
+        label="Add"
+        styleClass="p-button-sm p-button-rounded"
+        (onclick)="openModal()"
+      ></app-button>
+      <app-button
+        label="Sell"
+        class="ml-1"
+        styleClass="p-button-sm p-button-rounded p-button-danger"
+        routerLink="/sell-inventory"
+      ></app-button>
     </div>
   </div>
   <div class="middle-content w-o-tabs mt-3">
-    <div class="filter-row flex justify-content-between pt-3">
-    </div>
+    <div class="filter-row flex justify-content-between pt-3"></div>
 
-    <p-tabView (onChange)="onTabChange($event)" [(activeIndex)]="selectedTabIndex">   
-  
+    <p-tabView
+      (onChange)="onTabChange($event)"
+      [(activeIndex)]="selectedTabIndex"
+    >
       <p-tabPanel header="Available">
-        <app-datatable [data]="data" [cols]="columns" [globalFilterFields]="['vehicleMake','vehicleModel','vehicleVariant','vehicleChasisNo']" [actions]="actions"></app-datatable>
+        <app-datatable
+          [data]="data"
+          [cols]="columns"
+          [globalFilterFields]="[
+            'vehicleMake',
+            'vehicleModel',
+            'vehicleVariant',
+            'vehicleChasisNo'
+          ]"
+          [actions]="actions"
+        ></app-datatable>
       </p-tabPanel>
       <p-tabPanel header="Sold">
-        <app-datatable [data]="data" [cols]="columns" [globalFilterFields]="['vehicleMake','vehicleModel','vehicleVariant','vehicleChasisNo']" [actions]="actions"></app-datatable>
+        <app-datatable
+          [data]="data"
+          [cols]="columns"
+          [globalFilterFields]="[
+            'vehicleMake',
+            'vehicleModel',
+            'vehicleVariant',
+            'vehicleChasisNo'
+          ]"
+          [actions]="actions"
+        ></app-datatable>
       </p-tabPanel>
       <p-tabPanel header="On Order">
-        <app-datatable [data]="data" [cols]="columns" [globalFilterFields]="['vehicleMake','vehicleModel','vehicleVariant','vehicleChasisNo']" [actions]="actions"></app-datatable>
+        <app-datatable
+          [data]="data"
+          [cols]="columns"
+          [globalFilterFields]="[
+            'vehicleMake',
+            'vehicleModel',
+            'vehicleVariant',
+            'vehicleChasisNo'
+          ]"
+          [actions]="actions"
+        ></app-datatable>
       </p-tabPanel>
-
     </p-tabView>
-  
-  
-  
-  
   </div>
-  <p-sidebar [(visible)]="modal" position="right" [style]="{ width:'80rem'}">
-
-    <p-tabView [(activeIndex)]="activeTabIndex" >  
+  <p-sidebar [(visible)]="modal" position="right" [style]="{ width: '80rem' }">
+    <p-tabView [(activeIndex)]="activeTabIndex">
       <p-tabPanel header="Vehicle Details">
         <form (ngSubmit)="onNext()" #Inventory="ngForm">
           <div class="sidebar-main">
             <div class="sidebar-header">
               <div class="sh-title">
-                <h3 style="text-align: center;">
-                  Add Inventory
-                </h3>
-                <h5 style="text-align: center;">Vehicle Details</h5>
-                <br>
+                <h3 style="text-align: center">Add Inventory</h3>
+                <h5 style="text-align: center">Vehicle Details</h5>
+                <br />
               </div>
-              <div class="sh-toolbar">
-              </div>
+              <div class="sh-toolbar"></div>
             </div>
             <div class="sidebar-content">
               <div class="card-grey padding">
-                <div class="row-form grid" >
-                  <div class="col-4">
-                    <div class="p-field">
-                      <span class="p-float-label">
-                        <p-dropdown class="p-inputtext-lg" 
-                        placeholder="Select a Vehicle Type" 
-                        [options]="vehicleTypes" 
-                        optionLabel="type_name"
-                         (onChange)="onVehicleTypeChange($event)"
-                         name="vehicleType"
-                         [(ngModel)]="vehicleInventory.vehicleType"
-                         [required]="true"
-                         ></p-dropdown>
-                        <label for="float-label">Vehicle Type*</label>
-                    </span>
-                    </div>
-                  </div>
-                  <div class="col-4">
-                    <div class="p-field">
-                      <span class="p-float-label">
-                        <input 
-                        class="p-inputtext-lg"
-                         pInputText 
-                         name="make"
-                         required
-                         [(ngModel)]="vehicleInventory.vehicleMake"
-                         />
-                        <label htmlFor="username">Make*</label>
-                    </span>
-                    </div>
-                  </div>
-                  <div class="col-4">
-                    <div class="p-field">
-                      <span class="p-float-label">
-                        <input class="p-inputtext-lg" 
-                        pInputText
-                        name="model"
-                        required
-                        [(ngModel)]="vehicleInventory.vehicleModel"
-                        />
-                        <label htmlFor="username">Model*</label>
-                    </span>
-                    </div>
-                  </div>
-                </div>
-                <br>
                 <div class="row-form grid">
                   <div class="col-4">
                     <div class="p-field">
                       <span class="p-float-label">
-                        <input class="p-inputtext-lg"
-                        required
-                         pInputText
-                         name="variant"
-                         [(ngModel)]="vehicleInventory.vehicleVariant"
-                         />
-                        <label htmlFor="username">Variant*</label>
-                    </span>
+                        <p-dropdown
+                          class="p-inputtext-lg"
+                          placeholder="Select a Vehicle Type"
+                          [options]="vehicleTypes"
+                          optionLabel="type_name"
+                          (onChange)="onVehicleTypeChange($event)"
+                          name="vehicleType"
+                          [(ngModel)]="vehicleInventory.vehicleType"
+                          [required]="true"
+                          #vehicleType="ngModel"
+                        ></p-dropdown>
+                        <div *ngIf="vehicleType.invalid && (vehicleType.dirty || vehicleType.touched)" class="p-error">
+                          <span *ngIf="vehicleType.errors?.['required']">
+                            Vehicle Type is required.</span>
+                        </div>
+                        <label for="float-label">Vehicle Type*</label>
+                      </span>
                     </div>
                   </div>
                   <div class="col-4">
                     <div class="p-field">
                       <span class="p-float-label">
-                        <input class="p-inputtext-lg" 
-                        pInputText
-                        name="Chasis No"
-                        [(ngModel)]="vehicleInventory.vehicleChasisNo"
+                        <input
+                          class="p-inputtext-lg"
+                          pInputText
+                          name="make"
+                          required
+                          minlength="3"
+                          pattern="^\S(?:\s*\S)*$"
+                          [(ngModel)]="vehicleInventory.vehicleMake"
+                          #make="ngModel"
                         />
+
+                        <div *ngIf="make.invalid && (make.dirty || make.touched)" class="p-error">
+                          <span *ngIf="vehicleType.errors?.['required']">
+                            Vehicle Make Name is required.</span>
+                            <br>
+
+                            <span *ngIf="make.errors?.['minlength']">
+                              Make must be at least 3 characters long.
+                            </span>
+                        </div>
+
+                        <label htmlFor="username">Make*</label>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <input
+                          class="p-inputtext-lg"
+                          pInputText
+                          name="model"
+                          required
+                          [(ngModel)]="vehicleInventory.vehicleModel"
+                          minlength="3"
+                          pattern="^\S(?:\s*\S)*$"
+                          #model="ngModel"
+                        />
+
+                        <div *ngIf="model.invalid && (model.dirty || model.touched)" class="p-error">
+                          <span *ngIf="model.errors?.['required']">
+                            Vehicle Model Name is required.</span>
+                            <br>
+                            <span *ngIf="model.errors?.['minlength']">
+                              Model Name must be at least 3 characters long.
+                            </span>
+                        </div>
+
+                        <label htmlFor="username">Model*</label>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <br />
+                <div class="row-form grid">
+                  <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <input
+                          class="p-inputtext-lg"
+                          pInputText
+                          name="variant"
+                          [(ngModel)]="vehicleInventory.vehicleVariant"
+                          required
+                          minlength="3"
+                          pattern="^\S(?:\s*\S)*$"
+                          #variant="ngModel"
+                        />
+
+                        
+                        <div *ngIf="variant.invalid && (variant.dirty || variant.touched)" class="p-error">
+                          <span *ngIf="variant.errors?.['required']">
+                            Vehicle Variant Name is required.</span>
+                            <br>
+                            <span *ngIf="model.errors?.['minlength']">
+                              Variant Name must be at least 3 characters long.
+                            </span>
+                        </div>
+
+                        <label htmlFor="username">Variant*</label>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <input
+                          class="p-inputtext-lg"
+                          pInputText
+                          name="Chasis No"
+                          [(ngModel)]="vehicleInventory.vehicleChasisNo"
+                          minlength="17"
+                          maxlength="17"
+                          pattern="^(?!\s)(?!.*\s$)(?!.*[IOQioq])[0-9A-HJ-NPR-Z]{17}$"
+                          #chassisNo="ngModel"
+                        />
+
+                        <div *ngIf="chassisNo.invalid && (chassisNo.dirty || chassisNo.touched)" class="p-error">
+                            <span *ngIf="chassisNo.errors?.['minlength' || 'maxlength']">
+                              The chassis must have a length of 17 characters.
+                            </span>
+                            <br>
+                            <span *ngIf="chassisNo.errors?.['pattern']">
+                              Chasis Number cant contain I,O,Q.
+                            </span>
+                        </div>
+
                         <label htmlFor="username">Chasis No</label>
                       </span>
                     </div>
@@ -126,237 +221,394 @@
                   <div class="col-4">
                     <div class="p-field">
                       <span class="p-float-label">
-                        <input class="p-inputtext-lg" 
-                        pInputText
-                        name="engineNo"
-                        [(ngModel)]="vehicleInventory.engineNo"
+                        <input
+                          class="p-inputtext-lg"
+                          pInputText
+                          name="engineNo"
+                          [(ngModel)]="vehicleInventory.engineNo"
+                          minlength="9"
+                          maxlength="9"
+                          required
+                          #engineNo="ngModel"
                         />
+
+                        <div *ngIf="engineNo.invalid && (engineNo.dirty || engineNo.touched)" class="p-error">
+                          <span *ngIf="engineNo.errors?.['required']">
+                            Engine Number is required
+                          </span>
+                          <br>
+                          <span *ngIf="engineNo.errors?.['minlength' || 'maxlength']">
+                            The Engine Number must have a length of 9 characters.
+                          </span>
+                      </div>
+
                         <label for="float-label">Engine No</label>
-                    </span>
+                      </span>
                     </div>
                   </div>
                 </div>
-                <br>
+                <br />
                 <div class="row-form grid">
                   <div class="col-4">
                     <div class="p-field">
                       <span class="p-float-label">
-                        <p-inputNumber class="p-inputtext-lg" 
-                         mode="currency" 
-                         currency="PKR" 
-                         locale="en-US"
-                         name="costPrice"
-                         [(ngModel)]="vehicleInventory.costPrice"
-                         > </p-inputNumber>
+                        <p-inputNumber
+                          class="p-inputtext-lg"
+                          mode="currency"
+                          currency="PKR"
+                          locale="en-US"
+                          name="costPrice"
+                          [(ngModel)]="vehicleInventory.costPrice"
+                          [required]="true"
+                          pattern="^\d+$"
+                          #cost="ngModel"
+                        >
+                        </p-inputNumber>
+
+                        <div *ngIf="cost.invalid && (cost.dirty || cost.touched)" class="p-error">
+                          <span *ngIf="engineNo.errors?.['required']">
+                            Please Enter Cost Price
+                          </span>
+                          <br>
+                      </div>
+
                         <label for="float-label">Cost Price*</label>
-                    </span>
+                      </span>
                     </div>
                   </div>
                   <div class="col-4">
                     <div class="p-field">
                       <span class="p-float-label">
-                        <p-inputNumber class="p-inputtext-lg"  
-                        mode="currency"
-                         currency="PKR" 
-                         locale="en-US"
-                         name="demand"
-                         [(ngModel)]="vehicleInventory.demand"
-                         > </p-inputNumber>
+                        <p-inputNumber
+                          class="p-inputtext-lg"
+                          mode="currency"
+                          currency="PKR"
+                          locale="en-US"
+                          name="demand"
+                          [(ngModel)]="vehicleInventory.demand"
+                          pattern="^\d+$"
+                          [required]="true"
+                          #demand = "ngModel"
+                        >
+                        </p-inputNumber>
+
+                        <div *ngIf="demand.invalid && (demand.dirty || demand.touched)" class="p-error">
+                          <span *ngIf="demand.errors?.['required']">
+                            Please Enter Demand Price.
+                          </span>
+                          <br>
+                      </div>
+
                         <label for="float-label">Demand*</label>
-                    </span>
+                      </span>
                     </div>
                   </div>
                   <div class="col-4">
                     <div class="p-field">
                       <span class="p-float-label">
-                        <p-calendar [readonlyInput]="true" 
-                        class="p-inputtext-lg"
-                        name="date of purchase"
-                        [(ngModel)]="vehicleInventory.dateOfPurchase"
+                        <p-calendar
+                          [readonlyInput]="true"
+                          class="p-inputtext-lg"
+                          name="date of purchase"
+                          [(ngModel)]="vehicleInventory.dateOfPurchase"
+                          [required]="true"
+                          #dop = "ngModel"
                         ></p-calendar>
+
+                        <div *ngIf="dop.invalid && (dop.dirty || dop.touched)" class="p-error">
+                          <span *ngIf="dop.errors?.['required']">
+                            Date of Purchase Required.
+                          </span>
+                          <br>
+                      </div>
                         <label>Date Of Purcahse*</label>
-                    </span>
+                      </span>
                     </div>
                   </div>
                 </div>
-                <br>
+                <br />
                 <div class="row-form grid">
                   <div class="col-4">
                     <div class="p-field">
                       <span class="p-float-label">
-                        <p-calendar [readonlyInput]="true" 
-                        class="p-inputtext-lg"
-                        name="date of sale"
-                        [(ngModel)]="vehicleInventory.dateOfSale"
+                        <p-calendar
+                          [readonlyInput]="true"
+                          class="p-inputtext-lg"
+                          name="date of sale"
+                          [(ngModel)]="vehicleInventory.dateOfSale"
                         ></p-calendar>
                         <label>Date Of Sale</label>
-                    </span>
+                      </span>
                     </div>
                   </div>
                   <div class="col-4">
                     <div class="p-field">
                       <span class="p-float-label">
-                        <input class="p-inputtext-lg" 
-                        pInputText
-                        required
-                        name="color"
-                        [(ngModel)]="vehicleInventory.bodyColor"
+                        <input
+                          class="p-inputtext-lg"
+                          pInputText
+                          required
+                          name="color"
+                          [(ngModel)]="vehicleInventory.bodyColor"
+                          required
+                          pattern="^(?! )[A-Za-z]+(?! )$"
+                          #color = "ngModel"
                         />
+
+                        <div *ngIf="color.invalid && (color.dirty || color.touched)" class="p-error">
+                          <span *ngIf="color.errors?.['required']">
+                            Color Required.
+                          </span>
+                          <br>
+                          <span *ngIf="color.errors?.['pattern']">
+                            Invalid Color.
+                          </span>
+                      </div>
+
                         <label htmlFor="username">Body Color*</label>
-                    </span>
+                      </span>
                     </div>
                   </div>
                   <div class="col-4">
                     <div class="p-field">
-                    <span class="p-float-label">
-                      <p-dropdown
-                       [options]="status" 
-                       class="p-inputtext-lg" 
-                       placeholder="Select a Vehicle Type"
-                       name="status"
-                        [(ngModel)]="vehicleInventory.status"
-                        [required]="true"
-                       ></p-dropdown>
-                      <label for="float-label">Status*</label>
-                    </span>
+                      <span class="p-float-label">
+                        <p-dropdown
+                          [options]="status"
+                          class="p-inputtext-lg"
+                          placeholder="Select a Vehicle Type"
+                          name="status"
+                          [(ngModel)]="vehicleInventory.status"
+                          [required]="true"
+                          #vehicleStatus = "ngModel"
+                        ></p-dropdown>
+
+                        <div *ngIf="vehicleStatus.invalid && (vehicleStatus.dirty || vehicleStatus.touched)" class="p-error">
+                          <span *ngIf="vehicleStatus.errors?.['required']">
+                            Status Required
+                          </span>
+                      </div>
+                        <label for="float-label">Status*</label>
+                      </span>
                     </div>
                   </div>
                 </div>
-                <br>
+                <br />
                 <div class="row-form grid">
                   <div class="col-4">
                     <div class="p-field">
-                    <span class="p-float-label">
-                      <input class="p-inputtext-lg" 
-                      pInputText  
-                      name="RegNo"
-                      [(ngModel)]="vehicleInventory.regNo"
-                      />
-                      <label for="float-label">Registration Number</label>
-                  </span>
-                  </div>
-                  </div>
-                  <div class="col-4">
-                    <div class="p-field">
                       <span class="p-float-label">
-                        <p-inputNumber class="p-inputtext-lg" 
-                         name="milage"
-                         [(ngModel)]="vehicleInventory.mileage"
-                         > </p-inputNumber>
-                        <label for="float-label">Mileage*</label>
-                    </span>
+                        <input
+                          class="p-inputtext-lg"
+                          pInputText
+                          name="RegNo"
+                          [(ngModel)]="vehicleInventory.regNo"
+                        />
+                     
+                        
+                        <label for="float-label">License Number</label>
+                      </span>
                     </div>
                   </div>
                   <div class="col-4">
                     <div class="p-field">
                       <span class="p-float-label">
-                        <input 
-                        class="p-inputtext-lg"
-                         pInputText 
-                         name="modelYear"
-                         [(ngModel)]="vehicleInventory.modelYear"
-                         />
+                        <p-inputNumber
+                          class="p-inputtext-lg"
+                          name="milage"
+                          [(ngModel)]="vehicleInventory.mileage"
+                          pattern="^\d+(\.\d+)?$"
+                          suffix="km"
+                          #mileage = "ngModel"
+                          [required] = "true"
+                        >
+                        </p-inputNumber>
+
+                        <div *ngIf="mileage.invalid && (mileage.dirty || mileage.touched)" class="p-error">
+                          <span *ngIf="mileage.errors?.['required']">
+                            Mileage is Required.
+                          </span>
+                      </div>
+
+                        <label for="float-label">Mileage*</label>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <input
+                          class="p-inputtext-lg"
+                          pInputText
+                          name="modelYear"
+                          [(ngModel)]="vehicleInventory.modelYear"
+                          minlength="4"
+                          maxlength="4"
+                          required
+                          pattern="^(?!202[8-9]|20[3-9]\d|2[1-9]\d{2}|[3-9]\d{3}|10000)\d+$"
+                          #modelYear = "ngModel"
+                        />
+                        <div *ngIf="modelYear.invalid && (modelYear.dirty || modelYear.touched)" class="p-error">
+                          <span *ngIf="modelYear.errors?.['required']">
+                            Model Year Of Vehicle Is Required.
+                          </span>
+                          <br>
+                          <span *ngIf="modelYear.errors?.['pattern']">
+                            Model year cant be greater than 2027. Contact system admin to change that.
+                          </span>
+                      </div>
                         <label htmlFor="Model Year">Model Year*</label>
-                    </span>
+                      </span>
                     </div>
                   </div>
                 </div>
-                  <br>
-                  <div class="row-form grid">
+                <br />
+                <div class="row-form grid">
                   <div class="col-8">
                     <div class="p-field">
-                    <span class="p-float-label">
-                      <textarea id="float-input" 
-                      rows="5" cols="80" 
-                      pInputTextarea
-                      name="comments"
-                      [(ngModel)]="vehicleInventory.comments"
-                      ></textarea>
-                      <label for="float-label">Other Details</label>
-                  </span>
+                      <span class="p-float-label">
+                        <textarea
+                          id="float-input"
+                          rows="5"
+                          cols="80"
+                          pInputTextarea
+                          name="comments"
+                          [(ngModel)]="vehicleInventory.comments"
+                        ></textarea>
+                        <label for="float-label">Other Details</label>
+                      </span>
+                    </div>
                   </div>
-                </div>
-                <!-- </div> -->
-                <!-- <br> -->
-                
+                  <!-- </div> -->
+                  <!-- <br> -->
+
                   <div class="col-3">
                     <div class="p-field">
                       <label>Grade*</label>
-                    <input type="number" 
-                    pInputText 
-                    [(ngModel)]="sliderValue"
-                     class="w-full" 
-                     (input)="onInputChange($event)" 
-                     (keydown)="onKeyDown($event)"
-                      [min]="0" 
-                      [max]="5"
-                      name="grade"
-                      required
-                      [(ngModel)]="vehicleInventory.grade"
+                      <input
+                        type="number"
+                        pInputText
+                        [(ngModel)]="sliderValue"
+                        class="w-full"
+                        (input)="onInputChange($event)"
+                        (keydown)="onKeyDown($event)"
+                        [min]="0"
+                        [max]="5"
+                        name="grade"
+                        required
+                        [(ngModel)]="vehicleInventory.grade"
+                        #grade = "ngModel"
                       />
+
+                      <div *ngIf="grade.invalid && (grade.dirty || grade.touched)" class="p-error">
+                        <span *ngIf="grade.errors?.['required']">
+                          Vehicle Grade Is Required.
+                         
+                        </span>
+                        <br>
+                        <span *ngIf="grade.errors?.['max' || 'min']">
+                          Grade can only be between 0 and 5.
+                        </span>
+                    </div>
                       <!-- <p-slider [(ngModel)]="sliderValue" [min]="0" [max]="5" [step]="0.5" class="w-full"></p-slider> -->
                     </div>
-                  </div> 
+                  </div>
                 </div>
-              <br>
-             <!-- adding dynamic form here-->
-                  <div *ngIf="vehicleInventory.stockAttributeValue.length > 0">
-                     <h5 style="text-align: center;">Additional Details</h5> <br>
-                    <div class="row-form grid">
-                      <div class="col-4" *ngFor="let attribute of vehicleInventory.stockAttributeValue; let i = index">
-                        <div *ngIf="attribute.vehicleTypeAttribute.input_type === 'text'">
-                          <div class="p-field">
-                            <span class="p-float-label">
-                              <input class="p-inputtext-lg"
-                               pInputText
-                               [(ngModel)]="attribute.value" 
-                               name="Dynamic Form"
-                               />
-                              <label for="float-label">{{ attribute.vehicleTypeAttribute.attribute_name }}</label>
-                            </span>
-                          </div>
-                        </div>
-                        <div *ngIf="attribute.vehicleTypeAttribute.input_type === 'number'">
-                          <div class="p-field">
-                            <span class="p-float-label">
-                              <input class="p-inputtext-lg" 
-                              pInputText 
-                              [(ngModel)]="attribute.value" 
-                              name="Dynamic Form2" 
-                              />
-                              <label for="float-label">{{attribute.vehicleTypeAttribute.attribute_name }}</label>
-                            </span>
-                          </div>
-                        </div>
-                        <div *ngIf="attribute.vehicleTypeAttribute.input_type === 'date'">
-                          <div class="p-field">
-                            <span class="p-float-label">
-                              <p-calendar [readonlyInput]="true" 
+                <br />
+                <!-- adding dynamic form here-->
+                <div *ngIf="vehicleInventory.stockAttributeValue.length > 0">
+                  <h5 style="text-align: center">Additional Details</h5>
+                  <br />
+                  <div class="row-form grid">
+                    <div
+                      class="col-4"
+                      *ngFor="
+                        let attribute of vehicleInventory.stockAttributeValue;
+                        let i = index
+                      "
+                    >
+                      <div
+                        *ngIf="
+                          attribute.vehicleTypeAttribute.input_type === 'text'
+                        "
+                      >
+                        <div class="p-field">
+                          <span class="p-float-label">
+                            <input
                               class="p-inputtext-lg"
-                              name="Dynamic Form3"
+                              pInputText
                               [(ngModel)]="attribute.value"
-                              ></p-calendar>
-                              <label for="float-label">{{attribute.vehicleTypeAttribute.attribute_name }}</label>
-                            </span>
-                          </div>
-                        </div>
-                        <div *ngIf="attribute.vehicleTypeAttribute.input_type === 'dropdown'">
-                          <span class="p-float-label">                
-                            <p-dropdown class="p-inputtext-lg" 
-                            placeholder="Select {{ attribute.vehicleTypeAttribute.attribute_name}}" 
-                            [options]="getOptions(attribute)" 
-                            [(ngModel)]="attribute.value" 
-                            name="Dynamic Form3"  
-                            ></p-dropdown>
-                            <label for="float-label">{{ attribute.vehicleTypeAttribute.attribute_name}}</label>
+                              name="Dynamic Form"
+                            />
+                            <label for="float-label">{{
+                              attribute.vehicleTypeAttribute.attribute_name
+                            }}</label>
                           </span>
                         </div>
                       </div>
+                      <div
+                        *ngIf="
+                          attribute.vehicleTypeAttribute.input_type === 'number'
+                        "
+                      >
+                        <div class="p-field">
+                          <span class="p-float-label">
+                            <input
+                              class="p-inputtext-lg"
+                              pInputText
+                              [(ngModel)]="attribute.value"
+                              name="Dynamic Form2"
+                            />
+                            <label for="float-label">{{
+                              attribute.vehicleTypeAttribute.attribute_name
+                            }}</label>
+                          </span>
+                        </div>
+                      </div>
+                      <div
+                        *ngIf="
+                          attribute.vehicleTypeAttribute.input_type === 'date'
+                        "
+                      >
+                        <div class="p-field">
+                          <span class="p-float-label">
+                            <p-calendar
+                              [readonlyInput]="true"
+                              class="p-inputtext-lg"
+                              name="Dynamic Form3"
+                              [(ngModel)]="attribute.value"
+                            ></p-calendar>
+                            <label for="float-label">{{
+                              attribute.vehicleTypeAttribute.attribute_name
+                            }}</label>
+                          </span>
+                        </div>
+                      </div>
+                      <div
+                        *ngIf="
+                          attribute.vehicleTypeAttribute.input_type ===
+                          'dropdown'
+                        "
+                      >
+                        <span class="p-float-label">
+                          <p-dropdown
+                            class="p-inputtext-lg"
+                            placeholder="Select {{
+                              attribute.vehicleTypeAttribute.attribute_name
+                            }}"
+                            [options]="getOptions(attribute)"
+                            [(ngModel)]="attribute.value"
+                            name="Dynamic Form3"
+                          ></p-dropdown>
+                          <label for="float-label">{{
+                            attribute.vehicleTypeAttribute.attribute_name
+                          }}</label>
+                        </span>
+                      </div>
                     </div>
                   </div>
+                </div>
               </div>
-              
-              
+
               <!-- <div class="container">
                 <h2>Upload Photos</h2>
                   <span>Choose Images To Upload:</span>
@@ -369,86 +621,89 @@
       
                   </div>            
               </div> -->
-             
-              <br>
-          </div>
+
+              <br />
+            </div>
             <div class="sidebar-footer flex justify-content-end">
               <app-button
-              type="submit"
-               label="Next" 
-               styleClass="p-button-sm p-button-rounded" 
-               ></app-button>
+                type="submit"
+                label="Next"
+                styleClass="p-button-sm p-button-rounded"
+              ></app-button>
             </div>
           </div>
         </form>
       </p-tabPanel>
-      
-      <p-tabPanel header="Seller Details" >   <!-- [disabled]="!showSecondTab" -->
-      
-        
-      <form (ngSubmit)="postInventory()" #Seller="ngForm"> 
-        <div class="sidebar-main">
-          <div class="sidebar-header">
-            <div class="sh-title">
-              <h3 style="text-align: center;">
-                Add Inventory
-              </h3>
-              <h5 style="text-align: center;"> Seller Details</h5>
-              <br>
-            </div>
-            <div class="sh-toolbar">
+
+      <p-tabPanel header="Seller Details">
+        <!-- [disabled]="!showSecondTab" -->
+
+        <form (ngSubmit)="postInventory()" #Seller="ngForm">
+          <div class="sidebar-main">
+            <div class="sidebar-header">
+              <div class="sh-title">
+                <h3 style="text-align: center">Add Inventory</h3>
+                <h5 style="text-align: center">Seller Details</h5>
+                <br />
               </div>
+              <div class="sh-toolbar"></div>
             </div>
           </div>
           <div class="sidebar-content">
             <div class="card-grey padding">
-              <div class="row-form grid" >
+              <div class="row-form grid">
                 <div class="col-4">
                   <div class="p-field">
-                  <span class="p-float-label">
-                    <p-dropdown
-                     [options]="sellerCategory" 
-                     class="p-inputtext-lg" 
-                     placeholder="Select a Vehicle Type"
-                     name="seller_category"
-                     [(ngModel)]="vehicleInventory.customerCategory"
-                     ></p-dropdown>
-                    <label for="float-label">Seller Category</label>
-                  </span>
+                    <span class="p-float-label">
+                      <p-dropdown
+                        [options]="sellerCategory"
+                        class="p-inputtext-lg"
+                        placeholder="Select a Vehicle Type"
+                        name="seller_category"
+                      ></p-dropdown>
+                      <label for="float-label">Seller Category</label>
+                    </span>
                   </div>
                 </div>
                 <div class="col-4">
                   <div class="p-field">
                     <span class="p-float-label">
-                      <input 
-                      class="p-inputtext-lg"
-                       pInputText 
-                       name="name"
-                       required
-                       [(ngModel)]="vehicleInventory.customerName"
-                       />
-                       <label htmlFor="customerName">
-                        {{ selectedSellerCategory === 'AGENT' ? 'Agent' : selectedSellerCategory === 'CUSTOMER' ? 'Customer' : selectedSellerCategory === 'DEALERSHIP' ? 'Dealership' : '' }} Name
+                      <input
+                        class="p-inputtext-lg"
+                        pInputText
+                        name="name"
+                        required
+                      />
+                      <label htmlFor="customerName">
+                        {{
+                          selectedSellerCategory === "AGENT"
+                            ? "Agent"
+                            : selectedSellerCategory === "CUSTOMER"
+                            ? "Customer"
+                            : selectedSellerCategory === "DEALERSHIP"
+                            ? "Dealership"
+                            : ""
+                        }}
+                        Name
                       </label>
-                  </span>
+                    </span>
                   </div>
                 </div>
-                <div class="col-4">
+                <!-- <div class="col-4">
                   <div class="p-field">
                     <span class="p-float-label">
                       <input class="p-inputtext-lg" 
                       pInputText
                       name="contactNumber"
                       required
-                      [(ngModel)]="vehicleInventory.contactNo"
                       />
                       <label htmlFor="username">Contact Number</label>
                   </span>
                   </div>
-                </div>
+                </div> -->
               </div>
-              <br>
-              <div class="row-form grid">
+              <!-- <br> -->
+              <!-- <div class="row-form grid">
                 <div class="col-4">
                   <div class="p-field">
                     <span class="p-float-label">
@@ -486,8 +741,8 @@
                   </span>
                   </div>
                 </div>
-              </div>
-              <br>
+              </div> -->
+              <!-- <br>
               <div class="row-form grid">
                 <div class="col-4">
                   <div class="p-field">
@@ -516,32 +771,34 @@
                 </div>
               </div>
            
-              <br>
+              <br> -->
               <div class="sidebar-header">
                 <div class="sh-title">
-                  <h5 style="text-align: center;"> Investor Details</h5>
-                  <br>
-                
-              <br><br>
+                  <h5 style="text-align: center">Investor Details</h5>
+                  <br />
 
-             <div class= "investor_form" *ngFor="let form of investorForms; let i = index">
-              <div class="row-form grid">
-                <div class="col-4">
-                  <div class="p-field">
-                  <span class="p-float-label">
-                    <p-dropdown
-                     [options]="investors" 
-                     optionLabel="investor_name"
-                     class="p-inputtext-lg" 
-                     placeholder="Select a investor"
-                     name="investor Name"
-                     [(ngModel)]="vehicleInventory.investor[i]"
-                     ></p-dropdown>
-                    <label for="float-label">Investor Name*</label>
-                  </span>
-                  </div>
-                </div>
-                <!-- <div class="col-4">
+                  <br /><br />
+
+                  <div
+                    class="investor_form"
+                    *ngFor="let form of investorForms; let i = index"
+                  >
+                    <div class="row-form grid">
+                      <div class="col-4">
+                        <div class="p-field">
+                          <span class="p-float-label">
+                            <p-dropdown
+                              [options]="investors"
+                              optionLabel="investor_name"
+                              class="p-inputtext-lg"
+                              placeholder="Select a investor"
+                              name="investor Name"
+                            ></p-dropdown>
+                            <label for="float-label">Investor Name*</label>
+                          </span>
+                        </div>
+                      </div>
+                      <!-- <div class="col-4">
                   <div class="p-field">
                     <div class="flex flex-wrap gap-3">
                       <div class="flex align-items-center">
@@ -559,74 +816,75 @@
                   </div>
                 </div> -->
 
-                <div class="col-4">
-                  <div class="p-field">
-                  <span class="p-float-label">
-                    <input class="p-inputtext-lg" 
-                    pInputText
-                    name="percentage"
-                    required
-                    [(ngModel)]="vehicleInventory.investmentPercentage[i]"
-                    />
-                    <label for="float-label">Enter percentage %*
-                      <!-- {{ selectedOption === 'Amount' ? 'Amount' : selectedOption === 'Percentage' ? 'Percentage' : '' }}% -->
-                    </label>  
-                                 
-                  </span>
+                      <div class="col-4">
+                        <div class="p-field">
+                          <span class="p-float-label">
+                            <input
+                              class="p-inputtext-lg"
+                              pInputText
+                              name="percentage"
+                              required
+                            />
+                            <label for="float-label"
+                              >Enter percentage %*
+                              <!-- {{ selectedOption === 'Amount' ? 'Amount' : selectedOption === 'Percentage' ? 'Percentage' : '' }}% -->
+                            </label>
+                          </span>
+                        </div>
+                      </div>
+
+                      <!-- <div class="row-form grid" > -->
+
+                      <!-- </div> -->
+                    </div>
+                    <br />
+                  </div>
+                  <div class="row-form grid">
+                    <div class="col-4">
+                      <div class="buttons">
+                        <p-button
+                          icon="pi pi-plus"
+                          (click)="addInvestorForm()"
+                        ></p-button>
+                        <p-button
+                          severity="danger"
+                          class="ml-2"
+                          icon="pi pi-minus"
+                          (click)="removeInvestorForm()"
+                        ></p-button>
+                      </div>
+                      <!-- <br><br> -->
+                    </div>
+                    <div class="col-4">
+                      <div class="p-field">
+                        <span class="p-float-label">
+                          <input
+                            class="p-inputtext-lg"
+                            pInputText
+                            name="totalInvestment"
+                            required
+                            disabled
+                          />
+                          <label for="float-label"
+                            >Remaining Percentage %</label
+                          >
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
-
-
-              <!-- <div class="row-form grid" > -->
-                
-              <!-- </div> -->
-            </div>
-              <br>
-            </div>
-            <div class="row-form grid" >
-              <div class="col-4">
-              <div class="buttons">
-            <p-button icon="pi pi-plus" (click)="addInvestorForm()"></p-button>
-            <p-button severity="danger" class="ml-2" icon="pi pi-minus"  (click)="removeInvestorForm()"></p-button>
-          </div>
-            <!-- <br><br> -->
-          </div>
-            <div class="col-4">
-              <div class="p-field">
-              <span class="p-float-label">
-                  <input class="p-inputtext-lg" 
-                  pInputText
-                  name="totalInvestment"
-                  required
-                  disabled
-                  />
-                <label for="float-label">Remaining Percentage %</label>
-              </span>
               </div>
             </div>
-            
-            </div>
           </div>
-            </div> 
-              </div>
-            </div>
-            <div class="sidebar-footer flex justify-content-end">
-              <app-button
+          <div class="sidebar-footer flex justify-content-end">
+            <app-button
               type="submit"
-               label="save" 
-               styleClass="p-button-sm p-button-rounded" 
-               ></app-button>
-            </div>
-            </form>
+              label="save"
+              styleClass="p-button-sm p-button-rounded"
+            ></app-button>
+          </div>
+        </form>
       </p-tabPanel>
-      </p-tabView> 
+    </p-tabView>
   </p-sidebar>
 </div>
-
-
-
-
-
-
-
-

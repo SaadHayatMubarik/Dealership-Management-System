@@ -35,14 +35,21 @@
             <div class="col-4">
               <div class="p-field">
                <label>Select a vehicle type:</label> <br>
-                <p-dropdown [(ngModel)]="vehicleTypeAttribute.vehicleType" [options]="vehicleTypes"  optionLabel="type_name"></p-dropdown>
+                <p-dropdown 
+                [(ngModel)]="vehicleTypeAttribute.vehicleType" 
+                [options]="vehicleTypes"  
+                optionLabel="type_name"
+                [required]="true"></p-dropdown>
                   <br>                
               </div>
             </div>
             <div class="col-4">
               <div class="p-field">
                 <label>Attribute Name:</label> <br>
-                <app-textbox [(controlModel)]="vehicleTypeAttribute.vehicleAttributeName"></app-textbox><br>
+                <app-textbox [(controlModel)]="vehicleTypeAttribute.vehicleAttributeName"
+                pattern="^(?!\s)(?!.*\s$).+$"
+                required
+                ></app-textbox><br>
               </div>
             </div>
             <div class="col-4">
@@ -52,6 +59,7 @@
                 [options]="inputTypes"
                 [(ngModel)]="vehicleTypeAttribute.attributeInputType"
                 placeholder="Input type"
+                [required]="true"
               ></p-dropdown><br>
               </div>  
             </div>
@@ -61,7 +69,12 @@
             <div class="col-4">
               <div class="p-field">
                 <label>Enter 1 or more Values:</label> <br>
-                  <p-chips [(ngModel)]="vehicleTypeAttribute.vehicleAttributeValue" separator="," placeholder="eg: red, green, yellow">
+                  <p-chips 
+                  [(ngModel)]="vehicleTypeAttribute.vehicleAttributeValue"
+                   separator="," 
+                   placeholder="eg: red, green, yellow"
+                   pattern="^(?!\s)(?!.*\s$).+$"
+                   required>
                   </p-chips>
               </div>
             </div>
