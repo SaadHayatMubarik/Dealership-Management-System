@@ -1,6 +1,7 @@
 export interface IVehicleType {
   vehicleTypeName: string;
   showroomId: any;
+
 }
 
 export interface IVehicleTypeAttribute {
@@ -9,6 +10,7 @@ export interface IVehicleTypeAttribute {
   attributeInputType: string;
   vehicleType: any;
   ShowroomId: any;
+
 }
 
 export interface IInventory {
@@ -33,16 +35,17 @@ export interface IInventory {
   attributeValueId:number[];
   value: string[];
   stockAttributeValue : IStockAttributeValue[];
-  customerCategory: string;
-  customerName: string;
-  contactNo: string;
-  customerEmail: string;
-  province: string;
-  city: string;
-  address: string;
-  cnic: string;
-  investor: any[];
-  investmentPercentage: number[];
+  // customerCategory: string;
+  // customerName: string;
+  // contactNo: string;
+  // customerEmail: string;
+  // province: string;
+  // city: string;
+  // address: string;
+  // cnic: string;
+  // investor: any[];
+  // investmentPercentage: number[];
+
 }
 
 

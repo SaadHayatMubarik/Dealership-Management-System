@@ -13,6 +13,8 @@ import {
   IVehicleTypeAttribute,
   IVehicleTypeAttributeDto,
 } from '../../interfaces/inventory';
+
+import { IInvestor } from '../../interfaces';
 import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
 
@@ -24,6 +26,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./add-inventory-form.component.scss'],
 })
 export class AddInventoryFormComponent extends BaseComponent implements OnInit {
+  
   vehicleInventory: IInventory = {
     vehicleMake: '',
     vehicleModel: '',
@@ -46,17 +49,29 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
     value:[],
     attributeValueId:[],
     stockAttributeValue: [],
-    customerCategory: '',
-    customerName: '',
-    contactNo: '',
-    customerEmail: '',
-    province: '',
-    city: '',
-    address: '',
-    cnic: '',
-    investor: [],
-    investmentPercentage: []
+    // customerCategory: '',
+    // customerName: '',
+    // contactNo: '',
+    // customerEmail: '',
+    // province: '',
+    // city: '',
+    // address: '',
+    // cnic: '',
+    // investor: [],
+    // investmentPercentage: []
   };
+
+
+  investor: IInvestor=
+  {
+   investorName : '',
+    cnic:'' ,
+    phoneNo:'' ,
+    showroomId: localStorage.getItem('Showroom Id'),
+  }
+
+
+  
 
   activeTabIndex = 0; // Track current active tab index
   showSecondTab = false; // Initially disable the second tab
@@ -303,5 +318,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
       console.log(this.status[this.selectedTabIndex]);
     });
   }
+
+
 
 }

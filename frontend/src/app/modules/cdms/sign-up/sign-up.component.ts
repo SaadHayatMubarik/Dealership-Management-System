@@ -10,20 +10,6 @@ import {  MessageService } from 'primeng/api';
 import { ISignUp } from '../../interfaces';
 
 
-interface State {
-  label: string;
-  value: string;
-}
-
-interface CityList {
-  label: string;
-  value: string;
-  
-}
-
-
-
-
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -89,7 +75,6 @@ export class SignUpComponent  {
   {
     if(this.AdminForm.valid && this.ShowroomForm.valid && this.AdminForm.value.password === this.AdminForm.value.confirmPassword)
     {
-      
       this.apiService.postLogin('/auth/signUp',this.createAdmin).subscribe({
         next: (response) => {
           console.log('Response from server : ', response);

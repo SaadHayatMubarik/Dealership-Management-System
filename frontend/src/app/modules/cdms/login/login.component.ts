@@ -51,13 +51,13 @@ export class LoginComponent implements OnInit{
     {
       if(this.loginForm.valid)
       {
-        if(this.rememberMeChecked)
-        {
-          localStorage.setItem('userData', JSON.stringify(this.userData));
-        }
-        else{
-          localStorage.removeItem('userData')
-        }
+        // if(this.rememberMeChecked)
+        // {
+        //   localStorage.setItem('userData', JSON.stringify(this.userData));
+        // }
+        // else{
+        //   localStorage.removeItem('userData')
+        // }
         // console.log("-----------------------")
         // localStorage.clear();
         this.auth.login('/auth/login',this.userData).subscribe({
