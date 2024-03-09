@@ -4,14 +4,37 @@ import { Customer } from './entity/Customer';
 import { Repository } from 'typeorm';
 import { CustomerType } from './customer-type.enum';
 import { CustomerCatagory } from './customer-catagory.enum';
+import { CreateCustomerDto } from './dto/create-customer.dto';
+import { Showroom } from '../showroom/entity/Showroom';
+import { privateDecrypt } from 'crypto';
 
 @Injectable()
 export class CustomerService {
     constructor (
         @InjectRepository(Customer)
-        private customerRepository: Repository<Customer>
+        private customerRepository: Repository<Customer>,
+        @InjectRepository(Showroom)
+        private showroomRepository: Repository<Showroom>
     ){}
 
+    async addCustomer(createCustomerDto:CreateCustomerDto){
+        let catagories = [CustomerCatagory.AGENT, CustomerCatagory.CUSTOMER, CustomerCatagory.DEALERSHIP];
+        const { address, category, city, email, name, phoneNo, province, cnic, showroomId } = createCustomerDto;
+        const customer = new Customer();
+        customer.address = address;
+        customer.city = city;
+        customer.cnic = cnic;
+        customer.email = email;
+        customer.name = name;
+        customer.province = province;
+        customer.phone_number = phoneNo;
+        customer.showroom = await this.showroomRepository.findOneBy({showroom_id: showroomId});
+        for(let i=0; i<catagories.length;i++){
+        if(category == catagories[i])
+        customer.catagory = catagories[i];
+        }
+        return await this.customerRepository.save(customer);
+    }
     async getCustomer(showroomId: number, CustomerCatagory:CustomerCatagory):  Promise<Customer[]>{
         return await this.customerRepository.findBy({showroom:{showroom_id:showroomId}, catagory:CustomerCatagory});
     }

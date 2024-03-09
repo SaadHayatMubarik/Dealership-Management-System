@@ -23,11 +23,12 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
 
     name:'',
     category:'',
-    phone_no:0,
+    phoneNo : '',
     email:'',
     province:'',
-    City:'',
+    city:'',
     address:'',
+    cnic: '',
     showroomId: localStorage.getItem('Showroom Id'),
     
   };
@@ -35,9 +36,10 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
   customerId: string = '';
   selectedTabIndex: number = 0;
   sellerCategory: string[] = ["DEALERSHIP", "AGENT", "CUSTOMER"];
-  selectedSellerCategory: string = '';
+  selectedCategory: string = '';
 
   columns: DataTableColumn[] = [];
+  dealershipColumns: DataTableColumn[]= [];
   actions: IDataTableAction[] = [];
   data: IObject[] = [];
 
@@ -52,6 +54,7 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
    this.getCustomer();
 
    this.columns=[
+    
     {
       field: 'name',
       fieldTitle: 'Name',
@@ -64,6 +67,39 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
       field: 'cnic',
       fieldTitle: 'Cnic'
     },
+    {
+      field: 'phone_number',
+      fieldTitle: 'Phone Number'
+    },
+    {
+      field: 'email',
+      fieldTitle: 'Email'
+
+    },
+    {
+      field: 'address',
+      fieldTitle: 'Address'
+    },
+    {
+      field: 'city',
+      fieldTitle: 'City'
+
+    }
+   ];
+   this.dealershipColumns=[
+    
+    {
+      field: 'name',
+      fieldTitle: 'Name',
+    },
+    {
+      field: 'type',
+      fieldTitle: 'Type',
+    },
+    // {
+    //   field: 'cnic',
+    //   fieldTitle: 'Cnic'
+    // },
     {
       field: 'phone_number',
       fieldTitle: 'Phone Number'
@@ -108,25 +144,25 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
     this.getCustomer();
   }
 
-  // onSubmit(){
-  //   {
-  //     this.apiService
-  //       .post('/investor/addInvestor', this.investor)
-  //       .subscribe({
-  //         next: (response) => {
-  //           console.log(this.investor);
-  //           console.log(response);
-  //           this.closeModal();
-  //           this.toast.showSuccess('New User.');
-  //           this.getinvestors();
-  //         },
-  //         error: () => {
-  //           this.toast.showError();
-  //           console.log(this.investor);
-  //         },
-  //       });
-  //   }
-  // }
+  onSubmit(){
+    {
+      this.apiService
+        .post('/customer/addCustomer', this.customer)
+        .subscribe({
+          next: (response) => {
+            // console.log(this.investor);
+            console.log(response);
+            this.closeModal();
+            this.toast.showSuccess('New User.');
+            this.getCustomer();
+          },
+          error: () => {
+            this.toast.showError();
+            // console.log(this.investor);
+          },
+        });
+    }
+  }
 
   getCustomer(){
     console.log(this.customer.category);

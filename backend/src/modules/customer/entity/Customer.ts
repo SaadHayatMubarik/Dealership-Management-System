@@ -18,13 +18,13 @@ export class Customer {
     @Column()
     type: CustomerType;
 
-    @Column()
+    @Column({ unique:true })
     cnic: string;
 
-    @Column()
+    @Column({ unique:true })
     phone_number: string;
 
-    @Column()
+    @Column({ unique:true })
     email: string;
 
     @Column()

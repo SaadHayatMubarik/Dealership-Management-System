@@ -32,12 +32,13 @@ showroomId: any;
 
 export interface ISeller{
     category:string;
-    name: String;
-    phone_no:number;
+    name: string;
+    phoneNo: string;
     email:string;
     province:string;
-    City:string;
+    city:string;
     address:string;
+    cnic: string;
     showroomId:any;
 
 }

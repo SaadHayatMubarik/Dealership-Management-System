@@ -21,7 +21,7 @@
 
   <p-tabView (onChange)="onTabChange($event)" [(activeIndex)]="selectedTabIndex">   
     <p-tabPanel header="Dealership">
-      <app-datatable [data]="data" [cols]="columns" [globalFilterFields]="[]" [actions]="actions"></app-datatable>
+      <app-datatable [data]="data" [cols]="dealershipColumns" [globalFilterFields]="[]" [actions]="actions"></app-datatable>
     </p-tabPanel>
     <p-tabPanel header="Agent">
       <app-datatable [data]="data" [cols]="columns" [globalFilterFields]="[]" [actions]="actions"></app-datatable>
@@ -33,7 +33,7 @@
   </p-tabView>
 
   <p-sidebar [(visible)]="modal" position="right" [style]="{width: '55rem'}" >
-    <form  #Seller="ngForm"> 
+    <form  (ngSubmit)="onSubmit()" #Seller="ngForm"> 
         <div class="sidebar-main">
           <div class="sidebar-header">
             <div class="sh-title">
@@ -57,7 +57,21 @@
                      name="seller_category"
                    
                      ></p-dropdown>
-                    <label for="float-label">Seller Category</label>
+                    <label for="float-label">Customer Category</label>
+                  </span>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="p-field">
+                  <span class="p-float-label">
+                    <p-dropdown
+                     [options]="sellerCategory" 
+                     class="p-inputtext-lg" 
+                     placeholder="Select Type"
+                     name="seller_category"
+                   
+                     ></p-dropdown>
+                    <label for="float-label">Customer Type</label>
                   </span>
                   </div>
                 </div>
@@ -67,17 +81,18 @@
                       <input 
                       class="p-inputtext-lg"
                        pInputText 
-                       name="category"
+                       name="type"
                        required
-                       [(ngModel)]="selectedSellerCategory"
+                       [(ngModel)]="customer.category"
                     
                        />
                        <label htmlFor="customerName">
-                        {{ selectedSellerCategory === 'AGENT' ? 'Agent' : selectedSellerCategory === 'CUSTOMER' ? 'Customer' : selectedSellerCategory === 'DEALERSHIP' ? 'Dealership' : '' }} Name
+                        {{ selectedCategory === 'AGENT' ? 'Agent' : selectedCategory === 'CUSTOMER' ? 'Customer' : selectedCategory === 'DEALERSHIP' ? 'Dealership' : '' }} Name
                       </label>
                   </span>
                   </div>
                 </div>
+              </div>
                 <div class="col-4">
                   <div class="p-field">
                     <span class="p-float-label">
@@ -85,13 +100,13 @@
                       pInputText
                       name="name"
                       required
-                    
+                      [(ngModel)]="customer.name"
                       />
                       <label htmlFor="number">Contact Number</label>
                   </span>
                   </div>
                 </div>
-              </div>
+              
               <br>
               <div class="row-form grid">
                 <div class="col-4">
@@ -101,7 +116,7 @@
                       required
                        pInputText
                        name="number"
-                    
+                       [(ngModel)]="customer.phoneNo"
                        />
                       <label htmlFor="email">Email</label>
                   </span>
@@ -113,7 +128,7 @@
                       <input class="p-inputtext-lg" 
                       pInputText
                       name="email"
-                    
+                      [(ngModel)]="customer.email"
                       />
                       <label htmlFor="province">Province</label>
                     </span>
@@ -125,7 +140,7 @@
                       <input class="p-inputtext-lg" 
                       pInputText
                       name="province"
-                   
+                      [(ngModel)]="customer.province"
                       />
                       <label for="float-label">City</label>
                   </span>
@@ -139,19 +154,20 @@
                     <span class="p-float-label">
                       <input class="p-inputtext-lg" 
                       pInputText
-                      name="engineNo"
+                      name="Address"
+                      [(ngModel)]="customer.address"
                       />
                       <label for="float-label">Address</label>
                   </span>
                   </div>
                 </div>
                 <div class="col-4">
-                  <div class="p-field" *ngIf="selectedSellerCategory === 'AGENT' || selectedSellerCategory === 'CUSTOMER'">
+                  <div class="p-field" *ngIf="selectedCategory === 'AGENT' || selectedCategory === 'CUSTOMER'">
                     <span class="p-float-label">
                       <input class="p-inputtext-lg" 
                       pInputText
-                      name="engineNo"
-                     
+                      name="CNIC"
+                      [(ngModel)]="customer.cnic"
                       />
                       <label for="float-label">CNIC</label>
                   </span>
