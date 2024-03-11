@@ -33,11 +33,9 @@
   </p-tabView>
 
   <p-sidebar [(visible)]="modal" position="right" [style]="{width: '55rem'}" >
-<<<<<<< HEAD
+
     <form  (ngSubmit)="onSubmit()" #Seller="ngForm"> 
-=======
-    <form  (ngSubmit)="onSubmit()" #customer="ngForm"> 
->>>>>>> 19e34e7fe71b01eca3c2c9f9ef2825fd526cf750
+
         <div class="sidebar-main">
           <div class="sidebar-header">
             <div class="sh-title">
@@ -56,43 +54,21 @@
                   <div class="p-field">
                   <span class="p-float-label">
                     <p-dropdown
-<<<<<<< HEAD
                     [required]="true"
-                     [options]="sellerCategory" 
-=======
                      [options]="category" 
                      class="p-inputtext-lg" 
                      placeholder="Select a Vehicle Type"
-                     name="seller_category"
-
-                     ></p-dropdown>
-                    <label for="float-label">Customer Category</label>
-                  </span>
-                  </div>
-                </div>
-                <div class="col-4">
-                  <div class="p-field">
-                  <span class="p-float-label">
-                    <p-dropdown
-                     [options]="customerType" 
->>>>>>> 19e34e7fe71b01eca3c2c9f9ef2825fd526cf750
-                     class="p-inputtext-lg" 
-                     placeholder="Select a Vehicle Type"
                      name="category"
-                     [(ngModel)]="selectedSellerCategory"
+                     [(ngModel)]="customer.category"
                      #catergory = "ngModel"
-                     ></p-dropdown>
-<<<<<<< HEAD
-                     
+                     ></p-dropdown>       
                      <div *ngIf="catergory.invalid && (catergory.dirty || catergory.touched)" class="p-error">
                       <span *ngIf="catergory.errors?.['required']">
                         Category is required.</span>    
                     </div>
 
                     <label for="float-label">Seller Category</label>
-=======
-                    <label for="float-label">Customer Type</label>
->>>>>>> 19e34e7fe71b01eca3c2c9f9ef2825fd526cf750
+
                   </span>
                   </div>
                 </div>
@@ -103,16 +79,12 @@
                       <input 
                       class="p-inputtext-lg"
                        pInputText 
-<<<<<<< HEAD
                        name="name"
                        required
                        [(ngModel)]="customer.name"
                        #name = "ngModel"
                       pattern="^[a-zA-Z]+(?:\s+[a-zA-Z]+)*$"
-=======
-                       name="type"
-                       required
->>>>>>> 19e34e7fe71b01eca3c2c9f9ef2825fd526cf750
+
                        />
 
                        <div *ngIf="name.invalid && (name.dirty || name.touched)" class="p-error">
@@ -129,12 +101,6 @@
                   </span>
                   </div>
                 </div>
-<<<<<<< HEAD
-
-=======
-              </div>
-              <div class="row-form grid">
->>>>>>> 19e34e7fe71b01eca3c2c9f9ef2825fd526cf750
                 <div class="col-4">
                   <div class="p-field">
                     <span class="p-float-label">
@@ -142,15 +108,12 @@
                       pInputText
                       name="phone_no"
                       required
-<<<<<<< HEAD
-                      [(ngModel)]="customer.phone_no"
+                      [(ngModel)]="customer.phoneNo"
                       #phone_no = "ngModel"
                       pattern="^(03\d{9}|021\d{8})$"
                       minlength="11"
                       maxlength="11"
-=======
 
->>>>>>> 19e34e7fe71b01eca3c2c9f9ef2825fd526cf750
                       />
 
                       <div *ngIf="phone_no.invalid && (phone_no.dirty || phone_no.touched)" class="p-error">
@@ -165,14 +128,10 @@
                   </span>
                   </div>
                 </div>
+                </div>
               
               <br>
-<<<<<<< HEAD
-
               <div class="row-form grid">
-=======
-              
->>>>>>> 19e34e7fe71b01eca3c2c9f9ef2825fd526cf750
                 <div class="col-4">
                   <div class="p-field">
                     <span class="p-float-label">
@@ -180,14 +139,9 @@
                        required
                        email
                        pInputText
-<<<<<<< HEAD
                        name="email"
                        [(ngModel)]="customer.email"
                        #email = "ngModel"
-=======
-                       name="number"
-
->>>>>>> 19e34e7fe71b01eca3c2c9f9ef2825fd526cf750
                        />
 
                        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="p-error">
@@ -202,17 +156,11 @@
                   </span>
                   </div>
                 </div>
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 19e34e7fe71b01eca3c2c9f9ef2825fd526cf750
                 <div class="col-4">
                   <div class="p-field">
                     <span class="p-float-label">
                       <input class="p-inputtext-lg" 
                       pInputText
-<<<<<<< HEAD
                       name="province"
                       [(ngModel)]="customer.province"
                       #province = "ngModel" 
@@ -232,16 +180,11 @@
                           </span>
                       </div>
 
-=======
-                      name="email"
 
-                      />
->>>>>>> 19e34e7fe71b01eca3c2c9f9ef2825fd526cf750
                       <label htmlFor="province">Province</label>
                     </span>
                   </div>
                 </div>
-<<<<<<< HEAD
 
                 <div class="col-4">
                   <div class="p-field">
@@ -249,7 +192,7 @@
                       <input class="p-inputtext-lg" 
                       pInputText
                       name="city"
-                      [(ngModel)]="customer.City"
+                      [(ngModel)]="customer.city"
                       #city = "ngModel"
                       minlength="3"
                       maxlength="40"
@@ -272,8 +215,6 @@
                   </span>
                   </div>
                 </div>
-=======
->>>>>>> 19e34e7fe71b01eca3c2c9f9ef2825fd526cf750
               </div>
               <div class="row-form grid">
                 <div class="col-4">
@@ -281,31 +222,12 @@
                     <span class="p-float-label">
                       <input class="p-inputtext-lg" 
                       pInputText
-<<<<<<< HEAD
                       name="address"
                       [(ngModel)]="customer.address"
                       #address = "ngModel"
                       pattern="^\S(?:\s*\S)*$"
                       required
-=======
-                      name="province"
 
-                      />
-                      <label for="float-label">City</label>
-                  </span>
-                  </div>
-                </div>
-              
-              <br>
-              
-                <div class="col-4">
-                  <div class="p-field">
-                    <span class="p-float-label">
-                      <input class="p-inputtext-lg" 
-                      pInputText
-                      name="Address"
-
->>>>>>> 19e34e7fe71b01eca3c2c9f9ef2825fd526cf750
                       />
 
                       <div *ngIf="address.invalid && (address.dirty || address.touched)" class="p-error">
@@ -327,16 +249,13 @@
                       <input class="p-inputtext-lg" 
                       pInputText
                       name="cnic"
-<<<<<<< HEAD
+
                       [(ngModel)]="customer.cnic"
                       #cnic = "ngModel"
                       required
                       minlength="13"
                       maxlength="13"
                       pattern="[0-9]*"
-=======
-                  
->>>>>>> 19e34e7fe71b01eca3c2c9f9ef2825fd526cf750
                       />
 
                       <div *ngIf="cnic.invalid && (cnic.dirty || cnic.touched)" class="p-error">

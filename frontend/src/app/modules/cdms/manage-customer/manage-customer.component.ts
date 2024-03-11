@@ -10,7 +10,7 @@ import {
 import { ISeller} from '../../interfaces';
 import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
-import { NgForm } from '@angular/forms';
+// import { NgForm } from '@angular/forms';
 
 import { NgForm } from '@angular/forms';
 
@@ -22,9 +22,9 @@ import { NgForm } from '@angular/forms';
 })
 export class ManageCustomerComponent extends BaseComponent implements OnInit {
 
-<<<<<<< HEAD
+
   customerId: string = '';
-=======
+
   customer: ISeller = {
     name:'',
     category:'',
@@ -37,29 +37,10 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
     showroomId: localStorage.getItem('Showroom Id'),
     
   };
-
-  // customerId: string = '';
->>>>>>> 19e34e7fe71b01eca3c2c9f9ef2825fd526cf750
   selectedTabIndex: number = 0;
   category: string[] = ["DEALERSHIP", "AGENT", "CUSTOMER"];
   customerType: string[] = ["Buyer", "Seller"];
-  selectedCategory: string = '';
-
-
-  customer: ISeller = {
-    name:'',
-    category: this.selectedSellerCategory,
-    phone_no:0,
-    email:'',
-    province:'',
-    City:'',
-    address:'',
-    cnic:'',
-    showroomId: localStorage.getItem('Showroom Id'),
-    
-  };
-
- 
+  selectedCategory: string = ''; 
   columns: DataTableColumn[] = [];
   dealershipColumns: DataTableColumn[]= [];
   actions: IDataTableAction[] = [];
@@ -168,12 +149,11 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
     this.getCustomer();
   }
 
-<<<<<<< HEAD
   onSubmit(){
     {
       if(this.SellerForm.valid) {
         this.apiService
-        .post('', this.customer)
+        .post('/customer/addCustomer', this.customer)
         .subscribe({
           next: (response) => {
             console.log(this.customer);
@@ -198,37 +178,8 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
 
   getCustomer(){
     console.log(this.customer.category);
-    this.apiService.get(`/customer/getCustomer/${this.customer.showroomId}/${this.sellerCategory[this.selectedTabIndex]}`).subscribe((data) => {
-      console.log(data);
-=======
-
-
-  onSubmit(){
-    {
-      console.log(this.customer);
-      this.apiService
-        .post('/customer/addCustomer', this.customer)
-        .subscribe({
-          next: (response) => {
-            // console.log(this.investor);
-            console.log(response);
-            this.closeModal();
-            this.toast.showSuccess('New User.');
-            this.getCustomer();
-          },
-          error: () => {
-            this.toast.showError();
-            // console.log(this.investor);
-          },
-        });
-    }
-  }
-
-  getCustomer(){
-    // console.log(this.seller.category);
     this.apiService.get(`/customer/getCustomer/${this.customer.showroomId}/${this.category[this.selectedTabIndex]}`).subscribe((data) => {
-      // console.log(data);
->>>>>>> 19e34e7fe71b01eca3c2c9f9ef2825fd526cf750
+      console.log(data);
       this.data = data;
     });
   }
