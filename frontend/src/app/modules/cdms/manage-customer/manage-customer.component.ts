@@ -12,6 +12,8 @@ import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
 import { NgForm } from '@angular/forms';
 
+import { NgForm } from '@angular/forms';
+
 
 @Component({
   selector: 'app-manage-customer',
@@ -20,6 +22,9 @@ import { NgForm } from '@angular/forms';
 })
 export class ManageCustomerComponent extends BaseComponent implements OnInit {
 
+<<<<<<< HEAD
+  customerId: string = '';
+=======
   customer: ISeller = {
     name:'',
     category:'',
@@ -34,11 +39,27 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
   };
 
   // customerId: string = '';
+>>>>>>> 19e34e7fe71b01eca3c2c9f9ef2825fd526cf750
   selectedTabIndex: number = 0;
   category: string[] = ["DEALERSHIP", "AGENT", "CUSTOMER"];
   customerType: string[] = ["Buyer", "Seller"];
   selectedCategory: string = '';
 
+
+  customer: ISeller = {
+    name:'',
+    category: this.selectedSellerCategory,
+    phone_no:0,
+    email:'',
+    province:'',
+    City:'',
+    address:'',
+    cnic:'',
+    showroomId: localStorage.getItem('Showroom Id'),
+    
+  };
+
+ 
   columns: DataTableColumn[] = [];
   dealershipColumns: DataTableColumn[]= [];
   actions: IDataTableAction[] = [];
@@ -140,11 +161,46 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
 
   }
 
+  @ViewChild('Seller') SellerForm!: NgForm;
+
   onTabChange(event: any) {
     this.selectedTabIndex = event.index;
     this.getCustomer();
   }
 
+<<<<<<< HEAD
+  onSubmit(){
+    {
+      if(this.SellerForm.valid) {
+        this.apiService
+        .post('', this.customer)
+        .subscribe({
+          next: (response) => {
+            console.log(this.customer);
+            console.log(response);
+            this.toast.showSuccess('New Customer Added.');
+            this. getCustomer();
+          },
+          error: () => {
+            this.toast.showError('Error Occured');
+            console.log(this.customer);
+          },
+        });
+      }
+
+      else{
+        this.toast.showError('Fill all the fields')
+      }
+    }
+  }
+
+
+
+  getCustomer(){
+    console.log(this.customer.category);
+    this.apiService.get(`/customer/getCustomer/${this.customer.showroomId}/${this.sellerCategory[this.selectedTabIndex]}`).subscribe((data) => {
+      console.log(data);
+=======
 
 
   onSubmit(){
@@ -172,6 +228,7 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
     // console.log(this.seller.category);
     this.apiService.get(`/customer/getCustomer/${this.customer.showroomId}/${this.category[this.selectedTabIndex]}`).subscribe((data) => {
       // console.log(data);
+>>>>>>> 19e34e7fe71b01eca3c2c9f9ef2825fd526cf750
       this.data = data;
     });
   }
