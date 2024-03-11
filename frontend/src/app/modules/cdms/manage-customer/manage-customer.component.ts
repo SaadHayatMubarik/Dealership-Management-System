@@ -10,6 +10,7 @@ import {
 import { ISeller} from '../../interfaces';
 import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
+import { NgForm } from '@angular/forms';
 
 
 @Component({
@@ -19,7 +20,7 @@ import { ToastService } from 'src/app/shared/services/toast.service';
 })
 export class ManageCustomerComponent extends BaseComponent implements OnInit {
 
-  seller: ISeller = {
+  customer: ISeller = {
     name:'',
     category:'',
     phoneNo : '',
@@ -32,9 +33,10 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
     
   };
 
-  customerId: string = '';
+  // customerId: string = '';
   selectedTabIndex: number = 0;
-  sellerCategory: string[] = ["DEALERSHIP", "AGENT", "CUSTOMER"];
+  category: string[] = ["DEALERSHIP", "AGENT", "CUSTOMER"];
+  customerType: string[] = ["Buyer", "Seller"];
   selectedCategory: string = '';
 
   columns: DataTableColumn[] = [];
@@ -130,7 +132,7 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
       label: 'Update',
       icon: 'pi pi-pencil',
       command: (event) => {
-        this.customerId = event.customer_id;
+        // this.customerId = event.customer_id;
         // this.updateSidebarVisible = true;
       },
     }
@@ -143,8 +145,11 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
     this.getCustomer();
   }
 
+
+
   onSubmit(){
     {
+      console.log(this.customer);
       this.apiService
         .post('/customer/addCustomer', this.customer)
         .subscribe({
@@ -164,9 +169,9 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
   }
 
   getCustomer(){
-    console.log(this.seller.category);
-    this.apiService.get(`/customer/getCustomer/${this.seller.showroomId}/${this.sellerCategory[this.selectedTabIndex]}`).subscribe((data) => {
-      console.log(data);
+    // console.log(this.seller.category);
+    this.apiService.get(`/customer/getCustomer/${this.customer.showroomId}/${this.category[this.selectedTabIndex]}`).subscribe((data) => {
+      // console.log(data);
       this.data = data;
     });
   }

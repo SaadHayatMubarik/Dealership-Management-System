@@ -33,11 +33,11 @@
   </p-tabView>
 
   <p-sidebar [(visible)]="modal" position="right" [style]="{width: '55rem'}" >
-    <form  (ngSubmit)="onSubmit()" #Seller="ngForm"> 
+    <form  (ngSubmit)="onSubmit()" #customer="ngForm"> 
         <div class="sidebar-main">
           <div class="sidebar-header">
             <div class="sh-title">
-              <h5 style="text-align: center;"> Seller Details</h5>
+              <h5 style="text-align: center;"> Customer Details</h5>
               <br>
             </div>
             <div class="sh-toolbar">
@@ -51,11 +51,11 @@
                   <div class="p-field">
                   <span class="p-float-label">
                     <p-dropdown
-                     [options]="sellerCategory" 
+                     [options]="category" 
                      class="p-inputtext-lg" 
                      placeholder="Select a Vehicle Type"
                      name="seller_category"
-                   
+
                      ></p-dropdown>
                     <label for="float-label">Customer Category</label>
                   </span>
@@ -65,9 +65,9 @@
                   <div class="p-field">
                   <span class="p-float-label">
                     <p-dropdown
-                     [options]="sellerCategory" 
+                     [options]="customerType" 
                      class="p-inputtext-lg" 
-                     placeholder="Select Type"
+                     placeholder="Select a Vehicle Type"
                      name="seller_category"
                    
                      ></p-dropdown>
@@ -83,8 +83,6 @@
                        pInputText 
                        name="type"
                        required
-                       [(ngModel)]="customer.category"
-                    
                        />
                        <label htmlFor="customerName">
                         {{ selectedCategory === 'AGENT' ? 'Agent' : selectedCategory === 'CUSTOMER' ? 'Customer' : selectedCategory === 'DEALERSHIP' ? 'Dealership' : '' }} Name
@@ -93,6 +91,7 @@
                   </div>
                 </div>
               </div>
+              <div class="row-form grid">
                 <div class="col-4">
                   <div class="p-field">
                     <span class="p-float-label">
@@ -100,7 +99,7 @@
                       pInputText
                       name="name"
                       required
-                      [(ngModel)]="customer.name"
+
                       />
                       <label htmlFor="number">Contact Number</label>
                   </span>
@@ -108,7 +107,7 @@
                 </div>
               
               <br>
-              <div class="row-form grid">
+              
                 <div class="col-4">
                   <div class="p-field">
                     <span class="p-float-label">
@@ -116,7 +115,7 @@
                       required
                        pInputText
                        name="number"
-                       [(ngModel)]="customer.phoneNo"
+
                        />
                       <label htmlFor="email">Email</label>
                   </span>
@@ -128,34 +127,36 @@
                       <input class="p-inputtext-lg" 
                       pInputText
                       name="email"
-                      [(ngModel)]="customer.email"
+
                       />
                       <label htmlFor="province">Province</label>
                     </span>
                   </div>
                 </div>
-                <div class="col-4">
-                  <div class="p-field">
-                    <span class="p-float-label">
-                      <input class="p-inputtext-lg" 
-                      pInputText
-                      name="province"
-                      [(ngModel)]="customer.province"
-                      />
-                      <label for="float-label">City</label>
-                  </span>
-                  </div>
-                </div>
               </div>
-              <br>
               <div class="row-form grid">
                 <div class="col-4">
                   <div class="p-field">
                     <span class="p-float-label">
                       <input class="p-inputtext-lg" 
                       pInputText
+                      name="province"
+
+                      />
+                      <label for="float-label">City</label>
+                  </span>
+                  </div>
+                </div>
+              
+              <br>
+              
+                <div class="col-4">
+                  <div class="p-field">
+                    <span class="p-float-label">
+                      <input class="p-inputtext-lg" 
+                      pInputText
                       name="Address"
-                      [(ngModel)]="customer.address"
+
                       />
                       <label for="float-label">Address</label>
                   </span>
@@ -166,8 +167,8 @@
                     <span class="p-float-label">
                       <input class="p-inputtext-lg" 
                       pInputText
-                      name="CNIC"
-                      [(ngModel)]="customer.cnic"
+                      name="cnic"
+                  
                       />
                       <label for="float-label">CNIC</label>
                   </span>

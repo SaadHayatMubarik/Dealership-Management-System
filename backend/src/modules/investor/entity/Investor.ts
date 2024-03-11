@@ -11,10 +11,10 @@ investor_id: number;
 @Column()
 investor_name:  string;
 
-@Column()
+@Column({ unique:true })
 cnic: string;
 
-@Column()
+@Column({ unique: true})
 phone: string;
 
 @Column({ default: '0' })
