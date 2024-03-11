@@ -34,6 +34,7 @@ export interface ISeller {
   province: string;
   City: string;
   address: string;
+  cnic?: string;
   showroomId: any;
 }
 

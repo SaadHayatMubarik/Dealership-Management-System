@@ -11,6 +11,8 @@ import { ISeller} from '../../interfaces';
 import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
 
+import { NgForm } from '@angular/forms';
+
 
 @Component({
   selector: 'app-manage-customer',
@@ -19,23 +21,26 @@ import { ToastService } from 'src/app/shared/services/toast.service';
 })
 export class ManageCustomerComponent extends BaseComponent implements OnInit {
 
-  seller: ISeller = {
-    name:'',
-    category:'',
-    phone_no:0,
-    email:'',
-    province:'',
-    City:'',
-    address:'',
-    showroomId: localStorage.getItem('Showroom Id'),
-    
-  };
-
   customerId: string = '';
   selectedTabIndex: number = 0;
   sellerCategory: string[] = ["DEALERSHIP", "AGENT", "CUSTOMER"];
   selectedSellerCategory: string = '';
 
+
+  customer: ISeller = {
+    name:'',
+    category: this.selectedSellerCategory,
+    phone_no:0,
+    email:'',
+    province:'',
+    City:'',
+    address:'',
+    cnic:'',
+    showroomId: localStorage.getItem('Showroom Id'),
+    
+  };
+
+ 
   columns: DataTableColumn[] = [];
   actions: IDataTableAction[] = [];
   data: IObject[] = [];
@@ -102,34 +107,43 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
 
   }
 
+  @ViewChild('Seller') SellerForm!: NgForm;
+
   onTabChange(event: any) {
     this.selectedTabIndex = event.index;
     this.getCustomer();
   }
 
-  // onSubmit(){
-  //   {
-  //     this.apiService
-  //       .post('/investor/addInvestor', this.investor)
-  //       .subscribe({
-  //         next: (response) => {
-  //           console.log(this.investor);
-  //           console.log(response);
-  //           this.closeModal();
-  //           this.toast.showSuccess('New User.');
-  //           this.getinvestors();
-  //         },
-  //         error: () => {
-  //           this.toast.showError();
-  //           console.log(this.investor);
-  //         },
-  //       });
-  //   }
-  // }
+  onSubmit(){
+    {
+      if(this.SellerForm.valid) {
+        this.apiService
+        .post('', this.customer)
+        .subscribe({
+          next: (response) => {
+            console.log(this.customer);
+            console.log(response);
+            this.toast.showSuccess('New Customer Added.');
+            this. getCustomer();
+          },
+          error: () => {
+            this.toast.showError('Error Occured');
+            console.log(this.customer);
+          },
+        });
+      }
+
+      else{
+        this.toast.showError('Fill all the fields')
+      }
+    }
+  }
+
+
 
   getCustomer(){
-    console.log(this.seller.category);
-    this.apiService.get(`/customer/getCustomer/${this.seller.showroomId}/${this.sellerCategory[this.selectedTabIndex]}`).subscribe((data) => {
+    console.log(this.customer.category);
+    this.apiService.get(`/customer/getCustomer/${this.customer.showroomId}/${this.sellerCategory[this.selectedTabIndex]}`).subscribe((data) => {
       console.log(data);
       this.data = data;
     });
