@@ -85,7 +85,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   inventoryId : number = 0;
   selectedTabIndex: number = 0;
   sellerCategory: string[] = ["CUSTOMER", "AGENT", "DEALERSHIP"];
-  investor_name: string[] = ["Salman", "Haris"];
+  // investor_name: string[] = ["Salman", "Haris"];
   selectedSellerCategory: string = '';
   investorName: string = '';
   selectedOption: string = '';

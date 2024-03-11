@@ -26,6 +26,7 @@ export interface IInvestor {
   showroomId: any;
 }
 
+<<<<<<< HEAD
 export interface ISeller {
   category: string;
   name: String;
@@ -36,6 +37,18 @@ export interface ISeller {
   address: string;
   cnic?: string;
   showroomId: any;
+=======
+export interface ISeller{
+    category:string;
+    name: string;
+    phoneNo: string;
+    email:string;
+    province:string;
+    city:string;
+    address:string;
+    cnic: string;
+    showroomId:any;
+>>>>>>> 19e34e7fe71b01eca3c2c9f9ef2825fd526cf750
 }
 
 export interface Ilogin {

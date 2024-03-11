@@ -10,6 +10,7 @@ import {
 import { ISeller} from '../../interfaces';
 import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
+import { NgForm } from '@angular/forms';
 
 import { NgForm } from '@angular/forms';
 
@@ -21,10 +22,28 @@ import { NgForm } from '@angular/forms';
 })
 export class ManageCustomerComponent extends BaseComponent implements OnInit {
 
+<<<<<<< HEAD
   customerId: string = '';
+=======
+  customer: ISeller = {
+    name:'',
+    category:'',
+    phoneNo : '',
+    email:'',
+    province:'',
+    city:'',
+    address:'',
+    cnic: '',
+    showroomId: localStorage.getItem('Showroom Id'),
+    
+  };
+
+  // customerId: string = '';
+>>>>>>> 19e34e7fe71b01eca3c2c9f9ef2825fd526cf750
   selectedTabIndex: number = 0;
-  sellerCategory: string[] = ["DEALERSHIP", "AGENT", "CUSTOMER"];
-  selectedSellerCategory: string = '';
+  category: string[] = ["DEALERSHIP", "AGENT", "CUSTOMER"];
+  customerType: string[] = ["Buyer", "Seller"];
+  selectedCategory: string = '';
 
 
   customer: ISeller = {
@@ -42,6 +61,7 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
 
  
   columns: DataTableColumn[] = [];
+  dealershipColumns: DataTableColumn[]= [];
   actions: IDataTableAction[] = [];
   data: IObject[] = [];
 
@@ -56,6 +76,7 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
    this.getCustomer();
 
    this.columns=[
+    
     {
       field: 'name',
       fieldTitle: 'Name',
@@ -87,6 +108,39 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
 
     }
    ];
+   this.dealershipColumns=[
+    
+    {
+      field: 'name',
+      fieldTitle: 'Name',
+    },
+    {
+      field: 'type',
+      fieldTitle: 'Type',
+    },
+    // {
+    //   field: 'cnic',
+    //   fieldTitle: 'Cnic'
+    // },
+    {
+      field: 'phone_number',
+      fieldTitle: 'Phone Number'
+    },
+    {
+      field: 'email',
+      fieldTitle: 'Email'
+
+    },
+    {
+      field: 'address',
+      fieldTitle: 'Address'
+    },
+    {
+      field: 'city',
+      fieldTitle: 'City'
+
+    }
+   ];
    this.actions = [
     {
       label: 'Delete',
@@ -99,7 +153,7 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
       label: 'Update',
       icon: 'pi pi-pencil',
       command: (event) => {
-        this.customerId = event.customer_id;
+        // this.customerId = event.customer_id;
         // this.updateSidebarVisible = true;
       },
     }
@@ -114,6 +168,7 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
     this.getCustomer();
   }
 
+<<<<<<< HEAD
   onSubmit(){
     {
       if(this.SellerForm.valid) {
@@ -145,6 +200,35 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
     console.log(this.customer.category);
     this.apiService.get(`/customer/getCustomer/${this.customer.showroomId}/${this.sellerCategory[this.selectedTabIndex]}`).subscribe((data) => {
       console.log(data);
+=======
+
+
+  onSubmit(){
+    {
+      console.log(this.customer);
+      this.apiService
+        .post('/customer/addCustomer', this.customer)
+        .subscribe({
+          next: (response) => {
+            // console.log(this.investor);
+            console.log(response);
+            this.closeModal();
+            this.toast.showSuccess('New User.');
+            this.getCustomer();
+          },
+          error: () => {
+            this.toast.showError();
+            // console.log(this.investor);
+          },
+        });
+    }
+  }
+
+  getCustomer(){
+    // console.log(this.seller.category);
+    this.apiService.get(`/customer/getCustomer/${this.customer.showroomId}/${this.category[this.selectedTabIndex]}`).subscribe((data) => {
+      // console.log(data);
+>>>>>>> 19e34e7fe71b01eca3c2c9f9ef2825fd526cf750
       this.data = data;
     });
   }
