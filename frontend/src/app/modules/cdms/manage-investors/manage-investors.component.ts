@@ -101,7 +101,8 @@ validateAlphabeticInput(event: KeyboardEvent) {
 }
 
 onSubmit(){
-  if(this.investorForm.valid){
+  console.log(this.investor)
+  // if(this.investorForm.valid){
     this.apiService
     .post('/investor/addInvestor', this.investor)
     .subscribe({
@@ -118,7 +119,7 @@ onSubmit(){
       },
     });
 
-  }
+  // }
 }
 
 getinvestors(){
