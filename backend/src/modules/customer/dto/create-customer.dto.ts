@@ -1,11 +1,16 @@
 import { IsNotEmpty } from "class-validator";
+import { CustomerType } from "../customer-type.enum";
+import { CustomerCatagory } from "../customer-catagory.enum";
 
 export class CreateCustomerDto{
     @IsNotEmpty()
     name: string;
 
     @IsNotEmpty()
-    category: string;
+    category: CustomerCatagory;
+
+    @IsNotEmpty()
+    type: CustomerType;
 
     @IsNotEmpty()
     phoneNo: string;

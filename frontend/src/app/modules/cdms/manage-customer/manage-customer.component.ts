@@ -10,9 +10,10 @@ import {
 import { ISeller} from '../../interfaces';
 import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
+import { NgForm } from '@angular/forms';
 // import { NgForm } from '@angular/forms';
 
-import { NgForm } from '@angular/forms';
+
 
 
 @Component({
@@ -28,6 +29,7 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
   customer: ISeller = {
     name:'',
     category:'',
+    type: '', 
     phoneNo : '',
     email:'',
     province:'',
@@ -39,8 +41,9 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
   };
   selectedTabIndex: number = 0;
   category: string[] = ["DEALERSHIP", "AGENT", "CUSTOMER"];
-  customerType: string[] = ["Buyer", "Seller"];
+  customerType: string[] = ["BUYER", "SELLER"];
   selectedCategory: string = ''; 
+  selectedtype: string = '';
   columns: DataTableColumn[] = [];
   dealershipColumns: DataTableColumn[]= [];
   actions: IDataTableAction[] = [];
@@ -148,9 +151,9 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
     this.selectedTabIndex = event.index;
     this.getCustomer();
   }
-
   onSubmit(){
     {
+      console.log(this.customer)
       if(this.SellerForm.valid) {
         this.apiService
         .post('/customer/addCustomer', this.customer)

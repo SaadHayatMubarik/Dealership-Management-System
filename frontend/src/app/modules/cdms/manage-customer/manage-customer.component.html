@@ -49,7 +49,6 @@
           <div class="sidebar-content">
             <div class="card-grey padding">
               <div class="row-form grid" >
-
                 <div class="col-4">
                   <div class="p-field">
                   <span class="p-float-label">
@@ -106,9 +105,10 @@
                     <span class="p-float-label">
                       <input class="p-inputtext-lg" 
                       pInputText
-                      name="phone_no"
+                      name="phoneNo"
                       required
                       [(ngModel)]="customer.phoneNo"
+
                       #phone_no = "ngModel"
                       pattern="^(03\d{9}|021\d{8})$"
                       minlength="11"
@@ -161,6 +161,7 @@
                     <span class="p-float-label">
                       <input class="p-inputtext-lg" 
                       pInputText
+                      required
                       name="province"
                       [(ngModel)]="customer.province"
                       #province = "ngModel" 
@@ -176,7 +177,7 @@
                             Exceeding length.</span>  
                             <br>
                             <span *ngIf="province.errors?.['minlength']"> 
-                            City Name too short.
+                            Province Name too short.
                           </span>
                       </div>
 
@@ -185,7 +186,6 @@
                     </span>
                   </div>
                 </div>
-
                 <div class="col-4">
                   <div class="p-field">
                     <span class="p-float-label">
@@ -197,6 +197,7 @@
                       minlength="3"
                       maxlength="40"
                       pattern="^\S(?:\s*\S)*$"
+                      required
                       />
 
                       <div *ngIf="city.invalid && (city.dirty || city.touched)" class="p-error">
@@ -216,18 +217,21 @@
                   </div>
                 </div>
               </div>
+              
+              <br>
+             
               <div class="row-form grid">
                 <div class="col-4">
                   <div class="p-field">
                     <span class="p-float-label">
                       <input class="p-inputtext-lg" 
                       pInputText
+                      required
                       name="address"
                       [(ngModel)]="customer.address"
                       #address = "ngModel"
                       pattern="^\S(?:\s*\S)*$"
                       required
-
                       />
 
                       <div *ngIf="address.invalid && (address.dirty || address.touched)" class="p-error">
@@ -243,13 +247,37 @@
                   </span>
                   </div>
                 </div>
+
+                <div class="col-4">
+                  <div class="p-field">
+                  <span class="p-float-label">
+                    <p-dropdown
+                    [required]="true"
+                     [options]="customerType" 
+                     class="p-inputtext-lg" 
+                     name="customer_type"
+                     [(ngModel)]="customer.type"
+                     #type = "ngModel"
+                     ></p-dropdown>
+
+                     <div *ngIf="type.invalid && (type.dirty || type.touched)" class="p-error">
+                      <span *ngIf="type.errors?.['required']">
+                        Customer Type is required.</span>    
+                    </div>
+
+                    <label for="float-label">Seller Category</label>
+
+                  </span>
+                  </div>
+                </div>
+
+
                 <div class="col-4">
                   <div class="p-field" *ngIf="selectedCategory === 'AGENT' || selectedCategory === 'CUSTOMER'">
                     <span class="p-float-label">
                       <input class="p-inputtext-lg" 
                       pInputText
                       name="cnic"
-
                       [(ngModel)]="customer.cnic"
                       #cnic = "ngModel"
                       required
@@ -271,12 +299,14 @@
                   </span>
                   </div>
                 </div>
+
+                
               </div>
            
               <br>
             
               </div>
-            </div>
+          
             <div class="sidebar-footer flex justify-content-end">
               <app-button
               type="submit"
@@ -284,7 +314,8 @@
                styleClass="p-button-sm p-button-rounded" 
                ></app-button>
             </div>
-            </form>
+          </div>
+    </form>
   </p-sidebar>  
           
           

@@ -29,6 +29,7 @@ export interface IInvestor {
 
 export interface ISeller{
     category:string;
+    type: string;
     name: string;
     phoneNo: string;
     email:string;
@@ -37,8 +38,9 @@ export interface ISeller{
     address:string;
     cnic: string;
     showroomId:any;
-
 }
+
+
 
 export interface Ilogin {
   username: string;

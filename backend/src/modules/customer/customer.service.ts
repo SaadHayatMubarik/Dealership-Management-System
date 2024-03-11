@@ -19,7 +19,8 @@ export class CustomerService {
 
     async addCustomer(createCustomerDto:CreateCustomerDto){
         let catagories = [CustomerCatagory.AGENT, CustomerCatagory.CUSTOMER, CustomerCatagory.DEALERSHIP];
-        const { address, category, city, email, name, phoneNo, province, cnic, showroomId } = createCustomerDto;
+        let types = [CustomerType.BUYER, CustomerType.SELLER];
+        const { address, category, city, email, name, phoneNo, province, cnic, showroomId,type } = createCustomerDto;
         const customer = new Customer();
         customer.address = address;
         customer.city = city;
@@ -28,6 +29,10 @@ export class CustomerService {
         customer.name = name;
         customer.province = province;
         customer.phone_number = phoneNo;
+        for(let i=0; i<catagories.length;i++){
+        if(type == types[i])
+        customer.type = types[i]
+        }
         customer.showroom = await this.showroomRepository.findOneBy({showroom_id: showroomId});
         for(let i=0; i<catagories.length;i++){
         if(category == catagories[i])
