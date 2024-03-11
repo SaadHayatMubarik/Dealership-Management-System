@@ -12,7 +12,7 @@ import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
 import { NgForm } from '@angular/forms';
 
-import { NgForm } from '@angular/forms';
+
 
 
 @Component({
@@ -22,28 +22,11 @@ import { NgForm } from '@angular/forms';
 })
 export class ManageCustomerComponent extends BaseComponent implements OnInit {
 
-<<<<<<< HEAD
-  customerId: string = '';
-=======
-  customer: ISeller = {
-    name:'',
-    category:'',
-    phoneNo : '',
-    email:'',
-    province:'',
-    city:'',
-    address:'',
-    cnic: '',
-    showroomId: localStorage.getItem('Showroom Id'),
-    
-  };
 
-  // customerId: string = '';
->>>>>>> 19e34e7fe71b01eca3c2c9f9ef2825fd526cf750
   selectedTabIndex: number = 0;
   category: string[] = ["DEALERSHIP", "AGENT", "CUSTOMER"];
   customerType: string[] = ["Buyer", "Seller"];
-  selectedCategory: string = '';
+  selectedSellerCategory: string = '';
 
 
   customer: ISeller = {
@@ -52,9 +35,10 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
     phone_no:0,
     email:'',
     province:'',
-    City:'',
+    city:'',
     address:'',
     cnic:'',
+    customer_type:'',
     showroomId: localStorage.getItem('Showroom Id'),
     
   };
@@ -168,7 +152,7 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
     this.getCustomer();
   }
 
-<<<<<<< HEAD
+
   onSubmit(){
     {
       if(this.SellerForm.valid) {
@@ -198,37 +182,8 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
 
   getCustomer(){
     console.log(this.customer.category);
-    this.apiService.get(`/customer/getCustomer/${this.customer.showroomId}/${this.sellerCategory[this.selectedTabIndex]}`).subscribe((data) => {
+    this.apiService.get(`/customer/getCustomer/${this.customer.showroomId}/${this.selectedSellerCategory[this.selectedTabIndex]}`).subscribe((data) => {
       console.log(data);
-=======
-
-
-  onSubmit(){
-    {
-      console.log(this.customer);
-      this.apiService
-        .post('/customer/addCustomer', this.customer)
-        .subscribe({
-          next: (response) => {
-            // console.log(this.investor);
-            console.log(response);
-            this.closeModal();
-            this.toast.showSuccess('New User.');
-            this.getCustomer();
-          },
-          error: () => {
-            this.toast.showError();
-            // console.log(this.investor);
-          },
-        });
-    }
-  }
-
-  getCustomer(){
-    // console.log(this.seller.category);
-    this.apiService.get(`/customer/getCustomer/${this.customer.showroomId}/${this.category[this.selectedTabIndex]}`).subscribe((data) => {
-      // console.log(data);
->>>>>>> 19e34e7fe71b01eca3c2c9f9ef2825fd526cf750
       this.data = data;
     });
   }

@@ -26,30 +26,21 @@ export interface IInvestor {
   showroomId: any;
 }
 
-<<<<<<< HEAD
+
 export interface ISeller {
   category: string;
   name: String;
   phone_no: number;
   email: string;
   province: string;
-  City: string;
+  city: string;
   address: string;
   cnic?: string;
+  customer_type:string;
   showroomId: any;
-=======
-export interface ISeller{
-    category:string;
-    name: string;
-    phoneNo: string;
-    email:string;
-    province:string;
-    city:string;
-    address:string;
-    cnic: string;
-    showroomId:any;
->>>>>>> 19e34e7fe71b01eca3c2c9f9ef2825fd526cf750
 }
+
+
 
 export interface Ilogin {
   username: string;
