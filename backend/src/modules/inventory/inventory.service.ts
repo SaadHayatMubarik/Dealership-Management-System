@@ -59,7 +59,7 @@ export class InventoryService {
         customer.name = customerName;
         customer.type = CustomerType.SELLER;
 // >>>>>>> 369659bcb1e74e283bcdf50739feaf63c2d2346b
-        customer.phone_number = contactNo;
+        customer.phoneNo = contactNo;
         customer.email = customerEmail;
         customer.province = province;
         customer.city = city;

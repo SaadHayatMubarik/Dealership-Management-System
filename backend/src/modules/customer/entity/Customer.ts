@@ -22,7 +22,7 @@ export class Customer {
     cnic: string;
 
     @Column({ unique:true })
-    phone_number: string;
+    phoneNo: string;
 
     @Column({ unique:true })
     email: string;
