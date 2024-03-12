@@ -369,5 +369,29 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   }
 
 
+  //investors logic
+
+
+  percentageInvested: number = 0; // Percentage invested by the investor
+  amountInvested: number = 0; // Amount invested by the investor
+  totalPercentageInvested: number = 0; // Total percentage invested
+  remainingPercentage: number = 100; // Remaining percentage
+
+ calculateInvestment() {
+    // Calculate amount invested
+    console.log(this.percentageInvested);
+    this.amountInvested = (this.percentageInvested / 100) * this.vehicleInventory.costPrice;
+    this.calculateTotalPercentage();
+    
+  }
+
+  calculateTotalPercentage() {
+    // Calculate total percentage invested
+    this.totalPercentageInvested = this.percentageInvested;
+    this.remainingPercentage = 100 - this.totalPercentageInvested;
+  }
+
+  
+      
 
 }
