@@ -17,7 +17,8 @@ export interface IUser {
   showroomId: any;
 }
 
-export interface IInvestor {
+
+export interface IInvestor  {
   investorName: string;
   cnic: string;
   phoneNo: string;
