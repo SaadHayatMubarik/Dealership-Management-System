@@ -14,7 +14,7 @@ import {
   IVehicleTypeAttributeDto,
 } from '../../interfaces/inventory';
 
-import { IInvestor } from '../../interfaces';
+import { IInvestor,  ISeller } from '../../interfaces';
 import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
 
@@ -49,17 +49,10 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
     value:[],
     attributeValueId:[],
     stockAttributeValue: [],
-    // customerCategory: '',
-    // customerName: '',
-    // contactNo: '',
-    // customerEmail: '',
-    // province: '',
-    // city: '',
-    // address: '',
-    // cnic: '',
-    // investor: [],
-    // investmentPercentage: []
+ 
   };
+
+
 
 
   investor: IInvestor=
@@ -78,6 +71,8 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   vehicleTypes: any[] = []; //to populate dropdown of vehicle type
   investors: any[] = []; // To store list of Investors for whom inventory is added
   customers: any[] = []  ;//To store list of Customers for whom  inventory is added
+  customersDetails: any; //To store individual customer details
+  customerType: string = 'SELLER'
   status: string[] = ['AVAILABLE', 'SOLD', 'ON ORDER']; //to populate status dropdown
   sliderValue: number = 0;
   investorId: any; //saving investor id
@@ -86,7 +81,9 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   inventoryId : number = 0;
   selectedTabIndex: number = 0;
   sellerCategory: string[] = ["CUSTOMER", "AGENT", "DEALERSHIP"];
-  selectedSellerCategory: string = '';
+  selectedCategory: string = '';
+  selectedCustomer: any = null;  
+  sellerId: number = 0;
   investorName: string = '';
   selectedOption: string = '';
   investorForms: any[] = [];
@@ -107,7 +104,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
     this.onTabChange({ index: this.selectedTabIndex });
     this.getVehicleTypes();
     this.getInvestors();
-    // this.getCustomers();
+    // this.getCustomersByType();
     // this.getInventory();
     // this.vehicleTypes = this.apiService.getVehicleTypes();
     // this.onVehicleTypeSelected();
@@ -193,17 +190,54 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
         })
     }
 
-  //   getCustomers() {
-  //     this.apiService
-  //     .get(`/investor/getInvestor/${this.vehicleInventory.showroomId}`)
-  //     .subscribe({
-  //       next: (response: IObject[]) => {
-  //         this.investors = response;
-  //       },
-  //       complete: () => {
-  //       }
-  //     })
-  // }
+    getCustomersByType() {
+     
+      this.apiService
+      .get(`/customer/getCustomer/${this.vehicleInventory.showroomId}/${this.selectedCategory}/${this.customerType}`)
+      .subscribe({
+        next: (response) => {
+          console.log(response);
+          this.customers = response;
+         
+        },
+        complete: () => {
+        }
+      })
+  }
+
+  onCustomerSelectionChange(): void {
+    if (this.selectedCustomer) {
+        // Assuming the customer object has an 'id' property
+
+        this.sellerId = this.selectedCustomer.customer_id;
+        console.log(this.sellerId);
+
+    }
+    this.getCustomersById();  
+}
+
+  phone_no : string = '' ;
+  email : string = '' ;
+  city : string = '' ;
+  address : string = '' ;
+
+  getCustomersById(){
+    this.apiService
+    .get(`/customer/getCustomerDetails/${this.sellerId}`)
+    .subscribe({
+      next: (response: IObject[]) => {
+        console.log(response);
+        this.customersDetails = response;
+        this.phone_no = this.customersDetails.phone_number;
+        this.email = this.customersDetails.email;
+        this.city = this.customersDetails.city;
+        this.address = this.customersDetails.address;
+      },
+      error: () => {
+        this.toast.showError('Server Error!');
+      }
+    })
+  }
 
 
 
