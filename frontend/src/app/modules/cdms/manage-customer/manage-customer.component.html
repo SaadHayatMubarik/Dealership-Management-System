@@ -66,7 +66,7 @@
                         Category is required.</span>    
                     </div>
 
-                    <label for="float-label">Seller Category</label>
+                    <label for="float-label">Customer Category</label>
 
                   </span>
                   </div>
@@ -273,7 +273,7 @@
 
 
                 <div class="col-4">
-                  <div class="p-field" *ngIf="selectedCategory === 'AGENT' || selectedCategory === 'CUSTOMER'">
+                  <div class="p-field" *ngIf="customer.category === 'AGENT' || customer.category === 'CUSTOMER'">
                     <span class="p-float-label">
                       <input class="p-inputtext-lg" 
                       pInputText

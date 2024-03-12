@@ -159,9 +159,10 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
         .post('/customer/addCustomer', this.customer)
         .subscribe({
           next: (response) => {
-            console.log(this.customer);
-            console.log(response);
+            // console.log(this.customer);
+            // console.log(response);
             this.toast.showSuccess('New Customer Added.');
+            this.closeModal();
             this. getCustomer();
           },
           error: () => {
