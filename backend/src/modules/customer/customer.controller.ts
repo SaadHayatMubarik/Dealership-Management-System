@@ -20,6 +20,12 @@ export class CustomerController {
         return this.customerService.getCustomer(showroomId,CustomerCatagory)
     }
 
+    @Get('getCustomer/:showroomId/:customerCategory/:customerType')
+    getCustomerByType(@Param('showroomId') showroomId: number, @Param('customerCategory') CustomerCatagory:CustomerCatagory, @Param('customerType') customerType: CustomerType): Promise<Customer[]>{
+        // console.log(showroomId, customerType)
+        return this.customerService.getCustomerByType(showroomId,CustomerCatagory,customerType);
+    }
+
     @Get('getCustomerDetails/:customerId')
     getCustomerDetails(@Param('customerId') customerId: number): Promise<Customer> {
         return this.customerService.getCustomerDetails(customerId);

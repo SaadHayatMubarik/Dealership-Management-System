@@ -44,6 +44,10 @@ export class CustomerService {
         return await this.customerRepository.findBy({showroom:{showroom_id:showroomId}, catagory:CustomerCatagory});
     }
 
+    async getCustomerByType(showroomId: number, CustomerCatagory:CustomerCatagory, customerType: CustomerType){
+        return await this.customerRepository.findBy({ showroom:{showroom_id:showroomId}, catagory:CustomerCatagory, type: customerType })
+    }
+
     async getCustomerDetails(customerId: number): Promise<Customer>{
         return await this.customerRepository.findOneBy({customer_id:customerId});
     }
