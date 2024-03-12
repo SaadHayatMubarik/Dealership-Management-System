@@ -77,6 +77,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   showSecondTab = false; // Initially disable the second tab
   vehicleTypes: any[] = []; //to populate dropdown of vehicle type
   investors: any[] = []; // To store list of Investors for whom inventory is added
+  customers: any[] = []  ;//To store list of Customers for whom  inventory is added
   status: string[] = ['AVAILABLE', 'SOLD', 'ON ORDER']; //to populate status dropdown
   sliderValue: number = 0;
   investorId: any; //saving investor id
@@ -85,7 +86,6 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   inventoryId : number = 0;
   selectedTabIndex: number = 0;
   sellerCategory: string[] = ["CUSTOMER", "AGENT", "DEALERSHIP"];
-  // investor_name: string[] = ["Salman", "Haris"];
   selectedSellerCategory: string = '';
   investorName: string = '';
   selectedOption: string = '';
@@ -107,6 +107,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
     this.onTabChange({ index: this.selectedTabIndex });
     this.getVehicleTypes();
     this.getInvestors();
+    // this.getCustomers();
     // this.getInventory();
     // this.vehicleTypes = this.apiService.getVehicleTypes();
     // this.onVehicleTypeSelected();
@@ -190,8 +191,22 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
           complete: () => {
           }
         })
-      
     }
+
+  //   getCustomers() {
+  //     this.apiService
+  //     .get(`/investor/getInvestor/${this.vehicleInventory.showroomId}`)
+  //     .subscribe({
+  //       next: (response: IObject[]) => {
+  //         this.investors = response;
+  //       },
+  //       complete: () => {
+  //       }
+  //     })
+  // }
+
+
+
   
 
 

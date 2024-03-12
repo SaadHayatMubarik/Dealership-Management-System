@@ -110,7 +110,7 @@ onSubmit(){
         console.log(this.investor);
         console.log(response);
         this.closeModal();
-        this.toast.showSuccess('New User.');
+        this.toast.showSuccess('New Investor Added.');
         this.getinvestors();
       },
       error: () => {
