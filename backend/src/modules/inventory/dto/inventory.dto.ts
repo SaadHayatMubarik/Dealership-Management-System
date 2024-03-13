@@ -5,6 +5,7 @@ import { Showroom } from "src/modules/showroom/entity/Showroom";
 import { VehicleType } from "src/modules/vehicle-type/entity/Vehicle-type";
 import { CustomerCatagory } from "src/modules/customer/customer-catagory.enum";
 import { Investor } from "src/modules/investor/entity/Investor";
+import { Customer } from "src/modules/customer/entity/Customer";
 
 export class InventoryDto{
 
@@ -69,32 +70,11 @@ export class InventoryDto{
     stockAttributeValue: StockAttributeValue[];
 
     @IsNotEmpty()
-    customerCategory: CustomerCatagory;
-
-    @IsNotEmpty()
-    customerName: string;
-
-    @IsNotEmpty()
-    contactNo: string;
-
-    @IsNotEmpty()
-    customerEmail: string;
-
-    @IsNotEmpty()
-    province: string;
-
-    @IsNotEmpty()
-    city: string;
-
-    @IsNotEmpty()
-    address: string;
-
-    @IsOptional()
-    cnic: string;
-
+    customerId: number;
+    
     @IsNotEmpty()
     investor: Investor[];
 
     @IsNotEmpty()
-    investmentPercentage: number[];
+    investmentAmount: number[];
 }

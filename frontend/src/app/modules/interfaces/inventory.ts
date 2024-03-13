@@ -35,18 +35,11 @@ export interface IInventory {
   attributeValueId:number[];
   value: string[];
   stockAttributeValue : IStockAttributeValue[];
-  // customerCategory: string;
-  // customerName: string;
-  // contactNo: string;
-  // customerEmail: string;
-  // province: string;
-  // city: string;
-  // address: string;
-  // cnic: string;
-  // investor: any[];
-  // investmentPercentage: number[];
-
+  customer: any;
+  investor: any[];
+  investmentAmount: number[];
 }
+
 
 
 export interface IVehicleDetails {

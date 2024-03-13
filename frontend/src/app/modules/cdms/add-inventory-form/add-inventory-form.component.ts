@@ -49,7 +49,9 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
     value:[],
     attributeValueId:[],
     stockAttributeValue: [],
- 
+    customer: '',
+    investor: [],
+    investmentAmount: []
   };
 
 
@@ -184,6 +186,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
         .subscribe({
           next: (response: IObject[]) => {
             this.investors = response;
+            console.log(this.investors)
           },
           complete: () => {
           }
@@ -222,13 +225,14 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   address : string = '' ;
 
   getCustomersById(){
+    this.vehicleInventory.customer = this.sellerId;
     this.apiService
     .get(`/customer/getCustomerDetails/${this.sellerId}`)
     .subscribe({
       next: (response: IObject[]) => {
         console.log(response);
         this.customersDetails = response;
-        this.phone_no = this.customersDetails.phone_number;
+        this.phone_no = this.customersDetails.phoneNo;
         this.email = this.customersDetails.email;
         this.city = this.customersDetails.city;
         this.address = this.customersDetails.address;
@@ -372,24 +376,29 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   //investors logic
 
 
-  percentageInvested: number = 0; // Percentage invested by the investor
-  amountInvested: number = 0; // Amount invested by the investor
+  percentageInvested: number[] = []; // Percentage invested by the investor
+  amountInvested: number[] = []; // Amount invested by the investor
   totalPercentageInvested: number = 0; // Total percentage invested
   remainingPercentage: number = 100; // Remaining percentage
 
  calculateInvestment() {
     // Calculate amount invested
-    console.log(this.percentageInvested);
-    this.amountInvested = (this.percentageInvested / 100) * this.vehicleInventory.costPrice;
-    this.calculateTotalPercentage();
+    for (let i=0 ;i<this.percentageInvested.length; i++){
+    this.amountInvested[i] = (this.percentageInvested[i] / 100) * this.vehicleInventory.costPrice;
+    console.log(this.amountInvested[i]);
+    this.vehicleInventory.investmentAmount[i] = this.amountInvested[i];
+    // this.calculateTotalPercentage();
+    this.totalPercentageInvested = this.percentageInvested[i];
+    this.remainingPercentage = 100 - this.totalPercentageInvested;
+    }
+    
     
   }
 
-  calculateTotalPercentage() {
-    // Calculate total percentage invested
-    this.totalPercentageInvested = this.percentageInvested;
-    this.remainingPercentage = 100 - this.totalPercentageInvested;
-  }
+  // calculateTotalPercentage() {
+  //   // Calculate total percentage invested
+    
+  // }
 
   
       

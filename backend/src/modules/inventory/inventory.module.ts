@@ -13,13 +13,14 @@ import { VehicleTypeAttribute } from '../vehicle-type-attribute/entity/Vehicle-t
 import { Investment } from '../investment/entity/Investment';
 import { Picture } from '../picture/entity/Picture';
 import { Customer } from '../customer/entity/Customer';
+import { Investor } from '../investor/entity/Investor';
 
 // import { Showroom } from '../showroom/entity/Showroom';
 // import { VehicleType } from '../vehicle-type/Vehicle-type';
 // import { VehicleTypeModule } from '../vehicle-type/vehicle-type.module';
 @Module({
 
-  imports: [TypeOrmModule.forFeature([Inventory,Showroom,VehicleType,StockAttributeValue,MultiValueAttribute,VehicleTypeAttribute,Investment,Picture,Customer])],
+  imports: [TypeOrmModule.forFeature([Inventory,Showroom,VehicleType,StockAttributeValue,MultiValueAttribute,VehicleTypeAttribute,Investment,Picture,Customer,Investor])],
 
   controllers: [InventoryController],
   providers: [InventoryService]

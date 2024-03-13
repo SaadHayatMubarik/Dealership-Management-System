@@ -19,8 +19,9 @@ import { UpdateInventoryDto } from './dto/updateInventory.dto';
 import { Customer } from '../customer/entity/Customer';
 import { CustomerType } from '../customer/customer-type.enum';
 import { Investment } from '../investment/entity/Investment';
-// import { InvestorDto } from './dto/investor.dto';
-// import { CustomerDto } from './dto/customer.dto';
+import { Investor } from '../investor/entity/Investor';
+import { privateDecrypt } from 'crypto';
+
 
 
 @Injectable()
@@ -42,33 +43,16 @@ export class InventoryService {
         @InjectRepository(Customer)
         private customerRepository: Repository <Customer>,
         @InjectRepository(Investment)
-
-        private  investmentRepository: Repository <Investment>
+        private  investmentRepository: Repository <Investment>,
+        @InjectRepository(Investment)
+        private investorRepository: Repository <Investor>
     ){}
 
     async addInventory (addInventoryDto: InventoryDto): Promise<Inventory>{
         const { vehicleType, vehicleMake, vehicleModel , vehicleVariant , modelYear ,
              vehicleChasisNo , costPrice , demand , dateOfPurchase , dateOfSale ,
               bodyColor , engineNo , comments , grade , regNo, mileage, status,
-               showroomId ,stockAttributeValue , address , city , cnic , contactNo ,
-               customerCategory ,customerEmail, investmentPercentage,investor,customerName,province } = addInventoryDto;
-        // const { investor, investmentPercentage } = addInvestorDto;
-        // const { customerCategory, name, contactNo, customerEmail, province, city, address, cnic } = addCustomerDto;
-        const customer = new Customer();
-        customer.catagory = customerCategory;
-        customer.name = customerName;
-        customer.type = CustomerType.SELLER;
-// >>>>>>> 369659bcb1e74e283bcdf50739feaf63c2d2346b
-        customer.phoneNo = contactNo;
-        customer.email = customerEmail;
-        customer.province = province;
-        customer.city = city;
-        customer.address = address;
-        customer.cnic = cnic;
-        customer.showroom = await this.showroomRepository.findOne({ where: { showroom_id: showroomId } });
-        await this.customerRepository.save(customer);
-        
-        const customerId = await this.customerRepository.getId(customer);
+               showroomId ,stockAttributeValue, customerId, investmentAmount, investor } = addInventoryDto;
 
         const inventory = new Inventory();
         inventory.make = vehicleMake.toUpperCase();
@@ -89,8 +73,14 @@ export class InventoryService {
         inventory.mileage = mileage;
         inventory.vehicleType = vehicleType;
         inventory.showroom = await this.showroomRepository.findOne({ where: { showroom_id: showroomId } });
-
-        inventory.customer = await this.customerRepository.findOneBy({customer_id: customerId});
+        // const  customer = await this.customerRepository.findOneBy({customer_id:customerId});
+        // // for(let i=0; i<inventory.customer.length; i++){
+        // inventory.customer.push(customer);
+        // }
+        // const customer = new Customer();
+        // customer.inventories = [inventory];
+        // await this.customerRepository.save({inventories: [inventory]});
+        // inventory.customer = await this.customerRepository.findOneBy({customer_id: customerId});
 
         // console.log('stockValueAttribute', stockAttributeValue);
 
@@ -101,20 +91,26 @@ export class InventoryService {
         let inventoryObj = await this.inventoryRepository.findOne({where:{inventory_id:inventoryId}})
         const typeId = await this.vehicleTypeRepository.getId(vehicleType);
         for (let i=0; i<stockAttributeValue.length; i++){ 
-
             const stockAttributeattrValue = new StockAttributeValue();
             stockAttributeattrValue.value = stockAttributeValue[i].value;
             // console.log(vehicleType);
-            
             stockAttributeattrValue.vehicleTypeAttribute = await this.vehicleTypeAttribute.findOne({where:{vehicleType:{type_id:typeId}}});
             stockAttributeattrValue.inventory = inventoryObj;
             // console.log(inventory)
             await this.stockValueAttributeRepository.save(stockAttributeattrValue);
         }
         for (let i=0; i<investor.length; i++){
+            // let investorId = await this.investorRepository.getId(investor[i]);
+            // const getData = await this.inventoryRepository.createQueryBuilder('investor')
+            // .select('capital_amount')
+            // .where('investor.investor_id = :investorId',{investorId})
+            // .getOne();
+            // console.log(getData);
+            // let getCapitalAmount = getData + investmentAmount[i] 
+            // await this.customerRepository.findOneBy({})
             const investment = new Investment();
             investment.investment_date = new Date();
-            investment.investment_percentage = investmentPercentage[i];
+            investment.investment_amount = investmentAmount[i];
             investment.inventory = inventoryObj;
             investment.investor = investor[i];
             await this.investmentRepository.save(investment);

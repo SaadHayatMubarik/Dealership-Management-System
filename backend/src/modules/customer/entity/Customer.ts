@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinTable, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { CustomerType } from "../customer-type.enum";
 import { CustomerCatagory } from "../customer-catagory.enum";
 import { Inventory } from "src/modules/inventory/entity/Inventory";
@@ -37,6 +37,7 @@ export class Customer {
     province: string;
     
     @OneToMany(() => Inventory, (inventory) => inventory.customer)
+    @JoinTable()
     inventories: Inventory[];
 
     @ManyToOne(() => Showroom, (showroom) => showroom.customers)

@@ -232,11 +232,10 @@
                           [(ngModel)]="vehicleInventory.engineNo"
                           minlength="9"
                           maxlength="9"
-                          required
                           #engineNo="ngModel"
                         />
 
-                        <div *ngIf="engineNo.invalid && (engineNo.dirty || engineNo.touched)" class="p-error">
+                        <!-- <div *ngIf="engineNo.invalid && (engineNo.dirty || engineNo.touched)" class="p-error">
                           <span *ngIf="engineNo.errors?.['required']">
                             Engine Number is required
                           </span>
@@ -244,7 +243,7 @@
                           <span *ngIf="engineNo.errors?.['minlength' || 'maxlength']">
                             The Engine Number must have a length of 9 characters.
                           </span>
-                      </div>
+                      </div> -->
 
                         <label for="float-label">Engine No</label>
                       </span>
@@ -808,6 +807,7 @@
                               class="p-inputtext-lg"
                               placeholder="Select a investor"
                               name="investor Name"
+                              [(ngModel)]="vehicleInventory.investor[i]"
                             ></p-dropdown>
                             <label for="float-label">Investor Name*</label>
                           </span>
@@ -825,8 +825,8 @@
                               [(ngModel)]="percentageInvested"
                               (ngModelChange)="calculateInvestment()"
                             /> -->
-
-                            <app-numeric-textbox [(controlModel)] ="percentageInvested" 
+                            
+                            <app-numeric-textbox [(controlModel)] ="percentageInvested[i]" 
                             (controlModelChange)="calculateInvestment()">
 
                             </app-numeric-textbox>
@@ -845,7 +845,7 @@
                               pInputText
                               name="percentage"
                               required
-                              [ngModel]="amountInvested"
+                              [ngModel]="amountInvested[i]"
                            
                             />
                             <label for="float-label"
