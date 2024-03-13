@@ -19,8 +19,8 @@ export class InvestorController {
         return this.investorService.getInvestor(showroomId);
     }
 
-    // @Get('getInvestorDetails/:investorId')
-    // getInvestorDetails(@Param('investorId') investorId: number) :Promise<{}> {
-    //     return  this.investorService.getInvestorDetails(investorId);
-    // }
+    @Get('getInvestorDetails/:investorId')
+    getInvestorDetails(@Param('investorId') investorId: number) :Promise<Investor> {
+        return  this.investorService.getInvestorDetails(investorId);
+    }
 }

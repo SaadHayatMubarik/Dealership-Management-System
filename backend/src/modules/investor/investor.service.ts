@@ -26,11 +26,10 @@ export class InvestorService {
         investor.showroom = await this.showroomRepository.findOneBy({showroom_id: showroomId});
        return await this.investorRepository.save(investor);
     }
-    // async getInvestorDetails(investorId: number): Promise<{Investor,Investment[]}>{
-    //     return {
-    //         await this.investorRepository.findOne({where:{investor_id : investorId}})
-    //     }
-    //     }
+    async getInvestorDetails(investorId: number): Promise<Investor>{
+        return await this.investorRepository.findOne({where:{investor_id : investorId}})
+        }
+        
 
     async getInvestor(showroomId:number):Promise<Investor[]>{
         return await this.investorRepository.findBy({showroom:{showroom_id:showroomId}});
