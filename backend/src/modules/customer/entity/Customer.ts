@@ -1,8 +1,9 @@
-import { Column, Entity, JoinTable, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinTable, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { CustomerType } from "../customer-type.enum";
 import { CustomerCatagory } from "../customer-catagory.enum";
 import { Inventory } from "src/modules/inventory/entity/Inventory";
 import { Showroom } from "src/modules/showroom/entity/Showroom";
+import { Account } from "src/modules/account/entity/Accounts";
 
 @Entity({ name: 'customer' })
 export class Customer {
@@ -47,4 +48,6 @@ export class Customer {
     @ManyToOne(() => Showroom, (showroom) => showroom.customers)
     showroom: Showroom;
 
+    @OneToOne(() => Account, (account) => account.customer)
+    account: Account;
 }

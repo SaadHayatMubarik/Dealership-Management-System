@@ -14,7 +14,7 @@ export class CustomerController {
     addCustomer(@Body() createCustomerDto: CreateCustomerDto) {
         return this.customerService.addCustomer(createCustomerDto)
     }
-
+ 
     @Get('getCustomer/:showroomId/:customerCategory')
     getCustomer(@Param('showroomId') showroomId: number, @Param('customerCategory') CustomerCatagory:CustomerCatagory): Promise<Customer[]>{
         // console.log(showroomId, customerType)
