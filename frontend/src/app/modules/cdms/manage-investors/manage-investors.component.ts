@@ -112,6 +112,7 @@ onSubmit(){
         this.closeModal();
         this.toast.showSuccess('New Investor Added.');
         this.getinvestors();
+        this.investorForm.reset();
       },
       error: () => {
         this.toast.showError();

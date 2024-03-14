@@ -7,6 +7,7 @@ import { CustomerCatagory } from './customer-catagory.enum';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { Showroom } from '../showroom/entity/Showroom';
 import { privateDecrypt } from 'crypto';
+import { UpdateCustomerDto } from './dto/update-customer.dto';
 
 @Injectable()
 export class CustomerService {
@@ -28,7 +29,7 @@ export class CustomerService {
         customer.email = email;
         customer.name = name;
         customer.province = province;
-        customer.phone_number = phoneNo;
+        customer.phoneNo = phoneNo;
         for(let i=0; i<catagories.length;i++){
         if(type == types[i])
         customer.type = types[i]
@@ -50,5 +51,18 @@ export class CustomerService {
 
     async getCustomerDetails(customerId: number): Promise<Customer>{
         return await this.customerRepository.findOneBy({customer_id:customerId});
+    }
+    async updateCustomer(updateCustomerDto:UpdateCustomerDto){
+        const { address, category, city, cnic, customer_Id, email,name,phoneNo, province, type } = updateCustomerDto;
+        return this.customerRepository.createQueryBuilder("customer")
+        .update(Customer)
+        .set(updateCustomerDto)
+        .where("customer.customer_id = :id", { id: customer_Id })
+        .execute();
+        // return await this.customerRepository.update({customer_id:customerId}, {name: name});
+    }
+
+    async deleteCustomer(customerId: number){
+        return await this.customerRepository.delete({ customer_id: customerId });
     }
 }

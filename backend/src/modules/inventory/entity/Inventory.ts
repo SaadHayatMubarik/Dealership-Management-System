@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn, OneToOne, OneToMany, ManyToOne } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, OneToOne, OneToMany, ManyToOne, ManyToMany, JoinTable } from "typeorm";
 import { VehicleType } from "../../vehicle-type/entity/Vehicle-type";
 import { StockAttributeValue } from "../../stock-attribute-value/entity/Stock-attribute-value";
 import { InventoryStatus } from "../inventory-status.enum";
@@ -74,8 +74,12 @@ showroom: Showroom;
 @OneToOne(() => Notification, (notification) => notification)
 notifications: Notification;
 
-@ManyToOne(() => Customer, (customer) => customer.inventories)
-customer: Customer;
+@ManyToOne(() => Customer, (customer) => customer.sellerInventories)
+// @JoinTable()
+seller: Customer;
+
+@ManyToOne(() => Customer, (customer) => customer.buyerInventories)
+buyer: Customer;
 
 @OneToMany(() => Investment, (investment) => investment.inventory)
 investments: Investment[];

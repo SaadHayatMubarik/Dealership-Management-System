@@ -20,9 +20,6 @@ phone: string;
 @Column({ default: '0' })
 capital_amount: number;
 
-@Column({ default: '0' })
-profit: number;
-
 // @ManyToOne(() => Showroom, (showroom) => showroom.investors)
 // showroom: Showroom;
 

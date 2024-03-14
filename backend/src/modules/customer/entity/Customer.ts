@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinTable, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { CustomerType } from "../customer-type.enum";
 import { CustomerCatagory } from "../customer-catagory.enum";
 import { Inventory } from "src/modules/inventory/entity/Inventory";
@@ -22,7 +22,7 @@ export class Customer {
     cnic: string;
 
     @Column({ unique:true })
-    phone_number: string;
+    phoneNo: string;
 
     @Column({ unique:true })
     email: string;
@@ -36,8 +36,13 @@ export class Customer {
     @Column()
     province: string;
     
-    @OneToMany(() => Inventory, (inventory) => inventory.customer)
-    inventories: Inventory[];
+    @OneToMany(() => Inventory, (inventory) => inventory.seller)
+    // @JoinTable()
+    sellerInventories: Inventory[];
+
+    @OneToMany(() => Inventory, (inventory) => inventory.buyer)
+    // @JoinTable()
+    buyerInventories: Inventory[];
 
     @ManyToOne(() => Showroom, (showroom) => showroom.customers)
     showroom: Showroom;

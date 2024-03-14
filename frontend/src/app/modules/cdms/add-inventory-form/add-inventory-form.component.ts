@@ -49,7 +49,9 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
     value:[],
     attributeValueId:[],
     stockAttributeValue: [],
- 
+    sellerId: '',
+    investor: [],
+    investmentAmount: []
   };
 
 
@@ -195,6 +197,20 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   }
 
 
+  getInvestors() {
+        this.apiService
+        .get(`/investor/getInvestor/${this.vehicleInventory.showroomId}`)
+        .subscribe({
+          next: (response: IObject[]) => {
+            this.investors = response;
+            console.log(this.investors)
+          },
+          complete: () => {
+          }
+        })
+    }
+
+
     getCustomersByType() {
      
       this.apiService
@@ -230,13 +246,14 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   address : string = '' ;
 
   getCustomersById(){
+    this.vehicleInventory.sellerId = this.sellerId;
     this.apiService
     .get(`/customer/getCustomerDetails/${this.sellerId}`)
     .subscribe({
       next: (response: IObject[]) => {
         console.log(response);
         this.customersDetails = response;
-        this.phone_no = this.customersDetails.phone_number;
+        this.phone_no = this.customersDetails.phoneNo;
         this.email = this.customersDetails.email;
         this.city = this.customersDetails.city;
         this.address = this.customersDetails.address;
@@ -364,17 +381,6 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
       console.log(this.status[this.selectedTabIndex]);
     });
   }
-
-
-  
-
-
- 
- 
- 
- 
- 
- 
  
  
  //investors logic
@@ -394,27 +400,18 @@ removeInvestorForm() {
 }
 
 
-getInvestors() {
-  this.apiService
-  .get(`/investor/getInvestor/${this.vehicleInventory.showroomId}`)
-  .subscribe({
-    next: (response: IObject[]) => {
-      console.log(response);
-      this.investors = response;
-    },
-    complete: () => {
-    }
-  })
-}
-
 
 
 
 
 
  
-  percentageInvested: number = 0; // Percentage invested by the investor
-  amountInvested: number = 0; // Amount invested by the investor
+//   percentageInvested: number = 0; // Percentage invested by the investor
+//   amountInvested: number = 0; // Amount invested by the investor
+// =======
+  percentageInvested: number[] = []; // Percentage invested by the investor
+  amountInvested: number[] = []; // Amount invested by the investor
+// >>>>>>> 17a807b0552467598a98cd1e970c990f6a53cd25
   totalPercentageInvested: number = 0; // Total percentage invested
   remainingPercentage: number = 100; // Remaining percentage
 
@@ -422,18 +419,19 @@ getInvestors() {
 
   calculateInvestment() {
     // Calculate amount invested
-    console.log(this.percentageInvested);
-    this.amountInvested = (this.percentageInvested / 100) * this.vehicleInventory.costPrice;
-    this.calculateTotalPercentage();
+    for (let i=0 ;i<this.percentageInvested.length; i++){
+    this.amountInvested[i] = (this.percentageInvested[i] / 100) * this.vehicleInventory.costPrice;
+    console.log(this.amountInvested[i]);
+    this.vehicleInventory.investmentAmount[i] = this.amountInvested[i];
+    // this.calculateTotalPercentage();
+    this.totalPercentageInvested = this.percentageInvested[i];
+    this.remainingPercentage = 100 - this.totalPercentageInvested;
+    }
+    
     
   }
 
- 
-  calculateTotalPercentage() {
-    // Calculate total percentage invested
-    this.totalPercentageInvested = this.percentageInvested;
-    this.remainingPercentage = 100 - this.totalPercentageInvested;
-  }
+
 
   
       

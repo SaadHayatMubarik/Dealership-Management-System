@@ -19,8 +19,9 @@ import { UpdateInventoryDto } from './dto/updateInventory.dto';
 import { Customer } from '../customer/entity/Customer';
 import { CustomerType } from '../customer/customer-type.enum';
 import { Investment } from '../investment/entity/Investment';
-// import { InvestorDto } from './dto/investor.dto';
-// import { CustomerDto } from './dto/customer.dto';
+import { Investor } from '../investor/entity/Investor';
+import { privateDecrypt } from 'crypto';
+
 
 
 @Injectable()
@@ -42,33 +43,16 @@ export class InventoryService {
         @InjectRepository(Customer)
         private customerRepository: Repository <Customer>,
         @InjectRepository(Investment)
-
-        private  investmentRepository: Repository <Investment>
+        private  investmentRepository: Repository <Investment>,
+        @InjectRepository(Investor)
+        private investorRepository: Repository <Investor>
     ){}
 
     async addInventory (addInventoryDto: InventoryDto): Promise<Inventory>{
         const { vehicleType, vehicleMake, vehicleModel , vehicleVariant , modelYear ,
              vehicleChasisNo , costPrice , demand , dateOfPurchase , dateOfSale ,
               bodyColor , engineNo , comments , grade , regNo, mileage, status,
-               showroomId ,stockAttributeValue , address , city , cnic , contactNo ,
-               customerCategory ,customerEmail, investmentPercentage,investor,customerName,province } = addInventoryDto;
-        // const { investor, investmentPercentage } = addInvestorDto;
-        // const { customerCategory, name, contactNo, customerEmail, province, city, address, cnic } = addCustomerDto;
-        const customer = new Customer();
-        customer.catagory = customerCategory;
-        customer.name = customerName;
-        customer.type = CustomerType.SELLER;
-// >>>>>>> 369659bcb1e74e283bcdf50739feaf63c2d2346b
-        customer.phone_number = contactNo;
-        customer.email = customerEmail;
-        customer.province = province;
-        customer.city = city;
-        customer.address = address;
-        customer.cnic = cnic;
-        customer.showroom = await this.showroomRepository.findOne({ where: { showroom_id: showroomId } });
-        await this.customerRepository.save(customer);
-        
-        const customerId = await this.customerRepository.getId(customer);
+               showroomId ,stockAttributeValue, sellerId, investmentAmount, investor } = addInventoryDto;
 
         const inventory = new Inventory();
         inventory.make = vehicleMake.toUpperCase();
@@ -89,11 +73,7 @@ export class InventoryService {
         inventory.mileage = mileage;
         inventory.vehicleType = vehicleType;
         inventory.showroom = await this.showroomRepository.findOne({ where: { showroom_id: showroomId } });
-
-        inventory.customer = await this.customerRepository.findOneBy({customer_id: customerId});
-
-        // console.log('stockValueAttribute', stockAttributeValue);
-
+        inventory.seller = await this.customerRepository.findOneBy({customer_id: sellerId});
         await this.inventoryRepository.save(inventory);
 
         const inventoryId = await this.inventoryRepository.getId(inventory);
@@ -101,20 +81,29 @@ export class InventoryService {
         let inventoryObj = await this.inventoryRepository.findOne({where:{inventory_id:inventoryId}})
         const typeId = await this.vehicleTypeRepository.getId(vehicleType);
         for (let i=0; i<stockAttributeValue.length; i++){ 
-
             const stockAttributeattrValue = new StockAttributeValue();
             stockAttributeattrValue.value = stockAttributeValue[i].value;
-            // console.log(vehicleType);
-            
+
             stockAttributeattrValue.vehicleTypeAttribute = await this.vehicleTypeAttribute.findOne({where:{vehicleType:{type_id:typeId}}});
             stockAttributeattrValue.inventory = inventoryObj;
-            // console.log(inventory)
+
             await this.stockValueAttributeRepository.save(stockAttributeattrValue);
         }
         for (let i=0; i<investor.length; i++){
+            let investorId = await this.investorRepository.getId(investor[i]);
+            let getData = await this.investorRepository.createQueryBuilder('investor')
+            .select('capital_amount')
+            .where('investor.investor_id = :investorId',{investorId})
+            .getRawOne();
+            if (getData) {
+                const capitalAmount = getData.capital_amount;
+                let getCapitalAmount = capitalAmount + investmentAmount[i];
+            await this.investorRepository.update({investor_id:investorId},{capital_amount: getCapitalAmount});
+            }
+
             const investment = new Investment();
             investment.investment_date = new Date();
-            investment.investment_percentage = investmentPercentage[i];
+            investment.investment_amount = investmentAmount[i];
             investment.inventory = inventoryObj;
             investment.investor = investor[i];
             await this.investmentRepository.save(investment);
@@ -134,11 +123,6 @@ export class InventoryService {
     }
 
     async getInventoryDetails(inventoryId: number): Promise<Inventory>{
-        // const getData = await this.stockValueAttributeRepository.createQueryBuilder('stockValueAttribute')
-        // .leftJoin(VehicleTypeAttribute, 'vehicleTypeAttribute','stockValueAttribute.vehicleTypeAttributeAttributeId = vehicleTypeAttribute.attribute_id')
-        // .select(['stockValueAttribute.value as value','vehicleTypeAttribute.attribute_name as attributeName'])
-        // .where('stockValueAttribute.inventoryInventoryId = :inventoryId',{inventoryId});
-        // const result = await getData.getRawMany();
         const Inventory = await this.inventoryRepository.findOne({relations:['showroom'],where: {inventory_id: inventoryId}})
         return Inventory;
          
@@ -161,7 +145,9 @@ export class InventoryService {
         return result;
     }
 
+
     deleteInventory(inventoryId: number){
+        
          this.stockValueAttributeRepository.delete({inventory:{inventory_id:inventoryId}})
         return this.inventoryRepository.delete({ inventory_id: inventoryId });
     }

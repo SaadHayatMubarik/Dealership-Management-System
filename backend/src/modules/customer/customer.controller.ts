@@ -1,9 +1,10 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { CustomerService } from './customer.service';
 import { CustomerType } from './customer-type.enum';
 import { Customer } from './entity/Customer';
 import { CustomerCatagory } from './customer-catagory.enum';
 import { CreateCustomerDto } from './dto/create-customer.dto';
+import { UpdateCustomerDto } from './dto/update-customer.dto';
 
 @Controller('customer')
 export class CustomerController {
@@ -29,5 +30,15 @@ export class CustomerController {
     @Get('getCustomerDetails/:customerId')
     getCustomerDetails(@Param('customerId') customerId: number): Promise<Customer> {
         return this.customerService.getCustomerDetails(customerId);
+    }
+
+    // @Put('updateCustomer')
+    // updateCustomer(@Body()updateCustomerDto: UpdateCustomerDto){
+    //     return this.customerService.updateCustomer(updateCustomerDto);
+    // }
+
+    @Delete('deleteCustomer/:customerId')
+    deleteCustomer(@Param('customerId') customerId: number) {
+        return this.customerService.deleteCustomer(customerId);
     }
 }

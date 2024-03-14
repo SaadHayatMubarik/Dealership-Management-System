@@ -8,11 +8,14 @@ export class Investment{
 @PrimaryGeneratedColumn()
 investement_id: number;
 
-@Column('decimal', { precision: 4, scale: 1 } )
-investment_percentage: number;
+@Column()
+investment_amount: number;
 
 @Column()
 investment_date: Date;
+
+@Column({ default: '0' })
+profit: number;
 
 @ManyToOne(() => Investor, (investor) => investor.investments)
 investor: Investor;

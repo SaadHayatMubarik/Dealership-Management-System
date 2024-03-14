@@ -37,12 +37,11 @@ export interface IInventory {
   attributeValueId:number[];
   value: string[];
   stockAttributeValue : IStockAttributeValue[];
-
-
-
-
-
+  sellerId: any;
+  investor: any[];
+  investmentAmount: number[];
 }
+
 
 
 export interface IVehicleDetails {

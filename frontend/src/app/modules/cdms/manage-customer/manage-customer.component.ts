@@ -74,7 +74,7 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
       fieldTitle: 'Cnic'
     },
     {
-      field: 'phone_number',
+      field: 'phoneNo',
       fieldTitle: 'Phone Number'
     },
     {
@@ -107,7 +107,7 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
     //   fieldTitle: 'Cnic'
     // },
     {
-      field: 'phone_number',
+      field: 'phoneNo',
       fieldTitle: 'Phone Number'
     },
     {
