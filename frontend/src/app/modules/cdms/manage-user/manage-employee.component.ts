@@ -91,23 +91,30 @@ export class ManageEmployeeComponent extends BaseComponent implements OnInit {
   }
 
   onSubmit(){
-    {
-      this.apiService
-        .post('/auth/createUser', this.user)
-        .subscribe({
-          next: (response) => {
-            console.log(this.user);
-            console.log(response);
-            this.closeModal();
-            this.toast.showSuccess('New User.');
-            this.getemployee();
-          },
-          error: () => {
-            this.toast.showError();
-            console.log(this.user);
-          },
-        });
-    }
+     if (this.userForm.valid){
+      
+        this.apiService
+          .post('/auth/createUser', this.user)
+          .subscribe({
+            next: (response) => {
+              console.log(this.user);
+              console.log(response);
+              this.closeModal();
+              this.toast.showSuccess('New User.');
+              this.getemployee();
+            },
+            error: () => {
+              this.toast.showError();
+              console.log(this.user);
+            },
+          });
+    
+      }
+
+      else {
+        this.toast.showError('Please fill all the fields correctly.')
+      }
+
   }
 
   getemployee(){

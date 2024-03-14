@@ -78,7 +78,7 @@ export class ManageInvestorsComponent extends BaseComponent implements OnInit{
 
   }
 
-  @ViewChild('investor') investorForm!: NgForm;
+  @ViewChild('investorForm') investorForm!: NgForm;
 
 
   validateNumericInput(event: KeyboardEvent) {
@@ -101,8 +101,8 @@ validateAlphabeticInput(event: KeyboardEvent) {
 }
 
 onSubmit(){
-  console.log(this.investor)
-  // if(this.investorForm.valid){
+
+  if(this.investorForm.valid){
     this.apiService
     .post('/investor/addInvestor', this.investor)
     .subscribe({
@@ -119,8 +119,11 @@ onSubmit(){
         console.log(this.investor);
       },
     });
+  }
 
-  // }
+  else{
+    this.toast.showError("Please fill all fields correctly")
+  }
 }
 
 getinvestors(){

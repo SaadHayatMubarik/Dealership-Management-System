@@ -29,11 +29,13 @@
 
       <div class="sidebar-content">
         <div class="card-grey">
+          <form (ngSubmit)="onSubmit()" #userForm="ngForm">
           <div class="row-form grid">
             <div class="col-4">
                 <div class="p-field">
                     <label>Username:</label> <br>
                     <input
+                    name="username"
                     type="username"
                     pInputText
                     pTooltip="Should contain atleast 4 characters"
@@ -41,16 +43,31 @@
                     style="padding: 1rem"
                     minlength="4"
                     maxlength="20"
+                    pattern="^[A-Za-z0-9_-]+$"
                     required
                     [(ngModel)]="user.username"
+                    #username = "ngModel"
                   />
                   </div> 
+
+                  <div *ngIf="username.invalid && (username.dirty || username.touched)" class="p-error">
+                    <span *ngIf="username.errors?.['required']">
+                      Please Enter Username.</span>   
+                    
+                      <span *ngIf="username.errors?.['minlength' || 'maxlength']">
+                        Username should be between 4-20.</span>  
+                        <br>
+                        
+                      <span *ngIf="username.errors?.['pattern']">
+                        Please avoid any space.</span>  
+                  </div>
                
                   
               <div class="p-field">
                 <label>Email:</label> <br>
                 <div class="p-field">
                   <input
+                  name="email"
                   type="email"
                   pInputText
                   class="w-full md:w-20rem mb-5"
@@ -59,7 +76,17 @@
                   required
                   email
                   [(ngModel)]="user.email"
+                  #email = "ngModel"
                 />
+
+                <div *ngIf="email.invalid && (email.dirty || email.touched)" class="p-error">
+                  <span *ngIf="email.errors?.['required']">
+                    Please Enter Email.</span>   
+                  
+                    <span *ngIf="email.errors?.['email']">
+                      Please Enter A Valid Email.</span>  
+                </div>
+
                 </div> 
               </div>
              
@@ -67,6 +94,7 @@
               <div class="p-field">
                 <label>Password:</label> <br>
                 <p-password
+                name="password"
                 styleClass="mb-5"
                 inputStyleClass="w-full p-3 md:w-20rem"
                 pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
@@ -75,21 +103,38 @@
                 [(ngModel)]="user.password"
                 [feedback]="false"
                 pTooltip="Atleast one upper case, one lowercase, a number and a special character required."
+                #password = 'ngModel'
               >
               </p-password>
+              <div *ngIf="password.invalid && (password.dirty || password.touched)" class="p-error">
+                <span *ngIf="password.errors?.['required']">
+                  Please Enter Password.</span>   
+                
+                  <span *ngIf="password.errors?.['pattern']">
+                    Please Enter A Valid Password.</span>  
+              </div>
               </div>
              
 
               <div class="p-field">
-                <p-dropdown [options]="roles" [(ngModel)]="user.role"  [showClear]="true" placeholder="Select a Role"></p-dropdown>
+                <p-dropdown
+                [required]="true"
+                name="password"
+                [options]="roles"
+                 [(ngModel)]="user.role" 
+                  [showClear]="true" 
+                  placeholder="Select a Role"
+                  
+                  ></p-dropdown>
               </div>
 
             
             </div>
           </div>
           <br>
-         
+        </form>
         </div>
+
       </div>
       <div class="sidebar-footer flex justify-content-end">
         <app-button label="Save" styleClass="p-button-sm p-button-rounded" (onclick)="onSubmit()" ></app-button>
