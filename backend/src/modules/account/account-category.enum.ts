@@ -1,0 +1,8 @@
+export enum AccountCategory{
+
+INVENTORY = 'INVENTORY',
+CUTOMER = 'CUTOMER',
+EMPLOYEE = 'EMPLOYEE',
+INVESTOR = 'INVESTOR',
+
+}

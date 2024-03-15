@@ -36,7 +36,7 @@
                   <div class="p-field">
                       <label>Full Name:</label> <br>
                       <input
-                      name="name"
+                      name="fullName"
                       pInputText
                       class="w-full md:w-20rem mb-5"
                       style="padding: 1rem"
@@ -46,9 +46,17 @@
                       [(ngModel)]="investor.investorName"
                       (keypress)="validateAlphabeticInput($event)"
                       pattern="^\S(?:\s*\S)*$"
+                      #fullName ='ngModel'
                       
                     />
                     </div> 
+                    <div *ngIf="fullName.invalid && (fullName.dirty || fullName.touched)" class="p-error">
+                      <span *ngIf="fullName.errors?.['required']">
+                        Full Name Required.</span>   
+                        <br>
+                        <span *ngIf="fullName.errors?.['pattern']">
+                          Avoid unneccessary spaces.</span>  
+                    </div>
                 
                     
                 <div class="p-field">
@@ -66,7 +74,15 @@
                     pattern="[0-9]{13}"
                     [(ngModel)]="investor.cnic"
                     (keypress)="validateNumericInput($event)"
+                    #cnic ='ngModel'
                   />
+                  <div *ngIf="cnic.invalid && (cnic.dirty || cnic.touched)" class="p-error">
+                    <span *ngIf="cnic.errors?.['required']">
+                      Cnic is required.</span>   
+                      <br>
+                      <span *ngIf="cnic.errors?.['pattern']">
+                        cnic must be 13  digits long and contain only numbers.</span>  
+                  </div>
                   </div> 
                 </div>
               
@@ -85,7 +101,16 @@
                       [(ngModel)]="investor.phoneNo"
                       pattern="^(03\d{9})$"
                       (keypress)="validateNumericInput($event)"
+                      #phoneNo ='ngModel'
                     />
+                    <div *ngIf="phoneNo.invalid && (phoneNo.dirty || phoneNo.touched)" class="p-error">
+                      <span *ngIf="phoneNo.errors?.['required']">
+                       Phone Number is required.</span>   
+                        <br>
+                        <span *ngIf="phoneNo.errors?.['pattern']">
+                          Phone Number must be 11 digits long and should start with 03.</span>  
+                    </div>
+                    
                 </div> 
               </div>
             </div>

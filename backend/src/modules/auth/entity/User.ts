@@ -1,7 +1,8 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, Unique } from "typeorm";
+import { Column, Entity, ManyToOne, OneToOne, PrimaryGeneratedColumn, Unique } from "typeorm";
 import { UserRole } from "../user-role.enum";
 import * as bcrypt from 'bcrypt';
 import { Showroom } from "src/modules/showroom/entity/Showroom";
+import { Account } from "src/modules/account/entity/Accounts";
 
 @Entity({ name: 'user' })
 @Unique(['user_name', 'email'])
@@ -43,6 +44,9 @@ export class User {
     async comparePassword(password: string): Promise<boolean> {
         return await bcrypt.compare(password, this.password);
       }
+
+    //   @OneToOne( () =>  Account, (account) =>  account.user)
+    //   account : Account
 }
 
 

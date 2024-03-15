@@ -28,12 +28,18 @@
       <div class="sidebar-content">
         <div class="card-grey">
           <div class="row-form grid">
+            <form (ngSubmit)=" saveVehicleType()" #vehicleTypeForm="ngForm">
             <div class="col-4">
               <div class="p-field">
                 <label>Name</label> <br>
-                <app-textbox [(controlModel)]="vehicleType.vehicleTypeName" ></app-textbox>
+                <app-textbox [(controlModel)]="vehicleType.vehicleTypeName"
+                name="vehicleType"
+                pattern = '^\S(?:\s*\S)*$'
+                required 
+                ></app-textbox>
               </div>
             </div>
+          </form>
           </div>
         </div>
       </div>
@@ -58,6 +64,7 @@
       <div class="sidebar-content">
         <div class="card-grey">
           <div class="row-form grid">
+            <form action="">
             <div class="col-4">
               <div class="p-field">
                 <label>Name</label> <br>
@@ -67,6 +74,7 @@
                 ></app-textbox>
               </div>
             </div>
+          </form>
           </div>
         </div>
       </div>

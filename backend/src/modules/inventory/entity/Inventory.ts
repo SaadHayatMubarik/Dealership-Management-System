@@ -7,6 +7,7 @@ import { Notification } from "src/modules/notification/entity/Notification";
 import { Customer } from "src/modules/customer/entity/Customer";
 import { Investment } from "src/modules/investment/entity/Investment";
 import { Picture } from "src/modules/picture/entity/Picture";
+import { Account } from "src/modules/account/entity/Accounts";
 
 @Entity({ name: 'inventory' })
 export class Inventory {
@@ -74,13 +75,19 @@ showroom: Showroom;
 @OneToOne(() => Notification, (notification) => notification)
 notifications: Notification;
 
-@ManyToOne(() => Customer, (customer) => customer.inventories)
-// @JoinTable()
-customer: Customer;
+@ManyToOne(() => Customer, (customer) => customer.sellerInventories)
+seller: Customer;
+
+@ManyToOne(() => Customer, (customer) => customer.buyerInventories)
+buyer: Customer;
 
 @OneToMany(() => Investment, (investment) => investment.inventory)
 investments: Investment[];
 
 @OneToMany(() => Picture, (picture) => picture.inventory)
 pictures: Picture[];
+
+@OneToOne(() => Account, (account) => account.inventory)
+account: Account;
+
 }

@@ -1,3 +1,5 @@
+import { IInvestor, ISeller } from ".";
+
 export interface IVehicleType {
   vehicleTypeName: string;
   showroomId: any;
@@ -35,7 +37,7 @@ export interface IInventory {
   attributeValueId:number[];
   value: string[];
   stockAttributeValue : IStockAttributeValue[];
-  customer: any;
+  sellerId: any;
   investor: any[];
   investmentAmount: number[];
 }
@@ -53,6 +55,7 @@ export interface IVehicleDetails {
 }
 
 export interface IStockAttributeValue {  
+  
   id: number;
   value: any;
   inventoryInventoryId:number;

@@ -49,7 +49,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
     value:[],
     attributeValueId:[],
     stockAttributeValue: [],
-    customer: '',
+    sellerId: '',
     investor: [],
     investmentAmount: []
   };
@@ -57,13 +57,15 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
 
 
 
-  investor: IInvestor=
-  {
-   investorName : '',
-    cnic:'' ,
-    phoneNo:'' ,
-    showroomId: localStorage.getItem('Showroom Id'),
-  }
+
+  // investor: IInvestor =
+  // {
+  //  investorName : '',
+  //   cnic:'' ,
+  //   phoneNo:'' ,
+  //   capitalAmount:0,
+  //   showroomId: localStorage.getItem('Showroom Id'),
+  // }
 
 
   
@@ -77,7 +79,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   customerType: string = 'SELLER'
   status: string[] = ['AVAILABLE', 'SOLD', 'ON ORDER']; //to populate status dropdown
   sliderValue: number = 0;
-  investorId: any; //saving investor id
+ 
   vehicleId: any; //saving vehicle type id
   vehicleAttributes: any[] = []; //to save vehicle type attributes
   inventoryId : number = 0;
@@ -86,6 +88,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   selectedCategory: string = '';
   selectedCustomer: any = null;  
   sellerId: number = 0;
+
   investorName: string = '';
   selectedOption: string = '';
   investorForms: any[] = [];
@@ -132,10 +135,6 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
         field: 'demand',
         fieldTitle: 'Demand',
       },
-      {
-        field: 'mileage',
-        fieldTitle: 'Mileage',
-      },
     ];
     this.actions = [
       {
@@ -162,7 +161,24 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
         command: (event) => {
           this.router.navigate(['/detail-view', event.inventoryId]);
         },
-      }
+      },
+      {
+        label: 'Update',
+        icon: 'pi pi-file-edit',
+        command: (event) => {
+         
+        },
+      },
+      {
+        label: 'Sell',
+        icon: 'pi pi-dollar',
+        command: (event) => {
+         
+        },
+      },
+      
+      
+
     ];
   }
 
@@ -180,6 +196,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
       });
   }
 
+
   getInvestors() {
         this.apiService
         .get(`/investor/getInvestor/${this.vehicleInventory.showroomId}`)
@@ -192,6 +209,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
           }
         })
     }
+
 
     getCustomersByType() {
      
@@ -211,7 +229,6 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   onCustomerSelectionChange(): void {
     if (this.selectedCustomer) {
         // Assuming the customer object has an 'id' property
-
         this.sellerId = this.selectedCustomer.customer_id;
         console.log(this.sellerId);
 
@@ -219,13 +236,17 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
     this.getCustomersById();  
 }
 
+
+
+
+
   phone_no : string = '' ;
   email : string = '' ;
   city : string = '' ;
   address : string = '' ;
 
   getCustomersById(){
-    this.vehicleInventory.customer = this.sellerId;
+    this.vehicleInventory.sellerId = this.sellerId;
     this.apiService
     .get(`/customer/getCustomerDetails/${this.sellerId}`)
     .subscribe({
@@ -243,9 +264,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
     })
   }
 
-
-
-  
+ 
 
 
   //to limit slider value from 0 to 5.
@@ -275,22 +294,6 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
       event.preventDefault();
     }
   }
-
-
-  addInvestorForm() {
-    // Add a new form to the array
-    this.investorForms.push({});
-    console.log(this.investorForms);
-  }
-
-  removeInvestorForm() {
-    // Remove the last form from the array
-    if (this.investorForms.length > 0) {
-      this.investorForms.pop();
-    }
-  }
-
-
 
   // fucntion to store vehicle type id when selecting from dropdown.
   onVehicleTypeChange(event: any) {
@@ -331,6 +334,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
 
 
   onNext(){
+
     if(this.InventoryForm.valid)
     {
           this.activeTabIndex = 1;
@@ -372,17 +376,43 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
       console.log(this.status[this.selectedTabIndex]);
     });
   }
+ 
+ 
+ //investors logic
+
+ addInvestorForm() {
+
+  this.investorForms.push({});
+}
 
 
-  //investors logic
+removeInvestorForm() {
+  // Remove the last form from the array
+  if (this.investorForms.length > 0) {
+    this.investorForms.pop();
+   
+  }
+}
 
 
+
+
+
+
+
+ 
+//   percentageInvested: number = 0; // Percentage invested by the investor
+//   amountInvested: number = 0; // Amount invested by the investor
+// =======
   percentageInvested: number[] = []; // Percentage invested by the investor
   amountInvested: number[] = []; // Amount invested by the investor
+// >>>>>>> 17a807b0552467598a98cd1e970c990f6a53cd25
   totalPercentageInvested: number = 0; // Total percentage invested
   remainingPercentage: number = 100; // Remaining percentage
 
- calculateInvestment() {
+
+
+  calculateInvestment() {
     // Calculate amount invested
     for (let i=0 ;i<this.percentageInvested.length; i++){
     this.amountInvested[i] = (this.percentageInvested[i] / 100) * this.vehicleInventory.costPrice;
@@ -396,10 +426,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
     
   }
 
-  // calculateTotalPercentage() {
-  //   // Calculate total percentage invested
-    
-  // }
+
 
   
       

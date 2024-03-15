@@ -70,7 +70,7 @@ export class InventoryDto{
     stockAttributeValue: StockAttributeValue[];
 
     @IsNotEmpty()
-    customerId: number;
+    sellerId: number;
     
     @IsNotEmpty()
     investor: Investor[];

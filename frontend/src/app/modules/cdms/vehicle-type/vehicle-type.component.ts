@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BaseComponent } from 'src/app/shared/base.component';
+import { NgForm } from '@angular/forms';
 
 
 import {
@@ -93,8 +94,10 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
     ];
   }
 
+  @ViewChild('vehicleTypeForm') typeForm!: NgForm;
+
   saveVehicleType() {
-    if (this.vehicleType.vehicleTypeName != "^\S+$" ) {
+    if (this.typeForm.valid){
       this.apiService
         .post('/vehicle-type/addVehicleType', this.vehicleType)
         .subscribe({
@@ -110,6 +113,10 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
             this.toast.showError();
           },
         });
+    }
+
+    else{
+      this.toast.showError('Please  fill out  field correctly.');
     }
   }
 
