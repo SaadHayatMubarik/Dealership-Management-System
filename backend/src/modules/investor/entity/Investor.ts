@@ -1,4 +1,5 @@
-import { Account } from "src/modules/account/entity/Accounts";
+
+import { Account } from "src/modules/account/entity/Account";
 import { Investment } from "src/modules/investment/entity/Investment";
 import { Showroom } from "src/modules/showroom/entity/Showroom";
 import { Column, Entity, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";

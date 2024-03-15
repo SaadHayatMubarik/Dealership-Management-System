@@ -5,6 +5,8 @@ import { Notification } from "src/modules/notification/entity/Notification";
 import { Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Investor } from "src/modules/investor/entity/Investor";
 import { Customer } from "src/modules/customer/entity/Customer";
+import { Account } from "src/modules/account/entity/Account";
+import { Employee } from "src/modules/employee/entity/Employee";
 
 
 @Entity({ name: 'Showroom' })
@@ -39,8 +41,6 @@ export class Showroom {
     @OneToMany(() => Notification, (notification)  => notification.senderShowroom)
     senderNotification: Notification[];
 
-    // @OneToMany(() => Notification, (notification)  => notification.senderShowroom)
-    // receiverNotification: Notification[];
     @OneToMany(() => Investor, (investor) => investor.showroom)
     investors: Investor[];
 
@@ -48,4 +48,9 @@ export class Showroom {
     @OneToMany(() => Customer, (customer) => customer.showroom)
     customers: Customer[];
 
+    @OneToMany(() => Account, (account) =>  account.showroom)
+    accounts : Account[] ;
+
+    @OneToMany(() => Employee, (employee) => employee.showroom)
+    employees:Employee[];
 }

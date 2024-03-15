@@ -2,7 +2,8 @@ import { Column, Entity, ManyToOne, OneToOne, PrimaryGeneratedColumn, Unique } f
 import { UserRole } from "../user-role.enum";
 import * as bcrypt from 'bcrypt';
 import { Showroom } from "src/modules/showroom/entity/Showroom";
-import { Account } from "src/modules/account/entity/Accounts";
+import { Employee } from "src/modules/employee/entity/Employee";
+
 
 @Entity({ name: 'user' })
 @Unique(['user_name', 'email'])
@@ -47,6 +48,9 @@ export class User {
 
     //   @OneToOne( () =>  Account, (account) =>  account.user)
     //   account : Account
+
+    @OneToOne(() => Employee, (employee) => employee.user)
+    employee: Employee;
 }
 
 
