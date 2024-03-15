@@ -74,9 +74,9 @@ showroom: Showroom;
 @OneToOne(() => Notification, (notification) => notification)
 notifications: Notification;
 
-@ManyToMany(() => Customer, (customer) => customer.inventories)
-@JoinTable()
-customer: Customer[];
+@ManyToOne(() => Customer, (customer) => customer.inventories)
+// @JoinTable()
+customer: Customer;
 
 @OneToMany(() => Investment, (investment) => investment.inventory)
 investments: Investment[];

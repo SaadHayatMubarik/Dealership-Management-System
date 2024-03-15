@@ -37,7 +37,7 @@ export class Customer {
     province: string;
     
     @OneToMany(() => Inventory, (inventory) => inventory.customer)
-    @JoinTable()
+    // @JoinTable()
     inventories: Inventory[];
 
     @ManyToOne(() => Showroom, (showroom) => showroom.customers)

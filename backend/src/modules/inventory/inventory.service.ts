@@ -73,8 +73,9 @@ export class InventoryService {
         inventory.mileage = mileage;
         inventory.vehicleType = vehicleType;
         inventory.showroom = await this.showroomRepository.findOne({ where: { showroom_id: showroomId } });
-        // const  customer = await this.customerRepository.findOneBy({customer_id:customerId});
-        // // for(let i=0; i<inventory.customer.length; i++){
+        let customer = new Customer();
+         customer = await this.customerRepository.findOneBy({customer_id:customerId});
+        // for(let i=0; i<inventory.customer.length; i++){
         // inventory.customer.push(customer);
         // }
         // const customer = new Customer();
@@ -89,6 +90,8 @@ export class InventoryService {
         const inventoryId = await this.inventoryRepository.getId(inventory);
 
         let inventoryObj = await this.inventoryRepository.findOne({where:{inventory_id:inventoryId}})
+        customer.inventories = [inventoryObj];
+        await this.customerRepository.preload(customer);
         const typeId = await this.vehicleTypeRepository.getId(vehicleType);
         for (let i=0; i<stockAttributeValue.length; i++){ 
             const stockAttributeattrValue = new StockAttributeValue();

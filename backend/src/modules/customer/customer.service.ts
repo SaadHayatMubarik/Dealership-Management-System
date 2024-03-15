@@ -52,6 +52,11 @@ export class CustomerService {
     async getCustomerDetails(customerId: number): Promise<Customer>{
         return await this.customerRepository.findOneBy({customer_id:customerId});
     }
+
+    async getCustomerRelation(customerId: number): Promise<Customer>{
+        return await this.customerRepository.findOne({relations:['inventories'], where: {customer_id:customerId}});
+    }
+
     async updateCustomer(updateCustomerDto:UpdateCustomerDto){
         const { address, category, city, cnic, customer_Id, email,name,phoneNo, province, type } = updateCustomerDto;
         return this.customerRepository.createQueryBuilder("customer")

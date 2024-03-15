@@ -280,6 +280,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   addInvestorForm() {
     // Add a new form to the array
     this.investorForms.push({});
+    console.log(this.investorForms);
   }
 
   removeInvestorForm() {
