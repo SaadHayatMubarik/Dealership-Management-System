@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn, OneToOne, OneToMany, ManyToOne, ManyToMany, JoinTable } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, OneToOne, OneToMany, ManyToOne } from "typeorm";
 import { VehicleType } from "../../vehicle-type/entity/Vehicle-type";
 import { StockAttributeValue } from "../../stock-attribute-value/entity/Stock-attribute-value";
 import { InventoryStatus } from "../inventory-status.enum";
@@ -7,7 +7,7 @@ import { Notification } from "src/modules/notification/entity/Notification";
 import { Customer } from "src/modules/customer/entity/Customer";
 import { Investment } from "src/modules/investment/entity/Investment";
 import { Picture } from "src/modules/picture/entity/Picture";
-import { Account } from "src/modules/account/entity/Accounts";
+import { Account } from "src/modules/account/entity/Account";
 
 @Entity({ name: 'inventory' })
 export class Inventory {
@@ -76,7 +76,6 @@ showroom: Showroom;
 notifications: Notification;
 
 @ManyToOne(() => Customer, (customer) => customer.sellerInventories)
-// @JoinTable()
 seller: Customer;
 
 @ManyToOne(() => Customer, (customer) => customer.buyerInventories)

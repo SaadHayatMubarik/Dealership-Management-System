@@ -3,7 +3,8 @@ import { CustomerType } from "../customer-type.enum";
 import { CustomerCatagory } from "../customer-catagory.enum";
 import { Inventory } from "src/modules/inventory/entity/Inventory";
 import { Showroom } from "src/modules/showroom/entity/Showroom";
-import { Account } from "src/modules/account/entity/Accounts";
+import { Account } from "src/modules/account/entity/Account";
+
 
 @Entity({ name: 'customer' })
 export class Customer {
@@ -37,6 +38,7 @@ export class Customer {
     @Column()
     province: string;
     
+
     @OneToMany(() => Inventory, (inventory) => inventory.seller)
     // @JoinTable()
     sellerInventories: Inventory[];

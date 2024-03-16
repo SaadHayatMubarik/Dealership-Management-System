@@ -32,6 +32,11 @@ export class CustomerController {
         return this.customerService.getCustomerDetails(customerId);
     }
 
+    @Get('getCustomerRelation/:customerId')
+    getCustomerRelation(@Param('customerId') customerId: number): Promise<Customer>{
+        return this.customerService.getCustomerRelation(customerId);
+    }
+
     // @Put('updateCustomer')
     // updateCustomer(@Body()updateCustomerDto: UpdateCustomerDto){
     //     return this.customerService.updateCustomer(updateCustomerDto);

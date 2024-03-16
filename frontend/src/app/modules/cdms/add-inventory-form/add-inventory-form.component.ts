@@ -295,11 +295,6 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
     }
   }
 
-
-
-
-
-
   // fucntion to store vehicle type id when selecting from dropdown.
   onVehicleTypeChange(event: any) {
     if (event.value) {
