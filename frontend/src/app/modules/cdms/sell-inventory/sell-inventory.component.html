@@ -7,9 +7,427 @@
 
   <div class="col-12 xl:col-12">
     <div class="card">
-    <div class="flex justify-content-between">
-        <h5>Vehicle Details</h5>
-    </div>
+  
+
+    
+    <p-tabView [(activeIndex)]="activeTabIndex">
+      <p-tabPanel header="Vehicle Details">
+        <form  >
+          <div class="sh-title">
+            <h5 style="text-align: center">Vehicle Details</h5>
+            <br>
+          </div>
+         
+            <!-- <div class="sidebar-header">
+              <div class="sh-title">
+                <h3 style="text-align: center">Add Inventory</h3>
+                <h5 style="text-align: center">Vehicle Details</h5>
+                <br />
+              </div>
+            </div> -->
+              
+                <div class="row-form grid">
+                  <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <input
+                          class="p-inputtext-lg"
+                          pInputText
+                          name="vehicleType"
+                          [class.p-disabled]="true"
+                        />
+                        <label htmlFor="username">Make*</label>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <input
+                          class="p-inputtext-lg"
+                          pInputText
+                          name="make"
+                          [class.p-disabled]="true"
+                        />
+                        <label htmlFor="username">Make*</label>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <input
+                          class="p-inputtext-lg"
+                          pInputText
+                          name="model"
+                          required
+                          [class.p-disabled]="true"
+                        />
+                        <label htmlFor="username">Model*</label>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <br />
+
+                <div class="row-form grid">
+                  <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <input
+                          class="p-inputtext-lg"
+                          pInputText
+                          name="variant"
+                          [class.p-disabled]="true"
+
+                        />
+
+                        
+                       
+
+                        <label htmlFor="username">Variant*</label>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <input
+                          class="p-inputtext-lg"
+                          pInputText
+                          name="Chasis No"
+                          [class.p-disabled]="true"
+                         
+                        />
+                        <label htmlFor="username">Chasis No</label>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <input
+                          class="p-inputtext-lg"
+                          pInputText
+                          name="engineNo"
+                          [class.p-disabled]="true"
+                        />
+                        <label for="float-label">Engine No</label>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                
+                <br>
+                <div class="row-form grid">
+                  <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <p-inputNumber
+                          class="p-inputtext-lg"
+                          mode="currency"
+                          currency="PKR"
+                          locale="en-US"
+                          name="costPrice"
+                          [class.p-disabled]="true"
+                        >
+                        </p-inputNumber>
+
+                     
+
+                        <label for="float-label">Cost Price*</label>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <p-inputNumber
+                          class="p-inputtext-lg"
+                          mode="currency"
+                          currency="PKR"
+                          locale="en-US"
+                          name="demand"
+                          [class.p-disabled]="true"
+                        >
+                        </p-inputNumber>
+
+                        <label for="float-label">Demand*</label>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <p-calendar
+                          [readonlyInput]="true"
+                          class="p-inputtext-lg"
+                          name="date of purchase"
+                          [class.p-disabled]="true"
+                        ></p-calendar>
+
+                        <label>Date Of Purcahse*</label>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <br />
+                <div class="row-form grid">
+                  <div class="col-4">
+                    <div class="p-field">
+
+                      <span class="p-float-label">
+                        <input
+                          class="p-inputtext-lg"
+                          pInputText
+                          name="modelYear"
+                          [class.p-disabled]="true"
+                        />
+                        <label htmlFor="Model Year">Model Year*</label>
+                      </span>               
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <input
+                          class="p-inputtext-lg"
+                          pInputText
+                          required
+                          name="color"
+                          [class.p-disabled]="true"
+                        />
+
+
+                        <label htmlFor="username">Body Color*</label>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <input
+                        class="p-inputtext-lg"
+                        pInputText
+                        required
+                        name="status"
+                        [class.p-disabled]="true"
+                      />
+                        <label for="float-label">Status*</label>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <br />
+                <div class="row-form grid">
+                  <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <input
+                          class="p-inputtext-lg"
+                          pInputText
+                          name="RegNo"
+                          [class.p-disabled]="true"
+                        />
+                        <label for="float-label">License Number</label>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <p-inputNumber
+                          class="p-inputtext-lg"
+                          name="milage"
+                          [class.p-disabled]="true"
+                        >
+                        </p-inputNumber>
+
+                       
+
+                        <label for="float-label">Date Of Sale</label>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <p-calendar
+                          [readonlyInput]="true"
+                          class="p-inputtext-lg"
+                          name="date of sale"
+                          [required] = "true"
+                        ></p-calendar>
+                        <label>Date Of Sale</label>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <br />
+                <div class="row-form grid">
+                  <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <p-inputNumber
+                          class="p-inputtext-lg"
+                          mode="currency"
+                          currency="PKR"
+                          locale="en-US"
+                          name="Selling Price"
+                          pattern="^\d+$"
+                          [required]="true" 
+                         
+                        >
+                        </p-inputNumber>
+
+                        <label for="float-label">Selling Price</label>
+                      </span>
+                    </div>
+                  </div> 
+                </div>
+                <br />
+              <br />
+            <div class="sidebar-footer flex justify-content-end">
+              <app-button
+                type="submit"
+                label="Next"
+                styleClass="p-button-sm p-button-rounded"
+              ></app-button>
+            </div>
+          
+        </form>
+      </p-tabPanel>
+
+      <p-tabPanel header="Buyer Details">
+        <!-- [disabled]="!showSecondTab" -->
+
+        <form  #Seller="ngForm">
+          <div class="sidebar-main">
+            <div class="sidebar-header">
+              <div class="sh-title">
+                <h5 style="text-align: center">Buyer Details</h5>
+                <br>
+              </div>
+              <div class="sh-toolbar"></div>
+            </div>
+          </div>
+          <div class="sidebar-content">
+            <div class="card-grey padding">
+              <div class="row-form grid">
+
+                <div class="col-4">
+                  <div class="p-field">
+                    <span class="p-float-label">
+
+                      <p-dropdown
+                        class="p-inputtext-lg"
+                        placeholder="Select a Vehicle Type"
+                        name="seller_category"
+                      ></p-dropdown>
+
+                      <label for="float-label"> Buyer Category</label>
+                    </span>
+                  </div>
+                </div>
+
+                <div class="col-4">
+                  <div class="p-field">
+                    <span class="p-float-label">
+
+                      <p-dropdown
+                      optionLabel="name"
+                      class="p-inputtext-lg"
+                      name="name"
+
+                    ></p-dropdown>
+                    <label for="float-label">Buyer Name</label>
+
+                    </span>
+                  </div>
+                </div>
+
+                <div class="col-4">
+                  <div class="p-field">
+                    <span class="p-float-label">
+                      <input class="p-inputtext-lg" 
+                      pInputText
+                      name="contactNumber"
+                     
+                      [class.p-disabled]="true"
+                      />
+                      <label htmlFor="username">Contact Number</label>
+                  </span>
+                  </div>
+                </div>
+              </div>
+              <br>
+
+              <div class="row-form grid">
+                <div class="col-4">
+                  <div class="p-field">
+                    <span class="p-float-label">
+                      <input class="p-inputtext-lg"
+                      required
+                       pInputText
+                       name="email"
+                       
+                       [class.p-disabled]="true"
+                       
+                       />
+                      <label htmlFor="username">Email</label>
+                  </span>
+                  </div>
+                </div>
+
+                <div class="col-4">
+                  <div class="p-field">
+                    <span class="p-float-label">
+                      <input class="p-inputtext-lg" 
+                      pInputText
+                      name="city"
+                      
+                      [class.p-disabled]="true"
+                      
+                      />
+                      <label htmlFor="city">City</label>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="p-field">
+                    <span class="p-float-label">
+                      <input class="p-inputtext-lg" 
+                      pInputText
+                      name="address"
+                      [class.p-disabled]="true"
+                      />
+                      <label for="float-label">Address</label>
+                  </span>
+                  </div>
+                </div>
+              </div>
+
+              <br>
+
+          
+             
+            </div>
+          </div>
+          <div class="sidebar-footer flex justify-content-end">
+            <app-button
+              type="submit"
+              label="save"
+              styleClass="p-button-sm p-button-rounded"
+            ></app-button>
+          </div>
+        </form>
+      </p-tabPanel>
+    </p-tabView>
+ 
            
     
 
