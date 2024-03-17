@@ -32,8 +32,6 @@ export class InventoryService {
         private inventoryRepository: Repository<Inventory>,
         @InjectRepository(Showroom)
         private showroomRepository: Repository<Showroom>,
-        // @InjectRepository(MultiValueAttribute)
-        // private multiValueAttributeRepository : Repository <MultiValueAttribute> ,
         @InjectRepository(VehicleType)
         private vehicleTypeRepository: Repository<VehicleType>,
         @InjectRepository(StockAttributeValue)
@@ -53,7 +51,7 @@ export class InventoryService {
              vehicleChasisNo , costPrice , demand , dateOfPurchase , dateOfSale ,
               bodyColor , engineNo , comments , grade , regNo, mileage, status,
                showroomId ,stockAttributeValue, sellerId, investmentAmount, investor } = addInventoryDto;
-
+        if (investor.length >0){
         const inventory = new Inventory();
         inventory.make = vehicleMake.toUpperCase();
         inventory.model = vehicleModel.toUpperCase();
@@ -113,9 +111,9 @@ export class InventoryService {
         }
         return inventory;
     }
+    }
 
     async getInventory(status: String, showroomId: number): Promise<GetInventroyDto[]>{
-        // let vehicleStatus = status.toUpperCase();
         const getData = this.inventoryRepository.createQueryBuilder('inventory')
         .select(['inventory_id as inventoryId','make as vehicleMake','model as vehicleModel', 'variant as vehicleVariant', 'year as modelYear','chasis_no as vehicleChasisNo','demand', 'mileage'])
         .where('inventory.status = :status',{status})
@@ -155,7 +153,7 @@ export class InventoryService {
     }
 
     async updateInventory(updateInventoryDto: UpdateInventoryDto){
-        const { vehicleVariant, vehicleModel, vehicleMake, vehicleChasisNo, status, comments, bodyColor, costPrice, dateOfPurchase, dateOfSale, demand, engineNo, grade, inventoryId, mileage, modelYear, regNo, vehicleType } = updateInventoryDto;
+        const { vehicleVariant, vehicleModel, vehicleMake, vehicleChasisNo, status, comments, bodyColor, costPrice, dateOfPurchase, dateOfSale, demand, engineNo, grade, inventoryId, mileage, modelYear, regNo, vehicleType, buyer } = updateInventoryDto;
         if(vehicleVariant)
         await this.inventoryRepository.update({inventory_id:inventoryId},{variant:vehicleVariant});
         if(vehicleModel)
@@ -190,17 +188,8 @@ export class InventoryService {
         await this.inventoryRepository.update({inventory_id:inventoryId},{reg_no:regNo});
         if(vehicleType)
         await this.inventoryRepository.update({inventory_id:inventoryId},{vehicleType:vehicleType});
-    //     if(value){
-    //     // const getData: StockAttributeValue[] = await this.stockValueAttributeRepository.createQueryBuilder('stockValueAttribute')
-    //     // .select('*')
-    //     // .where('stockValueAttribute.inventoryInventoryId = :inventoryId',{inventoryId})
-    //     // .getMany();
-    // // const result = await getData.getRawMany();
-    // // const array: StockAttributeValue[] = getData.toArray();
-    //     for(let i=0; i<value.length; i++){
-    //     await this.stockValueAttributeRepository.update({id:},{value:value[i]});
-    //     }
-    // }
+        if(buyer)
+        await this.inventoryRepository.update({inventory_id:inventoryId},{buyer:buyer});
     }
     
 }
