@@ -15,6 +15,7 @@ import { Transaction } from "src/modules/transcation/entity/Transcation";
 import { VehicleTypeAttribute } from "src/modules/vehicle-type-attribute/entity/Vehicle-type-attribute";
 import { VehicleType } from "src/modules/vehicle-type/entity/Vehicle-type";
 
+
 export const typeOrmConfig: TypeOrmModuleOptions  = {
     type: 'mysql',
     host: 'localhost',
@@ -23,6 +24,6 @@ export const typeOrmConfig: TypeOrmModuleOptions  = {
     password: 'root',
     database: 'd_m_s',
     entities: [Inventory, MultiValueAttribute, StockAttributeValue , VehicleType, VehicleTypeAttribute ,User,Showroom,Customer,Notification,Investment,Investor,Picture,Transaction,Account, Employee],
-    synchronize: false, 
+    synchronize: true, 
 }
 
