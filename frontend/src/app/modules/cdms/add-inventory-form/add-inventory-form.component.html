@@ -10,12 +10,6 @@
         styleClass="p-button-sm p-button-rounded"
         (onclick)="openModal()"
       ></app-button>
-      <app-button
-        label="Sell"
-        class="ml-1"
-        styleClass="p-button-sm p-button-rounded p-button-danger"
-        routerLink="/sell-inventory"
-      ></app-button>
     </div>
   </div>
   <div class="middle-content w-o-tabs mt-3">
@@ -121,7 +115,7 @@
                         />
 
                         <div *ngIf="make.invalid && (make.dirty || make.touched)" class="p-error">
-                          <span *ngIf="vehicleType.errors?.['required']">
+                          <span *ngIf="make.errors?.['required']">
                             Vehicle Make Name is required.</span>
                             <br>
 
@@ -512,7 +506,7 @@
                   <!-- </div> -->
                   <!-- <br> -->
 
-                  <div class="col-3" >
+                  <!-- <div class="col-3" >
                     <div class="p-field" *ngIf="vehicleInventory.status === 'SOLD'" class="p-error">
                       <span class="p-float-label">
                         <p-calendar
@@ -520,11 +514,13 @@
                           class="p-inputtext-lg"
                           name="date of sale"
                           [(ngModel)]="vehicleInventory.dateOfSale"
+                          [required]="true"
+                         
                         ></p-calendar>
                         <label>Date Of Sale</label>
                       </span>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
                 <br />
                 <!-- adding dynamic form here-->
@@ -742,7 +738,7 @@
                       <input class="p-inputtext-lg" 
                       pInputText
                       name="city"
-                      [(ngModel)]="phone_no"
+                      [(ngModel)]="city"
                       [class.p-disabled]="true"
                       
                       />
@@ -756,7 +752,7 @@
                       <input class="p-inputtext-lg" 
                       pInputText
                       name="address"
-                      [(ngModel)]="address "
+                      [(ngModel)]="address"
                       [class.p-disabled]="true"
                       />
                       <label for="float-label">Address</label>

@@ -46,12 +46,6 @@ images: any[] = [
   .subscribe(
     (data) => {
       this.vehicleDetails = data;
-// <<<<<<< HEAD
-//       //  this.disableButton();
-// =======
-//       console.log(this.vehicleDetails);
-//       console.log(this.vehicleDetails.demand);
-// >>>>>>> adf8b96a2e878a0bd51a8d37865c8a07df19cd3a
     }
   );
   }
