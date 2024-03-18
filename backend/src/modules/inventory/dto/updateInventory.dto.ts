@@ -2,6 +2,7 @@ import { IsNotEmpty, IsNumber, IsOptional } from "class-validator";
 import { VehicleType } from "src/modules/vehicle-type/entity/Vehicle-type";
 import { InventoryStatus } from "../inventory-status.enum";
 import { StockAttributeValue } from "src/modules/stock-attribute-value/entity/Stock-attribute-value";
+import { Customer } from "src/modules/customer/entity/Customer";
 
 export class UpdateInventoryDto{
     @IsNotEmpty()
@@ -58,6 +59,12 @@ export class UpdateInventoryDto{
 
     @IsOptional()
     mileage: number;
+
+    @IsOptional()
+    sellingPrice: number;
+
+    @IsOptional()
+    buyerId: number;
 
     // @IsOptional()
     // // stockAttributeValue: StockAttributeValue[];

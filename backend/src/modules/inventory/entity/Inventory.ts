@@ -36,6 +36,9 @@ price: number;
 @Column()
 demand: number;
 
+@Column({ nullable:true })
+selling_Price: number
+
 @Column()
 date_of_purchase: Date;
 

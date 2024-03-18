@@ -15,7 +15,6 @@ import { Transaction } from "src/modules/transcation/entity/Transcation";
 import { VehicleTypeAttribute } from "src/modules/vehicle-type-attribute/entity/Vehicle-type-attribute";
 import { VehicleType } from "src/modules/vehicle-type/entity/Vehicle-type";
 
-
 export const typeOrmConfig: TypeOrmModuleOptions  = {
     type: 'mysql',
     host: 'localhost',

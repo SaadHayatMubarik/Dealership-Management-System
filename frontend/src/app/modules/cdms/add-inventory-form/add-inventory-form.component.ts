@@ -229,6 +229,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
     if (this.selectedCustomer) {
         this.sellerId = this.selectedCustomer.customer_id;
 
+
     }
     this.getCustomersById();  
 }
@@ -414,18 +415,11 @@ removeInvestorForm() {
 
 
 
-  calculateInvestment() {
-    // Calculate amount invested
-    for (let i=0 ;i<this.percentageInvested.length; i++){
+  calculateInvestment(i: number) {
     this.amountInvested[i] = (this.percentageInvested[i] / 100) * this.vehicleInventory.costPrice;
-    console.log(this.amountInvested[i]);
     this.vehicleInventory.investmentAmount[i] = this.amountInvested[i];
-    // this.calculateTotalPercentage();
     this.totalPercentageInvested = this.percentageInvested[i];
     this.remainingPercentage = 100 - this.totalPercentageInvested;
-    }
-    
-    
   }
 
 
