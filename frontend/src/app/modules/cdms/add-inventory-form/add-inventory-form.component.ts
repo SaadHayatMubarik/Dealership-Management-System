@@ -174,7 +174,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
         icon: 'pi pi-dollar',
         command: (event) => {
           this.router.navigate(['/sell-inventory', event.inventoryId]);
-          console.log(event.inventoryId);
+          // console.log(event.inventoryId);
          
         },
       },
@@ -205,7 +205,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
         .subscribe({
           next: (response: IObject[]) => {
             this.investors = response;
-            console.log(this.investors)
+            // console.log(this.investors)
           },
           complete: () => {
           }
@@ -249,7 +249,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
     .get(`/customer/getCustomerDetails/${this.sellerId}`)
     .subscribe({
       next: (response: IObject[]) => {
-        console.log(response);
+        // console.log(response);
         this.customersDetails = response;
         this.phone_no = this.customersDetails.phoneNo;
         this.email = this.customersDetails.email;
@@ -302,14 +302,14 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
           .get(`/vehicle-type-attribute/${this.vehicleId.type_id}`)
           .subscribe((attributes: IVehicleTypeAttributeDto[]) => {
             this.vehicleAttributes = attributes;
-            console.log(this.vehicleAttributes);
+            // console.log(this.vehicleAttributes);
             this.vehicleInventory.stockAttributeValue = [];
             let stockAttrVals: IStockAttributeValue[] = [];
             console.log('====================================');
             attributes.forEach((vta: IVehicleTypeAttributeDto) => {
               // console.log(vta);
               stockAttrVals.push({ id: 0, value: '', inventoryInventoryId:0, multiValueAttributeMultiValueId:0, vehicleTypeAttribute: vta })
-              console.log(vta.multiVals);
+              // console.log(vta.multiVals);
             });
             console.log('====================================');
           
@@ -323,7 +323,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
 
   getOptions(attribute: any) {
     // console.log('====================================');
-    console.log('attribute', attribute);
+    // console.log('attribute', attribute);
     // console.log('====================================');
     return attribute.vehicleTypeAttribute.multiValueAttributes.map(
       (mv: IObject) => mv['attribute_value']
@@ -376,7 +376,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   getInventory(){
     this.apiService.get(`/inventory/getInventory/${this.vehicleInventory.showroomId}/${this.status[this.selectedTabIndex]}`).subscribe((data) => {
       this.data = data;
-      console.log(this.status[this.selectedTabIndex]);
+      // console.log(this.status[this.selectedTabIndex]);
     });
   }
  

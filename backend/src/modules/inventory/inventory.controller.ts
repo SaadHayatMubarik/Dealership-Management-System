@@ -44,8 +44,9 @@ export class InventoryController {
         return this.inventoryService.deleteInventory(inventoryId);
     }
 
-    @Put('updateInventory')
+    @Put('updateInventory/sellInventory')
     updateInventory(@Body() updateInventoryDto: UpdateInventoryDto){
+        console.log(updateInventoryDto);
         return this.inventoryService.updateInventory(updateInventoryDto);
     }
 }

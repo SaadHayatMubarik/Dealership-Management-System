@@ -43,11 +43,26 @@ export interface IInventory {
 }
 
 export interface ISellInventory {
-  buyer_Id: number;
-  vehicle_Id: number;
-  date_Of_Sale: string;
-  selling_Price: string;
-  status: string;
+  inventoryId? : number;
+  vehicleType? : any;
+  vehicleMake? : string;
+  vehicleModel? : string;
+  vehicleVariant? : string;
+  modelYear? : number;
+  vehicleChasisNo? : string;
+  costPrice? : number;
+  demand? : number;
+  dateOfPurchase? : string;
+  dateOfSale? : string;
+  bodyColor? : string;
+  engineNo? : string;
+  comments: string;
+  grade: number;
+  status? : string;
+  regNo? : string;
+  mileage: number;
+  sellingPrice? : string;
+  buyerId? : number;
 }
 
 
