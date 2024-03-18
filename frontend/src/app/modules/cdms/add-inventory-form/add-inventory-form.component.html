@@ -10,12 +10,6 @@
         styleClass="p-button-sm p-button-rounded"
         (onclick)="openModal()"
       ></app-button>
-      <app-button
-        label="Sell"
-        class="ml-1"
-        styleClass="p-button-sm p-button-rounded p-button-danger"
-        routerLink="/sell-inventory"
-      ></app-button>
     </div>
   </div>
   <div class="middle-content w-o-tabs mt-3">
@@ -121,7 +115,7 @@
                         />
 
                         <div *ngIf="make.invalid && (make.dirty || make.touched)" class="p-error">
-                          <span *ngIf="vehicleType.errors?.['required']">
+                          <span *ngIf="make.errors?.['required']">
                             Vehicle Make Name is required.</span>
                             <br>
 
@@ -335,14 +329,23 @@
                 <div class="row-form grid">
                   <div class="col-4">
                     <div class="p-field">
+
                       <span class="p-float-label">
-                        <p-calendar
-                          [readonlyInput]="true"
+                        <p-dropdown
+                          [options]="status"
                           class="p-inputtext-lg"
-                          name="date of sale"
-                          [(ngModel)]="vehicleInventory.dateOfSale"
-                        ></p-calendar>
-                        <label>Date Of Sale</label>
+                          name="status"
+                          [(ngModel)]="vehicleInventory.status"
+                          [required]="true"
+                          #vehicleStatus = "ngModel"
+                        ></p-dropdown>
+
+                        <div *ngIf="vehicleStatus.invalid && (vehicleStatus.dirty || vehicleStatus.touched)" class="p-error">
+                          <span *ngIf="vehicleStatus.errors?.['required']">
+                            Status Required
+                          </span>
+                      </div>
+                        <label for="float-label">Status*</label>
                       </span>
                     </div>
                   </div>
@@ -376,24 +379,33 @@
                   </div>
                   <div class="col-4">
                     <div class="p-field">
-                      <span class="p-float-label">
-                        <p-dropdown
-                          [options]="status"
-                          class="p-inputtext-lg"
-                          placeholder="Select a Vehicle Type"
-                          name="status"
-                          [(ngModel)]="vehicleInventory.status"
-                          [required]="true"
-                          #vehicleStatus = "ngModel"
-                        ></p-dropdown>
 
-                        <div *ngIf="vehicleStatus.invalid && (vehicleStatus.dirty || vehicleStatus.touched)" class="p-error">
-                          <span *ngIf="vehicleStatus.errors?.['required']">
-                            Status Required
+                      <span class="p-float-label">
+                        <input
+                          class="p-inputtext-lg"
+                          pInputText
+                          name="modelYear"
+                          [(ngModel)]="vehicleInventory.modelYear"
+                          minlength="4"
+                          maxlength="4"
+                          required
+                          pattern="^(?!202[8-9]|20[3-9]\d|2[1-9]\d{2}|[3-9]\d{3}|10000)\d+$"
+                          #modelYear = "ngModel"
+                        />
+                        <div *ngIf="modelYear.invalid && (modelYear.dirty || modelYear.touched)" class="p-error">
+                          <span *ngIf="modelYear.errors?.['required']">
+                            Model Year Of Vehicle Is Required.
+                          </span>
+                          <br>
+                          <span *ngIf="modelYear.errors?.['pattern']">
+                            Model year cant be greater than 2027. Contact system admin to change that.
                           </span>
                       </div>
-                        <label for="float-label">Status*</label>
+                        <label htmlFor="Model Year">Model Year*</label>
                       </span>
+
+
+                   
                     </div>
                   </div>
                 </div>
@@ -438,55 +450,8 @@
                       </span>
                     </div>
                   </div>
-                  <div class="col-4">
-                    <div class="p-field">
-                      <span class="p-float-label">
-                        <input
-                          class="p-inputtext-lg"
-                          pInputText
-                          name="modelYear"
-                          [(ngModel)]="vehicleInventory.modelYear"
-                          minlength="4"
-                          maxlength="4"
-                          required
-                          pattern="^(?!202[8-9]|20[3-9]\d|2[1-9]\d{2}|[3-9]\d{3}|10000)\d+$"
-                          #modelYear = "ngModel"
-                        />
-                        <div *ngIf="modelYear.invalid && (modelYear.dirty || modelYear.touched)" class="p-error">
-                          <span *ngIf="modelYear.errors?.['required']">
-                            Model Year Of Vehicle Is Required.
-                          </span>
-                          <br>
-                          <span *ngIf="modelYear.errors?.['pattern']">
-                            Model year cant be greater than 2027. Contact system admin to change that.
-                          </span>
-                      </div>
-                        <label htmlFor="Model Year">Model Year*</label>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <br />
-                <div class="row-form grid">
-                  <div class="col-8">
-                    <div class="p-field">
-                      <span class="p-float-label">
-                        <textarea
-                          id="float-input"
-                          rows="5"
-                          cols="80"
-                          pInputTextarea
-                          name="comments"
-                          [(ngModel)]="vehicleInventory.comments"
-                        ></textarea>
-                        <label for="float-label">Other Details</label>
-                      </span>
-                    </div>
-                  </div>
-                  <!-- </div> -->
-                  <!-- <br> -->
-
                   <div class="col-3">
+
                     <div class="p-field">
                       <label>Grade*</label>
                       <input
@@ -516,7 +481,46 @@
                     </div>
                       <!-- <p-slider [(ngModel)]="sliderValue" [min]="0" [max]="5" [step]="0.5" class="w-full"></p-slider> -->
                     </div>
+
+
+                   
                   </div>
+                </div>
+                <br />
+                <div class="row-form grid">
+                  <div class="col-8">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <textarea
+                          id="float-input"
+                          rows="5"
+                          cols="80"
+                          pInputTextarea
+                          name="comments"
+                          [(ngModel)]="vehicleInventory.comments"
+                        ></textarea>
+                        <label for="float-label">Other Details</label>
+                      </span>
+                    </div>
+                  </div>
+                  <!-- </div> -->
+                  <!-- <br> -->
+
+                  <!-- <div class="col-3" >
+                    <div class="p-field" *ngIf="vehicleInventory.status === 'SOLD'" class="p-error">
+                      <span class="p-float-label">
+                        <p-calendar
+                          [readonlyInput]="true"
+                          class="p-inputtext-lg"
+                          name="date of sale"
+                          [(ngModel)]="vehicleInventory.dateOfSale"
+                          [required]="true"
+                         
+                        ></p-calendar>
+                        <label>Date Of Sale</label>
+                      </span>
+                    </div>
+                  </div> -->
                 </div>
                 <br />
                 <!-- adding dynamic form here-->
@@ -734,7 +738,7 @@
                       <input class="p-inputtext-lg" 
                       pInputText
                       name="city"
-                      [(ngModel)]="phone_no"
+                      [(ngModel)]="city"
                       [class.p-disabled]="true"
                       
                       />
@@ -748,7 +752,7 @@
                       <input class="p-inputtext-lg" 
                       pInputText
                       name="address"
-                      [(ngModel)]="address "
+                      [(ngModel)]="address"
                       [class.p-disabled]="true"
                       />
                       <label for="float-label">Address</label>

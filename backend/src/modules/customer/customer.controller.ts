@@ -12,6 +12,7 @@ export class CustomerController {
 
     @Post('addCustomer')
     addCustomer(@Body() createCustomerDto: CreateCustomerDto) {
+        console.log(createCustomerDto);
         return this.customerService.addCustomer(createCustomerDto)
     }
  

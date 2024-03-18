@@ -77,7 +77,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   customers: any[] = []  ;//To store list of Customers for whom  inventory is added
   customersDetails: any; //To store individual customer details
   customerType: string = 'SELLER'
-  status: string[] = ['AVAILABLE', 'SOLD', 'ON ORDER']; //to populate status dropdown
+  status: string[] = ['AVAILABLE', 'ON ORDER']; //to populate status dropdown
   sliderValue: number = 0;
  
   vehicleId: any; //saving vehicle type id
@@ -173,6 +173,8 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
         label: 'Sell',
         icon: 'pi pi-dollar',
         command: (event) => {
+          this.router.navigate(['/sell-inventory', event.inventoryId]);
+          console.log(event.inventoryId);
          
         },
       },
@@ -212,14 +214,11 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
 
 
     getCustomersByType() {
-     
       this.apiService
       .get(`/customer/getCustomer/${this.vehicleInventory.showroomId}/${this.selectedCategory}/${this.customerType}`)
       .subscribe({
         next: (response) => {
-          console.log(response);
           this.customers = response;
-         
         },
         complete: () => {
         }
@@ -228,9 +227,8 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
 
   onCustomerSelectionChange(): void {
     if (this.selectedCustomer) {
-        // Assuming the customer object has an 'id' property
         this.sellerId = this.selectedCustomer.customer_id;
-        // console.log(this.sellerId);
+
 
     }
     this.getCustomersById();  

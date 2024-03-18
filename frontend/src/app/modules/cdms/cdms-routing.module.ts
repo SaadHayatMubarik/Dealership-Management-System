@@ -107,7 +107,7 @@ const routes: Routes = [
       component: ManageCustomerComponent
     },
     {
-      path: 'sell-inventory', 
+      path: 'sell-inventory/:inventoryId', 
       component: SellInventoryComponent
     },
     

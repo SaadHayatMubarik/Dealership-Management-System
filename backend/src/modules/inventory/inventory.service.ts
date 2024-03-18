@@ -21,6 +21,7 @@ import { CustomerType } from '../customer/customer-type.enum';
 import { Investment } from '../investment/entity/Investment';
 import { Investor } from '../investor/entity/Investor';
 import { privateDecrypt } from 'crypto';
+import { PictureService } from '../picture/picture.service';
 
 
 
@@ -153,7 +154,7 @@ export class InventoryService {
     }
 
     async updateInventory(updateInventoryDto: UpdateInventoryDto){
-        const { vehicleVariant, vehicleModel, vehicleMake, vehicleChasisNo, status, comments, bodyColor, costPrice, dateOfPurchase, dateOfSale, demand, engineNo, grade, inventoryId, mileage, modelYear, regNo, vehicleType, buyer } = updateInventoryDto;
+        const { vehicleVariant, vehicleModel, vehicleMake, vehicleChasisNo, status, comments, bodyColor, costPrice, dateOfPurchase, dateOfSale, demand, engineNo, grade, inventoryId, mileage, modelYear, regNo, vehicleType, sellingPrice, buyerId } = updateInventoryDto;
         if(vehicleVariant)
         await this.inventoryRepository.update({inventory_id:inventoryId},{variant:vehicleVariant});
         if(vehicleModel)
@@ -188,8 +189,10 @@ export class InventoryService {
         await this.inventoryRepository.update({inventory_id:inventoryId},{reg_no:regNo});
         if(vehicleType)
         await this.inventoryRepository.update({inventory_id:inventoryId},{vehicleType:vehicleType});
-        if(buyer)
-        await this.inventoryRepository.update({inventory_id:inventoryId},{buyer:buyer});
+        if(sellingPrice)
+        await this.inventoryRepository.update({inventory_id:inventoryId}, {selling_Price:sellingPrice});
+        if(buyerId)
+        await this.inventoryRepository.update({inventory_id:inventoryId},{buyer:{customer_id:buyerId}});
     }
     
 }

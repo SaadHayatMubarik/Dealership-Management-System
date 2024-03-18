@@ -27,19 +27,7 @@
             </div> -->
               
                 <div class="row-form grid">
-                  <div class="col-4">
-                    <div class="p-field">
-                      <span class="p-float-label">
-                        <input
-                          class="p-inputtext-lg"
-                          pInputText
-                          name="vehicleType"
-                          [class.p-disabled]="true"
-                        />
-                        <label htmlFor="username">Make*</label>
-                      </span>
-                    </div>
-                  </div>
+             
 
                   <div class="col-4">
                     <div class="p-field">
@@ -49,8 +37,9 @@
                           pInputText
                           name="make"
                           [class.p-disabled]="true"
+                          [(ngModel)]="make"
                         />
-                        <label htmlFor="username">Make*</label>
+                        <label htmlFor="username">Make</label>
                       </span>
                     </div>
                   </div>
@@ -64,16 +53,13 @@
                           name="model"
                           required
                           [class.p-disabled]="true"
+                          [(ngModel)]="model"
                         />
-                        <label htmlFor="username">Model*</label>
+                        <label htmlFor="username">Model</label>
                       </span>
                     </div>
                   </div>
-                </div>
 
-                <br />
-
-                <div class="row-form grid">
                   <div class="col-4">
                     <div class="p-field">
                       <span class="p-float-label">
@@ -82,16 +68,19 @@
                           pInputText
                           name="variant"
                           [class.p-disabled]="true"
-
+                          [(ngModel)]="variant"
                         />
-
-                        
-                       
-
-                        <label htmlFor="username">Variant*</label>
+                        <label htmlFor="username">Variant</label>
                       </span>
                     </div>
                   </div>
+
+                </div>
+
+                <br />
+
+                <div class="row-form grid">
+               
                   <div class="col-4">
                     <div class="p-field">
                       <span class="p-float-label">
@@ -100,7 +89,9 @@
                           pInputText
                           name="Chasis No"
                           [class.p-disabled]="true"
-                         
+                          [(ngModel)]="chasisNo"
+                          
+
                         />
                         <label htmlFor="username">Chasis No</label>
                       </span>
@@ -115,8 +106,25 @@
                           pInputText
                           name="engineNo"
                           [class.p-disabled]="true"
+                          [(ngModel)]="engineNo"
                         />
                         <label for="float-label">Engine No</label>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <input
+                          class="p-inputtext-lg"
+                          pInputText
+                          name="RegNo"
+                          [class.p-disabled]="true"
+                          [(ngModel)]="regNo"
+
+                        />
+                        <label for="float-label">License Number</label>
                       </span>
                     </div>
                   </div>
@@ -134,12 +142,13 @@
                           locale="en-US"
                           name="costPrice"
                           [class.p-disabled]="true"
+                          [(ngModel)]="costPrice"
                         >
                         </p-inputNumber>
 
                      
 
-                        <label for="float-label">Cost Price*</label>
+                        <label for="float-label">Cost Price</label>
                       </span>
                     </div>
                   </div>
@@ -148,15 +157,13 @@
                       <span class="p-float-label">
                         <p-inputNumber
                           class="p-inputtext-lg"
-                          mode="currency"
-                          currency="PKR"
-                          locale="en-US"
                           name="demand"
                           [class.p-disabled]="true"
+                          [(ngModel)]="demand"
                         >
                         </p-inputNumber>
 
-                        <label for="float-label">Demand*</label>
+                        <label for="float-label">Demand</label>
                       </span>
                     </div>
                   </div>
@@ -168,9 +175,10 @@
                           class="p-inputtext-lg"
                           name="date of purchase"
                           [class.p-disabled]="true"
+                          [(ngModel)]="dateOfPurchase"
                         ></p-calendar>
 
-                        <label>Date Of Purcahse*</label>
+                        <label>Date Of Purcahse</label>
                       </span>
                     </div>
                   </div>
@@ -186,8 +194,9 @@
                           pInputText
                           name="modelYear"
                           [class.p-disabled]="true"
+                          [(ngModel)]="modelYear"
                         />
-                        <label htmlFor="Model Year">Model Year*</label>
+                        <label htmlFor="Model Year">Model Year</label>
                       </span>               
                     </div>
                   </div>
@@ -200,10 +209,11 @@
                           required
                           name="color"
                           [class.p-disabled]="true"
+                          [(ngModel)]="bodyColor"
                         />
 
 
-                        <label htmlFor="username">Body Color*</label>
+                        <label htmlFor="username">Body Color</label>
                       </span>
                     </div>
                   </div>
@@ -216,43 +226,17 @@
                         required
                         name="status"
                         [class.p-disabled]="true"
+                        [(ngModel)]="status"
                       />
-                        <label for="float-label">Status*</label>
+                        <label for="float-label">Status</label>
                       </span>
                     </div>
                   </div>
                 </div>
                 <br />
                 <div class="row-form grid">
-                  <div class="col-4">
-                    <div class="p-field">
-                      <span class="p-float-label">
-                        <input
-                          class="p-inputtext-lg"
-                          pInputText
-                          name="RegNo"
-                          [class.p-disabled]="true"
-                        />
-                        <label for="float-label">License Number</label>
-                      </span>
-                    </div>
-                  </div>
-                  <div class="col-4">
-                    <div class="p-field">
-                      <span class="p-float-label">
-                        <p-inputNumber
-                          class="p-inputtext-lg"
-                          name="milage"
-                          [class.p-disabled]="true"
-                        >
-                        </p-inputNumber>
-
-                       
-
-                        <label for="float-label">Date Of Sale</label>
-                      </span>
-                    </div>
-                  </div>
+              
+              
                   <div class="col-4">
                     <div class="p-field">
                       <span class="p-float-label">
@@ -261,14 +245,13 @@
                           class="p-inputtext-lg"
                           name="date of sale"
                           [required] = "true"
+                        
                         ></p-calendar>
                         <label>Date Of Sale</label>
                       </span>
                     </div>
                   </div>
-                </div>
-                <br />
-                <div class="row-form grid">
+
                   <div class="col-4">
                     <div class="p-field">
                       <span class="p-float-label">
@@ -280,15 +263,16 @@
                           name="Selling Price"
                           pattern="^\d+$"
                           [required]="true" 
-                         
                         >
                         </p-inputNumber>
 
                         <label for="float-label">Selling Price</label>
                       </span>
                     </div>
-                  </div> 
+                  </div>
                 </div>
+                <br />
+              
                 <br />
               <br />
             <div class="sidebar-footer flex justify-content-end">
@@ -324,9 +308,12 @@
                     <span class="p-float-label">
 
                       <p-dropdown
+                      [options]="BuyerCategory"
                         class="p-inputtext-lg"
                         placeholder="Select a Vehicle Type"
-                        name="seller_category"
+                        name="buyer_category"
+                        [(ngModel)]=" SelectedCategory"
+                        (ngModelChange)="getCustomersByType()"
                       ></p-dropdown>
 
                       <label for="float-label"> Buyer Category</label>
@@ -342,7 +329,9 @@
                       optionLabel="name"
                       class="p-inputtext-lg"
                       name="name"
-
+                      [options]="customers"
+                      [(ngModel)]="selectedCustomer"
+                      (ngModelChange)="onCustomerSelectionChange()"
                     ></p-dropdown>
                     <label for="float-label">Buyer Name</label>
 
@@ -350,13 +339,13 @@
                   </div>
                 </div>
 
-                <div class="col-4">
+                <div class="col-4" *ngIf="selectedCustomer !== null">
                   <div class="p-field">
                     <span class="p-float-label">
                       <input class="p-inputtext-lg" 
                       pInputText
                       name="contactNumber"
-                     
+                      [(ngModel)]="phone_no"
                       [class.p-disabled]="true"
                       />
                       <label htmlFor="username">Contact Number</label>
@@ -366,7 +355,7 @@
               </div>
               <br>
 
-              <div class="row-form grid">
+              <div class="row-form grid" *ngIf="selectedCustomer !== null">
                 <div class="col-4">
                   <div class="p-field">
                     <span class="p-float-label">
@@ -374,7 +363,7 @@
                       required
                        pInputText
                        name="email"
-                       
+                       [(ngModel)]="email"
                        [class.p-disabled]="true"
                        
                        />
@@ -389,7 +378,7 @@
                       <input class="p-inputtext-lg" 
                       pInputText
                       name="city"
-                      
+                      [(ngModel)]="city"
                       [class.p-disabled]="true"
                       
                       />
@@ -403,6 +392,7 @@
                       <input class="p-inputtext-lg" 
                       pInputText
                       name="address"
+                      [(ngModel)]="address"
                       [class.p-disabled]="true"
                       />
                       <label for="float-label">Address</label>
@@ -410,11 +400,7 @@
                   </div>
                 </div>
               </div>
-
-              <br>
-
-          
-             
+              <br>             
             </div>
           </div>
           <div class="sidebar-footer flex justify-content-end">
