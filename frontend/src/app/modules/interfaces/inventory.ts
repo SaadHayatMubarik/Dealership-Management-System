@@ -42,6 +42,13 @@ export interface IInventory {
   investmentAmount: number[];
 }
 
+export interface ISellInventory {
+  buyer_Id: number;
+  vehicle_Id: number;
+  date_Of_Sale: string;
+  selling_Price: string;
+  status: string;
+}
 
 
 export interface IVehicleDetails {

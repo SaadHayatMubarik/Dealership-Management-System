@@ -115,15 +115,13 @@
                   <div class="col-4">
                     <div class="p-field">
                       <span class="p-float-label">
-                     
                         <input
                           class="p-inputtext-lg"
                           pInputText
                           name="RegNo"
                           [class.p-disabled]="true"
                           [(ngModel)]="regNo"
-                          [attr.disabled]="regNo !== undefined ? true : null"
-
+                          [attr.disabled]="regNo !== '' ? true : null"
                         />
                         <label for="float-label">License Number</label>
                       </span>
@@ -147,7 +145,6 @@
                         >
                         </p-inputNumber>
 
-                     
 
                         <label for="float-label">Cost Price</label>
                       </span>
@@ -207,12 +204,10 @@
                         <input
                           class="p-inputtext-lg"
                           pInputText
-                       
                           name="color"
                           [class.p-disabled]="true"
                           [(ngModel)]="bodyColor"
                         />
-
 
                         <label htmlFor="username">Body Color</label>
                       </span>
@@ -246,6 +241,7 @@
                           class="p-inputtext-lg"
                           name="date of sale"
                           [required] = "true"
+                          [(ngModel)]="sellInventoryObj.date_Of_Sale"
                         
                         ></p-calendar>
                         <label>Date Of Sale</label>
@@ -264,7 +260,7 @@
                           name="Selling Price"
                           pattern="^\d+$"
                           [required]="true" 
-                          [(ngModel)]="sellingPrice" >
+                          [(ngModel)]="sellInventoryObj.selling_Price" >
                         </p-inputNumber>
                         <label for="float-label">Selling Price</label>
                       </span>

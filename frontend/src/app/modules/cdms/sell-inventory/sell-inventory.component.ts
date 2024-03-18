@@ -3,15 +3,17 @@ import { BaseComponent } from 'src/app/shared/base.component';
 import { NgForm } from '@angular/forms';
 import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
 import { ActivatedRoute } from '@angular/router';
-// import { DatePipe } from '@angular/common';
+
 import { ToastService } from 'src/app/shared/services/toast.service';
 
 
 
+import { ISellInventory } from '../../interfaces/inventory';
+
+
+
 import {
-  DataTableColumn,
-  IDataTableAction,
-  IObject,
+  IObject
 } from 'src/app/shared/interfaces/common';
 @Component({
   selector: 'app-sell-inventory',
@@ -72,8 +74,20 @@ export class SellInventoryComponent extends BaseComponent implements OnInit{
   regNo : string = '' ;
   selectedCustomer:any = '';
 
+  
+  sellInventoryObj: ISellInventory =
+  {
+    buyer_Id:this.buyerId, 
+    vehicle_Id: this.inventoryId, 
+    date_Of_Sale:'',
+    selling_Price:'', 
+    status:this.customerType,
+  }
+
+
+
   @ViewChild('vehicle') Vehicle!: NgForm;
-  @ViewChild('BuyerForm') SellerForm!: NgForm;
+  @ViewChild('BuyerForm') BuyerForm!: NgForm;
   
 
   onNext(){
@@ -111,7 +125,7 @@ export class SellInventoryComponent extends BaseComponent implements OnInit{
       this.regNo = this.vehicleDetails.reg_no
       this.demand = this.vehicleDetails.demand
 
-      console.log("this is reg no", this.regNo)
+      // console.log("this is reg no", this.regNo)
 
  
     }
@@ -164,15 +178,31 @@ getCustomersById(){
       this.address = this.customersDetails.address;
     },
     error: () => {
-      // this.toast.showError('Server Error!');
+      this.toast.showError('Server Error!');
     }
   })
 }
 
 
-
 sellInventory()
 {
+  if (this.BuyerForm.valid){ 
+    this.apiService
+    .postLogin('/inventory/updateInventory', this.sellInventoryObj)
+    .subscribe({
+      next: (response) => {
+        this.toast.showSuccess('Inventory Sold');
+      },
+      error: () => {
+        this.toast.showError('Error Occured. Inventory Not Deleted');
+      },
+    });
+  }
+  else{
+    this.toast.showError("Please fill all the required fields");
+  }
+   
+
 
 }
 }
