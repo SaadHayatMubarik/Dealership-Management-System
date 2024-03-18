@@ -265,7 +265,7 @@
                         </p-inputNumber>
 
                         <div *ngIf="cost.invalid && (cost.dirty || cost.touched)" class="p-error">
-                          <span *ngIf="engineNo.errors?.['required']">
+                          <span *ngIf="cost.errors?.['required']">
                             Please Enter Cost Price
                           </span>
                           <br>
@@ -644,8 +644,8 @@
         </form>
       </p-tabPanel>
 
-      <p-tabPanel header="Seller Details">
-        <!-- [disabled]="!showSecondTab" -->
+      <p-tabPanel header="Seller Details" [disabled]="!showSecondTab">
+        
 
         <form (ngSubmit)="postInventory()" #Seller="ngForm">
           <div class="sidebar-main">
@@ -673,6 +673,7 @@
                         name="seller_category"
                         [(ngModel)]="selectedCategory"
                         (ngModelChange)="getCustomersByType()"
+                        [required] ="true"
                       ></p-dropdown>
 
                       <label for="float-label">Seller Category</label>
@@ -691,6 +692,7 @@
                       name="name"
                       [(ngModel)]="selectedCustomer"
                       (ngModelChange)="onCustomerSelectionChange()"
+                      [required] ="true"
 
                     ></p-dropdown>
                     <label for="float-label">Seller Name</label>
@@ -720,7 +722,7 @@
                   <div class="p-field">
                     <span class="p-float-label">
                       <input class="p-inputtext-lg"
-                      required
+                     
                        pInputText
                        name="email"
                        [(ngModel)]="email"
@@ -795,12 +797,8 @@
               <br> -->
               <div class="sidebar-header">
                 <div class="sh-title">
-                  <h5 style="text-align: center">Investor Details</h5>
-                 
+                  <h5 style="text-align: center">Investor Details</h5>        
                   <br>
-
-                
-
                   <div class="investor_form">
                     <div class="row-form grid" *ngFor="let form of investorForms; let i = index">
                       <div class="col-4">
@@ -813,7 +811,7 @@
                               placeholder="Select a investor"
                               name="investor Name"
                               [(ngModel)]="vehicleInventory.investor[i]"
-
+                              [required] ="true"
                             ></p-dropdown>
                             <label for="float-label">Investor Name*</label>
                           </span>
@@ -833,8 +831,8 @@
                             /> -->
                             
                             <app-numeric-textbox [(controlModel)] ="percentageInvested[i]" 
-                            (controlModelChange)="calculateInvestment(i)">
-
+                            (controlModelChange)="calculateInvestment(i)"
+                            required>
                             </app-numeric-textbox>
                             <!-- <label for="float-label"
                               >Enter percentage %*  
@@ -853,7 +851,6 @@
                               required
                               [ngModel]="amountInvested[i]"
                               disabled
-                              
                             />
                             <label for="float-label"
                               >Amount Invested
@@ -862,15 +859,8 @@
                           </span>
                         </div>
                       </div>
-
-                      <!-- <div class="row-form grid" > -->
-
-                      <!-- </div> -->
                     </div>
                     <br />
-
-
-
                   </div>
                   <div class="row-form grid">
                     <div class="col-4">
@@ -895,7 +885,6 @@
                             class="p-inputtext-lg"
                             pInputText
                             name="totalInvestment"
-                            required
                             disabled
                             [(ngModel)]="remainingPercentage" 
                             

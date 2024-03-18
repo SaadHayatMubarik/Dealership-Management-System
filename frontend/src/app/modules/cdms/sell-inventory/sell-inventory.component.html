@@ -12,7 +12,7 @@
     
     <p-tabView [(activeIndex)]="activeTabIndex">
       <p-tabPanel header="Vehicle Details">
-        <form  >
+        <form (ngSubmit)="onNext()" #vehicle="ngForm" >
           <div class="sh-title">
             <h5 style="text-align: center">Vehicle Details</h5>
             <br>
@@ -51,7 +51,7 @@
                           class="p-inputtext-lg"
                           pInputText
                           name="model"
-                          required
+                        
                           [class.p-disabled]="true"
                           [(ngModel)]="model"
                         />
@@ -116,12 +116,14 @@
                   <div class="col-4">
                     <div class="p-field">
                       <span class="p-float-label">
+                     
                         <input
                           class="p-inputtext-lg"
                           pInputText
                           name="RegNo"
                           [class.p-disabled]="true"
                           [(ngModel)]="regNo"
+                          [attr.disabled]="regNo !== undefined ? true : null"
 
                         />
                         <label for="float-label">License Number</label>
@@ -206,7 +208,7 @@
                         <input
                           class="p-inputtext-lg"
                           pInputText
-                          required
+                       
                           name="color"
                           [class.p-disabled]="true"
                           [(ngModel)]="bodyColor"
@@ -223,7 +225,7 @@
                         <input
                         class="p-inputtext-lg"
                         pInputText
-                        required
+                      
                         name="status"
                         [class.p-disabled]="true"
                         [(ngModel)]="status"
@@ -263,9 +265,8 @@
                           name="Selling Price"
                           pattern="^\d+$"
                           [required]="true" 
-                        >
+                          [(ngModel)]="sellingPrice" >
                         </p-inputNumber>
-
                         <label for="float-label">Selling Price</label>
                       </span>
                     </div>
@@ -286,10 +287,10 @@
         </form>
       </p-tabPanel>
 
-      <p-tabPanel header="Buyer Details">
+      <p-tabPanel header="Buyer Details" [disabled]="!showSecondTab">
         <!-- [disabled]="!showSecondTab" -->
 
-        <form  #Seller="ngForm">
+        <form (ngSubmit)="sellInventory()" #BuyerForm="ngForm">
           <div class="sidebar-main">
             <div class="sidebar-header">
               <div class="sh-title">
@@ -360,7 +361,7 @@
                   <div class="p-field">
                     <span class="p-float-label">
                       <input class="p-inputtext-lg"
-                      required
+                  
                        pInputText
                        name="email"
                        [(ngModel)]="email"

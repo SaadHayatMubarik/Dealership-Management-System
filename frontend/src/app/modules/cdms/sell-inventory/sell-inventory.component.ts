@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BaseComponent } from 'src/app/shared/base.component';
 import { NgForm } from '@angular/forms';
 import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
 import { ActivatedRoute } from '@angular/router';
 // import { DatePipe } from '@angular/common';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 
 
@@ -31,9 +32,15 @@ export class SellInventoryComponent extends BaseComponent implements OnInit{
   SelectedCategory:string = '';
   customers: any[] = []
   buyerId: number = 0;
+  sellingPrice:number=0;
+
+  dateofsale: string ='';
+  
 
 
-  constructor(private apiService:ApiHelperService, private route: ActivatedRoute){
+  constructor(private apiService:ApiHelperService, 
+     private route: ActivatedRoute,
+     private toast: ToastService){
     super();
   }
 
@@ -47,7 +54,6 @@ export class SellInventoryComponent extends BaseComponent implements OnInit{
     
     });
 
-
   }
 
   dateOfPurchase: Date | null = null;
@@ -60,16 +66,28 @@ export class SellInventoryComponent extends BaseComponent implements OnInit{
   engineNo : string = '' ;
   costPrice : string = '' ;
   demand : string = '' ;
-  // dateOfPurchase : string = '' ;
   modelYear : string = '' ;
   bodyColor : string = '' ;
   status : string = '' ;
   regNo : string = '' ;
   selectedCustomer:any = '';
 
- 
+  @ViewChild('vehicle') Vehicle!: NgForm;
+  @ViewChild('BuyerForm') SellerForm!: NgForm;
+  
 
+  onNext(){
 
+    if(this.Vehicle.valid)
+    {
+          this.activeTabIndex = 1;
+          this.showSecondTab = true;
+    }
+  
+    else {
+      this.toast.showError("Please fill all the required fields");
+    }
+    }
 
   getvehicleDetail(){
     this.apiService
@@ -86,13 +104,14 @@ export class SellInventoryComponent extends BaseComponent implements OnInit{
       this.chasisNo = this.vehicleDetails.chasis_no
       this.engineNo = this.vehicleDetails.engine_no
       this.costPrice = this.vehicleDetails.price
-      // this.dateOfPurchase = this.vehicleDetails.date_of_purchase
       this.dateOfPurchase = new Date(this.vehicleDetails.date_of_purchase);
       this.modelYear = this.vehicleDetails.year
       this.bodyColor = this.vehicleDetails.color
       this.status = this.vehicleDetails.status
       this.regNo = this.vehicleDetails.reg_no
       this.demand = this.vehicleDetails.demand
+
+      console.log("this is reg no", this.regNo)
 
  
     }
@@ -118,7 +137,7 @@ onCustomerSelectionChange(): void {
   if (this.selectedCustomer) {
       // Assuming the customer object has an 'id' property
      this.buyerId=  this.selectedCustomer.customer_id;
-      console.log(this.buyerId);
+     
 
   }
   this.getCustomersById();  
@@ -152,4 +171,8 @@ getCustomersById(){
 
 
 
+sellInventory()
+{
+
+}
 }

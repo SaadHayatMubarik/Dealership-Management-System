@@ -10,7 +10,7 @@ import {
 import {
   IInventory,
   IStockAttributeValue,
-  IVehicleTypeAttribute,
+
   IVehicleTypeAttributeDto,
 } from '../../interfaces/inventory';
 
@@ -345,21 +345,26 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
     }
 
   postInventory() {
-   
-      console.log('this.vehicleInventory', this.vehicleInventory);
+
+    if (this.SellerForm.valid){ 
       this.apiService
-        .postLogin('/inventory/addInventory', this.vehicleInventory,)
-        .subscribe({
-          next: (response) => {
-            this.toast.showSuccess('New Inventory Added');
-            this.closeModal();
-            this.getInventory();
-          },
-          error: () => {
-            this.toast.showError();
-            console.log(this.vehicleInventory);
-          },
-        });
+      .postLogin('/inventory/addInventory', this.vehicleInventory,)
+      .subscribe({
+        next: (response) => {
+          this.toast.showSuccess('New Inventory Added');
+          this.closeModal();
+          this.getInventory();
+        },
+        error: () => {
+          this.toast.showError();
+          console.log(this.vehicleInventory);
+        },
+      });
+    }
+    else{
+      this.toast.showError("Please fill all the required fields");
+    }
+     
    
   }
 
