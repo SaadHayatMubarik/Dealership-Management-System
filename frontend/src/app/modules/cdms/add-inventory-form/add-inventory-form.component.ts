@@ -110,7 +110,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
     this.getVehicleTypes();
     this.getInvestors();
     // this.getCustomersByType();
-    // this.getInventory();
+    this.getInventory();
     // this.vehicleTypes = this.apiService.getVehicleTypes();
     // this.onVehicleTypeSelected();
 

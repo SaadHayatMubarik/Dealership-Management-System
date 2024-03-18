@@ -37,7 +37,7 @@ export class SellInventoryComponent extends BaseComponent implements OnInit{
   sellingPrice:number=0;
   vehicleStatus: string = 'SOLD'
   dateofsale: string ='';
-  
+
 
 
   constructor(private apiService:ApiHelperService, 
@@ -204,8 +204,9 @@ sellInventoryObj: ISellInventory =
 
 sellInventory()
 {
-  console.log(this.sellInventoryObj)
+
   // if (this.BuyerForm.valid){ 
+
     this.apiService
     .put('/inventory/updateInventory/sellInventory', this.sellInventoryObj)
     .subscribe({
@@ -221,7 +222,7 @@ sellInventory()
   // else{
   //   this.toast.showError("Please fill all the required fields");
   // }
-   
+
 
 
 }
