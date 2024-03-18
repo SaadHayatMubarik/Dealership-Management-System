@@ -34,9 +34,8 @@ export class SellInventoryComponent extends BaseComponent implements OnInit{
   SelectedCategory:string = '';
   customers: any[] = []
   buyerId: number = 0;
-  sellingPrice:number=0;
 
-  dateofsale: string ='';
+
   
 
 
@@ -186,7 +185,7 @@ getCustomersById(){
 
 sellInventory()
 {
-  if (this.BuyerForm.valid){ 
+
     this.apiService
     .postLogin('/inventory/updateInventory', this.sellInventoryObj)
     .subscribe({
@@ -197,10 +196,8 @@ sellInventory()
         this.toast.showError('Error Occured. Inventory Not Deleted');
       },
     });
-  }
-  else{
-    this.toast.showError("Please fill all the required fields");
-  }
+  
+ 
    
 
 

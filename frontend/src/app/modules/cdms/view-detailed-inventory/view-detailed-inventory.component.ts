@@ -4,6 +4,7 @@ import { IObject} from 'src/app/shared/interfaces/common';
 import { ToastService } from 'src/app/shared/services/toast.service';
 import { BaseComponent } from 'src/app/shared/base.component';
 import { ActivatedRoute } from '@angular/router';
+import { INotification } from '../../interfaces';
 
 @Component({
   selector: 'app-view-detailed-inventory',
@@ -12,7 +13,10 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ViewDetailedInventoryComponent extends BaseComponent implements OnInit {
 
-constructor(private apiService:ApiHelperService, private route: ActivatedRoute){
+constructor(private apiService:ApiHelperService, 
+  private route: ActivatedRoute,
+  private toast:ToastService)
+  {
   super();
 }
 
@@ -28,6 +32,11 @@ images: any[] = [
   // Add more image objects as needed
 ];
 
+notification : INotification = 
+{
+  inventoryId: 0,
+  showroomId: this.showroomId,
+}
 
 
   ngOnInit() {
@@ -35,10 +44,14 @@ images: any[] = [
     this.route.params.subscribe(params => {
       this.inventoryId = params['inventoryId']; 
       this.getvehicleDetail();
+      this.notification.inventoryId=this.inventoryId;
     });
-
-    this.getvehicleDetail();
+  
+    
+    // this.getvehicleDetail();
   }
+
+ 
 
   getvehicleDetail(){
     this.apiService
@@ -62,6 +75,28 @@ images: any[] = [
     else{
       return false;
     }
+
+  }
+
+
+  sendNotification()
+  {
+ 
+    this.apiService
+    .postLogin('/notification/sendRequest',this.notification )
+    .subscribe({
+      next: (response) => {
+        this.toast.showSuccess('Notification Sent');
+        console.log(this.notification)
+      },
+      error: () => {
+        this.toast.showError('Error Occured.');
+        console.log(this.notification)
+      },
+    });
+  
+  
+
 
   }
 

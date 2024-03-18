@@ -7,7 +7,7 @@
     <div class="grid">
       <div class="col-12 lg:col-6 xl:col-12">
         <div class="card mb-0 color">
-          <p-tabView>
+          <p-tabView (onTabChange)="handleTabChange($event)">
             <p-tabPanel header="Recieved">
               <div class="notification-tile">
                 <div class="notification-header">
@@ -35,22 +35,27 @@
             <p-tabPanel header="Sent">
                 <div class="notification-tile">
                     <div class="notification-header">
+                      <span> You have sent a request to: </span>
                       <b>Showroom Name</b>
-                      <span> has sent you a request to sell this car </span>
-                      <b>Car Name</b>
                     </div>
+                    <div class="notification-header">
+                      <b>Toyota Corolla 2019</b>
+                    </div>
+                  
+                   
                     <div class="notification-details">
                       <span class="notification-time"
                         >Date & Time: [Date & Time]</span
                       >
                     </div>
-                    <br>
+                    
                     <div class="notification-details">
                         <span class="notification-time"
-                          >Date & Time: [Date & Time]</span
+                          >Status: Pending</span
                         >
                       </div>
-                  </div> </p-tabPanel>
+                  </div>
+            </p-tabPanel>
           </p-tabView>
         </div>
       </div>

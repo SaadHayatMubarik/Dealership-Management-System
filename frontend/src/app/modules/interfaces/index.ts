@@ -53,3 +53,9 @@ export interface IChangePassword {
   oldPassword: string;
   newPassword: string;
 }
+
+export interface INotification 
+{
+  inventoryId:  number;
+  showroomId : string | null;
+}
