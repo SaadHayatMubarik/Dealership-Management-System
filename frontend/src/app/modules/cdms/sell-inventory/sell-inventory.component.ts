@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { ToastService } from 'src/app/shared/services/toast.service';
 
-
+import { Router } from '@angular/router';
 
 import { ISellInventory } from '../../interfaces/inventory';
 
@@ -34,14 +34,16 @@ export class SellInventoryComponent extends BaseComponent implements OnInit{
   SelectedCategory:string = '';
   customers: any[] = []
   buyerId: number = 0;
+  sellingPrice:number=0;
+  vehicleStatus: string = 'SOLD'
+  dateofsale: string ='';
 
-
-  
 
 
   constructor(private apiService:ApiHelperService, 
      private route: ActivatedRoute,
-     private toast: ToastService){
+     private toast: ToastService,
+     private router: Router){
     super();
   }
 
@@ -74,14 +76,7 @@ export class SellInventoryComponent extends BaseComponent implements OnInit{
   selectedCustomer:any = '';
 
   
-  sellInventoryObj: ISellInventory =
-  {
-    buyer_Id:this.buyerId, 
-    vehicle_Id: this.inventoryId, 
-    date_Of_Sale:'',
-    selling_Price:'', 
-    status:this.customerType,
-  }
+ 
 
 
 
@@ -103,12 +98,13 @@ export class SellInventoryComponent extends BaseComponent implements OnInit{
     }
 
   getvehicleDetail(){
+    this.sellInventoryObj.inventoryId = this.inventoryId;
     this.apiService
   .get(`/inventory/getInventoryDetails/${this.inventoryId}`)
   .subscribe(
     (data) => {
       this.vehicleDetails = data;
-      console.log(data)
+      // console.log(data)
 
       // this.dateOfPurchase = this.datePipe.transform(this.vehicleDetails.date_of_purchase, 'yyyy-MM-dd');
       this.make = this.vehicleDetails.make
@@ -137,7 +133,7 @@ export class SellInventoryComponent extends BaseComponent implements OnInit{
     .get(`/customer/getCustomer/${this.showroomId}/${this. SelectedCategory}/${this.customerType}`)
     .subscribe({
       next: (response) => {
-        console.log(response);
+        // console.log(response);
         this.customers = response;
        
       },
@@ -165,6 +161,7 @@ address : string = '' ;
 
 
 getCustomersById(){
+  this.sellInventoryObj.buyerId = this.buyerId;
   this.apiService
   .get(`/customer/getCustomerDetails/${this.buyerId}`)
   .subscribe({
@@ -181,24 +178,51 @@ getCustomersById(){
     }
   })
 }
-
+sellInventoryObj: ISellInventory =
+{
+  inventoryId: 0, 
+  vehicleType: '',
+  vehicleMake: '',
+  vehicleModel :'',
+  vehicleVariant : '',
+  modelYear : 0,
+  vehicleChasisNo:  '',
+  costPrice :0,
+  demand : 0,
+  dateOfPurchase: '',
+  dateOfSale:'',
+  bodyColor : '',
+  engineNo :  '',
+  comments: '',
+  grade: 0,
+  status:this.vehicleStatus,
+  regNo: '',
+  mileage: 0,
+  sellingPrice:'', 
+  buyerId:0
+}
 
 sellInventory()
 {
 
+  // if (this.BuyerForm.valid){ 
+
     this.apiService
-    .postLogin('/inventory/updateInventory', this.sellInventoryObj)
+    .put('/inventory/updateInventory/sellInventory', this.sellInventoryObj)
     .subscribe({
       next: (response) => {
+        this.router.navigate(['/add-inventory']);
         this.toast.showSuccess('Inventory Sold');
       },
       error: () => {
         this.toast.showError('Error Occured. Inventory Not Deleted');
       },
     });
-  
- 
-   
+  // }
+  // else{
+  //   this.toast.showError("Please fill all the required fields");
+  // }
+
 
 
 }
