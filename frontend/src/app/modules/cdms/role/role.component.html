@@ -35,14 +35,13 @@
                 <div class="p-field ">
                     <label> <b>Role Name:</b> </label> <br>
                     <input
-                    name="username"
-                    type="username"
+                    name="role name"
+                    type="text"
                     pInputText
-                    pTooltip="Should contain atleast 4 characters"
                     class="w-full md:w-20rem mb-5"
                     style="padding: 1rem"
                     minlength="4"
-                    maxlength="20"
+                    maxlength="30"
                     pattern="^[A-Za-z0-9_-]+$"
                     required
                   />
@@ -60,13 +59,16 @@
                         Please avoid any space.</span>  
                   </div> -->
             </div>
+            
+        
           </div>
+        </form>
           <br>
 
           <div class="p-grid">
             <div class="p-col">
                 <h4 style="text-align: center;">
-                    Permission Name
+                    Permissions
                     </h4>
                 <p-table [value]="modules" [paginator]="false" [rows]="10">
                     <ng-template pTemplate="header">
@@ -98,8 +100,7 @@
                 </p-table>
             </div>
         </div>
-
-        </form>
+<!--  -->
         </div>
 
       </div>

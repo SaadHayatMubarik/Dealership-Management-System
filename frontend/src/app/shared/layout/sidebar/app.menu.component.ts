@@ -9,11 +9,12 @@ import { LayoutService } from '../service/app.layout.service';
 export class AppMenuComponent implements OnInit {
 
     model: any[] = [];
+    menuItems:any
 
     constructor(public layoutService: LayoutService) { }
 
     ngOnInit() {
-        this.model = [
+      this.model = [
             {
                 label: 'Home',
                 items: [
