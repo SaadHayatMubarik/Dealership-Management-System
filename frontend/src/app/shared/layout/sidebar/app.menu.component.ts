@@ -21,7 +21,7 @@ export class AppMenuComponent implements OnInit {
                 ]
             },
             {
-                label: 'Manage Inventory',
+                label: 'Inventory',
                 items: [
                     { label: 'Vehicle Type', 
                     icon: 'pi pi-fw  pi-truck', 
@@ -49,16 +49,25 @@ export class AppMenuComponent implements OnInit {
                 label: 'Management',
                 items: [
                     { label: 'Manage Users', 
-                    icon: 'pi pi-fw pi-users', 
+                    icon: 'pi pi-fw pi-user', 
                     routerLink: ['/cdms/manage-employee'] },
                    
                     { label: 'Manage Investors', 
-                    icon: 'pi pi-fw pi-money-bill', 
+                    icon: 'pi pi-fw pi-users', 
                     routerLink: ['/cdms/investors'] },
 
                     { label: 'Manage Customers', 
-                    icon: 'pi pi-fw pi-dollar', 
+                    icon: 'pi pi-fw pi-user-plus', 
                     routerLink: ['/cdms/customers'] },
+                ],
+                
+            },
+            {
+                label: 'Roles/Permission',
+                items: [
+                    { label: 'Roles', 
+                    icon: 'pi pi-fw pi-plus', 
+                    routerLink: ['/cdms/roles'] },
                 ],
                 
             },

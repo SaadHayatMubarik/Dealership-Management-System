@@ -45,6 +45,7 @@ import { ManageInvestorsComponent } from './manage-investors/manage-investors.co
 import { ManageCustomerComponent } from './manage-customer/manage-customer.component';
 import { SellInventoryComponent } from './sell-inventory/sell-inventory.component';
 import { RoleComponent } from './role/role.component';
+import { TableModule } from 'primeng/table';
 
 
 
@@ -106,6 +107,7 @@ import { RoleComponent } from './role/role.component';
     DataViewModule,
     RadioButtonModule,
     DialogModule,
+    TableModule,
 
 
   ],
