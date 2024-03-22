@@ -86,6 +86,86 @@
       </div>
     </div>
   </p-sidebar>  
+  
+
+
+  <p-sidebar *ngIf="updateSidebarVisible" [(visible)]="updateSidebarVisible" position="right" [style]="{ width:'40rem'}">
+    <div class="sidebar-main">
+      <div class="sidebar-header">
+        <div class="sh-title">
+          <h3 style="text-align: center;">
+            Vehicle Type Attribute Update
+          </h3>
+          <br>
+        </div>
+        <div class="sh-toolbar">
+        </div>
+      </div>
+      <div class="sidebar-content">
+        <div class="card-grey">
+          <!-- <form action=""> -->
+          <div class="row-form grid">
+              <div class="col-4">
+                <div class="p-field">
+                 <label>Select a vehicle type:</label> <br>
+                  <p-dropdown 
+                  [(ngModel)]="vehicleTypeAttribute.vehicleType" 
+                  [options]="vehicleTypes"  
+                  optionLabel="type_name"
+                  [required]="true"></p-dropdown>
+                    <br>                
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="p-field">
+                  <label>Attribute Name:</label> <br>
+                  <app-textbox [(controlModel)]="vehicleTypeAttribute.vehicleAttributeName"
+                  pattern="^(?!\s)(?!.*\s$).+$"
+                  required
+                  ></app-textbox><br>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="p-field">
+                  <label>Select an input type:</label><br>
+                  <p-dropdown
+                  [options]="inputTypes"
+                  [(ngModel)]="vehicleTypeAttribute.attributeInputType"
+                  placeholder="Input type"
+                  [required]="true"
+                ></p-dropdown><br>
+                </div>  
+              </div>
+          </div>
+          <br>
+          <div class="row-form grid">
+            <div class="col-4">
+              <div class="p-field">
+                <label>Enter 1 or more Values:</label> <br>
+                  <p-chips 
+                  [(ngModel)]="vehicleTypeAttribute.vehicleAttributeValue"
+                   separator="," 
+                   placeholder="eg: red, green, yellow"
+                   pattern="^(?!\s)(?!.*\s$).+$"
+                   required>
+                  </p-chips>
+              </div>
+            </div>
+          </div>
+
+
+        <!-- </form> -->
+
+        </div>
+      </div>
+      <div class="sidebar-footer flex justify-content-end">
+         <app-button label="Update" styleClass="p-button-sm p-button-rounded"></app-button>
+      </div>
+    </div>
+  </p-sidebar>
+
+
+
           
           
         

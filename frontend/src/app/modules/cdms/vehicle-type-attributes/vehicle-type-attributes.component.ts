@@ -37,12 +37,16 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
   selectedVehicleTypeAttributeId: any; 
   inputTypes: any[] = ['TEXT', 'NUMBER', 'DATE', 'DROPDOWN'];
   
+  modalVisible = false;
+  updateSidebarVisible = false; 
+ 
   
   columns: DataTableColumn[] = [];
   actions: IDataTableAction[] = [];
   data: IObject[] = [];
   
   showroomID :any; 
+  vehicle_attribute_id: string = '';
   
   constructor(private readonly apiService: ApiHelperService, 
               private dialogService: DialogControlService ,
@@ -108,6 +112,11 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
         icon: 'pi pi-file-edit',
         command: (event) => {
           
+          this.vehicle_attribute_id = event.vehicleAttributeId;
+          console.log(this.vehicle_attribute_id);
+          this.updateSidebarVisible = true;
+          
+
         },
       },
     ];

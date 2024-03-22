@@ -55,7 +55,7 @@ handleTabChange(event: any) {
 getNotification(){
   console.log(this.status[this.selectedTabIndex]);
   console.log(this.showroomId);
-  this.apiService.get(`/notification/updateRequestStatus/${this.showroomId}/${this.status[this.selectedTabIndex]}`).subscribe((data) => {
+  this.apiService.get(`/notification/getRequest/${this.showroomId}/${this.status[this.selectedTabIndex]}`).subscribe((data) => {
     this.data = data;
     console.log( this.data);
     console.log(this.status[this.selectedTabIndex]);
