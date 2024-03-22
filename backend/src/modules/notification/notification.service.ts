@@ -32,7 +32,7 @@ export class NotificationService {
          if(status.toLowerCase() == "sent")
         return await this.notficationRepository.find({relations:['inventory','inventory.showroom'],where:{senderShowroom:{showroom_id:showroomId}}});
         if(status.toLowerCase() == "received")
-        return await this.notficationRepository.find({relations:['senderShowroom'],where:{inventory:{showroom:{showroom_id:showroomId}}}});
+        return await this.notficationRepository.find({relations:['inventory','senderShowroom'],where:{inventory:{showroom:{showroom_id:showroomId}}}});
     }
 
     // async getRequestReceive(showroomId: number): Promise<Notification[]>{
