@@ -128,6 +128,118 @@
       
       </div>
     </p-sidebar>  
+
+
+    <p-sidebar *ngIf="updateSidebarVisible" [(visible)]="updateSidebarVisible" position="right" [style]="{width: '40% '}" >
+      <div class="sidebar-main">
+        <div class="sidebar-header">
+          <div class="sh-title">
+            <h3 style="text-align: center;">
+            Update Investor Information
+            </h3><br>
+          </div>
+        </div>
+        
+        <form (ngSubmit)="onSubmit()" #investorForm="ngForm">
+        <div class="sidebar-content">
+          <div class="card-grey">
+            <div class="row-form grid">
+              <div class="col-4">
+                  <div class="p-field">
+                      <label>Full Name:</label> <br>
+                      <input
+                      name="fullName"
+                      pInputText
+                      class="w-full md:w-20rem mb-5"
+                      style="padding: 1rem"
+                      minlength="4"
+                      maxlength="30"
+                      required
+                      [(ngModel)]="investor.investorName"
+                      (keypress)="validateAlphabeticInput($event)"
+                      pattern="^\S(?:\s*\S)*$"
+                      #fullName ='ngModel'
+                      
+                    />
+                    </div> 
+                    <div *ngIf="fullName.invalid && (fullName.dirty || fullName.touched)" class="p-error">
+                      <span *ngIf="fullName.errors?.['required']">
+                        Full Name Required.</span>   
+                        <br>
+                        <span *ngIf="fullName.errors?.['pattern']">
+                          Avoid unneccessary spaces.</span>  
+                    </div>
+                
+                    
+                <div class="p-field">
+                  <label>Cnic:</label> <br>
+                  <div class="p-field">
+                    <input
+                    name="cnic"
+                    type="text"
+                    pInputText
+                    class="w-full md:w-20rem mb-5"
+                    style="padding: 1rem"
+                    required
+                    minlength="13"
+                    maxlength="13"
+                    pattern="[0-9]{13}"
+                    [(ngModel)]="investor.cnic"
+                    (keypress)="validateNumericInput($event)"
+                    #cnic ='ngModel'
+                  />
+                  <div *ngIf="cnic.invalid && (cnic.dirty || cnic.touched)" class="p-error">
+                    <span *ngIf="cnic.errors?.['required']">
+                      Cnic is required.</span>   
+                      <br>
+                      <span *ngIf="cnic.errors?.['pattern']">
+                        cnic must be 13  digits long and contain only numbers.</span>  
+                  </div>
+                  </div> 
+                </div>
+              
+
+                <div class="p-field">
+                  <label>Phone Number</label> <br>
+                  <input
+                      name="phone number"
+                      type="text"
+                      pInputText
+                      class="w-full md:w-20rem mb-5"
+                      style="padding: 1rem"
+                      required
+                      minlength="11"
+                      maxlength="11"
+                      [(ngModel)]="investor.phoneNo"
+                      pattern="^(03\d{9})$"
+                      (keypress)="validateNumericInput($event)"
+                      #phoneNo ='ngModel'
+                    />
+                    <div *ngIf="phoneNo.invalid && (phoneNo.dirty || phoneNo.touched)" class="p-error">
+                      <span *ngIf="phoneNo.errors?.['required']">
+                       Phone Number is required.</span>   
+                        <br>
+                        <span *ngIf="phoneNo.errors?.['pattern']">
+                          Phone Number must be 11 digits long and should start with 03.</span>  
+                    </div>
+                    
+                </div> 
+              </div>
+            </div>
+            <br>
+          </div>
+        </div>
+        <div class="sidebar-footer flex justify-content-end">
+        <app-button
+        label="Save"
+        styleClass="p-button-sm p-button-rounded"
+        type="submit"
+        ></app-button>
+        </div>
+      </form>
+      
+      </div>
+    </p-sidebar>  
             
             
           

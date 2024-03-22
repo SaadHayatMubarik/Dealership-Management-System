@@ -49,6 +49,7 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
   actions: IDataTableAction[] = [];
   data: IObject[] = [];
 
+  updateSidebarVisible:boolean = false;
 
 
   constructor(private apiService : ApiHelperService, private toast : ToastService )
@@ -139,6 +140,7 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
       command: (event) => {
         // this.customerId = event.customer_id;
         // this.updateSidebarVisible = true;
+        this.updateSidebarVisible = true;
       },
     }
    ];

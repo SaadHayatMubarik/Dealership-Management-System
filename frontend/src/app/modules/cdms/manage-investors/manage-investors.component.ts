@@ -36,6 +36,8 @@ export class ManageInvestorsComponent extends BaseComponent implements OnInit{
   actions: IDataTableAction[] = [];
   data: IObject[] = [];
 
+  updateSidebarVisible:boolean = false;
+
   constructor(private apiService : ApiHelperService, private toast : ToastService )
   {
     super();
@@ -69,9 +71,10 @@ export class ManageInvestorsComponent extends BaseComponent implements OnInit{
           },
      
       {
-        label: 'View',
-        icon: 'pi pi-eye',
+        label: 'Update',
+        icon: 'pi pi-pencil',
         command: () => {
+          this.updateSidebarVisible = true;
         },
       }
     ];
