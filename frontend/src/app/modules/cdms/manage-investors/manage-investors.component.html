@@ -184,17 +184,17 @@
                     minlength="13"
                     maxlength="13"
                     pattern="[0-9]{13}"
-                    [(ngModel)]="cnic"
+                    [(ngModel)]="cnic_no"
                     (keypress)="validateNumericInput($event)"
-                  
+                    #cnic ='ngModel'
                   />
-                  <!-- <div *ngIf="cnic.invalid && (cnic.dirty || cnic.touched)" class="p-error">
+                  <div *ngIf="cnic.invalid && (cnic.dirty || cnic.touched)" class="p-error">
                     <span *ngIf="cnic.errors?.['required']">
                       Cnic is required.</span>   
                       <br>
                       <span *ngIf="cnic.errors?.['pattern']">
                         cnic must be 13  digits long and contain only numbers.</span>  
-                  </div> -->
+                  </div>
                   </div> 
                 </div>
               
