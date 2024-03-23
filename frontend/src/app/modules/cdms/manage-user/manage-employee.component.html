@@ -173,7 +173,7 @@
                     maxlength="20"
                     pattern="^[A-Za-z0-9_-]+$"
                     required
-                    [(ngModel)]="user.username"
+                    [(ngModel)]="user_username"
                     #username = "ngModel"
                   />
                   </div> 
@@ -203,7 +203,7 @@
                   style="padding: 1rem"
                   required
                   email
-                  [(ngModel)]="user.email"
+                  [(ngModel)]="user_email"
                   #email = "ngModel"
                 />
 
@@ -220,38 +220,13 @@
              
 
               <div class="p-field">
-                <label>Password:</label> <br>
-                <p-password
-                name="password"
-                styleClass="mb-5"
-                inputStyleClass="w-full p-3 md:w-20rem"
-                pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
-                required
-                [toggleMask]="false"
-                [(ngModel)]="user.password"
-                [feedback]="false"
-                pTooltip="Atleast one upper case, one lowercase, a number and a special character required."
-                #password = 'ngModel'
-              >
-              </p-password>
-              <div *ngIf="password.invalid && (password.dirty || password.touched)" class="p-error">
-                <span *ngIf="password.errors?.['required']">
-                  Please Enter Password.</span>   
-                
-                  <span *ngIf="password.errors?.['pattern']">
-                    Please Enter A Valid Password.</span>  
-              </div>
-              </div>
-             
-
-              <div class="p-field">
                 <p-dropdown
                 [required]="true"
-                name="password"
+                name="role"
                 [options]="roles"
-                 [(ngModel)]="user.role" 
-                  [showClear]="true" 
-                  placeholder="Select a Role"
+                [(ngModel)]="user_role" 
+                [showClear]="true" 
+                placeholder="Select a Role"
                   
                   ></p-dropdown>
               </div>
@@ -265,7 +240,7 @@
 
       </div>
       <div class="sidebar-footer flex justify-content-end">
-        <app-button label="Save" styleClass="p-button-sm p-button-rounded" (onclick)="onSubmit()" ></app-button>
+        <app-button label="Update" styleClass="p-button-sm p-button-rounded" (onclick)="onSubmit()" ></app-button>
       </div>
     </div>
   </p-sidebar>  

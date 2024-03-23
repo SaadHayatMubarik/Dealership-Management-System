@@ -138,9 +138,11 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
       label: 'Update',
       icon: 'pi pi-pencil',
       command: (event) => {
-        // this.customerId = event.customer_id;
-        // this.updateSidebarVisible = true;
+        this.customerId = event.customer_id;
+       console.log(this.customerId);
         this.updateSidebarVisible = true;
+        this.getCustomerById();
+
       },
     }
    ];
@@ -183,10 +185,45 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
 
 
   getCustomer(){
-    console.log(this.customer.category);
+   
     this.apiService.get(`/customer/getCustomer/${this.customer.showroomId}/${this.category[this.selectedTabIndex]}`).subscribe((data) => {
       console.log(data);
       this.data = data;
     });
   }
+
+  
+  customerById:any;
+
+  customer_category: string = '';
+  customer_name: string = '';
+  customer_type: string = '';
+  customer_email: string = '';
+  customer_phoneNo: string = '';
+  customer_cnic: string = '';
+  customer_address: string = '';
+  customer_city: string = '';
+  customer_province: string = '';
+
+
+  getCustomerById(){
+    this.apiService.get(`/customer/getCustomerDetails/${this.customerId}`).subscribe((data) => {
+      console.log(data);
+      this.customerById = data;
+
+      this.customer_category = this.customerById.catagory;
+      this.customer_name = this.customerById.name;
+      this.customer_phoneNo = this.customerById.phoneNo;
+      this.customer_email = this.customerById.email;
+      this.customer_province = this.customerById.province;
+      this.customer_city = this.customerById.city;
+      this.customer_address = this.customerById.address;
+      this.customer_type = this.customerById.type;
+      this.customer_cnic = this.customerById.cnic;
+      
+    
+    });
+
+  }
 }
+
