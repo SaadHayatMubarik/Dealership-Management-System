@@ -91,8 +91,9 @@ export class ManageEmployeeComponent extends BaseComponent implements OnInit {
         label: 'Update',
         icon: 'pi pi-pencil',
         command: (event) => {
+          this.userId = event.userId;
           this.updateSidebarVisible = true;
-
+          this.getUserById();
         },
       },
 
@@ -130,7 +131,29 @@ export class ManageEmployeeComponent extends BaseComponent implements OnInit {
   getemployee(){
     this.apiService.get(`/auth/getUsers/${this.user.showroomId}`).subscribe((data) => {
       this.data = data;
+     
     });
+  }
+
+  userById: any;
+  user_username : string = '';
+  user_email : string = '';
+  user_role: string = '';
+
+  getUserById(){
+    this.apiService.get(`/auth/getUsers/${this.userId}`).subscribe((data) => {
+      this.userById = data;
+      console.log('user info: ', this.userById);
+     
+      this.user_username = this.userById.username;
+      console.log('username:', this.user_username)
+
+
+      this.user_email = this.userById.email;
+      this.user_role = this.userById.role;
+
+    });
+
   }
 
 }
