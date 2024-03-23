@@ -68,11 +68,13 @@
             <form action="">
             <div class="col-4">
               <div class="p-field">
-                <label>Name</label> <br>
+                <label>Name</label> 
+                <br>
                 <app-textbox [(controlModel)]="updatedType"
                 required 
                 pattern="^(?!\s)(?!.*\s$).+$"
                 ></app-textbox>
+                
               </div>
             </div>
           </form>
