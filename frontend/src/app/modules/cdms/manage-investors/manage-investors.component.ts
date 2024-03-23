@@ -37,6 +37,7 @@ export class ManageInvestorsComponent extends BaseComponent implements OnInit{
   data: IObject[] = [];
 
   updateSidebarVisible:boolean = false;
+  investorId:string='';
 
   constructor(private apiService : ApiHelperService, private toast : ToastService )
   {
@@ -73,8 +74,10 @@ export class ManageInvestorsComponent extends BaseComponent implements OnInit{
       {
         label: 'Update',
         icon: 'pi pi-pencil',
-        command: () => {
-          this.updateSidebarVisible = true;
+        command: (event) => {
+        this.investorId = event.investor_id;
+        this.updateSidebarVisible = true;
+        this.getInvestorById();
         },
       }
     ];
@@ -134,6 +137,33 @@ getinvestors(){
     console.log(data);
     this.data = data;
   });
+}
+
+
+investorById: any;
+investor_name:string='';
+phone_no:string='';
+cnic:string='';
+
+
+
+getInvestorById(){
+  this.apiService.get(`/investor/getInvestorDetails/${this.investorId}`).subscribe((data) => {
+    console.log(data);
+    this.investorById = data;
+
+    this.investor_name = this.investorById.investor_name;
+    this.phone_no = this.investorById.phone;
+    this.cnic = this.investorById.cnic;
+    console.log(this.investor_name);
+    console.log(this.cnic);
+    console.log(this.phone_no);
+
+
+  });
+
+
+
 }
 
 }

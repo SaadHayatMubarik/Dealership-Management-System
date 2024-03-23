@@ -155,7 +155,7 @@
                       minlength="4"
                       maxlength="30"
                       required
-                      [(ngModel)]="investor.investorName"
+                      [(ngModel)]="investor_name"
                       (keypress)="validateAlphabeticInput($event)"
                       pattern="^\S(?:\s*\S)*$"
                       #fullName ='ngModel'
@@ -184,17 +184,17 @@
                     minlength="13"
                     maxlength="13"
                     pattern="[0-9]{13}"
-                    [(ngModel)]="investor.cnic"
+                    [(ngModel)]="cnic"
                     (keypress)="validateNumericInput($event)"
-                    #cnic ='ngModel'
+                  
                   />
-                  <div *ngIf="cnic.invalid && (cnic.dirty || cnic.touched)" class="p-error">
+                  <!-- <div *ngIf="cnic.invalid && (cnic.dirty || cnic.touched)" class="p-error">
                     <span *ngIf="cnic.errors?.['required']">
                       Cnic is required.</span>   
                       <br>
                       <span *ngIf="cnic.errors?.['pattern']">
                         cnic must be 13  digits long and contain only numbers.</span>  
-                  </div>
+                  </div> -->
                   </div> 
                 </div>
               
@@ -210,7 +210,7 @@
                       required
                       minlength="11"
                       maxlength="11"
-                      [(ngModel)]="investor.phoneNo"
+                      [(ngModel)]="phone_no"
                       pattern="^(03\d{9})$"
                       (keypress)="validateNumericInput($event)"
                       #phoneNo ='ngModel'
