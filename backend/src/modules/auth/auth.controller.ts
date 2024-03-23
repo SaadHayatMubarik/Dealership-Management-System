@@ -51,6 +51,11 @@ export class AuthController {
   getUsers(@Param('showroomId') showroomId: number): Promise<GetUserDto[]>{
     return this.authService.getUsers(showroomId);
   }
+
+  @Get('getUsers/:userId')
+  getUsersById(@Param('userId') userId: number): Promise<User>{
+    return this.authService.getUsersById(userId);
+  }
   @Delete('deleteUser/:userId')
   deleteUser(@Param('userId') userId: number){
     return this.authService.deleteUser(userId);

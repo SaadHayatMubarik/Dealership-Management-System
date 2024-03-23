@@ -3,20 +3,28 @@ import { Picture } from './entity/Picture';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { S3 } from 'aws-sdk';
+import * as AWS from 'aws-sdk';
 import { Inventory } from '../inventory/entity/Inventory';
 
 @Injectable()
 export class PictureService {
+  
+  AWS_S3_BUCKET = 'd-m-s';
+  s3 = new AWS.S3({
+    accessKeyId: 'AKIAZI2LGWUFHKKODIOG',
+    secretAccessKey: '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',
+  });
 
     constructor(
         @InjectRepository(Picture)
         private readonly pictureRepository: Repository<Picture>,
       ) {}
 
+      
     async uploadPictureToS3(file: Express.Multer.File): Promise<string> {
         const s3 = new S3();
         const params = {
-          Bucket: 'your-bucket-name',
+          Bucket: this.AWS_S3_BUCKET,
           Key: file.originalname,
           Body: file.buffer,
           ContentType: file.mimetype,
