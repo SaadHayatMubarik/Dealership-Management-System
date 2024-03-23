@@ -143,7 +143,7 @@ getinvestors(){
 investorById: any;
 investor_name:string='';
 phone_no:string='';
-cnic:string='';
+cnic_no:string='';
 
 
 
@@ -154,9 +154,9 @@ getInvestorById(){
 
     this.investor_name = this.investorById.investor_name;
     this.phone_no = this.investorById.phone;
-    this.cnic = this.investorById.cnic;
+    this.cnic_no = this.investorById.cnic;
     console.log(this.investor_name);
-    console.log(this.cnic);
+   
     console.log(this.phone_no);
 
 
