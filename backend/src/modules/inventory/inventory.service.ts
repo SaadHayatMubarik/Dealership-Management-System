@@ -206,34 +206,34 @@ export class InventoryService {
     
     
       
-    async uploadPictureToS3(file: Express.Multer.File): Promise<string> {
-        const s3 = new S3();
-        // const { originalname } = file;
-        const params = {
-          Bucket: this.AWS_S3_BUCKET,
-          Key: file.originalname,
-          Body: file.buffer,
-          ContentType: file.mimetype,
-        };
-        try {
-          const uploadedObject = await s3.upload(params).promise();
-        return uploadedObject.Location;
-        } catch (e) {
-          console.log(e);
-        }
+    // async uploadPictureToS3(file: Express.Multer.File): Promise<string> {
+    //     const s3 = new S3();
+    //     // const { originalname } = file;
+    //     const params = {
+    //       Bucket: this.AWS_S3_BUCKET,
+    //       Key: file.originalname,
+    //       Body: file.buffer,
+    //       ContentType: file.mimetype,
+    //     };
+    //     try {
+    //       const uploadedObject = await s3.upload(params).promise();
+    //     return uploadedObject.Location;
+    //     } catch (e) {
+    //       console.log(e);
+    //     }
         
-      }
+    //   }
     
-      async savePictureUrlToDatabase(files: Express.Multer.File, inventoryObj: Inventory): Promise<Picture> {
-        // console.log(files.length);
-        // for(let i=0; i<files.length;i++){
-        const url = await this.uploadPictureToS3(files);   // saving the file in aws and getting the url 
-        const picture = new Picture();
-        picture.link = url;
-        picture.inventory = inventoryObj;
-        return this.pictureRepository.save(picture);
-        // }
-      }
+    //   async savePictureUrlToDatabase(files: Express.Multer.File, inventoryObj: Inventory): Promise<Picture> {
+    //     // console.log(files.length);
+    //     // for(let i=0; i<files.length;i++){
+    //     const url = await this.uploadPictureToS3(files);   // saving the file in aws and getting the url 
+    //     const picture = new Picture();
+    //     picture.link = url;
+    //     picture.inventory = inventoryObj;
+    //     return this.pictureRepository.save(picture);
+    //     // }
+    //   }
 
       async uploadFile(file) {
         console.log(file);

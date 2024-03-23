@@ -53,8 +53,8 @@ export class CustomerService {
         return await this.customerRepository.findOneBy({customer_id:customerId});
     }
 
-    async getCustomerRelation(customerId: number): Promise<Customer>{
-        return await this.customerRepository.findOne({relations:['inventories'], where: {customer_id:customerId}});
+    async getCustomerRelation(customerId: number): Promise<Customer[]>{
+        return await this.customerRepository.find({relations:['inventories'], where: {customer_id:customerId}});
     }
 
     async updateCustomer(updateCustomerDto:UpdateCustomerDto){

@@ -52,7 +52,7 @@ export class AuthController {
     return this.authService.getUsers(showroomId);
   }
 
-  @Get('getUsers/:userId')
+  @Get('getUser/:userId')
   getUsersById(@Param('userId') userId: number): Promise<User>{
     return this.authService.getUsersById(userId);
   }

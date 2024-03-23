@@ -54,15 +54,14 @@ export class InventoryController {
 
     // @Post('uploadPicture')
     // @UseInterceptors(FileInterceptor('file'))
-    // uploadFile(@UploadedFiles() file: Express.Multer.File, @Body() inventoryObj: Inventory): Promise<Picture> {
+    // uploadFile(@UploadedFiles() file: Express.Multer.File): Promise<Picture> {
     //     console.log(file);
     //   return this.inventoryService.savePictureUrlToDatabase(file,inventoryObj);
     // }
 
-    @Post('uploadPicture')
-    @UseInterceptors(FileInterceptor('file'))
-    uploadFile(@UploadedFiles() file: Express.Multer.File){
-        // console.log(file);
-      return this.inventoryService.uploadFile(file);
-    }
+    @Post('upload')
+  @UseInterceptors(FileInterceptor('file'))
+  uploadFile(@UploadedFile() file: Express.Multer.File, @Body() inventoryObj: Inventory) {
+    return this.inventoryService.uploadFile(file);
+  }
 }
