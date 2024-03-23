@@ -26,7 +26,10 @@ export class VehicleTypeService {
     async addVehicleType (vehicleTypeDto: VehicleTypeDto): Promise<VehicleType>{
         const vehicleType = new VehicleType();
         const {vehicleTypeName, showroomId} = vehicleTypeDto;
-        if ( await this.vehicleTypeRepository.exist({ where: { type_name: vehicleTypeName, showroom: { showroom_id: showroomId }} }) == false ){
+        if ( await this.vehicleTypeRepository.exist({ where: { type_name: vehicleTypeName, showroom: { showroom_id: showroomId }} })){
+            
+        }
+        else{
         vehicleType.type_name = vehicleTypeName;
         vehicleType.showroom = await this.showroomRepository.findOne({ where: { showroom_id: showroomId } });
         await this.vehicleTypeRepository.save(vehicleType);

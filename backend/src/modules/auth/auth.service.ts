@@ -138,15 +138,13 @@ if(role == roles[i]){
     return this.userRepository.delete({user_id:userId});
   }
 
-  async updateUserDetails(updateUserDto:UpdateUserDto){
+  async updateUserDetails(updateUserDto:UpdateUserDto): Promise<User>{
     const { userId,username, email, role } = updateUserDto;
-    if(username)
-    await this.userRepository.update({user_id:userId},{user_name:username});
-    if (email)
-    await this.userRepository.update({user_id:userId},{email:email});
-    if (role)
-    await this.userRepository.update({user_id:userId},{role:role});
-  return 'Successfully updated the details';
+    const user = await this.userRepository.findOneBy({user_id:userId});
+    user.user_name = username;
+    user.email = email;
+    user.role = role;
+  return await this.userRepository.save(user);
   }
 
   private async hashPassword(password: string, salt: string): Promise<string>{
