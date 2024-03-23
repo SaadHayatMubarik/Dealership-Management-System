@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, UploadedFile, UploadedFiles, UseGuards, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
 import { InventoryService } from './inventory.service';
 import { InventoryDto } from './dto/inventory.dto';
 import { Inventory } from './entity/Inventory';
@@ -7,6 +7,8 @@ import { GetInventoryByFilterDto } from './dto/getInventoryByFilter.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { InventoryStatus } from './inventory-status.enum';
 import { UpdateInventoryDto } from './dto/updateInventory.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { Picture } from '../picture/entity/Picture';
 
 
 @Controller('inventory')
@@ -48,5 +50,12 @@ export class InventoryController {
     updateInventory(@Body() updateInventoryDto: UpdateInventoryDto){
         console.log(updateInventoryDto);
         return this.inventoryService.updateInventory(updateInventoryDto);
+    }
+
+    @Post('uploadPicture')
+    @UseInterceptors(FileInterceptor('file'))
+    uploadFile(@UploadedFiles() file: Express.Multer.File, @Body() inventoryObj: Inventory): Promise<Picture> {
+        console.log(file);
+      return this.inventoryService.savePictureUrlToDatabase(file,inventoryObj);
     }
 }

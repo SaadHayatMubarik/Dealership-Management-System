@@ -11,7 +11,7 @@ export class PictureController {
 
     // @Post('uploadPicture')
     // @UseInterceptors(FileInterceptor('file'))
-    // uploadFile(@UploadedFile() file: Express.Multer.File) {
-    //   return this.pictureService.savePictureUrlToDatabase(file);
+    // uploadFile(@UploadedFile() file: Express.Multer.File,) {
+    //   return this.pictureService.(file);
     // }
 }
