@@ -11,6 +11,8 @@ import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
 
 import { NgForm } from '@angular/forms';
+import { IUpdateUser } from '../../interfaces/update';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -20,6 +22,12 @@ import { NgForm } from '@angular/forms';
 })
 export class ManageEmployeeComponent extends BaseComponent implements OnInit {
 
+update_user: IUpdateUser = {
+
+  user_name:'', 
+  email:'', 
+  role:'',
+}
 
   user: IUser = {
     username: '',
@@ -40,9 +48,11 @@ export class ManageEmployeeComponent extends BaseComponent implements OnInit {
 
   updateSidebarVisible:boolean = false;
 
-  @ViewChild ('userForm') userForm!:NgForm;
+  @ViewChild ('userForm') userForm!: NgForm;
+  @ViewChild ('updateUser') updateUser!: NgForm;
 
-  constructor(private apiService : ApiHelperService, private toast : ToastService )
+  constructor(private apiService : ApiHelperService, private toast : ToastService,
+    private httpClient: HttpClient )
   {
     super();
   }
@@ -93,17 +103,14 @@ export class ManageEmployeeComponent extends BaseComponent implements OnInit {
         command: (event) => {
           this.userId = event.userId;
           this.updateSidebarVisible = true;
-          this.getUserById();
+          this.getUserById(this.userId);
         },
       },
-
     ];
-
   }
 
   onSubmit(){
      if (this.userForm.valid){
-      
         this.apiService
           .post('/auth/createUser', this.user)
           .subscribe({
@@ -140,15 +147,46 @@ export class ManageEmployeeComponent extends BaseComponent implements OnInit {
   user_email : string = '';
   user_role: string = '';
 
-  getUserById(){
-    this.apiService.get(`/auth/getUser/${this.userId}`).subscribe((data) => {
-      this.userById = data;
-      this.user_username = this.userById.user_name;
-      this.user_email = this.userById.email;
-      this.user_role = this.userById.role;
+  
 
+  getUserById(userId: number) {
+    this.apiService.get(`/auth/getUser/${userId}`).subscribe((data: IUpdateUser) => {
+      this.update_user = data;
     });
-
   }
+
+
+  update(){
+          this.apiService.patch('/auth/updateUserDetails', this.update_user).subscribe({
+            next: (response) => {
+              this.toast.showSuccess('User information updated.');
+              this.updateSidebarVisible = false;
+              this.getemployee();
+              console.log('Success Object:', this.update_user);
+            },
+            error: () => {
+              this.toast.showError('Server Error! Please try again later.');
+              console.log('Error Object:', this.update_user);              
+            },
+          });
+  }
+
+
+  // update() {
+  //   if (this.updateUser.valid) {
+  //     this.httpClient.patch('/auth/updateUserDetails', this.userById).subscribe({
+  //       next: (response) => {
+  //         this.toast.showSuccess('User information updated.');
+  //         this.updateSidebarVisible = false;
+  //         this.getemployee();
+  //       },
+  //       error: () => {
+  //         this.toast.showError('Server Error! Please try again later.');
+  //       },
+  //     });
+  //   } else {
+  //     this.toast.showError('Please fill all the fields correctly');
+  //   }
+  // }
 
 }

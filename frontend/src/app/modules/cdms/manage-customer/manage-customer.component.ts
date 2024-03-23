@@ -13,6 +13,8 @@ import { ToastService } from 'src/app/shared/services/toast.service';
 import { NgForm } from '@angular/forms';
 // import { NgForm } from '@angular/forms';
 
+import { IUpdateCustomer } from '../../interfaces/update';
+
 
 
 
@@ -24,7 +26,20 @@ import { NgForm } from '@angular/forms';
 export class ManageCustomerComponent extends BaseComponent implements OnInit {
 
 
-  customerId: string = '';
+  customerId: number = 0;
+
+  updateCustomer: IUpdateCustomer =
+  {
+    catagory: '',
+    name: '',
+    phoneNo: '',
+    email: '',
+    province: '',
+    city: '',
+    address: '',
+    type: '',
+    cnic: '',
+  }
 
   customer: ISeller = {
     name:'',
@@ -139,9 +154,9 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
       icon: 'pi pi-pencil',
       command: (event) => {
         this.customerId = event.customer_id;
-       console.log(this.customerId);
+       
         this.updateSidebarVisible = true;
-        this.getCustomerById();
+        this.getCustomerById(this.customerId);
 
       },
     }
@@ -150,36 +165,35 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
   }
 
   @ViewChild('Seller') SellerForm!: NgForm;
+  @ViewChild('updatedCustomer') updateCustomerForm!:NgForm;
 
   onTabChange(event: any) {
     this.selectedTabIndex = event.index;
     this.getCustomer();
   }
+
   onSubmit(){
-    {
-      console.log(this.customer)
+       
       if(this.SellerForm.valid) {
         this.apiService
         .post('/customer/addCustomer', this.customer)
         .subscribe({
           next: (response) => {
-
             this.toast.showSuccess('New Customer Added.');
             this.closeModal();
             this.SellerForm.reset();
-
             this. getCustomer();
           },
           error: () => {
             this.toast.showError('Error Occured');
-            console.log(this.customer);
+           
           },
         });
       }
       else{
         this.toast.showError('Fill all the fields')
       }
-    }
+    
   }
 
 
@@ -193,37 +207,42 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
   }
 
   
-  customerById:any;
+  // customerById:any;
 
-  customer_category: string = '';
-  customer_name: string = '';
-  customer_type: string = '';
-  customer_email: string = '';
-  customer_phoneNo: string = '';
-  customer_cnic: string = '';
-  customer_address: string = '';
-  customer_city: string = '';
-  customer_province: string = '';
+ 
 
 
-  getCustomerById(){
-    this.apiService.get(`/customer/getCustomerDetails/${this.customerId}`).subscribe((data) => {
-      console.log(data);
-      this.customerById = data;
-
-      this.customer_category = this.customerById.catagory;
-      this.customer_name = this.customerById.name;
-      this.customer_phoneNo = this.customerById.phoneNo;
-      this.customer_email = this.customerById.email;
-      this.customer_province = this.customerById.province;
-      this.customer_city = this.customerById.city;
-      this.customer_address = this.customerById.address;
-      this.customer_type = this.customerById.type;
-      this.customer_cnic = this.customerById.cnic;
-      
-    
+  getCustomerById(customerId: number){
+    this.apiService.get(`/customer/getCustomerDetails/${customerId}`).subscribe((data : IUpdateCustomer) => {
+      this.updateCustomer = data;
+      console.log(this.updateCustomer);
     });
 
+  }
+
+  //no update customer api
+
+  update(){
+
+    //  if(this.updateCustomer.valid) {
+    //     this.apiService
+    //     .patch('/customer/addCustomer')
+    //     .subscribe({
+    //       next: (response) => {
+    //         this.toast.showSuccess('New Customer Added.');
+    //         this.closeModal();
+    //         this.SellerForm.reset();
+    //         this. getCustomer();
+    //       },
+    //       error: () => {
+    //         this.toast.showError('Error Occured');
+           
+    //       },
+    //     });
+    //   }
+    //   else{
+    //     this.toast.showError('Fill all the fields')
+    //   }
   }
 }
 

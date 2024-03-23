@@ -95,7 +95,7 @@
                       </div>
 
                        <label htmlFor="customerName">
-                        {{ selectedCategory === 'AGENT' ? 'Agent' : selectedCategory === 'CUSTOMER' ? 'Customer' : selectedCategory === 'DEALERSHIP' ? 'Dealership' : '' }} Name
+                         Name
                       </label>
                   </span>
                   </div>
@@ -322,7 +322,7 @@
 
   <p-sidebar *ngIf="updateSidebarVisible" [(visible)]="updateSidebarVisible" position="right" [style]="{width: '55rem'}" >
 
-    <form > 
+    <form (ngSubmit)="update()" #updateCustomer="ngForm"> 
 
         <div class="sidebar-main">
           <div class="sidebar-header">
@@ -347,15 +347,13 @@
                      class="p-inputtext-lg" 
                      placeholder="Select a Vehicle Type"
                      name="category"
-                     [(ngModel)]="customer_category"
-                     #catergory = "ngModel"
                      [class.p-disabled]="true"
                      
                      ></p-dropdown>       
-                     <div *ngIf="catergory.invalid && (catergory.dirty || catergory.touched)" class="p-error">
+                     <!-- <div *ngIf="catergory.invalid && (catergory.dirty || catergory.touched)" class="p-error">
                       <span *ngIf="catergory.errors?.['required']">
                         Category is required.</span>    
-                    </div>
+                    </div> -->
 
                     <label for="float-label">Customer Category</label>
 
@@ -371,19 +369,19 @@
                        pInputText 
                        name="name"
                        required
-                       [(ngModel)]="customer_name"
-                       #name = "ngModel"
+                      [(ngModel)]="updateCustomer.name"
+                      
                       pattern="^[a-zA-Z]+(?:\s+[a-zA-Z]+)*$"
 
                        />
 
-                       <div *ngIf="name.invalid && (name.dirty || name.touched)" class="p-error">
+                       <!-- <div *ngIf="name.invalid && (name.dirty || name.touched)" class="p-error">
                         <span *ngIf="name.errors?.['required']">
                           Please Enter Name.</span>   
                           <br>
                           <span *ngIf="name.errors?.['pattern']">
                             Please Enter Valid Name. Remove unneccessary spaces</span>  
-                      </div>
+                      </div> -->
 
                        <label htmlFor="customerName">
                        Name
@@ -398,21 +396,21 @@
                       pInputText
                       name="phoneNo"
                       required
-                      [(ngModel)]="customer_phoneNo"
-                      #phone_no = "ngModel"
+                     
+                     
                       pattern="^(03\d{9}|021\d{8})$"
                       minlength="11"
                       maxlength="11"
 
                       />
 
-                      <div *ngIf="phone_no.invalid && (phone_no.dirty || phone_no.touched)" class="p-error">
+                      <!-- <div *ngIf="phone_no.invalid && (phone_no.dirty || phone_no.touched)" class="p-error">
                         <span *ngIf="phone_no.errors?.['required']">
                           Please Enter Phone Number.</span>   
                           <br>
                           <span *ngIf="phone_no.errors?.['pattern' || 'minlength' || 'maxlength']">
                             Please Enter Valid Mobile Number.</span>  
-                      </div>
+                      </div> -->
 
                       <label htmlFor="number">Contact Number</label>
                   </span>
@@ -430,17 +428,17 @@
                        email
                        pInputText
                        name="email"
-                       [(ngModel)]="customer_email"
-                       #email = "ngModel"
+                   
+                    
                        />
-
+<!-- 
                        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="p-error">
                         <span *ngIf="email.errors?.['required']">
                           Please Enter Email.</span>   
                           <br>
                           <span *ngIf="email.errors?.['email']">
                             Please Enter A Valid Email.</span>  
-                      </div>
+                      </div> -->
 
                       <label htmlFor="email">Email</label>
                   </span>
@@ -453,13 +451,14 @@
                       pInputText
                       required
                       name="province"
-                      [(ngModel)]="customer_province"
-                      #province = "ngModel" 
+                     
+                     
                       minlength="3"
                       maxlength="20"
                       pattern="^\S(?:\s*\S)*$"
                       />
-                      <div *ngIf="province.invalid && (province.dirty || province.touched)" class="p-error">
+
+                      <!-- <div *ngIf="province.invalid && (province.dirty || province.touched)" class="p-error">
                         <span *ngIf="province.errors?.['required']">
                           Please Enter Province.</span>   
                           <br>
@@ -469,7 +468,7 @@
                             <span *ngIf="province.errors?.['minlength']"> 
                             Province Name too short.
                           </span>
-                      </div>
+                      </div> -->
 
 
                       <label htmlFor="province">Province</label>
@@ -482,15 +481,15 @@
                       <input class="p-inputtext-lg" 
                       pInputText
                       name="city"
-                      [(ngModel)]="customer_city"
-                      #city = "ngModel"
+                   
+                     
                       minlength="3"
                       maxlength="40"
                       pattern="^\S(?:\s*\S)*$"
                       required
                       />
 
-                      <div *ngIf="city.invalid && (city.dirty || city.touched)" class="p-error">
+                      <!-- <div *ngIf="city.invalid && (city.dirty || city.touched)" class="p-error">
                         <span *ngIf="city.errors?.['required']">
                           Please Enter City Name of Person/Dealership.</span>   
                           <br>
@@ -500,7 +499,7 @@
                             <span *ngIf="city.errors?.['minlength']"> 
                             City Name too short.
                           </span>
-                      </div>
+                      </div> -->
 
                       <label for="float-label">City</label>
                   </span>
@@ -518,20 +517,20 @@
                       pInputText
                       required
                       name="address"
-                      [(ngModel)]="customer_address"
-                      #address = "ngModel"
+                     
+                      
                       pattern="^\S(?:\s*\S)*$"
                       required
                       />
 
-                      <div *ngIf="address.invalid && (address.dirty || address.touched)" class="p-error">
+                      <!-- <div *ngIf="address.invalid && (address.dirty || address.touched)" class="p-error">
                         <span *ngIf="city.errors?.['required']">
                           Please Enter Address.</span>  
                             <br>
                             <span *ngIf="address.errors?.['pattern']"> 
                             Enter Valid Address, Remove unneccessary spaces.
                           </span>
-                      </div>
+                      </div> -->
 
                       <label for="float-label">Address</label>
                   </span>
@@ -547,15 +546,15 @@
                      [options]="customerType" 
                      class="p-inputtext-lg" 
                      name="customer_type"
-                     [(ngModel)]="customer_type"
-                     #type = "ngModel"
+                    
+                    
                      [class.p-disabled]="true"
                      ></p-dropdown>
 
-                     <div *ngIf="type.invalid && (type.dirty || type.touched)" class="p-error">
+                     <!-- <div *ngIf="type.invalid && (type.dirty || type.touched)" class="p-error">
                       <span *ngIf="type.errors?.['required']">
                         Customer Type is required.</span>    
-                    </div>
+                    </div> -->
 
                     <label for="float-label">Customer Type</label>
 
@@ -565,27 +564,28 @@
 
 
                 <div class="col-4">
-                  <div class="p-field" *ngIf="customer_category === 'AGENT' || customer_category === 'CUSTOMER'">
+                  <!-- <div class="p-field" *ngIf="customer_category === 'AGENT' || customer_category === 'CUSTOMER'"> -->
+                    <div class="p-field">
                     <span class="p-float-label">
                       <input class="p-inputtext-lg" 
                       pInputText
                       name="cnic"
-                      [(ngModel)]="customer_cnic"
-                      #cnic = "ngModel"
+                     
+                    
                       required
                       minlength="13"
                       maxlength="13"
                       pattern="[0-9]*"
                       />
 
-                      <div *ngIf="cnic.invalid && (cnic.dirty || cnic.touched)" class="p-error">
+                      <!-- <div *ngIf="cnic.invalid && (cnic.dirty || cnic.touched)" class="p-error">
                         <span *ngIf="cnic.errors?.['required']">
                           Please Enter Cnic Number.</span>  
                             <br>
                             <span *ngIf="cnic.errors?.['pattern' || 'minlength' || 'maxlength']"> 
                             Enter Valid Cnic Number.
                           </span>
-                      </div>
+                      </div> -->
 
                       <label for="float-label">CNIC</label>
                   </span>

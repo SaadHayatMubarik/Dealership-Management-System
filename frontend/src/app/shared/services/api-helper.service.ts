@@ -46,12 +46,20 @@ export class ApiHelperService {
     .pipe(this.hookResponse(this));
   }
 
-  patch(path: string, params: HttpParams = new HttpParams()): Observable<any> {
-    return this.http
-      .patch(`${environment.apiUrl}${path}`, { params, headers: this.addTokenHeader() })
-      .pipe(this.hookResponse(this));
+  // patch(path: string, params: HttpParams = new HttpParams()): Observable<any> {
+  //   return this.http
+  //     .patch(`${environment.apiUrl}${path}`, { params, headers: this.addTokenHeader() })
+  //     .pipe(this.hookResponse(this));
+  // }
 
+
+  patch(path: string, params: any = {}): Observable<any> {
+    return this.http
+      .patch(`${environment.apiUrl}${path}`, params, { headers: this.addTokenHeader() })
+      .pipe(this.hookResponse(this)
+      );
   }
+
 
   put(path: string, body: Object = {}): Observable<any> {
     const headers = this.addTokenHeader();

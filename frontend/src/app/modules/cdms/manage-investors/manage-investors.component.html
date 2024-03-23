@@ -140,7 +140,7 @@
           </div>
         </div>
         
-        <form (ngSubmit)="onSubmit()" #investorForm="ngForm">
+        <form (ngSubmit)="update()" #investorForm="ngForm">
         <div class="sidebar-content">
           <div class="card-grey">
             <div class="row-form grid">
@@ -155,7 +155,7 @@
                       minlength="4"
                       maxlength="30"
                       required
-                      [(ngModel)]="investor_name"
+                      [(ngModel)]="UpdateInvestor.investor_name"
                       (keypress)="validateAlphabeticInput($event)"
                       pattern="^\S(?:\s*\S)*$"
                       #fullName ='ngModel'
@@ -184,7 +184,7 @@
                     minlength="13"
                     maxlength="13"
                     pattern="[0-9]{13}"
-                    [(ngModel)]="cnic_no"
+                    [(ngModel)]="UpdateInvestor.cnic"
                     (keypress)="validateNumericInput($event)"
                     #cnic ='ngModel'
                   />
@@ -210,7 +210,7 @@
                       required
                       minlength="11"
                       maxlength="11"
-                      [(ngModel)]="phone_no"
+                      [(ngModel)]="UpdateInvestor.phone"
                       pattern="^(03\d{9})$"
                       (keypress)="validateNumericInput($event)"
                       #phoneNo ='ngModel'
