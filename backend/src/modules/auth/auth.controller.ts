@@ -52,9 +52,9 @@ export class AuthController {
     return this.authService.getUsers(showroomId);
   }
 
-  @Get('getUsers/:userId')
-  getUsersById(@Param('userId') userId: number): Promise<User>{
-    return this.authService.getUsersById(userId);
+  @Get('getUser/:userId')
+  getUserById(@Param('userId') userId: number): Promise<User>{
+    return this.authService.getUserById(userId);
   }
   @Delete('deleteUser/:userId')
   deleteUser(@Param('userId') userId: number){

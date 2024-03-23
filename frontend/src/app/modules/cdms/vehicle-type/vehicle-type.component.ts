@@ -127,9 +127,6 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
   }
 
   updateVehicleType(){
-
-    if (this.vehicleType.vehicleTypeName != "^\S+$" ){
-  
     this.apiService.patch(`/vehicle-type/updateVehicleType/${this.updatedType}/${this.vehicleId}`).subscribe(
         next => {
         this.toast.showSuccess('Updated Successfully');
@@ -137,10 +134,10 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
         this.getVehicleType();
       },
       error => {
-        this.toast.showError("field is empty");
+      this.toast.showError('Server Error! Please try again later.');
       }
     )
-  }
+  
 }
 }
 
