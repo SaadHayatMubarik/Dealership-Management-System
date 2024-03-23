@@ -126,19 +126,22 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
     });
   }
 
+
   updateVehicleType(){
-    this.apiService.patch(`/vehicle-type/updateVehicleType/${this.updatedType}/${this.vehicleId}`).subscribe(
-        next => {
+    this.apiService.patch(`/vehicle-type/updateVehicleType/${this.updatedType}/${this.vehicleId}`).subscribe(     
+      next => {
+        console.log('API RESPONSE', next)
         this.toast.showSuccess('Updated Successfully');
         this.updateSidebarVisible =false;
         this.getVehicleType();
       },
       error => {
+        console.log('API ERROR', error)
       this.toast.showError('Server Error! Please try again later.');
-      }
+      },
     )
-  
 }
+
 }
 
 
