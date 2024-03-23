@@ -22,6 +22,7 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./vehicle-type.component.css'],
 })
 export class VehicleTypeComponent extends BaseComponent implements OnInit {
+ 
   vehicleType: IVehicleType = {
     vehicleTypeName: '',
     showroomId: localStorage.getItem("Showroom Id"),
@@ -126,10 +127,15 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
     });
   }
 
+
+  
   updateVehicleType(){
-    if(this.updatedType != '' && this.updatedType != '')
-    this.apiService.patch(`/vehicle-type/updateVehicleType/${this.updatedType}/${this.vehicleId}`).subscribe(
-      next => {
+
+    const trimmedType = this.updatedType.trim();
+
+    if(trimmedType != ''){
+      this.apiService.patch(`/vehicle-type/updateVehicleType/${trimmedType}/${this.vehicleId}`).subscribe(
+        next => {
         this.toast.showSuccess('Updated Successfully');
         this.updateSidebarVisible = false;
         this.getVehicleType();
@@ -138,7 +144,13 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
         console.log('API ERROR', error)
       this.toast.showError('Server Error! Please try again later.');
       },
-    );
+    )
+    }
+    else {
+      this.toast.showError('Fill the field Correctly')
+    }
+
+  
 }
 }
 
