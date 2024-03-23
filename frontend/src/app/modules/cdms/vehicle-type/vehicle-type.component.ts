@@ -129,7 +129,7 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
   updateVehicleType(){
 
     if (this.vehicleType.vehicleTypeName != "^\S+$" ){
-  
+  console.log("done");
     this.apiService.patch(`/vehicle-type/updateVehicleType/${this.updatedType}/${this.vehicleId}`).subscribe(
         next => {
         this.toast.showSuccess('Updated Successfully');

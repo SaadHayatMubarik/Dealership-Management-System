@@ -141,6 +141,7 @@ export class ManageEmployeeComponent extends BaseComponent implements OnInit {
   user_role: string = '';
 
   getUserById(){
+    // console.log(this.userId);
     this.apiService.get(`/auth/getUsers/${this.userId}`).subscribe((data) => {
       this.userById = data;
       console.log('user info: ', this.userById);
