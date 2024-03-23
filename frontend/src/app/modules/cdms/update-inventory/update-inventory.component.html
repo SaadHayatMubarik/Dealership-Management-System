@@ -1,0 +1,256 @@
+
+<div class="sh-title">
+    <h3 style="text-align: center;">
+      Update Inventory
+    </h3>
+    <br>
+  </div>
+
+  <div class="col-12 xl:col-12">
+    <div class="card">
+  
+
+    
+  
+        <form>
+            <!-- (ngSubmit)="onNext()" #vehicle="ngForm" -->
+          <div class="sh-title">
+            <h5 style="text-align: center">Vehicle Details</h5>
+            <br>
+          </div>
+         
+            <!-- <div class="sidebar-header">
+              <div class="sh-title">
+                <h3 style="text-align: center">Add Inventory</h3>
+                <h5 style="text-align: center">Vehicle Details</h5>
+                <br />
+              </div>
+            </div> -->
+              
+                <div class="row-form grid">
+             
+
+                  <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <input
+                          class="p-inputtext-lg"
+                          pInputText
+                          name="make"
+                         
+                          [(ngModel)]="make"
+
+                        />
+                        <label htmlFor="username">Make</label>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <input
+                          class="p-inputtext-lg"
+                          pInputText
+                          name="model"
+                          [(ngModel)] ="model"
+                          
+                        />
+                        <label htmlFor="username">Model</label>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <input
+                          class="p-inputtext-lg"
+                          pInputText
+                          name="variant"
+                          [(ngModel)] = "variant"
+                          
+                        />
+                        <label htmlFor="username">Variant</label>
+                      </span>
+                    </div>
+                  </div>
+
+                </div>
+
+                <br />
+
+                <div class="row-form grid">
+               
+                  <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <input
+                          class="p-inputtext-lg"
+                          pInputText
+                          name="Chasis No"
+                         
+                          [(ngModel)]="chasisNo"
+                       
+                          
+
+                        />
+                        <label htmlFor="username">Chasis No</label>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <input
+                          class="p-inputtext-lg"
+                          pInputText
+                          name="engineNo"
+                          
+                          [(ngModel)]="engineNo"
+                      
+                        />
+                        <label for="float-label">Engine No</label>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <input
+                          class="p-inputtext-lg"
+                          pInputText
+                          name="RegNo"
+                       
+                          [(ngModel)] = "regNo"
+                        
+                        
+                        />
+                        <label for="float-label">License Number</label>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                
+                <br>
+                <div class="row-form grid">
+                  <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <p-inputNumber
+                          class="p-inputtext-lg"
+                          mode="currency"
+                          currency="PKR"
+                          locale="en-US"
+                          name="costPrice"
+                        
+                          [(ngModel)] = "costPrice"
+                       
+                        >
+                        </p-inputNumber>
+
+
+                        <label for="float-label">Cost Price</label>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <p-inputNumber
+                          class="p-inputtext-lg"
+                          name="demand"
+                         
+                          [(ngModel)] = "demand"
+                       
+                        >
+                        </p-inputNumber>
+
+                        <label for="float-label">Demand</label>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <p-calendar
+                          [readonlyInput]="true"
+                          class="p-inputtext-lg"
+                          name="date of purchase"
+                          [(ngModel)] = "dateOfPurchase"
+                        
+                        ></p-calendar>
+
+                        <label>Date Of Purcahse</label>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <br />
+                <div class="row-form grid">
+                  <div class="col-4">
+                    <div class="p-field">
+
+                      <span class="p-float-label">
+                        <input
+                          class="p-inputtext-lg"
+                          pInputText
+                          name="modelYear"
+                         
+                          [(ngModel)] = "modelYear"
+                       
+                        />
+                        <label htmlFor="Model Year">Model Year</label>
+                      </span>               
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <input
+                          class="p-inputtext-lg"
+                          pInputText
+                          name="color"
+                          [(ngModel)] = "bodyColor"
+                       
+                        />
+
+                        <label htmlFor="username">Body Color</label>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <input
+                        class="p-inputtext-lg"
+                        pInputText
+                      
+                        name="status"
+                        [(ngModel)] = "status"
+                    
+                      />
+                        <label for="float-label">Status</label>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <br />
+                <div class="row-form grid">
+                </div>
+                <br />
+              
+                <br />
+              <br />
+            <div class="sidebar-footer flex justify-content-end">
+              <app-button
+                type="submit"
+                label="Update"
+                styleClass="p-button-sm p-button-rounded"
+              ></app-button>
+            </div>
+        </form>
+            </div>    
+        </div> 

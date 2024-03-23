@@ -46,6 +46,7 @@ import { ManageCustomerComponent } from './manage-customer/manage-customer.compo
 import { SellInventoryComponent } from './sell-inventory/sell-inventory.component';
 import { RoleComponent } from './role/role.component';
 import { TableModule } from 'primeng/table';
+import { UpdateInventoryComponent } from './update-inventory/update-inventory.component';
 
 
 
@@ -76,6 +77,7 @@ import { TableModule } from 'primeng/table';
     ManageCustomerComponent,
     SellInventoryComponent,
     RoleComponent,
+    UpdateInventoryComponent,
  
   ],
   imports: [

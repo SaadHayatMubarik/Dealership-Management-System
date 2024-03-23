@@ -166,6 +166,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
         label: 'Update',
         icon: 'pi pi-file-edit',
         command: (event) => {
+         this.router.navigate((['/update-inventory', event.inventoryId]));
          
         },
       },

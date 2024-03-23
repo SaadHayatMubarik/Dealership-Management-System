@@ -34,6 +34,9 @@ export class NotificationComponent extends BaseComponent {
   status: string[] = ['received', 'sent'];
 
   showroomId :string | null=  localStorage.getItem('Showroom Id')
+  details:any;
+
+ 
 
 
 
@@ -57,9 +60,9 @@ getNotification(){
   console.log(this.showroomId);
   this.apiService.get(`/notification/getRequest/${this.showroomId}/${this.status[this.selectedTabIndex]}`).subscribe((data) => {
     this.data = data;
-    console.log( this.data);
-    console.log(this.status[this.selectedTabIndex]);
-    console.log(this.showroomId);
+    this.details = data
+    console.log(this.details)
+
   });
 }
 

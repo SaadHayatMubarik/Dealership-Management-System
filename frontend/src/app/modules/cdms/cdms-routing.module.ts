@@ -21,6 +21,7 @@ import { ManageInvestorsComponent } from './manage-investors/manage-investors.co
 import { ManageCustomerComponent } from './manage-customer/manage-customer.component';
 import { SellInventoryComponent } from './sell-inventory/sell-inventory.component'; 
 import { RoleComponent } from './role/role.component';
+import { UpdateInventoryComponent } from './update-inventory/update-inventory.component';
 
 
 
@@ -114,6 +115,10 @@ const routes: Routes = [
     {
       path: 'roles', 
       component:RoleComponent
+    },
+    {
+      path: 'update-inventory/:inventoryId', 
+      component:UpdateInventoryComponent
     },
 
 

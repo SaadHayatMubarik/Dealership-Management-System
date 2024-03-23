@@ -38,6 +38,8 @@ export class ManageEmployeeComponent extends BaseComponent implements OnInit {
   userId : number = 0;
   userName : string = '';
 
+  updateSidebarVisible:boolean = false;
+
   @ViewChild ('userForm') userForm!:NgForm;
 
   constructor(private apiService : ApiHelperService, private toast : ToastService )
@@ -66,7 +68,7 @@ export class ManageEmployeeComponent extends BaseComponent implements OnInit {
 
     this.actions = [
       {
-        label: ' Delete',
+        label: 'Delete',
         icon: 'pi pi-trash',
         command: (event) => {
          this.userId = event.userId;
@@ -82,6 +84,14 @@ export class ManageEmployeeComponent extends BaseComponent implements OnInit {
            }
          }
            );
+
+        },
+      },
+      {
+        label: 'Update',
+        icon: 'pi pi-pencil',
+        command: (event) => {
+          this.updateSidebarVisible = true;
 
         },
       },

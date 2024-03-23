@@ -15,6 +15,8 @@ import { ISellInventory } from '../../interfaces/inventory';
 import {
   IObject
 } from 'src/app/shared/interfaces/common';
+
+
 @Component({
   selector: 'app-sell-inventory',
   templateUrl: './sell-inventory.component.html',
