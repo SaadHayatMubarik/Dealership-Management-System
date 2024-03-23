@@ -157,7 +157,8 @@
 
       <div class="sidebar-content">
         <div class="card-grey">
-          <form>
+          
+          <form (ngSubmit)="update()" #updateUser="ngForm">
           <div class="row-form grid">
             <div class="col-4">
                 <div class="p-field">
@@ -173,7 +174,7 @@
                     maxlength="20"
                     pattern="^[A-Za-z0-9_-]+$"
                     required
-                    [(ngModel)]="user_username"
+                    [(ngModel)]="update_user.user_name"
                     #username = "ngModel"
                   />
                   </div> 
@@ -203,7 +204,7 @@
                   style="padding: 1rem"
                   required
                   email
-                  [(ngModel)]="user_email"
+                  [(ngModel)]="update_user.email"
                   #email = "ngModel"
                 />
 
@@ -224,7 +225,7 @@
                 [required]="true"
                 name="role"
                 [options]="roles"
-                [(ngModel)]="user_role" 
+                [(ngModel)]="update_user.role" 
                 [showClear]="true" 
                 placeholder="Select a Role"
                   
@@ -240,7 +241,7 @@
 
       </div>
       <div class="sidebar-footer flex justify-content-end">
-        <app-button label="Update" styleClass="p-button-sm p-button-rounded" (onclick)="onSubmit()" ></app-button>
+        <app-button label="Update" styleClass="p-button-sm p-button-rounded" (onclick)="update()" ></app-button>
       </div>
     </div>
   </p-sidebar>  

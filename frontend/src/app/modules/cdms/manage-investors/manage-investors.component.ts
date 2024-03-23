@@ -12,6 +12,8 @@ import { ToastService } from 'src/app/shared/services/toast.service';
 
 import { NgForm } from '@angular/forms';
 
+import { IUpdateInvestor } from '../../interfaces/update';
+
 
 
 
@@ -23,6 +25,12 @@ import { NgForm } from '@angular/forms';
 export class ManageInvestorsComponent extends BaseComponent implements OnInit{
 
 
+  UpdateInvestor: IUpdateInvestor =
+  {
+    investor_name:'',
+    phone:'',
+    cnic:'',
+  }
 
   investor: IInvestor = {
     investorName: '',
@@ -37,7 +45,7 @@ export class ManageInvestorsComponent extends BaseComponent implements OnInit{
   data: IObject[] = [];
 
   updateSidebarVisible:boolean = false;
-  investorId:string='';
+  investorId:number=0;
 
   constructor(private apiService : ApiHelperService, private toast : ToastService )
   {
@@ -77,7 +85,7 @@ export class ManageInvestorsComponent extends BaseComponent implements OnInit{
         command: (event) => {
         this.investorId = event.investor_id;
         this.updateSidebarVisible = true;
-        this.getInvestorById();
+        this.getInvestorById(this.investorId);
         },
       }
     ];
@@ -147,22 +155,29 @@ cnic_no:string='';
 
 
 
-getInvestorById(){
-  this.apiService.get(`/investor/getInvestorDetails/${this.investorId}`).subscribe((data) => {
-    console.log(data);
-    this.investorById = data;
-
-    this.investor_name = this.investorById.investor_name;
-    this.phone_no = this.investorById.phone;
-    this.cnic_no = this.investorById.cnic;
-    console.log(this.investor_name);
-   
-    console.log(this.phone_no);
-
-
+getInvestorById(investorId: number){
+  this.apiService.get(`/investor/getInvestorDetails/${investorId}`).subscribe((data: IUpdateInvestor) => {
+    this.UpdateInvestor = data;
+    console.log(this.UpdateInvestor);
   });
 
+}
 
+//update api of investor not made
+
+update(){
+  this.apiService.patch('', this.UpdateInvestor).subscribe({
+    next: (response) => {
+      this.toast.showSuccess('User information updated.');
+      this.updateSidebarVisible = false;
+      this.getinvestors();
+      console.log('Success Object:', this.UpdateInvestor);
+    },
+    error: () => {
+      this.toast.showError('Server Error! Please try again later.');
+      console.log('Error Object:', this.UpdateInvestor);              
+    },
+  });
 
 }
 

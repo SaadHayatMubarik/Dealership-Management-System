@@ -113,14 +113,15 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
         command: (event) => {
           
           this.vehicle_attribute_id = event.vehicleAttributeId;
-          console.log(this.vehicle_attribute_id);
-          this.updateSidebarVisible = true;
           
+          this.updateSidebarVisible = true;
+          this.getVehicleAtt();
 
         },
       },
     ];
   }
+
 
 
 
@@ -179,9 +180,19 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
     return this.vehicleTypeAttribute.attributeInputType === 'DROPDOWN';
   }
 
+
+  vehicleAttr:any;
+  //get individual vehicle type attribute, check this api
+  getVehicleAtt(){
+    this.apiService.get(`/vehicle-type-attribute/${this.vehicle_attribute_id}`).subscribe((data) => {
+      this.vehicleAttr = data;
+      console.log(this.vehicleAttr);
+    });
+
+
+  }
+
 }
-
-
 
 
 

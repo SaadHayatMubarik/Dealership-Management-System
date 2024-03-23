@@ -12,8 +12,8 @@
 
     
   
-        <form>
-            <!-- (ngSubmit)="onNext()" #vehicle="ngForm" -->
+        <form (ngSubmit)="update()" #vehicleUpdate="ngForm" >
+         
           <div class="sh-title">
             <h5 style="text-align: center">Vehicle Details</h5>
             <br>
@@ -37,10 +37,22 @@
                           class="p-inputtext-lg"
                           pInputText
                           name="make"
-                         
+                          required
+                          minlength="3"
+                          pattern="^\S(?:\s*\S)*$"
                           [(ngModel)]="make"
-
+                          #make_update = "ngModel"
                         />
+                        <div *ngIf="make_update.invalid && (make_update.dirty || make_update.touched)" class="p-error">
+                          <span *ngIf="make_update.errors?.['required']">
+                            Vehicle Make Name is required.</span>
+                            <br>
+                            <span *ngIf="make_update.errors?.['minlength']">
+                              Make must be at least 3 characters long.
+                            </span>
+                        </div>
+                        
+
                         <label htmlFor="username">Make</label>
                       </span>
                     </div>
@@ -54,8 +66,22 @@
                           pInputText
                           name="model"
                           [(ngModel)] ="model"
-                          
+                          required
+                          #model_update="ngModel"
+                          minlength="3"
+                          pattern="^\S(?:\s*\S)*$"
+
                         />
+                        <div *ngIf="model_update.invalid && (model_update.dirty || model_update.touched)" class="p-error">
+                          <span *ngIf="model_update.errors?.['required']">
+                            Vehicle Model Name is required.</span>
+                            <br>
+                            <span *ngIf="model_update.errors?.['minlength']">
+                              Model Name must be at least 3 characters long.
+                            </span>
+                        </div>
+
+
                         <label htmlFor="username">Model</label>
                       </span>
                     </div>
@@ -69,8 +95,19 @@
                           pInputText
                           name="variant"
                           [(ngModel)] = "variant"
-                          
+                          #variant_update="ngModel"
+                          required
+                          minlength="3"
+                          pattern="^\S(?:\s*\S)*$"
                         />
+                        <div *ngIf="variant_update.invalid && (variant_update.dirty || variant_update.touched)" class="p-error">
+                          <span *ngIf="variant_update.errors?.['required']">
+                            Vehicle Variant Name is required.</span>
+                            <br>
+                            <span *ngIf="variant_update.errors?.['minlength']">
+                              Variant Name must be at least 3 characters long.
+                            </span>
+                        </div>
                         <label htmlFor="username">Variant</label>
                       </span>
                     </div>
@@ -89,12 +126,26 @@
                           class="p-inputtext-lg"
                           pInputText
                           name="Chasis No"
-                         
                           [(ngModel)]="chasisNo"
+                          #chasis_update = "ngModel"
+                          required
+                          minlength="17"
+                          maxlength="17"
+                          pattern="^(?!\s)(?!.*\s$)(?!.*[IOQioq])[0-9A-HJ-NPR-Z]{17}$"
+                          #chassisNo="ngModel"
                        
-                          
-
                         />
+
+                        <div *ngIf="chasis_update.invalid && (chasis_update.dirty || chasis_update.touched)" class="p-error">
+                          <span *ngIf="chasis_update.errors?.['minlength' || 'maxlength']">
+                            The chassis must have a length of 17 characters.
+                          </span>
+                          <br>
+                          <span *ngIf="chasis_update.errors?.['pattern']">
+                            Chasis Number cant contain I,O,Q.
+                          </span>
+                      </div>
+
                         <label htmlFor="username">Chasis No</label>
                       </span>
                     </div>
@@ -107,10 +158,24 @@
                           class="p-inputtext-lg"
                           pInputText
                           name="engineNo"
-                          
+                          #update_engine = "ngModel"
                           [(ngModel)]="engineNo"
+                          required
+                          minlength="9"
+                          maxlength="9"
                       
                         />
+
+                           <div *ngIf="update_engine.invalid && (update_engine.dirty || update_engine.touched)" class="p-error">
+                          <span *ngIf="update_engine.errors?.['required']">
+                            Engine Number is required
+                          </span>
+                          <br>
+                          <span *ngIf="update_engine.errors?.['minlength' || 'maxlength']">
+                            The Engine Number must have a length of 9 characters.
+                          </span>
+                      </div>  
+
                         <label for="float-label">Engine No</label>
                       </span>
                     </div>
@@ -123,11 +188,9 @@
                           class="p-inputtext-lg"
                           pInputText
                           name="RegNo"
-                       
                           [(ngModel)] = "regNo"
-                        
-                        
                         />
+
                         <label for="float-label">License Number</label>
                       </span>
                     </div>
@@ -145,28 +208,44 @@
                           currency="PKR"
                           locale="en-US"
                           name="costPrice"
-                        
+                          [required]="true"
+                          pattern="^\d+$"
                           [(ngModel)] = "costPrice"
-                       
+                          #update_cost = "ngModel"
                         >
                         </p-inputNumber>
+
+                        <div *ngIf="update_cost.invalid && (update_cost.dirty || update_cost.touched)" class="p-error">
+                          <span *ngIf="update_cost.errors?.['required']">
+                            Please Enter Cost Price
+                          </span>
+                          <br>
+                      </div>
 
 
                         <label for="float-label">Cost Price</label>
                       </span>
                     </div>
                   </div>
+
                   <div class="col-4">
                     <div class="p-field">
                       <span class="p-float-label">
                         <p-inputNumber
                           class="p-inputtext-lg"
                           name="demand"
-                         
+                          #update_demand = "ngModel"
                           [(ngModel)] = "demand"
-                       
+                          [required]="true"
                         >
                         </p-inputNumber>
+
+                        <div *ngIf="update_demand.invalid && (update_demand.dirty || update_demand.touched)" class="p-error">
+                          <span *ngIf="update_demand.errors?.['required']">
+                            Please Enter Demand Price.
+                          </span>
+                          <br>
+                      </div>
 
                         <label for="float-label">Demand</label>
                       </span>
@@ -180,8 +259,17 @@
                           class="p-inputtext-lg"
                           name="date of purchase"
                           [(ngModel)] = "dateOfPurchase"
+                          #update_dop = "ngModel"
+                          [required]="true"
                         
                         ></p-calendar>
+
+                        <div *ngIf="update_dop.invalid && (update_dop.dirty || update_dop.touched)" class="p-error">
+                          <span *ngIf="update_dop.errors?.['required']">
+                            Date of Purchase Required.
+                          </span>
+                          <br>
+                      </div>
 
                         <label>Date Of Purcahse</label>
                       </span>
@@ -198,10 +286,24 @@
                           class="p-inputtext-lg"
                           pInputText
                           name="modelYear"
-                         
+                          minlength="4"
+                          maxlength="4"
+                          required
+                          pattern="^(?!202[8-9]|20[3-9]\d|2[1-9]\d{2}|[3-9]\d{3}|10000)\d+$"
+                          #update_model = "ngModel"
                           [(ngModel)] = "modelYear"
-                       
                         />
+
+                        <div *ngIf="update_model.invalid && (update_model.dirty || update_model.touched)" class="p-error">
+                          <span *ngIf="update_model.errors?.['required']">
+                            Model Year Of Vehicle Is Required.
+                          </span>
+                          <br>
+                          <span *ngIf="update_model.errors?.['pattern']">
+                            Model year cant be greater than 2027. Contact system admin to change that.
+                          </span>
+                      </div>
+
                         <label htmlFor="Model Year">Model Year</label>
                       </span>               
                     </div>
@@ -214,8 +316,20 @@
                           pInputText
                           name="color"
                           [(ngModel)] = "bodyColor"
-                       
+                          #update_color = "ngModel"
+                          required
+                          pattern="^(?! )[A-Za-z]+(?! )$"
                         />
+
+                        <div *ngIf="update_color.invalid && (update_color.dirty || update_color.touched)" class="p-error">
+                          <span *ngIf="update_color.errors?.['required']">
+                            Color Required.
+                          </span>
+                          <br>
+                          <span *ngIf="update_color.errors?.['pattern']">
+                            Invalid Color.
+                          </span>
+                      </div>
 
                         <label htmlFor="username">Body Color</label>
                       </span>
@@ -224,14 +338,14 @@
                   <div class="col-4">
                     <div class="p-field">
                       <span class="p-float-label">
-                        <input
-                        class="p-inputtext-lg"
-                        pInputText
-                      
-                        name="status"
-                        [(ngModel)] = "status"
-                    
-                      />
+                        <p-dropdown
+                          [options]="status_option"
+                          class="p-inputtext-lg"
+                          name="status"
+                          [(ngModel)]="status"
+                          [required]="true"
+                          #vehicleStatus = "ngModel"
+                        ></p-dropdown>
                         <label for="float-label">Status</label>
                       </span>
                     </div>

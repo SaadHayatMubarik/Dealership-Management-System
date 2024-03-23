@@ -24,6 +24,8 @@ export class UpdateInventoryComponent extends BaseComponent implements OnInit {
 
   inventoryId : number = 0;
   showroomId = localStorage.getItem('showroom Id');
+
+  status_option: string[] = ['AVAILABLE', 'ON ORDER'];
   
 
 
@@ -43,8 +45,9 @@ export class UpdateInventoryComponent extends BaseComponent implements OnInit {
     
     });
    
-    
     };
+
+      @ViewChild('vehicleUpdate') vehicleUpdate!: NgForm ;
 
     vehicleDetails: any = '';
     make : string = '' ;
@@ -85,6 +88,23 @@ export class UpdateInventoryComponent extends BaseComponent implements OnInit {
     );
     }
 
+
+    update(){
+
+
+      this.apiService.patch('/inventory/updateInventory/sellInventory', ).subscribe(
+        next => {
+        this.toast.showSuccess('Updated Successfully');
+        
+              },
+      error => {
+       
+      this.toast.showError('Server Error! Please try again later.');
+      },
+    )
+
+
+    }
 
 
 

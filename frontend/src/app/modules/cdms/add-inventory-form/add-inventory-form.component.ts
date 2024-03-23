@@ -186,7 +186,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   }
 
   @ViewChild('Inventory') InventoryForm!: NgForm;
-  @ViewChild('Seller') SellerForm!: NgForm;
+  @ViewChild('vehicleUpdate') vehicleUpdate!:NgForm;  @ViewChild('Seller') SellerForm!: NgForm;
   
   getVehicleTypes() {
     this.apiService

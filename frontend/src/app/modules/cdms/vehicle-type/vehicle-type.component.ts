@@ -149,7 +149,6 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
     else {
       this.toast.showError('Fill the field Correctly')
     }
-
   
 }
 }
