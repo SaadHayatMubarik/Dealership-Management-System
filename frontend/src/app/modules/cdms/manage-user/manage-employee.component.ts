@@ -148,10 +148,10 @@ export class ManageEmployeeComponent extends BaseComponent implements OnInit {
       this.user_role = this.userById.role;
 
     });
-
-    
-
-
   }
+  // updateUser(){
+  //   const user = {this.userById, this.user_username, this.user_email, this.user_role};
+  //   this.apiService.put(`/auth/updateUserDetails/${}`)
+  // }
 
 }
