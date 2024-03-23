@@ -77,8 +77,6 @@ if(role == roles[i]){
         throw new InternalServerErrorException()
       }
     }
-    
-    
   }
 
   async changePassword(userId: number,newPassword: string, oldPassword: string){

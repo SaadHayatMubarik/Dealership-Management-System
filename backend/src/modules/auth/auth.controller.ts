@@ -55,6 +55,7 @@ export class AuthController {
   @Get('getUser/:userId')
   getUserById(@Param('userId') userId: number): Promise<User>{
     return this.authService.getUserById(userId);
+
   }
   @Delete('deleteUser/:userId')
   deleteUser(@Param('userId') userId: number){

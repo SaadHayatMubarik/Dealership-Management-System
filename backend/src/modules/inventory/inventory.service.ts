@@ -206,32 +206,65 @@ export class InventoryService {
     
     
       
-    async uploadPictureToS3(file: Express.Multer.File): Promise<string> {
-        const s3 = new S3();
-        // const { originalname } = file;
+    // async uploadPictureToS3(file: Express.Multer.File): Promise<string> {
+    //     const s3 = new S3();
+    //     // const { originalname } = file;
+    //     const params = {
+    //       Bucket: this.AWS_S3_BUCKET,
+    //       Key: file.originalname,
+    //       Body: file.buffer,
+    //       ContentType: file.mimetype,
+    //     };
+    //     try {
+    //       const uploadedObject = await s3.upload(params).promise();
+    //     return uploadedObject.Location;
+    //     } catch (e) {
+    //       console.log(e);
+    //     }
+        
+    //   }
+    
+    //   async savePictureUrlToDatabase(files: Express.Multer.File, inventoryObj: Inventory): Promise<Picture> {
+    //     // console.log(files.length);
+    //     // for(let i=0; i<files.length;i++){
+    //     const url = await this.uploadPictureToS3(files);   // saving the file in aws and getting the url 
+    //     const picture = new Picture();
+    //     picture.link = url;
+    //     picture.inventory = inventoryObj;
+    //     return this.pictureRepository.save(picture);
+    //     // }
+    //   }
+
+      async uploadFile(file) {
+        console.log(file);
+        const { originalname } = file;
+    
+        return await this.s3_upload(
+          file.buffer,
+          this.AWS_S3_BUCKET,
+          originalname,
+          file.mimetype,
+        );
+      }
+    
+      async s3_upload(file, bucket, name, mimetype) {
         const params = {
-          Bucket: this.AWS_S3_BUCKET,
-          Key: file.originalname,
-          Body: file.buffer,
-          ContentType: file.mimetype,
+          Bucket: bucket,
+          Key: String(name),
+          Body: file,
+          ACL: 'public-read',
+          ContentType: mimetype,
+          ContentDisposition: 'inline',
+          CreateBucketConfiguration: {
+            LocationConstraint: 'ap-south-1',
+          },
         };
+    
         try {
-          const uploadedObject = await s3.upload(params).promise();
-        return uploadedObject.Location;
+          let s3Response = await this.s3.upload(params).promise();
+          return s3Response;
         } catch (e) {
           console.log(e);
         }
-        
-      }
-    
-      async savePictureUrlToDatabase(files: Express.Multer.File, inventoryObj: Inventory): Promise<Picture> {
-        // console.log(files.length);
-        // for(let i=0; i<files.length;i++){
-        const url = await this.uploadPictureToS3(files);   // saving the file in aws and getting the url 
-        const picture = new Picture();
-        picture.link = url;
-        picture.inventory = inventoryObj;
-        return this.pictureRepository.save(picture);
-        // }
       }
 }

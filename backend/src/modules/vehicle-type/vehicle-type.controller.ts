@@ -34,7 +34,7 @@ export class VehicleTypeController {
     }
 
     @Patch('updateVehicleType/:updatedType/:vehicleId')
-    updateVehicleType(@Param('updatedType',ValidationPipe) updatedType:string, @Param('vehicleId') vehicleId: number){
+    updateVehicleType(@Param('updatedType',ValidationPipe) updatedType:string, @Param('vehicleId') vehicleId: number): Promise<VehicleType>{
         // console.log(updatedType, "===============",vehicleId);
         return this.vehicleTypeService.updateVehicleType(updatedType,vehicleId);
     }

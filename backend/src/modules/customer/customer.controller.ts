@@ -34,7 +34,7 @@ export class CustomerController {
     }
 
     @Get('getCustomerRelation/:customerId')
-    getCustomerRelation(@Param('customerId') customerId: number): Promise<Customer>{
+    getCustomerRelation(@Param('customerId') customerId: number): Promise<Customer[]>{
         return this.customerService.getCustomerRelation(customerId);
     }
 

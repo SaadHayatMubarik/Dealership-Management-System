@@ -128,11 +128,11 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
 
 
   updateVehicleType(){
-    this.apiService.patch(`/vehicle-type/updateVehicleType/${this.updatedType}/${this.vehicleId}`).subscribe(     
-      next => {
-        console.log('API RESPONSE', next)
+    if(this.updatedType != '' && this.updatedType != '')
+    this.apiService.patch(`/vehicle-type/updateVehicleType/${this.updatedType}/${this.vehicleId}`).subscribe(
+        next => {
         this.toast.showSuccess('Updated Successfully');
-        this.updateSidebarVisible =false;
+        this.updateSidebarVisible = false;
         this.getVehicleType();
       },
       error => {
@@ -140,8 +140,7 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
       this.toast.showError('Server Error! Please try again later.');
       },
     )
-}
-
+  
 }
 
 
