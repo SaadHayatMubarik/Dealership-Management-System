@@ -56,11 +56,13 @@ export class VehicleTypeService {
         return await this.vehicleTypeRepository.delete({ type_id: vehicleTypeId});
     }
 
-    async updateVehicleType (updatedType: string, vehicleId: number){
-        const type: VehicleType = await this.vehicleTypeRepository.findOneBy({type_id:vehicleId});
-        if(type.type_name !==  updatedType) 
-        await this.vehicleTypeRepository.update({type_id:vehicleId},{ type_name: updatedType });
-        return "updated successfully !";
+    async updateVehicleType (updatedType: string, vehicleId: number): Promise<VehicleType>{
+        const type = await this.vehicleTypeRepository.findOneBy({type_id:vehicleId});
+        type.type_name = updatedType;
+        // const type: VehicleType = await this.vehicleTypeRepository.findOneBy({type_id:vehicleId});
+        // if(type.type_name !==  updatedType) 
+        
+        return await this.vehicleTypeRepository.save(type);
     }
 }
  

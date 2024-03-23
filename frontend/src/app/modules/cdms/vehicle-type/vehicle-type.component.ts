@@ -127,20 +127,18 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
   }
 
   updateVehicleType(){
-
-    if (this.vehicleType.vehicleTypeName != "^\S+$" ){
-  console.log("done");
+    if(this.updatedType != '' && this.updatedType != '')
     this.apiService.patch(`/vehicle-type/updateVehicleType/${this.updatedType}/${this.vehicleId}`).subscribe(
-        next => {
+      next => {
         this.toast.showSuccess('Updated Successfully');
-        this.updateSidebarVisible =false;
+        this.updateSidebarVisible = false;
         this.getVehicleType();
       },
       error => {
-        this.toast.showError("field is empty");
-      }
-    )
-  }
+        console.log('API ERROR', error)
+      this.toast.showError('Server Error! Please try again later.');
+      },
+    );
 }
 }
 

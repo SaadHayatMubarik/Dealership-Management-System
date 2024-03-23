@@ -130,7 +130,7 @@ if(role == roles[i]){
     return result;
   }
 
-  async getUsersById(userId: number):Promise<User>{
+  async getUserById(userId: number):Promise<User>{
     return await this.userRepository.findOneBy({user_id:userId});
   }
 
