@@ -44,7 +44,7 @@ export class CustomerController {
     }
 
     @Delete('deleteCustomer/:customerId')
-    deleteCustomer(@Param('customerId') customerId: number) {
+    deleteCustomer(@Param('customerId') customerId: number): Promise<string> {
         return this.customerService.deleteCustomer(customerId);
     }
 }

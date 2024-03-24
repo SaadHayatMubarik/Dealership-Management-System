@@ -162,46 +162,32 @@ export class InventoryService {
         return this.inventoryRepository.delete({ inventory_id: inventoryId });
     }
 
-    async updateInventory(updateInventoryDto: UpdateInventoryDto){
+    async updateInventory(updateInventoryDto: UpdateInventoryDto):Promise<Inventory>{
         const { vehicleVariant, vehicleModel, vehicleMake, vehicleChasisNo, status, comments, bodyColor, costPrice, dateOfPurchase, dateOfSale, demand, engineNo, grade, inventoryId, mileage, modelYear, regNo, vehicleType, sellingPrice, buyerId } = updateInventoryDto;
-        if(vehicleVariant)
-        await this.inventoryRepository.update({inventory_id:inventoryId},{variant:vehicleVariant});
-        if(vehicleModel)
-        await this.inventoryRepository.update({inventory_id:inventoryId}, {model:vehicleModel}); 
-        if(vehicleMake)
-        await this.inventoryRepository.update({inventory_id:inventoryId}, {make:vehicleMake});  
-        if(vehicleChasisNo)
-        await this.inventoryRepository.update({inventory_id:inventoryId}, {chasis_no:vehicleChasisNo});
-        if(status)
-        await this.inventoryRepository.update({inventory_id:inventoryId}, {status:status});
-        if(comments)
-        await this.inventoryRepository.update({inventory_id:inventoryId},{comments:comments});
-        if(bodyColor)
-        await this.inventoryRepository.update({inventory_id:inventoryId},{color:bodyColor});
-        if(costPrice)
-        await this.inventoryRepository.update({inventory_id:inventoryId},{price:costPrice});
-        if(demand)
-        await this.inventoryRepository.update({inventory_id:inventoryId},{demand:demand});
-        if(dateOfPurchase)
-        await this.inventoryRepository.update({inventory_id:inventoryId},{date_of_purchase:dateOfPurchase});
-        if(dateOfSale)
-        await this.inventoryRepository.update({inventory_id:inventoryId},{date_of_sale:dateOfSale});
-        if(engineNo)
-        await this.inventoryRepository.update({inventory_id:inventoryId},{engine_no:engineNo});
-        if(grade)
-        await this.inventoryRepository.update({inventory_id:inventoryId},{grade:grade});
-        if(mileage)
-        await this.inventoryRepository.update({inventory_id:inventoryId},{mileage:mileage});
-        if(modelYear)
-        await this.inventoryRepository.update({inventory_id:inventoryId},{mileage:mileage});
-        if(regNo)
-        await this.inventoryRepository.update({inventory_id:inventoryId},{reg_no:regNo});
-        if(vehicleType)
-        await this.inventoryRepository.update({inventory_id:inventoryId},{vehicleType:vehicleType});
+        const inventory = await this.inventoryRepository.findOneBy({inventory_id:inventoryId});
+        inventory.variant = vehicleVariant;
+        inventory.make = vehicleMake;
+        inventory.model = vehicleModel;
+        inventory.chasis_no = vehicleChasisNo;
+        inventory.status = status;
+        inventory.comments = comments;
+        inventory.color = bodyColor;
+        inventory.price = costPrice;
+        inventory.date_of_purchase = dateOfPurchase;
+        inventory.date_of_sale = dateOfSale;
+        inventory.demand = demand;
+        inventory.engine_no = engineNo;
+        inventory.grade = grade;
+        inventory.mileage = mileage;
+        inventory.year = modelYear;
+        inventory.reg_no = regNo;
+        inventory.vehicleType = vehicleType;
         if(sellingPrice)
-        await this.inventoryRepository.update({inventory_id:inventoryId}, {selling_Price:sellingPrice});
+        inventory.selling_Price = sellingPrice;
         if(buyerId)
         await this.inventoryRepository.update({inventory_id:inventoryId},{buyer:{customer_id:buyerId}});
+
+        return await this.inventoryRepository.save(inventory);
     }
     
     

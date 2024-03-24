@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Customer } from './entity/Customer';
 import { Repository } from 'typeorm';
@@ -8,6 +8,7 @@ import { CreateCustomerDto } from './dto/create-customer.dto';
 import { Showroom } from '../showroom/entity/Showroom';
 import { privateDecrypt } from 'crypto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
+import { Inventory } from '../inventory/entity/Inventory';
 
 @Injectable()
 export class CustomerService {
@@ -15,7 +16,9 @@ export class CustomerService {
         @InjectRepository(Customer)
         private customerRepository: Repository<Customer>,
         @InjectRepository(Showroom)
-        private showroomRepository: Repository<Showroom>
+        private showroomRepository: Repository<Showroom>,
+        @InjectRepository(Inventory)
+        private inventoryRepository: Repository<Inventory>
     ){}
 
     async addCustomer(createCustomerDto:CreateCustomerDto){
@@ -72,7 +75,13 @@ export class CustomerService {
         return await this.customerRepository.save(customer);
     }
 
-    async deleteCustomer(customerId: number){
-        return await this.customerRepository.delete({ customer_id: customerId });
+    async deleteCustomer(customerId: number): Promise<string>{
+        try{
+            await this.customerRepository.delete({ customer_id: customerId });
+            return "Successfully Deleted";
+        }catch (e){
+            // console.log(e)
+            throw new BadRequestException('This customer cannot be delete');
+        }
     }
 }

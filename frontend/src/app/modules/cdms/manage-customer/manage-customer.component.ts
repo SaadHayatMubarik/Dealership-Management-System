@@ -63,7 +63,7 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
   dealershipColumns: DataTableColumn[]= [];
   actions: IDataTableAction[] = [];
   data: IObject[] = [];
-
+  // customerId: number = 0;   //for deleting customer
   updateSidebarVisible:boolean = false;
 
 
@@ -146,7 +146,17 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
       label: 'Delete',
       icon: 'pi pi-trash',
       command: (event) => {
-
+        this.customerId = event.customer_id;
+        this.apiService.delete(`/customer/deleteCustomer/${this.customerId}`).subscribe({
+          next: (response) => {
+            this.getCustomer();
+            this.toast.showSuccess("Customer has been Deleted.");
+          },
+          error: () => 
+                {
+                  this.toast.showError('Using Customer is linked with inventory. Record cant be deleted!');
+                }
+        })
       },
     },
     {
@@ -217,7 +227,6 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
       this.updateCustomer = data;
       console.log(this.updateCustomer);
     });
-
   }
 
   //no update customer api

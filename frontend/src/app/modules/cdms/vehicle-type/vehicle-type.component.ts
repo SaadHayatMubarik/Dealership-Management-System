@@ -29,7 +29,7 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
   };
   
 
-  vehicleId: string = '';
+  vehicleId: number = 0;
   updatedType: string = '';
   // modalVisible = false;
   updateSidebarVisible = false;

@@ -45,11 +45,15 @@ export class VehicleTypeService {
 
     async deleteVehicleType (vehicleTypeId: number){
         // write it better if have time
-        const vehicleType = await this.vehicleTypeRepository.createQueryBuilder('vehicleType')
+        
+        try{
+            // await this.multiValueAttributeRepository.delete({vehicleTypeAttribute:{vehicleType:{type_id:vehicleTypeId}}});
+            // await this.vehicleTypeAttributeRepository.delete({vehicleType:{ type_id: vehicleTypeId}});
+            // return await this.vehicleTypeRepository.delete({type_id:vehicleTypeId});
+            const vehicleType = await this.vehicleTypeRepository.createQueryBuilder('vehicleType')
         .select('*')
         .where('vehicleType.type_id = :vehicleTypeId', { vehicleTypeId })
         .getRawOne();
-
         const vehicleAttribute = await this.vehicleTypeAttributeRepository.createQueryBuilder('vehicleTypeAttribute')
         .select('*')
         .where('vehicleTypeAttribute.vehicleTypeTypeId = :vehicleTypeId', { vehicleTypeId })
@@ -57,6 +61,11 @@ export class VehicleTypeService {
         await this.multiValueAttributeRepository.delete({ vehicleTypeAttribute: vehicleAttribute });
         await this.vehicleTypeAttributeRepository.delete({ vehicleType:{ type_id:vehicleTypeId } });
         return await this.vehicleTypeRepository.delete({ type_id: vehicleTypeId});
+        }catch(e){
+            console.log(e)
+            throw new BadRequestException('This vehicle type is still used in another place');
+        }
+        
     }
 
     async updateVehicleType (updatedType: string, vehicleId: number): Promise<VehicleType>{
