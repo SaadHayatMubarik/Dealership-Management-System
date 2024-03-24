@@ -51,6 +51,6 @@ export interface IUpdateInventory {
     color : string  ;
     status : string  ;
     reg_no : string  ;
-    date_of_purchase: Date | string | null;
+    date_of_purchase: Date | string ;
  
 }

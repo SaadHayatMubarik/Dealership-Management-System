@@ -75,10 +75,20 @@ export class ManageInvestorsComponent extends BaseComponent implements OnInit{
         label: ' Delete',
         icon: 'pi pi-trash',
         command: (event) => {
-        
+          this.investorId = event.invesotr_id
+          this.apiService.delete(`/investor/deleteInvestor/${this.investorId}`).subscribe({
+            next: (response) => { 
+              this.getinvestors();
+              this.toast.showSuccess("Investor Deleted.");
+            },
+            error: () => 
+            {
+              this.toast.showError('Server Error! Please try again later.');
+            }
+          }
+            );           
             },
           },
-     
       {
         label: 'Update',
         icon: 'pi pi-pencil',
@@ -89,7 +99,6 @@ export class ManageInvestorsComponent extends BaseComponent implements OnInit{
         },
       }
     ];
-
   }
 
   @ViewChild('investorForm') investorForm!: NgForm;
@@ -166,9 +175,9 @@ getInvestorById(investorId: number){
 //update api of investor not made
 
 update(){
-  this.apiService.patch('', this.UpdateInvestor).subscribe({
+  this.apiService.put('/investor/updateInvestor', this.UpdateInvestor).subscribe({
     next: (response) => {
-      this.toast.showSuccess('User information updated.');
+      this.toast.showSuccess('Investor information updated.');
       this.updateSidebarVisible = false;
       this.getinvestors();
       console.log('Success Object:', this.UpdateInvestor);
@@ -178,7 +187,5 @@ update(){
       console.log('Error Object:', this.UpdateInvestor);              
     },
   });
-
 }
-
 }
