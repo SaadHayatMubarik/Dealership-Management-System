@@ -81,12 +81,11 @@ export class UpdateInventoryComponent extends BaseComponent implements OnInit {
     update(){
       this.apiService.put('/inventory/updateInventory/sellInventory', this.updateInventory).subscribe(
         next => {
-        
         this.router.navigate(['/add-inventory']);
         console.log('success', next);
         this.toast.showSuccess('Updated Successfully');
-        console.log('object on success', this.updateInventory)
-        ;},
+        console.log('object on success', this.updateInventory);
+      },
       error => {
       this.toast.showError('Server Error! Please try again later.');
       console.log('Fail:', error);
