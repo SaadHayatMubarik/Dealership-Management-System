@@ -4,7 +4,7 @@ import { IVehicleTypeAttribute } from '../../interfaces/inventory';
 import { DialogControlService } from 'src/app/shared/services/dialog.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
 
-
+import { IUpdateVehicleAttr } from '../../interfaces/update';
 
 
 import {
@@ -46,13 +46,23 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
   data: IObject[] = [];
   
   showroomID :any; 
-  vehicle_attribute_id: string = '';
+  vehicle_attribute_id: number = 0;
   
   constructor(private readonly apiService: ApiHelperService, 
               private dialogService: DialogControlService ,
               private toastService:ToastService) {
     super()
       
+  }
+
+  updateAttr: IUpdateVehicleAttr = {
+
+     multiValueId: [],
+     vehicleAttributeId:0,
+     vehicleTypeName:'', 
+     vehicleAttributeName:'', 
+     attributeInputType:'',
+      vehicleAttributeValue:'',
   }
 
   ngOnInit() 
@@ -115,7 +125,7 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
           this.vehicle_attribute_id = event.vehicleAttributeId;
           
           this.updateSidebarVisible = true;
-          this.getVehicleAtt();
+          this.getVehicleAtt(this.vehicle_attribute_id);
 
         },
       },
@@ -183,10 +193,10 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
 
   vehicleAttr:any;
   //get individual vehicle type attribute, check this api
-  getVehicleAtt(){
-    this.apiService.get(`/vehicle-type-attribute/getVehicleAttributeById/${this.vehicle_attribute_id}`).subscribe((data) => {
-      this.vehicleAttr = data;
-      console.log(this.vehicleAttr);
+  getVehicleAtt(vehicle_attribute_id: number){
+    this.apiService.get(`/vehicle-type-attribute/getVehicleAttributeById/${vehicle_attribute_id}`).subscribe((data: IUpdateVehicleAttr) => {
+      this.updateAttr = data;
+      console.log(this.updateAttr);
     });
 
 

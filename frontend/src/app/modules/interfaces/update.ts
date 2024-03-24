@@ -25,3 +25,32 @@ export interface IUpdateCustomer
     cnic: string;
 
 }
+
+export interface IUpdateVehicleAttr{
+ 
+    multiValueId?: (number| null)[];
+    vehicleAttributeId?: number | null;
+    vehicleTypeName: string;
+    vehicleAttributeName: string;
+    attributeInputType: string;
+    vehicleAttributeValue:string;
+
+}
+
+export interface IUpdateInventory {
+
+    
+    make : string;
+    model : string ;
+    variant : string;
+    chasis_no : string ;
+    engine_no : string ;
+    price : string  ;
+    demand : string  ;
+    year : string ;
+    color : string  ;
+    status : string  ;
+    reg_no : string  ;
+    date_of_purchase: Date | string | null;
+ 
+}

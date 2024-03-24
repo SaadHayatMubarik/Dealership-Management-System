@@ -40,7 +40,7 @@
                           required
                           minlength="3"
                           pattern="^\S(?:\s*\S)*$"
-                          [(ngModel)]="make"
+                          [(ngModel)]="updateInventory.make"
                           #make_update = "ngModel"
                         />
                         <div *ngIf="make_update.invalid && (make_update.dirty || make_update.touched)" class="p-error">
@@ -65,7 +65,7 @@
                           class="p-inputtext-lg"
                           pInputText
                           name="model"
-                          [(ngModel)] ="model"
+                          [(ngModel)] ="updateInventory.model"
                           required
                           #model_update="ngModel"
                           minlength="3"
@@ -94,7 +94,7 @@
                           class="p-inputtext-lg"
                           pInputText
                           name="variant"
-                          [(ngModel)] = "variant"
+                          [(ngModel)] = "updateInventory.variant"
                           #variant_update="ngModel"
                           required
                           minlength="3"
@@ -126,7 +126,7 @@
                           class="p-inputtext-lg"
                           pInputText
                           name="Chasis No"
-                          [(ngModel)]="chasisNo"
+                          [(ngModel)]="updateInventory.chasis_no"
                           #chasis_update = "ngModel"
                           required
                           minlength="17"
@@ -159,7 +159,7 @@
                           pInputText
                           name="engineNo"
                           #update_engine = "ngModel"
-                          [(ngModel)]="engineNo"
+                          [(ngModel)]="updateInventory.engine_no"
                           required
                           minlength="9"
                           maxlength="9"
@@ -188,7 +188,7 @@
                           class="p-inputtext-lg"
                           pInputText
                           name="RegNo"
-                          [(ngModel)] = "regNo"
+                          [(ngModel)] = "updateInventory.reg_no"
                         />
 
                         <label for="float-label">License Number</label>
@@ -210,7 +210,7 @@
                           name="costPrice"
                           [required]="true"
                           pattern="^\d+$"
-                          [(ngModel)] = "costPrice"
+                          [(ngModel)] = "updateInventory.price"
                           #update_cost = "ngModel"
                         >
                         </p-inputNumber>
@@ -235,7 +235,7 @@
                           class="p-inputtext-lg"
                           name="demand"
                           #update_demand = "ngModel"
-                          [(ngModel)] = "demand"
+                          [(ngModel)] = "updateInventory.demand"
                           [required]="true"
                         >
                         </p-inputNumber>
@@ -258,7 +258,7 @@
                           [readonlyInput]="true"
                           class="p-inputtext-lg"
                           name="date of purchase"
-                          [(ngModel)] = "dateOfPurchase"
+                          [(ngModel)] = "updateInventory.date_of_purchase"
                           #update_dop = "ngModel"
                           [required]="true"
                         
@@ -291,7 +291,7 @@
                           required
                           pattern="^(?!202[8-9]|20[3-9]\d|2[1-9]\d{2}|[3-9]\d{3}|10000)\d+$"
                           #update_model = "ngModel"
-                          [(ngModel)] = "modelYear"
+                          [(ngModel)] = "updateInventory.year"
                         />
 
                         <div *ngIf="update_model.invalid && (update_model.dirty || update_model.touched)" class="p-error">
@@ -315,7 +315,7 @@
                           class="p-inputtext-lg"
                           pInputText
                           name="color"
-                          [(ngModel)] = "bodyColor"
+                          [(ngModel)] ="updateInventory.color"
                           #update_color = "ngModel"
                           required
                           pattern="^(?! )[A-Za-z]+(?! )$"
@@ -342,7 +342,7 @@
                           [options]="status_option"
                           class="p-inputtext-lg"
                           name="status"
-                          [(ngModel)]="status"
+                          [(ngModel)]="updateInventory.status"
                           [required]="true"
                           #vehicleStatus = "ngModel"
                         ></p-dropdown>
