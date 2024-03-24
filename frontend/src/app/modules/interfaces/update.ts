@@ -33,10 +33,10 @@ export interface IUpdateVehicleAttr{
  
     multiValueId?: (number| null)[];
     vehicleAttributeId?: number | null;
-    vehicleTypeName: string;
+    vehicleTypeName?: string;
     vehicleAttributeName: string;
     attributeInputType: string;
-    vehicleAttributeValue:string;
+    vehicleAttributeValue:string[];
 
 }
 

@@ -196,7 +196,6 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
           },
           error: () => {
             this.toast.showError('Error Occured');
-           
           },
         });
       }

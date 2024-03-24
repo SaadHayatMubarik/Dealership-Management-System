@@ -34,7 +34,9 @@ export class NotificationComponent extends BaseComponent {
   status: string[] = ['received', 'sent'];
 
   showroomId :string | null=  localStorage.getItem('Showroom Id')
-  details:any;
+  details:any[]= [];
+
+  notifications: any = '';
 
  
 
@@ -55,17 +57,42 @@ handleTabChange(event: any) {
 }
 
 
+
+
+
 getNotification(){
   console.log(this.status[this.selectedTabIndex]);
   console.log(this.showroomId);
   this.apiService.get(`/notification/getRequest/${this.showroomId}/${this.status[this.selectedTabIndex]}`).subscribe((data) => {
-    this.data = data;
     this.details = data
-    console.log(this.details)
-
+    console.log(this.details);
+   
   });
 }
 
+// {notificationId}/{updatedStatus}
+
+changeStatus(notification_id:number ,status: string){
+  this.apiService
+  .patch(`/notification/updateRequestStatus/${notification_id}/${status}`,) 
+  .subscribe({
+    next: (response) => {
+      this.toast.showSuccess('Request:', status);
+      console.log('success',status)
+      console.log('success',notification_id)
+      localStorage.setItem('lastRequestTime', new Date().getTime().toString());
+    },
+    error: () => {
+      this.toast.showError('Error Occured.');
+      console.log('fail',status)
+      console.log('fail',notification_id)
+      // console.log()
+    },
+  });
+  
+
+
+}
 
 
 

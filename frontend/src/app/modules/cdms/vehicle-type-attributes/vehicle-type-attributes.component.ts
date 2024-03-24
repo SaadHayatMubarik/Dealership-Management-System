@@ -62,7 +62,7 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
      vehicleTypeName:'', 
      vehicleAttributeName:'', 
      attributeInputType:'',
-      vehicleAttributeValue:'',
+      vehicleAttributeValue:[],
   }
 
   ngOnInit() 

@@ -399,23 +399,10 @@ removeInvestorForm() {
   }
 }
 
-
-
-
-
-
-
- 
-//   percentageInvested: number = 0; // Percentage invested by the investor
-//   amountInvested: number = 0; // Amount invested by the investor
-// =======
   percentageInvested: number[] = []; // Percentage invested by the investor
   amountInvested: number[] = []; // Amount invested by the investor
-// >>>>>>> 17a807b0552467598a98cd1e970c990f6a53cd25
   totalPercentageInvested: number = 0; // Total percentage invested
   remainingPercentage: number = 100; // Remaining percentage
-
-
 
   calculateInvestment(i: number) {
     this.amountInvested[i] = (this.percentageInvested[i] / 100) * this.vehicleInventory.costPrice;
@@ -423,10 +410,5 @@ removeInvestorForm() {
     this.totalPercentageInvested = this.percentageInvested[i];
     this.remainingPercentage = 100 - this.totalPercentageInvested;
   }
-
-
-
-  
-      
 
 }
