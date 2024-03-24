@@ -163,29 +163,29 @@ export class InventoryService {
     }
 
     async updateInventory(updateInventoryDto: UpdateInventoryDto):Promise<Inventory>{
-        const { vehicleVariant, vehicleModel, vehicleMake, vehicleChasisNo, status, comments, bodyColor, costPrice, dateOfPurchase, dateOfSale, demand, engineNo, grade, inventoryId, mileage, modelYear, regNo, vehicleType, sellingPrice, buyerId } = updateInventoryDto;
-        const inventory = await this.inventoryRepository.findOneBy({inventory_id:inventoryId});
-        inventory.variant = vehicleVariant;
-        inventory.make = vehicleMake;
-        inventory.model = vehicleModel;
-        inventory.chasis_no = vehicleChasisNo;
+        const { variant, model, make, chasis_no, status, comments, color, price, date_of_purchase, date_of_sale, demand, engine_no, grade, inventory_id, mileage, year, reg_no, selling_Price, buyerId } = updateInventoryDto;
+        const inventory = await this.inventoryRepository.findOneBy({inventory_id:inventory_id});
+        inventory.variant = variant;
+        inventory.make = make;
+        inventory.model = model;
+        inventory.chasis_no = chasis_no;
         inventory.status = status;
         inventory.comments = comments;
-        inventory.color = bodyColor;
-        inventory.price = costPrice;
-        inventory.date_of_purchase = dateOfPurchase;
-        inventory.date_of_sale = dateOfSale;
+        inventory.color = color;
+        inventory.price = price;
+        inventory.date_of_purchase = date_of_purchase;
+        inventory.date_of_sale = date_of_sale;
         inventory.demand = demand;
-        inventory.engine_no = engineNo;
+        inventory.engine_no = engine_no;
         inventory.grade = grade;
         inventory.mileage = mileage;
-        inventory.year = modelYear;
-        inventory.reg_no = regNo;
-        inventory.vehicleType = vehicleType;
-        if(sellingPrice)
-        inventory.selling_Price = sellingPrice;
+        inventory.year = year;
+        inventory.reg_no = reg_no;
+        // inventory.vehicleType = vehicleType;
+        if(selling_Price)
+        inventory.selling_Price = selling_Price;
         if(buyerId)
-        await this.inventoryRepository.update({inventory_id:inventoryId},{buyer:{customer_id:buyerId}});
+        await this.inventoryRepository.update({inventory_id:inventory_id},{buyer:{customer_id:buyerId}});
 
         return await this.inventoryRepository.save(inventory);
     }

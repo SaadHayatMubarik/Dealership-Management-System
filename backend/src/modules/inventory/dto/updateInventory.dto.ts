@@ -6,43 +6,43 @@ import { Customer } from "src/modules/customer/entity/Customer";
 
 export class UpdateInventoryDto{
     @IsNotEmpty()
-    inventoryId: number;
+    inventory_id: number;
 
-    @IsOptional()
-    vehicleType: VehicleType;
+    // @IsOptional()
+    // vehicleType: VehicleType;
     
     @IsOptional()
-    vehicleMake: string;
+    make: string;
 
     @IsOptional()
-    vehicleModel: string;
+    model: string;
 
     @IsOptional()
-    vehicleVariant: string;
+    variant: string;
 
     @IsOptional()
-    modelYear: number;
+    year: number;
 
     @IsOptional()
-    vehicleChasisNo: string;
+    chasis_no: string;
 
     @IsOptional()
-    costPrice: number;
+    price: number;
 
     @IsOptional()
     demand: number;
 
     @IsOptional()
-    dateOfPurchase: Date;
+    date_of_purchase: Date;
 
     @IsOptional()
-    dateOfSale: Date;
+    date_of_sale: Date;
 
     @IsOptional()
-    bodyColor: string;
+    color: string;
 
     @IsOptional()
-    engineNo: string;
+    engine_no: string;
 
     @IsOptional()
     comments: string;
@@ -55,13 +55,13 @@ export class UpdateInventoryDto{
     status: InventoryStatus;
     
     @IsOptional()
-    regNo: string;
+    reg_no: string;
 
     @IsOptional()
     mileage: number;
 
     @IsOptional()
-    sellingPrice: number;
+    selling_Price: number;
 
     @IsOptional()
     buyerId: number;

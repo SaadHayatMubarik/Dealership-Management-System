@@ -2,14 +2,14 @@ import { IsNotEmpty } from "class-validator";
 
 export class UpdateInvestorDto{
     @IsNotEmpty()
-    investorId: number;
+    investor_id: number;
 
     @IsNotEmpty()
-    investorName: string;
+    investor_name: string;
 
     @IsNotEmpty()
-    investorCnic: string;
+    cnic: string;
 
     @IsNotEmpty()
-    phoneNo: string;
+    phone: string;
 }

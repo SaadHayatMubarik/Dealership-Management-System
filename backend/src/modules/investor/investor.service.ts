@@ -37,12 +37,11 @@ export class InvestorService {
     }
 
     async updateInvestor(updateInvestorDto: UpdateInvestorDto):Promise<Investor>{
-        const { investorCnic, investorId, investorName, phoneNo } = updateInvestorDto;
-        const investor = await this.investorRepository.findOneBy({investor_id:investorId});
-        investor.cnic = investorCnic;
-        investor.investor_name = investorName;
-        investor.phone = phoneNo;
-
+        const { cnic, investor_id, investor_name, phone } = updateInvestorDto;
+        const investor = await this.investorRepository.findOneBy({investor_id:investor_id});
+        investor.cnic = cnic;
+        investor.investor_name = investor_name;
+        investor.phone = phone;
         return  await this.investorRepository.save(investor);
     }
 
