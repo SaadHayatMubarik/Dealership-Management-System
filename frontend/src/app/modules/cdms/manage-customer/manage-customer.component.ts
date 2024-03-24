@@ -30,6 +30,7 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
 
   updateCustomer: IUpdateCustomer =
   {
+    customer_id: 0,
     catagory: '',
     name: '',
     phoneNo: '',
@@ -210,7 +211,7 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
   getCustomer(){
    
     this.apiService.get(`/customer/getCustomer/${this.customer.showroomId}/${this.category[this.selectedTabIndex]}`).subscribe((data) => {
-      console.log(data);
+      // console.log(data);
       this.data = data;
     });
   }
@@ -224,14 +225,15 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
   getCustomerById(customerId: number){
     this.apiService.get(`/customer/getCustomerDetails/${customerId}`).subscribe((data : IUpdateCustomer) => {
       this.updateCustomer = data;
-      console.log(this.updateCustomer.name);
+      // console.log(this.updateCustomer.name);
     });
   }
 
   //no update customer api
   update(){
+    console.log(this.updateCustomer);
         this.apiService
-        .patch('/customer/addCustomer')
+        .put(`/customer/updateCustomer/${this.updateCustomer}`)
         .subscribe({
           next: (response) => {
             this.toast.showSuccess('New Customer Added.');

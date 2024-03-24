@@ -4,13 +4,13 @@ import { CustomerType } from "../customer-type.enum";
 
 export class UpdateCustomerDto{
     @IsNotEmpty()
-    customerId: number;
+    customer_id: number;
 
     @IsNotEmpty()
     name: string;
 
     @IsNotEmpty()
-    category: CustomerCatagory;
+    catagory: CustomerCatagory;
 
     @IsNotEmpty()
     type: CustomerType;

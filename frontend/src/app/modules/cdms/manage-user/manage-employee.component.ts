@@ -23,7 +23,7 @@ import { HttpClient } from '@angular/common/http';
 export class ManageEmployeeComponent extends BaseComponent implements OnInit {
 
 update_user: IUpdateUser = {
-
+  user_id: 0,
   user_name:'', 
   email:'', 
   role:'',
@@ -81,6 +81,7 @@ update_user: IUpdateUser = {
         label: 'Delete',
         icon: 'pi pi-trash',
         command: (event) => {
+          
          this.userId = event.userId;
          this.userName = event.username
          this.apiService.delete(`/auth/deleteUser/${this.userId}`).subscribe({
@@ -161,7 +162,7 @@ update_user: IUpdateUser = {
 
 
   update(){
-          this.apiService.patch('/auth/updateUserDetails', this.update_user).subscribe({
+          this.apiService.put('/auth/updateUserDetails', this.update_user).subscribe({
             next: (response) => {
               this.toast.showSuccess('User information updated.');
               this.updateSidebarVisible = false;

@@ -182,7 +182,7 @@ export class InventoryService {
         inventory.year = year;
         inventory.reg_no = reg_no;
         // inventory.vehicleType = vehicleType;
-        if(selling_Price)
+        // if(selling_Price)
         inventory.selling_Price = selling_Price;
         if(buyerId)
         await this.inventoryRepository.update({inventory_id:inventory_id},{buyer:{customer_id:buyerId}});

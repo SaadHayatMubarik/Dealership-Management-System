@@ -322,7 +322,7 @@
 
   <p-sidebar *ngIf="updateSidebarVisible" [(visible)]="updateSidebarVisible" position="right" [style]="{width: '55rem'}" >
 
-    <form > 
+    <form (ngSubmit)="update()" #updateUser="ngForm">
       <!-- (ngSubmit)="update()" #updateCustomer="ngForm" -->
         <div class="sidebar-main">
           <div class="sidebar-header">

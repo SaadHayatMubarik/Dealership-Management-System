@@ -10,6 +10,7 @@ import { GetUserDto } from './dto/get-user.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { UserRole } from './user-role.enum';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { DeleteResult } from 'typeorm';
 
 
 @Controller('auth')
@@ -42,6 +43,7 @@ export class AuthController {
 
   @Put('updateUserDetails')
   updateUserDetails(@Body() updateUserDto:UpdateUserDto):Promise <User>{
+    // console.log(updateUserDto);
     return this.authService.updateUserDetails(updateUserDto);
   }
 
@@ -58,7 +60,7 @@ export class AuthController {
 
   }
   @Delete('deleteUser/:userId')
-  deleteUser(@Param('userId') userId: number){
+  deleteUser(@Param('userId') userId: number): Promise<DeleteResult>{
     return this.authService.deleteUser(userId);
   }
   

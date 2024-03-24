@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Equal, Repository } from 'typeorm';
+import { DeleteResult, Equal, Repository } from 'typeorm';
 import { VehicleTypeDto } from './dto/vehicle-type.dto';
 import { VehicleTypeAttributeService } from '../vehicle-type-attribute/vehicle-type-attribute.service';
 import { VehicleType } from './entity/Vehicle-type';
@@ -43,7 +43,7 @@ export class VehicleTypeService {
                             
     }
 
-    async deleteVehicleType (vehicleTypeId: number){
+    async deleteVehicleType (vehicleTypeId: number): Promise<DeleteResult>{
         // write it better if have time
         
         try{
@@ -62,7 +62,7 @@ export class VehicleTypeService {
         await this.vehicleTypeAttributeRepository.delete({ vehicleType:{ type_id:vehicleTypeId } });
         return await this.vehicleTypeRepository.delete({ type_id: vehicleTypeId});
         }catch(e){
-            console.log(e)
+            // console.log(e)
             throw new BadRequestException('This vehicle type is still used in another place');
         }
         

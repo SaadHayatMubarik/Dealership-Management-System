@@ -3,6 +3,7 @@ import { InvestorService } from './investor.service';
 import { Investor } from './entity/Investor';
 import { InvestorDto } from './dto/investor.dto';
 import { UpdateInvestorDto } from './dto/update-investor.dto';
+import { DeleteResult } from 'typeorm';
 
 @Controller('investor')
 export class InvestorController {
@@ -29,7 +30,8 @@ export class InvestorController {
     }
 
     @Delete('deleteInvestor/:investorId')
-    deleteInvestor(@Param('investorId') investorId: number){
+    deleteInvestor(@Param('investorId') investorId: number): Promise<DeleteResult>{
+        // console.log(investorId);
         return this.investorService.deleteInvestor(investorId);
     }
 }

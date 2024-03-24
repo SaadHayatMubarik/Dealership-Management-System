@@ -3,7 +3,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 // import { User } from './entities/User';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { ValidateUserDto } from './dto/validate-user.dto';
 import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from './jwt-payload.interface';
@@ -134,14 +134,14 @@ if(role == roles[i]){
     return await this.userRepository.findOneBy({user_id:userId});
   }
 
-  async deleteUser(userId: number){
+  async deleteUser(userId: number): Promise<DeleteResult>{
     return this.userRepository.delete({user_id:userId});
   }
 
   async updateUserDetails(updateUserDto:UpdateUserDto): Promise<User>{
-    const { userId,username, email, role } = updateUserDto;
-    const user = await this.userRepository.findOneBy({user_id:userId});
-    user.user_name = username;
+    const { user_Id,user_name, email, role } = updateUserDto;
+    const user = await this.userRepository.findOneBy({user_id:user_Id});
+    user.user_name = user_name;
     user.email = email;
     user.role = role;
   return await this.userRepository.save(user);

@@ -75,7 +75,7 @@ export class ManageInvestorsComponent extends BaseComponent implements OnInit{
         label: ' Delete',
         icon: 'pi pi-trash',
         command: (event) => {
-          this.investorId = event.invesotr_id
+          this.investorId = event.investor_id
           this.apiService.delete(`/investor/deleteInvestor/${this.investorId}`).subscribe({
             next: (response) => { 
               this.getinvestors();
@@ -83,7 +83,7 @@ export class ManageInvestorsComponent extends BaseComponent implements OnInit{
             },
             error: () => 
             {
-              this.toast.showError('Server Error! Please try again later.');
+              this.toast.showError('Investor has investements can not be deleted.');
             }
           }
             );           

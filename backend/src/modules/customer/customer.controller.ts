@@ -5,6 +5,7 @@ import { Customer } from './entity/Customer';
 import { CustomerCatagory } from './customer-catagory.enum';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
+import { DeleteResult } from 'typeorm';
 
 @Controller('customer')
 export class CustomerController {
@@ -12,7 +13,7 @@ export class CustomerController {
 
     @Post('addCustomer')
     addCustomer(@Body() createCustomerDto: CreateCustomerDto) {
-        console.log(createCustomerDto);
+        // console.log(createCustomerDto);
         return this.customerService.addCustomer(createCustomerDto)
     }
  
@@ -40,11 +41,12 @@ export class CustomerController {
 
     @Put('updateCustomer')
     updateCustomer(@Body()updateCustomerDto: UpdateCustomerDto): Promise<Customer>{
+        console.log(updateCustomerDto);
         return this.customerService.updateCustomer(updateCustomerDto);
     }
 
     @Delete('deleteCustomer/:customerId')
-    deleteCustomer(@Param('customerId') customerId: number): Promise<string> {
+    deleteCustomer(@Param('customerId') customerId: number): Promise<DeleteResult> {
         return this.customerService.deleteCustomer(customerId);
     }
 }

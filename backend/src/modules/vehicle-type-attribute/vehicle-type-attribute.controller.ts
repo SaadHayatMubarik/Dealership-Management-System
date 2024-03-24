@@ -5,6 +5,7 @@ import { GetVehicleTypeAttributeDto } from './dto/get-vehicle-type-attribute.dto
 import { AuthGuard } from '@nestjs/passport';
 import { VehicleTypeAttribute } from './entity/Vehicle-type-attribute';
 import { UpdateVehicleTypeAttributeDto } from './dto/update-vehicle-type-attribute.dto';
+import { MultiValueAttribute } from '../multi-value-attribute/entity/Multi-value-attribute';
 
 @Controller('vehicle-type-attribute')
 // @UseGuards(AuthGuard())
@@ -30,10 +31,7 @@ export class VehicleTypeAttributeController {
         return this.vehicleTypeAttributeService.getVehicleAttributeById(vehicleTypeId);
     }
 
-    @Get('getVehicleAttributeById/:attributeId')
-    getVehicleAttibuteByAttributeId(@Param('attributeId') attributeId:number): Promise<VehicleTypeAttribute>{
-        return this.getVehicleAttibuteByAttributeId(attributeId);
-    }
+    
 
     @Delete('/:vehicleTypeAttributeId')
     deleteVehicleAttributeByName(@Param('vehicleTypeAttributeId') vehicleTypeAttributeId: number){

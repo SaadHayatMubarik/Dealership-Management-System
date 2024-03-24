@@ -1,5 +1,6 @@
 export interface IUpdateUser
 {
+    user_id: number
     user_name: string;
     email: string;
     role: string;
@@ -7,6 +8,7 @@ export interface IUpdateUser
 
 export interface IUpdateInvestor
 {
+
     investor_name: string;
     phone: string;
     cnic: string;
@@ -14,14 +16,15 @@ export interface IUpdateInvestor
 
 export interface IUpdateCustomer
 {
-    catagory: string;
+    customer_id: number;
     name: string;
+    catagory: string;
+    type: string;
     phoneNo: string;
     email: string;
     province: string;
     city: string;
     address: string;
-    type: string;
     cnic: string;
 
 }

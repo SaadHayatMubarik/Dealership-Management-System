@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Customer } from './entity/Customer';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { CustomerType } from './customer-type.enum';
 import { CustomerCatagory } from './customer-catagory.enum';
 import { CreateCustomerDto } from './dto/create-customer.dto';
@@ -61,10 +61,10 @@ export class CustomerService {
     }
 
     async updateCustomer(updateCustomerDto:UpdateCustomerDto): Promise<Customer>{
-        const { address, category, city, cnic, customerId, email,name,phoneNo, province, type } = updateCustomerDto;
-        const customer = await this.customerRepository.findOneBy({customer_id:customerId});
+        const { address, catagory, city, cnic, customer_id, email,name,phoneNo, province, type } = updateCustomerDto;
+        const customer = await this.customerRepository.findOneBy({customer_id:customer_id});
         customer.address = address;
-        customer.catagory = category;
+        customer.catagory = catagory;
         customer.city = city;
         customer.cnic = cnic;
         customer.email = email;
@@ -75,10 +75,9 @@ export class CustomerService {
         return await this.customerRepository.save(customer);
     }
 
-    async deleteCustomer(customerId: number): Promise<string>{
+    async deleteCustomer(customerId: number): Promise<DeleteResult>{
         try{
-            await this.customerRepository.delete({ customer_id: customerId });
-            return "Successfully Deleted";
+            return await this.customerRepository.delete({ customer_id: customerId });
         }catch (e){
             // console.log(e)
             throw new BadRequestException('This customer cannot be delete');

@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Investor } from './entity/Investor';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { InvestorDto } from './dto/investor.dto';
 import { Showroom } from '../showroom/entity/Showroom';
 import { privateDecrypt } from 'crypto';
@@ -45,7 +45,11 @@ export class InvestorService {
         return  await this.investorRepository.save(investor);
     }
 
-    async deleteInvestor(investorId:number){
-        return this.investorRepository.delete({investor_id:investorId});
+    async deleteInvestor(investorId:number): Promise<DeleteResult>{
+        try{
+        return await this.investorRepository.delete({investor_id:investorId});
+        }catch(e){
+            throw new BadRequestException("Investor has investements can not be deleted");
     }
+}
 }

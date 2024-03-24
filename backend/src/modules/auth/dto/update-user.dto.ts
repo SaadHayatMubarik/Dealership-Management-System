@@ -5,13 +5,13 @@ export class UpdateUserDto{
     
     @IsNumber()
     @IsNotEmpty()
-    userId: number;
+    user_Id: number;
 
     @IsString()
     @IsOptional()
     @MinLength(4)
     @MaxLength(20)
-    username?: string;
+    user_name?: string;
 
     @IsString()
     @IsOptional()

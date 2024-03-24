@@ -77,7 +77,8 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   customers: any[] = []  ;//To store list of Customers for whom  inventory is added
   customersDetails: any; //To store individual customer details
   customerType: string = 'SELLER'
-  status: string[] = ['AVAILABLE', 'ON ORDER']; //to populate status dropdown
+  status: string[] = ['AVAILABLE','SOLD' ,'ON ORDER']; //to populate status tabs
+  statusDropdown: string[] = ['AVAILABLE','ON ORDER']; //to populate status dropdown
   sliderValue: number = 0;
  
   vehicleId: any; //saving vehicle type id
