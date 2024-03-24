@@ -9,28 +9,34 @@
         <div class="card mb-0 color">
           <p-tabView (onTabChange)="handleTabChange($event)">
             <p-tabPanel header="Recieved">
-              <div class="notification-tile">
+              <div *ngIf="details && details.length > 0">
+              <div *ngFor="let notification of details" class="notification-tile">
                 <div class="notification-header">
-                  <b>Showroom Name</b>
-                  <span> has sent you a request to sell this car:  </span>
-                  <b></b>
+                  <b>  {{notification.senderShowroom.showroom_name}} </b>
+                  <span> has sent you a request to sell this car: 
+                    <b>{{notification.inventory.make}}  {{notification.inventory.model}} {{notification.inventory.variant}} 
+                    </b></span>
                 </div>
                 <div class="notification-details">
                   <span class="notification-time"
-                    >Date & Time: [Date & Time]</span
+                    >{{notification.date}}</span
                   >
                 </div>
                 <div class="notification-actions">
-                  <p-button>Accept</p-button>
+                  <p-button  
+                  (click)="changeStatus(notification.notification_id, 'ACCEPT')"
+                  >Accept</p-button>
                   <p-button
+                  (click)="changeStatus(notification.notification_id, 'REJECT')"
                     severity="danger"
                     class="ml-2"
                   >Reject</p-button>
-                  <a [routerLink]="['/cdms/dashboard']" style="float: right"
+                  <a [routerLink]="['/detail-view/', notification.inventory.inventory_id]" style="float: right"
                     >View Car Details</a
                   >
                 </div>
               </div>
+            </div>
             </p-tabPanel>
             <p-tabPanel header="Sent">
                 <div class="notification-tile">

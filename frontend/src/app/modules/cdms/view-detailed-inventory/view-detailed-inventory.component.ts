@@ -64,10 +64,8 @@ notification : INotification =
   }
 
   disableButton(){
-    
     const vehicleShowroomId = this.vehicleDetails.showroom.showroom_id;
     console.log(vehicleShowroomId);
-   
     if (this.showroomId == vehicleShowroomId)
     {
       return true;
@@ -75,30 +73,58 @@ notification : INotification =
     else{
       return false;
     }
-
   }
 
 
   sendNotification()
   {
-
     this.apiService
-    .postLogin('/notification/sendRequest',this.notification )
+    .post('/notification/sendRequest',this.notification )
     .subscribe({
       next: (response) => {
         this.toast.showSuccess('Notification Sent');
         console.log(this.notification)
+        localStorage.setItem('lastRequestTime', new Date().getTime().toString());
       },
       error: () => {
         this.toast.showError('Error Occured.');
         console.log(this.notification)
       },
     });
-  
-  
-
-
   }
+
+  // sendNotification() {
+  //   // Assuming this.notification is your request data
+  //   this.apiService.postLogin('/notification/sendRequest', this.notification)
+  //     .subscribe({
+  //       next: (response) => {
+  //         this.toast.showSuccess('Notification Sent');
+  //         console.log(this.notification);
+  //         // Save the current timestamp to local storage
+  //         localStorage.setItem('lastRequestTime', new Date().getTime().toString());
+  //         // Disable the button or take any other action as needed
+  //       },
+  //       error: () => {
+  //         this.toast.showError('Error Occurred.');
+  //         console.log(this.notification);
+  //       },
+  //     });
+  // }
+  
+  isRequestSentInLast24Hours(): boolean {
+    // Get the timestamp of the last request from local storage
+    const lastRequestTime = localStorage.getItem('lastRequestTime');
+    if (lastRequestTime) {
+      const currentTime = new Date().getTime();
+      const lastRequestTimestamp = parseInt(lastRequestTime, 10);
+      // Calculate the difference in milliseconds between current time and last request time
+      const timeDifference = currentTime - lastRequestTimestamp;
+      // Check if a request was sent in the last 24 hours
+      return timeDifference < 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+    }
+    return false; // Return false if no previous request was sent
+  }
+  
 
   
 }

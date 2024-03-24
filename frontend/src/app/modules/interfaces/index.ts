@@ -59,3 +59,9 @@ export interface INotification
   inventoryId:  number;
   showroomId : string | null;
 }
+
+export interface INotificationReceived {
+  showroomName: string;
+  vehicleId: string; 
+  dateTime: Date;
+}
