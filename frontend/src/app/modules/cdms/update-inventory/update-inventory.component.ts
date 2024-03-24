@@ -25,7 +25,6 @@ export class UpdateInventoryComponent extends BaseComponent implements OnInit {
 
   inventoryId : number = 0;
   showroomId = localStorage.getItem('showroom Id');
-
   status_option: string[] = ['AVAILABLE', 'ON ORDER'];
   
 
@@ -65,47 +64,7 @@ export class UpdateInventoryComponent extends BaseComponent implements OnInit {
       status : ''  ,
       reg_no : ''  ,
       date_of_purchase:'',
-
       }
-
-    
-   
-    // model : string = '' ;
-    // variant : string = '' ;
-    // chasisNo : string = '' ;
-    // engineNo : string = '' ;
-    // costPrice : string = '' ;
-    // demand : string = '' ;
-    // modelYear : string = '' ;
-    // bodyColor : string = '' ;
-    // status : string = '' ;
-    // regNo : string = '' ;
-    // dateOfPurchase: Date | null = null;
- 
-    // getvehicleDetail(){
-    //   this.apiService
-    // .get(`/inventory/getInventoryDetails/${this.inventoryId}`)
-    // .subscribe(
-    //   (data) => {
-    //     this.vehicleDetails = data;
-    //     console.log('vehicle details object', this.vehicleDetails);
-      
-    //     this.make = this.vehicleDetails.make
-    //     this.model = this.vehicleDetails.model
-    //     this.variant = this.vehicleDetails.variant
-    //     this.chasisNo = this.vehicleDetails.chasis_no
-    //     this.engineNo = this.vehicleDetails.engine_no
-    //     this.costPrice = this.vehicleDetails.price
-    //     this.dateOfPurchase = new Date(this.vehicleDetails.date_of_purchase);
-    //     this.modelYear = this.vehicleDetails.year
-    //     this.bodyColor = this.vehicleDetails.color
-    //     this.status = this.vehicleDetails.status
-    //     this.regNo = this.vehicleDetails.reg_no
-    //     this.demand = this.vehicleDetails.demand
-  
-    //   }
-    // );
-    // }
 
     getVehicleDetails(inventoryId: number){
 
@@ -114,10 +73,8 @@ export class UpdateInventoryComponent extends BaseComponent implements OnInit {
       .subscribe(
         (data: IUpdateInventory) => {
           this.updateInventory = data;
-     
         }
       );
-
     }
 
 

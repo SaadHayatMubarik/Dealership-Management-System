@@ -154,7 +154,6 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
       icon: 'pi pi-pencil',
       command: (event) => {
         this.customerId = event.customer_id;
-       
         this.updateSidebarVisible = true;
         this.getCustomerById(this.customerId);
 
@@ -207,7 +206,7 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
   }
 
   
-  // customerById:any;
+
 
  
 
@@ -215,34 +214,27 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
   getCustomerById(customerId: number){
     this.apiService.get(`/customer/getCustomerDetails/${customerId}`).subscribe((data : IUpdateCustomer) => {
       this.updateCustomer = data;
-      console.log(this.updateCustomer);
+      console.log(this.updateCustomer.name);
     });
 
   }
 
   //no update customer api
-
   update(){
-
-    //  if(this.updateCustomer.valid) {
-    //     this.apiService
-    //     .patch('/customer/addCustomer')
-    //     .subscribe({
-    //       next: (response) => {
-    //         this.toast.showSuccess('New Customer Added.');
-    //         this.closeModal();
-    //         this.SellerForm.reset();
-    //         this. getCustomer();
-    //       },
-    //       error: () => {
-    //         this.toast.showError('Error Occured');
-           
-    //       },
-    //     });
-    //   }
-    //   else{
-    //     this.toast.showError('Fill all the fields')
-    //   }
+        this.apiService
+        .patch('/customer/addCustomer')
+        .subscribe({
+          next: (response) => {
+            this.toast.showSuccess('New Customer Added.');
+            this.closeModal();
+            this.SellerForm.reset();
+            this. getCustomer();
+          },
+          error: () => {
+            this.toast.showError('Error Occured');
+          },
+        });
+  
   }
 }
 

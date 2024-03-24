@@ -149,7 +149,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
             },
             error: () => 
             {
-              this.toast.showError('System Error');
+              this.toast.showError('Cant delete Inventory');
             }
           }
             );
