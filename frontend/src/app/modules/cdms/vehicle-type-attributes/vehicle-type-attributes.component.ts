@@ -184,7 +184,7 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
   vehicleAttr:any;
   //get individual vehicle type attribute, check this api
   getVehicleAtt(){
-    this.apiService.get(`/vehicle-type-attribute/${this.vehicle_attribute_id}`).subscribe((data) => {
+    this.apiService.get(`/vehicle-type-attribute/getVehicleAttributeById/${this.vehicle_attribute_id}`).subscribe((data) => {
       this.vehicleAttr = data;
       console.log(this.vehicleAttr);
     });

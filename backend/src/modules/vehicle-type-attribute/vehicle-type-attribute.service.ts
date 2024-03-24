@@ -7,6 +7,7 @@ import { VehicleType } from '../vehicle-type/entity/Vehicle-type';
 import { VehicleTypeAttribute } from './entity/Vehicle-type-attribute';
 import { MultiValueAttribute } from '../multi-value-attribute/entity/Multi-value-attribute';
 import { UpdateVehicleTypeAttributeDto } from './dto/update-vehicle-type-attribute.dto';
+import { promises } from 'dns';
 
 @Injectable()
 export class VehicleTypeAttributeService {
@@ -56,6 +57,10 @@ export class VehicleTypeAttributeService {
     return result;
     }
 
+    async getVehicleAttributesById(attributeId: number): Promise<VehicleTypeAttribute>{
+        return await this.vehicleTypeAttributeRepository.findOneBy({attribute_id:attributeId});
+    }
+
     async getVehicleAttributeById(vehicleTypeId: number): Promise<VehicleTypeAttribute[]>{
         let getValue =await this.vehicleTypeAttributeRepository.find({ 
             relations: ['multiValueAttributes'],
@@ -68,16 +73,19 @@ export class VehicleTypeAttributeService {
         await this.multiValueAttributeRepository.delete({vehicleTypeAttribute: { attribute_id: attributeId }});
         return this.vehicleTypeAttributeRepository.delete({ attribute_id: attributeId });
     }
-    async updateVehicleTypeAttribute(updateVehicleTypeAttributeDto : UpdateVehicleTypeAttributeDto){
+    async updateVehicleTypeAttribute(updateVehicleTypeAttributeDto : UpdateVehicleTypeAttributeDto):Promise<VehicleTypeAttribute>{
         const { vehicleAttributeId, vehicleAttributeName, multiValue, multiValueId } = updateVehicleTypeAttributeDto;
-        if(vehicleAttributeName)
-        await this.vehicleTypeAttributeRepository.update({attribute_id:vehicleAttributeId},{attribute_name: vehicleAttributeName});
-    if(multiValue){
-            if ( await this.multiValueAttributeRepository.exist({ where:{ attribute_value: multiValue, multi_value_id:multiValueId}}) == false  ){
-        await this.multiValueAttributeRepository.update({multi_value_id:multiValueId},{attribute_value:multiValue});
-            }
+        if(multiValue){
+        for(let i=0;i<multiValue.length;i++) {
+        const multi = await this.multiValueAttributeRepository.findOneBy({multi_value_id:multiValueId});
+        multi.attribute_value = multiValue[i]
+        await this.multiValueAttributeRepository.save(multi);
+        }
     }
-    return "updated successfully";
+    const attribute = await this.vehicleTypeAttributeRepository.findOneBy({attribute_id:vehicleAttributeId});
+    attribute.attribute_name = vehicleAttributeName;
+    
+    return await this.vehicleTypeAttributeRepository.save(attribute);
     }
 
 }

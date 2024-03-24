@@ -57,14 +57,19 @@ export class CustomerService {
         return await this.customerRepository.find({relations:['inventories'], where: {customer_id:customerId}});
     }
 
-    async updateCustomer(updateCustomerDto:UpdateCustomerDto){
-        const { address, category, city, cnic, customer_Id, email,name,phoneNo, province, type } = updateCustomerDto;
-        return this.customerRepository.createQueryBuilder("customer")
-        .update(Customer)
-        .set(updateCustomerDto)
-        .where("customer.customer_id = :id", { id: customer_Id })
-        .execute();
-        // return await this.customerRepository.update({customer_id:customerId}, {name: name});
+    async updateCustomer(updateCustomerDto:UpdateCustomerDto): Promise<Customer>{
+        const { address, category, city, cnic, customerId, email,name,phoneNo, province, type } = updateCustomerDto;
+        const customer = await this.customerRepository.findOneBy({customer_id:customerId});
+        customer.address = address;
+        customer.catagory = category;
+        customer.city = city;
+        customer.cnic = cnic;
+        customer.email = email;
+        customer.name = name;
+        customer.phoneNo = phoneNo;
+        customer.province = province;
+        customer.type = type;
+        return await this.customerRepository.save(customer);
     }
 
     async deleteCustomer(customerId: number){

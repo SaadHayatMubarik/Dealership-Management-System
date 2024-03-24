@@ -11,14 +11,14 @@ export class MultiValueAttributeController {
     constructor( private multiValueAttributeService: MultiValueAttributeService)
     {}
 
-    @Get('/:attributeName')
-    getMultiAttributeByAttributeId(@Param('attributeName') attributeName: string): Promise<MultiValueAttribute[]>{
-        return this.multiValueAttributeService.getMultiValueAttributeByAttributeName(attributeName);
-    }
+    // @Get('/:attributeName')
+    // getMultiAttributeByAttributeId(@Param('attributeName') attributeName: string): Promise<MultiValueAttribute[]>{
+    //     return this.multiValueAttributeService.getMultiValueAttributeByAttributeName(attributeName);
+    // }
 
-    @Patch('/updateAttributeValue')
-    @UsePipes(new ValidationPipe())
-    updateMultiValueAttributeByValue(@Body() updateAttributeValueDto: MultiValueAttributeDto): Promise<MultiValueAttribute>{
-        return this.multiValueAttributeService.updateMultValueAttributeByValue(updateAttributeValueDto);
-    }
+    // @Patch('/updateAttributeValue')
+    // @UsePipes(new ValidationPipe())
+    // updateMultiValueAttributeByValue(@Body() updateAttributeValueDto: MultiValueAttributeDto): Promise<MultiValueAttribute>{
+    //     return this.multiValueAttributeService.updateMultValueAttributeByValue(updateAttributeValueDto);
+    // }
 }

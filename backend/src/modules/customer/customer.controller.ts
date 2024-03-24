@@ -38,10 +38,10 @@ export class CustomerController {
         return this.customerService.getCustomerRelation(customerId);
     }
 
-    // @Put('updateCustomer')
-    // updateCustomer(@Body()updateCustomerDto: UpdateCustomerDto){
-    //     return this.customerService.updateCustomer(updateCustomerDto);
-    // }
+    @Put('updateCustomer')
+    updateCustomer(@Body()updateCustomerDto: UpdateCustomerDto): Promise<Customer>{
+        return this.customerService.updateCustomer(updateCustomerDto);
+    }
 
     @Delete('deleteCustomer/:customerId')
     deleteCustomer(@Param('customerId') customerId: number) {

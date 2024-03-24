@@ -1,8 +1,8 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { InvestorService } from './investor.service';
 import { Investor } from './entity/Investor';
 import { InvestorDto } from './dto/investor.dto';
-// import { InventoryDto } from '../inventory/dto/inventory.dto';
+import { UpdateInvestorDto } from './dto/update-investor.dto';
 
 @Controller('investor')
 export class InvestorController {
@@ -22,5 +22,14 @@ export class InvestorController {
     @Get('getInvestorDetails/:investorId')
     getInvestorDetails(@Param('investorId') investorId: number) :Promise<Investor> {
         return  this.investorService.getInvestorDetails(investorId);
+    }
+    @Put('updateInvestor')
+    updateInvestor(@Body() updateInvestorDto:UpdateInvestorDto): Promise<Investor>{
+        return this.investorService.updateInvestor(updateInvestorDto);
+    }
+
+    @Delete('deleteInvestor/:investorId')
+    deleteInvestor(@Param('investorId') investorId: number){
+        return this.investorService.deleteInvestor(investorId);
     }
 }

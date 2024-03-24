@@ -6,7 +6,7 @@ export class UpdateVehicleTypeAttributeDto{
     multiValueId: number;
 
     @IsOptional()
-    multiValue: string;
+    multiValue: string[];
 
     @IsOptional()
     vehicleAttributeId: number;

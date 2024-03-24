@@ -30,6 +30,11 @@ export class VehicleTypeAttributeController {
         return this.vehicleTypeAttributeService.getVehicleAttributeById(vehicleTypeId);
     }
 
+    @Get('getVehicleAttributeById/:attributeId')
+    getVehicleAttibuteByAttributeId(@Param('attributeId') attributeId:number): Promise<VehicleTypeAttribute>{
+        return this.getVehicleAttibuteByAttributeId(attributeId);
+    }
+
     @Delete('/:vehicleTypeAttributeId')
     deleteVehicleAttributeByName(@Param('vehicleTypeAttributeId') vehicleTypeAttributeId: number){
         // console.log(vehicleTypeAttributeId);
@@ -37,7 +42,7 @@ export class VehicleTypeAttributeController {
     }
 
     @Put('updateVehicleTypeAttribute')
-    updateVehicleTypeAttribute(@Body()updateVehicleTypeAttributeDto : UpdateVehicleTypeAttributeDto) {
+    updateVehicleTypeAttribute(@Body()updateVehicleTypeAttributeDto : UpdateVehicleTypeAttributeDto) :Promise<VehicleTypeAttribute>{
         // console.log(updateVehicleTypeAttributeDto);
         return this.vehicleTypeAttributeService.updateVehicleTypeAttribute(updateVehicleTypeAttributeDto);
     }

@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { InvestorDto } from './dto/investor.dto';
 import { Showroom } from '../showroom/entity/Showroom';
 import { privateDecrypt } from 'crypto';
+import { UpdateInvestorDto } from './dto/update-investor.dto';
 
 @Injectable()
 export class InvestorService {
@@ -35,4 +36,17 @@ export class InvestorService {
         return await this.investorRepository.findBy({showroom:{showroom_id:showroomId}});
     }
 
+    async updateInvestor(updateInvestorDto: UpdateInvestorDto):Promise<Investor>{
+        const { investorCnic, investorId, investorName, phoneNo } = updateInvestorDto;
+        const investor = await this.investorRepository.findOneBy({investor_id:investorId});
+        investor.cnic = investorCnic;
+        investor.investor_name = investorName;
+        investor.phone = phoneNo;
+
+        return  await this.investorRepository.save(investor);
+    }
+
+    async deleteInvestor(investorId:number){
+        return this.investorRepository.delete({investor_id:investorId});
+    }
 }
