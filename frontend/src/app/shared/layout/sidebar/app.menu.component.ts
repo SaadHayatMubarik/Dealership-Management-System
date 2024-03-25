@@ -51,7 +51,7 @@ export class AppMenuComponent implements OnInit {
                 items: [
                     { label: 'Manage Users', 
                     icon: 'pi pi-fw pi-user', 
-                    routerLink: ['/cdms/manage-employee'] },
+                    routerLink: ['/cdms/manage-users'] },
                    
                     { label: 'Manage Investors', 
                     icon: 'pi pi-fw pi-users', 
@@ -60,6 +60,10 @@ export class AppMenuComponent implements OnInit {
                     { label: 'Manage Customers', 
                     icon: 'pi pi-fw pi-user-plus', 
                     routerLink: ['/cdms/customers'] },
+
+                    { label: 'Manage Employee', 
+                    icon: 'pi pi-fw pi-id-card', 
+                    routerLink: ['/cdms/manage-employee'] },
                 ],
                 
             },
