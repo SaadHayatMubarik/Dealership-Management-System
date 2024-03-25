@@ -7,6 +7,7 @@ import { Investor } from "src/modules/investor/entity/Investor";
 import { Customer } from "src/modules/customer/entity/Customer";
 import { Account } from "src/modules/account/entity/Account";
 import { Employee } from "src/modules/employee/entity/Employee";
+import { Role } from "src/modules/role-based/entities/Role";
 
 
 @Entity({ name: 'Showroom' })
@@ -53,4 +54,7 @@ export class Showroom {
 
     @OneToMany(() => Employee, (employee) => employee.showroom)
     employees:Employee[];
+
+    @OneToMany(() => Role, (role) =>  role.showroom)
+    roles : Role[] ;
 }

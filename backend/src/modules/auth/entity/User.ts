@@ -3,6 +3,7 @@ import { UserRole } from "../user-role.enum";
 import * as bcrypt from 'bcrypt';
 import { Showroom } from "src/modules/showroom/entity/Showroom";
 import { Employee } from "src/modules/employee/entity/Employee";
+import { Role } from "src/modules/role-based/entities/Role";
 
 
 @Entity({ name: 'user' })
@@ -51,6 +52,9 @@ export class User {
 
     @OneToOne(() => Employee, (employee) => employee.user)
     employee: Employee;
+
+    @ManyToOne(() => Role, (role) => role.users)
+    role_id: Role;
 }
 
 

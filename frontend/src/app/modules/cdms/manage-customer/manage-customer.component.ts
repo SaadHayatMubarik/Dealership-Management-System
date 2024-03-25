@@ -31,15 +31,15 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
   updateCustomer: IUpdateCustomer =
   {
     customer_id: 0,
-    catagory: '',
     name: '',
+    catagory: '',
+    type: '',
     phoneNo: '',
     email: '',
     province: '',
     city: '',
     address: '',
-    type: '',
-    cnic: '',
+    cnic: ''
   }
 
   customer: ISeller = {
@@ -232,11 +232,11 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
   update(){
     console.log(this.updateCustomer);
         this.apiService
-        .put(`/customer/updateCustomer/${this.updateCustomer}`)
+        .put('/customer/updateCustomer/',this.updateCustomer)
         .subscribe({
           next: (response) => {
             this.toast.showSuccess('New Customer Added.');
-            this.closeModal();
+            this.updateSidebarVisible = false;
             this.SellerForm.reset();
             this. getCustomer();
           },

@@ -1,12 +1,19 @@
-import { IsNotEmpty } from "class-validator";
+import { IsNotEmpty, IsOptional } from "class-validator";
+import { VehicleType } from "src/modules/vehicle-type/entity/Vehicle-type";
 
 export class MultiValueAttributeDto{
-    @IsNotEmpty()
-    attributeValue: string;
+    @IsOptional()
+    multiValue?: any[];
 
     @IsNotEmpty()
-    attributeName: string;
+    vehicleAttributeId: number;
 
     @IsNotEmpty()
-    newAttributeValue: string;
+    vehicleAttributeName: string;
+
+    @IsNotEmpty()
+    attributeInputType: string;
+
+    @IsNotEmpty()
+    vehicleType: VehicleType;
 }

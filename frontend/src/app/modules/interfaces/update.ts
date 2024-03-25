@@ -31,14 +31,30 @@ export interface IUpdateCustomer
 
 export interface IUpdateVehicleAttr{
  
-    multiValueId?: (number| null)[];
-    vehicleAttributeId?: number | null;
-    vehicleTypeName?: string;
-    vehicleAttributeName: string;
-    attributeInputType: string;
-    vehicleAttributeValue:string[];
-
+    // multiValue: IUpdateMultivalue[];
+    // vehicleAttributeId: number | null;
+    // vehicleAttributeName: string;
+    // attributeInputType: string;
+    // vehicleTypeDto: any;
+    VehicleTypeAttribute: IUpdateAttr,
+    MultiValueAttribute: any[]
 }
+// export interface IUpdateMulti {
+//     multi_value_id: number | null;
+//     attribute_value: string;
+// }
+
+export interface IUpdateAttr{
+    attribute_id:(number| null);
+    attribute_name: string;
+    input_type: string;
+    vehicleType: IUpdateVehicleType
+}
+export interface IUpdateVehicleType{
+    type_id:number;
+    type_name: string;
+}
+
 
 export interface IUpdateInventory {
 

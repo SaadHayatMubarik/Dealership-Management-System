@@ -31,8 +31,6 @@ export class VehicleTypeAttributeController {
         return this.vehicleTypeAttributeService.getVehicleAttributeById(vehicleTypeId);
     }
 
-    
-
     @Delete('/:vehicleTypeAttributeId')
     deleteVehicleAttributeByName(@Param('vehicleTypeAttributeId') vehicleTypeAttributeId: number){
         // console.log(vehicleTypeAttributeId);

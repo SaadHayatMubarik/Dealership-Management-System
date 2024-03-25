@@ -41,7 +41,7 @@ export class CustomerController {
 
     @Put('updateCustomer')
     updateCustomer(@Body()updateCustomerDto: UpdateCustomerDto): Promise<Customer>{
-        console.log(updateCustomerDto);
+        // console.log(updateCustomerDto);
         return this.customerService.updateCustomer(updateCustomerDto);
     }
 

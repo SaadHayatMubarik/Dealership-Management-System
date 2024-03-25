@@ -89,7 +89,7 @@
   
 
 
-  <p-sidebar *ngIf="updateSidebarVisible" [(visible)]="updateSidebarVisible" position="right" [style]="{ width:'40rem'}">
+  <p-sidebar *ngIf="updateSidebarVisible" [(visible)]="updateSidebarVisible" position="right" [style]="{ width:'45rem'}">
     <div class="sidebar-main">
       <div class="sidebar-header">
         <div class="sh-title">
@@ -107,19 +107,18 @@
           <div class="row-form grid">
               <div class="col-4">
                 <div class="p-field">
-                 <label>Select a vehicle type:</label> <br>
-                  <p-dropdown 
-                  [(ngModel)]="vehicleTypeAttribute.vehicleType" 
-                  [options]="vehicleTypes"  
-                  optionLabel="type_name"
-                  [required]="true"></p-dropdown>
-                    <br>                
+                 <label>vehicle type:</label> <br>
+                 <app-textbox [(controlModel)]="updateAttr.VehicleTypeAttribute.vehicleType.type_name"
+                 pattern="^(?!\s)(?!.*\s$).+$"
+                 required
+                 [disabled]="true"
+                 ></app-textbox><br>
                 </div>
               </div>
               <div class="col-4">
                 <div class="p-field">
                   <label>Attribute Name:</label> <br>
-                  <app-textbox [(controlModel)]="vehicleTypeAttribute.vehicleAttributeName"
+                  <app-textbox [(controlModel)]="updateAttr.VehicleTypeAttribute.attribute_name"
                   pattern="^(?!\s)(?!.*\s$).+$"
                   required
                   ></app-textbox><br>
@@ -128,12 +127,11 @@
               <div class="col-4">
                 <div class="p-field">
                   <label>Select an input type:</label><br>
-                  <p-dropdown
-                  [options]="inputTypes"
-                  [(ngModel)]="vehicleTypeAttribute.attributeInputType"
-                  placeholder="Input type"
-                  [required]="true"
-                ></p-dropdown><br>
+                  <app-textbox [(controlModel)]="updateAttr.VehicleTypeAttribute.input_type"
+                  pattern="^(?!\s)(?!.*\s$).+$"
+                  required
+                  [disabled]="true"
+                  ></app-textbox><br>
                 </div>  
               </div>
           </div>
@@ -142,8 +140,8 @@
             <div class="col-4">
               <div class="p-field">
                 <label>Enter 1 or more Values:</label> <br>
-                  <p-chips 
-                  [(ngModel)]="vehicleTypeAttribute.vehicleAttributeValue"
+                  <p-chips
+                  [(ngModel)]="updateAttr.MultiValueAttribute"
                    separator="," 
                    placeholder="eg: red, green, yellow"
                    pattern="^(?!\s)(?!.*\s$).+$"

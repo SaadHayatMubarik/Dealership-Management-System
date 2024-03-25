@@ -4,7 +4,7 @@ import { IVehicleTypeAttribute } from '../../interfaces/inventory';
 import { DialogControlService } from 'src/app/shared/services/dialog.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
 
-import { IUpdateVehicleAttr } from '../../interfaces/update';
+import { IUpdateAttr, IUpdateVehicleAttr, IUpdateVehicleType } from '../../interfaces/update';
 
 
 import {
@@ -13,6 +13,7 @@ import {
   IObject,
 } from 'src/app/shared/interfaces/common';
 import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
+import { empty } from 'rxjs';
 
 @Component({
   selector: 'app-vehicle-type-attributes',
@@ -40,7 +41,7 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
   modalVisible = false;
   updateSidebarVisible = false; 
  
-  
+
   columns: DataTableColumn[] = [];
   actions: IDataTableAction[] = [];
   data: IObject[] = [];
@@ -55,15 +56,33 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
       
   }
 
-  updateAttr: IUpdateVehicleAttr = {
-
-     multiValueId: [],
-     vehicleAttributeId:0,
-     vehicleTypeName:'', 
-     vehicleAttributeName:'', 
-     attributeInputType:'',
-      vehicleAttributeValue:[],
+  updateVehicleType: IUpdateVehicleType = {
+    type_id: 0,
+    type_name: ''
   }
+
+  updateVehicleAttr: IUpdateAttr ={
+    attribute_id: 0,
+    attribute_name: '',
+    input_type: '',
+    vehicleType:  this.updateVehicleType
+  }
+
+  // updateMulti: IUpdateMulti = {
+  //   multi_value_id: 0,
+  //   attribute_value: ''
+  // }
+
+  updateAttr: IUpdateVehicleAttr = {
+    //  multiValue: [],
+    //  vehicleAttributeId:0,
+    //  vehicleAttributeName:'', 
+    //  attributeInputType:'',
+    //  vehicleTypeDto: null
+    VehicleTypeAttribute: this.updateVehicleAttr,
+    MultiValueAttribute: []
+  }
+  // investorForms: any[] = this.updateAttr.MultiValueAttribute;
 
   ngOnInit() 
 
@@ -196,7 +215,7 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
   getVehicleAtt(vehicle_attribute_id: number){
     this.apiService.get(`/multi-value-attribute/getVehicleAttributeById/${vehicle_attribute_id}`).subscribe((data: IUpdateVehicleAttr) => {
       this.updateAttr = data;
-      console.log(this.updateAttr);
+      console.log(this.updateAttr.MultiValueAttribute[0].attribute_value);
     });
 
 

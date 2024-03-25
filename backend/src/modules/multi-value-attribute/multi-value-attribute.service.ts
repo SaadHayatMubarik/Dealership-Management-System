@@ -35,7 +35,8 @@ export class MultiValueAttributeService {
     //     return await this.multiValueAttributeRepository.save(attribute);
     // }
     async getVehicleAttributesById(attributeId: number): Promise<{VehicleTypeAttribute:VehicleTypeAttribute,MultiValueAttribute:MultiValueAttribute[]}>{
-        const VehicleTypeAttribute = await this.vehicleTypeAttributeRepository.findOneBy({attribute_id:attributeId});
+        
+        const VehicleTypeAttribute = await this.vehicleTypeAttributeRepository.findOne({relations:['vehicleType'],where:{attribute_id:attributeId}});
         const MultiValueAttribute = await this.multiValueAttributeRepository.find({ where:{vehicleTypeAttribute:{attribute_id:attributeId}}});
         return { VehicleTypeAttribute, MultiValueAttribute }
     }

@@ -9,6 +9,9 @@ import { Investor } from "src/modules/investor/entity/Investor";
 import { MultiValueAttribute } from "src/modules/multi-value-attribute/entity/Multi-value-attribute";
 import { Notification } from "src/modules/notification/entity/Notification";
 import { Picture } from "src/modules/picture/entity/Picture";
+import { Role } from "src/modules/role-based/entities/Role";
+import { Component } from "src/modules/role-based/entities/component";
+import { Permission } from "src/modules/role-based/entities/permission";
 import { Showroom } from "src/modules/showroom/entity/Showroom";
 import { StockAttributeValue } from "src/modules/stock-attribute-value/entity/Stock-attribute-value";
 import { Transaction } from "src/modules/transcation/entity/Transcation";
@@ -22,7 +25,7 @@ export const typeOrmConfig: TypeOrmModuleOptions  = {
     username: 'root',
     password: 'root',
     database: 'd_m_s',
-    entities: [Inventory, MultiValueAttribute, StockAttributeValue , VehicleType, VehicleTypeAttribute ,User,Showroom,Customer,Notification,Investment,Investor,Picture,Transaction,Account, Employee],
+    entities: [Inventory, MultiValueAttribute, StockAttributeValue , VehicleType, VehicleTypeAttribute ,User,Showroom,Customer,Notification,Investment,Investor,Picture,Transaction,Account, Employee,Role,Component,Permission],
     synchronize: false, 
 }
 
