@@ -71,10 +71,13 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
 
 
 
+
+
   updateAttr: IUpdateVehicleAttr = {
     VehicleTypeAttribute: this.updateVehicleAttr,
     MultiValueAttribute: []
   }
+ 
 
   @ViewChild('updatedVehicleAttribute') updateVehicleAttributeForm!:NgForm;
   ngOnInit() 
@@ -201,22 +204,35 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
   isDropdownSelected(): boolean {
     return this.vehicleTypeAttribute.attributeInputType === 'DROPDOWN';
   }
+  // vehicleAttr: any;
+  // updateAttribute :a = {
+  //   vehicleAttributeId: 0 ,
+  //   vehicleAttributeName: ''
+  // }
 
 
-  vehicleAttr:any;
   //get individual vehicle type attribute, check this api
   getVehicleAtt(vehicle_attribute_id: number){
     this.apiService.get(`/multi-value-attribute/getVehicleAttributeById/${vehicle_attribute_id}`).subscribe((data: IUpdateVehicleAttr) => {
       this.updateAttr = data;
+      this.updateVehicleAttr.attribute_id = this.updateAttr.VehicleTypeAttribute.attribute_id;
+    //    this.updateVehicleAttr.attribute_id = this.updateAttr.VehicleTypeAttribute.attribute_id;
+    //    console.log(this.vehicleAttr);
+    //    this.updateAttribute
+    // vehicleAttributeName: this.updateAttr.VehicleTypeAttribute.attribute_name;
+    // console.log(this.updateAttribute);
     });
   }
+
+
   update(){
-    this.apiService.put('/vehicle-type-attribute/updateVehicleTypeAttribute/',this.updateAttr).subscribe({
+    this.updateVehicleAttr.attribute_name = this.updateAttr.VehicleTypeAttribute.attribute_name;
+    this.apiService.put('/vehicle-type-attribute/updateVehicleTypeAttribute/',this.updateVehicleAttr).subscribe({
       next:(res)=>{
         this.toastService.showSuccess('Customer Updated.');
         this.updateSidebarVisible = false;
-        this.updateVehicleAttributeForm.reset();
         this.getVehicleTypeAttribute();
+        
       },
       error: () => {
         this.toastService.showError('Error Occured');

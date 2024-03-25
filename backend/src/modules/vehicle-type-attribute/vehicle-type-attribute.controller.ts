@@ -39,7 +39,7 @@ export class VehicleTypeAttributeController {
 
     @Put('updateVehicleTypeAttribute')
     updateVehicleTypeAttribute(@Body()updateVehicleTypeAttributeDto : UpdateVehicleTypeAttributeDto) :Promise<VehicleTypeAttribute>{
-        // console.log(updateVehicleTypeAttributeDto);
+        console.log(updateVehicleTypeAttributeDto);
         return this.vehicleTypeAttributeService.updateVehicleTypeAttribute(updateVehicleTypeAttributeDto);
     }
     

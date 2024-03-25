@@ -3,24 +3,11 @@ import { VehicleType } from "src/modules/vehicle-type/entity/Vehicle-type";
 
 export class UpdateVehicleTypeAttributeDto{
 
-    @IsOptional()
-    multiValueId?: number[];
-
-    @IsOptional()
-    vehicleAttributeValue?: string[];
-
     @IsNotEmpty()
-    vehicleAttributeId: number;
+    attribute_id: number;
     
     @IsNotEmpty()
-    vehicleAttributeName: string;
+    attribute_name: string;
 
-    @IsNotEmpty()
-    attributeInputType: string;
 
-    @IsNotEmpty()
-    vehicleType: VehicleType
-
-    // @IsOptional()
-    // vehicleAttributeValue?: string[];
 }
