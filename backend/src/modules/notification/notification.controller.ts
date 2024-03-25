@@ -25,7 +25,8 @@ export class NotificationController {
     //     return this.notificationService.getRequestReceive(showroomId);
     // }
     @Patch('updateRequestStatus/:notificationId/:updatedStatus')
-    updateRequestStatus(@Param('notificationId') notificationId: number, @Param('updatedStatus')updatedStatus:NotificationStatus) {
+    updateRequestStatus(@Param('notificationId') notificationId: number, @Param('updatedStatus')updatedStatus:NotificationStatus): Promise<string> {
+        // console.log(notificationId, updatedStatus);
         return this.notificationService.updateRequestStatus(notificationId,updatedStatus);
     }
 }

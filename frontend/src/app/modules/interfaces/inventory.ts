@@ -93,8 +93,9 @@ export interface IVehicleTypeAttributeDto {
 }
 
 export interface IMultiValue {
+  multi_value_id: number;
   attribute_value: string;
-  multi_value_id: number
+  
 }
 
 

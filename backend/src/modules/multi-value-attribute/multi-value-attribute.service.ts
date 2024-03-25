@@ -34,11 +34,23 @@ export class MultiValueAttributeService {
     //     attribute.attribute_value = newAttributeValue;
     //     return await this.multiValueAttributeRepository.save(attribute);
     // }
-    async getVehicleAttributesById(attributeId: number): Promise<{VehicleTypeAttribute:VehicleTypeAttribute,MultiValueAttribute:MultiValueAttribute[]}>{
-        
-        const VehicleTypeAttribute = await this.vehicleTypeAttributeRepository.findOne({relations:['vehicleType'],where:{attribute_id:attributeId}});
-        const MultiValueAttribute = await this.multiValueAttributeRepository.find({ where:{vehicleTypeAttribute:{attribute_id:attributeId}}});
-        return { VehicleTypeAttribute, MultiValueAttribute }
+    async getVehicleAttributesById(attributeId: number): Promise<MultiValueAttributeDto>{
+        const multiValueAttributeDto = new MultiValueAttributeDto()
+        const obj = await this.multiValueAttributeRepository.createQueryBuilder('multiValueAttribute')
+        .select('*')
+        .where('multiValueAttribute.vehicleTypeAttributeAttributeId = :attributeId',{attributeId})
+        .getMany();
+        for(let i; i<obj.length;i++){
+        multiValueAttributeDto.multiValueId[i]=obj[i].multi_value_id;
+        multiValueAttributeDto.vehicleAttributeValue[i]=obj[i].attribute_value
+        }
+        console.log(obj);
+        multiValueAttributeDto.vehicleAttributeName = obj[0].vehicleTypeAttribute.attribute_name;
+        multiValueAttributeDto.vehicleAttributeId = attributeId;
+        multiValueAttributeDto.attributeInputType = obj[0].vehicleTypeAttribute.input_type;
+        multiValueAttributeDto.vehicleType = obj[0].vehicleTypeAttribute.vehicleType;
+
+        return multiValueAttributeDto
     }
     
     

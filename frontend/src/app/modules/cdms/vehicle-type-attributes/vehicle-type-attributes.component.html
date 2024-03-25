@@ -90,6 +90,7 @@
 
 
   <p-sidebar *ngIf="updateSidebarVisible" [(visible)]="updateSidebarVisible" position="right" [style]="{ width:'45rem'}">
+    <form (ngSubmit)="update()" #updateUser="ngForm">
     <div class="sidebar-main">
       <div class="sidebar-header">
         <div class="sh-title">
@@ -145,7 +146,8 @@
                    separator="," 
                    placeholder="eg: red, green, yellow"
                    pattern="^(?!\s)(?!.*\s$).+$"
-                   required>
+                   required
+                   [disabled]="true">
                   </p-chips>
               </div>
             </div>
@@ -160,6 +162,7 @@
          <app-button label="Update" styleClass="p-button-sm p-button-rounded"></app-button>
       </div>
     </div>
+  </form>
   </p-sidebar>
 
 

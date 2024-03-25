@@ -230,12 +230,12 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
 
   //no update customer api
   update(){
-    console.log(this.updateCustomer);
+    // console.log(this.updateCustomer);
         this.apiService
         .put('/customer/updateCustomer/',this.updateCustomer)
         .subscribe({
           next: (response) => {
-            this.toast.showSuccess('New Customer Added.');
+            this.toast.showSuccess('Customer Updated.');
             this.updateSidebarVisible = false;
             this.SellerForm.reset();
             this. getCustomer();

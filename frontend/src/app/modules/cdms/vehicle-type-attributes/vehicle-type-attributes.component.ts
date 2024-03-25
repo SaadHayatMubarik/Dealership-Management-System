@@ -1,6 +1,6 @@
-import { Component, ErrorHandler, OnInit } from '@angular/core';
+import { Component, ErrorHandler, OnInit, ViewChild } from '@angular/core';
 import { BaseComponent } from 'src/app/shared/base.component';
-import { IVehicleTypeAttribute } from '../../interfaces/inventory';
+import { IMultiValue, IVehicleTypeAttribute } from '../../interfaces/inventory';
 import { DialogControlService } from 'src/app/shared/services/dialog.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
 
@@ -14,6 +14,7 @@ import {
 } from 'src/app/shared/interfaces/common';
 import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
 import { empty } from 'rxjs';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-vehicle-type-attributes',
@@ -37,17 +38,15 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
   vehicleTypes: any[] = [];
   selectedVehicleTypeAttributeId: any; 
   inputTypes: any[] = ['TEXT', 'NUMBER', 'DATE', 'DROPDOWN'];
-  
   modalVisible = false;
   updateSidebarVisible = false; 
- 
-
   columns: DataTableColumn[] = [];
   actions: IDataTableAction[] = [];
   data: IObject[] = [];
   
   showroomID :any; 
   vehicle_attribute_id: number = 0;
+
   
   constructor(private readonly apiService: ApiHelperService, 
               private dialogService: DialogControlService ,
@@ -61,6 +60,8 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
     type_name: ''
   }
 
+
+
   updateVehicleAttr: IUpdateAttr ={
     attribute_id: 0,
     attribute_name: '',
@@ -68,22 +69,14 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
     vehicleType:  this.updateVehicleType
   }
 
-  // updateMulti: IUpdateMulti = {
-  //   multi_value_id: 0,
-  //   attribute_value: ''
-  // }
+
 
   updateAttr: IUpdateVehicleAttr = {
-    //  multiValue: [],
-    //  vehicleAttributeId:0,
-    //  vehicleAttributeName:'', 
-    //  attributeInputType:'',
-    //  vehicleTypeDto: null
     VehicleTypeAttribute: this.updateVehicleAttr,
     MultiValueAttribute: []
   }
-  // investorForms: any[] = this.updateAttr.MultiValueAttribute;
 
+  @ViewChild('updatedVehicleAttribute') updateVehicleAttributeForm!:NgForm;
   ngOnInit() 
 
   {
@@ -215,12 +208,21 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
   getVehicleAtt(vehicle_attribute_id: number){
     this.apiService.get(`/multi-value-attribute/getVehicleAttributeById/${vehicle_attribute_id}`).subscribe((data: IUpdateVehicleAttr) => {
       this.updateAttr = data;
-      console.log(this.updateAttr.MultiValueAttribute[0].attribute_value);
     });
-
-
   }
-
+  update(){
+    this.apiService.put('/vehicle-type-attribute/updateVehicleTypeAttribute/',this.updateAttr).subscribe({
+      next:(res)=>{
+        this.toastService.showSuccess('Customer Updated.');
+        this.updateSidebarVisible = false;
+        this.updateVehicleAttributeForm.reset();
+        this.getVehicleTypeAttribute();
+      },
+      error: () => {
+        this.toastService.showError('Error Occured');
+      },
+    })
+  }
 }
 
 

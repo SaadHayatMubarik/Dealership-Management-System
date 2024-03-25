@@ -23,7 +23,7 @@ export class MultiValueAttributeController {
     //     return this.multiValueAttributeService.updateMultValueAttributeByValue(updateAttributeValueDto);
     // }
     @Get('getVehicleAttributeById/:attributeId')
-    getVehicleAttibuteByAttributeId(@Param('attributeId') attributeId:number): Promise<{VehicleTypeAttribute:VehicleTypeAttribute,MultiValueAttribute:MultiValueAttribute[]}>{
+    getVehicleAttibuteByAttributeId(@Param('attributeId') attributeId:number): Promise<MultiValueAttributeDto>{
         return this.multiValueAttributeService.getVehicleAttributesById(attributeId);
     }
 }

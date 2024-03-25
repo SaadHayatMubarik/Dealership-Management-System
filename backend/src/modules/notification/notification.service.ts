@@ -12,7 +12,7 @@ import { NotificationStatus } from './notification-status.enum';
 export class NotificationService {
     constructor(
         @InjectRepository(Notification)
-        private notficationRepository: Repository<Notification>,
+        private notificationRepository: Repository<Notification>,
         @InjectRepository(Inventory)
         private  inventoryRepository: Repository<Inventory>,
         @InjectRepository(Showroom)
@@ -25,21 +25,22 @@ export class NotificationService {
         notification.senderShowroom = await this.showRoomRepository.findOne({where:{showroom_id:showroomId}});
         notification.date = new Date();
         // notification.status
-        return await this.notficationRepository.save(notification);
+        return await this.notificationRepository.save(notification);
     } 
 
     async getRequest(showroomId: number, status: string): Promise<Notification[]>{
          if(status.toLowerCase() == "sent")
-        return await this.notficationRepository.find({relations:['inventory','inventory.showroom'],where:{senderShowroom:{showroom_id:showroomId}}});
+        return await this.notificationRepository.find({relations:['inventory','inventory.showroom'],where:{senderShowroom:{showroom_id:showroomId}}});
         if(status.toLowerCase() == "received")
-        return await this.notficationRepository.find({relations:['inventory','senderShowroom'],where:{inventory:{showroom:{showroom_id:showroomId}}}});
+        return await this.notificationRepository.find({relations:['inventory','senderShowroom'],where:{inventory:{showroom:{showroom_id:showroomId}}}});
     }
 
     // async getRequestReceive(showroomId: number): Promise<Notification[]>{
     //     return await this.notficationRepository.find({relations:['inventory.showroom'],where:{inventory:{showroom:{showroom_id:showroomId}}}});
     // }
 
-    async updateRequestStatus(notificationId: number, updatedStatus:NotificationStatus){
-        return  await this.notficationRepository.update({notification_id:notificationId} ,{ status : updatedStatus})
+    async updateRequestStatus(notificationId: number, updatedStatus:NotificationStatus):Promise<string>{
+        await this.notificationRepository.update(notificationId,{status:updatedStatus})
+        return "The request has been "+updatedStatus+"!";
     }
 }

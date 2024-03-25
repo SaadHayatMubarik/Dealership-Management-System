@@ -1,3 +1,5 @@
+import { IMultiValue } from "./inventory";
+
 export interface IUpdateUser
 {
     user_id: number
@@ -31,18 +33,10 @@ export interface IUpdateCustomer
 
 export interface IUpdateVehicleAttr{
  
-    // multiValue: IUpdateMultivalue[];
-    // vehicleAttributeId: number | null;
-    // vehicleAttributeName: string;
-    // attributeInputType: string;
-    // vehicleTypeDto: any;
     VehicleTypeAttribute: IUpdateAttr,
     MultiValueAttribute: any[]
 }
-// export interface IUpdateMulti {
-//     multi_value_id: number | null;
-//     attribute_value: string;
-// }
+
 
 export interface IUpdateAttr{
     attribute_id:(number| null);

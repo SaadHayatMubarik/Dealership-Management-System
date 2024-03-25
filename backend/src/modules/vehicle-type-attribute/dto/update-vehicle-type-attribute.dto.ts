@@ -1,4 +1,5 @@
 import { IsNotEmpty, IsOptional } from "class-validator";
+import { VehicleType } from "src/modules/vehicle-type/entity/Vehicle-type";
 
 export class UpdateVehicleTypeAttributeDto{
 
@@ -8,11 +9,17 @@ export class UpdateVehicleTypeAttributeDto{
     @IsOptional()
     vehicleAttributeValue?: string[];
 
-    @IsOptional()
+    @IsNotEmpty()
     vehicleAttributeId: number;
     
-    @IsOptional()
-    vehicleAttributeName?: string;
+    @IsNotEmpty()
+    vehicleAttributeName: string;
+
+    @IsNotEmpty()
+    attributeInputType: string;
+
+    @IsNotEmpty()
+    vehicleType: VehicleType
 
     // @IsOptional()
     // vehicleAttributeValue?: string[];

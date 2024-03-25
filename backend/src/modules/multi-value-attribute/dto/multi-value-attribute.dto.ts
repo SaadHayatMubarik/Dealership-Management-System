@@ -3,7 +3,10 @@ import { VehicleType } from "src/modules/vehicle-type/entity/Vehicle-type";
 
 export class MultiValueAttributeDto{
     @IsOptional()
-    multiValue?: any[];
+    multiValueId?: number[];
+
+    @IsOptional()
+    vehicleAttributeValue?: string[];
 
     @IsNotEmpty()
     vehicleAttributeId: number;
