@@ -21,15 +21,14 @@
 
   <p-tabView (onChange)="onTabChange($event)" [(activeIndex)]="selectedTabIndex">   
     <p-tabPanel header="Dealership">
-      <app-datatable [data]="data" [cols]="dealershipColumns" [globalFilterFields]="[]" [actions]="actions"></app-datatable>
+      <app-datatable [data]="data" [cols]="dealershipColumns" [globalFilterFields]="['name', 'email', 'city']" [actions]="actions"></app-datatable>
     </p-tabPanel>
     <p-tabPanel header="Agent">
-      <app-datatable [data]="data" [cols]="columns" [globalFilterFields]="[]" [actions]="actions"></app-datatable>
+      <app-datatable [data]="data" [cols]="columns" [globalFilterFields]="['name', 'email', 'city']" [actions]="actions"></app-datatable>
     </p-tabPanel>
     <p-tabPanel header="Customer">
-      <app-datatable [data]="data" [cols]="columns" [globalFilterFields]="[]" [actions]="actions"></app-datatable>
+      <app-datatable [data]="data" [cols]="columns" [globalFilterFields]="['name', 'email', 'city']" [actions]="actions"></app-datatable>
     </p-tabPanel>
-
   </p-tabView>
 
   <p-sidebar [(visible)]="modal" position="right" [style]="{width: '55rem'}" >

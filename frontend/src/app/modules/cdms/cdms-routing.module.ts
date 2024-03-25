@@ -22,6 +22,7 @@ import { ManageCustomerComponent } from './manage-customer/manage-customer.compo
 import { SellInventoryComponent } from './sell-inventory/sell-inventory.component'; 
 import { RoleComponent } from './role/role.component';
 import { UpdateInventoryComponent } from './update-inventory/update-inventory.component';
+import { EmployeesDetailComponent } from './employees-detail/employees-detail.component';
 
 
 
@@ -80,7 +81,7 @@ const routes: Routes = [
      
     },
     {
-      path:'manage-employee',
+      path:'manage-users',
       component: ManageEmployeeComponent
     },
     {
@@ -120,6 +121,10 @@ const routes: Routes = [
       path: 'update-inventory/:inventoryId', 
       component:UpdateInventoryComponent
     },
+    {
+      path:'manage-employee',
+      component:EmployeesDetailComponent
+    }
 
 
 

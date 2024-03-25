@@ -65,3 +65,22 @@ export interface INotificationReceived {
   vehicleId: string; 
   dateTime: Date;
 }
+
+export interface IEmployee {
+
+  employeeName: string,
+  employeeCnic: string,
+  employeePosition: string,
+  employeeStatus: string,
+  employeePhoneNo: string,
+  employeeEmail: string,
+  employeeSalary: number,
+  joiningDate: Date,
+  terminationDate: Date,
+  shiftTime: string,
+  bonus: number,
+  totalLeaves:number,
+  availableLeaves:number,
+  performance:string;
+
+}
