@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 // import { Inventory } from './entities/Inventory';
 import { Repository } from 'typeorm';
@@ -156,10 +156,13 @@ export class InventoryService {
     }
 
 
-    deleteInventory(inventoryId: number){
-        
-         this.stockValueAttributeRepository.delete({inventory:{inventory_id:inventoryId}})
-        return this.inventoryRepository.delete({ inventory_id: inventoryId });
+    async deleteInventory(inventoryId: number){
+        try{
+         await this.stockValueAttributeRepository.delete({inventory:{inventory_id:inventoryId}})
+        return await this.inventoryRepository.delete({ inventory_id: inventoryId });
+        }catch (e) {
+          throw new BadRequestException('This inventory item can not be deleted!');
+        }
     }
 
     async updateInventory(updateInventoryDto: UpdateInventoryDto):Promise<Inventory>{

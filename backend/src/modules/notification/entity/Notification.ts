@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToOne, PrimaryGeneratedColumn} from "typeorm";
 import { NotificationStatus } from "../notification-status.enum";
 import { Inventory } from "src/modules/inventory/entity/Inventory";
 import { Showroom } from "src/modules/showroom/entity/Showroom";

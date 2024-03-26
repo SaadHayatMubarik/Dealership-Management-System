@@ -111,19 +111,19 @@ notification : INotification =
   //     });
   // }
   
-  isRequestSentInLast24Hours(): boolean {
-    // Get the timestamp of the last request from local storage
-    const lastRequestTime = localStorage.getItem('lastRequestTime');
-    if (lastRequestTime) {
-      const currentTime = new Date().getTime();
-      const lastRequestTimestamp = parseInt(lastRequestTime, 10);
-      // Calculate the difference in milliseconds between current time and last request time
-      const timeDifference = currentTime - lastRequestTimestamp;
-      // Check if a request was sent in the last 24 hours
-      return timeDifference < 24 * 60 * 60 * 1000; // 24 hours in milliseconds
-    }
-    return false; // Return false if no previous request was sent
-  }
+  // isRequestSentInLast24Hours(): boolean {
+  //   // Get the timestamp of the last request from local storage
+  //   const lastRequestTime = localStorage.getItem('lastRequestTime');
+  //   if (lastRequestTime) {
+  //     const currentTime = new Date().getTime();
+  //     const lastRequestTimestamp = parseInt(lastRequestTime, 10);
+  //     // Calculate the difference in milliseconds between current time and last request time
+  //     const timeDifference = currentTime - lastRequestTimestamp;
+  //     // Check if a request was sent in the last 24 hours
+  //     return timeDifference < 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+  //   }
+  //   return false; // Return false if no previous request was sent
+  // }
   
 
   

@@ -77,38 +77,38 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
   ngOnInit() {
    this.getCustomer();
 
-  //  this.columns=[
-  //   {
-  //     field: 'name',
-  //     fieldTitle: 'Name',
-  //   },
-  //   {
-  //     field: 'type',
-  //     fieldTitle: 'Type',
-  //   },
-  //   {
-  //     field: 'cnic',
-  //     fieldTitle: 'Cnic'
-  //   },
-  //   {
-  //     field: 'phoneNo',
-  //     fieldTitle: 'Phone Number'
-  //   },
-  //   {
-  //     field: 'email',
-  //     fieldTitle: 'Email'
+   this.columns=[
+    {
+      field: 'name',
+      fieldTitle: 'Name',
+    },
+    {
+      field: 'type',
+      fieldTitle: 'Type',
+    },
+    {
+      field: 'cnic',
+      fieldTitle: 'Cnic'
+    },
+    {
+      field: 'phoneNo',
+      fieldTitle: 'Phone Number'
+    },
+    {
+      field: 'email',
+      fieldTitle: 'Email'
 
-  //   },
-  //   {
-  //     field: 'address',
-  //     fieldTitle: 'Address'
-  //   },
-  //   {
-  //     field: 'city',
-  //     fieldTitle: 'City'
+    },
+    {
+      field: 'address',
+      fieldTitle: 'Address'
+    },
+    {
+      field: 'city',
+      fieldTitle: 'City'
 
-  //   }
-  //  ];
+    }
+   ];
 
    this.dealershipColumns=[ 
     {

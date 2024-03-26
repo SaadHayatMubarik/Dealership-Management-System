@@ -204,11 +204,7 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
   isDropdownSelected(): boolean {
     return this.vehicleTypeAttribute.attributeInputType === 'DROPDOWN';
   }
-  // vehicleAttr: any;
-  // updateAttribute :a = {
-  //   vehicleAttributeId: 0 ,
-  //   vehicleAttributeName: ''
-  // }
+
 
 
   //get individual vehicle type attribute, check this api
@@ -216,11 +212,7 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
     this.apiService.get(`/multi-value-attribute/getVehicleAttributeById/${vehicle_attribute_id}`).subscribe((data: IUpdateVehicleAttr) => {
       this.updateAttr = data;
       this.updateVehicleAttr.attribute_id = this.updateAttr.VehicleTypeAttribute.attribute_id;
-    //    this.updateVehicleAttr.attribute_id = this.updateAttr.VehicleTypeAttribute.attribute_id;
-    //    console.log(this.vehicleAttr);
-    //    this.updateAttribute
-    // vehicleAttributeName: this.updateAttr.VehicleTypeAttribute.attribute_name;
-    // console.log(this.updateAttribute);
+ 
     });
   }
 
