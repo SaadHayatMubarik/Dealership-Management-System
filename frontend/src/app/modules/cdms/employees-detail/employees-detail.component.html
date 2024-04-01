@@ -16,8 +16,7 @@
 
   <p-sidebar [(visible)]="modal" position="right" [style]="{width: '55rem'}" >
 
-    <form> 
-
+    <form (ngSubmit)="onSubmit()"> 
         <div class="sidebar-main">
           <div class="sidebar-header">
             <div class="sh-title">
@@ -99,7 +98,7 @@
                         pInputText
                         name="position"
                         [(ngModel)]="employee.employeePosition"
-                        minlength="4"
+                        minlength="2"
                         maxlength="30"
                         required
                         pattern="^\S(?:\s*\S)*$"
@@ -252,24 +251,6 @@
                   </span>
                   </div>
                 </div>
-
-
-                <div class="col-4">
-                  <div class="p-field">
-                <span class="p-float-label">
-                    <p-calendar
-                    [readonlyInput]="true"
-                    class="p-inputtext-lg"
-                    name="date of termination"
-                    [(ngModel)]="employee.terminationDate"
-                  ></p-calendar>
-                      <label for="float-label">Termination Date (optional)</label>
-                  </span>
-                  </div>
-                </div>
-              </div>
-              <br>
-              <div class="row-form grid">
                 <div class="col-4">
                   <div class="p-field">
                     <span class="p-float-label">
@@ -295,7 +276,27 @@
                   </div>
                 </div>
 
-                <div class="col-4">
+
+                <!-- <div class="col-4">
+                  <div class="p-field">
+                <span class="p-float-label">
+                    <p-calendar
+                    [readonlyInput]="true"
+                    class="p-inputtext-lg"
+                    name="date of termination"
+                    [(ngModel)]="employee.terminationDate"
+                  ></p-calendar>
+                      <label for="float-label">Termination Date (optional)</label>
+                  </span>
+                  </div>
+                </div> -->
+
+              </div>
+              <br>
+              <div class="row-form grid">
+              
+
+                <!-- <div class="col-4">
                   <div class="p-field">
                     <span class="p-float-label">
                         <p-inputNumber
@@ -311,7 +312,7 @@
                         <label for="float-label">Bonus (optional)</label>
                       </span>
                   </div>
-                </div>
+                </div> -->
 
 
                 <div class="col-4">
@@ -341,8 +342,8 @@
                 </div>
               </div>
               <br>
-              <div class="row-form grid">
-                <div class="col-4">
+              <!-- <div class="row-form grid"> -->
+                <!-- <div class="col-4">
                   <div class="p-field">
                     <span class="p-float-label">
                         <input
@@ -359,9 +360,9 @@
                           <label for="float-label">Leaves Available (optional)</label>
                       </span>
                   </div>
-                </div>
+                </div> -->
 
-                <div class="col-4">
+                <!-- <div class="col-4">
                   <div class="p-field">
                     <span class="p-float-label">
                         <p-dropdown
@@ -383,11 +384,9 @@
                   </span>
                 
                   </div>
-                </div>
+                </div> -->
+              <!-- </div> -->
               </div>
-
-              </div>
-          
             <div class="sidebar-footer flex justify-content-end">
               <app-button
               type="submit"
@@ -398,22 +397,4 @@
           </div>
     </form>
   </p-sidebar> 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   </div>
