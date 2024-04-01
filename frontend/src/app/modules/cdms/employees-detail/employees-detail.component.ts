@@ -46,6 +46,8 @@ export class EmployeesDetailComponent extends BaseComponent implements OnInit {
     performance:'',
 
   }
+  showroomId : any = localStorage.getItem('Showroom Id'); 
+
 
   constructor(private apiService : ApiHelperService, private toast : ToastService )
   {
@@ -131,7 +133,7 @@ export class EmployeesDetailComponent extends BaseComponent implements OnInit {
 
 
 getEmployee(){
-  this.apiService.get(``).subscribe((data) => {
+  this.apiService.get(`/employee/getAllEmployees/${this.showroomId}`).subscribe((data) => {
     this.data = data;
     console.log(this.data);
   });
@@ -139,10 +141,8 @@ getEmployee(){
 
 
   onSubmit(){
-
-    
       this.apiService
-      .post('', this.employee)
+      .post('/employee/addEmployee', this.employee)
       .subscribe({
         next: (response) => {
           console.log(this.employee);
