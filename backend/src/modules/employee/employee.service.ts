@@ -1,8 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Delete, Injectable } from '@nestjs/common';
 import { Employee } from './entity/Employee';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { Showroom } from '../showroom/entity/Showroom';
 
 @Injectable()
@@ -34,6 +34,12 @@ export class EmployeeService {
         return await this.employeeRepo.findBy({showroom: {showroom_id:showroomId}})
     }
 
-
+    async deleteEmployee(employeeId: number): Promise<DeleteResult>{
+        try{
+     return await this.employeeRepo.delete({employee_id: employeeId})
+        } catch(e){
+            throw new BadRequestException('This employee can not be deleted');
+        }
+    }
     
 }
