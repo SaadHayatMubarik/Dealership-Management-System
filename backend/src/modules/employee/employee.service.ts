@@ -30,7 +30,9 @@ export class EmployeeService {
         return await this.employeeRepo.save(employee);
     }
 
-    // async get
+    async getEmployees(showroomId:number): Promise<Employee[]>{
+        return await this.employeeRepo.findBy({showroom: {showroom_id:showroomId}})
+    }
 
 
     
