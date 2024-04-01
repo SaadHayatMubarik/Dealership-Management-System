@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, Headers } from '@nestjs/common';
 import { EmployeeService } from './employee.service';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
 
@@ -7,7 +7,8 @@ export class EmployeeController {
     constructor(private employeeService: EmployeeService){}
 
     @Post('addEmployee')
-    addEmployee(@Body() createEmployeeDto:CreateEmployeeDto) {
-        return this.employeeService.addEmployee(createEmployeeDto);
+    addEmployee(@Body() createEmployeeDto:CreateEmployeeDto, @Headers('showroomId') showroomId: number) {
+        console.log(createEmployeeDto);
+        return this.employeeService.addEmployee(createEmployeeDto,showroomId);
     }
 }

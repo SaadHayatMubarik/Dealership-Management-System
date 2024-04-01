@@ -12,9 +12,6 @@ export class CreateEmployeeDto{
     employeePosition: string;
 
     @IsNotEmpty()
-    employeeStatus: string;
-
-    @IsNotEmpty()
     employeePhoneNo: string;
 
     @IsNotEmpty()
@@ -27,15 +24,9 @@ export class CreateEmployeeDto{
     joiningDate: Date;
 
     @IsNotEmpty()
-    shift_time: string;
-
-    @IsNotEmpty()
-    bonus: number;
+    shiftTime: string;
 
     @IsNotEmpty()
     totalLeaves: number;
-
-    @IsNotEmpty()
-    availableLeaves: number;
 
 }

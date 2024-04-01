@@ -3,6 +3,7 @@ import { User } from "src/modules/auth/entity/User";
 import { Showroom } from "src/modules/showroom/entity/Showroom";
 import { Column, Entity, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, Unique } from "typeorm";
 import { EmployeePerformance } from "../employee-performance.enum";
+import { EmployeeStatus } from "../employee-status.enum";
 
 @Entity({ name: 'employee'})
 @Unique(['employee_cnic','employee_phone_no',])
@@ -20,8 +21,8 @@ export class Employee{
     @Column()
     employee_position: string;
 
-    @Column()
-    employee_status: string;
+    @Column({ type: "enum", enum: EmployeeStatus, default: EmployeeStatus.ACTIVE })
+    employee_status: EmployeeStatus;
 
     @Column()
     employee_phone_no: string;
@@ -41,7 +42,7 @@ export class Employee{
     @Column()
     shift_time: string;
 
-    @Column()
+    @Column({ nullable: true })
     bonus: number;
 
     @Column()
