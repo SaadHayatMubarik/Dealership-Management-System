@@ -9,9 +9,10 @@ export class EmployeeController {
     constructor(private employeeService: EmployeeService){}
 
     @Post('addEmployee')
-    addEmployee(@Body() createEmployeeDto:CreateEmployeeDto, @Headers('Showroom Id') showroomId: number): Promise<Employee> {
+    addEmployee(@Body() createEmployeeDto:CreateEmployeeDto): Promise<Employee> {
+        // console.log(headers);
         console.log(createEmployeeDto);
-        return this.employeeService.addEmployee(createEmployeeDto,showroomId);
+        return this.employeeService.addEmployee(createEmployeeDto);
     }
     @Get('getAllEmployees/:showroomId')
     getAllEmployees(@Headers('Showroom Id') showroomId: number):Promise<Employee[]>{

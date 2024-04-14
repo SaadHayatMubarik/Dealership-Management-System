@@ -29,4 +29,7 @@ export class CreateEmployeeDto{
     @IsNotEmpty()
     totalLeaves: number;
 
+    @IsNotEmpty()
+    showroomId: number;
+
 }

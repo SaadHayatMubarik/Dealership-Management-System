@@ -39,8 +39,9 @@ export class NotificationService {
     //     return await this.notficationRepository.find({relations:['inventory.showroom'],where:{inventory:{showroom:{showroom_id:showroomId}}}});
     // }
 
-    async updateRequestStatus(notificationId: number, updatedStatus:NotificationStatus):Promise<string>{
-        await this.notificationRepository.update(notificationId,{status:updatedStatus})
-        return "The request has been "+updatedStatus+"!";
+    async updateRequestStatus(notificationId: number, updatedStatus:NotificationStatus):Promise<Notification>{
+        const notification = await this.notificationRepository.findOneBy({notification_id:notificationId});
+        notification.status = updatedStatus;
+        return await this.notificationRepository.save(notification);
     }
 }

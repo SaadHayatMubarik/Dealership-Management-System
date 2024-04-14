@@ -61,7 +61,7 @@ export class CustomerService {
     }
 
     async updateCustomer(updateCustomerDto:UpdateCustomerDto): Promise<Customer>{
-        console.log(updateCustomerDto);
+        // console.log(updateCustomerDto);
         const { address, catagory, city, cnic, customer_id, email,name,phoneNo, province, type } = updateCustomerDto;
         const customer = await this.customerRepository.findOneBy({customer_id:customer_id});
         customer.address = address;

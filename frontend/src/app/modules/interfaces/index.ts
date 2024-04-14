@@ -82,5 +82,6 @@ export interface IEmployee {
   totalLeaves:number,
   availableLeaves:number,
   performance:string;
+  showroomId: number;
 
 }

@@ -51,7 +51,7 @@ export class Employee{
     @Column()
     available_leaves: number;
 
-    @Column()
+    @Column({nullable:true})
     performance: EmployeePerformance;
 
     @ManyToOne(() => Showroom, (showroom) => showroom.employees)

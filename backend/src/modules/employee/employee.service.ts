@@ -14,8 +14,8 @@ export class EmployeeService {
         private showroomRepository: Repository<Showroom>
     ){}
 
-    async addEmployee(createEmployeeDto:CreateEmployeeDto, showroomId: number):Promise<Employee>{
-        const { employeeCnic, employeeEmail, employeeName, employeePhoneNo, employeePosition, shiftTime, employeeSalary, joiningDate, totalLeaves } = createEmployeeDto;
+    async addEmployee(createEmployeeDto:CreateEmployeeDto):Promise<Employee>{
+        const { employeeCnic, employeeEmail, employeeName, employeePhoneNo, employeePosition, shiftTime, employeeSalary, joiningDate, totalLeaves, showroomId } = createEmployeeDto;
         const employee = new Employee();
         employee.employee_cnic = employeeCnic;
         employee.employee_email = employeeEmail;
@@ -26,6 +26,7 @@ export class EmployeeService {
         employee.joining_date = joiningDate;
         employee.shift_time = shiftTime;
         employee.total_leaves = totalLeaves;
+        employee.available_leaves = totalLeaves;
         employee.showroom = await this.showroomRepository.findOneBy({showroom_id:showroomId});
         return await this.employeeRepo.save(employee);
     }

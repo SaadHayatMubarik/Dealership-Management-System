@@ -26,7 +26,7 @@ export class EmployeesDetailComponent extends BaseComponent implements OnInit {
 
   status : any[] = ['Active', 'Inactive']
   performanceArr : any[] = ['Good', 'Average', 'Bad']
-
+  showroomId : any = localStorage.getItem('Showroom Id'); 
 
   employee : IEmployee = 
   { 
@@ -44,9 +44,10 @@ export class EmployeesDetailComponent extends BaseComponent implements OnInit {
     totalLeaves:0,
     availableLeaves:0,
     performance:'',
+    showroomId: +this.showroomId
 
   }
-  showroomId : any = localStorage.getItem('Showroom Id'); 
+ 
 
 
   constructor(private apiService : ApiHelperService, private toast : ToastService )
