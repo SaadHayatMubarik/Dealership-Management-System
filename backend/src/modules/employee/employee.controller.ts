@@ -11,15 +11,20 @@ export class EmployeeController {
     @Post('addEmployee')
     addEmployee(@Body() createEmployeeDto:CreateEmployeeDto): Promise<Employee> {
         // console.log(headers);
-        console.log(createEmployeeDto);
+        // console.log(createEmployeeDto);
         return this.employeeService.addEmployee(createEmployeeDto);
     }
     @Get('getAllEmployees/:showroomId')
-    getAllEmployees(@Headers('Showroom Id') showroomId: number):Promise<Employee[]>{
+    getAllEmployees(@Param('Showroom Id') showroomId: number):Promise<Employee[]>{
         return  this.employeeService.getEmployees(showroomId);
     }
     @Delete('deleteEmployee/:employeeId')
     deleteEmployee(@Param('employeeId') employeeId :number): Promise<DeleteResult>{
         return this.employeeService.deleteEmployee(employeeId);
+    }
+
+    @Get('dashboard/activeEmployee/:showroomId')
+    getActiveEmployee( @Param('showroomId') showroomId: number) : Promise <number>{
+        return this.employeeService.getActiveEmployees(showroomId);
     }
 }

@@ -256,4 +256,8 @@ export class InventoryService {
           console.log(e);
         }
       }
+
+      async getTotalAvailableInventory(showroomId: number): Promise<number>{
+        return await this.inventoryRepository.countBy({showroom: {showroom_id:showroomId}, status:InventoryStatus.AVAILABLE}); 
+      }
 }

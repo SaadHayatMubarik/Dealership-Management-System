@@ -4,6 +4,7 @@ import { CreateEmployeeDto } from './dto/create-employee.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository } from 'typeorm';
 import { Showroom } from '../showroom/entity/Showroom';
+import { EmployeeStatus } from './employee-status.enum';
 
 @Injectable()
 export class EmployeeService {
@@ -42,5 +43,8 @@ export class EmployeeService {
             throw new BadRequestException('This employee can not be deleted');
         }
     }
-    
+
+    async getActiveEmployees(showroomId:number):Promise<number>{
+        return this.employeeRepo.countBy({showroom: {showroom_id:showroomId}, employee_status:EmployeeStatus.ACTIVE});
+}
 }

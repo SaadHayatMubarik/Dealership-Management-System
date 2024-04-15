@@ -6,6 +6,7 @@ import { CustomerCatagory } from './customer-catagory.enum';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
 import { DeleteResult } from 'typeorm';
+import { Showroom } from '../showroom/entity/Showroom';
 
 @Controller('customer')
 export class CustomerController {
@@ -48,5 +49,10 @@ export class CustomerController {
     @Delete('deleteCustomer/:customerId')
     deleteCustomer(@Param('customerId') customerId: number): Promise<DeleteResult> {
         return this.customerService.deleteCustomer(customerId);
+    }
+
+    @Get('dashboard/TotalCustomer/:showroomId')
+    getTotalCustomer(@Param('showroomId') showroomId: number): Promise <number> {
+        return this.customerService.getTotalCustomer(showroomId);
     }
 }

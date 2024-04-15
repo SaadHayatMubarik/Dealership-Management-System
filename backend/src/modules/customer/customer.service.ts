@@ -84,4 +84,8 @@ export class CustomerService {
             throw new BadRequestException('This customer cannot be delete');
         }
     }
+
+    getTotalCustomer(showroomId: number): Promise<number>{
+        return this.customerRepository.countBy({showroom: {showroom_id:showroomId}});
+    }
 }

@@ -64,4 +64,9 @@ export class InventoryController {
   uploadFile(@UploadedFile() file: Express.Multer.File, @Body() inventoryObj: Inventory) {
     return this.inventoryService.uploadFile(file);
   }
+
+  @Get('dashboard/TotalInventory/:showroomId')
+  getTotalAvailableInventory(@Param('showroomId') showroomId: number): Promise<number>{
+    return this.inventoryService.getTotalAvailableInventory(showroomId);
+  }
 }
