@@ -61,29 +61,29 @@ export class EmployeesDetailComponent extends BaseComponent implements OnInit {
 
     this.columns=[
       {
-        field: 'name',
+        field: 'employee_name',
         fieldTitle: 'Employee Name',
       },
       {
-        field: 'cnic',
+        field: 'employee_cnic',
         fieldTitle: 'Cnic'
       },
       {
-        field: 'phoneNo',
+        field: 'employee_phone_no',
         fieldTitle: 'Phone Number'
       },
       {
-        field: 'email',
+        field: 'employee_email',
         fieldTitle: 'Email'
   
       },
       {
-        field: 'address',
-        fieldTitle: 'Address'
+        field: 'joining_date',
+        fieldTitle: 'Joining Date'
       },
       {
-        field: 'city',
-        fieldTitle: 'City'
+        field: 'shift_time',
+        fieldTitle: 'Shift Time'
   
       }
      ];
@@ -136,7 +136,7 @@ export class EmployeesDetailComponent extends BaseComponent implements OnInit {
 getEmployee(){
   this.apiService.get(`/employee/getAllEmployees/${this.showroomId}`).subscribe((data) => {
     this.data = data;
-    console.log(this.data);
+    console.log('employee data:', this.data);
   });
 }
 

@@ -63,6 +63,7 @@ handleTabChange(event: any) {
 getNotification(){
   this.apiService.get(`/notification/getRequest/${this.showroomId}/${this.status[this.selectedTabIndex]}`).subscribe((data) => {
   this.details = data
+  console.log(this.details);
   });
 }
 
