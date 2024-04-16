@@ -7,7 +7,8 @@
     <div class="grid">
       <div class="col-12 lg:col-6 xl:col-12">
         <div class="card mb-0 color">
-          <p-tabView (onTabChange)="handleTabChange($event)">
+          <p-tabView (onTabChange)="handleTabChange($event)" 
+          [(activeIndex)]="selectedTabIndex">
             <p-tabPanel header="Recieved">
               <div *ngIf="details && details.length > 0">
               <div *ngFor="let notification of details" class="notification-tile">
@@ -48,28 +49,38 @@
             </div>
             </p-tabPanel>
             <p-tabPanel header="Sent">
-                <div class="notification-tile">
-                    <div class="notification-header">
-                      <span> You have sent a request to: </span>
-                      <b>Showroom Name</b>
-                    </div>
-                    <div class="notification-header">
-                      <b>Toyota Corolla 2019</b>
-                    </div>
-                  
-                   
-                    <div class="notification-details">
-                      <span class="notification-time"
-                        >Date & Time: [Date & Time]</span
-                      >
-                    </div>
-                    
-                    <div class="notification-details">
-                        <span class="notification-time"
-                          >Status: Pending</span
-                        >
-                      </div>
+              <div *ngIf="sent && sent.length > 0">
+                <div *ngFor="let sent_notification of sent" class="notification-tile">
+                  <div class="notification-header">
+                    <span> You have sent a request to </span>
+                    <b>{{sent_notification.inventory.showroom.showroom_name }}</b>
+                    <span> for this car: 
+                      <b>{{sent_notification.inventory.make}}  {{sent_notification.inventory.model}} {{sent_notification.inventory.variant}} 
+                      </b></span>
                   </div>
+                  <div class="notification-details">
+                    <span class="notification-time"
+                      ><b>Date and Time:</b>  {{sent_notification.date}}</span
+                    >
+                  </div>
+                    <div class="notification-actions">
+                      <span class="status-text"
+                            [ngClass]="{
+                              'accepted': sent_notification.status === 'ACCEPTED',
+                              'rejected': sent_notification.status === 'REJECTED',
+                              'pending': sent_notification.status === 'PENDING'
+                            }">
+                        <b>Status: </b>
+                        <span [ngClass]="{
+                                'accepted-text': sent_notification.status === 'ACCEPTED',
+                                'rejected-text': sent_notification.status === 'REJECTED',
+                                'pending-text': sent_notification.status === 'PENDING'
+                              }">{{ sent_notification.status }}</span>
+                      </span>
+                      <a [routerLink]="['/detail-view/', sent_notification.inventory.inventory_id]" style="float: right">View Car Details</a>
+                    </div>
+                </div>
+              </div>
             </p-tabPanel>
           </p-tabView>
         </div>

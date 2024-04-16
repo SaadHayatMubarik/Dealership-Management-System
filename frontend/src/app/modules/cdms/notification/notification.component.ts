@@ -21,6 +21,7 @@ export class NotificationComponent extends BaseComponent {
   ngOnInit(){
  
   this.getNotification();
+  this.sentNotification();
   }
 
 
@@ -29,13 +30,13 @@ export class NotificationComponent extends BaseComponent {
   columns: DataTableColumn[] = [];
   actions: IDataTableAction[] = [];
   data: IObject[] = [];
-
   selectedTabIndex: number = 0;
   status: string[] = ['received', 'sent'];
-
+  sent_status:string = "sent";
+  receive_status:string = "receive";
   showroomId :string | null=  localStorage.getItem('Showroom Id')
   details:any[]= [];
-
+  sent:any[]= [];
   notifications: any = '';
 
  
@@ -54,6 +55,7 @@ export class NotificationComponent extends BaseComponent {
 handleTabChange(event: any) {
   // Update selectedTabIndex based on the index of the selected tab
   this.selectedTabIndex = event.index;
+  this.getNotification;
 }
 
 
@@ -63,8 +65,17 @@ handleTabChange(event: any) {
 getNotification(){
   this.apiService.get(`/notification/getRequest/${this.showroomId}/${this.status[this.selectedTabIndex]}`).subscribe((data) => {
   this.details = data
-  console.log(this.details);
+  console.log('details', this.details);
   });
+}
+
+sentNotification(){
+  this.apiService.get(`/notification/getRequest/${this.showroomId}/${this.sent_status}`).subscribe((data) => {
+    this.sent = data
+    console.log('sent', this.sent);
+    console.log('status', this.sent_status);
+    });
+
 }
 
 // {notificationId}/{updatedStatus}
