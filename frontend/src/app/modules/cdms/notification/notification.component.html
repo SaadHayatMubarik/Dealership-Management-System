@@ -19,10 +19,10 @@
                 </div>
                 <div class="notification-details">
                   <span class="notification-time"
-                    >{{notification.date}}</span
+                    ><b>Date and Time:</b>  {{notification.date}}</span
                   >
                 </div>
-                <div class="notification-actions">
+                <div *ngIf="notification.status === 'PENDING'; else statusText" class="notification-actions">
                   <p-button  
                   (click)="changeStatus(notification.notification_id, 'ACCEPTED')"
                   >Accept</p-button>
@@ -31,10 +31,19 @@
                     severity="danger"
                     class="ml-2"
                   >Reject</p-button>
+
                   <a [routerLink]="['/detail-view/', notification.inventory.inventory_id]" style="float: right"
-                    >View Car Details</a
-                  >
+                    >View Car Details</a>
                 </div>
+                <ng-template #statusText>
+                  <div class="notification-actions">
+                    <span class="status-text" [ngClass]="{'accepted': notification.status === 'ACCEPTED', 'rejected': notification.status === 'REJECTED'}">
+                    <b>Status: </b><span [ngClass]="{'accepted-text': notification.status === 'ACCEPTED', 'rejected-text': notification.status === 'REJECTED'}">{{ notification.status }}</span>
+                    </span>
+                    <a [routerLink]="['/detail-view/', notification.inventory.inventory_id]" style="float: right">View Car Details</a>
+                  </div>
+                </ng-template>
+
               </div>
             </div>
             </p-tabPanel>

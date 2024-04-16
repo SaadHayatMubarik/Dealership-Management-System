@@ -61,12 +61,8 @@ handleTabChange(event: any) {
 
 
 getNotification(){
-  console.log(this.status[this.selectedTabIndex]);
-  console.log(this.showroomId);
   this.apiService.get(`/notification/getRequest/${this.showroomId}/${this.status[this.selectedTabIndex]}`).subscribe((data) => {
-    this.details = data
-    console.log(this.details);
-   
+  this.details = data
   });
 }
 
@@ -80,17 +76,17 @@ changeStatus(notification_id:number ,status: string){
       this.toast.showSuccess('Request:', status);
       console.log('success',status)
       console.log('success',notification_id)
-      localStorage.setItem('lastRequestTime', new Date().getTime().toString());
+      this.getNotification();
+      // localStorage.setItem('lastRequestTime', new Date().getTime().toString());
     },
     error: () => {
       this.toast.showError('Error Occured.');
-      console.log('fail',status)
-      console.log('fail',notification_id)
+      console.log('fail',status);
+      console.log('fail',notification_id);
+      this.getNotification();
       // console.log()
     },
   });
-  
-
 
 }
 
