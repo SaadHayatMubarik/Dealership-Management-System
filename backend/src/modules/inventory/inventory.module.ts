@@ -14,6 +14,8 @@ import { Investment } from '../investment/entity/Investment';
 import { Picture } from '../picture/entity/Picture';
 import { Customer } from '../customer/entity/Customer';
 import { Investor } from '../investor/entity/Investor';
+import { PictureService } from '../picture/picture.service';
+import { S3Service } from '../picture/aws-s3.service';
 
 // import { Showroom } from '../showroom/entity/Showroom';
 // import { VehicleType } from '../vehicle-type/Vehicle-type';
@@ -23,6 +25,6 @@ import { Investor } from '../investor/entity/Investor';
   imports: [TypeOrmModule.forFeature([Inventory,Showroom,VehicleType,StockAttributeValue,MultiValueAttribute,VehicleTypeAttribute,Investment,Picture,Customer,Investor])],
 
   controllers: [InventoryController],
-  providers: [InventoryService]
+  providers: [InventoryService,PictureService,S3Service]
 })
 export class InventoryModule {}
