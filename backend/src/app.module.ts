@@ -40,7 +40,6 @@ import { EmployeeModule } from './modules/employee/employee.module';
     CustomerModule,
     InvestmentModule,
     InvestorModule,
-    PictureModule,
     EmployeeModule
   ],
   controllers: [AppController],

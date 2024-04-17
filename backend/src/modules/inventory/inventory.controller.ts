@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query, UploadedFile, UploadedFiles, UseGuards, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, FileTypeValidator, Get, Param, ParseFilePipe, Post, Put, Query, UploadedFile, UploadedFiles, UseGuards, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
 import { InventoryService } from './inventory.service';
 import { InventoryDto } from './dto/inventory.dto';
 import { Inventory } from './entity/Inventory';
@@ -9,6 +9,7 @@ import { InventoryStatus } from './inventory-status.enum';
 import { UpdateInventoryDto } from './dto/updateInventory.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Picture } from '../picture/entity/Picture';
+import { MaxImageSizeValidator } from '../picture/max-image.validator';
 
 
 @Controller('inventory')
@@ -16,11 +17,23 @@ import { Picture } from '../picture/entity/Picture';
 export class InventoryController {
     constructor(private inventoryService: InventoryService){}
 
-    @Post('addInventory')
-    addInventory(@Body() addInventoryDto: InventoryDto): Promise<Inventory> {
+    @Post('addInventory/:pictureType')
+    
+    addInventory(
+    @UploadedFiles(
+        new ParseFilePipe({
+          validators: [new FileTypeValidator({ fileType: /(jpg|jpeg|png)$/ })],
+          fileIsRequired: true,
+        }),
+        new MaxImageSizeValidator(),
+      )
+      files: Express.Multer.File[],
+      @Param('pictureType') pictureType: string,
+      @Body() addInventoryDto: InventoryDto): Promise<Inventory> {
         // console.log(addInventoryDto);
-        return this.inventoryService.addInventory(addInventoryDto);
+        return this.inventoryService.addInventory(files,pictureType,addInventoryDto);
     }
+
     @Get('getInventoryDetails/:inventoryId')
     getInventoryDetail(@Param('inventoryId') inventoryId: number): Promise<Inventory>{
         // console.log("inventoryId: " + inventoryId);
