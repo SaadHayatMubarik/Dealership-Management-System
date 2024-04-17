@@ -25,6 +25,8 @@ vehicleDetails: any = '';
 showroomId = localStorage.getItem("Showroom Id");
 inventoryId : number = 0;
 
+range: number[] = [800000, 1000000];
+
 images: any[] = [
   { itemImageSrc: '../../../../assets/demo/images/car.jpg' },
   { itemImageSrc: '../../../../assets/demo/images/car.jpg' },
