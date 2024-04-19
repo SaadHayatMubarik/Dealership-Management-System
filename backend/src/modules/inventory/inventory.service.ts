@@ -57,7 +57,7 @@ export class InventoryService {
         private readonly pictureRepository: Repository<Picture>,
     ){}
 
-    async addInventory (files: Express.Multer.File[], pictureType: string, addInventoryDto: InventoryDto): Promise<Inventory>{
+    async addInventory (files: Express.Multer.File[],pictures: Express.Multer.File[], pictureType: string, addInventoryDto: InventoryDto): Promise<Inventory>{
         const { vehicleType, vehicleMake, vehicleModel , vehicleVariant , modelYear ,
              vehicleChasisNo , costPrice , demand , dateOfPurchase , dateOfSale ,
               bodyColor , engineNo , comments , grade , regNo, mileage, status,
@@ -87,9 +87,9 @@ export class InventoryService {
 
         const inventoryId = await this.inventoryRepository.getId(inventory);
 
-        let inventoryObj = await this.inventoryRepository.findOne({where:{inventory_id:inventoryId}})
+        let inventoryObj = await this.inventoryRepository.findOne({where:{inventory_id:inventoryId}});
+        await this.pictureService.uploadImage(pictures,pictureType,inventoryObj);
         await this.pictureService.uploadImage(files,pictureType,inventoryObj);  // for uploading pictures
-
         // customer.inventories = [inventoryObj];
         // await this.customerRepository.preload(customer);
         const typeId = await this.vehicleTypeRepository.getId(vehicleType);

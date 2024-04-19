@@ -28,10 +28,11 @@ export class InventoryController {
         new MaxImageSizeValidator(),
       )
       files: Express.Multer.File[],
+      pictures: Express.Multer.File[],
       @Param('pictureType') pictureType: string,
       @Body() addInventoryDto: InventoryDto): Promise<Inventory> {
         // console.log(addInventoryDto);
-        return this.inventoryService.addInventory(files,pictureType,addInventoryDto);
+        return this.inventoryService.addInventory(files,pictures,pictureType,addInventoryDto);
     }
 
     @Get('getInventoryDetails/:inventoryId')
