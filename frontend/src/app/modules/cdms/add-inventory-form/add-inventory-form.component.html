@@ -907,6 +907,50 @@
           </div>
         </form>
       </p-tabPanel>
+
+      <!-- UPLOAD DOCUMENT CODE -->
+
+      <p-tabPanel header="Upload">
+        <form>
+
+          <div class="sh-title">
+            <h5 style="text-align: center">Upload Vehicle images</h5>
+            <br />
+          </div>
+          
+          <p-fileUpload name="myfile[]" url="https://www.primefaces.org/cdn/api/upload.php" [multiple]="true" accept="image/*">
+            <ng-template pTemplate="toolbar">
+                <div class="py-3">Upload Images</div>
+            </ng-template>
+            <ng-template let-file pTemplate="file">
+                <div>Custom UI to display a file</div>
+            </ng-template>
+            <ng-template pTemplate="content" let-files>
+                <div>Additional content.</div>
+            </ng-template>
+        </p-fileUpload>
+        <br>
+        <br>
+
+        <div class="sh-title">
+          <h5 style="text-align: center">Upload Vehicle Documents</h5>
+          <br />
+        </div>
+        
+        <p-fileUpload name="myfile[]" url="https://www.primefaces.org/cdn/api/upload.php" [multiple]="true" accept="image/*">
+          <ng-template pTemplate="toolbar">
+              <div class="py-3">Upload Documents</div>
+          </ng-template>
+          <ng-template let-file pTemplate="file">
+              <div>Custom UI to display a file</div>
+          </ng-template>
+          <ng-template pTemplate="content" let-files>
+              <div>Additional content.</div>
+          </ng-template>
+      </p-fileUpload>
+        </form>
+         
+      </p-tabPanel>
     </p-tabView>
   </p-sidebar>
 </div>

@@ -76,7 +76,7 @@
                             <th>Module</th>
                             <th>Add</th>
                             <th>Delete</th>
-                            <th>Update</th>
+                           <th>Update</th>
                             <th>View</th>
                         </tr>
                     </ng-template>
@@ -84,16 +84,16 @@
                         <tr>
                             <td>{{module.name}}</td>
                             <td>
-                                <p-checkbox [(ngModel)]="rolePermissions[module.name]['add']"></p-checkbox>
+                                <p-checkbox [(ngModel)]="rolePermissions[module.name]['add']" [binary]="true"></p-checkbox>
                             </td>
                             <td>
-                                <p-checkbox [(ngModel)]="rolePermissions[module.name]['delete']"></p-checkbox>
+                                <p-checkbox [(ngModel)]="rolePermissions[module.name]['delete']" [binary]="true"></p-checkbox>
                             </td>
                             <td>
-                                <p-checkbox [(ngModel)]="rolePermissions[module.name]['update']"></p-checkbox>
+                                <p-checkbox [(ngModel)]="rolePermissions[module.name]['update']" [binary]="true"></p-checkbox>
                             </td>
                             <td>
-                                <p-checkbox [(ngModel)]="rolePermissions[module.name]['view']"></p-checkbox>
+                                <p-checkbox [(ngModel)]="rolePermissions[module.name]['view']" [binary]="true"></p-checkbox>
                             </td>
                         </tr>
                     </ng-template>

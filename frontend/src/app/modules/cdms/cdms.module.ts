@@ -58,6 +58,7 @@ import { EmployeesDetailComponent } from './employees-detail/employees-detail.co
 
 
 
+
 @NgModule({
   declarations: [
     VehicleTypeComponent,
@@ -80,6 +81,7 @@ import { EmployeesDetailComponent } from './employees-detail/employees-detail.co
     RoleComponent,
     UpdateInventoryComponent,
     EmployeesDetailComponent,
+    
  
   ],
   imports: [
@@ -112,6 +114,7 @@ import { EmployeesDetailComponent } from './employees-detail/employees-detail.co
     RadioButtonModule,
     DialogModule,
     TableModule,
+   
 
 
   ],
