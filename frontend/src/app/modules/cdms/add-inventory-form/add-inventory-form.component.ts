@@ -19,6 +19,7 @@ import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
 
 import { NgForm } from '@angular/forms';
+import { FileUpload } from 'primeng/fileupload';
 
 @Component({
   selector: 'app-add-inventory-form',
@@ -51,7 +52,10 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
     stockAttributeValue: [],
     sellerId: '',
     investor: [],
-    investmentAmount: []
+    investmentAmount: [],
+    pictures: [],
+    files: [],
+    
   };
 
 
@@ -72,6 +76,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
 
   activeTabIndex = 0; // Track current active tab index
   showSecondTab = false; // Initially disable the second tab
+  showThirdTab = false;
   vehicleTypes: any[] = []; //to populate dropdown of vehicle type
   investors: any[] = []; // To store list of Investors for whom inventory is added
   customers: any[] = []  ;//To store list of Customers for whom  inventory is added
@@ -187,7 +192,9 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   }
 
   @ViewChild('Inventory') InventoryForm!: NgForm;
-  @ViewChild('vehicleUpdate') vehicleUpdate!:NgForm;  @ViewChild('Seller') SellerForm!: NgForm;
+  @ViewChild('vehicleUpdate') vehicleUpdate!:NgForm;  
+  @ViewChild('Seller') SellerForm!: NgForm;
+  @ViewChild ('upload') UploadForm!:NgForm;
   
   getVehicleTypes() {
     this.apiService
@@ -346,9 +353,58 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
     }
     }
 
+    onUpload(){
+      if (this.SellerForm.valid)
+        {
+          this.activeTabIndex = 2;
+          this.showThirdTab = true;
+        }
+    
+    }
+
+
+    // files: FileUpload[] = [];
+
+    vehicleImages: File[] = [];
+    vehicleDocuments: File[] = [];
+
+    handleUpload(event: any, type: string) {
+      // Extract the uploaded files from the event
+      const uploadedFiles: File[] = event.files;
+  
+      // Update the appropriate array based on the type
+      if (type === 'pictures') {
+          this.vehicleImages = this.vehicleImages.concat(uploadedFiles);
+      } else if (type === 'documents') {
+          this.vehicleDocuments = this.vehicleDocuments.concat(uploadedFiles);
+      }
+  }
+
+    // handleUpload(event: any, type: string) {
+    //   // Extract the uploaded files from the event
+    //   const uploadedFiles: any[] = event.files;
+    //   if (type === 'pictures') {
+    //     this.vehicleInventory.pictures = uploadedFiles.map((file: any) => file.objectURL);
+    //   } else if (type === 'files') {
+    //     this.vehicleInventory.files = uploadedFiles.map((file: any) => file.objectURL);
+    //   }
+    // }
+
+  // private createObjectURL(file: any): string | null {
+  //   if (window.URL) {
+  //     return window.URL.createObjectURL(file);
+  //   } else if (window.webkitURL) {
+  //     return window.webkitURL.createObjectURL(file);
+  //   } else {
+  //     return null;
+  //   }
+  // }
+  
+
+
   postInventory() {
 
-    if (this.SellerForm.valid){ 
+    if (this.UploadForm.valid){ 
       this.apiService
       .postLogin('/inventory/addInventory', this.vehicleInventory,)
       .subscribe({
@@ -356,10 +412,12 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
           this.toast.showSuccess('New Inventory Added');
           this.closeModal();
           this.getInventory();
+          console.log('success',this.vehicleInventory);
+          
         },
         error: () => {
           this.toast.showError();
-          console.log(this.vehicleInventory);
+          console.log('error',this.vehicleInventory);
         },
       });
     }
