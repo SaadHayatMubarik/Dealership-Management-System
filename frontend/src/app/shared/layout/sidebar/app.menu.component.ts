@@ -26,6 +26,7 @@ export class AppMenuComponent implements OnInit {
                 items: [
                     { label: 'Vehicle Type', 
                     icon: 'pi pi-fw  pi-truck', 
+                    permission: ['add_car', 'view_car'],
                     routerLink: ['/cdms/vehicle-type'] },
                     { label: 'Vehicle Type Attributes', 
                     icon: 'pi pi-fw  pi-car', 
