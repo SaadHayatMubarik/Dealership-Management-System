@@ -88,7 +88,9 @@ export class InventoryService {
         const inventoryId = await this.inventoryRepository.getId(inventory);
 
         let inventoryObj = await this.inventoryRepository.findOne({where:{inventory_id:inventoryId}});
-        await this.pictureService.uploadImage(pictures,pictureType,inventoryObj);
+        const picture = `${pictureType}/pictures`;
+        await this.pictureService.uploadImage(pictures,picture,inventoryObj);
+        const document = `${pictureType}/documents`;
         await this.pictureService.uploadImage(files,pictureType,inventoryObj);  // for uploading pictures
         // customer.inventories = [inventoryObj];
         // await this.customerRepository.preload(customer);
@@ -227,40 +229,38 @@ export class InventoryService {
     //     // }
     //   }
 
-      async uploadFile(file) {
-        console.log(file);
-        const { originalname } = file;
+      // async uploadFile(file) {
+      //   console.log(file);
+      //   const { originalname } = file;
     
-        return await this.s3_upload(
-          file.buffer,
-          this.AWS_S3_BUCKET,
-          originalname,
-          file.mimetype,
-        );
-      }
+      //   return await this.s3_upload(
+      //     file.buffer,
+      //     this.AWS_S3_BUCKET,
+      //     originalname,
+      //     file.mimetype,
+      //   );
+      // }
     
-      async s3_upload(file, bucket, name, mimetype) {
-        const params = {
-          Bucket: bucket,
-          Key: String(name),
-          Body: file,
-          ACL: 'public-read',
-          ContentType: mimetype,
-          ContentDisposition: 'inline',
-          CreateBucketConfiguration: {
-            LocationConstraint: 'ap-south-1',
-          },
-        };
+      // async s3_upload(file, bucket, name, mimetype) {
+      //   const params = {
+      //     Bucket: bucket,
+      //     Key: String(name),
+      //     Body: file,
+      //     ACL: 'public-read',
+      //     ContentType: mimetype,
+      //     ContentDisposition: 'inline',
+      //     CreateBucketConfiguration: {
+      //       LocationConstraint: 'ap-south-1',
+      //     },
+      //   };
     
-        try {
-          let s3Response = await this.s3.upload(params).promise();
-          return s3Response;
-        } catch (e) {
-          console.log(e);
-        }
-      }
+      //   try {
+      //     let s3Response = await this.s3.upload(params).promise();
+      //     return s3Response;
+      //   } catch (e) {
+      //     console.log(e);
+      //   }
+      // }
 
-      async getTotalAvailableInventory(showroomId: number): Promise<number>{
-        return await this.inventoryRepository.countBy({showroom: {showroom_id:showroomId}, status:InventoryStatus.AVAILABLE}); 
-      }
+      
 }

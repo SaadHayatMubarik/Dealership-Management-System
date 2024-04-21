@@ -18,7 +18,6 @@ export class InventoryController {
     constructor(private inventoryService: InventoryService){}
 
     @Post('addInventory/:pictureType')
-    
     addInventory(
     @UploadedFiles(
         new ParseFilePipe({
@@ -73,14 +72,11 @@ export class InventoryController {
     //   return this.inventoryService.savePictureUrlToDatabase(file,inventoryObj);
     // }
 
-    @Post('upload')
-  @UseInterceptors(FileInterceptor('file'))
-  uploadFile(@UploadedFile() file: Express.Multer.File, @Body() inventoryObj: Inventory) {
-    return this.inventoryService.uploadFile(file);
-  }
+  //   @Post('upload')
+  // @UseInterceptors(FileInterceptor('file'))
+  // uploadFile(@UploadedFile() file: Express.Multer.File, @Body() inventoryObj: Inventory) {
+  //   return this.inventoryService.uploadFile(file);
+  // }
 
-  @Get('dashboard/TotalInventory/:showroomId')
-  getTotalAvailableInventory(@Param('showroomId') showroomId: number): Promise<number>{
-    return this.inventoryService.getTotalAvailableInventory(showroomId);
-  }
+  
 }

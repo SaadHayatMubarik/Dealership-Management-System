@@ -6,5 +6,11 @@ export class SendRequestDto{
 
     @IsNotEmpty()
     showroomId: number;
+
+    @IsNotEmpty()
+    minValue: string;
+
+    @IsNotEmpty()
+    maxValue: string;
     
 }

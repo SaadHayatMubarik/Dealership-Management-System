@@ -19,11 +19,13 @@ export class NotificationService {
         private  showRoomRepository : Repository <Showroom>
     ){}
     async sendRequest(sendRequestDto:SendRequestDto): Promise<Notification>{
-        const { inventoryId, showroomId } = sendRequestDto;
+        const { inventoryId, showroomId, minValue, maxValue } = sendRequestDto;
         const notification = new Notification();
         notification.inventory = await this.inventoryRepository.findOne({where: {inventory_id:inventoryId}});
         notification.senderShowroom = await this.showRoomRepository.findOne({where:{showroom_id:showroomId}});
         notification.date = new Date();
+        notification.min_value=minValue;
+        notification.max_value=maxValue;
         // notification.status
         return await this.notificationRepository.save(notification);
     } 

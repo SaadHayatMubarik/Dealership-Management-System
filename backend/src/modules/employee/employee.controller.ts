@@ -23,8 +23,8 @@ export class EmployeeController {
         return this.employeeService.deleteEmployee(employeeId);
     }
 
-    @Get('dashboard/activeEmployee/:showroomId')
-    getActiveEmployee( @Param('showroomId') showroomId: number) : Promise <number>{
-        return this.employeeService.getActiveEmployees(showroomId);
-    }
+    // @Get('dashboard/activeEmployee/:showroomId')
+    // getActiveEmployee( @Param('showroomId') showroomId: number) : Promise <number>{
+    //     return this.employeeService.getActiveEmployees(showroomId);
+    // }
 }
