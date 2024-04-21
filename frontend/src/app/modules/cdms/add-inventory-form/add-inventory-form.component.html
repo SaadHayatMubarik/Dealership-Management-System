@@ -645,7 +645,7 @@
       </p-tabPanel>
 
       <p-tabPanel header="Seller Details" [disabled]="!showSecondTab">
-        <form (ngSubmit)="postInventory()" #Seller="ngForm">
+        <form (ngSubmit)="onUpload()" #Seller="ngForm">
           <div class="sidebar-main">
             <div class="sidebar-header">
               <div class="sh-title">
@@ -901,7 +901,7 @@
           <div class="sidebar-footer flex justify-content-end">
             <app-button
               type="submit"
-              label="save"
+              label="next"
               styleClass="p-button-sm p-button-rounded"
             ></app-button>
           </div>
@@ -910,24 +910,26 @@
 
       <!-- UPLOAD DOCUMENT CODE -->
 
-      <p-tabPanel header="Upload">
-        <form>
+      <p-tabPanel header="Upload" >
+        <!-- [disabled]="!showThirdTab" -->
+        <form (ngSubmit)="postInventory()" #upload="ngForm">
 
           <div class="sh-title">
             <h5 style="text-align: center">Upload Vehicle images</h5>
             <br />
           </div>
           
-          <p-fileUpload name="myfile[]" url="https://www.primefaces.org/cdn/api/upload.php" [multiple]="true" accept="image/*">
+          <p-fileUpload name="myfile[]"  
+          [multiple]="true" 
+          accept="image/*"
+          (onUpload)="handleUpload($event, 'pictures')"
+          [(ngModel)]="vehicleImages">
             <ng-template pTemplate="toolbar">
                 <div class="py-3">Upload Images</div>
             </ng-template>
-            <ng-template let-file pTemplate="file">
-                <div>Custom UI to display a file</div>
-            </ng-template>
             <ng-template pTemplate="content" let-files>
-                <div>Additional content.</div>
-            </ng-template>
+              <div *ngIf="!(files && files.length > 0)">No images uploaded yet.</div>
+          </ng-template>
         </p-fileUpload>
         <br>
         <br>
@@ -937,17 +939,27 @@
           <br />
         </div>
         
-        <p-fileUpload name="myfile[]" url="https://www.primefaces.org/cdn/api/upload.php" [multiple]="true" accept="image/*">
+        <p-fileUpload name="myfile[]"  
+        [multiple]="true" 
+        accept="image/*"
+        (onUpload)="handleUpload($event, 'files')"
+        [(ngModel)]="vehicleDocuments">
           <ng-template pTemplate="toolbar">
               <div class="py-3">Upload Documents</div>
           </ng-template>
-          <ng-template let-file pTemplate="file">
-              <div>Custom UI to display a file</div>
-          </ng-template>
           <ng-template pTemplate="content" let-files>
-              <div>Additional content.</div>
-          </ng-template>
+            <div *ngIf="!(files && files.length > 0)">No images uploaded yet.</div>
+        </ng-template>
       </p-fileUpload>
+      <br>
+
+      <div class="sidebar-footer flex justify-content-end">
+        <app-button
+          type="submit"
+          label="save"
+          styleClass="p-button-sm p-button-rounded"
+        ></app-button>
+      </div>
         </form>
          
       </p-tabPanel>

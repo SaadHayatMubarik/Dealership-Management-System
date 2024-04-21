@@ -40,6 +40,8 @@ export interface IInventory {
   sellerId: any;
   investor: any[];
   investmentAmount: number[];
+  pictures: any[];
+  files: any[];
 }
 
 export interface ISellInventory {
