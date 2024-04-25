@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BaseComponent } from 'src/app/shared/base.component';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 import {
   DataTableColumn,
@@ -53,8 +54,6 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
     sellerId: '',
     investor: [],
     investmentAmount: [],
-    pictures: [],
-    files: [],
     
   };
 
@@ -105,7 +104,8 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   constructor(
     private readonly apiService: ApiHelperService,
     private toast: ToastService,
-    private router: Router
+    private router: Router,
+    private http: HttpClient
 
   ) {
     super();
@@ -244,9 +244,6 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
 }
 
 
-
-
-
   phone_no : string = '' ;
   email : string = '' ;
   city : string = '' ;
@@ -362,24 +359,9 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
     
     }
 
-
     // files: FileUpload[] = [];
-
-    vehicleImages: File[] = [];
-    vehicleDocuments: File[] = [];
-
-    handleUpload(event: any, type: string) {
-      // Extract the uploaded files from the event
-      const uploadedFiles: File[] = event.files;
-  
-      // Update the appropriate array based on the type
-      if (type === 'pictures') {
-          this.vehicleImages = this.vehicleImages.concat(uploadedFiles);
-      } else if (type === 'documents') {
-          this.vehicleDocuments = this.vehicleDocuments.concat(uploadedFiles);
-      }
-  }
-
+    // vehicleImages: File[] = [];
+    // vehicleDocuments: File[] = [];
     // handleUpload(event: any, type: string) {
     //   // Extract the uploaded files from the event
     //   const uploadedFiles: any[] = event.files;
@@ -389,7 +371,6 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
     //     this.vehicleInventory.files = uploadedFiles.map((file: any) => file.objectURL);
     //   }
     // }
-
   // private createObjectURL(file: any): string | null {
   //   if (window.URL) {
   //     return window.URL.createObjectURL(file);
@@ -399,34 +380,79 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   //     return null;
   //   }
   // }
+
+  uploadedFiles: File[] = [];
+
+  handleUpload(event: any) {
+    this.uploadedFiles = event.files;
+    console.log('Uploaded Files:',this.uploadedFiles);
+  }
   
-
-
   postInventory() {
-
-    if (this.UploadForm.valid){ 
-      this.apiService
-      .postLogin('/inventory/addInventory', this.vehicleInventory,)
+    if (this.UploadForm.valid) { 
+      const formData = new FormData();
+  
+      // Append form data
+      Object.keys(this.vehicleInventory).forEach(key => {
+        formData.append(key, this.vehicleInventory[key as keyof IInventory]);
+      });
+      
+      // Append images
+      this.uploadedFiles.forEach(file => {
+        formData.append('images', file);
+      });
+      this.http
+      .post<any>('/inventory/addInventory', formData)
       .subscribe({
         next: (response) => {
           this.toast.showSuccess('New Inventory Added');
           this.closeModal();
           this.getInventory();
-          console.log('success',this.vehicleInventory);
-          
+          console.log('success', formData);
+          console.log('success', formData);
         },
         error: () => {
           this.toast.showError();
-          console.log('error',this.vehicleInventory);
+          console.log('error', formData);
         },
       });
-    }
-    else{
+    } else {
       this.toast.showError("Please fill all the required fields");
     }
-     
-   
   }
+
+
+
+//used 
+  // postInventory() {
+  //   if (this.UploadForm.valid){ 
+  //     const formData = new FormData();
+  //     this.uploadedFiles.forEach(file => {
+  //       formData.append('images', file);
+  //     });
+
+  //      // Append other form data if needed
+  //     //  formData.append('otherField', this.UploadForm.get('otherField').value);
+      
+  //     this.apiService
+  //     .postLogin('/inventory/addInventory', this.vehicleInventory)
+  //     .subscribe({
+  //       next: (response) => {
+  //         this.toast.showSuccess('New Inventory Added');
+  //         this.closeModal();
+  //         this.getInventory();
+  //         console.log('success',this.vehicleInventory);
+  //       },
+  //       error: () => {
+  //         this.toast.showError();
+  //         console.log('error',this.vehicleInventory);
+  //       },
+  //     });
+  //   }
+  //   else{
+  //     this.toast.showError("Please fill all the required fields");
+  //   }
+  // }
 
   onTabChange(event: any) {
     this.selectedTabIndex = event.index;

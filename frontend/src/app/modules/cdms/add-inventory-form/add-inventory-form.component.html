@@ -922,8 +922,7 @@
           <p-fileUpload name="myfile[]"  
           [multiple]="true" 
           accept="image/*"
-          (onUpload)="handleUpload($event, 'pictures')"
-          [(ngModel)]="vehicleImages">
+          (onUpload)="handleUpload($event)">
             <ng-template pTemplate="toolbar">
                 <div class="py-3">Upload Images</div>
             </ng-template>
@@ -941,9 +940,7 @@
         
         <p-fileUpload name="myfile[]"  
         [multiple]="true" 
-        accept="image/*"
-        (onUpload)="handleUpload($event, 'files')"
-        [(ngModel)]="vehicleDocuments">
+        accept="image/*">
           <ng-template pTemplate="toolbar">
               <div class="py-3">Upload Documents</div>
           </ng-template>
@@ -951,6 +948,7 @@
             <div *ngIf="!(files && files.length > 0)">No images uploaded yet.</div>
         </ng-template>
       </p-fileUpload>
+
       <br>
 
       <div class="sidebar-footer flex justify-content-end">
