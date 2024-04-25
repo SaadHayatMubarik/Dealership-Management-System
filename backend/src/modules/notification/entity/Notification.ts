@@ -15,6 +15,12 @@ export class Notification {
     @Column()
     date: Date;
 
+    @Column()
+    min_value: string;
+
+    @Column()
+    max_value: string;
+
     @ManyToOne(() => Inventory, (inventory) => inventory.notifications)
     inventory: Inventory;
 

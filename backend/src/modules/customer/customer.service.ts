@@ -25,6 +25,7 @@ export class CustomerService {
         let catagories = [CustomerCatagory.AGENT, CustomerCatagory.CUSTOMER, CustomerCatagory.DEALERSHIP];
         let types = [CustomerType.BUYER, CustomerType.SELLER];
         const { address, category, city, email, name, phoneNo, province, cnic, showroomId,type } = createCustomerDto;
+        if(await this.customerRepository.exist({where:{cnic:cnic, showroom:{showroom_id:showroomId}}}) == false){
         const customer = new Customer();
         customer.address = address;
         customer.city = city;
@@ -43,6 +44,7 @@ export class CustomerService {
         customer.catagory = catagories[i];
         }
         return await this.customerRepository.save(customer);
+    }
     }
     async getCustomer(showroomId: number, CustomerCatagory:CustomerCatagory):  Promise<Customer[]>{
         return await this.customerRepository.findBy({showroom:{showroom_id:showroomId}, catagory:CustomerCatagory});
@@ -85,7 +87,7 @@ export class CustomerService {
         }
     }
 
-    getTotalCustomer(showroomId: number): Promise<number>{
-        return this.customerRepository.countBy({showroom: {showroom_id:showroomId}});
-    }
+    // getTotalCustomer(showroomId: number): Promise<number>{
+    //     return 
+    // }
 }

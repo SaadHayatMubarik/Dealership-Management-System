@@ -31,8 +31,6 @@ export class DashboardComponent extends BaseComponent implements OnInit {
   ngOnInit(){
     this.getVehicleDetails();
     this.getInventoryCount();
-    this.getCustomerCount();
-    this.getEmployeeCount(); 
   }
 
 getVehicleDetails() {
@@ -47,27 +45,13 @@ getVehicleDetails() {
   });
 } 
 
-inventoryCount : any;
+dashboardData : any;
 getInventoryCount(){
-  this.apiService.get(`/inventory/dashboard/TotalInventory/${this.showroomId}`).subscribe((data) => {
-    this.inventoryCount = data
+  this.apiService.get(`/dashboard/dashboard/${this.showroomId}`).subscribe((data) => {
+    this.dashboardData = data
     });
 }
 
-customerCount : any;
-getCustomerCount(){
-  this.apiService.get(`/customer/dashboard/TotalCustomer/${this.showroomId}`).subscribe((data) => {
-    this.customerCount = data
-    });
-}
-
-employeeCount : any;
-getEmployeeCount(){
-  this.apiService.get(`/employee/dashboard/activeEmployee/${this.showroomId}`).subscribe((data) => {
-    this.employeeCount = data
-    console.log('Count:',this.employeeCount);
-    });
-}
 
 
 

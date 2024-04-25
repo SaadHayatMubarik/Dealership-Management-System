@@ -22,6 +22,7 @@ import { InvestmentModule } from './modules/investment/investment.module';
 import { InvestorModule } from './modules/investor/investor.module';
 import { PictureModule } from './modules/picture/picture.module';
 import { EmployeeModule } from './modules/employee/employee.module';
+import { DashboardModule } from './modules/dashboard/dashboard.module';
 
 @Module({
   imports: [
@@ -40,7 +41,8 @@ import { EmployeeModule } from './modules/employee/employee.module';
     CustomerModule,
     InvestmentModule,
     InvestorModule,
-    EmployeeModule
+    EmployeeModule,
+    DashboardModule,
   ],
   controllers: [AppController],
   providers: [

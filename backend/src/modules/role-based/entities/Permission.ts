@@ -1,6 +1,7 @@
 import { Column, Entity, ManyToOne, OneToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 import { Component } from "./component";
 import { Role } from "./Role";
+import { ActionType } from "../action-type.enum";
 // import { Component } from "./component";
 
 @Entity({ name: 'permission' })
@@ -9,16 +10,10 @@ export class Permission{
     permission_id: number;
 
     @Column()
-    add_permission: boolean;
+    permission_name: string;
 
-    @Column()
-    view_permission: boolean;
-
-    @Column()
-    update_permission: boolean;
-
-    @Column()
-    delete_permission: boolean;
+    @Column({ type:"enum", enum: ActionType})
+    action_type: ActionType;
 
     @ManyToOne(() => Component, (component) => component.permissions)
     component: Component;

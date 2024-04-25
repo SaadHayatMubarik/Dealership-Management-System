@@ -17,6 +17,7 @@ export class EmployeeService {
 
     async addEmployee(createEmployeeDto:CreateEmployeeDto):Promise<Employee>{
         const { employeeCnic, employeeEmail, employeeName, employeePhoneNo, employeePosition, shiftTime, employeeSalary, joiningDate, totalLeaves, showroomId } = createEmployeeDto;
+        if(await this.employeeRepo.exist({where:{employee_cnic:employeeCnic,showroom:{showroom_id:showroomId}}}) == false){
         const employee = new Employee();
         employee.employee_cnic = employeeCnic;
         employee.employee_email = employeeEmail;
@@ -30,6 +31,7 @@ export class EmployeeService {
         employee.available_leaves = totalLeaves;
         employee.showroom = await this.showroomRepository.findOneBy({showroom_id:showroomId});
         return await this.employeeRepo.save(employee);
+        }
     }
 
     async getEmployees(showroomId:number): Promise<Employee[]>{
@@ -44,7 +46,7 @@ export class EmployeeService {
         }
     }
 
-    async getActiveEmployees(showroomId:number):Promise<number>{
-        return this.employeeRepo.countBy({showroom: {showroom_id:showroomId}, employee_status:EmployeeStatus.ACTIVE});
-}
+//     async getActiveEmployees(showroomId:number):Promise<number>{
+//         return 
+// }
 }

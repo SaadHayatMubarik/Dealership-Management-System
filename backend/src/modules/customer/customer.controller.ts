@@ -51,8 +51,8 @@ export class CustomerController {
         return this.customerService.deleteCustomer(customerId);
     }
 
-    @Get('dashboard/TotalCustomer/:showroomId')
-    getTotalCustomer(@Param('showroomId') showroomId: number): Promise <number> {
-        return this.customerService.getTotalCustomer(showroomId);
-    }
+    // @Get('dashboard/TotalCustomer/:showroomId')
+    // getTotalCustomer(@Param('showroomId') showroomId: number): Promise <number> {
+    //     return this.customerService.getTotalCustomer(showroomId);
+    // }
 }

@@ -58,25 +58,29 @@
         <div class= "flex mt-4">
             <div style="flex: 1; text-align: center; border: 1px solid lightgrey; border-right: none; padding: 10px; border-radius: 3px;"> 
                 <i class="pi pi-money-bill" style="color: slateblue; font-size: 30px;" ></i>
-                <br><br>
+                <p style="color: rgb(148, 148, 148); margin-bottom: 0;">demand</p>
+                <!-- <br> -->
                 <p>{{ vehicleDetails.demand | number: '1.0-0' }}</p>
             </div>
 
             <div style="flex: 1; text-align: center; border: 1px solid lightgrey; border-right: none; padding: 10px; border-radius: 3px;">
                 <i class="pi pi-calendar" style="color: slateblue; font-size: 30px;" ></i>
-                <br><br>
+                <p style="color: rgb(148, 148, 148); margin-bottom: 0;">model</p>
+                <!-- <br > -->
                 <p>{{ vehicleDetails.year}}</p>
             </div>
 
             <div style="flex: 1; text-align: center; border: 1px solid lightgrey; border-right: none; padding: 10px; border-radius: 3px;">
                 <i class="pi pi-star" style="color: slateblue; font-size: 30px;" ></i>
-                <br><br>
+                <p style="color: rgb(148, 148, 148); margin-bottom: 0;">grade</p>
+                <!-- <br> -->
                 <p>{{ vehicleDetails.grade}}</p>
             </div>
 
             <div style="flex: 1; text-align: center; border: 1px solid lightgrey; padding: 10px; border-radius: 3px;">
                 <i class="pi pi-clock" style="color: slateblue; font-size: 30px;" ></i>
-                <br><br>
+                <p style="color: rgb(148, 148, 148); margin-bottom: 0;">mileage</p>
+                
                 <p>{{ vehicleDetails.mileage | number: '1.0-0'}} Km</p>
             </div>
         </div>
