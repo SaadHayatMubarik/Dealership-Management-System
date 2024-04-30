@@ -48,6 +48,7 @@ import { RoleComponent } from './role/role.component';
 import { TableModule } from 'primeng/table';
 import { UpdateInventoryComponent } from './update-inventory/update-inventory.component';
 import { EmployeesDetailComponent } from './employees-detail/employees-detail.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -114,6 +115,7 @@ import { EmployeesDetailComponent } from './employees-detail/employees-detail.co
     RadioButtonModule,
     DialogModule,
     TableModule,
+    ReactiveFormsModule,
    
 
 

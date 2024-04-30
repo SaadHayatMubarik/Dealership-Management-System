@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { BaseComponent } from 'src/app/shared/base.component';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 import {
   DataTableColumn,
@@ -15,7 +16,6 @@ import {
   IVehicleTypeAttributeDto,
 } from '../../interfaces/inventory';
 
-import { IInvestor,  ISeller } from '../../interfaces';
 import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
 
@@ -58,19 +58,6 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   };
 
 
-
-
-
-  // investor: IInvestor =
-  // {
-  //  investorName : '',
-  //   cnic:'' ,
-  //   phoneNo:'' ,
-  //   capitalAmount:0,
-  //   showroomId: localStorage.getItem('Showroom Id'),
-  // }
-
-
   
 
   activeTabIndex = 0; // Track current active tab index
@@ -101,17 +88,26 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   columns: DataTableColumn[] = [];
   actions: IDataTableAction[] = [];
   data: IObject[] = [];
+
+  uploadForm!: FormGroup;
   constructor(
     private readonly apiService: ApiHelperService,
     private toast: ToastService,
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private formBuilder: FormBuilder
 
   ) {
     super();
   }
 
   ngOnInit() {
+
+    this.uploadForm = this.formBuilder.group({
+      imageUpload: [[]], // Initialize imageUpload form control with an empty array
+      documentUpload: [[]] // Initialize documentUpload form control with an empty array
+    });
+
     this.onTabChange({ index: this.selectedTabIndex });
     this.getVehicleTypes();
     this.getInvestors();
@@ -336,7 +332,6 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
     ) as string[];
   }
 
-
   onNext(){
 
     if(this.InventoryForm.valid)
@@ -350,14 +345,57 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
     }
     }
 
-    onUpload(){
-      if (this.SellerForm.valid)
-        {
+  postInventory() {
+    if (this.SellerForm.valid){ 
+      this.apiService
+      .postLogin('/inventory/addInventory', this.vehicleInventory)
+      .subscribe({
+        next: (response) => {
+          this.toast.showSuccess('Add images and documents');
+          this.closeModal();
+          this.getInventory();
+          console.log('success',this.vehicleInventory);
           this.activeTabIndex = 2;
           this.showThirdTab = true;
-        }
-    
+        },
+        error: () => {
+          this.toast.showError('Error Occurred!');
+          console.log('error',this.vehicleInventory);
+        },
+      });
     }
+    else{
+      this.toast.showError("Please fill all the required fields");
+    }
+  }
+
+
+    handleUpload(event: any) {
+      const files = event.files;
+      this.uploadForm.get('imageUpload')?.setValue(files)
+      console.log('Files uploaded2:', files);
+    }
+
+    uploadImage(){
+      const formData = new FormData();
+      const files = this.uploadForm.get('imageUpload')?.value;
+      
+      if (files && files.length > 0) {
+        for (let i = 0; i < files.length; i++) {
+          formData.append('image', files[i]);
+        }
+      }
+      console.log('FormData Check:', formData);
+      this.http.post('/inventory/addInventory', formData).subscribe(response => {
+      console.log('Upload successful:', response);
+      console.log('Upload successful:', formData);
+    }, error => {
+      console.error('Upload failed:', error);
+      console.log('Upload successful:', formData);
+    });
+    }
+
+  
 
     // files: FileUpload[] = [];
     // vehicleImages: File[] = [];
@@ -381,79 +419,46 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   //   }
   // }
 
-  uploadedFiles: File[] = [];
 
-  handleUpload(event: any) {
-    this.uploadedFiles = event.files;
-    console.log('Uploaded Files:',this.uploadedFiles);
-  }
+
+  // handleUpload(event: any) {
+  //   this.uploadedFiles = event.files;
+  //   console.log('Uploaded Files:',this.uploadedFiles);
+  // }
   
-  postInventory() {
-    if (this.UploadForm.valid) { 
-      const formData = new FormData();
-  
-      // Append form data
-      Object.keys(this.vehicleInventory).forEach(key => {
-        formData.append(key, this.vehicleInventory[key as keyof IInventory]);
-      });
-      
-      // Append images
-      this.uploadedFiles.forEach(file => {
-        formData.append('images', file);
-      });
-      this.http
-      .post<any>('/inventory/addInventory', formData)
-      .subscribe({
-        next: (response) => {
-          this.toast.showSuccess('New Inventory Added');
-          this.closeModal();
-          this.getInventory();
-          console.log('success', formData);
-          console.log('success', formData);
-        },
-        error: () => {
-          this.toast.showError();
-          console.log('error', formData);
-        },
-      });
-    } else {
-      this.toast.showError("Please fill all the required fields");
-    }
-  }
-
-
-
-//used 
   // postInventory() {
-  //   if (this.UploadForm.valid){ 
+  //   if (this.UploadForm.valid) { 
   //     const formData = new FormData();
+  
+  //     // Append form data
+  //     Object.keys(this.vehicleInventory).forEach(key => {
+  //       formData.append(key, this.vehicleInventory[key as keyof IInventory]);
+  //     });
+      
+  //     // Append images
   //     this.uploadedFiles.forEach(file => {
   //       formData.append('images', file);
   //     });
-
-  //      // Append other form data if needed
-  //     //  formData.append('otherField', this.UploadForm.get('otherField').value);
-      
-  //     this.apiService
-  //     .postLogin('/inventory/addInventory', this.vehicleInventory)
+  //     this.http
+  //     .post<any>('/inventory/addInventory', formData)
   //     .subscribe({
   //       next: (response) => {
   //         this.toast.showSuccess('New Inventory Added');
   //         this.closeModal();
   //         this.getInventory();
-  //         console.log('success',this.vehicleInventory);
+  //         console.log('success', formData);
+  //         console.log('success', formData);
   //       },
   //       error: () => {
   //         this.toast.showError();
-  //         console.log('error',this.vehicleInventory);
+  //         console.log('error', formData);
   //       },
   //     });
-  //   }
-  //   else{
+  //   } else {
   //     this.toast.showError("Please fill all the required fields");
   //   }
   // }
-
+ 
   onTabChange(event: any) {
     this.selectedTabIndex = event.index;
     this.getInventory();
