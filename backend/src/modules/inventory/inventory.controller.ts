@@ -19,19 +19,9 @@ export class InventoryController {
 
     @Post('addInventory/:pictureType')
     addInventory(
-    @UploadedFiles(
-        new ParseFilePipe({
-          validators: [new FileTypeValidator({ fileType: /(jpg|jpeg|png)$/ })],
-          fileIsRequired: true,
-        }),
-        new MaxImageSizeValidator(),
-      )
-      files: Express.Multer.File[],
-      pictures: Express.Multer.File[],
-      @Param('pictureType') pictureType: string,
       @Body() addInventoryDto: InventoryDto): Promise<Inventory> {
         // console.log(addInventoryDto);
-        return this.inventoryService.addInventory(files,pictures,pictureType,addInventoryDto);
+        return this.inventoryService.addInventory(addInventoryDto);
     }
 
     @Get('getInventoryDetails/:inventoryId')
