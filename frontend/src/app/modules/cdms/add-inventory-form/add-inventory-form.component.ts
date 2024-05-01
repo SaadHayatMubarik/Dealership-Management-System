@@ -385,12 +385,10 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
           formData.append('image', files[i]);
         }
       }
-      console.log('FormData Check:', formData);
+     
       this.http.post('/inventory/addInventory', formData).subscribe(response => {
-      console.log('Upload successful:', response);
       console.log('Upload successful:', formData);
     }, error => {
-      console.error('Upload failed:', error);
       console.log('Upload successful:', formData);
     });
     }

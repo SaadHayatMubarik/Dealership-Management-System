@@ -28,6 +28,8 @@ export class EmployeesDetailComponent extends BaseComponent implements OnInit {
   performanceArr : any[] = ['Good', 'Average', 'Bad']
   showroomId : any = localStorage.getItem('Showroom Id'); 
 
+  employeeId:any='';
+
   employee : IEmployee = 
   { 
     employeeName : '',
@@ -92,7 +94,20 @@ export class EmployeesDetailComponent extends BaseComponent implements OnInit {
         label: 'Delete',
         icon: 'pi pi-trash',
         command: (event) => {
-        
+          this.employeeId = event.employee_id 
+          console.log('EMPLOYEE ID', this.employeeId);
+          this.apiService.delete(`/employee/deleteEmployee/${this.employeeId}`).subscribe({
+            next: (response) => {
+              this.toast.showSuccess(`Employee Name: ${event.employee_name} record deleted.`);   
+              this.getEmployee();
+            },
+            error: () => 
+            {
+              this.toast.showError('Cant delete Employee Record due to an error. Contact System Admin.');
+              this.getEmployee();
+            }
+          } 
+            );
         },
       },
       {

@@ -911,7 +911,8 @@
 
       
      
-      <p-tabPanel header="Upload"  [disabled]="!showThirdTab">
+      <p-tabPanel header="Upload"  >
+        <!-- [disabled]="!showThirdTab" -->
        
         <form [formGroup]="uploadForm" (ngSubmit)="uploadImage()">
           <div class="sh-title">
