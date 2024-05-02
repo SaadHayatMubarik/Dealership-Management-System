@@ -1,7 +1,8 @@
 import { User } from "src/modules/auth/entity/User";
 import { Showroom } from "src/modules/showroom/entity/Showroom";
-import { Column, Entity, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Permission } from "./permission";
+import { RolePermission } from "./Role-Permission";
 
 @Entity({ name: 'role' })
 export class Role {
@@ -14,9 +15,9 @@ export class Role {
     @ManyToOne(() => Showroom, (showroom) => showroom.roles)
     showroom: Showroom;
 
-    @OneToMany(() => User, (user) => user.role_id)
+    @OneToMany(() => User, (user) => user.role)
     users: User[]; 
 
-    @OneToOne(() => Permission, (permission) => permission.role)
-    permissions: Permission;
+    @ManyToMany(() => RolePermission, (rolePermission) => rolePermission.role)
+    rolePermissions: RolePermission[];
 }

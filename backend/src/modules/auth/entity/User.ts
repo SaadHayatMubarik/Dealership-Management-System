@@ -25,24 +25,27 @@ export class User {
     @Column()
     salt: string;
 
-    @Column({ type:"enum", enum: UserRole, default: UserRole.SalesEmployee })
-    role: UserRole;
+    // @Column({ type:"enum", enum: UserRole, default: UserRole.SalesEmployee })
+    // role: UserRole;
 
     @ManyToOne(() => Showroom, (showroom) => showroom.users)
     showroom: Showroom;
+
+    // @OneToOne(() => Role, (role) => role)
+    // role: Role;
     
     async validatePassword(password: string): Promise<boolean>{
         const hash = await bcrypt.hash(password, this.salt);
         return hash === this.password;
     }
-    async validateUserRole(role: string): Promise<boolean>{
-        let userType = false;
-        // const roles = this.role;
-        if (role == UserRole.Admin || UserRole.InventoryEmployee || UserRole.SalesEmployee){
-             userType = true;
-        }
-        return userType;
-    }
+    // async validateUserRole(role: string): Promise<boolean>{
+    //     let userType = false;
+    //     // const roles = this.role;
+    //     if (role == UserRole.Admin || UserRole.InventoryEmployee || UserRole.SalesEmployee){
+    //          userType = true;
+    //     }
+    //     return userType;
+    // }
     async comparePassword(password: string): Promise<boolean> {
         return await bcrypt.compare(password, this.password);
       }
@@ -54,7 +57,7 @@ export class User {
     employee: Employee;
 
     @ManyToOne(() => Role, (role) => role.users)
-    role_id: Role;
+    role: Role;
 }
 
 

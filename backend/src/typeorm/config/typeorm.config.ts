@@ -10,6 +10,7 @@ import { MultiValueAttribute } from "src/modules/multi-value-attribute/entity/Mu
 import { Notification } from "src/modules/notification/entity/Notification";
 import { Picture } from "src/modules/picture/entity/Picture";
 import { Role } from "src/modules/role-based/entities/Role";
+import { RolePermission } from "src/modules/role-based/entities/Role-Permission";
 import { Component } from "src/modules/role-based/entities/component";
 import { Permission } from "src/modules/role-based/entities/permission";
 import { Showroom } from "src/modules/showroom/entity/Showroom";
@@ -25,7 +26,7 @@ export const typeOrmConfig: TypeOrmModuleOptions  = {
     username: 'root',
     password: 'root',
     database: 'd_m_s',
-    entities: [Inventory, MultiValueAttribute, StockAttributeValue , VehicleType, VehicleTypeAttribute ,User,Showroom,Customer,Notification,Investment,Investor,Picture,Transaction,Account, Employee,Role,Component,Permission],
+    entities: [Inventory, MultiValueAttribute, StockAttributeValue , VehicleType, VehicleTypeAttribute ,User,Showroom,Customer,Notification,Investment,Investor,Picture,Transaction,Account, Employee,Role,Component,Permission,RolePermission],
     synchronize: false, 
 }
 

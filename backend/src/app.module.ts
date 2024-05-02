@@ -10,10 +10,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmConfig } from './typeorm/config/typeorm.config';
 import { AuthModule } from './modules/auth/auth.module';
 import { ShowroomModule } from './modules/showroom/showroom.module';
-import { APP_INTERCEPTOR } from '@nestjs/core';
-// import { TokenExpirationInterceptor } from './token.expiration.interceptor';
+
 import { JwtService } from '@nestjs/jwt';
-// import { NotificationModule } from './modules/notification/notification.module';
 import { CustomerService } from './modules/customer/customer.service';
 import { CustomerModule } from './modules/customer/customer.module';
 import { NotificationModule } from './modules/notification/notification.module';
@@ -23,6 +21,7 @@ import { InvestorModule } from './modules/investor/investor.module';
 import { PictureModule } from './modules/picture/picture.module';
 import { EmployeeModule } from './modules/employee/employee.module';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
+import { RoleBasedModule } from './modules/role-based/role-based.module';
 
 @Module({
   imports: [
@@ -43,6 +42,7 @@ import { DashboardModule } from './modules/dashboard/dashboard.module';
     InvestorModule,
     EmployeeModule,
     DashboardModule,
+    RoleBasedModule
   ],
   controllers: [AppController],
   providers: [

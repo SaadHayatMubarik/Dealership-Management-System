@@ -1,6 +1,7 @@
 import { IsNotEmpty,IsString, MinLength, MaxLength, IsEnum, Matches} from "class-validator";
 import { UserRole } from "../user-role.enum";
 import { Showroom } from "src/modules/showroom/entity/Showroom";
+import { Role } from "src/modules/role-based/entities/Role";
 // import { isString } from "util";
 export class CreateUserDto {
     @IsString()
@@ -22,7 +23,7 @@ export class CreateUserDto {
     password: string;
 
     // @IsEnum({type:"enum", enum: UserRole, default: UserRole.EMPLOYEE})
-    role: UserRole;
+    role: Role;
 
     showroomId: number;
     

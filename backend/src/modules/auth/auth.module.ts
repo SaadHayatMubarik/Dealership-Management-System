@@ -9,6 +9,9 @@ import { JwtStrategy } from './jwt-strategy';
 import { User } from './entity/User';
 import { Showroom } from '../showroom/entity/Showroom';
 import { APP_INTERCEPTOR } from '@nestjs/core';
+import { Role } from '../role-based/entities/Role';
+import { Permission } from '../role-based/entities/permission';
+import { RolePermission } from '../role-based/entities/Role-Permission';
 
 @Module({
   imports: [
@@ -19,7 +22,7 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
         expiresIn: 3600, //expire in 1 hour
       },
     }),
-    TypeOrmModule.forFeature([User, Showroom])
+    TypeOrmModule.forFeature([User, Showroom, Role, Permission, RolePermission])
   ],
   controllers: [AuthController],
   providers: [

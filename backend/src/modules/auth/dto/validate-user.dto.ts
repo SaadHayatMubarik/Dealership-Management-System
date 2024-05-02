@@ -17,6 +17,4 @@ export class ValidateUserDto {
      { message: 'password is too weak' })
     password: string;
 
-    role: UserRole;
-
 }

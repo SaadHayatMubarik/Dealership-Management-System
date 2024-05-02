@@ -14,6 +14,10 @@ import { UserRole } from './user-role.enum';
 import { GetUserDto } from './dto/get-user.dto';
 import { get } from 'http';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { Role } from '../role-based/entities/Role';
+import { Permission } from '../role-based/entities/permission';
+import { RolePermission } from '../role-based/entities/Role-Permission';
+import { privateDecrypt } from 'crypto';
 // import { CreateAuthDto } from './dto/create-user.dto';
 // import { UpdateAuthDto } from './dto/update-user.dto';
 
@@ -24,14 +28,21 @@ export class AuthService {
     private showroomRepository: Repository<Showroom>,
     @InjectRepository(User)
     private userRepository: Repository<User>,
+    @InjectRepository(Permission)
+    private  permissionRepository: Repository<Permission>,
+    @InjectRepository(Role)
+    private  roleRepository : Repository <Role> ,
+    @InjectRepository(RolePermission)
+    private rolePermissionRepository : Repository <RolePermission>,
     private jwtService: JwtService,
+
   ){}
   async signup(createAdminDto: CreateAdminDto): Promise<User>{
     const { username,  email, password, showroomAddress, showroomCity, showroomContactNo, showroomName, showroomState } = createAdminDto;
     const user = new User();
     const showroom = new Showroom();
-    if(await this.userRepository.exist({ where: { user_name: username} })){
-      throw new HttpException('Username already exists', HttpStatus.BAD_REQUEST);
+    if(await this.userRepository.exist({ where: { user_name: username} }) && await this.showroomRepository.exist({ where: {showroom_name:showroomName} })){
+      throw new HttpException('Username or Showroom name already exists', HttpStatus.BAD_REQUEST);
     }
     else{
       showroom.address = showroomAddress;
@@ -39,34 +50,41 @@ export class AuthService {
     showroom.contact_no = showroomContactNo;
     showroom.showroom_name = showroomName;
     showroom.state = showroomState;
-    await this.showroomRepository.save(showroom);
-      user.user_name = username;
+    const showroomObj = await this.showroomRepository.save(showroom);
+    const showroomId = await this.showroomRepository.getId(showroomObj);
+
+    const role = new Role();
+    role.role_name = 'ADMIN';
+    role.showroom = await this.showroomRepository.findOneBy({showroom_id:showroomId});
+    await this.roleRepository.save(role);
+    const roleId = await this.roleRepository.getId(role);
+    const roleObj = await this.roleRepository.findOneBy({role_id:roleId});
+
+    let totalPermissions = await this.permissionRepository.find();
+    for(let i=0; i<totalPermissions.length; i++){
+      const rolePermission = new RolePermission();
+      rolePermission.role = roleObj;
+      rolePermission.permission = totalPermissions[i];
+      await this.rolePermissionRepository.save(rolePermission);
+    }
+
+    user.user_name = username;
     user.salt = await bcrypt.genSalt();
     user.password = await this.hashPassword(password,user.salt);
     user.email = email;
-    user.role = UserRole.Admin;
-    user.showroom = showroom;
+    user.role = roleObj;
+    user.showroom = role.showroom;
     return await this.userRepository.save(user);
     }
   }
   async createUser(createUserDto: CreateUserDto): Promise<User>{
     const { username, password, email, role, showroomId } = createUserDto;
-    let roles = [UserRole.Admin,UserRole.InventoryEmployee,UserRole.SalesEmployee];
-    // const salt = 
-    // console.log(salt);
-    // console.log(roles);
     const user = new User();
     user.user_name = username;
     user.salt = await bcrypt.genSalt();
     user.password = await this.hashPassword(password,user.salt);
-    // console.log(user.password);
     user.email = email;
-    for(let i=0; i<roles.length; i++){
-if(role == roles[i]){
-  user.role = role;
-}
-    }
-    // console.log(user.role);
+    user.role = role;
     user.showroom = await this.showroomRepository.findOne({ where: { showroom_id: showroomId } });
     try{
       return  await this.userRepository.save(user);
@@ -143,7 +161,7 @@ if(role == roles[i]){
     const user = await this.userRepository.findOneBy({user_id:user_Id});
     user.user_name = user_name;
     user.email = email;
-    user.role = role;
+    user.role.role_name = role;
   return await this.userRepository.save(user);
   }
 
@@ -152,9 +170,9 @@ if(role == roles[i]){
   }
 
   private async validateUserPassword( validateUserDto: ValidateUserDto ): Promise<string>{
-  const { username, password, role } = validateUserDto
-  const user = await this.userRepository.findOne({where: { user_name: username, role: role }});
-  if (user && await user.validatePassword(password) && user.validateUserRole(role)) {
+  const { username, password} = validateUserDto
+  const user = await this.userRepository.findOne({where: { user_name: username }});
+  if (user && await user.validatePassword(password)) {
     return user.user_name;
   }
   else {
