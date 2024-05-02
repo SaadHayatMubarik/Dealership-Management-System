@@ -644,7 +644,8 @@
         </form>
       </p-tabPanel>
 
-      <p-tabPanel header="Seller Details"  [disabled]="!showSecondTab">
+      <p-tabPanel header="Seller Details"  >
+        <!-- [disabled]="!showSecondTab" -->
        
         <form (ngSubmit)="postInventory()" #Seller="ngForm">
           <div class="sidebar-main">
@@ -764,36 +765,6 @@
 
               <br>
 
-              <!-- <br>
-              <div class="row-form grid">
-                <div class="col-4">
-                  <div class="p-field">
-                    <span class="p-float-label">
-                      <input class="p-inputtext-lg" 
-                      pInputText
-                      name="engineNo"
-                      [(ngModel)]="vehicleInventory.address"
-                      />
-                      <label for="float-label">Address</label>
-                  </span>
-                  </div>
-                </div>
-                <div class="col-4">
-                  <div class="p-field" *ngIf="selectedSellerCategory === 'AGENT' || selectedSellerCategory === 'CUSTOMER'">
-                    <span class="p-float-label">
-                      <input class="p-inputtext-lg" 
-                      pInputText
-                      name="engineNo"
-                      [(ngModel)]="vehicleInventory.cnic"
-                     
-                      />
-                      <label for="float-label">CNIC</label>
-                  </span>
-                  </div>
-                </div>
-              </div>
-           
-              <br> -->
               <div class="sidebar-header">
                 <div class="sh-title">
                   <h5 style="text-align: center">Investor Details</h5>        
@@ -819,23 +790,11 @@
 
                       <div class="col-4">
                         <div class="p-field">
-                          <span class="p-float-label">
-                            <!-- <input
-                              class="p-inputtext-lg"
-                              pInputText
-                              name="percentage"
-                              required
-                              [(ngModel)]="percentageInvested"
-                              (ngModelChange)="calculateInvestment()"
-                            /> -->
-                            
+                          <span class="p-float-label">      
                             <app-numeric-textbox [(controlModel)] ="percentageInvested[i]" 
                             (controlModelChange)="calculateInvestment(i)"
                             required>
                             </app-numeric-textbox>
-                            <!-- <label for="float-label"
-                              >Enter percentage %*  
-                            </label> -->
                           </span>
                         </div>
                       </div>
@@ -853,7 +812,7 @@
                             />
                             <label for="float-label"
                               >Amount Invested
-                              <!-- {{ selectedOption === 'Amount' ? 'Amount' : selectedOption === 'Percentage' ? 'Percentage' : '' }}% -->
+                             
                             </label>
                           </span>
                         </div>
@@ -871,11 +830,9 @@
                         <p-button
                           severity="danger"
                           class="ml-2"
-                          icon="pi pi-minus"
-                          (click)="removeInvestorForm()"
-                        ></p-button>
+                          icon="pi pi-minus">
+                        </p-button>
                       </div>
-                      <!-- <br><br> -->
                     </div>
                     <div class="col-4">
                       <div class="p-field">
@@ -908,14 +865,12 @@
           </div>
         </form>
       </p-tabPanel>
-
-      
-     
       <p-tabPanel header="Upload"  >
         <!-- [disabled]="!showThirdTab" -->
        
-        <form [formGroup]="uploadForm" (ngSubmit)="uploadImage()">
-          <div class="sh-title">
+        <form [formGroup]="uploadForm" >  
+          <!-- (ngSubmit)="uploadImage()" -->
+          <!-- <div class="sh-title">
             <h5 style="text-align: center">Upload Vehicle images</h5>
             <br />
           </div>
@@ -945,15 +900,33 @@
             </ng-template>
           </p-fileUpload>
       
-          <br>
+          <br> -->
+
+          <div class="sh-title">
+            <h5 style="text-align: center">Upload Vehicle Images</h5>
+            <br />
+          </div>
+          <div class="row pt-3">
+            <div class="col-3">
+              <input type="file" (change)="uploadImage($event)">
+            </div>
+          </div>
+
+          <div class="sh-title">
+            <h5 style="text-align: center">Upload Vehicle Documents</h5>
+            <br />
+          </div>
+          <div class="row pt-3">
+            <div class="col-3">
+              <input type="file" (change)="uploadDocuments($event)">
+            </div>
+          </div>
       
           <div class="sidebar-footer flex justify-content-end">
             <app-button type="submit" label="save" styleClass="p-button-sm p-button-rounded"></app-button>
           </div>
         </form>
       </p-tabPanel>
-      
-
     </p-tabView>
   </p-sidebar>
 </div>
