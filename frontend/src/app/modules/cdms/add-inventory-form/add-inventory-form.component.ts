@@ -80,7 +80,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   selectedCategory: string = '';
   selectedCustomer: any = null;  
   sellerId: number = 0;
-
+  inventoryObj: any = null;
   investorName: string = '';
   selectedOption: string = '';
 
@@ -395,9 +395,11 @@ calculateTotalPercentageInvested() {
       .subscribe({
         next: (response) => {
           this.toast.showSuccess('Add images and documents');
-          this.closeModal();
-          this.getInventory();
+          // this.closeModal();
+          this.inventoryObj = response;
+          // this.getInventory();
           console.log('success',this.vehicleInventory);
+          // console.log(this.inventoryObj.inventory_id);
           this.activeTabIndex = 2;
           this.showThirdTab = true;
         },
@@ -498,7 +500,7 @@ calculateTotalPercentageInvested() {
     formObj.append('file', image);
     console.log('formData: ', formObj);
     debugger;
-    this.http.post(`/picture/{pictureType}/${this.vehicleInventory.showroomId}`, formObj).subscribe((response => {
+    this.http.post(`/picture/{inventory/pictures}/${this.inventoryObj.inventory_id}`, formObj).subscribe((response => {
       console.log('Upload Images:', response);
     }), error => {
       console.log('Upload Image error:', error);
@@ -510,7 +512,7 @@ calculateTotalPercentageInvested() {
     const formObj = new FormData();
     formObj.append('file', file);
     console.log('formData: ', formObj);
-    this.http.post(`/picture/{pictureType}/${this.vehicleInventory.showroomId}`, formObj).subscribe((response => {
+    this.http.post(`/picture/{inventory/documents}/${this.inventoryObj.inventory_id}`, formObj).subscribe((response => {
       console.log('Upload Files:', response);
     }), error => {
       console.log('Upload File error:', error);

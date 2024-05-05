@@ -160,7 +160,10 @@ export class InventoryService {
 
     async deleteInventory(inventoryId: number){
         try{
-         await this.stockValueAttributeRepository.delete({inventory:{inventory_id:inventoryId}})
+        //  await this.stockValueAttributeRepository.delete({inventory:{inventory_id:inventoryId}});
+        //  await this.inventoryRepository.update({inventory_id:inventoryId},{vehicleType:null});
+        //  await this.inventoryRepository.update({inventory_id:inventoryId},{seller:null});
+        //  await this.inventoryRepository.update({inventory_id:inventoryId},{showroom:null});
         return await this.inventoryRepository.delete({ inventory_id: inventoryId });
         }catch (e) {
           throw new BadRequestException('This inventory item can not be deleted!');

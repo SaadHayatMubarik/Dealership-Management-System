@@ -17,7 +17,7 @@ import { MaxImageSizeValidator } from '../picture/max-image.validator';
 export class InventoryController {
     constructor(private inventoryService: InventoryService){}
 
-    @Post('addInventory/:pictureType')
+    @Post('addInventory')
     addInventory(
       @Body() addInventoryDto: InventoryDto): Promise<Inventory> {
         // console.log(addInventoryDto);

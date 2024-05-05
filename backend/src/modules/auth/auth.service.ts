@@ -117,6 +117,7 @@ export class AuthService {
 
   async login( validateUserDto: ValidateUserDto): Promise<{ userId: number ,accessToken: string, showroom: number, role:UserRole}>{
     const username = await this.validateUserPassword(validateUserDto);
+    // console.log(username);
     if(!username){
       throw new UnauthorizedException('Invalidate credentials');
     }
@@ -126,25 +127,28 @@ export class AuthService {
     .select('showroomShowroomId') 
     .where('user.user_name = :username', {username})
     .getRawOne();  
-    const role = await this.userRepository.createQueryBuilder('user')
-    .select('role') 
-    .where('user.user_name = :username', {username})
-    .getRawOne();      
+
+    
+    // console.log(role);   
     const userId = await this.userRepository.createQueryBuilder('user')
     .select('user_id') 
     .where('user.user_name = :username', {username})
     .getRawOne();    
-// console.log(accessToken);
-//     console.log(showroom);
+    
+    const role = await this.userRepository.createQueryBuilder('user')
+    .leftJoin(Role, 'role', 'user.roleRoleId = role.role_id')
+    .select('role.role_name') 
+    .where('user.user_name = :username', {username})
+    .getRawOne();   
     return { userId,accessToken, showroom, role };
   } 
 
   async getUsers(showroomId: number):Promise<GetUserDto[]>{
     const getData = this.userRepository.createQueryBuilder('user')
-    .select(['user_id as userId','user_name as username','email','role'])
+    .leftJoin(Role, 'role', 'user.roleRoleId = role.role_id')
+    .select(['user_id as userId','user_name as username','email','role.role_name as role'])
     .where('user.showroomShowroomId = :showroomId',{showroomId});
     const result = await getData.getRawMany();
-    // console.log(result);
     return result;
   }
 
@@ -172,6 +176,7 @@ export class AuthService {
   private async validateUserPassword( validateUserDto: ValidateUserDto ): Promise<string>{
   const { username, password} = validateUserDto
   const user = await this.userRepository.findOne({where: { user_name: username }});
+  // console.log(user);
   if (user && await user.validatePassword(password)) {
     return user.user_name;
   }
