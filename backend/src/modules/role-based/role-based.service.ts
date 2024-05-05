@@ -7,6 +7,8 @@ import { ActionType } from './action-type.enum';
 import { Component } from './entities/component';
 import { GetComponentWithPermissionDto} from './getComponentWithPermission.dto';
 import { find } from 'rxjs';
+import { User } from '../auth/entity/User';
+import { RolePermission } from './entities/Role-Permission';
 
 @Injectable()
 export class RoleBasedService {
@@ -14,7 +16,11 @@ export class RoleBasedService {
         @InjectRepository(Permission)
         private permissionRepository: Repository<Permission>,
         @InjectRepository(Component)
-        private componentRepository: Repository<Component>
+        private componentRepository: Repository<Component>,
+        @InjectRepository(User)
+        private userRepository: Repository<User>,
+        @InjectRepository(RolePermission)
+        private rolePermission: Repository<RolePermission>
     ){}
     async addPermission (permissionName: string, actionType: ActionType ,componentId: number): Promise<Permission>{
         const permission = new Permission();
@@ -31,6 +37,19 @@ export class RoleBasedService {
              object.push({component:await this.componentRepository.findOneBy({component_id:i}), permissions: await this.permissionRepository.findBy({component:{component_id:i}})});
         }
             return object;
+    }
+
+    async getComponentViaRole(userId: number): Promise<Component[]>{
+        const roleId = await this.userRepository.findOne({relations:['role'], where:{user_id:userId}});
+        let object: GetComponentWithPermissionDto[] = [];
+        let componentNo: any[] = [];
+        // componentNo.push(await this.rolePermission.find({relations:['permission.component'], where:{role:{role_id:roleId}}}));
+        // const componentNo[] = await this.role.count();
+        // for (let i=1; i<componentNo;i++){
+        //      object.push({component:await this.componentRepository.findOneBy({component_id:i}), permissions: await this.permissionRepository.findBy({component:{component_id:i}})});
+        // }
+        //     return object;
+        return 
     }
 
 }

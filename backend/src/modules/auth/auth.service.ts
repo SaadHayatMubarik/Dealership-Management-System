@@ -115,7 +115,7 @@ export class AuthService {
   }
 
 
-  async login( validateUserDto: ValidateUserDto): Promise<{ userId: number ,accessToken: string, showroom: number, role:UserRole}>{
+  async login( validateUserDto: ValidateUserDto): Promise<{ userId: number ,accessToken: string, showroom: number, role:string}>{
     const username = await this.validateUserPassword(validateUserDto);
     // console.log(username);
     if(!username){

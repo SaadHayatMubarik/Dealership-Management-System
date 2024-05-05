@@ -31,7 +31,7 @@ export class AuthController {
   }
 
   @Post('login')
-  login(@Body(ValidationPipe) validationUserDto: ValidateUserDto): Promise<{ userId: number, accessToken: string, showroom: number, role:UserRole }> {
+  login(@Body(ValidationPipe) validationUserDto: ValidateUserDto): Promise<{ userId: number, accessToken: string, showroom: number, role:string}> {
     // console.log(validationUserDto);
     return this.authService.login(validationUserDto);
   } 

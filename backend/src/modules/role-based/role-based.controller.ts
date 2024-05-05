@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post } from '@nestjs/common';
+import { Controller, Get, Param, ParseEnumPipe, Post } from '@nestjs/common';
 import { RoleBasedService } from './role-based.service';
 import { Permission } from './entities/permission';
 import { ActionType } from './action-type.enum';
@@ -22,5 +22,10 @@ export class RoleBasedController {
     @Get('permissionAndComponent')
     getComponent(): Promise<any[]>{
         return this.roleBasedService.getComponent();
+    }
+
+    @Get('componentViaRole/:userId')
+    getComponentViaRole(@Param('userId') userId: number): Promise<Component[]>{
+        return this.roleBasedService.getComponentViaRole(userId);
     }
 }
