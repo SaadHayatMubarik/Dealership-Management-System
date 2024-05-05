@@ -33,9 +33,10 @@ export class RoleBasedService {
     async getComponent (): Promise<any[]>{
         let object: GetComponentWithPermissionDto[] = [];
         const componentNo = await this.componentRepository.count();
-        for (let i=1; i<componentNo;i++){
+        for (let i=1; i<=componentNo;i++){
              object.push({component:await this.componentRepository.findOneBy({component_id:i}), permissions: await this.permissionRepository.findBy({component:{component_id:i}})});
         }
+        // console.log(object);
             return object;
     }
 

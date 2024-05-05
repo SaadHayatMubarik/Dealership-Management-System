@@ -83,7 +83,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   inventoryObj: any = null;
   investorName: string = '';
   selectedOption: string = '';
-
+  private baseurl = 'http://localhost:3000';
 
   columns: DataTableColumn[] = [];
   actions: IDataTableAction[] = [];
@@ -398,7 +398,7 @@ calculateTotalPercentageInvested() {
           // this.closeModal();
           this.inventoryObj = response;
           // this.getInventory();
-          console.log('success',this.vehicleInventory);
+          // console.log('success',this.vehicleInventory);
           // console.log(this.inventoryObj.inventory_id);
           this.activeTabIndex = 2;
           this.showThirdTab = true;
@@ -494,13 +494,14 @@ calculateTotalPercentageInvested() {
 
 
   uploadImage(event: any){
-     
-    const image = event.currentTarget.files[0];
+    
+    const files: File[] = event.target.files;
     const formObj = new FormData();
-    formObj.append('file', image);
-    console.log('formData: ', formObj);
-    debugger;
-    this.http.post(`/picture/{inventory/pictures}/${this.inventoryObj.inventory_id}`, formObj).subscribe((response => {
+    const pictureType = 'inventory pictures'
+    for(let i=0;i<files.length;i++){
+      formObj.append('files', files[i]);
+    }
+    this.apiService.postPicture(`/picture/${pictureType}/${this.inventoryObj.inventory_id}`, formObj).subscribe((response => {
       console.log('Upload Images:', response);
     }), error => {
       console.log('Upload Image error:', error);
@@ -508,16 +509,17 @@ calculateTotalPercentageInvested() {
   }
 
   uploadDocuments(event:any){
-    const file = event.currentTarget.files[0];
+    const files: File[] = event.target.files;
     const formObj = new FormData();
-    formObj.append('file', file);
-    console.log('formData: ', formObj);
-    this.http.post(`/picture/{inventory/documents}/${this.inventoryObj.inventory_id}`, formObj).subscribe((response => {
+    const pictureType = 'inventory documents'
+    for(let i=0;i<files.length;i++){
+      formObj.append('files', files[i]);
+    }
+    this.apiService.postPicture(`/picture/${pictureType}/${this.inventoryObj.inventory_id}`, formObj).subscribe((response => {
       console.log('Upload Files:', response);
     }), error => {
       console.log('Upload File error:', error);
     });
-    debugger;
   }
 
 
