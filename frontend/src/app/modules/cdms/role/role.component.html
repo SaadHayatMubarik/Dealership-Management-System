@@ -70,7 +70,7 @@
                 <h4 style="text-align: center;">
                     Permissions
                     </h4>
-                <p-table [value]="modules" [paginator]="false" [rows]="10">
+                <!-- <p-table [value]="modules" [paginator]="false" [rows]="10">
                     <ng-template pTemplate="header">
                         <tr>
                             <th>Module</th>
@@ -97,7 +97,37 @@
                             </td>
                         </tr>
                     </ng-template>
-                </p-table>
+                </p-table> -->
+
+                
+<p-table [value]="modules" [paginator]="false" [rows]="10">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Module</th>
+      <th>Add</th>
+      <th>Delete</th>
+      <th>Update</th>
+      <th>View</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-module>
+    <tr>
+      <td>{{ module.name }}</td>
+      <td>
+        <p-checkbox [(ngModel)]="rolePermissions[module.name]['add']" [binary]="true"></p-checkbox>
+      </td>
+      <td>
+        <p-checkbox [(ngModel)]="rolePermissions[module.name]['delete']" [binary]="true"></p-checkbox>
+      </td>
+      <td>
+        <p-checkbox [(ngModel)]="rolePermissions[module.name]['update']" [binary]="true"></p-checkbox>
+      </td>
+      <td>
+        <p-checkbox [(ngModel)]="rolePermissions[module.name]['view']" [binary]="true"></p-checkbox>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
             </div>
         </div>
 <!--  -->
