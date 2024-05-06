@@ -552,7 +552,6 @@ calculateTotalPercentageInvested() {
   // }
 
   uploadImage(event: any){
-    
     const files: File[] = event.target.files;
     const formObj = new FormData();
     const pictureType = 'inventory pictures'
