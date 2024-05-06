@@ -40,4 +40,8 @@ export class PictureService {
         const inventoryObj = await this.inventoryRepository.findOneBy({inventory_id:inventoryId});  
         return await this.uploadImage(pictures,pictureType,inventoryObj);
       }
+
+      async getPictures(): Promise<Picture>{
+        return 
+      }
 }

@@ -58,6 +58,8 @@ export interface INotification
 {
   inventoryId:  number;
   showroomId : string | null;
+  minValue: string;
+  maxValue: string;
 }
 
 export interface INotificationReceived {

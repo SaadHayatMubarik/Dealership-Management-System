@@ -38,6 +38,8 @@ notification : INotification =
 {
   inventoryId: 0,
   showroomId: this.showroomId,
+  minValue: '',
+  maxValue: '',
 }
 
 
@@ -80,6 +82,8 @@ notification : INotification =
 
   sendNotification()
   {
+    this.notification.minValue = this.range[0].toString();
+    this.notification.maxValue = this.range[1].toString();
     this.apiService
     .post('/notification/sendRequest',this.notification )
     .subscribe({
