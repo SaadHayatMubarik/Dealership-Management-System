@@ -25,6 +25,8 @@ vehicleDetails: any = '';
 showroomId = localStorage.getItem("Showroom Id");
 inventoryId : number = 0;
 
+minValue: number = 0;
+maxValue: number = 0 ;
 range: number[] = [800000, 1000000];
 
 images: any[] = [
@@ -38,6 +40,8 @@ notification : INotification =
 {
   inventoryId: 0,
   showroomId: this.showroomId,
+  min_value : this.minValue,
+  max_value: this.maxValue
 }
 
 
@@ -51,6 +55,11 @@ notification : INotification =
   
     
     // this.getvehicleDetail();
+  }
+
+  updateMinMaxValues() {
+    this.minValue = this.range[0];
+    this.maxValue = this.range[1];
   }
 
  
@@ -80,17 +89,20 @@ notification : INotification =
 
   sendNotification()
   {
+
+    this.notification.min_value = this.minValue;
+    this.notification.max_value = this.maxValue;
     this.apiService
     .post('/notification/sendRequest',this.notification )
     .subscribe({
       next: (response) => {
         this.toast.showSuccess('Notification Sent');
-        console.log(this.notification)
+        console.log(this.notification);
         localStorage.setItem('lastRequestTime', new Date().getTime().toString());
       },
       error: () => {
         this.toast.showError('Error Occured.');
-        console.log(this.notification)
+        console.log('error:', this.notification);
       },
     });
   }

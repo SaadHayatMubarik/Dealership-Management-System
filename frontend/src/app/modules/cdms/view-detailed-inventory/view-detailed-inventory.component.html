@@ -101,20 +101,25 @@
           </div>
 
           <div>
-            <p-slider [(ngModel)]="range" [range]="true" [min]="800000" [max]="10000000" [step]="100000"></p-slider>
+            <p-slider [(ngModel)]="range" 
+            [range]="true" [min]="800000" 
+            [max]="10000000" 
+            [step]="100000" 
+            (onSlideEnd)="updateMinMaxValues()"
+            ></p-slider>
             <br>
           </div>
           <div class="p-grid">
             <div class="p-col">
               <label for="minValue">Min Value: </label>
-              <input id="minValue" pInputText type="number" [(ngModel)]="range[0]" [min]="800000" [max]="range[1]" [step]="100000">
+              <input id="minValue" pInputText type="number" [(ngModel)]="minValue" [min]="800000" [max]="range[1]" [step]="100000">
             </div>
             <div class="dash">
             <h2>-</h2>  
             </div>
             <div class="p-col">
               <label for="maxValue">Max Value: </label>
-              <input id="maxValue" pInputText type="number" [(ngModel)]="range[1]" [min]="range[0]" [max]="10000000" [step]="100000">
+              <input id="maxValue" pInputText type="number" [(ngModel)]="maxValue" [min]="range[0]" [max]="10000000" [step]="100000">
             </div>
           </div>
           

@@ -644,8 +644,8 @@
         </form>
       </p-tabPanel>
 
-      <p-tabPanel header="Seller Details"  >
-        <!-- [disabled]="!showSecondTab" -->
+      <p-tabPanel header="Seller Details"  [disabled]="!showSecondTab">
+       
        
         <form (ngSubmit)="postInventory()" #Seller="ngForm">
           <div class="sidebar-main">
@@ -859,16 +859,42 @@
           <div class="sidebar-footer flex justify-content-end">
             <app-button
               type="submit"
-              label="next"
+              label="Submit"
               styleClass="p-button-sm p-button-rounded"
             ></app-button>
           </div>
         </form>
       </p-tabPanel>
-      <p-tabPanel header="Upload"  >
-        <!-- [disabled]="!showThirdTab" -->
-       
-        <form [formGroup]="uploadForm" >  
+      
+      <!-- <p-tabPanel header="Upload"  [disabled]="!showThirdTab" >
+        <form [formGroup]="uploadForm">  
+
+          <div class="sh-title">
+            <h5 style="text-align: center">Upload Vehicle Images</h5>
+            <br />
+          </div>
+          <div class="row pt-3">
+            <div class="col-3">
+              <input type="file" (change)="uploadImage($event)">
+            </div>
+          </div>
+
+          <div class="sh-title">
+            <h5 style="text-align: center">Upload Vehicle Documents</h5>
+            <br />
+          </div>
+          <div class="row pt-3">
+            <div class="col-3">
+              <input type="file" (change)="uploadDocuments($event)">
+            </div>
+          </div>
+      
+          <div class="sidebar-footer flex justify-content-end">
+            <app-button type="submit" label="save" styleClass="p-button-sm p-button-rounded"></app-button>
+          </div>
+        </form>
+      </p-tabPanel> -->
+
           <!-- (ngSubmit)="uploadImage()" -->
           <!-- <div class="sh-title">
             <h5 style="text-align: center">Upload Vehicle images</h5>
@@ -901,32 +927,6 @@
           </p-fileUpload>
       
           <br> -->
-
-          <div class="sh-title">
-            <h5 style="text-align: center">Upload Vehicle Images</h5>
-            <br />
-          </div>
-          <div class="row pt-3">
-            <div class="col-3">
-              <input type="file" (change)="uploadImage($event)">
-            </div>
-          </div>
-
-          <div class="sh-title">
-            <h5 style="text-align: center">Upload Vehicle Documents</h5>
-            <br />
-          </div>
-          <div class="row pt-3">
-            <div class="col-3">
-              <input type="file" (change)="uploadDocuments($event)">
-            </div>
-          </div>
-      
-          <div class="sidebar-footer flex justify-content-end">
-            <app-button type="submit" label="save" styleClass="p-button-sm p-button-rounded"></app-button>
-          </div>
-        </form>
-      </p-tabPanel>
     </p-tabView>
   </p-sidebar>
 </div>
