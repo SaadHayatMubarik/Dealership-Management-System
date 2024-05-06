@@ -644,7 +644,8 @@
         </form>
       </p-tabPanel>
 
-      <p-tabPanel header="Seller Details"  [disabled]="!showSecondTab">
+      <p-tabPanel header="Seller Details" >
+        <!-- [disabled]="!showSecondTab" -->
         <form (ngSubmit)="postInventory()" #Seller="ngForm">
           <div class="sidebar-main">
             <div class="sidebar-header">
@@ -863,28 +864,67 @@
           </div>
         </form>
       </p-tabPanel>
-      <p-tabPanel header="Upload"  [disabled]="!showThirdTab" >
+      <p-tabPanel header="Upload" >
+        <!-- [disabled]="!showThirdTab"  -->
        
         <form [formGroup]="uploadForm" > 
+          
           <div class="sh-title">
-            <h5 style="text-align: center">Upload Vehicle Images</h5>
+            <h2 style="text-align: center">Upload Vehicle Images And Files</h2>
             <br />
           </div>
-          <div class="row pt-3">
+          <!-- <div class="row pt-3">
             <div class="col-3">
               <input type="file" multiple (change)="uploadImage($event)">
             </div>
-          </div>
+          </div> -->
 
-          <div class="sh-title">
+          <div class="container">
+            <h4>Upload Vehicle Images</h4>
+            <div class="upload-container">
+              <div class="p-fileupload p-fileupload-dnd">
+                <div class="p-fileupload-content">
+                  <div class="p-fileupload-files"></div>
+                  <button type="button" class="p-button p-fileupload-choose" tabindex="0">
+                    <!-- <span class="p-button-icon p-button-icon-left pi pi-fw pi-plus"></span>
+                    <span class="p-button-label p-clickable">Choose Images</span> -->
+                    <input type="file" multiple (change)="uploadImage($event)" class="p-fileupload-native">
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <br>
+
+          <div class="container">
+            <h4>Upload Vehicle Documents</h4>
+            <div class="upload-container">
+              <div class="p-fileupload p-fileupload-dnd">
+                <div class="p-fileupload-content">
+                  <div class="p-fileupload-files"></div>
+                  <button type="button" class="p-button p-fileupload-choose" tabindex="0">
+                    <!-- <span class="p-button-icon p-button-icon-left pi pi-fw pi-plus"></span>
+                    <span class="p-button-label p-clickable">Choose Images</span> -->
+                    <input type="file" multiple (change)="uploadDocuments($event)" class="p-fileupload-native">
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <br>
+          
+
+          <!-- <div class="sh-title">
             <h5 style="text-align: center">Upload Vehicle Documents</h5>
             <br />
-          </div>
-          <div class="row pt-3">
+          </div> -->
+          <!-- <div class="row pt-3">
             <div class="col-3">
               <input type="file" multiple  (change)="uploadDocuments($event)">
             </div>
-          </div>
+          </div> -->
       
           <div class="sidebar-footer flex justify-content-end">
             <app-button type="submit" label="save" styleClass="p-button-sm p-button-rounded"></app-button>
