@@ -41,7 +41,7 @@ export class PictureService {
         return await this.uploadImage(pictures,pictureType,inventoryObj);
       }
 
-      async getPictures(): Promise<Picture>{
-        return 
+      async getPictures(inventoryId: number): Promise<Picture[]>{
+        return await this.pictureRepository.find({select:['link'],where:{inventory:{inventory_id:inventoryId}}});
       }
 }

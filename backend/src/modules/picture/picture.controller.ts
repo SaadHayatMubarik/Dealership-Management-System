@@ -1,4 +1,4 @@
-import { Controller, FileTypeValidator, Param, ParseFilePipe, Post, UploadedFile, UploadedFiles, UseGuards, UseInterceptors } from '@nestjs/common';
+import { Controller, FileTypeValidator, Get, Param, ParseFilePipe, Post, UploadedFile, UploadedFiles, UseGuards, UseInterceptors } from '@nestjs/common';
 import {  FilesInterceptor } from '@nestjs/platform-express';
 import { PictureService } from './picture.service';
 import { AuthGuard } from '@nestjs/passport';
@@ -32,4 +32,8 @@ export class PictureController {
       return this.pictureService.addPictures(pictures,pictureType,inventoryId);
     }
 
+    @Get('getPicture/:inventoryId')
+    getPictures(@Param('inventoryId') inventoryId: number): Promise<Picture[]>{
+      return this.pictureService.getPictures(inventoryId);
+    }
 }

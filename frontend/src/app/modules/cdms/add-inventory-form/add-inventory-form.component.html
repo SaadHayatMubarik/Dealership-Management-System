@@ -199,7 +199,7 @@
                           [(ngModel)]="vehicleInventory.vehicleChasisNo"
                           minlength="17"
                           maxlength="17"
-                          pattern="^(?!\s)(?!.*\s$)(?!.*[IOQioq])[0-9A-HJ-NPR-Z]{17}$"
+                          pattern="^(?!\s)(?!.\s$)(?!.[IOQioq])[0-9A-HJ-NPR-Z]{17}$"
                           #chassisNo="ngModel"
                         />
 
@@ -644,9 +644,7 @@
         </form>
       </p-tabPanel>
 
-      <p-tabPanel header="Seller Details"  >
-        <!-- [disabled]="!showSecondTab" -->
-       
+      <p-tabPanel header="Seller Details"  [disabled]="!showSecondTab">
         <form (ngSubmit)="postInventory()" #Seller="ngForm">
           <div class="sidebar-main">
             <div class="sidebar-header">
@@ -865,10 +863,70 @@
           </div>
         </form>
       </p-tabPanel>
-      <p-tabPanel header="Upload"  >
-        <!-- [disabled]="!showThirdTab" -->
+      <p-tabPanel header="Upload"  [disabled]="!showThirdTab" >
        
-        <form [formGroup]="uploadForm" >  
+        <form [formGroup]="uploadForm" > 
+          <div class="sh-title">
+            <h5 style="text-align: center">Upload Vehicle Images</h5>
+            <br />
+          </div>
+          <div class="row pt-3">
+            <div class="col-3">
+              <input type="file" multiple (change)="uploadImage($event)">
+            </div>
+          </div>
+
+          <div class="sh-title">
+            <h5 style="text-align: center">Upload Vehicle Documents</h5>
+            <br />
+          </div>
+          <div class="row pt-3">
+            <div class="col-3">
+              <input type="file" multiple  (change)="uploadDocuments($event)">
+            </div>
+          </div>
+      
+          <div class="sidebar-footer flex justify-content-end">
+            <app-button type="submit" label="save" styleClass="p-button-sm p-button-rounded"></app-button>
+          </div>
+        </form>
+      </p-tabPanel>
+    </p-tabView>
+  </p-sidebar>
+</div>
+          
+          <!-- (ngSubmit)="uploadImage()" -->
+          <!-- <div class="sh-title">
+            <h5 style="text-align: center">Upload Vehicle images</h5>
+            <br />
+          </div>
+          <p-fileUpload formControlName="imageUpload" name="images" [multiple]="true" accept="image/*" 
+          (onSelect)="handleUpload($event)">
+            <ng-template pTemplate="toolbar">
+              <div class="py-3">Upload Images</div>
+            </ng-template>
+            <ng-template pTemplate="content" let-files>
+              <div *ngIf="!(files && files.length > 0)">No images uploaded yet.</div>
+            </ng-template>
+          </p-fileUpload>
+          <br>
+          <br>
+      
+          <div class="sh-title">
+            <h5 style="text-align: center">Upload Vehicle Documents</h5>
+            <br />
+          </div>
+      
+          <p-fileUpload formControlName="documentUpload" name="documents" [multiple]="true" accept="image/*">
+            <ng-template pTemplate="toolbar">
+              <div class="py-3">Upload Documents</div>
+            </ng-template>
+            <ng-template pTemplate="content" let-files>
+              <div *ngIf="!(files && files.length > 0)">No images uploaded yet.</div>
+            </ng-template>
+          </p-fileUpload>
+      
+          <br> -->          
           <!-- (ngSubmit)="uploadImage()" -->
           <!-- <div class="sh-title">
             <h5 style="text-align: center">Upload Vehicle images</h5>
@@ -901,32 +959,3 @@
           </p-fileUpload>
       
           <br> -->
-
-          <div class="sh-title">
-            <h5 style="text-align: center">Upload Vehicle Images</h5>
-            <br />
-          </div>
-          <div class="row pt-3">
-            <div class="col-3">
-              <input type="file" multiple (change)="uploadImage($event)">
-            </div>
-          </div>
-
-          <div class="sh-title">
-            <h5 style="text-align: center">Upload Vehicle Documents</h5>
-            <br />
-          </div>
-          <div class="row pt-3">
-            <div class="col-3">
-              <input type="file" multiple  (change)="uploadDocuments($event)">
-            </div>
-          </div>
-      
-          <div class="sidebar-footer flex justify-content-end">
-            <app-button type="submit" label="save" styleClass="p-button-sm p-button-rounded"></app-button>
-          </div>
-        </form>
-      </p-tabPanel>
-    </p-tabView>
-  </p-sidebar>
-</div>

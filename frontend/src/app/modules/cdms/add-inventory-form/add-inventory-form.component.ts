@@ -388,6 +388,8 @@ calculateTotalPercentageInvested() {
 }
 
 
+
+
   postInventory() {
     if (this.SellerForm.valid){ 
       this.apiService
@@ -490,11 +492,66 @@ calculateTotalPercentageInvested() {
       // console.log(this.status[this.selectedTabIndex]);
     });
   }
+
+  
+  // postInventory() {
+  //   if (this.SellerForm.valid){ 
+  //     this.apiService
+  //     .postLogin('/inventory/addInventory', this.vehicleInventory)
+  //     .subscribe({
+  //       next: (response) => {
+  //         this.toast.showSuccess('Inventory added');
+  //         this.closeModal();
+  //         this.inventoryObj = response;
+  //         this.getInventory();
+  //         console.log('success',this.vehicleInventory);
+  //         // console.log(this.inventoryObj.inventory_id);
+  //         // this.activeTabIndex = 2;
+  //         // this.showThirdTab = true;
+  //       },
+  //       error: () => {
+  //         this.toast.showError('Error Occurred!');
+  //         console.log('error',this.vehicleInventory);
+  //       },
+  //     });
+  //   }
+  //   else{
+  //     this.toast.showError("Please fill all the required fields");
+  //   }
+  // }
+
  
 
 
+
+  // uploadImage(event: any){
+     
+  //   const image = event.currentTarget.files[0];
+  //   const formObj = new FormData();
+  //   formObj.append('file', image);
+  //   console.log('formData: ', formObj);
+  //   debugger;
+  //   this.http.post(`/picture/{inventory/pictures}/${this.inventoryObj.inventory_id}`, formObj).subscribe((response => {
+  //     console.log('Upload Images:', response);
+  //   }), error => {
+  //     console.log('Upload Image error:', error);
+  //   });
+  // }
+
+  // uploadDocuments(event:any){
+  //   const file = event.currentTarget.files[0];
+  //   const formObj = new FormData();
+  //   formObj.append('file', file);
+  //   console.log('formData: ', formObj);
+  //   this.http.post(`/picture/{inventory/documents}/${this.inventoryObj.inventory_id}`, formObj).subscribe((response => {
+  //     console.log('Upload Files:', response);
+  //   }), error => {
+  //     console.log('Upload File error:', error);
+  //   });
+  //   debugger;
+  // }
+
   uploadImage(event: any){
-    
     const files: File[] = event.target.files;
     const formObj = new FormData();
     const pictureType = 'inventory pictures'
@@ -521,6 +578,7 @@ calculateTotalPercentageInvested() {
       console.log('Upload File error:', error);
     });
   }
+
 
 
    
