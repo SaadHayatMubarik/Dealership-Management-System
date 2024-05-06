@@ -4,6 +4,7 @@ import { PictureService } from './picture.service';
 import { AuthGuard } from '@nestjs/passport';
 import { MaxImageSizeValidator } from './max-image.validator';
 import { Inventory } from '../inventory/entity/Inventory';
+import { Picture } from './entity/Picture';
 
 @Controller('picture')
 export class PictureController {
@@ -18,13 +19,16 @@ export class PictureController {
         new ParseFilePipe({
           validators: [new FileTypeValidator({ fileType: /(jpg|jpeg|png)$/ })],
           fileIsRequired: true,
-        }),
+        }), 
         new MaxImageSizeValidator(),
       )
       pictures: Express.Multer.File[],
       @Param('pictureType') pictureType: string,
       @Param('inventoryId') inventoryId: number
-    ): Promise<string> {
+    ): Promise<Picture> {
+      // console.log("pictures",pictures)
+      // console.log("type", pictureType)
+      // console.log("id",inventoryId)
       return this.pictureService.addPictures(pictures,pictureType,inventoryId);
     }
 

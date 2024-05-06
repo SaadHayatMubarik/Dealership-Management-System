@@ -23,21 +23,20 @@ export class PictureService {
         file: Express.Multer.File[],
         type: string,
         inventoryObj: Inventory
-      ): Promise<string> {
+      ): Promise<Picture> {
         const path = type;
         for (let i=0; i < file.length; i++) {
         const picture = new Picture();
         const newImage = await this.s3Service.upload(path, file[i]);
         picture.link = newImage;
         picture.inventory = inventoryObj;
-        await this.pictureRepository.save(picture);
+        return await this.pictureRepository.save(picture);
         
         }
-        return "uploaded successfully";
         
       }
 
-      async addPictures (pictures: Express.Multer.File[], pictureType: string, inventoryId: number): Promise <string>{   
+      async addPictures (pictures: Express.Multer.File[], pictureType: string, inventoryId: number): Promise <Picture>{   
         const inventoryObj = await this.inventoryRepository.findOneBy({inventory_id:inventoryId});  
         return await this.uploadImage(pictures,pictureType,inventoryObj);
       }

@@ -83,7 +83,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   inventoryObj: any = null;
   investorName: string = '';
   selectedOption: string = '';
-
+  private baseurl = 'http://localhost:3000';
 
   columns: DataTableColumn[] = [];
   actions: IDataTableAction[] = [];
@@ -389,6 +389,34 @@ calculateTotalPercentageInvested() {
 
 
 
+
+  postInventory() {
+    if (this.SellerForm.valid){ 
+      this.apiService
+      .postLogin('/inventory/addInventory', this.vehicleInventory)
+      .subscribe({
+        next: (response) => {
+          this.toast.showSuccess('Add images and documents');
+          // this.closeModal();
+          this.inventoryObj = response;
+          // this.getInventory();
+          // console.log('success',this.vehicleInventory);
+          // console.log(this.inventoryObj.inventory_id);
+          this.activeTabIndex = 2;
+          this.showThirdTab = true;
+        },
+        error: () => {
+          this.toast.showError('Error Occurred!');
+          console.log('error',this.vehicleInventory);
+        },
+      });
+    }
+    else{
+      this.toast.showError("Please fill all the required fields");
+    }
+  }
+
+
   
 
     // files: FileUpload[] = [];
@@ -466,33 +494,34 @@ calculateTotalPercentageInvested() {
   }
 
   
-  postInventory() {
-    if (this.SellerForm.valid){ 
-      this.apiService
-      .postLogin('/inventory/addInventory', this.vehicleInventory)
-      .subscribe({
-        next: (response) => {
-          this.toast.showSuccess('Inventory added');
-          this.closeModal();
-          this.inventoryObj = response;
-          this.getInventory();
-          console.log('success',this.vehicleInventory);
-          // console.log(this.inventoryObj.inventory_id);
-          // this.activeTabIndex = 2;
-          // this.showThirdTab = true;
-        },
-        error: () => {
-          this.toast.showError('Error Occurred!');
-          console.log('error',this.vehicleInventory);
-        },
-      });
-    }
-    else{
-      this.toast.showError("Please fill all the required fields");
-    }
-  }
+  // postInventory() {
+  //   if (this.SellerForm.valid){ 
+  //     this.apiService
+  //     .postLogin('/inventory/addInventory', this.vehicleInventory)
+  //     .subscribe({
+  //       next: (response) => {
+  //         this.toast.showSuccess('Inventory added');
+  //         this.closeModal();
+  //         this.inventoryObj = response;
+  //         this.getInventory();
+  //         console.log('success',this.vehicleInventory);
+  //         // console.log(this.inventoryObj.inventory_id);
+  //         // this.activeTabIndex = 2;
+  //         // this.showThirdTab = true;
+  //       },
+  //       error: () => {
+  //         this.toast.showError('Error Occurred!');
+  //         console.log('error',this.vehicleInventory);
+  //       },
+  //     });
+  //   }
+  //   else{
+  //     this.toast.showError("Please fill all the required fields");
+  //   }
+  // }
 
  
+
 
 
   // uploadImage(event: any){
@@ -521,6 +550,36 @@ calculateTotalPercentageInvested() {
   //   });
   //   debugger;
   // }
+
+  uploadImage(event: any){
+    
+    const files: File[] = event.target.files;
+    const formObj = new FormData();
+    const pictureType = 'inventory pictures'
+    for(let i=0;i<files.length;i++){
+      formObj.append('files', files[i]);
+    }
+    this.apiService.postPicture(`/picture/${pictureType}/${this.inventoryObj.inventory_id}`, formObj).subscribe((response => {
+      console.log('Upload Images:', response);
+    }), error => {
+      console.log('Upload Image error:', error);
+    });
+  }
+
+  uploadDocuments(event:any){
+    const files: File[] = event.target.files;
+    const formObj = new FormData();
+    const pictureType = 'inventory documents'
+    for(let i=0;i<files.length;i++){
+      formObj.append('files', files[i]);
+    }
+    this.apiService.postPicture(`/picture/${pictureType}/${this.inventoryObj.inventory_id}`, formObj).subscribe((response => {
+      console.log('Upload Files:', response);
+    }), error => {
+      console.log('Upload File error:', error);
+    });
+  }
+
 
 
    

@@ -69,6 +69,15 @@ export class ApiHelperService {
 
   }
 
+  postPicture(path: string, params: any = {}): Observable<any> {
+    // console.log(body);
+    const headers = this.addTokenHeader();
+    // console.log(headers);
+    return this.http
+      .post<string>(`${environment.apiUrl}${path}`, params, { headers: this.addTokenHeader() })
+      .pipe(this.hookResponse(this));
+  }
+
   post(path: string, body: Object = {}): Observable<any> {
     // console.log(body);
     const headers = this.addTokenHeader();

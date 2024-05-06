@@ -927,6 +927,32 @@
           </p-fileUpload>
       
           <br> -->
+
+
+          <div class="sh-title">
+            <h5 style="text-align: center">Upload Vehicle Images</h5>
+            <br />
+          </div>
+          <div class="row pt-3">
+            <div class="col-3">
+              <input type="file" multiple (change)="uploadImage($event)">
+            </div>
+          </div>
+
+          <div class="sh-title">
+            <h5 style="text-align: center">Upload Vehicle Documents</h5>
+            <br />
+          </div>
+          <div class="row pt-3">
+            <div class="col-3">
+              <input type="file" multiple  (change)="uploadDocuments($event)">
+            </div>
+          </div>
+      
+          <div class="sidebar-footer flex justify-content-end">
+            <app-button type="submit" label="save" styleClass="p-button-sm p-button-rounded"></app-button>
+          </div>
+
     </p-tabView>
   </p-sidebar>
 </div>

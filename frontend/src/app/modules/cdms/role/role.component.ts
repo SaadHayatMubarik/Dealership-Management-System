@@ -54,7 +54,7 @@ export class RoleComponent extends BaseComponent implements OnInit {
       this.components = data;
       console.log(this.components)
       this.modules = this.components.map(component => ({ name: component.component.component_name }));
-  
+      console.log('this.modules', this.modules);
       this.rolePermissions = {};
       this.modules.forEach(module => {
         this.rolePermissions[module.name] = {
