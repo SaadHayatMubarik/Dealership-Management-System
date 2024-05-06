@@ -25,10 +25,26 @@
     padding: 1rem;
   }
 
-
-  // .totalInvestment{
-
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  // .upload-container {
+  //   width: 300px; /* adjust width as needed */
+  //   margin-top: 20px;
   // }
+  
+  // .p-fileupload {
+  //   border: 2px solid #007bff;
+  //   border-radius: 5px;
+  // }
+  
+  h2 {
+    text-align: center;
+  }
+  
   
 
 
