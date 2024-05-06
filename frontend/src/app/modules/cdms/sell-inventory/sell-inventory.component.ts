@@ -87,7 +87,6 @@ export class SellInventoryComponent extends BaseComponent implements OnInit{
   
 
   onNext(){
-
     if(this.Vehicle.valid)
     {
           this.activeTabIndex = 1;
@@ -106,9 +105,6 @@ export class SellInventoryComponent extends BaseComponent implements OnInit{
   .subscribe(
     (data) => {
       this.vehicleDetails = data;
-      // console.log(data)
-
-      // this.dateOfPurchase = this.datePipe.transform(this.vehicleDetails.date_of_purchase, 'yyyy-MM-dd');
       this.make = this.vehicleDetails.make
       this.model = this.vehicleDetails.model
       this.variant = this.vehicleDetails.variant
@@ -121,9 +117,6 @@ export class SellInventoryComponent extends BaseComponent implements OnInit{
       this.status = this.vehicleDetails.status
       this.regNo = this.vehicleDetails.reg_no
       this.demand = this.vehicleDetails.demand
-
-      // console.log("this is reg no", this.regNo)
-
  
     }
   );

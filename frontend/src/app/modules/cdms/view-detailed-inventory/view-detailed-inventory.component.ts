@@ -74,6 +74,10 @@ notification : INotification =
   );
   }
 
+  getImages(){
+    
+  }
+
   disableButton(){
     const vehicleShowroomId = this.vehicleDetails.showroom.showroom_id;
     console.log(vehicleShowroomId);
@@ -95,9 +99,9 @@ notification : INotification =
     .post('/notification/sendRequest',this.notification )
     .subscribe({
       next: (response) => {
-        this.toast.showSuccess('Notification Sent');
         console.log(this.notification);
-        localStorage.setItem('lastRequestTime', new Date().getTime().toString());
+        // localStorage.setItem('lastRequestTime', new Date().getTime().toString());
+        this.toast.showSuccess('Notification Sent');
       },
       error: () => {
         this.toast.showError('Error Occured.');
@@ -105,6 +109,8 @@ notification : INotification =
       },
     });
   }
+
+  
 
   // sendNotification() {
   //   // Assuming this.notification is your request data

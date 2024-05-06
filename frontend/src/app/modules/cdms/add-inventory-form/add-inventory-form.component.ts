@@ -493,45 +493,15 @@ calculateTotalPercentageInvested() {
     });
   }
 
-  
-  // postInventory() {
-  //   if (this.SellerForm.valid){ 
-  //     this.apiService
-  //     .postLogin('/inventory/addInventory', this.vehicleInventory)
-  //     .subscribe({
-  //       next: (response) => {
-  //         this.toast.showSuccess('Inventory added');
-  //         this.closeModal();
-  //         this.inventoryObj = response;
-  //         this.getInventory();
-  //         console.log('success',this.vehicleInventory);
-  //         // console.log(this.inventoryObj.inventory_id);
-  //         // this.activeTabIndex = 2;
-  //         // this.showThirdTab = true;
-  //       },
-  //       error: () => {
-  //         this.toast.showError('Error Occurred!');
-  //         console.log('error',this.vehicleInventory);
-  //       },
-  //     });
-  //   }
-  //   else{
-  //     this.toast.showError("Please fill all the required fields");
-  //   }
-  // }
-
  
-
-
-
   // uploadImage(event: any){
-     
-  //   const image = event.currentTarget.files[0];
+  //   const files: File[] = event.target.files;
   //   const formObj = new FormData();
-  //   formObj.append('file', image);
-  //   console.log('formData: ', formObj);
-  //   debugger;
-  //   this.http.post(`/picture/{inventory/pictures}/${this.inventoryObj.inventory_id}`, formObj).subscribe((response => {
+  //   const pictureType = 'inventory pictures'
+  //   for(let i=0;i<files.length;i++){
+  //     formObj.append('files', files[i]);
+  //   }
+  //   this.apiService.postPicture(`/picture/${pictureType}/${this.inventoryObj.inventory_id}`, formObj).subscribe((response => {
   //     console.log('Upload Images:', response);
   //   }), error => {
   //     console.log('Upload Image error:', error);
@@ -539,45 +509,76 @@ calculateTotalPercentageInvested() {
   // }
 
   // uploadDocuments(event:any){
-  //   const file = event.currentTarget.files[0];
+  //   const files: File[] = event.target.files;
   //   const formObj = new FormData();
-  //   formObj.append('file', file);
-  //   console.log('formData: ', formObj);
-  //   this.http.post(`/picture/{inventory/documents}/${this.inventoryObj.inventory_id}`, formObj).subscribe((response => {
+  //   const pictureType = 'inventory documents'
+  //   for(let i=0;i<files.length;i++){
+  //     formObj.append('files', files[i]);
+  //   }
+  //   this.apiService.postPicture(`/picture/${pictureType}/${this.inventoryObj.inventory_id}`, formObj).subscribe((response => {
   //     console.log('Upload Files:', response);
   //   }), error => {
   //     console.log('Upload File error:', error);
   //   });
-  //   debugger;
   // }
 
-  uploadImage(event: any){
-    const files: File[] = event.target.files;
-    const formObj = new FormData();
-    const pictureType = 'inventory pictures'
-    for(let i=0;i<files.length;i++){
-      formObj.append('files', files[i]);
-    }
-    this.apiService.postPicture(`/picture/${pictureType}/${this.inventoryObj.inventory_id}`, formObj).subscribe((response => {
-      console.log('Upload Images:', response);
-    }), error => {
-      console.log('Upload Image error:', error);
-    });
+  selectedImages: File[] = [];
+  selectedDocuments: File[] = [];
+
+  selectImages(event: any) {
+    this.selectedImages = event.target.files;
+  }
+  
+  // Function to store selected documents
+  selectDocuments(event: any) {
+    this.selectedDocuments = event.target.files;
   }
 
-  uploadDocuments(event:any){
-    const files: File[] = event.target.files;
-    const formObj = new FormData();
-    const pictureType = 'inventory documents'
-    for(let i=0;i<files.length;i++){
-      formObj.append('files', files[i]);
+  submitForm() {
+    const pictureTypeImages = 'inventory pictures';
+    const pictureTypeDocuments = 'inventory documents';
+  
+    // Upload images
+    if (this.selectedImages.length > 0) {
+      const formObjImages = new FormData();
+      for (let i = 0; i < this.selectedImages.length; i++) {
+        formObjImages.append('files', this.selectedImages[i]);
+      }
+      this.apiService.postPicture(`/picture/${pictureTypeImages}/${this.inventoryObj.inventory_id}`, formObjImages)
+        .subscribe(response => {
+          console.log('Upload Images:', response);
+         
+        }, error => {
+          console.error('Upload Image error:', error);
+          this.toast.showError('Error Uploading Images');
+        });
     }
-    this.apiService.postPicture(`/picture/${pictureType}/${this.inventoryObj.inventory_id}`, formObj).subscribe((response => {
-      console.log('Upload Files:', response);
-    }), error => {
-      console.log('Upload File error:', error);
-    });
+    // Upload documents
+    if (this.selectedDocuments.length > 0) {
+      const formObjDocuments = new FormData();
+      for (let i = 0; i < this.selectedDocuments.length; i++) {
+        formObjDocuments.append('files', this.selectedDocuments[i]);
+      }
+      this.apiService.postPicture(`/picture/${pictureTypeDocuments}/${this.inventoryObj.inventory_id}`, formObjDocuments)
+        .subscribe(response => {
+          console.log('Upload Documents:', response);
+          this.toast.showSuccess('Vehicle Added');
+        }, error => {
+          console.error('Upload Documents error:', error);
+          this.toast.showError('Error Uploading Documents');
+          this.closeModal();
+        });
+    }
   }
+}
+
+
+
+
+
+
+
+
 
 
 
@@ -646,5 +647,3 @@ calculateTotalPercentageInvested() {
 //     this.totalPercentageInvested = this.percentageInvested[i];
 //     this.remainingPercentage = 100 - this.totalPercentageInvested;
 //   }
-
-}
