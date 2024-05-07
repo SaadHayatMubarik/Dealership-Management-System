@@ -363,15 +363,23 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   this.amountInvested.push(0);
 }
 
-removeInvestorForm(index: number) {
-  // Remove the form at the specified index from the array
+// removeInvestorForm(index: number) {
+//   // Remove the form at the specified index from the array
+//   if (this.investorForms.length > 0) {
+//     this.investorForms.splice(index, 1);
+//     // Remove data associated with the removed form
+//     this.percentageInvested.splice(index, 1);
+//     this.amountInvested.splice(index, 1);
+//     // Recalculate total and remaining percentages
+//     this.calculateTotalPercentageInvested();
+//   }
+// }
+
+removeInvestorForm() {
+  // Remove the last form from the array
   if (this.investorForms.length > 0) {
-    this.investorForms.splice(index, 1);
-    // Remove data associated with the removed form
-    this.percentageInvested.splice(index, 1);
-    this.amountInvested.splice(index, 1);
-    // Recalculate total and remaining percentages
-    this.calculateTotalPercentageInvested();
+    this.investorForms.pop();
+   
   }
 }
 
@@ -529,7 +537,7 @@ calculateTotalPercentageInvested() {
     this.selectedImages = event.target.files;
   }
   
-  // Function to store selected documents
+
   selectDocuments(event: any) {
     this.selectedDocuments = event.target.files;
   }
@@ -570,6 +578,8 @@ calculateTotalPercentageInvested() {
         });
     }
   }
+
+
 }
 
 
@@ -632,13 +642,7 @@ calculateTotalPercentageInvested() {
 // }
 
 
-// removeInvestorForm() {
-//   // Remove the last form from the array
-//   if (this.investorForms.length > 0) {
-//     this.investorForms.pop();
-   
-//   }
-// }
+
 
 
 //   calculateInvestment(i: number) {
