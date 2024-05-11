@@ -28,7 +28,7 @@ export class PictureService {
         for (let i=0; i < file.length; i++) {
         const picture = new Picture();
         const newImage = await this.s3Service.upload(path, file[i]);
-        picture.link = newImage;
+        picture.link = `${path}/${newImage}`;
         picture.inventory = inventoryObj;
         return await this.pictureRepository.save(picture);
         
