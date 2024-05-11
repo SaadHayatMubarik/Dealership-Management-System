@@ -6,13 +6,12 @@
       <h3>Manage Roles and Permissions</h3>
     </div>
     <div class="comp-btns">
-      <app-button label="New" styleClass="p-button-sm p-button-rounded" (onclick)="openModal()"></app-button>
+      <app-button label="New" styleClass="p-button-sm p-button-rounded" (click)="openModal()"></app-button>
     </div>
   </div>
 
   <div class="middle-content w-o-tabs mt-3">
     <div class="filter-row flex justify-content-between pt-3">
-
     </div>
     <app-datatable [data]="data" [cols]="columns" [globalFilterFields]="['vehicleTypeName','vehicleAttributeName','attributeInputType','vehicleAttributeValue']" [actions]="actions"></app-datatable>
   </div>
@@ -21,20 +20,18 @@
     <div class="sidebar-main">
       <div class="sidebar-header">
         <div class="sh-title">
-          <h3 style="text-align: center;">
-          Add Role and Permission
-          </h3><br>
+          <h3 style="text-align: center;">Add Role and Permission</h3><br>
         </div>
       </div>
 
       <div class="sidebar-content">
         <div class="card-grey">
-        <form  #userForm="ngForm">
-          <div class="row-form grid">
-            <div class="col-4">
+          <form #userForm="ngForm">
+            <div class="row-form grid">
+              <div class="col-4">
                 <div class="p-field ">
-                    <label> <b>Role Name:</b> </label> <br>
-                    <input
+                  <label><b>Role Name:</b></label> <br>
+                  <input
                     name="role name"
                     type="text"
                     pInputText
@@ -44,109 +41,53 @@
                     maxlength="30"
                     pattern="^[A-Za-z0-9_-]+$"
                     required
+                    [(ngModel)]="roleName"
                   />
-                  </div> 
-
-                  <!-- <div *ngIf="username.invalid && (username.dirty || username.touched)" class="p-error">
-                    <span *ngIf="username.errors?.['required']">
-                      Please Enter Username.</span>   
-                    
-                      <span *ngIf="username.errors?.['minlength' || 'maxlength']">
-                        Username should be between 4-20.</span>  
-                        <br>
-                        
-                      <span *ngIf="username.errors?.['pattern']">
-                        Please avoid any space.</span>  
-                  </div> -->
+                </div> 
+              </div>
             </div>
-            
-        
-          </div>
-        </form>
+          </form>
           <br>
 
           <div class="p-grid">
             <div class="p-col">
-                <h4 style="text-align: center;">
-                    Permissions
-                    </h4>
-                <!-- <p-table [value]="modules" [paginator]="false" [rows]="10">
-                    <ng-template pTemplate="header">
-                        <tr>
-                            <th>Module</th>
-                            <th>Add</th>
-                            <th>Delete</th>
-                           <th>Update</th>
-                            <th>View</th>
-                        </tr>
-                    </ng-template>
-                    <ng-template pTemplate="body" let-module>
-                        <tr>
-                            <td>{{module.name}}</td>
-                            <td>
-                                <p-checkbox [(ngModel)]="rolePermissions[module.name]['add']" [binary]="true"></p-checkbox>
-                            </td>
-                            <td>
-                                <p-checkbox [(ngModel)]="rolePermissions[module.name]['delete']" [binary]="true"></p-checkbox>
-                            </td>
-                            <td>
-                                <p-checkbox [(ngModel)]="rolePermissions[module.name]['update']" [binary]="true"></p-checkbox>
-                            </td>
-                            <td>
-                                <p-checkbox [(ngModel)]="rolePermissions[module.name]['view']" [binary]="true"></p-checkbox>
-                            </td>
-                        </tr>
-                    </ng-template>
-                </p-table> -->
-
-                
-<p-table [value]="modules" [paginator]="false" [rows]="10">
-  <ng-template pTemplate="header">
-    <tr>
-      <th>Module</th>
-      <th>Add</th>
-      <th>Delete</th>
-      <th>Update</th>
-      <th>View</th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-module>
-    <tr>
-      <td>{{ module.name }}</td>
-      <td>
-        <p-checkbox [(ngModel)]="rolePermissions[module.name]['add']" [binary]="true"></p-checkbox>
-      </td>
-      <td>
-        <p-checkbox [(ngModel)]="rolePermissions[module.name]['delete']" [binary]="true"></p-checkbox>
-      </td>
-      <td>
-        <p-checkbox [(ngModel)]="rolePermissions[module.name]['update']" [binary]="true"></p-checkbox>
-      </td>
-      <td>
-        <p-checkbox [(ngModel)]="rolePermissions[module.name]['view']" [binary]="true"></p-checkbox>
-      </td>
-    </tr>
-  </ng-template>
-</p-table>
+              <h4 style="text-align: center;">Permissions</h4>
+              <p-table [value]="modules" [paginator]="false" [rows]="10">
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th>Module</th>
+                    <th>Add</th>
+                    <th>Delete</th>
+                    <th>Update</th>
+                    <th>View</th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-module>
+                  <tr>
+                    <td>{{ module.name }}</td>
+                    <td>
+                      <p-checkbox [(ngModel)]="rolePermissions[module.name]['ADD']" [binary]="true"></p-checkbox>
+                    </td>
+                    <td>
+                      <p-checkbox [(ngModel)]="rolePermissions[module.name]['DELETE']" [binary]="true"></p-checkbox>
+                    </td>
+                    <td>
+                      <p-checkbox [(ngModel)]="rolePermissions[module.name]['UPDATE']" [binary]="true"></p-checkbox>
+                    </td>
+                    <td>
+                      <p-checkbox [(ngModel)]="rolePermissions[module.name]['VIEW']" [binary]="true"></p-checkbox>
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
             </div>
+          </div>
         </div>
-<!--  -->
-        </div>
-
       </div>
       <br>
       <div class="sidebar-footer flex justify-content-end">
-        <app-button label="Save" styleClass="p-button-sm p-button-rounded"></app-button>
+        <app-button label="Save" styleClass="p-button-sm p-button-rounded" (click)="saveRolePermissions()"></app-button>
       </div>
     </div>
-  </p-sidebar>  
-          
-          
-        
-        
-        
-
-
-      
-
-
+  </p-sidebar>
+</div>
