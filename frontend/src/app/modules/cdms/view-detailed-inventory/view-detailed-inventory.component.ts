@@ -6,11 +6,17 @@ import { BaseComponent } from 'src/app/shared/base.component';
 import { ActivatedRoute } from '@angular/router';
 import { INotification } from '../../interfaces';
 
+const getFileUrl = (key: string): string => {
+  return `https://d-m-s.s3.ap-southeast-2.amazonaws.com/${key}`;
+};
+
 @Component({
   selector: 'app-view-detailed-inventory',
   templateUrl: './view-detailed-inventory.component.html',
   styleUrls: ['./view-detailed-inventory.component.scss']
 })
+
+
 export class ViewDetailedInventoryComponent extends BaseComponent implements OnInit {
 
 constructor(private apiService:ApiHelperService, 
@@ -29,12 +35,12 @@ minValue: number = 0;
 maxValue: number = 0 ;
 range: number[] = [800000, 1000000];
 
-images: any[] = [
-  { itemImageSrc: '../../../../assets/demo/images/car.jpg' },
-  { itemImageSrc: '../../../../assets/demo/images/car.jpg' },
-  { itemImageSrc: '../../../../assets/demo/images/car.jpg' },
-  // Add more image objects as needed
-];
+// images: any[] = [
+//   { itemImageSrc: '../../../../assets/demo/images/car.jpg' },
+//   { itemImageSrc: '../../../../assets/demo/images/car.jpg' },
+//   { itemImageSrc: '../../../../assets/demo/images/car.jpg' },
+//   // Add more image objects as needed
+// ];
 
 notification : INotification = 
 {
@@ -52,6 +58,7 @@ notification : INotification =
       this.getvehicleDetail();
       this.notification.inventoryId=this.inventoryId;
     });
+    this.getImages();
   
     
     // this.getvehicleDetail();
@@ -74,9 +81,27 @@ notification : INotification =
   );
   }
 
-  getImages(){
-    
+
+  
+  loadImages: any[] = [];
+   loadImagesUrls: string[] = [];
+   images:any[] =[];
+
+   getImages() {
+    this.apiService
+      .get(`/picture/getPicture/${this.inventoryId}`)
+      .subscribe(
+        (data: any[]) => {
+          this.loadImages = data;
+          console.log('load images:', this.loadImages);
+          this.loadImagesUrls = this.loadImages.map((obj: any) => getFileUrl(obj.link));
+          console.log('url from s3:', this.loadImagesUrls);
+          this.images = this.loadImagesUrls.map(url => ({ itemImageSrc: url }));
+          console.log('images',this.images)
+        }
+      );
   }
+
 
   disableButton(){
     const vehicleShowroomId = this.vehicleDetails.showroom.showroom_id;
