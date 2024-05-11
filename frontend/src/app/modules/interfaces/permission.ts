@@ -1,7 +1,18 @@
 
 export interface ModulePermission {
-    add: boolean;
-    delete: boolean;
-    update: boolean;
-    view: boolean;
+    ADD: boolean;
+    DELETE: boolean;
+    UPDATE: boolean;
+    VIEW: boolean;
 }
+
+// export interface RolePermission {
+//     roleName: string;
+//     component_id: number; // Assuming module_id is a number
+//     permissions: ModulePermission;
+// }
+
+export interface RolePermission {
+    roleName: string;
+    modulePermissions: { component_id: number; permissions: ModulePermission }[];
+  }
