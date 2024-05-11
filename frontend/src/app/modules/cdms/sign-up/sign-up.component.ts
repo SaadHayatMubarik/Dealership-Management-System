@@ -10,6 +10,8 @@ import {  MessageService } from 'primeng/api';
 import { ISignUp } from '../../interfaces';
 
 
+
+
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -78,7 +80,7 @@ export class SignUpComponent  {
       this.apiService.postLogin('/auth/signUp',this.createAdmin).subscribe({
         next: (response) => {
           console.log('Response from server : ', response);
-         this.toast.showSuccess('User Created');       
+         this.toast.showSuccess('User Created');      
          setTimeout(() => {
           this.router.navigate(['/login']);
         }, 2000);

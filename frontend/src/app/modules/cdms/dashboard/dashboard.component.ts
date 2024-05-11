@@ -49,14 +49,9 @@ dashboardData : any;
 getInventoryCount(){
   this.apiService.get(`/dashboard/dashboard/${this.showroomId}`).subscribe((data) => {
     this.dashboardData = data
+    console.log(this.dashboardData);
     });
 }
-
-
-
-
-
-
 
 redirect(inventoryId:string){
   this.router.navigate(['/detail-view', inventoryId]);

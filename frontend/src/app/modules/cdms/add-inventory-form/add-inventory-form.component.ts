@@ -571,10 +571,14 @@ calculateTotalPercentageInvested() {
         .subscribe(response => {
           console.log('Upload Documents:', response);
           this.toast.showSuccess('Vehicle Added');
+          this.closeModal();
+          this.InventoryForm.reset();
+          this.SellerForm.reset();
+          this.uploadForm.reset();
         }, error => {
           console.error('Upload Documents error:', error);
           this.toast.showError('Error Uploading Documents');
-          this.closeModal();
+         
         });
     }
   }
