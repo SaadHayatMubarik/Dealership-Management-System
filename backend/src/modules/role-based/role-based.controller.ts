@@ -1,9 +1,10 @@
-import { Controller, Get, Param, ParseEnumPipe, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseEnumPipe, Post } from '@nestjs/common';
 import { RoleBasedService } from './role-based.service';
 import { Permission } from './entities/permission';
 import { ActionType } from './action-type.enum';
 import { Component } from './entities/component';
-import { GetComponentWithPermissionDto } from './getComponentWithPermission.dto';
+import { RolePermission } from './entities/Role-Permission';
+import { AddRolePermissionDto } from './dto/addRolePermission.dto';
 
 @Controller('role-based')
 export class RoleBasedController {
@@ -19,8 +20,13 @@ export class RoleBasedController {
             return this.roleBasedService.addPermission(permissionName,actionType,componentId);
     }
 
+    @Post('addRolePermission')
+    addRolePermission(@Body() addRolePermissionDto: AddRolePermissionDto): Promise<RolePermission>{
+        return this.roleBasedService.addRolePermission(addRolePermissionDto);
+    }
+
     @Get('permissionAndComponent')
-    getComponent(): Promise<any[]>{
+    getComponent(): Promise<Component[]>{
         return this.roleBasedService.getComponent();
     }
 

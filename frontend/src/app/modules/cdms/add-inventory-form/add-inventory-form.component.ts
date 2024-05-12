@@ -543,8 +543,7 @@ calculateTotalPercentageInvested() {
   }
 
   submitForm() {
-    const pictureTypeImages = 'inventory pictures';
-    const pictureTypeDocuments = 'inventory documents';
+
   
     // Upload images
     if (this.selectedImages.length > 0) {
@@ -552,7 +551,7 @@ calculateTotalPercentageInvested() {
       for (let i = 0; i < this.selectedImages.length; i++) {
         formObjImages.append('files', this.selectedImages[i]);
       }
-      this.apiService.postPicture(`/picture/${pictureTypeImages}/${this.inventoryObj.inventory_id}`, formObjImages)
+      this.apiService.postPicture(`/picture/${this.inventoryObj.inventory_id}`, formObjImages)
         .subscribe(response => {
           console.log('Upload Images:', response);
          
@@ -567,7 +566,7 @@ calculateTotalPercentageInvested() {
       for (let i = 0; i < this.selectedDocuments.length; i++) {
         formObjDocuments.append('files', this.selectedDocuments[i]);
       }
-      this.apiService.postPicture(`/picture/${pictureTypeDocuments}/${this.inventoryObj.inventory_id}`, formObjDocuments)
+      this.apiService.postPicture(`/picture/${this.inventoryObj.inventory_id}`, formObjDocuments)
         .subscribe(response => {
           console.log('Upload Documents:', response);
           this.toast.showSuccess('Vehicle Added');
