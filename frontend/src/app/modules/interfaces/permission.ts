@@ -13,6 +13,7 @@ export interface ModulePermission {
 // }
 
 export interface RolePermission {
-    roleName: string;
     modulePermissions: { component_id: number; permissions: ModulePermission }[];
+    roleName: string;
+    showroomId: number;
   }

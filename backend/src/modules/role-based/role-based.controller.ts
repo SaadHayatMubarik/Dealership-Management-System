@@ -22,6 +22,7 @@ export class RoleBasedController {
 
     @Post('addRolePermission')
     addRolePermission(@Body() addRolePermissionDto: AddRolePermissionDto): Promise<RolePermission>{
+        console.log('result', addRolePermissionDto);
         return this.roleBasedService.addRolePermission(addRolePermissionDto);
     }
 
