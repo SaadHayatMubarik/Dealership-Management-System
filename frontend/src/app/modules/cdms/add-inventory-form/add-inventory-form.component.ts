@@ -544,27 +544,21 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   submitForm() {
     const pictureTypeImages = 'inventory pictures';
     const pictureTypeDocuments = 'inventory documents';
-
+  
     // Upload images
     if (this.selectedImages.length > 0) {
       const formObjImages = new FormData();
       for (let i = 0; i < this.selectedImages.length; i++) {
         formObjImages.append('files', this.selectedImages[i]);
       }
-      this.apiService
-        .postPicture(
-          `/picture/${pictureTypeImages}/${this.inventoryObj.inventory_id}`,
-          formObjImages
-        )
-        .subscribe(
-          (response) => {
-            console.log('Upload Images:', response);
-          },
-          (error) => {
-            console.error('Upload Image error:', error);
-            this.toast.showError('Error Uploading Images');
-          }
-        );
+      this.apiService.postPicture(`/picture/${pictureTypeImages}/${this.inventoryObj.inventory_id}`, formObjImages)
+        .subscribe(response => {
+          console.log('Upload Images:', response);
+         
+        }, error => {
+          console.error('Upload Image error:', error);
+          this.toast.showError('Error Uploading Images');
+        });
     }
     // Upload documents
     if (this.selectedDocuments.length > 0) {
@@ -572,25 +566,19 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
       for (let i = 0; i < this.selectedDocuments.length; i++) {
         formObjDocuments.append('files', this.selectedDocuments[i]);
       }
-      this.apiService
-        .postPicture(
-          `/picture/${pictureTypeDocuments}/${this.inventoryObj.inventory_id}`,
-          formObjDocuments
-        )
-        .subscribe(
-          (response) => {
-            console.log('Upload Documents:', response);
-            this.toast.showSuccess('Vehicle Added');
-            this.closeModal();
-            this.InventoryForm.reset();
-            this.SellerForm.reset();
-            this.uploadForm.reset();
-          },
-          (error) => {
-            console.error('Upload Documents error:', error);
-            this.toast.showError('Error Uploading Documents');
-          }
-        );
+      this.apiService.postPicture(`/picture/${pictureTypeDocuments}/${this.inventoryObj.inventory_id}`, formObjDocuments)
+        .subscribe(response => {
+          console.log('Upload Documents:', response);
+          this.toast.showSuccess('Vehicle Added');
+          this.closeModal();
+          this.InventoryForm.reset();
+          this.SellerForm.reset();
+          this.uploadForm.reset();
+        }, error => {
+          console.error('Upload Documents error:', error);
+          this.toast.showError('Error Uploading Documents');
+         
+        });
     }
   }
 }

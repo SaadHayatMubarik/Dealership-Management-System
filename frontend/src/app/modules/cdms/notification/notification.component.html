@@ -23,6 +23,13 @@
                     ><b>Date and Time:</b>  {{notification.date}}</span
                   >
                 </div>
+                
+                <div class="notification-details">
+                  <span class="notification-time"
+                    ><b>Offer:</b>  {{notification.min_value}} - {{notification.max_value}}</span
+                  >
+                </div>
+                
                 <div *ngIf="notification.status === 'PENDING'; else statusText" class="notification-actions">
                   <p-button  
                   (click)="changeStatus(notification.notification_id, 'ACCEPTED')"

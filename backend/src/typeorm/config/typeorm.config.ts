@@ -28,5 +28,6 @@ export const typeOrmConfig: TypeOrmModuleOptions  = {
     database: 'd_m_s',
     entities: [Inventory, MultiValueAttribute, StockAttributeValue , VehicleType, VehicleTypeAttribute ,User,Showroom,Customer,Notification,Investment,Investor,Picture,Transaction,Account, Employee,Role,Component,Permission,RolePermission],
     synchronize: false, 
+    
 }
 
