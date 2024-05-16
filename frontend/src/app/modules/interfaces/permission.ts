@@ -14,5 +14,6 @@ export interface ModulePermission {
 
 export interface RolePermission {
     roleName: string;
+    inventoryId: any;
     modulePermissions: { component_id: number; permissions: ModulePermission }[];
   }

@@ -212,10 +212,12 @@ export class RoleComponent extends BaseComponent implements OnInit {
   //     );
   // }
 
+  inventory_id = localStorage.getItem('Showroom Id');
 
   saveRolePermissions() {
     const rolePermissionsData: RolePermission = {
       roleName: this.roleName,
+      inventoryId: this.inventory_id,
       modulePermissions: []
     };
   

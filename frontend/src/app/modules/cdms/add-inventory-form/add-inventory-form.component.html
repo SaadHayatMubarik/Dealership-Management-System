@@ -644,7 +644,8 @@
         </form>
       </p-tabPanel>
 
-      <p-tabPanel header="Seller Details" [disabled]="!showSecondTab" >
+      <p-tabPanel header="Seller Details" >
+        <!-- [disabled]="!showSecondTab" -->
         
         <form (ngSubmit)="postInventory()" #Seller="ngForm">
           <div class="sidebar-main">
@@ -770,6 +771,7 @@
                   <br>
                   <div class="investor_form">
                     <div class="row-form grid" *ngFor="let form of investorForms; let i = index">
+                      <!-- *ngFor="let form of investorForms; let i = index" -->
                       <div class="col-4">
                         <div class="p-field">
                           <span class="p-float-label">
@@ -779,8 +781,7 @@
                               class="p-inputtext-lg"
                               placeholder="Select a investor"
                               name="investor Name"
-                              [(ngModel)]="vehicleInventory.investor[i]"
-                              [required] ="true"
+                              [(ngModel)]="form.investor_name"
                             ></p-dropdown>
                             <label for="float-label">Investor Name*</label>
                           </span>
@@ -790,8 +791,7 @@
                       <div class="col-4">
                         <div class="p-field">
                           <span class="p-float-label">      
-                            <app-numeric-textbox [(controlModel)] ="percentageInvested[i]" 
-                            (controlModelChange)="calculateInvestment(i)"
+                            <app-numeric-textbox 
                             required>
                             </app-numeric-textbox>
                           </span>
@@ -805,9 +805,9 @@
                               class="p-inputtext-lg"
                               pInputText
                               name="percentage"
-                              required
-                              [ngModel]="amountInvested[i]"
+                              required                            
                               disabled
+                              [(ngModel)]="form.investmentAmount"
                             />
                             <label for="float-label"
                               >Amount Invested
@@ -823,14 +823,15 @@
                     <div class="col-4">
                       <div class="buttons">
                         <p-button
-                          icon="pi pi-plus"
+                          icon="pi pi-plus" 
                           (click)="addInvestorForm()"
                         ></p-button>
                         <p-button
                           severity="danger"
                           class="ml-2"
                           icon="pi pi-minus"
-                          (click)="removeInvestorForm()">
+                          (click)="removeInvestorForm()"
+                          >
                         </p-button>
                       </div>
                     </div>
@@ -842,8 +843,6 @@
                             pInputText
                             name="totalInvestment"
                             disabled
-                            [(ngModel)]="remainingPercentage" 
-                            
                           />
                           <label for="float-label"
                             >Remaining Percentage %</label
@@ -865,11 +864,10 @@
           </div>
         </form>
       </p-tabPanel>
-      <p-tabPanel header="Upload" [disabled]="!showThirdTab" 
-      >
-       
+
+
+      <p-tabPanel header="Upload" [disabled]="!showThirdTab">
         <form [formGroup]="uploadForm" (ngSubmit)="submitForm()"> 
- 
           <div class="sh-title">
             <h2 style="text-align: center">Upload Vehicle Images And Files</h2>
             <br />

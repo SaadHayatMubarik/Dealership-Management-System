@@ -22,6 +22,12 @@ import { ToastService } from 'src/app/shared/services/toast.service';
 import { NgForm } from '@angular/forms';
 import { FileUpload } from 'primeng/fileupload';
 
+export interface Investor {
+  investor_id: number;
+  investor_name: string;
+  investmentAmount: number;
+}
+
 @Component({
   selector: 'app-add-inventory-form',
   templateUrl: './add-inventory-form.component.html',
@@ -52,9 +58,8 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
     attributeValueId:[],
     stockAttributeValue: [],
     sellerId: '',
-    investor: [],
-    investmentAmount: [],
-    
+    investment: []
+
   };
 
 
@@ -203,6 +208,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
       });
   }
 
+  
 
   getInvestors() {
         this.apiService
@@ -210,7 +216,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
         .subscribe({
           next: (response: IObject[]) => {
             this.investors = response;
-            // console.log(this.investors)
+         
           },
           complete: () => {
           }
@@ -350,50 +356,50 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
 
  investorForms: any[] = [];
 
- percentageInvested: number[] = []; // Percentage invested by the investor
- amountInvested: number[] = []; // Amount invested by the investor
- totalPercentageInvested: number = 0; // Total percentage invested
- remainingPercentage: number = 100; // Remaining percentage
+
 
  addInvestorForm() {
-  // Add a new form with default data
   this.investorForms.push({});
-  // Initialize percentage and amount invested for the new form
-  this.percentageInvested.push(0);
-  this.amountInvested.push(0);
 }
 
-// removeInvestorForm(index: number) {
-//   // Remove the form at the specified index from the array
-//   if (this.investorForms.length > 0) {
-//     this.investorForms.splice(index, 1);
-//     // Remove data associated with the removed form
-//     this.percentageInvested.splice(index, 1);
-//     this.amountInvested.splice(index, 1);
-//     // Recalculate total and remaining percentages
-//     this.calculateTotalPercentageInvested();
+
+
+// addInvestorForm() {
+//   // Fetch the investor info
+//   this.getInvestors(); // Assuming this populates this.investors synchronously
+
+//   // Assuming this.investors is populated synchronously, proceed with adding form
+//   if (this.investors.length > 0) {
+//     // Assuming the first investor from the response will be selected by default
+//     const selectedInvestor = this.investors[0];
+
+//     // Initialize a new investor object with the fetched info and a default investment amount
+//     const newInvestor = {
+//       investor_id: selectedInvestor.investor_id,
+//       investor_name: selectedInvestor.investor_name,
+//       investmentAmount: 0 // Default investment amount
+//     };
+
+//     // Initialize a new investment array with the new investor
+//     const newInvestment = { investment: [newInvestor] };
+
+//     // Push the new investment array into the investorForms array
+//     this.investorForms.push(newInvestment);
 //   }
 // }
 
+
+
+
 removeInvestorForm() {
-  // Remove the last form from the array
   if (this.investorForms.length > 0) {
     this.investorForms.pop();
-   
   }
 }
 
-calculateInvestment(i: number) {
-  this.amountInvested[i] = (this.percentageInvested[i] / 100) * this.vehicleInventory.costPrice;
-  this.vehicleInventory.investmentAmount[i] = this.amountInvested[i];
-  // Recalculate total and remaining percentages
-  this.calculateTotalPercentageInvested();
-}
 
-calculateTotalPercentageInvested() {
-  this.totalPercentageInvested = this.percentageInvested.reduce((total, current) => total + current, 0);
-  this.remainingPercentage = 100 - this.totalPercentageInvested;
-}
+
+
 
 
 
@@ -412,6 +418,7 @@ calculateTotalPercentageInvested() {
           // console.log(this.inventoryObj.inventory_id);
           this.activeTabIndex = 2;
           this.showThirdTab = true;
+          console.log('sent',this.vehicleInventory);
         },
         error: () => {
           this.toast.showError('Error Occurred!');
