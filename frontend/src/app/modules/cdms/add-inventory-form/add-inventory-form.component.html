@@ -771,17 +771,18 @@
                   <br>
                   <div class="investor_form">
                     <div class="row-form grid" *ngFor="let form of investorForms; let i = index">
-                      <!-- *ngFor="let form of investorForms; let i = index" -->
+                    
                       <div class="col-4">
                         <div class="p-field">
                           <span class="p-float-label">
                             <p-dropdown
                               [options]="investors"
                               optionLabel="investor_name"
+                              optionValue="investor_id"
                               class="p-inputtext-lg"
                               placeholder="Select a investor"
-                              name="investor Name"
-                              [(ngModel)]="form.investor_name"
+                              [(ngModel)]="form.investor_id"
+                              [ngModelOptions]="{standalone: true}"
                             ></p-dropdown>
                             <label for="float-label">Investor Name*</label>
                           </span>
@@ -792,11 +793,30 @@
                         <div class="p-field">
                           <span class="p-float-label">      
                             <app-numeric-textbox 
-                            required>
+                            name="percentage"
+                            pattern="[1-9]?[0-9]|100" 
+                            required
+                            [(ngModel)]="form.percentage_invested"
+                            (change)="calculateInvestment(form)"
+                            >
                             </app-numeric-textbox>
                           </span>
                         </div>
                       </div>
+
+                      <!-- <div class="col-4">
+                        <div class="p-field">
+                          <span class="p-float-label">      
+                            <input 
+                              class="p-inputtext-lg"
+                              pInputText
+                              name="percentage"
+                              required
+                            />
+                            <label for="percentage">Percentage</label>
+                          </span>
+                        </div>
+                      </div> -->
 
                       <div class="col-4">
                         <div class="p-field">
@@ -804,7 +824,7 @@
                             <input
                               class="p-inputtext-lg"
                               pInputText
-                              name="percentage"
+                              name="investmentAmount"
                               required                            
                               disabled
                               [(ngModel)]="form.investmentAmount"
@@ -815,7 +835,8 @@
                             </label>
                           </span>
                         </div>
-                      </div>
+                      </div> 
+
                     </div>
                     <br />
                   </div>
