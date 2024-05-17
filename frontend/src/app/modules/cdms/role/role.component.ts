@@ -138,9 +138,17 @@ export class RoleComponent extends BaseComponent implements OnInit {
   data: IObject[] = [];
   components: any[] = [];
 
+  constructor(
+    private readonly apiService: ApiHelperService,
+    private toast: ToastService
+  ){
+    super();
+  } 
+  
   ngOnInit() {
     this.getComponents();
   }
+ 
   
   modules: { name: string }[] = [];
   rolePermissions: { [moduleName: string]: ModulePermission } = {};
@@ -161,12 +169,7 @@ export class RoleComponent extends BaseComponent implements OnInit {
     });
   }
 
-  constructor(
-    private readonly apiService: ApiHelperService,
-    private toast: ToastService
-  ){
-    super();
-  } 
+
 
   // saveRolePermissions() {
   //   const rolePermissionsData: RolePermission[] = [];
@@ -218,11 +221,14 @@ export class RoleComponent extends BaseComponent implements OnInit {
 
 
     const rolePermissionsData: RolePermission = {
+      modulePermissions: [],
       roleName: this.roleName,
       showroomId: this.showroom_id,
-      modulePermissions: []
+
+      // showroomId: Number(localStorage.getItem('Showroom Id'))
+
     };
-  
+
     Object.keys(this.rolePermissions).forEach(moduleName => {
       const permissions: ModulePermission = this.rolePermissions[moduleName];
       const component_id = this.components.find(component => component.component_name === moduleName)?.component_id;
@@ -230,14 +236,15 @@ export class RoleComponent extends BaseComponent implements OnInit {
         rolePermissionsData.modulePermissions.push({ component_id: component_id, permissions: permissions });
       }
     });
+    
   
     this.apiService
-      .post('/role-based/saveRolePermissions', rolePermissionsData)
+      .post('/role-based/addRolePermissions', rolePermissionsData)
       .subscribe(
         (response) => {
           console.log('Role permissions saved successfully:', response);
           console.log('OBJ', rolePermissionsData);
-          this.toast.showSuccess('Role permissions saved successfully');
+          this.toast.showSuccess('Role permissions saved successfully');  
         },
         (error) => {
           console.error('Error saving role permissions:', error);

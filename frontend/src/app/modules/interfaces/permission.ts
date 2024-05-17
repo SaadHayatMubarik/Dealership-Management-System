@@ -16,4 +16,6 @@ export interface RolePermission {
     roleName: string;
     showroomId: any;
     modulePermissions: { component_id: number; permissions: ModulePermission }[];
+    
+    // showroomId: number;
   }

@@ -10,9 +10,10 @@ import { find } from 'rxjs';
 import { User } from '../auth/entity/User';
 import { RolePermission } from './entities/Role-Permission';
 import { GetComponentWithPermissionDto } from './dto/getComponentWithPermission.dto';
-import { AddRolePermissionDto, ComponentPermissionDto } from './dto/addRolePermission.dto';
+import { AddRolePermissionDto } from './dto/addRolePermission.dto';
 import { Role } from './entities/Role';
 import { Showroom } from '../showroom/entity/Showroom';
+// import { ComponentPermissionDto } from './dto/componentPermission.dto';
 
 @Injectable()
 export class RoleBasedService {
@@ -40,17 +41,26 @@ export class RoleBasedService {
 
     async addRolePermission (addRolePermissionDto: AddRolePermissionDto): Promise<RolePermission>{
         const { roleName, componentPermissionDto, showroomId } = addRolePermissionDto;
-        let componentPermission : ComponentPermissionDto[] = [];
-        componentPermission= componentPermissionDto;
+        const enums = [ActionType.ADD,ActionType.DELETE,ActionType.UPDATE,ActionType.VIEW];
+        let permissionObj: Permission[] = [];
         const role = new Role();
         role.role_name = roleName;
         role.showroom = await this.showroomRepository.findOneBy({showroom_id:showroomId});
         const roleObj = await this.roleRepository.save(role);
         for(let i=0 ; i<componentPermissionDto.length; i++){
-            // if(componentPermission.comp)
+            const { component_id,permissions } = componentPermissionDto[i];
+            for(let j=0; j<enums.length;j++){
+                if( `permissions.${enums[j]}` == 'true'){
+                  permissionObj  =  await this.permissionRepository.findBy({action_type:enums[j], component:{component_id:component_id}});
+                }
+            }
         }
-        return
-
+        for(let k=0; k<permissionObj.length; k++){
+            const rolePermission = new RolePermission();
+            rolePermission.role=roleObj;
+            rolePermission.permission = permissionObj[k];
+            return await this.rolePermissionRepository.save(rolePermission);
+        }
     }
 
     async getComponent (): Promise<Component[]>{
