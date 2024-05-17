@@ -38,8 +38,17 @@ export interface IInventory {
   value: string[];
   stockAttributeValue : IStockAttributeValue[];
   sellerId: any;
-  investor: any[];
-  investmentAmount: number[];
+  investment: investment[];
+}
+
+// export interface investment {
+//   investment: {investor_id:number , investor_name: string; investmentAmount: number}[];
+// }
+
+export interface investment {
+ investor_id:number;
+ percentage_invested:number;
+ investmentAmount: number;
 }
 
 export interface ISellInventory {
@@ -77,7 +86,6 @@ export interface IVehicleDetails {
 }
 
 export interface IStockAttributeValue {  
-  
   id: number;
   value: any;
   inventoryInventoryId:number;

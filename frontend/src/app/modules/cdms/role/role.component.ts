@@ -215,14 +215,15 @@ export class RoleComponent extends BaseComponent implements OnInit {
   //     );
   // }
 
+  inventory_id = localStorage.getItem('Showroom Id');
 
   saveRolePermissions() {
     const rolePermissionsData: RolePermission = {
       modulePermissions: [],
       roleName: this.roleName,
-      showroomId: Number(localStorage.getItem('Showroom Id'))
+      // showroomId: Number(localStorage.getItem('Showroom Id'))
     };
-  
+
     Object.keys(this.rolePermissions).forEach(moduleName => {
       const permissions: ModulePermission = this.rolePermissions[moduleName];
       const component_id = this.components.find(component => component.component.component_name === moduleName)?.component.component_id;

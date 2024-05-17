@@ -12,8 +12,8 @@ import {
 import {
   IInventory,
   IStockAttributeValue,
-
   IVehicleTypeAttributeDto,
+  investment,
 } from '../../interfaces/inventory';
 
 import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
@@ -21,6 +21,13 @@ import { ToastService } from 'src/app/shared/services/toast.service';
 
 import { NgForm } from '@angular/forms';
 import { FileUpload } from 'primeng/fileupload';
+import { IInvestor } from '../../interfaces';
+
+export interface Investor {
+  investor_id: number;
+  investor_name: string;
+  investmentAmount: number;
+}
 
 @Component({
   selector: 'app-add-inventory-form',
@@ -28,7 +35,6 @@ import { FileUpload } from 'primeng/fileupload';
   styleUrls: ['./add-inventory-form.component.scss'],
 })
 export class AddInventoryFormComponent extends BaseComponent implements OnInit {
-  
   vehicleInventory: IInventory = {
     vehicleMake: '',
     vehicleModel: '',
@@ -48,37 +54,32 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
     comments: '',
     mileage: 0,
     showroomId: localStorage.getItem('Showroom Id'),
-    value:[],
-    attributeValueId:[],
+    value: [],
+    attributeValueId: [],
     stockAttributeValue: [],
     sellerId: '',
-    investor: [],
-    investmentAmount: [],
-    
+    investment: [],
   };
-
-
-  
 
   activeTabIndex = 0; // Track current active tab index
   showSecondTab = false; // Initially disable the second tab
   showThirdTab = false;
   vehicleTypes: any[] = []; //to populate dropdown of vehicle type
   investors: any[] = []; // To store list of Investors for whom inventory is added
-  customers: any[] = []  ;//To store list of Customers for whom  inventory is added
+  customers: any[] = []; //To store list of Customers for whom  inventory is added
   customersDetails: any; //To store individual customer details
-  customerType: string = 'SELLER'
-  status: string[] = ['AVAILABLE','SOLD' ,'ON ORDER']; //to populate status tabs
-  statusDropdown: string[] = ['AVAILABLE','ON ORDER']; //to populate status dropdown
+  customerType: string = 'SELLER';
+  status: string[] = ['AVAILABLE', 'SOLD', 'ON ORDER']; //to populate status tabs
+  statusDropdown: string[] = ['AVAILABLE', 'ON ORDER']; //to populate status dropdown
   sliderValue: number = 0;
- 
+
   vehicleId: any; //saving vehicle type id
   vehicleAttributes: any[] = []; //to save vehicle type attributes
-  inventoryId : number = 0;
+  inventoryId: number = 0;
   selectedTabIndex: number = 0;
-  sellerCategory: string[] = ["CUSTOMER", "AGENT", "DEALERSHIP"];
+  sellerCategory: string[] = ['CUSTOMER', 'AGENT', 'DEALERSHIP'];
   selectedCategory: string = '';
-  selectedCustomer: any = null;  
+  selectedCustomer: any = null;
   sellerId: number = 0;
   inventoryObj: any = null;
   investorName: string = '';
@@ -96,13 +97,11 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
     private router: Router,
     private http: HttpClient,
     private formBuilder: FormBuilder
-
   ) {
     super();
   }
 
   ngOnInit() {
-
     this.uploadForm = this.formBuilder.group({
       imageUpload: [[]], // Initialize imageUpload form control with an empty array
       // documentUpload: [[]] // Initialize documentUpload form control with an empty array
@@ -143,18 +142,18 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
         label: ' Delete',
         icon: 'pi pi-trash',
         command: (event) => {
-          this.inventoryId =event.inventoryId;
+          this.inventoryId = event.inventoryId;
           this.apiService.delete(`/inventory/${this.inventoryId}`).subscribe({
             next: (response) => {
-              this.toast.showSuccess(`Inventory Id: ${this.inventoryId} record deleted.`);   
+              this.toast.showSuccess(
+                `Inventory Id: ${this.inventoryId} record deleted.`
+              );
               this.getInventory();
             },
-            error: () => 
-            {
+            error: () => {
               this.toast.showError('Cant delete Inventory');
-            }
-          }
-            );
+            },
+          });
         },
       },
       {
@@ -168,8 +167,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
         label: 'Update',
         icon: 'pi pi-file-edit',
         command: (event) => {
-         this.router.navigate((['/update-inventory', event.inventoryId]));
-         
+          this.router.navigate(['/update-inventory', event.inventoryId]);
         },
       },
       {
@@ -178,20 +176,16 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
         command: (event) => {
           this.router.navigate(['/sell-inventory', event.inventoryId]);
           // console.log(event.inventoryId);
-         
         },
       },
-      
-      
-
     ];
   }
 
   @ViewChild('Inventory') InventoryForm!: NgForm;
-  @ViewChild('vehicleUpdate') vehicleUpdate!:NgForm;  
+  @ViewChild('vehicleUpdate') vehicleUpdate!: NgForm;
   @ViewChild('Seller') SellerForm!: NgForm;
-  @ViewChild ('upload') UploadForm!:NgForm;
-  
+  @ViewChild('upload') UploadForm!: NgForm;
+
   getVehicleTypes() {
     this.apiService
       .get(`/vehicle-type/${this.vehicleInventory.showroomId}`)
@@ -203,69 +197,62 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
       });
   }
 
-
   getInvestors() {
-        this.apiService
-        .get(`/investor/getInvestor/${this.vehicleInventory.showroomId}`)
-        .subscribe({
-          next: (response: IObject[]) => {
-            this.investors = response;
-            // console.log(this.investors)
-          },
-          complete: () => {
-          }
-        })
-    }
+    this.apiService
+      .get(`/investor/getInvestor/${this.vehicleInventory.showroomId}`)
+      .subscribe({
+        next: (response: IObject[]) => {
+          this.investors = response;
+          console.log('response', response);
+          
+        },
+        complete: () => {},
+      });
+  }
 
-
-    getCustomersByType() {
-      this.apiService
-      .get(`/customer/getCustomer/${this.vehicleInventory.showroomId}/${this.selectedCategory}/${this.customerType}`)
+  getCustomersByType() {
+    this.apiService
+      .get(
+        `/customer/getCustomer/${this.vehicleInventory.showroomId}/${this.selectedCategory}/${this.customerType}`
+      )
       .subscribe({
         next: (response) => {
           this.customers = response;
         },
-        complete: () => {
-        }
-      })
+        complete: () => {},
+      });
   }
 
   onCustomerSelectionChange(): void {
     if (this.selectedCustomer) {
-        this.sellerId = this.selectedCustomer.customer_id;
-
-
+      this.sellerId = this.selectedCustomer.customer_id;
     }
-    this.getCustomersById();  
-}
-
-
-  phone_no : string = '' ;
-  email : string = '' ;
-  city : string = '' ;
-  address : string = '' ;
-
-  getCustomersById(){
-    this.vehicleInventory.sellerId = this.sellerId;
-    this.apiService
-    .get(`/customer/getCustomerDetails/${this.sellerId}`)
-    .subscribe({
-      next: (response: IObject[]) => {
-        // console.log(response);
-        this.customersDetails = response;
-        this.phone_no = this.customersDetails.phoneNo;
-        this.email = this.customersDetails.email;
-        this.city = this.customersDetails.city;
-        this.address = this.customersDetails.address;
-      },
-      error: () => {
-        this.toast.showError('Server Error!');
-      }
-    })
+    this.getCustomersById();
   }
 
- 
+  phone_no: string = '';
+  email: string = '';
+  city: string = '';
+  address: string = '';
 
+  getCustomersById() {
+    this.vehicleInventory.sellerId = this.sellerId;
+    this.apiService
+      .get(`/customer/getCustomerDetails/${this.sellerId}`)
+      .subscribe({
+        next: (response: IObject[]) => {
+          // console.log(response);
+          this.customersDetails = response;
+          this.phone_no = this.customersDetails.phoneNo;
+          this.email = this.customersDetails.email;
+          this.city = this.customersDetails.city;
+          this.address = this.customersDetails.address;
+        },
+        error: () => {
+          this.toast.showError('Server Error!');
+        },
+      });
+  }
 
   //to limit slider value from 0 to 5.
   onInputChange(event: any) {
@@ -310,15 +297,21 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
             console.log('====================================');
             attributes.forEach((vta: IVehicleTypeAttributeDto) => {
               // console.log(vta);
-              stockAttrVals.push({ id: 0, value: '', inventoryInventoryId:0, multiValueAttributeMultiValueId:0, vehicleTypeAttribute: vta })
+              stockAttrVals.push({
+                id: 0,
+                value: '',
+                inventoryInventoryId: 0,
+                multiValueAttributeMultiValueId: 0,
+                vehicleTypeAttribute: vta,
+              });
               // console.log(vta.multiVals);
             });
             console.log('====================================');
-          
+
             this.vehicleInventory.stockAttributeValue = stockAttrVals;
           });
       } else {
-        console.log("error");
+        console.log('error');
       }
     }
   }
@@ -332,113 +325,117 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
     ) as string[];
   }
 
-  onNext(){
-
-    if(this.InventoryForm.valid)
-    {
-          this.activeTabIndex = 1;
-          this.showSecondTab = true;
+  onNext() {
+    if (this.InventoryForm.valid) {
+      this.activeTabIndex = 1;
+      this.showSecondTab = true;
+    } else {
+      this.toast.showError('Please fill all the fields');
     }
-  
-    else {
-      this.toast.showError("Please fill all the fields");
-    }
-    }
-
-
-     //investors logic
-
- investorForms: any[] = [];
-
- percentageInvested: number[] = []; // Percentage invested by the investor
- amountInvested: number[] = []; // Amount invested by the investor
- totalPercentageInvested: number = 0; // Total percentage invested
- remainingPercentage: number = 100; // Remaining percentage
-
- addInvestorForm() {
-  // Add a new form with default data
-  this.investorForms.push({});
-  // Initialize percentage and amount invested for the new form
-  this.percentageInvested.push(0);
-  this.amountInvested.push(0);
-}
-
-// removeInvestorForm(index: number) {
-//   // Remove the form at the specified index from the array
-//   if (this.investorForms.length > 0) {
-//     this.investorForms.splice(index, 1);
-//     // Remove data associated with the removed form
-//     this.percentageInvested.splice(index, 1);
-//     this.amountInvested.splice(index, 1);
-//     // Recalculate total and remaining percentages
-//     this.calculateTotalPercentageInvested();
-//   }
-// }
-
-removeInvestorForm() {
-  // Remove the last form from the array
-  if (this.investorForms.length > 0) {
-    this.investorForms.pop();
-   
   }
-}
 
-calculateInvestment(i: number) {
-  this.amountInvested[i] = (this.percentageInvested[i] / 100) * this.vehicleInventory.costPrice;
-  this.vehicleInventory.investmentAmount[i] = this.amountInvested[i];
-  // Recalculate total and remaining percentages
-  this.calculateTotalPercentageInvested();
-}
+  //investors logic
 
-calculateTotalPercentageInvested() {
-  this.totalPercentageInvested = this.percentageInvested.reduce((total, current) => total + current, 0);
-  this.remainingPercentage = 100 - this.totalPercentageInvested;
-}
+  investorForms: investment[] = [];
+ 
+  percentage: number = 0; // Assuming you have a property to store the percentage
 
+  // Add the calculateInvestment method
+  calculateInvestment(investor: investment) {
+    const percentage = investor.percentage_invested;
+    const costPrice = this.vehicleInventory.costPrice;
+    investor.investmentAmount = (percentage / 100) * costPrice;
+    // Log the updated investor object to check if the investmentAmount is being updated
+    console.log('Updated Investor:', investor);
+  }
 
+  addInvestorForm() {
 
+    const defaultPercentage = 0;
+    const investmentAmount = (defaultPercentage / 100) * this.vehicleInventory.costPrice;
+
+    this.investorForms.push({
+      investor_id: 0,
+      percentage_invested:defaultPercentage,
+      investmentAmount: investmentAmount,
+    });
+    console.log('this.investorForms', this.investorForms);
+
+  }
+
+ 
+
+  // addInvestorForm() {
+  //   // Fetch the investor info
+  //   this.getInvestors(); // Assuming this populates this.investors synchronously
+
+  //   // Assuming this.investors is populated synchronously, proceed with adding form
+  //   if (this.investors.length > 0) {
+  //     // Assuming the first investor from the response will be selected by default
+  //     const selectedInvestor = this.investors[0];
+
+  //     // Initialize a new investor object with the fetched info and a default investment amount
+  //     const newInvestor = {
+  //       investor_id: selectedInvestor.investor_id,
+  //       investor_name: selectedInvestor.investor_name,
+  //       investmentAmount: 0 // Default investment amount
+  //     };
+
+  //     // Initialize a new investment array with the new investor
+  //     const newInvestment = { investment: [newInvestor] };
+
+  //     // Push the new investment array into the investorForms array
+  //     this.investorForms.push(newInvestment);
+  //   }
+  // }
+
+  removeInvestorForm() {
+    if (this.investorForms.length > 0) {
+      this.investorForms.pop();
+    }
+  }
 
   postInventory() {
-    if (this.SellerForm.valid){ 
-      this.apiService
-      .postLogin('/inventory/addInventory', this.vehicleInventory)
-      .subscribe({
-        next: (response) => {
-          this.toast.showSuccess('Add images and documents');
-          // this.closeModal();
-          this.inventoryObj = response;
-          // this.getInventory();
-          // console.log('success',this.vehicleInventory);
-          // console.log(this.inventoryObj.inventory_id);
-          this.activeTabIndex = 2;
-          this.showThirdTab = true;
-        },
-        error: () => {
-          this.toast.showError('Error Occurred!');
-          console.log('error',this.vehicleInventory);
-        },
-      });
-    }
-    else{
-      this.toast.showError("Please fill all the required fields");
+    if (!this.SellerForm.valid) {
+      this.vehicleInventory.investment = this.investorForms;
+      console.log('this.vehicleInventory', this.vehicleInventory);
+      
+      // this.apiService
+      //   .postLogin('/inventory/addInventory', this.vehicleInventory)
+      //   .subscribe({
+      //     next: (response) => {
+      //       this.toast.showSuccess('Add images and documents');
+      //       // this.closeModal();
+      //       this.inventoryObj = response;
+      //       // this.getInventory();
+      //       // console.log('success',this.vehicleInventory);
+      //       // console.log(this.inventoryObj.inventory_id);
+      //       this.activeTabIndex = 2;
+      //       this.showThirdTab = true;
+      //       console.log('sent', this.vehicleInventory);
+      //     },
+      //     error: () => {
+      //       this.toast.showError('Error Occurred!');
+      //       console.log('error', this.vehicleInventory);
+      //     },
+      //   });
+    } else {
+      this.toast.showError('Please fill all the required fields');
     }
   }
 
-
-  
-
-    // files: FileUpload[] = [];
-    // vehicleImages: File[] = [];
-    // vehicleDocuments: File[] = [];
-    // handleUpload(event: any, type: string) {
-    //   // Extract the uploaded files from the event
-    //   const uploadedFiles: any[] = event.files;
-    //   if (type === 'pictures') {
-    //     this.vehicleInventory.pictures = uploadedFiles.map((file: any) => file.objectURL);
-    //   } else if (type === 'files') {
-    //     this.vehicleInventory.files = uploadedFiles.map((file: any) => file.objectURL);
-    //   }
-    // }
+  // files: FileUpload[] = [];
+  // vehicleImages: File[] = [];
+  // vehicleDocuments: File[] = [];
+  // handleUpload(event: any, type: string) {
+  //   // Extract the uploaded files from the event
+  //   const uploadedFiles: any[] = event.files;
+  //   if (type === 'pictures') {
+  //     this.vehicleInventory.pictures = uploadedFiles.map((file: any) => file.objectURL);
+  //   } else if (type === 'files') {
+  //     this.vehicleInventory.files = uploadedFiles.map((file: any) => file.objectURL);
+  //   }
+  // }
   // private createObjectURL(file: any): string | null {
   //   if (window.URL) {
   //     return window.URL.createObjectURL(file);
@@ -449,22 +446,20 @@ calculateTotalPercentageInvested() {
   //   }
   // }
 
-
-
   // handleUpload(event: any) {
   //   this.uploadedFiles = event.files;
   //   console.log('Uploaded Files:',this.uploadedFiles);
   // }
-  
+
   // postInventory() {
-  //   if (this.UploadForm.valid) { 
+  //   if (this.UploadForm.valid) {
   //     const formData = new FormData();
-  
+
   //     // Append form data
   //     Object.keys(this.vehicleInventory).forEach(key => {
   //       formData.append(key, this.vehicleInventory[key as keyof IInventory]);
   //     });
-      
+
   //     // Append images
   //     this.uploadedFiles.forEach(file => {
   //       formData.append('images', file);
@@ -488,20 +483,25 @@ calculateTotalPercentageInvested() {
   //     this.toast.showError("Please fill all the required fields");
   //   }
   // }
- 
+
   onTabChange(event: any) {
     this.selectedTabIndex = event.index;
     this.getInventory();
   }
 
-  getInventory(){
-    this.apiService.get(`/inventory/getInventory/${this.vehicleInventory.showroomId}/${this.status[this.selectedTabIndex]}`).subscribe((data) => {
-      this.data = data;
-      // console.log(this.status[this.selectedTabIndex]);
-    });
+  getInventory() {
+    this.apiService
+      .get(
+        `/inventory/getInventory/${this.vehicleInventory.showroomId}/${
+          this.status[this.selectedTabIndex]
+        }`
+      )
+      .subscribe((data) => {
+        this.data = data;
+        // console.log(this.status[this.selectedTabIndex]);
+      });
   }
 
- 
   // uploadImage(event: any){
   //   const files: File[] = event.target.files;
   //   const formObj = new FormData();
@@ -536,14 +536,14 @@ calculateTotalPercentageInvested() {
   selectImages(event: any) {
     this.selectedImages = event.target.files;
   }
-  
 
   selectDocuments(event: any) {
     this.selectedDocuments = event.target.files;
   }
 
   submitForm() {
-
+    const pictureTypeImages = 'inventory pictures';
+    const pictureTypeDocuments = 'inventory documents';
   
     // Upload images
     if (this.selectedImages.length > 0) {
@@ -551,7 +551,7 @@ calculateTotalPercentageInvested() {
       for (let i = 0; i < this.selectedImages.length; i++) {
         formObjImages.append('files', this.selectedImages[i]);
       }
-      this.apiService.postPicture(`/picture/${this.inventoryObj.inventory_id}`, formObjImages)
+      this.apiService.postPicture(`/picture/${pictureTypeImages}/${this.inventoryObj.inventory_id}`, formObjImages)
         .subscribe(response => {
           console.log('Upload Images:', response);
          
@@ -566,7 +566,7 @@ calculateTotalPercentageInvested() {
       for (let i = 0; i < this.selectedDocuments.length; i++) {
         formObjDocuments.append('files', this.selectedDocuments[i]);
       }
-      this.apiService.postPicture(`/picture/${this.inventoryObj.inventory_id}`, formObjDocuments)
+      this.apiService.postPicture(`/picture/${pictureTypeDocuments}/${this.inventoryObj.inventory_id}`, formObjDocuments)
         .subscribe(response => {
           console.log('Upload Documents:', response);
           this.toast.showSuccess('Vehicle Added');
@@ -581,24 +581,7 @@ calculateTotalPercentageInvested() {
         });
     }
   }
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-   
-    
-
-
 
 // handleUpload(event: any) {
 //   const files = event.files;
@@ -610,7 +593,7 @@ calculateTotalPercentageInvested() {
 
 //   const formData = new FormData();
 //   const files = this.uploadForm.get('imageUpload')?.value;
-  
+
 //   if (files && files.length > 0) {
 //     for (let i = 0; i < files.length; i++) {
 //       formData.append('image[]', files[i]);
@@ -623,8 +606,8 @@ calculateTotalPercentageInvested() {
 //   console.log('FormData:', formDataString);
 //   console.log('FormData:', formData);
 
-   // Now you can send formDataString with headers to the server
-  /*
+// Now you can send formDataString with headers to the server
+/*
   this.http.post('/inventory/addInventory', formDataString, { headers }).subscribe(response => {
     console.log('Upload successful:', response);
   }, error => {
@@ -632,21 +615,14 @@ calculateTotalPercentageInvested() {
   });
   */
 
-  // Reset form after submission
-  // this.uploadForm.reset();
+// Reset form after submission
+// this.uploadForm.reset();
 // }
-
-
-
 
 //  addInvestorForm() {
 
 //   this.investorForms.push({});
 // }
-
-
-
-
 
 //   calculateInvestment(i: number) {
 //     this.amountInvested[i] = (this.percentageInvested[i] / 100) * this.vehicleInventory.costPrice;
