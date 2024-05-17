@@ -212,18 +212,20 @@ export class RoleComponent extends BaseComponent implements OnInit {
   //     );
   // }
 
-  inventory_id = localStorage.getItem('Showroom Id');
+  showroom_id = localStorage.getItem('Showroom Id');
 
   saveRolePermissions() {
+
+
     const rolePermissionsData: RolePermission = {
       roleName: this.roleName,
-      inventoryId: this.inventory_id,
+      showroomId: this.showroom_id,
       modulePermissions: []
     };
   
     Object.keys(this.rolePermissions).forEach(moduleName => {
       const permissions: ModulePermission = this.rolePermissions[moduleName];
-      const component_id = this.components.find(component => component.component.component_name === moduleName)?.component.component_id;
+      const component_id = this.components.find(component => component.component_name === moduleName)?.component_id;
       if (component_id !== undefined) { // Ensure component_id is found
         rolePermissionsData.modulePermissions.push({ component_id: component_id, permissions: permissions });
       }
@@ -243,6 +245,7 @@ export class RoleComponent extends BaseComponent implements OnInit {
           this.toast.showError('Error saving role permissions');
         }
       );
+
   }
   
 }
