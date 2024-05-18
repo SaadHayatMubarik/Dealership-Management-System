@@ -33,7 +33,7 @@
 
   <p-sidebar [(visible)]="modal" position="right" [style]="{width: '55rem'}" >
 
-    <form  (ngSubmit)="onSubmit()" #Seller="ngForm"> 
+    <form (ngSubmit)="onSubmit()" #Seller="ngForm"> 
 
           <div class="sidebar-main">
            <div class="sidebar-header">
@@ -48,9 +48,7 @@
           
           <div class="sidebar-content">
             <div class="card-grey padding">
-
-              <div class="row-form grid" >
-                
+              <div class="row-form grid" >    
                 <div class="col-4">
                   <div class="p-field">
                   <span class="p-float-label">
@@ -237,7 +235,7 @@
                       />
 
                       <div *ngIf="address.invalid && (address.dirty || address.touched)" class="p-error">
-                        <span *ngIf="city.errors?.['required']">
+                        <span *ngIf="address.errors?.['required']">
                           Please Enter Address.</span>  
                             <br>
                             <span *ngIf="address.errors?.['pattern']"> 

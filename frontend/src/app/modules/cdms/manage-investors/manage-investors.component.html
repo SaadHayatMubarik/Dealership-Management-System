@@ -18,7 +18,7 @@
       <app-datatable [data]="data" [cols]="columns" [globalFilterFields]="[]" [actions]="actions"></app-datatable>
     </div>
 
-    <p-sidebar [(visible)]="modal" position="right" [style]="{width: '55rem'}" >
+    <p-sidebar [(visible)]="modal" position="right" [style]="{width: '65rem'}" >
      
     <form (ngSubmit)="onSubmit()" #investorForm="ngForm">
       <div class="sidebar-main">
@@ -58,58 +58,525 @@
                 </span>
                 </div>
               </div>
+            </div>
+            
+            <br>
+              
 
               <div *ngIf="investor_form_input === 'Existing'">
+                <div class="sidebar-header">
+                  <div class="sh-title">
+                    <h3 style="text-align: center;">
+                    Adding Existing Investor
+                    </h3><br>
+                  </div>
+                </div>
+      
+                <div class="row-form grid" >
+                  
+                  <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <p-dropdown
+                         [required]="true"
+                         [options]="customers" 
+                         optionLabel="name"
+                         class="p-inputtext-lg" 
+                         placeholder="Select Investor"
+                         name="investorName"
+                         [(ngModel)]="investor.investorName"
+                         #customer = "ngModel"
+                         (onChange)="onCustomerChange($event)"
+                         ></p-dropdown>       
+                         <div *ngIf="customer.invalid && (customer.dirty || customer.touched)" class="p-error">
+                          <span *ngIf="customer.errors?.['required']">
+                            PLease Select Investor.</span>    
+                        </div>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <input class="p-inputtext-lg"
+                         required
+                         email
+                         pInputText
+                         name="email"
+                         [(ngModel)]="investor.email"
+                         #email = "ngModel"
+                         [disabled] = "true"
+                         />
+                         <div *ngIf="email.invalid && (email.dirty || email.touched)" class="p-error">
+                          <span *ngIf="email.errors?.['required']">
+                            Please Enter Email.</span>   
+                            <br>
+                            <span *ngIf="email.errors?.['email']">
+                              Please Enter A Valid Email.</span>  
+                        </div>
+                        <label htmlFor="email">Email</label>
+                    </span>
+                    </div>
+                  </div>
+
+                  <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <input class="p-inputtext-lg" 
+                        pInputText
+                        required
+                        name="address"
+                        [(ngModel)]="investor.address"
+                        #address = "ngModel"
+                        pattern="^\S(?:\s*\S)*$"
+                        required
+                        [disabled] = "true"
+                        />
+  
+                        <div *ngIf="address.invalid && (address.dirty || address.touched)" class="p-error">
+                          <span *ngIf="address.errors?.['required']">
+                            Please Enter Address.</span>  
+                              <br>
+                              <span *ngIf="address.errors?.['pattern']"> 
+                              Enter Valid Address, Remove unneccessary spaces.
+                            </span>
+                        </div>
+  
+                        <label for="float-label">Address</label>
+                    </span>
+                    </div>
+                  </div>
+
+                </div>
+                <br>
+
+                <div class="row-form grid" >
+
+                  <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <input class="p-inputtext-lg" 
+                        pInputText
+                        name="cnic"
+                        [(ngModel)]="investor.cnic"
+                        #cnic = "ngModel"
+                        minlength="13"
+                        maxlength="13"
+                        pattern="[0-9]*"
+                        [disabled] = "true"
+                        />
+                        <label for="float-label">CNIC</label>
+                    </span>
+                    </div>
+                  </div>
+
+                  <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <input class="p-inputtext-lg" 
+                        pInputText
+                        required
+                        name="province"
+                        [(ngModel)]="investor.province"
+                        #province = "ngModel" 
+                        minlength="3"
+                        maxlength="20"
+                        pattern="^\S(?:\s*\S)*$"
+                        [disabled] = "true"
+                        />
+                        <div *ngIf="province.invalid && (province.dirty || province.touched)" class="p-error">
+                          <span *ngIf="province.errors?.['required']">
+                            Please Enter Province.</span>   
+                            <br>
+                            <span *ngIf="province.errors?.['maxlength']"> 
+                              Exceeding length.</span>  
+                              <br>
+                              <span *ngIf="province.errors?.['minlength']"> 
+                              Province Name too short.
+                            </span>
+                        </div>
+                        <label htmlFor="province">Province</label>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <input class="p-inputtext-lg" 
+                        pInputText
+                        name="city"
+                        [(ngModel)]="investor.city"
+                        #city = "ngModel"
+                        minlength="3"
+                        maxlength="40"
+                        pattern="^\S(?:\s*\S)*$"
+                        required
+                        [disabled] = "true"
+                        />
+  
+                        <div *ngIf="city.invalid && (city.dirty || city.touched)" class="p-error">
+                          <span *ngIf="city.errors?.['required']">
+                            Please Enter City Name of Person/Dealership.</span>   
+                            <br>
+                            <span *ngIf="city.errors?.['maxlength']"> 
+                              Exceeding length.</span>  
+                              <br>
+                              <span *ngIf="city.errors?.['minlength']"> 
+                              City Name too short.
+                            </span>
+                        </div>
+  
+                        <label for="float-label">City</label>
+                    </span>
+                    </div>
+                  </div>
+                </div>
+                <br>
+
+                <div class="row-form grid" >
+                  <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <input class="p-inputtext-lg" 
+                        pInputText
+                        required
+                        name="address"
+                        [(ngModel)]="investor.address"
+                        #address = "ngModel"
+                        pattern="^\S(?:\s*\S)*$"
+                        required
+                        [disabled] = "true"
+                        />
+  
+                        <div *ngIf="address.invalid && (address.dirty || address.touched)" class="p-error">
+                          <span *ngIf="address.errors?.['required']">
+                            Please Enter Address.</span>  
+                              <br>
+                              <span *ngIf="address.errors?.['pattern']"> 
+                              Enter Valid Address, Remove unneccessary spaces.
+                            </span>
+                        </div>
+  
+                        <label for="float-label">Address</label>
+                    </span>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <input class="p-inputtext-lg" 
+                        pInputText
+                        name="phoneNo"
+                        required
+                        [(ngModel)]="investor.phoneNo"
+                        [disabled] = "true"
+                        #phone_no = "ngModel"
+                        pattern="^(03\d{9}|021\d{8})$"
+                        minlength="11"
+                        maxlength="11"
+  
+                        />
+  
+                        <div *ngIf="phone_no.invalid && (phone_no.dirty || phone_no.touched)" class="p-error">
+                          <span *ngIf="phone_no.errors?.['required']">
+                            Please Enter Phone Number.</span>   
+                            <br>
+                            <span *ngIf="phone_no.errors?.['pattern' || 'minlength' || 'maxlength']">
+                              Please Enter Valid Mobile Number.</span>  
+                        </div>
+  
+                        <label htmlFor="number">Contact Number</label>
+                    </span>
+                    </div>
+                  </div>
+
+                    <div class="col-4">
+                    <div class="p-field">
+                      <span class="p-float-label">
+                        <p-dropdown
+                        [required]="true"
+                         [options]="investor_type" 
+                         class="p-inputtext-lg" 
+                         placeholder="Investor Type"
+                         name="investor_type"
+                         [(ngModel)]="investor_type_selected"
+                         #investorType = "ngModel"
+                         ></p-dropdown>       
+                         <div *ngIf="investorType.invalid && (investorType.dirty || investorType.touched)" class="p-error">
+                          <span *ngIf="investorType.errors?.['required']">
+                            This Field is required.</span>    
+                        </div>
+                      </span>
+                    </div>
+                  </div>
+
+                </div>
+             
+
               
+              </div>
+
+            <div *ngIf="investor_form_input === 'New'">
+
+                <div class="sidebar-header">
+                  <div class="sh-title">
+                    <h3 style="text-align: center;">
+                    Adding New Investor
+                    </h3><br>
+                  </div>
+                </div>
+              
+                <div class="row-form grid" >
                 <div class="col-4">
                   <div class="p-field">
                     <span class="p-float-label">
-                      <p-dropdown
-                      [required]="true"
-                       [options]="investor_form" 
-                       class="p-inputtext-lg" 
-                       placeholder="Investor Add option"
-                       name="category"
-                       [(ngModel)]="investor_form_input"
-                       #investorForm = "ngModel"
-                       ></p-dropdown>       
-                       <div *ngIf="investorForm.invalid && (investorForm.dirty || investorForm.touched)" class="p-error">
-                        <span *ngIf="investorForm.errors?.['required']">
-                          This Field is required.</span>    
+                      <input 
+                      class="p-inputtext-lg"
+                       pInputText 
+                       name="name"
+                       required
+                       [(ngModel)]="investor.investorName"
+                       #name = "ngModel"
+                      pattern="^[a-zA-Z]+(?:\s+[a-zA-Z]+)*$"
+                       />
+                       <div *ngIf="name.invalid && (name.dirty || name.touched)" class="p-error">
+                        <span *ngIf="name.errors?.['required']">
+                          Please Enter Name.</span>   
+                          <br>
+                          <span *ngIf="name.errors?.['pattern']">
+                            Please Enter Valid Name. Remove unneccessary spaces</span>  
                       </div>
-                      <label for="float-label">Add option</label>
+                       <label htmlFor="customerName">
+                         Name
+                      </label>
+                  </span>
+                  </div>
+                </div>
+
+                <div class="col-4">
+                  <div class="p-field">
+                    <span class="p-float-label">
+                      <input class="p-inputtext-lg"
+                       required
+                       email
+                       pInputText
+                       name="email"
+                       [(ngModel)]="investor.email"
+                       #email = "ngModel"
+                       />
+                       <div *ngIf="email.invalid && (email.dirty || email.touched)" class="p-error">
+                        <span *ngIf="email.errors?.['required']">
+                          Please Enter Email.</span>   
+                          <br>
+                          <span *ngIf="email.errors?.['email']">
+                            Please Enter A Valid Email.</span>  
+                      </div>
+                      <label htmlFor="email">Email</label>
+                  </span>
+                  </div>
+                </div>
+
+                <div class="col-4">
+                  <div class="p-field">
+                    <span class="p-float-label">
+                      <input class="p-inputtext-lg" 
+                      pInputText
+                      required
+                      name="address"
+                      [(ngModel)]="investor.address"
+                      #address = "ngModel"
+                      pattern="^\S(?:\s*\S)*$"
+                      required
+                      />
+
+                      <div *ngIf="address.invalid && (address.dirty || address.touched)" class="p-error">
+                        <span *ngIf="address.errors?.['required']">
+                          Please Enter Address.</span>  
+                            <br>
+                            <span *ngIf="address.errors?.['pattern']"> 
+                            Enter Valid Address, Remove unneccessary spaces.
+                          </span>
+                      </div>
+
+                      <label for="float-label">Address</label>
+                  </span>
+                  </div>
+                </div>
+
+              </div>
+              <br>
+
+              <div class="row-form grid" >
+                <div class="col-4">
+                  <div class="p-field">
+                    <span class="p-float-label">
+                      <input class="p-inputtext-lg" 
+                      pInputText
+                      name="cnic"
+                      [(ngModel)]="investor.cnic"
+                      #cnic = "ngModel"
+                      minlength="13"
+                      maxlength="13"
+                      pattern="[0-9]*"            
+                      required
+                      />
+
+                      <div *ngIf="cnic.invalid && (cnic.dirty || cnic.touched)" class="p-error">
+                        <span *ngIf="cnic.errors?.['required']">
+                          Please Enter Cnic.</span>  
+                            <br>
+                            <span *ngIf="address.errors?.['pattern']"> 
+                            Enter Valid Cnic
+                          </span>
+                      </div>
+                      <label for="float-label">CNIC</label>
+                  </span>
+                  </div>
+                </div>
+
+                <div class="col-4">
+                  <div class="p-field">
+                    <span class="p-float-label">
+                      <input class="p-inputtext-lg" 
+                      pInputText
+                      required
+                      name="province"
+                      [(ngModel)]="investor.province"
+                      #province = "ngModel" 
+                      minlength="3"
+                      maxlength="20"
+                      pattern="^\S(?:\s*\S)*$"
+                      
+                      />
+                      <div *ngIf="province.invalid && (province.dirty || province.touched)" class="p-error">
+                        <span *ngIf="province.errors?.['required']">
+                          Please Enter Province.</span>   
+                          <br>
+                          <span *ngIf="province.errors?.['maxlength']"> 
+                            Exceeding length.</span>  
+                            <br>
+                            <span *ngIf="province.errors?.['minlength']"> 
+                            Province Name too short.
+                          </span>
+                      </div>
+                      <label htmlFor="province">Province</label>
                     </span>
                   </div>
                 </div>
-
                 <div class="col-4">
                   <div class="p-field">
-                  
+                    <span class="p-float-label">
+                      <input class="p-inputtext-lg" 
+                      pInputText
+                      name="city"
+                      [(ngModel)]="investor.city"
+                      #city = "ngModel"
+                      minlength="3"
+                      maxlength="40"
+                      pattern="^\S(?:\s*\S)*$"
+                      required
+                      />
+  
+                      <div *ngIf="city.invalid && (city.dirty || city.touched)" class="p-error">
+                        <span *ngIf="city.errors?.['required']">
+                          Please Enter City Name of Investor.</span>   
+                          <br>
+                          <span *ngIf="city.errors?.['maxlength']"> 
+                            Exceeding length.</span>  
+                            <br>
+                            <span *ngIf="city.errors?.['minlength']"> 
+                            City Name too short.
+                          </span>
+                      </div>
+  
+                      <label for="float-label">City</label>
+                  </span>
                   </div>
                 </div>
-
               </div>
+              <br>
 
-              <div *ngIf="investor_form_input === 'New'">
-              
-                <div class="col-4">
-                  <div class="p-field">
-                  
+                  <div class="row-form grid">
+
+                    <div class="col-4">
+                      <div class="p-field">
+                        <span class="p-float-label">
+                          <input class="p-inputtext-lg" 
+                          pInputText
+                          required
+                          name="address"
+                          [(ngModel)]="investor.address"
+                          #address = "ngModel"
+                          pattern="^\S(?:\s*\S)*$"
+                          required
+                          />
+    
+                          <div *ngIf="address.invalid && (address.dirty || address.touched)" class="p-error">
+                            <span *ngIf="address.errors?.['required']">
+                              Please Enter Address.</span>  
+                                <br>
+                                <span *ngIf="address.errors?.['pattern']"> 
+                                Enter Valid Address, Remove unneccessary spaces.
+                              </span>
+                          </div>
+    
+                          <label for="float-label">Address</label>
+                      </span>
+                      </div>
+                    </div>
+
+                    <div class="col-4">
+                      <div class="p-field">
+                        <span class="p-float-label">
+                          <input class="p-inputtext-lg" 
+                          pInputText
+                          name="phoneNo"
+                          required
+                          [(ngModel)]="investor.phoneNo"
+                          #phone_no = "ngModel"
+                          pattern="^(03\d{9}|021\d{8})$"
+                          minlength="11"
+                          maxlength="11"
+                          />
+    
+                          <div *ngIf="phone_no.invalid && (phone_no.dirty || phone_no.touched)" class="p-error">
+                            <span *ngIf="phone_no.errors?.['required']">
+                              Please Enter Phone Number.</span>   
+                              <br>
+                              <span *ngIf="phone_no.errors?.['pattern' || 'minlength' || 'maxlength']">
+                                Please Enter Valid Mobile Number.</span>  
+                          </div>
+    
+                          <label htmlFor="number">Contact Number</label>
+                      </span>
+                      </div>
+                    </div>
+
+                    <div class="col-4">
+                      <div class="p-field">
+                        <span class="p-float-label">
+                          <p-dropdown
+                          [required]="true"
+                           [options]="investor_type" 
+                           class="p-inputtext-lg" 
+                           placeholder="Investor Type"
+                           name="investor_type"
+                           [(ngModel)]="investor_type_selected"
+                           #investorType ="ngModel"
+                           ></p-dropdown>       
+                           <div *ngIf="investorType.invalid && (investorType.dirty || investorType.touched)" class="p-error">
+                            <span *ngIf="investorType.errors?.['required']">
+                              This Field is required.</span>    
+                          </div>
+                        </span>
+                      </div>
+                    </div>
+
                   </div>
-                </div>
-
-                <div class="col-4">
-                  <div class="p-field">
-                  
-                  </div>
-                </div>
-
-              </div>
-
-            
-
             </div>
-
+            
             </div>
             <br>
           </div>

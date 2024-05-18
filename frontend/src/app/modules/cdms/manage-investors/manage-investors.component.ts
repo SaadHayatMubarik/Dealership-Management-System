@@ -64,6 +64,7 @@ export class ManageInvestorsComponent extends BaseComponent implements OnInit{
 
   ngOnInit() {
     this.getinvestors();
+    this.getCustomer();
 
     this.columns = [
       {
@@ -144,8 +145,8 @@ onSubmit(){
     .post('/investor/addInvestor', this.investor)
     .subscribe({
       next: (response) => {
-        console.log(this.investor);
-        console.log(response);
+        console.log('investor',this.investor);
+        console.log('response',response);
         this.closeModal();
         this.toast.showSuccess('New Investor Added.');
         this.getinvestors();
@@ -153,7 +154,7 @@ onSubmit(){
       },
       error: () => {
         this.toast.showError();
-        console.log(this.investor);
+        console.log('error',this.investor);
       },
     });
   }
@@ -165,40 +166,59 @@ onSubmit(){
 
 getinvestors(){
   this.apiService.get(`/investor/getInvestor/${this.investor.showroomId}`).subscribe((data) => {
-    console.log(data);
     this.data = data;
   });
 }
 
 
-investorById: any;
-investor_name:string='';
-phone_no:string='';
-cnic_no:string='';
+// investorById: any;
+// investor_name:string='';
+// phone_no:string='';
+// cnic_no:string='';
 
 
 
 getInvestorById(investorId: number){
   this.apiService.get(`/investor/getInvestorDetails/${investorId}`).subscribe((data: IUpdateInvestor) => {
     this.UpdateInvestor = data;
-    console.log(this.UpdateInvestor);
   });
 
 }
-// customers: any[] = [];
 
-// getCustomer(){
-//   this.apiService.get(`/investor/getInvestor/${this.investor.showroomId}`).subscribe((data) => {
-//     console.log(data);
-//     this.customers = data;
-//   });
 
-// }
 
 //update api of investor not made
 
 investor_form : string[] = ['New','Existing'];
 investor_form_input : string= '';
+customers: any[] = [];
+customer_id: number = 0;
+investor_type : string[] = ['Owner', 'ThirdParty'];
+
+getCustomer(){
+  this.apiService.get(`/customer/getCustomerByShowroom/${this.investor.showroomId}`).subscribe((data) => {
+    this.customers = data;
+  });
+
+}
+
+selectedCustomer:any='';
+investor_type_selected:string='';
+
+onCustomerChange(event: any) {
+  this.selectedCustomer = event.value;
+
+  this.investor.investorName = this.selectedCustomer.name;
+  this.investor.email = this.selectedCustomer.email;
+  this.investor.address = this.selectedCustomer.address;
+  this.investor.cnic = this.selectedCustomer.cnic;
+  this.investor.province = this.selectedCustomer.province;
+  this.investor.city = this.selectedCustomer.province;
+  this.investor.phoneNo = this.selectedCustomer.phone_no;
+  this.investor.investor_type = this.investor_type_selected;
+
+}
+
 
 update(){
   this.apiService.put('/investor/updateInvestor', this.UpdateInvestor).subscribe({
@@ -214,4 +234,5 @@ update(){
     },
   });
 }
+
 }
