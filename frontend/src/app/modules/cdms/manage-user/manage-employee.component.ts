@@ -33,11 +33,11 @@ update_user: IUpdateUser = {
     username: '',
     email: '',
     password:'',
-    role:'',
+    role: [],
     showroomId: localStorage.getItem('Showroom Id'),
   };
 
-  roles : string[] = ['ADMIN', 'SALES EMPLOYEE','INVENTORY EMPLOYEE'];
+  // roles : string[] = ['ADMIN', 'SALES EMPLOYEE','INVENTORY EMPLOYEE'];
   
 
   columns: DataTableColumn[] = [];
@@ -144,10 +144,7 @@ update_user: IUpdateUser = {
     });
   }
 
-  userById: any;
-  user_username : string = '';
-  user_email : string = '';
-  user_role: string = '';
+ 
 
   
 
@@ -177,10 +174,18 @@ update_user: IUpdateUser = {
           });
   }
 
-  
-  getRole(){
+  roles:any[]=[];
 
+  getRole(){
+    this.apiService.get(`/role-based/getRole/${this.user.showroomId}`).subscribe((data) => {
+      this.roles = data;
+      console.log('api data', data);
+      console.log('roles', this.roles);
+     
+    });
   }
+
+
 
 
   // update() {

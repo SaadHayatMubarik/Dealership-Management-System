@@ -49,6 +49,7 @@ import { TableModule } from 'primeng/table';
 import { UpdateInventoryComponent } from './update-inventory/update-inventory.component';
 import { EmployeesDetailComponent } from './employees-detail/employees-detail.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 
 
@@ -116,6 +117,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     DialogModule,
     TableModule,
     ReactiveFormsModule,
+    MultiSelectModule,
    
 
 
