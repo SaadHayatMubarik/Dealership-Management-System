@@ -64,6 +64,10 @@ export class CustomerService {
         return await this.customerRepository.find({relations:['inventories'], where: {customer_and_investor_id:customerId}});
     }
 
+    async getCustomerByShowroomId(showroomId: number): Promise<CustomerAndInvestor[]>{
+        return await this.customerRepository.findBy({showroom:{showroom_id:showroomId}});
+    }
+
     async updateCustomer(updateCustomerDto:UpdateCustomerDto): Promise<CustomerAndInvestor>{
         // console.log(updateCustomerDto);
         const { address, catagory, city, cnic, customer_id, email,name,phoneNo, province, type } = updateCustomerDto;
