@@ -97,5 +97,8 @@ export class RoleBasedService {
         //     return object;
         return 
     }
+    async getRolesByShowroom (showroomId: number): Promise<Role[]>{
+        return await this.roleRepository.findBy({showroom:{showroom_id:showroomId}});
+    }
 
 }

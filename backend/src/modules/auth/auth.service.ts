@@ -115,7 +115,7 @@ export class AuthService {
   }
 
 
-  async login( validateUserDto: ValidateUserDto): Promise<{ userId: number ,accessToken: string, showroom: number, role:string}>{
+  async login( validateUserDto: ValidateUserDto): Promise<{ userId: number ,accessToken: string, showroom: number, role:string, permissions: RolePermission[]}>{
     const username = await this.validateUserPassword(validateUserDto);
     // console.log(username);
     if(!username){
@@ -129,18 +129,22 @@ export class AuthService {
     .getRawOne();  
 
     
-    // console.log(role);   
+    console.log('check1');   
     const userId = await this.userRepository.createQueryBuilder('user')
     .select('user_id') 
     .where('user.user_name = :username', {username})
     .getRawOne();    
+    console.log('check2');   
     
     const role = await this.userRepository.createQueryBuilder('user')
     .leftJoin(Role, 'role', 'user.roleRoleId = role.role_id')
-    .select('role.role_name') 
+    .select('role.role_name as role') 
     .where('user.user_name = :username', {username})
     .getRawOne();   
-    return { userId,accessToken, showroom, role };
+    console.log(role);   
+    const permissions = await this.rolePermissionRepository.find({relations:['permission'],where:{role:{showroom:{showroom_id:showroom}}}});
+    // console.log(permissions);
+    return { userId,accessToken, showroom, role, permissions};
   } 
 
   async getUsers(showroomId: number):Promise<GetUserDto[]>{

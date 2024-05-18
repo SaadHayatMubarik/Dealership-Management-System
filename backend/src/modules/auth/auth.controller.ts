@@ -11,6 +11,8 @@ import { AuthGuard } from '@nestjs/passport';
 import { UserRole } from './user-role.enum';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { DeleteResult } from 'typeorm';
+import { Permission } from '../role-based/entities/permission';
+import { RolePermission } from '../role-based/entities/Role-Permission';
 
 
 @Controller('auth')
@@ -31,7 +33,7 @@ export class AuthController {
   }
 
   @Post('login')
-  login(@Body(ValidationPipe) validationUserDto: ValidateUserDto): Promise<{ userId: number, accessToken: string, showroom: number, role:string}> {
+  login(@Body(ValidationPipe) validationUserDto: ValidateUserDto): Promise<{ userId: number, accessToken: string, showroom: number, role:string, permissions: RolePermission[]}> {
     // console.log(validationUserDto);
     return this.authService.login(validationUserDto);
   } 

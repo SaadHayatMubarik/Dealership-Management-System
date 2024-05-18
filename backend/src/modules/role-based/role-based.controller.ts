@@ -5,6 +5,7 @@ import { ActionType } from './action-type.enum';
 import { Component } from './entities/component';
 import { RolePermission } from './entities/Role-Permission';
 import { AddRolePermissionDto } from './dto/addRolePermission.dto';
+import { Role } from './entities/Role';
 
 @Controller('role-based')
 export class RoleBasedController {
@@ -34,5 +35,10 @@ export class RoleBasedController {
     @Get('componentViaRole/:userId')
     getComponentViaRole(@Param('userId') userId: number): Promise<Component[]>{
         return this.roleBasedService.getComponentViaRole(userId);
+    }
+
+    @Get('getRole/:showroomId')
+    getRole(@Param('showroomId') showroomId: number): Promise<Role[]>{
+        return this.roleBasedService.getRolesByShowroom(showroomId);
     }
 }
