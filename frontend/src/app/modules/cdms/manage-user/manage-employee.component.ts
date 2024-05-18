@@ -33,7 +33,7 @@ update_user: IUpdateUser = {
     username: '',
     email: '',
     password:'',
-    role: [],
+    role: '',
     showroomId: localStorage.getItem('Showroom Id'),
   };
 
