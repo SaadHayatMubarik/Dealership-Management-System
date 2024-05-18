@@ -8,6 +8,7 @@ import { UpdateCustomerDto } from './dto/update-customer.dto';
 import { DeleteResult } from 'typeorm';
 import { Showroom } from '../showroom/entity/Showroom';
 import { CustomerAndInvestor } from './entity/CustomerAndInvestor';
+import { retryWhen } from 'rxjs';
 
 @Controller('customer')
 export class CustomerController {
@@ -39,6 +40,11 @@ export class CustomerController {
     @Get('getCustomerRelation/:customerId')
     getCustomerRelation(@Param('customerId') customerId: number): Promise<CustomerAndInvestor[]>{
         return this.customerService.getCustomerRelation(customerId);
+    }
+
+    @Get('getCustomerByShowroom/:showroomId')
+    getCustomerByShowroomId(@Param('showroomId') showroomId: number): Promise<CustomerAndInvestor[]>{
+        return this.customerService.getCustomerByShowroomId(showroomId);
     }
 
     @Put('updateCustomer')
