@@ -1,4 +1,5 @@
 import { IsNotEmpty, IsOptional } from "class-validator";
+import { InvestorType } from "../investor-type.enum";
 
 export class InvestorDto{
     @IsNotEmpty()
@@ -10,12 +11,21 @@ export class InvestorDto{
     @IsNotEmpty()
     phoneNo: string;
 
-    @IsOptional()
-    capitalAmount: number;
+    @IsNotEmpty()
+    email: string;
 
-    @IsOptional()
-    profit: number;
+    @IsNotEmpty()
+    address: string;
+
+    @IsNotEmpty()
+    city: string;
+
+    @IsNotEmpty()
+    province: string;
 
     @IsNotEmpty()
     showroomId: number;
+
+    @IsNotEmpty()
+    investorType: InvestorType;
 }

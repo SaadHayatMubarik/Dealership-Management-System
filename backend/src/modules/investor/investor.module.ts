@@ -4,9 +4,10 @@ import { Investor } from './entity/Investor';
 import { InvestorController } from './investor.controller';
 import { InvestorService } from './investor.service';
 import { Showroom } from '../showroom/entity/Showroom';
+import { CustomerAndInvestor } from '../customer/entity/CustomerAndInvestor';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Investor,Showroom])],
+    imports: [TypeOrmModule.forFeature([Investor,Showroom,CustomerAndInvestor])],
     controllers: [InvestorController],
     providers: [InvestorService]
 })

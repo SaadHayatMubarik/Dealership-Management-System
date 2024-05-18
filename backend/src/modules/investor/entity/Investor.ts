@@ -19,20 +19,17 @@ cnic: string;
 @Column({ unique: true})
 phone: string;
 
-@Column({ default: '0' })
-capital_amount: number;
+
 
 // @ManyToOne(() => Showroom, (showroom) => showroom.investors)
 // showroom: Showroom;
 
-@OneToMany(() => Investment, (investment) => investment.investor)
-investments:  Investment[];
 
-@ManyToOne(() => Showroom, (showroom) => showroom.investors)
-showroom: Showroom;
 
-@OneToOne( () => Account, (account) => account.investor)
-account: Account;
+// @ManyToOne(() => Showroom, (showroom) => showroom.investors)
+// showroom: Showroom;
+
+
 
 
 }

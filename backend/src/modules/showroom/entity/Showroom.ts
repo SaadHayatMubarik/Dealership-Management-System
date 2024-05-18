@@ -4,10 +4,12 @@ import { VehicleType } from "src/modules/vehicle-type/entity/Vehicle-type";
 import { Notification } from "src/modules/notification/entity/Notification";
 import { Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Investor } from "src/modules/investor/entity/Investor";
-import { Customer } from "src/modules/customer/entity/Customer";
+// import { Customer } from "src/modules/customer/entity/Customer";
 import { Account } from "src/modules/account/entity/Account";
 import { Employee } from "src/modules/employee/entity/Employee";
 import { Role } from "src/modules/role-based/entities/Role";
+import { CustomerAndInvestor } from "src/modules/customer/entity/CustomerAndInvestor";
+// import { CustomerAndInvestor } from "src/modules/customer/entity/Customer";
 
 
 @Entity({ name: 'Showroom' })
@@ -42,12 +44,8 @@ export class Showroom {
     @OneToMany(() => Notification, (notification)  => notification.senderShowroom)
     senderNotification: Notification[];
 
-    @OneToMany(() => Investor, (investor) => investor.showroom)
-    investors: Investor[];
-
-
-    @OneToMany(() => Customer, (customer) => customer.showroom)
-    customers: Customer[];
+    @OneToMany(() => CustomerAndInvestor, (customer) => customer.showroom)
+    customers: CustomerAndInvestor[];
 
     @OneToMany(() => Account, (account) =>  account.showroom)
     accounts : Account[] ;

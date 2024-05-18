@@ -1,15 +1,31 @@
 import { IsNotEmpty } from "class-validator";
+import { InvestorType } from "../investor-type.enum";
 
 export class UpdateInvestorDto{
     @IsNotEmpty()
-    investor_id: number;
+    customer_and_investor_id: number;
 
     @IsNotEmpty()
-    investor_name: string;
+    name: string;
 
     @IsNotEmpty()
     cnic: string;
 
     @IsNotEmpty()
-    phone: string;
+    phoneNo: string;
+
+    @IsNotEmpty()
+    email: string;
+
+    @IsNotEmpty()
+    address: string;
+
+    @IsNotEmpty()
+    city: string;
+
+    @IsNotEmpty()
+    province: string;
+
+    @IsNotEmpty()
+    investor_type: InvestorType;
 }

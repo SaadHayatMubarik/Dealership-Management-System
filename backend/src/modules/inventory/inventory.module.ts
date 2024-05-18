@@ -12,17 +12,18 @@ import { VehicleTypeAttribute } from '../vehicle-type-attribute/entity/Vehicle-t
 
 import { Investment } from '../investment/entity/Investment';
 import { Picture } from '../picture/entity/Picture';
-import { Customer } from '../customer/entity/Customer';
+// import { Customer } from '../customer/entity/Customer';
 import { Investor } from '../investor/entity/Investor';
 import { PictureService } from '../picture/picture.service';
 import { S3Service } from '../picture/aws-s3.service';
+import { CustomerAndInvestor } from '../customer/entity/CustomerAndInvestor';
 
 // import { Showroom } from '../showroom/entity/Showroom';
 // import { VehicleType } from '../vehicle-type/Vehicle-type';
 // import { VehicleTypeModule } from '../vehicle-type/vehicle-type.module';
 @Module({
 
-  imports: [TypeOrmModule.forFeature([Inventory,Showroom,VehicleType,StockAttributeValue,MultiValueAttribute,VehicleTypeAttribute,Investment,Picture,Customer,Investor])],
+  imports: [TypeOrmModule.forFeature([Inventory,Showroom,VehicleType,StockAttributeValue,MultiValueAttribute,VehicleTypeAttribute,Investment,Picture,CustomerAndInvestor])],
 
   controllers: [InventoryController],
   providers: [InventoryService,PictureService,S3Service]

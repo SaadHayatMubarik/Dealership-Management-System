@@ -2,13 +2,10 @@ import { Column, Entity, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn 
 import { AccountType } from "../account-type.enum";
 import { AccountCategory } from "../account-category.enum";
 import { Inventory } from "src/modules/inventory/entity/Inventory";
-import { Customer } from "src/modules/customer/entity/Customer";
-import { InvestorDto } from "src/modules/investor/dto/investor.dto";
-import { Investor } from "src/modules/investor/entity/Investor";
-import { User } from "src/modules/auth/entity/User";
 import { Transaction } from "src/modules/transcation/entity/Transcation";
 import { Showroom } from "src/modules/showroom/entity/Showroom";
 import { Employee } from "src/modules/employee/entity/Employee";
+import { CustomerAndInvestor } from "src/modules/customer/entity/CustomerAndInvestor";
 
 
 @Entity({name: 'account'})
@@ -35,11 +32,11 @@ export class Account{
     @OneToOne( () => Inventory, (inventory) => inventory.account)
     inventory : Inventory;
 
-    @OneToOne( () => Customer, (customer) => customer.account)
-    customer : Customer;
+    @OneToOne( () => CustomerAndInvestor, (customer) => customer.account)
+    customer : CustomerAndInvestor;
 
-    @OneToOne( () => Investor, (invesetor) => invesetor.account)
-    investor : Investor;
+    // @OneToOne( () => Investor, (invesetor) => invesetor.account)
+    // investor : Investor;
 
     @OneToMany(() => Transaction, (transaction) =>  transaction.account)
     transactions:Transaction[];

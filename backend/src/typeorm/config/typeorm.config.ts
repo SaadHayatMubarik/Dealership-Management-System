@@ -1,7 +1,9 @@
 import { TypeOrmModuleOptions } from "@nestjs/typeorm";
 import { Account } from "src/modules/account/entity/Account";
 import { User } from "src/modules/auth/entity/User";
-import { Customer } from "src/modules/customer/entity/Customer";
+import { CustomerAndInvestor } from "src/modules/customer/entity/CustomerAndInvestor";
+// import { CustomerAndInvestor } from "src/modules/customer/entity/Customer";
+// import { Customer } from "src/modules/customer/entity/Customer";
 import { Employee } from "src/modules/employee/entity/Employee";
 import { Inventory } from "src/modules/inventory/entity/Inventory";
 import { Investment } from "src/modules/investment/entity/Investment";
@@ -26,7 +28,7 @@ export const typeOrmConfig: TypeOrmModuleOptions  = {
     username: 'root',
     password: 'root',
     database: 'd_m_s',
-    entities: [Inventory, MultiValueAttribute, StockAttributeValue , VehicleType, VehicleTypeAttribute ,User,Showroom,Customer,Notification,Investment,Investor,Picture,Transaction,Account, Employee,Role,Component,Permission,RolePermission],
+    entities: [Inventory, MultiValueAttribute, StockAttributeValue , VehicleType, VehicleTypeAttribute ,User,Showroom,CustomerAndInvestor,Notification,Investment,Picture,Transaction,Account, Employee,Role,Component,Permission,RolePermission],
     synchronize: false, 
     
 }

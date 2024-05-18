@@ -16,7 +16,7 @@ import { VehicleType } from '../vehicle-type/entity/Vehicle-type';
 import { VehicleTypeAttribute } from '../vehicle-type-attribute/entity/Vehicle-type-attribute';
 // import { privateDecrypt } from 'crypto';
 import { UpdateInventoryDto } from './dto/updateInventory.dto';
-import { Customer } from '../customer/entity/Customer';
+// import { Customer } from '../customer/entity/Customer';
 import { CustomerType } from '../customer/customer-type.enum';
 import { Investment } from '../investment/entity/Investment';
 import { Investor } from '../investor/entity/Investor';
@@ -25,6 +25,7 @@ import { PictureService } from '../picture/picture.service';
 import { S3 } from 'aws-sdk';
 import * as AWS from 'aws-sdk';
 import { Picture } from '../picture/entity/Picture';
+import { CustomerAndInvestor } from '../customer/entity/CustomerAndInvestor';
 
 
 @Injectable()
@@ -47,12 +48,10 @@ export class InventoryService {
         private stockValueAttributeRepository: Repository <StockAttributeValue>,
         @InjectRepository(VehicleTypeAttribute)
         private vehicleTypeAttribute: Repository <VehicleTypeAttribute>,
-        @InjectRepository(Customer)
-        private customerRepository: Repository <Customer>,
         @InjectRepository(Investment)
         private  investmentRepository: Repository <Investment>,
-        @InjectRepository(Investor)
-        private investorRepository: Repository <Investor>,
+        @InjectRepository(CustomerAndInvestor)
+        private customerInvestorRepository: Repository <CustomerAndInvestor>,
         @InjectRepository(Picture)
         private readonly pictureRepository: Repository<Picture>,
     ){}
@@ -82,7 +81,7 @@ export class InventoryService {
         inventory.mileage = mileage;
         inventory.vehicleType = vehicleType;
         inventory.showroom = await this.showroomRepository.findOne({ where: { showroom_id: showroomId } });
-        inventory.seller = await this.customerRepository.findOneBy({customer_id: sellerId});
+        inventory.seller = await this.customerInvestorRepository.findOneBy({customer_and_investor_id: sellerId});
         await this.inventoryRepository.save(inventory);
 
         const inventoryId = await this.inventoryRepository.getId(inventory);
@@ -102,15 +101,15 @@ export class InventoryService {
             await this.stockValueAttributeRepository.save(stockAttributeattrValue);
         }
         for (let i=0; i<investor.length; i++){
-            let investorId = await this.investorRepository.getId(investor[i]);
-            let getData = await this.investorRepository.createQueryBuilder('investor')
+            let investorId = await this.customerInvestorRepository.getId(investor[i]);
+            let getData = await this.customerInvestorRepository.createQueryBuilder('customer_investor')
             .select('capital_amount')
-            .where('investor.investor_id = :investorId',{investorId})
+            .where('customer_investor.customer_and_investor_id = :investorId',{investorId})
             .getRawOne();
             if (getData) {
                 const capitalAmount = getData.capital_amount;
                 let getCapitalAmount = capitalAmount + investmentAmount[i];
-            await this.investorRepository.update({investor_id:investorId},{capital_amount: getCapitalAmount});
+            await this.customerInvestorRepository.update({customer_and_investor_id:investorId},{capital_amount: getCapitalAmount});
             }
 
             const investment = new Investment();
@@ -193,8 +192,7 @@ export class InventoryService {
         // if(selling_Price)
         inventory.selling_Price = selling_Price;
         if(buyerId)
-        await this.inventoryRepository.update({inventory_id:inventory_id},{buyer:{customer_id:buyerId}});
-
+        await this.inventoryRepository.update({inventory_id:inventory_id},{buyer:{customer_and_investor_id:buyerId}});
         return await this.inventoryRepository.save(inventory);
     }
     

@@ -2,11 +2,12 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Inventory } from '../inventory/entity/Inventory';
 import { Investor } from '../investor/entity/Investor';
-import { Customer } from '../customer/entity/Customer';
+import { CustomerAndInvestor } from '../customer/entity/CustomerAndInvestor';
+
 
 @Module({
     imports: [
-        TypeOrmModule.forFeature([Inventory, Investor, Customer])
+        TypeOrmModule.forFeature([Inventory, Investor, CustomerAndInvestor])
     ]
 })
 export class AccountModule {}

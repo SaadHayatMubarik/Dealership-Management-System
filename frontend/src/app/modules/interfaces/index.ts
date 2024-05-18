@@ -24,6 +24,11 @@ export interface IInvestor  {
   phoneNo: string;
   capitalAmount?: number;
   profit?: number;
+  email: string;
+  address: string;
+  city: string;
+  province: string;
+  investor_type: string; 
   showroomId: any;
 }
 

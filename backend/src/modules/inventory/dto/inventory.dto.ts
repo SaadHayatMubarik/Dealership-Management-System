@@ -1,11 +1,12 @@
 import { IsNotEmpty, IsNumber, IsOptional,IsEnum } from "class-validator";
 import { InventoryStatus } from "../inventory-status.enum";
 import { StockAttributeValue } from "src/modules/stock-attribute-value/entity/Stock-attribute-value";
-import { Showroom } from "src/modules/showroom/entity/Showroom";
+// import { Showroom } from "src/modules/showroom/entity/Showroom";
 import { VehicleType } from "src/modules/vehicle-type/entity/Vehicle-type";
-import { CustomerCatagory } from "src/modules/customer/customer-catagory.enum";
-import { Investor } from "src/modules/investor/entity/Investor";
-import { Customer } from "src/modules/customer/entity/Customer";
+// import { CustomerCatagory } from "src/modules/customer/customer-catagory.enum";
+// import { Investor } from "src/modules/investor/entity/Investor";
+// import { Customer } from "src/modules/customer/entity/Customer";
+import { CustomerAndInvestor } from "src/modules/customer/entity/CustomerAndInvestor";
 
 export class InventoryDto{
 
@@ -73,7 +74,7 @@ export class InventoryDto{
     sellerId: number;
     
     @IsNotEmpty()
-    investor: Investor[];
+    investor: CustomerAndInvestor[];
 
     @IsNotEmpty()
     investmentAmount: number[];

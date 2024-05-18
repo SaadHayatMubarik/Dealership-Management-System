@@ -11,14 +11,19 @@ export interface IUpdateUser
 export interface IUpdateInvestor
 {
 
-    investor_name: string;
-    phone: string;
+    name: string;
+    phoneNo: string;
     cnic: string;
+    email: string;
+    address: string;
+    city: string;
+    province: string;
+    investor_type: string; 
 }
 
 export interface IUpdateCustomer
 {
-    customer_id: number;
+    customer_and_investor_id: number;
     name: string;
     catagory: string;
     type: string;

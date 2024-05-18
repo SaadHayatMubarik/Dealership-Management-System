@@ -27,15 +27,25 @@ export class ManageInvestorsComponent extends BaseComponent implements OnInit{
 
   UpdateInvestor: IUpdateInvestor =
   {
-    investor_name:'',
-    phone:'',
+    name:'',
+    phoneNo:'',
     cnic:'',
+    email: '',
+    address: '',
+    city: '',
+    province: '',
+    investor_type: ''
   }
 
   investor: IInvestor = {
     investorName: '',
     cnic: '',
     phoneNo:'',
+    email: '',
+    address: '',
+    city: '',
+    province: '',
+    investor_type: '',
     showroomId: localStorage.getItem('Showroom Id'),
   };
 
@@ -57,16 +67,20 @@ export class ManageInvestorsComponent extends BaseComponent implements OnInit{
 
     this.columns = [
       {
-        field: 'investor_name',
+        field: 'name',
         fieldTitle: 'Name',
       },
       {
-        field: 'phone',
+        field: 'phoneNo',
         fieldTitle: 'Phone Number',
       },
       {
         field: 'cnic',
         fieldTitle: 'Cnic',
+      },
+      {
+        field: 'investor_type',
+        fieldTitle: 'Investor Type',
       },
    
     ];
@@ -75,7 +89,7 @@ export class ManageInvestorsComponent extends BaseComponent implements OnInit{
         label: ' Delete',
         icon: 'pi pi-trash',
         command: (event) => {
-          this.investorId = event.investor_id
+          this.investorId = event.customer_and_investor_id
           this.apiService.delete(`/investor/deleteInvestor/${this.investorId}`).subscribe({
             next: (response) => { 
               this.getinvestors();
@@ -93,7 +107,7 @@ export class ManageInvestorsComponent extends BaseComponent implements OnInit{
         label: 'Update',
         icon: 'pi pi-pencil',
         command: (event) => {
-        this.investorId = event.investor_id;
+        this.investorId = event.customer_and_investor_id;
         this.updateSidebarVisible = true;
         this.getInvestorById(this.investorId);
         },

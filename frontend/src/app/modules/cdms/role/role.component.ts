@@ -239,7 +239,7 @@ export class RoleComponent extends BaseComponent implements OnInit {
     
   
     this.apiService
-      .post('/role-based/addRolePermissions', rolePermissionsData)
+      .post('/role-based/addRolePermission', rolePermissionsData)
       .subscribe(
         (response) => {
           console.log('Role permissions saved successfully:', response);

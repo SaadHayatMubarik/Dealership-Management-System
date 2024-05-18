@@ -1,3 +1,5 @@
+// import { CustomerAndInvestor } from "src/modules/customer/entity/Customer";
+import { CustomerAndInvestor } from "src/modules/customer/entity/CustomerAndInvestor";
 import { Inventory } from "src/modules/inventory/entity/Inventory";
 import { Investor } from "src/modules/investor/entity/Investor";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
@@ -17,8 +19,8 @@ investment_date: Date;
 @Column({ default: '0' })
 profit: number;
 
-@ManyToOne(() => Investor, (investor) => investor.investments)
-investor: Investor;
+@ManyToOne(() => CustomerAndInvestor, (investor) => investor.investments)
+investor: CustomerAndInvestor;
 
 @ManyToOne(() => Inventory, (inventory) => inventory.investments)
 inventory: Inventory;

@@ -24,7 +24,7 @@ export class ComponentPermissionDto{
 
 export class AddRolePermissionDto{
     @IsNotEmpty()
-    componentPermissionDto: ComponentPermissionDto[];
+    modulePermissions: ComponentPermissionDto[];
 
     @IsNotEmpty()
     roleName: string;

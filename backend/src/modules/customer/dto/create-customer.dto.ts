@@ -1,4 +1,4 @@
-import { IsNotEmpty } from "class-validator";
+import { IsNotEmpty, IsOptional } from "class-validator";
 import { CustomerType } from "../customer-type.enum";
 import { CustomerCatagory } from "../customer-catagory.enum";
 
@@ -27,7 +27,7 @@ export class CreateCustomerDto{
     @IsNotEmpty()
     address: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     cnic: string;
     
     @IsNotEmpty()

@@ -31,7 +31,7 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
 
   updateCustomer: IUpdateCustomer =
   {
-    customer_id: 0,
+    customer_and_investor_id: 0,
     name: '',
     catagory: '',
     type: '',
@@ -147,7 +147,7 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
       label: 'Delete',
       icon: 'pi pi-trash',
       command: (event) => {
-        this.customerId = event.customer_id;
+        this.customerId = event.customer_and_investor_id;
         this.apiService.delete(`/customer/deleteCustomer/${this.customerId}`).subscribe({
           next: (response) => {
             this.getCustomer();
@@ -164,7 +164,7 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
       label: 'Update',
       icon: 'pi pi-pencil',
       command: (event) => {
-        this.customerId = event.customer_id;
+        this.customerId = event.customer_and_investor_id;
         this.updateSidebarVisible = true;
         this.getCustomerById(this.customerId);
 

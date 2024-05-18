@@ -4,10 +4,11 @@ import { StockAttributeValue } from "../../stock-attribute-value/entity/Stock-at
 import { InventoryStatus } from "../inventory-status.enum";
 import { Showroom } from "src/modules/showroom/entity/Showroom";
 import { Notification } from "src/modules/notification/entity/Notification";
-import { Customer } from "src/modules/customer/entity/Customer";
+// import { Customer } from "src/modules/customer/entity/Customer";
 import { Investment } from "src/modules/investment/entity/Investment";
 import { Picture } from "src/modules/picture/entity/Picture";
 import { Account } from "src/modules/account/entity/Account";
+import { CustomerAndInvestor } from "src/modules/customer/entity/CustomerAndInvestor";
 
 @Entity({ name: 'inventory' })
 export class Inventory {
@@ -78,11 +79,11 @@ showroom: Showroom;
 @OneToOne(() => Notification, (notification) => notification)
 notifications: Notification;
 
-@ManyToOne(() => Customer, (customer) => customer.sellerInventories)
-seller: Customer;
+@ManyToOne(() => CustomerAndInvestor, (customer) => customer.sellerInventories)
+seller: CustomerAndInvestor;
 
-@ManyToOne(() => Customer, (customer) => customer.buyerInventories)
-buyer: Customer;
+@ManyToOne(() => CustomerAndInvestor, (customer) => customer.buyerInventories)
+buyer: CustomerAndInvestor;
 
 @OneToMany(() => Investment, (investment) => investment.inventory)
 investments: Investment[];

@@ -4,29 +4,31 @@ import { CustomerCatagory } from "../customer-catagory.enum";
 import { Inventory } from "src/modules/inventory/entity/Inventory";
 import { Showroom } from "src/modules/showroom/entity/Showroom";
 import { Account } from "src/modules/account/entity/Account";
+import { Investment } from "src/modules/investment/entity/Investment";
+import { InvestorType } from "src/modules/investor/investor-type.enum";
 
 
-@Entity({ name: 'customer' })
-export class Customer {
+@Entity({ name: 'customer_investor' })
+export class CustomerAndInvestor {
     @PrimaryGeneratedColumn()
-    customer_id: number;
+    customer_and_investor_id: number;
 
-    @Column({ type:"enum", enum:CustomerCatagory, default: CustomerCatagory.CUSTOMER })
+    @Column({ type:"enum", enum:CustomerCatagory, nullable: true })
     catagory: CustomerCatagory;
 
     @Column()
     name: string;
 
-    @Column()
+    @Column({ type:"enum", enum:CustomerType, nullable: true })
     type: CustomerType;
 
-    @Column({ unique:true })
+    @Column({ nullable:true })
     cnic: string;
 
-    @Column({ unique:true })
+    @Column()
     phoneNo: string;
 
-    @Column({ unique:true })
+    @Column()
     email: string;
 
     @Column()
@@ -37,7 +39,21 @@ export class Customer {
 
     @Column()
     province: string;
+
+    @Column({ default: '0' })
+    capital_amount: number;
+
+    @Column({ default: false })
+    is_investor: boolean;
+
+    @Column({ default: false })
+    is_customer: boolean;
+
+    @Column({ type:"enum", enum:InvestorType, nullable:true })
+    investor_type: InvestorType; 
     
+    @OneToMany(() => Investment, (investment) => investment.investor)
+    investments:  Investment[];
 
     @OneToMany(() => Inventory, (inventory) => inventory.seller)
     // @JoinTable()

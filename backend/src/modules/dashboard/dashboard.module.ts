@@ -2,12 +2,12 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Inventory } from '../inventory/entity/Inventory';
 import { Employee } from '../employee/entity/Employee';
-import { Customer } from '../customer/entity/Customer';
 import { DashboardController } from './dashboard.controller';
 import { DashboardService } from './dashboard.service';
+import { CustomerAndInvestor } from '../customer/entity/CustomerAndInvestor';
 
 @Module({
-    imports:[TypeOrmModule.forFeature([Inventory,Employee,Customer])],
+    imports:[TypeOrmModule.forFeature([Inventory,Employee,CustomerAndInvestor])],
     controllers: [DashboardController],
     providers: [DashboardService]
 })
