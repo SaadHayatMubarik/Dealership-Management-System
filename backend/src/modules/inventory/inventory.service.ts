@@ -19,7 +19,7 @@ import { UpdateInventoryDto } from './dto/updateInventory.dto';
 // import { Customer } from '../customer/entity/Customer';
 import { CustomerType } from '../customer/customer-type.enum';
 import { Investment } from '../investment/entity/Investment';
-import { Investor } from '../investor/entity/Investor';
+// import { Investor } from '../investor/entity/Investor';
 import { privateDecrypt } from 'crypto';
 import { PictureService } from '../picture/picture.service';
 import { S3 } from 'aws-sdk';

@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { InvestorService } from './investor.service';
-import { Investor } from './entity/Investor';
+// import { Investor } from './entity/Investor';
 import { InvestorDto } from './dto/investor.dto';
 import { UpdateInvestorDto } from './dto/update-investor.dto';
 import { DeleteResult } from 'typeorm';

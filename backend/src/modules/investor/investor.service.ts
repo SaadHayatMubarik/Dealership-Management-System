@@ -1,6 +1,6 @@
 import { BadRequestException, HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Investor } from './entity/Investor';
+// import { Investor } from './entity/Investor';
 import { DeleteResult, Repository } from 'typeorm';
 import { InvestorDto } from './dto/investor.dto';
 import { Showroom } from '../showroom/entity/Showroom';

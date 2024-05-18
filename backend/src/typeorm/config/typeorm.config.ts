@@ -7,7 +7,7 @@ import { CustomerAndInvestor } from "src/modules/customer/entity/CustomerAndInve
 import { Employee } from "src/modules/employee/entity/Employee";
 import { Inventory } from "src/modules/inventory/entity/Inventory";
 import { Investment } from "src/modules/investment/entity/Investment";
-import { Investor } from "src/modules/investor/entity/Investor";
+// import { Investor } from "src/modules/investor/entity/Investor";
 import { MultiValueAttribute } from "src/modules/multi-value-attribute/entity/Multi-value-attribute";
 import { Notification } from "src/modules/notification/entity/Notification";
 import { Picture } from "src/modules/picture/entity/Picture";

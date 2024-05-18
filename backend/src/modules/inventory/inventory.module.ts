@@ -13,7 +13,7 @@ import { VehicleTypeAttribute } from '../vehicle-type-attribute/entity/Vehicle-t
 import { Investment } from '../investment/entity/Investment';
 import { Picture } from '../picture/entity/Picture';
 // import { Customer } from '../customer/entity/Customer';
-import { Investor } from '../investor/entity/Investor';
+// import { Investor } from '../investor/entity/Investor';
 import { PictureService } from '../picture/picture.service';
 import { S3Service } from '../picture/aws-s3.service';
 import { CustomerAndInvestor } from '../customer/entity/CustomerAndInvestor';
