@@ -789,34 +789,6 @@
                         </div>
                       </div>
 
-                      <div class="col-4">
-                        <div class="p-field">
-                          <span class="p-float-label">      
-                            <app-numeric-textbox 
-                            name="percentage"
-                            pattern="[1-9]?[0-9]|100" 
-                            required
-                            [(ngModel)]="form.percentage_invested"
-                            (change)="calculateInvestment(form)"
-                            >
-                            </app-numeric-textbox>
-                          </span>
-                        </div>
-                      </div>
-
-                      <!-- <div class="col-4">
-                        <div class="p-field">
-                          <span class="p-float-label">      
-                            <input 
-                              class="p-inputtext-lg"
-                              pInputText
-                              name="percentage"
-                              required
-                            />
-                            <label for="percentage">Percentage</label>
-                          </span>
-                        </div>
-                      </div> -->
 
                       <div class="col-4">
                         <div class="p-field">
@@ -831,7 +803,6 @@
                             />
                             <label for="float-label"
                               >Amount Invested
-                             
                             </label>
                           </span>
                         </div>

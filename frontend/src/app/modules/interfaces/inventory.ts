@@ -47,7 +47,6 @@ export interface IInventory {
 
 export interface investment {
  investor_id:number;
- percentage_invested:number;
  investmentAmount: number;
 }
 
