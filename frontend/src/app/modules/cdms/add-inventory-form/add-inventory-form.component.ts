@@ -341,23 +341,13 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   percentage: number = 0; // Assuming you have a property to store the percentage
 
   // Add the calculateInvestment method
-  calculateInvestment(investor: investment) {
-    const percentage = investor.percentage_invested;
-    const costPrice = this.vehicleInventory.costPrice;
-    investor.investmentAmount = (percentage / 100) * costPrice;
-    // Log the updated investor object to check if the investmentAmount is being updated
-    console.log('Updated Investor:', investor);
-  }
+
 
   addInvestorForm() {
 
-    const defaultPercentage = 0;
-    const investmentAmount = (defaultPercentage / 100) * this.vehicleInventory.costPrice;
-
     this.investorForms.push({
       investor_id: 0,
-      percentage_invested:defaultPercentage,
-      investmentAmount: investmentAmount,
+      investmentAmount: 0,
     });
     console.log('this.investorForms', this.investorForms);
 

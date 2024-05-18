@@ -242,13 +242,10 @@ export class RoleComponent extends BaseComponent implements OnInit {
       .post('/role-based/addRolePermission', rolePermissionsData)
       .subscribe(
         (response) => {
-          console.log('Role permissions saved successfully:', response);
-          console.log('OBJ', rolePermissionsData);
           this.toast.showSuccess('Role permissions saved successfully');  
+          this.closeModal();
         },
         (error) => {
-          console.error('Error saving role permissions:', error);
-          console.log('OBJ', rolePermissionsData);
           this.toast.showError('Error saving role permissions');
         }
       );

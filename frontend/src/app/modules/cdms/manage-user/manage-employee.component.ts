@@ -60,6 +60,7 @@ update_user: IUpdateUser = {
   ngOnInit() {
 
     this.getemployee();
+    this.getRole();
 
     this.columns = [
       {
@@ -174,6 +175,11 @@ update_user: IUpdateUser = {
               console.log('Error Object:', this.update_user);              
             },
           });
+  }
+
+  
+  getRole(){
+
   }
 
 

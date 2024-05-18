@@ -185,8 +185,20 @@ getInvestorById(investorId: number){
   });
 
 }
+// customers: any[] = [];
+
+// getCustomer(){
+//   this.apiService.get(`/investor/getInvestor/${this.investor.showroomId}`).subscribe((data) => {
+//     console.log(data);
+//     this.customers = data;
+//   });
+
+// }
 
 //update api of investor not made
+
+investor_form : string[] = ['New','Existing'];
+investor_form_input : string= '';
 
 update(){
   this.apiService.put('/investor/updateInvestor', this.UpdateInvestor).subscribe({
