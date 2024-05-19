@@ -10,6 +10,7 @@ import { Showroom } from '../showroom/entity/Showroom';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
 import { Inventory } from '../inventory/entity/Inventory';
 import { CustomerAndInvestor } from './entity/CustomerAndInvestor';
+import { notEqual } from 'assert';
 
 @Injectable()
 export class CustomerService {
@@ -65,7 +66,7 @@ export class CustomerService {
     }
 
     async getCustomerByShowroomId(showroomId: number): Promise<CustomerAndInvestor[]>{
-        return await this.customerRepository.findBy({showroom:{showroom_id:showroomId}});
+        return await this.customerRepository.find({where:{showroom:{showroom_id:showroomId},is_customer:true}});
     }
 
     async updateCustomer(updateCustomerDto:UpdateCustomerDto): Promise<CustomerAndInvestor>{

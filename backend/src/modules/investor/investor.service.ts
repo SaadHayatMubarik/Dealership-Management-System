@@ -38,6 +38,7 @@ export class InvestorService {
             investor.is_investor = true;
             investor.investor_type = investorType;
             investor.showroom = await this.showroomRepository.findOneBy({showroom_id: showroomId});
+            // console.log(investor);
             return await this.investorRepository.save(investor);
         }
     }

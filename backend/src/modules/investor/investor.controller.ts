@@ -12,6 +12,7 @@ export class InvestorController {
 
     @Post('addInvestor') 
     addInvestor(@Body()  addInvestorDto: InvestorDto): Promise<CustomerAndInvestor> {
+        // console.log(addInvestorDto);
         return this.investorService.addInvestor(addInvestorDto);
     }
 

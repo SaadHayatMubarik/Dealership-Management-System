@@ -45,7 +45,7 @@ export class ManageInvestorsComponent extends BaseComponent implements OnInit{
     address: '',
     city: '',
     province: '',
-    investor_type: '',
+    investorType: '',
     showroomId: localStorage.getItem('Showroom Id'),
   };
 
@@ -138,9 +138,27 @@ validateAlphabeticInput(event: KeyboardEvent) {
   }
 }
 
+selectedCustomer:any='';
+investor_type_selected:string='';
+
+onCustomerChange(event: any) {
+  this.selectedCustomer = event.value;
+
+  this.investor.investorName = this.selectedCustomer.name;
+  this.investor.email = this.selectedCustomer.email;
+  this.investor.address = this.selectedCustomer.address;
+  this.investor.cnic = this.selectedCustomer.cnic;
+  this.investor.province = this.selectedCustomer.province;
+  this.investor.city = this.selectedCustomer.province;
+  this.investor.phoneNo = this.selectedCustomer.phone_no;
+  this.investor.investorType = this.investor_type_selected;
+
+}
+
 onSubmit(){
 
   if(this.investorForm.valid){
+    this.investor.investorType = this.investor_type_selected;
     this.apiService
     .post('/investor/addInvestor', this.investor)
     .subscribe({
@@ -202,22 +220,6 @@ getCustomer(){
 
 }
 
-selectedCustomer:any='';
-investor_type_selected:string='';
-
-onCustomerChange(event: any) {
-  this.selectedCustomer = event.value;
-
-  this.investor.investorName = this.selectedCustomer.name;
-  this.investor.email = this.selectedCustomer.email;
-  this.investor.address = this.selectedCustomer.address;
-  this.investor.cnic = this.selectedCustomer.cnic;
-  this.investor.province = this.selectedCustomer.province;
-  this.investor.city = this.selectedCustomer.province;
-  this.investor.phoneNo = this.selectedCustomer.phone_no;
-  this.investor.investor_type = this.investor_type_selected;
-
-}
 
 
 update(){

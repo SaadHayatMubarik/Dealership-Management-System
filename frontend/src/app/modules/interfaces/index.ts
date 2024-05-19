@@ -28,7 +28,7 @@ export interface IInvestor  {
   address: string;
   city: string;
   province: string;
-  investor_type: string; 
+  investorType: string; 
   showroomId: any;
 }
 
