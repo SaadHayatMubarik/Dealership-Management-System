@@ -151,13 +151,9 @@ update_user: IUpdateUser = {
   getUserById(userId: number) {
     this.apiService.get(`/auth/getUser/${userId}`).subscribe((data: IUpdateUser) => {
       this.update_user = data;
+      console.log('update user', this.update_user );
     });
   }
-  // updateUser(){
-  //   const user = {this.userById, this.user_username, this.user_email, this.user_role};
-  //   this.apiService.put(`/auth/updateUserDetails/${}`)
-  // }
-
 
   update(){
           this.apiService.put('/auth/updateUserDetails', this.update_user).subscribe({

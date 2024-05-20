@@ -117,6 +117,8 @@ export class ManageInvestorsComponent extends BaseComponent implements OnInit{
   }
 
   @ViewChild('investorForm') investorForm!: NgForm;
+  @ViewChild('updateForm') updateForm!: NgForm;
+
 
 
   validateNumericInput(event: KeyboardEvent) {
@@ -223,18 +225,26 @@ getCustomer(){
 
 
 update(){
-  this.apiService.put('/investor/updateInvestor', this.UpdateInvestor).subscribe({
-    next: (response) => {
-      this.toast.showSuccess('Investor information updated.');
-      this.updateSidebarVisible = false;
-      this.getinvestors();
-      console.log('Success Object:', this.UpdateInvestor);
-    },
-    error: () => {
-      this.toast.showError('Server Error! Please try again later.');
-      console.log('Error Object:', this.UpdateInvestor);              
-    },
-  });
+
+  if (this.updateForm.valid)
+    {
+      this.apiService.put('/investor/updateInvestor', this.UpdateInvestor).subscribe({
+        next: (response) => {
+          this.toast.showSuccess('Investor information updated.');
+          this.updateSidebarVisible = false;
+          this.getinvestors();
+          console.log('Success Object:', this.UpdateInvestor);
+        },
+        error: () => {
+          this.toast.showError('Server Error! Please try again later.');
+          console.log('Error Object:', this.UpdateInvestor);              
+        },
+      });
+    }
+   else (
+   this.toast.showError("Please fill the form correctly.")
+    )
+
 }
 
 }
