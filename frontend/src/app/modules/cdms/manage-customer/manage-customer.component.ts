@@ -56,6 +56,7 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
     showroomId: localStorage.getItem('Showroom Id'),
     
   };
+  
   selectedTabIndex: number = 0;
   category: string[] = ["DEALERSHIP", "AGENT", "CUSTOMER"];
   customerType: string[] = ["BUYER", "SELLER"];
@@ -68,6 +69,9 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
   // customerId: number = 0;   //for deleting customer
   updateSidebarVisible:boolean = false;
 
+  customer_form : string[] = ['New','Existing'];
+  customer_form_input : string= '';
+  investors: string[] = [];
 
   constructor(private apiService : ApiHelperService, private toast : ToastService )
   {
@@ -215,7 +219,10 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
     });
   }
 
+  // investor that are not customer work here
   
+  // getInvestors(){}
+  // onCustomerChange($event){}
 
 
  
