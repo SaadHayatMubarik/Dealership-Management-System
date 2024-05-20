@@ -123,27 +123,30 @@ export class AuthService {
     }
     const payload: JwtPayload = { username };
     const accessToken = await this.jwtService.sign(payload);
+
     const showroom = await this.userRepository.createQueryBuilder('user')
     .select('showroomShowroomId') 
     .where('user.user_name = :username', {username})
     .getRawOne();  
 
     
-    console.log('check1');   
+    // console.log('check1');   
     const userId = await this.userRepository.createQueryBuilder('user')
     .select('user_id') 
     .where('user.user_name = :username', {username})
     .getRawOne();    
-    console.log('check2');   
+    // console.log('check2');   
     
     const role = await this.userRepository.createQueryBuilder('user')
     .leftJoin(Role, 'role', 'user.roleRoleId = role.role_id')
     .select('role.role_name as role') 
     .where('user.user_name = :username', {username})
     .getRawOne();   
-    console.log(role);   
-    const permissions = await this.rolePermissionRepository.find({relations:['permission'],where:{role:{showroom:{showroom_id:showroom}}}});
-    // console.log(permissions);
+
+    const roleResult = role ? role.role : null;
+    // console.log(roleResult);   
+    const permissions = await this.rolePermissionRepository.find({where:{role:{role_name:roleResult,showroom:{showroom_id:showroom}}}});
+    console.log(permissions);
     return { userId,accessToken, showroom, role, permissions};
   } 
 
