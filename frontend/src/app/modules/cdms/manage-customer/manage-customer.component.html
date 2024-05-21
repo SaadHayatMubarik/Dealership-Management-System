@@ -84,7 +84,7 @@
                     [required]="true"
                      [options]="category" 
                      class="p-inputtext-lg" 
-                     placeholder="Select a Vehicle Type"
+                     placeholder="Select a Category"
                      name="category"
                      [(ngModel)]="customer.category"
                      #catergory = "ngModel"
@@ -323,19 +323,15 @@
                             Enter Valid Cnic Number.
                           </span>
                       </div>
-
                       <label for="float-label">CNIC</label>
                   </span>
                   </div>
-                </div>
-
-                
+                </div>       
               </div>
               </div>
 
               <div *ngIf="customer_form_input === 'Existing'">
                
-      
                 <div class="row-form grid" > 
                   <div class="col-4">
                     <div class="p-field">
@@ -348,14 +344,15 @@
                          placeholder="Select Investor"
                          name="investorName"
                          [(ngModel)]="customer.name"
-                         #customer = "ngModel"
-                        
+                         #customer_name = "ngModel"
+                         (onChange)="onCustomerChange($event)"
                          ></p-dropdown> 
-                         <label>Select Customer</label>      
-                         <div *ngIf="customer.invalid && (customer.dirty || customer.touched)" class="p-error">
-                          <span *ngIf="customer.errors?.['required']">
+                      
+                         <div *ngIf="customer_name.invalid && (customer_name.dirty || customer_name.touched)" class="p-error">
+                          <span *ngIf="customer_name.errors?.['required']">
                             PLease Select Customer.</span>    
                         </div>
+                        <label for="float-label">Customer Name</label>
                       </span>
                     </div>
                   </div>
@@ -368,8 +365,7 @@
                          email
                          pInputText
                          name="email"
-                      
-                       
+                         [(ngModel)]="customer.email"
                          [disabled] = "true"
                          />
                          <!-- <div *ngIf="email.invalid && (email.dirty || email.touched)" class="p-error">
@@ -391,10 +387,9 @@
                         pInputText
                         required
                         name="customer_address"
-                      
                         pattern="^\S(?:\s*\S)*$"
-
                         [disabled] = "true"
+                        [(ngModel)]="customer.address"
                         />
   
                         <!-- <div *ngIf="customer_address.invalid && (customer_address.dirty || customer_address.touched)" class="p-error">
@@ -422,8 +417,7 @@
                         <input class="p-inputtext-lg" 
                         pInputText
                         name="cnic"
-                        
-                    
+                        [(ngModel)]="customer.cnic"
                         minlength="13"
                         maxlength="13"phoneNo
                         pattern="[0-9]*"
@@ -441,8 +435,7 @@
                         pInputText
                         required
                         name="province"
-                      
-              
+                        [(ngModel)]="customer.province"
                         minlength="3"
                         maxlength="20"
                         pattern="^\S(?:\s*\S)*$"
@@ -470,8 +463,7 @@
                         <input class="p-inputtext-lg" 
                         pInputText
                         name="city"
-                     
-                      
+                        [(ngModel)]="customer.city"
                         minlength="3"
                         maxlength="40"
                         pattern="^\S(?:\s*\S)*$"
@@ -511,18 +503,57 @@
                         pattern="^(03\d{9}|021\d{8})$"
                         minlength="11"
                         maxlength="11"
-  
+                        [(ngModel)]="customer.phoneNo"
                         />
   
-                        <!-- <div *ngIf="phone_no.invalid && (phone_no.dirty || phone_no.touched)" class="p-error">
-                          <span *ngIf="phone_no.errors?.['required']">
-                            Please Enter Phone Number.</span>   
-                            <br>
-                            <span *ngIf="phone_no.errors?.['pattern' || 'minlength' || 'maxlength']">
-                              Please Enter Valid Mobile Number.</span>  
-                        </div>
-   -->
                         <label htmlFor="number">Contact Number</label>
+                    </span>
+                    </div>
+                  </div>
+
+                  <div class="col-4">
+                    <div class="p-field">
+                    <span class="p-float-label">
+                      <p-dropdown
+                      [required]="true"
+                       [options]="category" 
+                       class="p-inputtext-lg" 
+                       placeholder="Select Category"
+                       name="category"
+                       [(ngModel)]="customer.category"
+                       #catergory = "ngModel"
+                       ></p-dropdown>       
+                       <div *ngIf="catergory.invalid && (catergory.dirty || catergory.touched)" class="p-error">
+                        <span *ngIf="catergory.errors?.['required']">
+                          Category is required.</span>    
+                      </div>
+  
+                      <label for="float-label">Customer Category</label>
+  
+                    </span>
+                    </div>
+                  </div>
+
+                  <div class="col-4">
+                    <div class="p-field">
+                    <span class="p-float-label">
+                      <p-dropdown
+                      [required]="true"
+                      placeholder="customer type"
+                       [options]="customerType" 
+                       class="p-inputtext-lg" 
+                       name="customer_type"
+                       [(ngModel)]="customer.type"
+                       #type = "ngModel"
+                       ></p-dropdown>
+  
+                       <div *ngIf="type.invalid && (type.dirty || type.touched)" class="p-error">
+                        <span *ngIf="type.errors?.['required']">
+                          Customer Type is required.</span>    
+                      </div>
+  
+                      <label for="float-label">Customer Type</label>
+  
                     </span>
                     </div>
                   </div>

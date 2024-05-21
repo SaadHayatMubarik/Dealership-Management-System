@@ -7,7 +7,7 @@ import {
   IDataTableAction,
   IObject,
 } from 'src/app/shared/interfaces/common';
-import { ISeller} from '../../interfaces';
+import {  ISeller} from '../../interfaces';
 import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
 import { IUpdateCustomer } from '../../interfaces/update';
@@ -56,7 +56,7 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
     showroomId: localStorage.getItem('Showroom Id'),
     
   };
-  
+
   selectedTabIndex: number = 0;
   category: string[] = ["DEALERSHIP", "AGENT", "CUSTOMER"];
   customerType: string[] = ["BUYER", "SELLER"];
@@ -80,6 +80,7 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
    this.getCustomer();
+   this.getInvestors();
 
    this.columns=[
     {
@@ -89,10 +90,6 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
     {
       field: 'type',
       fieldTitle: 'Type',
-    },
-    {
-      field: 'cnic',
-      fieldTitle: 'Cnic'
     },
     {
       field: 'phoneNo',
@@ -186,6 +183,11 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
     this.getCustomer();
   }
 
+  
+  
+
+ 
+
   onSubmit(){
        
       if(this.SellerForm.valid) {
@@ -197,6 +199,7 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
             this.closeModal();
             this.SellerForm.reset();
             this. getCustomer();
+            console.log('Customer', this.customer);
           },
           error: () => {
             this.toast.showError('Error Occured');
@@ -211,6 +214,8 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
 
 
 
+
+
   getCustomer(){
    
     this.apiService.get(`/customer/getCustomer/${this.customer.showroomId}/${this.category[this.selectedTabIndex]}`).subscribe((data) => {
@@ -221,8 +226,29 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
 
   // investor that are not customer work here
   
-  // getInvestors(){}
-  // onCustomerChange($event){}
+  getInvestors(){
+    this.apiService.get(`/investor/getInvestor/${this.customer.showroomId}`).subscribe((data) => {
+      this.investors = data;
+    });
+  }
+
+  selectedInvestor:any='';
+
+  onCustomerChange(event : any){
+    this.selectedInvestor = event.value;
+
+    this.customer.name = this.selectedInvestor.name;
+    this.customer.email = this.selectedInvestor.email;
+    this.customer.address = this.selectedInvestor.address;
+    this.customer.cnic = this.selectedInvestor.cnic;
+    this.customer.province = this.selectedInvestor.province;
+    this.customer.city = this.selectedInvestor.city;
+    this.customer.phoneNo = this.selectedInvestor.phoneNo;
+  
+
+
+
+  }
 
 
  
