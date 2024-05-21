@@ -777,8 +777,8 @@
                           <span class="p-float-label">
                             <p-dropdown
                               [options]="investors"
-                              optionLabel="investor_name"
-                              optionValue="investor_id"
+                              optionLabel="name"
+                              optionValue="customer_and_investor_id"
                               class="p-inputtext-lg"
                               placeholder="Select a investor"
                               [(ngModel)]="form.investor_id"
@@ -793,14 +793,27 @@
                       <div class="col-4">
                         <div class="p-field">
                           <span class="p-float-label">
-                            <input
+                            <!-- <input
                               class="p-inputtext-lg"
+                              type="number"
                               pInputText
                               name="investmentAmount"
                               required                            
-                              disabled
                               [(ngModel)]="form.investmentAmount"
-                            />
+                            /> -->
+
+                            <p-inputNumber
+                            class="p-inputtext-lg"
+                            mode="currency"
+                            currency="PKR"
+                            locale="en-US"
+                            name="investmentAmount"
+                            [(ngModel)]="form.investmentAmount"
+                            pattern="^\d+$"
+                            [required]="true"
+                            [ngModelOptions]="{standalone: true}"
+                          />
+                          
                             <label for="float-label"
                               >Amount Invested
                             </label>

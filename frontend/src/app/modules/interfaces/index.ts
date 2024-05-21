@@ -46,6 +46,20 @@ export interface ISeller{
     showroomId:any;
 }
 
+export interface IExistingInvestor
+{
+  category:string;
+  type: string;
+  name: string;
+  phoneNo: string;
+  email:string;
+  province:string;
+  city:string;
+  address:string;
+  cnic: string;
+  showroomId:any;
+}
+
 
 
 export interface Ilogin {
