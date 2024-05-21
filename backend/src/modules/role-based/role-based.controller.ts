@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseEnumPipe, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseEnumPipe, Patch, Post } from '@nestjs/common';
 import { RoleBasedService } from './role-based.service';
 import { Permission } from './entities/permission';
 import { ActionType } from './action-type.enum';
@@ -40,5 +40,10 @@ export class RoleBasedController {
     @Get('getRole/:showroomId')
     getRole(@Param('showroomId') showroomId: number): Promise<Role[]>{
         return this.roleBasedService.getRolesByShowroom(showroomId);
+    }
+
+    @Patch('updateRole/:roleId/:roleName')
+    updateRole(@Param('roleId') roleId: number, @Param('roleName') roleName: string): Promise<Role>{
+        return this.roleBasedService.updateRoleById(roleId,roleName);
     }
 }

@@ -100,5 +100,10 @@ export class RoleBasedService {
     async getRolesByShowroom (showroomId: number): Promise<Role[]>{
         return await this.roleRepository.findBy({showroom:{showroom_id:showroomId}});
     }
+    async updateRoleById (roleId: number,roleName: string): Promise<Role>{
+        const role = await this.roleRepository.findOneBy({role_id:roleId});
+        role.role_name = roleName;
+        return await this.roleRepository.save(role);
+    }
 
 }
