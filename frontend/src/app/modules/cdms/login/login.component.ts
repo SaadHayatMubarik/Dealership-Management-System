@@ -67,10 +67,10 @@ export class LoginComponent implements OnInit{
           const showroomId = response.showroom;
           const role = response.role;
           const userId = response.userId;
-          localStorage.setItem('jwtToken', jwtToken);
-          localStorage.setItem('Showroom Id', showroomId['showroomShowroomId']);
-          localStorage.setItem('userRole', role['role']);
-          localStorage.setItem('user Id', userId['user_id']);
+          localStorage.setItem('jwtToken', jwtToken); 
+          localStorage.setItem('Showroom Id', showroomId);
+          localStorage.setItem('userRole', role);
+          localStorage.setItem('user Id', userId);
           this.toast.showSuccess('WELCOME');
           // this.auth.autoLogout(36000);
 

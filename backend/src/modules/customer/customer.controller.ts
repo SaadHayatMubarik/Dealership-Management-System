@@ -44,7 +44,7 @@ export class CustomerController {
 
     @Get('getCustomerByShowroom/:showroomId')
     getCustomerByShowroomId(@Param('showroomId') showroomId: number): Promise<CustomerAndInvestor[]>{
-        return this.customerService.getCustomerByShowroomId(showroomId);
+            return this.customerService.getAvailableCustomerByShowroomId(showroomId);
     }
 
     @Put('updateCustomer')

@@ -53,7 +53,7 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
     city:'',
     address:'',
     cnic: '',
-    showroomId: localStorage.getItem('Showroom Id'),
+    showroomId: Number(localStorage.getItem('Showroom Id')),
     
   };
 
@@ -227,7 +227,7 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
   // investor that are not customer work here
   
   getInvestors(){
-    this.apiService.get(`/investor/getInvestor/${this.customer.showroomId}`).subscribe((data) => {
+    this.apiService.get(`/investor/getInvestor/1/${this.customer.showroomId}`).subscribe((data) => {
       this.investors = data;
     });
   }

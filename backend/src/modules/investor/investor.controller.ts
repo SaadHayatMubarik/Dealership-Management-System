@@ -16,9 +16,11 @@ export class InvestorController {
         return this.investorService.addInvestor(addInvestorDto);
     }
 
-    @Get('getInvestor/:showroomId')
-    getInvestor(@Param('showroomId') showroomId:number): Promise<CustomerAndInvestor[]>{
-        console.log(showroomId);
+    @Get('getInvestor/:flag/:showroomId')
+    getInvestor(@Param('flag') flag: number ,@Param('showroomId') showroomId:number): Promise<CustomerAndInvestor[]>{
+        if(flag==1)
+          return  this.investorService.getAvailableInvestor(showroomId);
+        else if (flag==0)
         return this.investorService.getInvestor(showroomId);
     }
 

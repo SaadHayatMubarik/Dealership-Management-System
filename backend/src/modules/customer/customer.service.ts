@@ -42,19 +42,28 @@ export class CustomerService {
         customer.type = types[i]
         }
         customer.showroom = await this.showroomRepository.findOneBy({showroom_id: showroomId});
+        // console.log(customer.showroom);
         for(let i=0; i<catagories.length;i++){
         if(category == catagories[i])
         customer.catagory = catagories[i];
         }
+        // customer.is_customer=true;
+        return await this.customerRepository.save(customer);
+    }
+    else{
+        const customer = await this.customerRepository.findOneBy({cnic:cnic,showroom:{showroom_id:showroomId}});
+        customer.is_customer = true;
+        customer.catagory = category;
+        customer.type = type;
         return await this.customerRepository.save(customer);
     }
     }
     async getCustomer(showroomId: number, CustomerCatagory:CustomerCatagory):  Promise<CustomerAndInvestor[]>{
-        return await this.customerRepository.findBy({showroom:{showroom_id:showroomId}, catagory:CustomerCatagory});
+        return await this.customerRepository.findBy({showroom:{showroom_id:showroomId}, catagory:CustomerCatagory, is_customer:true});
     }
 
     async getCustomerByType(showroomId: number, CustomerCatagory:CustomerCatagory, customerType: CustomerType){
-        return await this.customerRepository.findBy({ showroom:{showroom_id:showroomId}, catagory:CustomerCatagory, type: customerType })
+        return await this.customerRepository.findBy({ showroom:{showroom_id:showroomId}, catagory:CustomerCatagory, type: customerType, is_customer:true })
     }
 
     async getCustomerDetails(customerId: number): Promise<CustomerAndInvestor>{
@@ -65,8 +74,8 @@ export class CustomerService {
         return await this.customerRepository.find({relations:['inventories'], where: {customer_and_investor_id:customerId}});
     }
 
-    async getCustomerByShowroomId(showroomId: number): Promise<CustomerAndInvestor[]>{
-        return await this.customerRepository.find({where:{showroom:{showroom_id:showroomId},is_customer:true}});
+    async getAvailableCustomerByShowroomId(showroomId: number): Promise<CustomerAndInvestor[]>{
+        return await this.customerRepository.find({where:{showroom:{showroom_id:showroomId},is_customer:true,is_investor:false}});
     }
 
     async updateCustomer(updateCustomerDto:UpdateCustomerDto): Promise<CustomerAndInvestor>{

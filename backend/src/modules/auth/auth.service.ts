@@ -161,7 +161,7 @@ export class AuthService {
     }
 
     const { user_id: userId, role: { role_name: role }, showroom: { showroom_id: showroom } } = user;
-
+// console.log(userId+ '-', role+ '-',showroom)
     const permissions = await this.rolePermissionRepository.find({
       relations: ['permission'],
       where: {

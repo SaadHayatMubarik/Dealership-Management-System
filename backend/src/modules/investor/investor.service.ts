@@ -51,6 +51,10 @@ export class InvestorService {
         return await this.investorRepository.findBy({showroom:{showroom_id:showroomId},is_investor:true});
     }
 
+    async getAvailableInvestor(showroomId: number): Promise<CustomerAndInvestor[]>{
+        return await this.investorRepository.findBy({showroom:{showroom_id:showroomId},is_investor:true, is_customer:false})
+    }
+
     async updateInvestor(updateInvestorDto: UpdateInvestorDto):Promise<CustomerAndInvestor>{
         const { cnic, customer_and_investor_id, name, phoneNo, province, address, city, email, investor_type } = updateInvestorDto;
         const investor = await this.investorRepository.findOneBy({customer_and_investor_id:customer_and_investor_id});

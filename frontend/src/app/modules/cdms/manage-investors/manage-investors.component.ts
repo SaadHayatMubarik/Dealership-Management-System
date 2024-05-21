@@ -185,7 +185,7 @@ onSubmit(){
 }
 
 getinvestors(){
-  this.apiService.get(`/investor/getInvestor/${this.investor.showroomId}`).subscribe((data) => {
+  this.apiService.get(`/investor/getInvestor/0/${this.investor.showroomId}`).subscribe((data) => {
     this.data = data;
   });
 }
