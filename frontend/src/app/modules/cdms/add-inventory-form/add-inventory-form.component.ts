@@ -203,7 +203,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
       .subscribe({
         next: (response: IObject[]) => {
           this.investors = response;
-          console.log('response', response);
+          console.log('Investors', response);
           
         },
         complete: () => {},
@@ -218,6 +218,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
       .subscribe({
         next: (response) => {
           this.customers = response;
+          console.log('Customer', this.customers);
         },
         complete: () => {},
       });
