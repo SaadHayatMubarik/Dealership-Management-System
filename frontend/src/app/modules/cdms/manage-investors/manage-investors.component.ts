@@ -152,7 +152,7 @@ onCustomerChange(event: any) {
   this.investor.cnic = this.selectedCustomer.cnic;
   this.investor.province = this.selectedCustomer.province;
   this.investor.city = this.selectedCustomer.province;
-  this.investor.phoneNo = this.selectedCustomer.phone_no;
+  this.investor.phoneNo = this.selectedCustomer.phoneNo;
   this.investor.investorType = this.investor_type_selected;
 
 }
