@@ -344,8 +344,8 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   addInvestorForm() {
 
     this.investorForms.push({
-      investor_id: 0,
-      investmentAmount: 0,
+      customer_and_investor_id: 0,
+      investment_amount: 0,
     });
     console.log('this.investorForms', this.investorForms);
     this.calculateInvestments();
@@ -363,7 +363,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
 
 
   calculateInvestments() {
-    const totalInvestment = this.investorForms.reduce((sum, form) => sum + (form.investmentAmount || 0), 0);
+    const totalInvestment = this.investorForms.reduce((sum, form) => sum + (form.investment_amount || 0), 0);
     this.remainingInvestment = this.vehicleInventory.costPrice - totalInvestment;
   }
 
