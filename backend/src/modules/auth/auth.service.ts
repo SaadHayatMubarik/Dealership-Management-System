@@ -2,7 +2,6 @@ import { ConflictException, HttpException, HttpStatus, Injectable, InternalServe
 import { CreateUserDto } from './dto/create-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
-// import { User } from './entities/User';
 import { DeleteResult, EntityManager, Repository } from 'typeorm';
 import { ValidateUserDto } from './dto/validate-user.dto';
 import { JwtService } from '@nestjs/jwt';
@@ -10,16 +9,11 @@ import { JwtPayload } from './jwt-payload.interface';
 import { User } from './entity/User';
 import { CreateAdminDto } from './dto/create-admin.dto';
 import { Showroom } from '../showroom/entity/Showroom';
-import { UserRole } from './user-role.enum';
 import { GetUserDto } from './dto/get-user.dto';
-import { get } from 'http';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { Role } from '../role-based/entities/Role';
 import { Permission } from '../role-based/entities/permission';
 import { RolePermission } from '../role-based/entities/Role-Permission';
-import { privateDecrypt } from 'crypto';
-// import { CreateAuthDto } from './dto/create-user.dto';
-// import { UpdateAuthDto } from './dto/update-user.dto';
 
 @Injectable()
 export class AuthService {
