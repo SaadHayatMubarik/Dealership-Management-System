@@ -7,6 +7,13 @@ import { VehicleType } from "src/modules/vehicle-type/entity/Vehicle-type";
 // import { Investor } from "src/modules/investor/entity/Investor";
 // import { Customer } from "src/modules/customer/entity/Customer";
 import { CustomerAndInvestor } from "src/modules/customer/entity/CustomerAndInvestor";
+export class investmentDto{
+ @IsNotEmpty()
+ investor_id: number;
+
+ @IsNotEmpty()
+ investmentAmount: number;
+}
 
 export class InventoryDto{
 
@@ -73,9 +80,9 @@ export class InventoryDto{
     @IsNotEmpty()
     sellerId: number;
     
-    @IsNotEmpty()
-    investor: CustomerAndInvestor[];
+    // @IsNotEmpty()
+    // investor: CustomerAndInvestor[];
 
     @IsNotEmpty()
-    investmentAmount: number[];
+    investment: investmentDto[];
 }

@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Connection, Repository } from 'typeorm';
+import { Connection, EntityManager, Repository } from 'typeorm';
 import { InventoryDto } from './dto/inventory.dto';
 import { InventoryStatus } from './inventory-status.enum';
 import { Inventory } from './entity/Inventory';
@@ -44,110 +44,81 @@ export class InventoryService {
         private customerInvestorRepository: Repository <CustomerAndInvestor>,
         @InjectRepository(Picture)
         private readonly pictureRepository: Repository<Picture>,
-        private readonly connection: Connection,
+        private readonly entityManager: EntityManager
     ){}
 
     async addInventory(addInventoryDto: InventoryDto): Promise<Inventory> {
-        const queryRunner = this.connection.createQueryRunner();
-        await queryRunner.connect();
-        await queryRunner.startTransaction();
+        const {
+            vehicleType, vehicleMake, vehicleModel, vehicleVariant, modelYear,
+            vehicleChasisNo, costPrice, demand, dateOfPurchase, dateOfSale,
+            bodyColor, engineNo, comments, grade, regNo, mileage, status,
+            showroomId, stockAttributeValue, sellerId, investment
+        } = addInventoryDto;
     
-        try {
-          const {
-            vehicleType,
-            vehicleMake,
-            vehicleModel,
-            vehicleVariant,
-            modelYear,
-            vehicleChasisNo,
-            costPrice,
-            demand,
-            dateOfPurchase,
-            dateOfSale,
-            bodyColor,
-            engineNo,
-            comments,
-            grade,
-            regNo,
-            mileage,
-            status,
-            showroomId,
-            stockAttributeValue,
-            sellerId,
-            investmentAmount,
-            investor,
-          } = addInventoryDto;
+        if (investment.length > 0) {
+            return await this.entityManager.transaction(async transactionalEntityManager => {
+                const inventory = new Inventory();
+                inventory.make = vehicleMake.toUpperCase();
+                inventory.model = vehicleModel.toUpperCase();
+                inventory.variant = vehicleVariant.toUpperCase();
+                inventory.year = modelYear;
+                inventory.chasis_no = vehicleChasisNo.toUpperCase();
+                inventory.price = costPrice;
+                inventory.demand = demand;
+                inventory.date_of_purchase = dateOfPurchase;
+                inventory.date_of_sale = dateOfSale;
+                inventory.color = bodyColor.toUpperCase();
+                inventory.engine_no = engineNo.toUpperCase();
+                inventory.comments = comments.toUpperCase();
+                inventory.grade = grade;
+                inventory.status = status;
+                inventory.reg_no = regNo.toUpperCase();
+                inventory.mileage = mileage;
+                inventory.vehicleType = vehicleType;
+                inventory.showroom = await transactionalEntityManager.findOne(Showroom, { where: { showroom_id: showroomId } });
+                inventory.seller = await transactionalEntityManager.findOne(CustomerAndInvestor, { where: { customer_and_investor_id: sellerId } });
     
-          if (investor.length > 0) {
-            const inventory = new Inventory();
-            inventory.make = vehicleMake.toUpperCase();
-            inventory.model = vehicleModel.toUpperCase();
-            inventory.variant = vehicleVariant.toUpperCase();
-            inventory.year = modelYear;
-            inventory.chasis_no = vehicleChasisNo.toUpperCase();
-            inventory.price = costPrice;
-            inventory.demand = demand;
-            inventory.date_of_purchase = dateOfPurchase;
-            inventory.date_of_sale = dateOfSale;
-            inventory.color = bodyColor.toUpperCase();
-            inventory.engine_no = engineNo.toUpperCase();
-            inventory.comments = comments.toUpperCase();
-            inventory.grade = grade;
-            inventory.status = status;
-            inventory.reg_no = regNo.toUpperCase();
-            inventory.mileage = mileage;
-            inventory.vehicleType = vehicleType;
-            inventory.showroom = await queryRunner.manager.findOne(Showroom, { where: { showroom_id: showroomId } });
-            inventory.seller = await queryRunner.manager.findOne(CustomerAndInvestor, { where: { customer_and_investor_id: sellerId } });
+                await transactionalEntityManager.save(Inventory,inventory);
     
-            await queryRunner.manager.save(inventory);
+                const inventoryId = inventory.inventory_id;
+                const inventoryObj = await transactionalEntityManager.findOne(Inventory, { where: { inventory_id: inventoryId } });
     
-            const inventoryId = inventory.inventory_id;
+                const typeId = await this.vehicleTypeRepository.getId(vehicleType);
+                for (let i = 0; i < stockAttributeValue.length; i++) {
+                    const stockAttributeattrValue = new StockAttributeValue();
+                    stockAttributeattrValue.value = stockAttributeValue[i].value;
+                    stockAttributeattrValue.vehicleTypeAttribute = await transactionalEntityManager.findOne(VehicleTypeAttribute, { where: { vehicleType: { type_id: typeId } } });
+                    stockAttributeattrValue.inventory = inventoryObj;
+                    await transactionalEntityManager.save(StockAttributeValue,stockAttributeattrValue);
+                }
     
-            let inventoryObj = await queryRunner.manager.findOne(Inventory, { where: { inventory_id: inventoryId } });
+                for (let i = 0; i < investment.length; i++) {
+                    // const investorId = await this.customerInvestorRepository.getId(investor[i]);
+                    const { investor_id, investmentAmount } = addInventoryDto.investment[i];
+                    // console.log(investmentAmount);
+                    const getData = await transactionalEntityManager.createQueryBuilder(CustomerAndInvestor, 'customer_investor')
+                        .select('capital_amount')
+                        .where('customer_investor.customer_and_investor_id = :investor_id', { investor_id })
+                        .getRawOne();
     
-            const typeId = await this.vehicleTypeRepository.getId(vehicleType);
+                    if (getData) {
+                        const capitalAmount = getData.capital_amount;
+                        const getCapitalAmount = capitalAmount + investmentAmount;
+                        await transactionalEntityManager.update(CustomerAndInvestor, { customer_and_investor_id: investor_id }, { capital_amount: getCapitalAmount });
+                    }
     
-            for (let i = 0; i < stockAttributeValue.length; i++) {
-              const stockAttributeattrValue = new StockAttributeValue();
-              stockAttributeattrValue.value = stockAttributeValue[i].value;
-              stockAttributeattrValue.vehicleTypeAttribute = await queryRunner.manager.findOne(VehicleTypeAttribute, { where: { vehicleType: { type_id: typeId } } });
-              stockAttributeattrValue.inventory = inventoryObj;
+                    const investment = new Investment();
+                    investment.investment_date = new Date();
+                    investment.investment_amount = investmentAmount;
+                    investment.inventory = inventoryObj;
+                    investment.investor = await transactionalEntityManager.findOneBy(CustomerAndInvestor,{customer_and_investor_id:investor_id})
+                    await transactionalEntityManager.save(Investment,investment);
+                }
     
-              await queryRunner.manager.save(stockAttributeattrValue);
-            }
-    
-            for (let i = 0; i < investor.length; i++) {
-              const investorId = await this.customerInvestorRepository.getId(investor[i]);
-              const getData = await queryRunner.manager.createQueryBuilder(CustomerAndInvestor, 'customer_investor')
-                .select('capital_amount')
-                .where('customer_investor.customer_and_investor_id = :investorId', { investorId })
-                .getRawOne();
-    
-              if (getData) {
-                const capitalAmount = getData.capital_amount;
-                const getCapitalAmount = capitalAmount + investmentAmount[i];
-                await queryRunner.manager.update(CustomerAndInvestor, { customer_and_investor_id: investorId }, { capital_amount: getCapitalAmount });
-              }
-    
-              const investment = new Investment();
-              investment.investment_date = new Date();
-              investment.investment_amount = investmentAmount[i];
-              investment.inventory = inventoryObj;
-              investment.investor = investor[i];
-              await queryRunner.manager.save(investment);
-            }
-    
-            await queryRunner.commitTransaction();
-            return inventory;
-          }
-        } catch (error) {
-          await queryRunner.rollbackTransaction();
-          throw new InternalServerErrorException('Failed to add inventory');
-        } finally {
-          await queryRunner.release();
+                return inventory;
+            });
         }
-      }
+    }
 
     async getInventory(status: String, showroomId: number): Promise<GetInventroyDto[]>{
         const getData = this.inventoryRepository.createQueryBuilder('inventory')
