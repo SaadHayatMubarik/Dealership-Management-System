@@ -781,7 +781,7 @@
                               optionValue="customer_and_investor_id"
                               class="p-inputtext-lg"
                               placeholder="Select a investor"
-                              [(ngModel)]="form.investor_id"
+                              [(ngModel)]="form.customer_and_investor_id"
                               [ngModelOptions]="{standalone: true}"
                             ></p-dropdown>
                             <label for="float-label">Investor Name*</label>
@@ -808,7 +808,7 @@
                             currency="PKR"
                             locale="en-US"
                             name="investmentAmount"
-                            [(ngModel)]="form.investmentAmount"
+                            [(ngModel)]="form.investment_amount"
                             (ngModelChange)="calculateInvestments()"
                             pattern="^\d+$"
                             [required]="true"

@@ -46,8 +46,8 @@ export interface IInventory {
 // }
 
 export interface investment {
- investor_id:number;
- investmentAmount: number;
+  customer_and_investor_id:number;
+ investment_amount: number;
 }
 
 export interface ISellInventory {
