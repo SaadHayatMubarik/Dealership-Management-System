@@ -199,7 +199,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
 
   getInvestors() {
     this.apiService
-      .get(`/investor/getInvestor/${this.vehicleInventory.showroomId}`)
+      .get(`/investor/getInvestor/0/${this.vehicleInventory.showroomId}`)
       .subscribe({
         next: (response: IObject[]) => {
           this.investors = response;

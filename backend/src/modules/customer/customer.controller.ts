@@ -6,9 +6,9 @@ import { CustomerCatagory } from './customer-catagory.enum';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
 import { DeleteResult } from 'typeorm';
-import { Showroom } from '../showroom/entity/Showroom';
+// import { Showroom } from '../showroom/entity/Showroom';
 import { CustomerAndInvestor } from './entity/CustomerAndInvestor';
-import { retryWhen } from 'rxjs';
+// import { retryWhen } from 'rxjs';
 
 @Controller('customer')
 export class CustomerController {
