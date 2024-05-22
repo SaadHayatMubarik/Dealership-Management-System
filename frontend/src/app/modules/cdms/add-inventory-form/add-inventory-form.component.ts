@@ -226,7 +226,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
 
   onCustomerSelectionChange(): void {
     if (this.selectedCustomer) {
-      this.sellerId = this.selectedCustomer.customer_id;
+      this.sellerId = this.selectedCustomer.customer_and_investor_id;
     }
     this.getCustomersById();
   }
@@ -244,6 +244,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
         next: (response: IObject[]) => {
           // console.log(response);
           this.customersDetails = response;
+          console.log('By ID',this.customersDetails );
           this.phone_no = this.customersDetails.phoneNo;
           this.email = this.customersDetails.email;
           this.city = this.customersDetails.city;
@@ -338,12 +339,8 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   //investors logic
 
   investorForms: investment[] = [];
+  remainingInvestment: number = this.vehicleInventory.costPrice;
  
-  percentage: number = 0; // Assuming you have a property to store the percentage
-
-  // Add the calculateInvestment method
-
-
   addInvestorForm() {
 
     this.investorForms.push({
@@ -351,65 +348,57 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
       investmentAmount: 0,
     });
     console.log('this.investorForms', this.investorForms);
-
+    this.calculateInvestments();
   }
 
  
 
-  // addInvestorForm() {
-  //   // Fetch the investor info
-  //   this.getInvestors(); // Assuming this populates this.investors synchronously
-
-  //   // Assuming this.investors is populated synchronously, proceed with adding form
-  //   if (this.investors.length > 0) {
-  //     // Assuming the first investor from the response will be selected by default
-  //     const selectedInvestor = this.investors[0];
-
-  //     // Initialize a new investor object with the fetched info and a default investment amount
-  //     const newInvestor = {
-  //       investor_id: selectedInvestor.investor_id,
-  //       investor_name: selectedInvestor.investor_name,
-  //       investmentAmount: 0 // Default investment amount
-  //     };
-
-  //     // Initialize a new investment array with the new investor
-  //     const newInvestment = { investment: [newInvestor] };
-
-  //     // Push the new investment array into the investorForms array
-  //     this.investorForms.push(newInvestment);
-  //   }
-  // }
 
   removeInvestorForm() {
     if (this.investorForms.length > 0) {
       this.investorForms.pop();
     }
+    this.calculateInvestments();
+  }
+
+
+  calculateInvestments() {
+    const totalInvestment = this.investorForms.reduce((sum, form) => sum + (form.investmentAmount || 0), 0);
+    this.remainingInvestment = this.vehicleInventory.costPrice - totalInvestment;
   }
 
   postInventory() {
-    if (!this.SellerForm.valid) {
+
+    this.calculateInvestments();
+
+    if (this.remainingInvestment !== 0) {
+      this.toast.showError('Total investment does not match the cost price.');
+      return;
+    }
+
+    if (this.SellerForm.valid) {
       this.vehicleInventory.investment = this.investorForms;
       console.log('this.vehicleInventory', this.vehicleInventory);
       
-      // this.apiService
-      //   .postLogin('/inventory/addInventory', this.vehicleInventory)
-      //   .subscribe({
-      //     next: (response) => {
-      //       this.toast.showSuccess('Add images and documents');
-      //       // this.closeModal();
-      //       this.inventoryObj = response;
-      //       // this.getInventory();
-      //       // console.log('success',this.vehicleInventory);
-      //       // console.log(this.inventoryObj.inventory_id);
-      //       this.activeTabIndex = 2;
-      //       this.showThirdTab = true;
-      //       console.log('sent', this.vehicleInventory);
-      //     },
-      //     error: () => {
-      //       this.toast.showError('Error Occurred!');
-      //       console.log('error', this.vehicleInventory);
-      //     },
-      //   });
+      this.apiService
+        .postLogin('/inventory/addInventory', this.vehicleInventory)
+        .subscribe({
+          next: (response) => {
+            this.toast.showSuccess('Add images and documents');
+            // this.closeModal();
+            this.inventoryObj = response;
+            // this.getInventory();
+            // console.log('success',this.vehicleInventory);
+            // console.log(this.inventoryObj.inventory_id);
+            this.activeTabIndex = 2;
+            this.showThirdTab = true;
+            console.log('sent', this.vehicleInventory);
+          },
+          error: () => {
+            this.toast.showError('Error Occurred!');
+            console.log('error', this.vehicleInventory);
+          },
+        });
     } else {
       this.toast.showError('Please fill all the required fields');
     }
