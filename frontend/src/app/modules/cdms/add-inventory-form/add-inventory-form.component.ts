@@ -226,7 +226,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
 
   onCustomerSelectionChange(): void {
     if (this.selectedCustomer) {
-      this.sellerId = this.selectedCustomer.customer_id;
+      this.sellerId = this.selectedCustomer.customer_and_investor_id;
     }
     this.getCustomersById();
   }

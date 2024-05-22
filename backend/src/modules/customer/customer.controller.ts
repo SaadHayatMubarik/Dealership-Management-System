@@ -34,6 +34,7 @@ export class CustomerController {
 
     @Get('getCustomerDetails/:customerId')
     getCustomerDetails(@Param('customerId') customerId: number): Promise<CustomerAndInvestor> {
+        console.log(customerId);
         return this.customerService.getCustomerDetails(customerId);
     }
 
