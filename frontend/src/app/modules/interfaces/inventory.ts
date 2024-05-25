@@ -51,26 +51,26 @@ export interface investment {
 }
 
 export interface ISellInventory {
-  inventoryId? : number;
+  inventory_id? : number;
   vehicleType? : any;
-  vehicleMake? : string;
-  vehicleModel? : string;
-  vehicleVariant? : string;
-  modelYear? : number;
-  vehicleChasisNo? : string;
-  costPrice? : number;
+  make? : string;
+  model? : string;
+  variant? : string;
+  year? : number;
+  chasis_no? : string;
+  price? : number;
   demand? : number;
-  dateOfPurchase? : string;
-  dateOfSale? : string;
-  bodyColor? : string;
-  engineNo? : string;
+  date_of_purchase? : any;
+  date_of_sale? : string;
+  color? : string;
+  engine_no? : string;
   comments: string;
   grade: number;
   status? : string;
-  regNo? : string;
+  reg_no? : string;
   mileage: number;
-  sellingPrice? : string;
-  buyerId? : number;
+  selling_price? : string;
+  buyer_id? : number;
 }
 
 

@@ -166,7 +166,7 @@ export class InventoryService {
     }
 
     async updateInventory(updateInventoryDto: UpdateInventoryDto):Promise<Inventory>{
-        const { variant, model, make, chasis_no, status, comments, color, price, date_of_purchase, date_of_sale, demand, engine_no, grade, inventory_id, mileage, year, reg_no, selling_Price, buyerId } = updateInventoryDto;
+        const { variant, model, make, chasis_no, status, comments, color, price, date_of_purchase, date_of_sale, demand, engine_no, grade, inventory_id, mileage, year, reg_no, selling_price, buyer_id } = updateInventoryDto;
         const inventory = await this.inventoryRepository.findOneBy({inventory_id:inventory_id});
         inventory.variant = variant;
         inventory.make = make;
@@ -186,9 +186,9 @@ export class InventoryService {
         inventory.reg_no = reg_no;
         // inventory.vehicleType = vehicleType;
         // if(selling_Price)
-        inventory.selling_Price = selling_Price;
-        if(buyerId)
-        await this.inventoryRepository.update({inventory_id:inventory_id},{buyer:{customer_and_investor_id:buyerId}});
+        inventory.selling_Price = selling_price;
+        if(buyer_id)
+        await this.inventoryRepository.update({inventory_id:inventory_id},{buyer:{customer_and_investor_id:buyer_id}});
         return await this.inventoryRepository.save(inventory);
     }
     

@@ -61,24 +61,46 @@ export class SellInventoryComponent extends BaseComponent implements OnInit{
 
   }
 
-  dateOfPurchase: Date | null = null;
+  // date_of_purchase: Date | null = null;
 
-  vehicleType : string = ''
-  make : string = '' ;
-  model : string = '' ;
-  variant : string = '' ;
-  chasisNo : string = '' ;
-  engineNo : string = '' ;
-  costPrice : string = '' ;
-  demand : string = '' ;
-  modelYear : string = '' ;
-  bodyColor : string = '' ;
-  status : string = '' ;
-  regNo : string = '' ;
+  // vehicleType : string = ''
+  // make : string = '' ;
+  // model : string = '' ;
+  // variant : string = '' ;
+  // chasis_no : string = '' ;
+  // engine_no : string = '' ;
+  // price : string = '' ;
+  // demand : string = '' ;
+  // year : string = '' ;
+  // color : string = '' ;
+  // status : string = '' ;
+  // reg_no : string = '' ;
   selectedCustomer:any = '';
 
   
- 
+  sellInventoryObj: ISellInventory =
+  {
+    inventory_id: 0, 
+    vehicleType: '',
+    make: '',
+    model :'',
+    variant : '',
+    year : 0,
+    chasis_no:  '',
+    price :0,
+    demand : 0,
+    date_of_purchase: '',
+    date_of_sale:'',
+    color : '',
+    engine_no :  '',
+    comments: '',
+    grade: 0,
+    status:this.vehicleStatus,
+    reg_no: '',
+    mileage: 0,
+    selling_price:'', 
+    buyer_id:0
+  }
 
 
 
@@ -99,24 +121,27 @@ export class SellInventoryComponent extends BaseComponent implements OnInit{
     }
 
   getvehicleDetail(){
-    this.sellInventoryObj.inventoryId = this.inventoryId;
+    this.sellInventoryObj.inventory_id = this.inventoryId;
     this.apiService
   .get(`/inventory/getInventoryDetails/${this.inventoryId}`)
   .subscribe(
     (data) => {
       this.vehicleDetails = data;
-      this.make = this.vehicleDetails.make
-      this.model = this.vehicleDetails.model
-      this.variant = this.vehicleDetails.variant
-      this.chasisNo = this.vehicleDetails.chasis_no
-      this.engineNo = this.vehicleDetails.engine_no
-      this.costPrice = this.vehicleDetails.price
-      this.dateOfPurchase = new Date(this.vehicleDetails.date_of_purchase);
-      this.modelYear = this.vehicleDetails.year
-      this.bodyColor = this.vehicleDetails.color
-      this.status = this.vehicleDetails.status
-      this.regNo = this.vehicleDetails.reg_no
-      this.demand = this.vehicleDetails.demand
+      this.sellInventoryObj.make = this.vehicleDetails.make
+      this.sellInventoryObj.model = this.vehicleDetails.model
+      this.sellInventoryObj.variant = this.vehicleDetails.variant
+      this.sellInventoryObj.chasis_no = this.vehicleDetails.chasis_no
+      this.sellInventoryObj.engine_no = this.vehicleDetails.engine_no
+      this.sellInventoryObj.price = this.vehicleDetails.price
+      this.sellInventoryObj.date_of_purchase = new Date(this.vehicleDetails.date_of_purchase);
+      this.sellInventoryObj.year = this.vehicleDetails.year
+      this.sellInventoryObj.color = this.vehicleDetails.color
+      this.sellInventoryObj.status = this.vehicleDetails.status
+      this.sellInventoryObj.reg_no = this.vehicleDetails.reg_no
+      this.sellInventoryObj.demand = this.vehicleDetails.demand
+      this.sellInventoryObj.mileage = this.vehicleDetails.mileage
+      this.sellInventoryObj.grade = this.vehicleDetails.grade
+      this.selectedCustomer.comments = this.vehicleDetails.comments
  
     }
   );
@@ -128,7 +153,7 @@ export class SellInventoryComponent extends BaseComponent implements OnInit{
     .get(`/customer/getCustomer/${this.showroomId}/${this. SelectedCategory}/${this.customerType}`)
     .subscribe({
       next: (response) => {
-        // console.log(response);
+        console.log(response);
         this.customers = response;
        
       },
@@ -140,7 +165,7 @@ export class SellInventoryComponent extends BaseComponent implements OnInit{
 onCustomerSelectionChange(): void {
   if (this.selectedCustomer) {
       // Assuming the customer object has an 'id' property
-     this.buyerId=  this.selectedCustomer.customer_id;
+     this.buyerId=  this.selectedCustomer.customer_and_investor_id;
      
 
   }
@@ -156,7 +181,8 @@ address : string = '' ;
 
 
 getCustomersById(){
-  this.sellInventoryObj.buyerId = this.buyerId;
+  this.sellInventoryObj.buyer_id = this.buyerId;
+  // console.log(this.buyerId);
   this.apiService
   .get(`/customer/getCustomerDetails/${this.buyerId}`)
   .subscribe({
@@ -173,35 +199,13 @@ getCustomersById(){
     }
   })
 }
-sellInventoryObj: ISellInventory =
-{
-  inventoryId: 0, 
-  vehicleType: '',
-  vehicleMake: '',
-  vehicleModel :'',
-  vehicleVariant : '',
-  modelYear : 0,
-  vehicleChasisNo:  '',
-  costPrice :0,
-  demand : 0,
-  dateOfPurchase: '',
-  dateOfSale:'',
-  bodyColor : '',
-  engineNo :  '',
-  comments: '',
-  grade: 0,
-  status:this.vehicleStatus,
-  regNo: '',
-  mileage: 0,
-  sellingPrice:'', 
-  buyerId:0
-}
+
 
 sellInventory()
 {
-
+this.sellInventoryObj.status = 'SOLD';
   // if (this.BuyerForm.valid){ 
-
+    // console.log(this.sellInventoryObj)
     this.apiService
     .put('/inventory/updateInventory/sellInventory', this.sellInventoryObj)
     .subscribe({

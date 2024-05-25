@@ -51,7 +51,7 @@ export class InventoryController {
 
     @Put('updateInventory/sellInventory')
     updateInventory(@Body() updateInventoryDto: UpdateInventoryDto): Promise<Inventory>{
-        // console.log(updateInventoryDto);
+        console.log(updateInventoryDto);
         return this.inventoryService.updateInventory(updateInventoryDto);
     }
 

@@ -61,10 +61,10 @@ export class UpdateInventoryDto{
     mileage: number;
 
     @IsOptional()
-    selling_Price: number;
+    selling_price: number;
 
     @IsOptional()
-    buyerId: number;
+    buyer_id: number;
 
     // @IsOptional()
     // // stockAttributeValue: StockAttributeValue[];

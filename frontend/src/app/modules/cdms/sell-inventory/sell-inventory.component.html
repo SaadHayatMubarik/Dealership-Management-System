@@ -37,7 +37,7 @@
                           pInputText
                           name="make"
                           [class.p-disabled]="true"
-                          [(ngModel)]="make"
+                          [(ngModel)]="sellInventoryObj.make"
                         />
                         <label htmlFor="username">Make</label>
                       </span>
@@ -53,7 +53,7 @@
                           name="model"
                         
                           [class.p-disabled]="true"
-                          [(ngModel)]="model"
+                          [(ngModel)]="sellInventoryObj.model"
                         />
                         <label htmlFor="username">Model</label>
                       </span>
@@ -68,7 +68,7 @@
                           pInputText
                           name="variant"
                           [class.p-disabled]="true"
-                          [(ngModel)]="variant"
+                          [(ngModel)]="sellInventoryObj.variant"
                         />
                         <label htmlFor="username">Variant</label>
                       </span>
@@ -89,7 +89,7 @@
                           pInputText
                           name="Chasis No"
                           [class.p-disabled]="true"
-                          [(ngModel)]="chasisNo"
+                          [(ngModel)]="sellInventoryObj.chasis_no"
                           
 
                         />
@@ -106,7 +106,7 @@
                           pInputText
                           name="engineNo"
                           [class.p-disabled]="true"
-                          [(ngModel)]="engineNo"
+                          [(ngModel)]="sellInventoryObj.engine_no"
                         />
                         <label for="float-label">Engine No</label>
                       </span>
@@ -121,8 +121,8 @@
                           pInputText
                           name="RegNo"
                           [class.p-disabled]="true"
-                          [(ngModel)]="regNo"
-                          [attr.disabled]="regNo !== '' ? true : null"
+                          [(ngModel)]="sellInventoryObj.reg_no"
+                          [attr.disabled]="sellInventoryObj.reg_no !== '' ? true : null"
                         />
                         <label for="float-label">License Number</label>
                       </span>
@@ -142,7 +142,7 @@
                           locale="en-US"
                           name="costPrice"
                           [class.p-disabled]="true"
-                          [(ngModel)]="costPrice"
+                          [(ngModel)]="sellInventoryObj.price"
                         >
                         </p-inputNumber>
 
@@ -158,7 +158,7 @@
                           class="p-inputtext-lg"
                           name="demand"
                           [class.p-disabled]="true"
-                          [(ngModel)]="demand"
+                          [(ngModel)]="sellInventoryObj.demand"
                         >
                         </p-inputNumber>
 
@@ -174,7 +174,7 @@
                           class="p-inputtext-lg"
                           name="date of purchase"
                           [class.p-disabled]="true"
-                          [(ngModel)]="dateOfPurchase"
+                          [(ngModel)]="sellInventoryObj.date_of_purchase"
                         ></p-calendar>
 
                         <label>Date Of Purcahse</label>
@@ -193,7 +193,7 @@
                           pInputText
                           name="modelYear"
                           [class.p-disabled]="true"
-                          [(ngModel)]="modelYear"
+                          [(ngModel)]="sellInventoryObj.year"
                         />
                         <label htmlFor="Model Year">Model Year</label>
                       </span>               
@@ -207,7 +207,7 @@
                           pInputText
                           name="color"
                           [class.p-disabled]="true"
-                          [(ngModel)]="bodyColor"
+                          [(ngModel)]="sellInventoryObj.color"
                         />
 
                         <label htmlFor="username">Body Color</label>
@@ -223,7 +223,7 @@
                       
                         name="status"
                         [class.p-disabled]="true"
-                        [(ngModel)]="status"
+                        [(ngModel)]="sellInventoryObj.status"
                       />
                         <label for="float-label">Status</label>
                       </span>
@@ -242,7 +242,7 @@
                           class="p-inputtext-lg"
                           name="date of sale"
                           [required] = "true"
-                          [(ngModel)]="sellInventoryObj.dateOfSale"
+                          [(ngModel)]="sellInventoryObj.date_of_sale"
                         
                         ></p-calendar>
                         <label>Date Of Sale</label>
@@ -259,7 +259,7 @@
                           name="Selling Price"
                           pattern="^\d+$"
                           [required]="true" 
-                          [(ngModel)]="sellInventoryObj.sellingPrice" >
+                          [(ngModel)]="sellInventoryObj.selling_price" >
                         </p-inputNumber>
                         <label for="float-label">Selling Price</label>
                       </span>
