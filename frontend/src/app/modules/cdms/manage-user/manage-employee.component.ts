@@ -144,9 +144,6 @@ update_user: IUpdateUser = {
     });
   }
 
- 
-
-  
 
   getUserById(userId: number) {
     this.apiService.get(`/auth/getUser/${userId}`).subscribe((data: IUpdateUser) => {

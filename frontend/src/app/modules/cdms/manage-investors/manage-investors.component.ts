@@ -62,6 +62,12 @@ export class ManageInvestorsComponent extends BaseComponent implements OnInit{
     super();
   }
 
+  displayDialog: boolean = false;
+
+  showDialog() {
+    this.displayDialog = true;
+  }
+
   ngOnInit() {
     this.getinvestors();
     this.getCustomer();
@@ -112,6 +118,14 @@ export class ManageInvestorsComponent extends BaseComponent implements OnInit{
         this.updateSidebarVisible = true;
         this.getInvestorById(this.investorId);
         },
+      },
+      {
+        label: 'View',
+        icon: 'pi pi-eye',
+        command: (event) => {
+       this.showDialog();
+
+        },
       }
     ];
   }
@@ -145,7 +159,6 @@ investor_type_selected:string='';
 
 onCustomerChange(event: any) {
   this.selectedCustomer = event.value;
-
   this.investor.investorName = this.selectedCustomer.name;
   this.investor.email = this.selectedCustomer.email;
   this.investor.address = this.selectedCustomer.address;
@@ -154,7 +167,6 @@ onCustomerChange(event: any) {
   this.investor.city = this.selectedCustomer.province;
   this.investor.phoneNo = this.selectedCustomer.phoneNo;
   this.investor.investorType = this.investor_type_selected;
-
 }
 
 onSubmit(){
@@ -191,13 +203,6 @@ getinvestors(){
 }
 
 
-// investorById: any;
-// investor_name:string='';
-// phone_no:string='';
-// cnic_no:string='';
-
-
-
 getInvestorById(investorId: number){
   this.apiService.get(`/investor/getInvestorDetails/${investorId}`).subscribe((data: IUpdateInvestor) => {
     this.UpdateInvestor = data;
@@ -207,7 +212,6 @@ getInvestorById(investorId: number){
 
 
 
-//update api of investor not made
 
 investor_form : string[] = ['New','Existing'];
 investor_form_input : string= '';
@@ -219,13 +223,10 @@ getCustomer(){
   this.apiService.get(`/customer/getCustomerByShowroom/${this.investor.showroomId}`).subscribe((data) => {
     this.customers = data;
   });
-
 }
 
 
-
 update(){
-
   if (this.updateForm.valid)
     {
       this.apiService.put('/investor/updateInvestor', this.UpdateInvestor).subscribe({
@@ -244,7 +245,6 @@ update(){
    else (
    this.toast.showError("Please fill the form correctly.")
     )
-
 }
 
 }

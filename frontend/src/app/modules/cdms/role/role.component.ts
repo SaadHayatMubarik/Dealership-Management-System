@@ -1,115 +1,3 @@
-
-// import { Component, OnInit, ViewChild } from '@angular/core';
-// import { BaseComponent } from 'src/app/shared/base.component';
-// import { ModulePermission, RolePermission } from '../../interfaces/permission';
-
-// import {
-//   DataTableColumn,
-//   IDataTableAction,
-//   IObject,
-// } from 'src/app/shared/interfaces/common';
-// import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
-// import { ToastService } from 'src/app/shared/services/toast.service';
-
-// import { NgForm } from '@angular/forms';
-
-
-// @Component({
-//   selector: 'app-role',
-//   templateUrl: './role.component.html',
-//   styleUrls: ['./role.component.scss']
-// })
-// export class RoleComponent extends BaseComponent implements OnInit {
-
-//   roleName: string = '';
-//   columns: DataTableColumn[] = [];
-//   actions: IDataTableAction[] = [];
-//   data: IObject[] = [];
-
-//   components: any[] = [];
-
-//   ngOnInit() {
-//     this.getComponents();
-
-//   }
-  
-//   modules: { name: string }[] = [];
-//   rolePermissions: { [moduleName: string]: ModulePermission } = {};
-  
-
-//   getComponents() {
-//     this.apiService.get(`/role-based/permissionAndComponent`).subscribe((data) => {
-//       this.components = data;
-//       this.modules = this.components.map(component => ({ name: component.component.component_name }));
-//       this.rolePermissions = {};
-//       this.modules.forEach(module => {
-//         this.rolePermissions[module.name] = {
-//           ADD: false,
-//           DELETE: false,
-//           UPDATE: false,
-//           VIEW: false
-//         };
-//       });
-//     });
-
-//   }
-
-//   constructor(private readonly apiService: ApiHelperService,
-//     private toast: ToastService){
-//     super()
-
-//     this.modules.forEach(module => {
-//       this.rolePermissions[module.name] = {
-//           ADD: false,
-//           DELETE: false,
-//           UPDATE: false,
-//           VIEW: false
-//       };
-//   });
-//   } 
-
-
-//   saveRolePermissions(){
-//     const rolePermissionsData: RolePermission[] = [];
-   
-//     this.components.forEach((component) => {
-//       const permissions: ModulePermission = this.rolePermissions[
-//         component.component.component_name
-//       ];
-//       const rolePermissionData: RolePermission = {
-//         roleName: this.roleName,
-//         component_id: component.component.id, // Assuming component has an ID property
-//         permissions: permissions,
-//       };
-//       rolePermissionsData.push(rolePermissionData);
-//     });
-
-//     this.apiService
-//     .post('/role-based/saveRolePermissions', rolePermissionsData)
-//     .subscribe(
-//       (response) => {
-//         // Handle success response
-//         console.log('Role permissions saved successfully:', response);
-//         console.log('OBJECT:', rolePermissionsData);
-//         // Optionally, display a success message using toast service
-//         this.toast.showSuccess('Role permissions saved successfully');
-//       },
-//       (error) => {
-//         // Handle error response
-//         console.error('Error saving role permissions:', error);
-//         console.log('OBJECT:', rolePermissionsData);
-//         // Optionally, display an error message using toast service
-//         this.toast.showError('Error saving role permissions');
-//       }
-//     );
-
-//   }
-
-// }
-
-
-
-
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BaseComponent } from 'src/app/shared/base.component';
 import { ModulePermission, RolePermission } from '../../interfaces/permission';
@@ -147,6 +35,18 @@ export class RoleComponent extends BaseComponent implements OnInit {
   
   ngOnInit() {
     this.getComponents();
+    this.getRoles();
+
+    this.columns = [
+      {
+        field: 'role_id',
+        fieldTitle: 'Role ID',
+      },
+      {
+        field: 'role_name',
+        fieldTitle: 'Role Name',
+      },
+      ];
   }
  
   
@@ -251,5 +151,15 @@ export class RoleComponent extends BaseComponent implements OnInit {
       );
 
   }
+
+
+
+  getRoles(){
+    
+    this.apiService.get(`/role-based/getRole/${this.showroom_id}`).subscribe((data) => {
+      this.data = data;
+    });
   
+}
+
 }
