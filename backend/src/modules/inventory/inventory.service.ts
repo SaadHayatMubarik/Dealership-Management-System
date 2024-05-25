@@ -94,24 +94,24 @@ export class InventoryService {
     
                 for (let i = 0; i < investment.length; i++) {
                     // const investorId = await this.customerInvestorRepository.getId(investor[i]);
-                    const { investor_id, investmentAmount } = addInventoryDto.investment[i];
+                    const { customer_and_investor_id, investment_amount } = addInventoryDto.investment[i];
                     // console.log(investmentAmount);
                     const getData = await transactionalEntityManager.createQueryBuilder(CustomerAndInvestor, 'customer_investor')
                         .select('capital_amount')
-                        .where('customer_investor.customer_and_investor_id = :investor_id', { investor_id })
+                        .where('customer_investor.customer_and_investor_id = :customer_and_investor_id', { customer_and_investor_id })
                         .getRawOne();
     
                     if (getData) {
                         const capitalAmount = getData.capital_amount;
-                        const getCapitalAmount = capitalAmount + investmentAmount;
-                        await transactionalEntityManager.update(CustomerAndInvestor, { customer_and_investor_id: investor_id }, { capital_amount: getCapitalAmount });
+                        const getCapitalAmount = capitalAmount + investment_amount;
+                        await transactionalEntityManager.update(CustomerAndInvestor, { customer_and_investor_id }, { capital_amount: getCapitalAmount });
                     }
     
                     const investment = new Investment();
                     investment.investment_date = new Date();
-                    investment.investment_amount = investmentAmount;
+                    investment.investment_amount = investment_amount;
                     investment.inventory = inventoryObj;
-                    investment.investor = await transactionalEntityManager.findOneBy(CustomerAndInvestor,{customer_and_investor_id:investor_id})
+                    investment.investor = await transactionalEntityManager.findOneBy(CustomerAndInvestor,{customer_and_investor_id})
                     await transactionalEntityManager.save(Investment,investment);
                 }
     

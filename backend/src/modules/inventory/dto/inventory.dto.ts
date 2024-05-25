@@ -9,10 +9,10 @@ import { VehicleType } from "src/modules/vehicle-type/entity/Vehicle-type";
 import { CustomerAndInvestor } from "src/modules/customer/entity/CustomerAndInvestor";
 export class investmentDto{
  @IsNotEmpty()
- investor_id: number;
+ customer_and_investor_id: number;
 
  @IsNotEmpty()
- investmentAmount: number;
+ investment_amount: number;
 }
 
 export class InventoryDto{
