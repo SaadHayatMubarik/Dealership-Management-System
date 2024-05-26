@@ -2,10 +2,9 @@
   <p-toast position="top-center"></p-toast>
 
   <p-dialog header="Investments" [(visible)]="displayDialog" [modal]="true" [contentStyle]="{'max-height': '800px', 'overflow': 'auto'}" class="custom-dialog">
-    <p>
-      Your long paragraph goes here. This is the detailed view content that you want to display when the button is clicked.
-      You can include any HTML content here as per your requirement.
-    </p>
+    <p *ngFor="let investment of investments">
+     Amount Invested: {{investment.investment_amount}}
+        </p>
   </p-dialog>
   
 

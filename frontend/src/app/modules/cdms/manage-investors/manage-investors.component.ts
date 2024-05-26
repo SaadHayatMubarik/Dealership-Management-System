@@ -56,6 +56,7 @@ export class ManageInvestorsComponent extends BaseComponent implements OnInit{
 
   updateSidebarVisible:boolean = false;
   investorId:number=0;
+  investments : any[] = [];
 
   constructor(private apiService : ApiHelperService, private toast : ToastService )
   {
@@ -117,13 +118,17 @@ export class ManageInvestorsComponent extends BaseComponent implements OnInit{
         this.investorId = event.customer_and_investor_id;
         this.updateSidebarVisible = true;
         this.getInvestorById(this.investorId);
+        
         },
       },
       {
         label: 'View',
         icon: 'pi pi-eye',
         command: (event) => {
-       this.showDialog();
+          this.investorId = event.customer_and_investor_id;
+          this.showDialog();
+          this.getInvestments(this.investorId);
+          console.log(this.investorId);
 
         },
       }
@@ -208,6 +213,14 @@ getInvestorById(investorId: number){
     this.UpdateInvestor = data;
   });
 
+}
+
+getInvestments(investorId: number){
+ 
+  this.apiService.get(`/investment/getInvestment/${investorId}`).subscribe((data) => {
+    this.investments = data;
+    console.log('api call', this.investments);
+  });
 }
 
 
