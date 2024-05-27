@@ -12,6 +12,6 @@ export class InvestmentService {
     ){}
 
     async getInvestment(investorId: number): Promise<Investment[]>{
-        return await this.investmentRepository.find({relations:['inventory'],where:{investor:{customer_and_investor_id:investorId}}})
+        return await this.investmentRepository.find({relations:['inventory','investor'],where:{investor:{customer_and_investor_id:investorId}}})
     }
 }

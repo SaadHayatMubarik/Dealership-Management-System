@@ -180,7 +180,7 @@ export class AuthService {
   }
 
   async getUserById(userId: number):Promise<User>{
-    return await this.userRepository.findOneBy({user_id:userId});
+    return await this.userRepository.findOne({select:['user_id','user_name','email'],relations:['role'],where:{user_id:userId}});
   }
 
   async deleteUser(userId: number): Promise<DeleteResult>{
