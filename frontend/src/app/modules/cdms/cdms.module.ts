@@ -50,6 +50,7 @@ import { UpdateInventoryComponent } from './update-inventory/update-inventory.co
 import { EmployeesDetailComponent } from './employees-detail/employees-detail.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { InvestmentsComponent } from './investments/investments.component';
 
 
 
@@ -83,6 +84,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
     RoleComponent,
     UpdateInventoryComponent,
     EmployeesDetailComponent,
+    InvestmentsComponent,
     
  
   ],

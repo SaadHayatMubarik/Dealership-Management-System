@@ -1,12 +1,7 @@
 
   <p-toast position="top-center"></p-toast>
 
-  <p-dialog header="Investments" [(visible)]="displayDialog" [modal]="true" [contentStyle]="{'max-height': '800px', 'overflow': 'auto'}" class="custom-dialog">
-    <p *ngFor="let investment of investments">
-     Amount Invested: {{investment.investment_amount}}
-        </p>
-  </p-dialog>
-  
+
 
   <div class="comp-content">
     <div class="toolbar-header mb-3">

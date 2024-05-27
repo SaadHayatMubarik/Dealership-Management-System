@@ -9,6 +9,7 @@ import {
 import { IInvestor } from '../../interfaces';
 import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
+import { Router } from '@angular/router';
 
 import { NgForm } from '@angular/forms';
 
@@ -58,7 +59,9 @@ export class ManageInvestorsComponent extends BaseComponent implements OnInit{
   investorId:number=0;
   investments : any[] = [];
 
-  constructor(private apiService : ApiHelperService, private toast : ToastService )
+  constructor(private apiService : ApiHelperService, 
+    private toast : ToastService,
+    private router: Router  )
   {
     super();
   }
@@ -126,9 +129,10 @@ export class ManageInvestorsComponent extends BaseComponent implements OnInit{
         icon: 'pi pi-eye',
         command: (event) => {
           this.investorId = event.customer_and_investor_id;
-          this.showDialog();
+          this.router.navigate(['manage-investments', this.investorId]);
+          // this.showDialog();
           this.getInvestments(this.investorId);
-          console.log(this.investorId);
+          // console.log(this.investorId);
 
         },
       }
