@@ -46,6 +46,7 @@ export class LoginComponent implements OnInit{
       this.router.navigate(['']); 
     }
     
+    userId: number = 0 ;
 
     onLogin()
     {
@@ -62,7 +63,8 @@ export class LoginComponent implements OnInit{
         // localStorage.clear();
         this.auth.login('/auth/login',this.userData).subscribe({
           next: (response) => {
-            console.log(response);
+            this.userId = response.userId;
+            console.log('userId',this.userId)
           const jwtToken = response.accessToken;
           const showroomId = response.showroom;
           const role = response.role;
@@ -72,6 +74,7 @@ export class LoginComponent implements OnInit{
           localStorage.setItem('userRole', role);
           localStorage.setItem('user Id', userId);
           this.toast.showSuccess('WELCOME');
+          this.getRole(this.userId);
           // this.auth.autoLogout(36000);
 
            setTimeout(() => {
@@ -86,6 +89,18 @@ export class LoginComponent implements OnInit{
       }
 
     }
+
+    role: any[] = []
+
+    getRole(userID:number){
+      this.apiService.get(`/role-based/componentViaRole/${userID}`).subscribe((data) => {
+        this.role = data;
+        console.log('Roles', this.role);
+      });
+
+    }
+
+   
 
     // onLogin(){
     //   if(this.loginForm.valid){

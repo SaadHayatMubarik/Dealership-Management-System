@@ -172,7 +172,6 @@ update_user: IUpdateUser = {
   getRole(){
     this.apiService.get(`/role-based/getRole/${this.user.showroomId}`).subscribe((data) => {
       this.roles = data;
-      console.log('api data', data);
       console.log('roles', this.roles);
      
     });
