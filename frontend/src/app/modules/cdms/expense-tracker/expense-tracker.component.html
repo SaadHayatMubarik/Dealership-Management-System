@@ -1,0 +1,208 @@
+<p-toast position="top-center"></p-toast>
+
+<div class="comp-content">
+  <div class="toolbar-header mb-3">
+    <div class="comp-title">
+      <h3>Expense Tracker</h3>
+    </div>
+    <div class="comp-btns">
+      <app-button label="New" styleClass="p-button-sm p-button-rounded" (click)="showDialog()"></app-button>
+    </div>
+  </div>
+
+  <div class="middle-content w-o-tabs mt-3">
+    <div class="filter-row flex justify-content-between pt-3">
+    </div>
+    <app-datatable [data]="data" [cols]="columns" [globalFilterFields]="[]" [actions]="actions"></app-datatable>
+  </div>
+
+  <p-dialog  header="Add Expense" [(visible)]="display" [modal]="true" [closable]="true" [dismissableMask]="true" [style]="{width: '80vw'}">
+    <div class="ui-g ui-fluid">
+        <div class="ui-g-12">
+          <div class="card">
+            <form (ngSubmit)="onSubmit()" #expenses="ngForm" >
+                <div class="row-form grid">
+                  <div class="col-4">
+                    <div class="p-field ">
+                      <label><b>Expense Name:</b></label> <br>
+                      <input
+                        name="expense_name"
+                        type="text"
+                        pInputText
+                        class="w-full md:w-20rem mb-5"
+                        style="padding: 1rem"
+                        minlength="4"
+                        maxlength="30"
+                        required
+                        [(ngModel)]="expense.expense_name"
+                        #name="ngModel" 
+                      />
+                      <div *ngIf="name.invalid && (name.dirty || name.touched)" class="p-error">
+                        <span *ngIf="name.errors?.['required']">
+                          Please Enter Expense Name 
+                        </span>
+                        <br>
+                    </div>
+                    </div> 
+                  </div>
+                  <div class="col-4">
+                    <div class="p-field ">
+                        <label><b>Expense Name:</b></label> <br>
+                        <input
+                          name="expense_amount"
+                          type="text"
+                          pInputText
+                          class="w-full md:w-20rem mb-5"
+                          style="padding: 1rem"
+                          required
+                          [(ngModel)]="expense.expense_amount"
+                          #amount="ngModel" 
+                        />
+                        <div *ngIf="amount.invalid && (amount.dirty || amount.touched)" class="p-error">
+                          <span *ngIf="amount.errors?.['required']">
+                            Please Enter An Amount 
+                          </span>
+                          <br>
+                      </div>
+                      </div> 
+                  </div>
+                  <div class="col-4">
+                    <div class="p-field">
+                        <span class="p-float-label">
+                          <p-calendar
+                            [readonlyInput]="true"
+                            class="p-inputtext-lg"
+                            name="date"
+                            [(ngModel)]="expense.date"
+                            [required]="true"
+                            #date = "ngModel"
+                          ></p-calendar>
+  
+                          <div *ngIf="date.invalid && (date.dirty || date.touched)" class="p-error">
+                            <span *ngIf="date.errors?.['required']">
+                              Date Required.
+                            </span>
+                            <br>
+                        </div>
+                          <label>Date Of Expense</label>
+                        </span>
+                      </div>
+                  </div>
+                </div>
+                <div class="row-form grid">
+                    <div class="col-4">
+                      <div class="p-field ">
+                        <label><b>Expense Description:</b></label> <br>
+                        <textarea 
+                        rows="5"
+                        cols="105" 
+                        pInputTextarea
+                        [(ngModel)]="expense.description">
+                    </textarea>
+                    
+                      </div> 
+                    </div>
+                  </div>
+                  <br>
+                  <br>
+                  <br>
+                  <div class="sidebar-footer flex justify-content-end">
+                      <app-button label="Save" styleClass="p-button-sm p-button-rounded" type="submit" ></app-button>
+                    </div>
+              </form>
+            </div>
+        </div>
+     
+    </div>
+  </p-dialog>
+
+
+
+  <!-- <p-sidebar [(visible)]="modal" position="right" [style]="{width: '78% '}" >
+    <div class="sidebar-main">
+      <div class="sidebar-header">
+        <div class="sh-title">
+          <h3 style="text-align: center;">Add Expense</h3><br>
+        </div>
+      </div>
+
+      <div class="sidebar-content">
+        <div class="card-grey">
+          <form (ngSubmit)="onSubmit()" #expense="ngForm" >
+            <div class="row-form grid">
+              <div class="col-4">
+                <div class="p-field ">
+                  <label><b>Expense Name:</b></label> <br>
+                  <input
+                    name="role name"
+                    type="text"
+                    pInputText
+                    class="w-full md:w-20rem mb-5"
+                    style="padding: 1rem"
+                    minlength="4"
+                    maxlength="30"
+                    required
+                  />
+                </div> 
+              </div>
+              <div class="col-4">
+                <div class="p-field ">
+                  <label><b>Expense Amount:</b></label> <br>
+                  <input
+                    name="role name"
+                    type="text"
+                    pInputText
+                    class="w-full md:w-20rem mb-5"
+                    style="padding: 1rem"
+                    minlength="4"
+                    maxlength="30"
+                    required
+                  />
+                </div> 
+              </div>
+              <div class="col-4">
+                <div class="p-field ">
+                  <label><b>Expense Date:</b></label> <br>
+                  <input
+                    name="role name"
+                    type="text"
+                    pInputText
+                    class="w-full md:w-20rem mb-5"
+                    style="padding: 1rem"
+                    minlength="4"
+                    maxlength="30"
+                    required
+                  />
+                </div> 
+              </div>
+            </div>
+            <div class="row-form grid">
+                <div class="col-4">
+                  <div class="p-field ">
+                    <label><b>Expense Description:</b></label> <br>
+                    <input
+                      name="role name"
+                      type="text"
+                      pInputText
+                      class="w-full md:w-20rem mb-5"
+                      style="padding: 1rem"
+                      minlength="4"
+                      maxlength="30"
+                      required
+                    />
+                  </div> 
+                </div>
+              </div>
+          </form>
+          <br>
+
+          
+        </div>
+      </div> -->
+      <!-- <br> -->
+      <!-- <div class="sidebar-footer flex justify-content-end">
+        <app-button label="Save" styleClass="p-button-sm p-button-rounded" type="submit" ></app-button>
+      </div> -->
+    </div>
+  <!-- </p-sidebar>
+</div> -->

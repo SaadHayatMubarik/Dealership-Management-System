@@ -77,8 +77,14 @@ export class AppMenuComponent implements OnInit {
                 ],
                 
             },
-            
-            
+            { 
+                label: 'Accounting',
+                items: [
+                    { label: 'Expense Tracker', 
+                    icon: 'pi pi-fw pi-dollar', 
+                    routerLink: ['/cdms/expense'] },
+                ],
+            },   
         ];
     }
 }

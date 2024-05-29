@@ -51,6 +51,7 @@ import { EmployeesDetailComponent } from './employees-detail/employees-detail.co
 import { ReactiveFormsModule } from '@angular/forms';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { InvestmentsComponent } from './investments/investments.component';
+import { ExpenseTrackerComponent } from './expense-tracker/expense-tracker.component';
 
 
 
@@ -85,6 +86,7 @@ import { InvestmentsComponent } from './investments/investments.component';
     UpdateInventoryComponent,
     EmployeesDetailComponent,
     InvestmentsComponent,
+    ExpenseTrackerComponent,
     
  
   ],

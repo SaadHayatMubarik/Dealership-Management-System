@@ -144,6 +144,7 @@ export class RoleComponent extends BaseComponent implements OnInit {
         (response) => {
           this.toast.showSuccess('Role permissions saved successfully');  
           this.closeModal();
+          console.log('permissions', rolePermissionsData)
         },
         (error) => {
           this.toast.showError('Error saving role permissions');
