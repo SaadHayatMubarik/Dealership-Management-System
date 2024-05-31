@@ -106,3 +106,13 @@ export interface IEmployee {
   showroomId: number;
 
 }
+
+export interface IExpense {
+
+  expense_name: string;
+  expense_amount: number;
+  date : string;
+  description: string;
+  showroomId: string;
+
+}

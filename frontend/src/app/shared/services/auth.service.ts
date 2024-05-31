@@ -22,6 +22,11 @@ export class AuthService {
           .pipe(this.apiService.hookResponse(this.apiService));
       }
 
+      hasPermission(permission: string): boolean {
+        const permissions = JSON.parse(localStorage.getItem('permissions') || '[]');
+        return permissions.includes(permission);
+      }
+
     // login(path: string, body: Object = {}): Observable<any> {
     //   return this.http
     //     .post(`${environment.apiUrl}${path}`, body)

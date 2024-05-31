@@ -17,6 +17,7 @@ import {
 } from '../../interfaces/inventory';
 
 import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
 
 import { NgForm } from '@angular/forms';
@@ -84,7 +85,8 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   inventoryObj: any = null;
   investorName: string = '';
   selectedOption: string = '';
-  private baseurl = 'http://localhost:3000';
+  // private baseurl = 'http://localhost:3000';
+  permissions: string[] = []
 
   columns: DataTableColumn[] = [];
   actions: IDataTableAction[] = [];
@@ -95,15 +97,19 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
     private readonly apiService: ApiHelperService,
     private toast: ToastService,
     private router: Router,
-    private http: HttpClient,
-    private formBuilder: FormBuilder
+    // private http: HttpClient,
+    private formBuilder: FormBuilder, 
+    private authService : AuthService
   ) {
     super();
   }
 
   ngOnInit() {
+    // this.permissions = JSON.parse(localStorage.getItem('permissions') || '[]');
+    // console.log('Permissions', this.permissions)
     this.uploadForm = this.formBuilder.group({
-      imageUpload: [[]], // Initialize imageUpload form control with an empty array
+      imageUpload: [[]],
+       // Initialize imageUpload form control with an empty array
       // documentUpload: [[]] // Initialize documentUpload form control with an empty array
     });
 
@@ -196,6 +202,10 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
         error: () => {},
       });
   }
+
+  // hasAddInventoryPermission(): boolean {
+  //   return this.authService.hasPermission('add.users');
+  // }
 
   getInvestors() {
     this.apiService
@@ -521,6 +531,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
     this.selectedDocuments = event.target.files;
   }
 
+ 
   submitForm() {
     const pictureTypeImages = 'inventory pictures';
     const pictureTypeDocuments = 'inventory documents';

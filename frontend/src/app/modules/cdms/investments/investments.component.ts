@@ -78,10 +78,12 @@ export class InvestmentsComponent {
     ];
     
   }
+  investor_name: string = '';
 
 
   getInvestments(investorId: string) {
     this.apiService.get(`/investment/getInvestment/${investorId}`).subscribe((data: any[]) => {
+      this.investor_name = data[0].investor.name;
       this.data = data.map(item => ({
         ...item,
         investment_date: this.formatDate(item.investment_date)

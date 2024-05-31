@@ -1,3 +1,10 @@
+interface Permission {
+  permission_id: number;
+  permission_name: string;
+  action_type: string;
+  role_Permission_id: number;
+}
+
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Ilogin } from '../../interfaces';
@@ -46,32 +53,34 @@ export class LoginComponent implements OnInit{
       this.router.navigate(['']); 
     }
     
+  
 
     onLogin()
     {
       if(this.loginForm.valid)
       {
-        // if(this.rememberMeChecked)
-        // {
-        //   localStorage.setItem('userData', JSON.stringify(this.userData));
-        // }
-        // else{
-        //   localStorage.removeItem('userData')
-        // }
-        // console.log("-----------------------")
-        // localStorage.clear();
+       
         this.auth.login('/auth/login',this.userData).subscribe({
           next: (response) => {
-            console.log(response);
+            console.log('login response', response);
+          
           const jwtToken = response.accessToken;
           const showroomId = response.showroom;
           const role = response.role;
           const userId = response.userId;
+         
+          // const permissions = response.permissions.map((p: { permission: { permission_name: string } }) => p.permission.permission_name);
+          const permissions = (response.permissions as { permission_name: string }[]).map(p => p.permission_name);
+
           localStorage.setItem('jwtToken', jwtToken); 
           localStorage.setItem('Showroom Id', showroomId);
           localStorage.setItem('userRole', role);
           localStorage.setItem('user Id', userId);
+          // localStorage.setItem('permissions', JSON.stringify(permissions)); // Store permissions
+          localStorage.setItem('permissions', JSON.stringify(permissions)); // Store permissions
+          
           this.toast.showSuccess('WELCOME');
+        
           // this.auth.autoLogout(36000);
 
            setTimeout(() => {
@@ -84,8 +93,12 @@ export class LoginComponent implements OnInit{
           },
         });
       }
-
     }
+
+ 
+
+  
+   
 
     // onLogin(){
     //   if(this.loginForm.valid){

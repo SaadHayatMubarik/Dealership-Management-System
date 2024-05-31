@@ -24,6 +24,7 @@ import { RoleComponent } from './role/role.component';
 import { UpdateInventoryComponent } from './update-inventory/update-inventory.component';
 import { EmployeesDetailComponent } from './employees-detail/employees-detail.component';
 import { InvestmentsComponent } from './investments/investments.component';
+import { ExpenseTrackerComponent } from './expense-tracker/expense-tracker.component';
 
 
 
@@ -129,7 +130,11 @@ const routes: Routes = [
     {
       path:'manage-investments/:investorId',
       component:InvestmentsComponent
-    }
+    },
+    {
+      path:'expense',
+      component:ExpenseTrackerComponent
+    },
 
 
 
