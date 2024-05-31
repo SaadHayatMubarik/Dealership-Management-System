@@ -126,6 +126,7 @@ export class InventoryService {
         .where('inventory.status = :status',{status})
         .andWhere('inventory.showroomShowroomId = :showroomId',{showroomId});
         const result = await getData.getRawMany();
+        // this.getProfit(15,150000);
         return result;
     }
 
@@ -187,9 +188,26 @@ export class InventoryService {
         // inventory.vehicleType = vehicleType;
         // if(selling_Price)
         inventory.selling_Price = selling_price;
-        if(buyer_id)
+        if(buyer_id && selling_price > 0){
         await this.inventoryRepository.update({inventory_id:inventory_id},{buyer:{customer_and_investor_id:buyer_id}});
+        this.getProfit(inventory_id,selling_price);
+        }
         return await this.inventoryRepository.save(inventory);
+    }
+
+    async getProfit( inventoryId: number, sellingPrice: number ): Promise<string>{
+        const costPrice = await this.inventoryRepository.findOne({select:['price'] ,where:{inventory_id:inventoryId}});
+        const profit = sellingPrice - costPrice.price; // total profit
+        let investment = await this.investmentRepository.find({where:{inventory:{inventory_id:inventoryId}}});
+        // console.log(investment[1].investment_amount);
+        let profitAmount = 0;
+        for (let i = 0; i < investment.length; i++) {
+            profitAmount = (investment[i].investment_amount/costPrice.price)*profit;
+            const investmentObj = await this.investmentRepository.findOneBy({investement_id:investment[i].investement_id});
+            investmentObj.profit = profitAmount;
+            await this.investmentRepository.save(investmentObj);
+        }
+        return 'profit added successfully'
     }
     
     

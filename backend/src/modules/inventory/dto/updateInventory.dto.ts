@@ -1,15 +1,10 @@
 import { IsNotEmpty, IsNumber, IsOptional } from "class-validator";
-import { VehicleType } from "src/modules/vehicle-type/entity/Vehicle-type";
 import { InventoryStatus } from "../inventory-status.enum";
-import { StockAttributeValue } from "src/modules/stock-attribute-value/entity/Stock-attribute-value";
-// import { Customer } from "src/modules/customer/entity/Customer";
+
 
 export class UpdateInventoryDto{
     @IsNotEmpty()
     inventory_id: number;
-
-    // @IsOptional()
-    // vehicleType: VehicleType;
     
     @IsOptional()
     make: string;
@@ -65,9 +60,5 @@ export class UpdateInventoryDto{
 
     @IsOptional()
     buyer_id: number;
-
-    // @IsOptional()
-    // // stockAttributeValue: StockAttributeValue[];
-    // value: string[];
 
 }
