@@ -166,7 +166,6 @@ onCustomerSelectionChange(): void {
   if (this.selectedCustomer) {
       // Assuming the customer object has an 'id' property
      this.buyerId=  this.selectedCustomer.customer_and_investor_id;
-     
 
   }
   this.getCustomersById();  

@@ -645,8 +645,8 @@
         </form>
       </p-tabPanel>
 
-      <p-tabPanel header="Seller Details" >
-        <!-- [disabled]="!showSecondTab" -->
+      <p-tabPanel header="Seller Details"  [disabled]="!showSecondTab">
+       
         
         <form (ngSubmit)="postInventory()" #Seller="ngForm">
           <div class="sidebar-main">

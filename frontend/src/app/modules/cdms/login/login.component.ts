@@ -69,8 +69,8 @@ export class LoginComponent implements OnInit{
           const role = response.role;
           const userId = response.userId;
          
-          // const permissions = response.permissions.map((p: { permission: { permission_name: string } }) => p.permission.permission_name);
-          const permissions = (response.permissions as { permission_name: string }[]).map(p => p.permission_name);
+          const permissions = response.permissions.map((p: { permission: { permission_name: string } }) => p.permission.permission_name);
+          // const permissions = (response.permissions as { permission_name: string }[]).map(p => p.permission_name);
 
           localStorage.setItem('jwtToken', jwtToken); 
           localStorage.setItem('Showroom Id', showroomId);

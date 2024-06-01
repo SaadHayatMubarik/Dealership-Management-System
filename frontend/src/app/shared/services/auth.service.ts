@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
 import { Router } from "@angular/router";
-import { tap } from 'rxjs/operators';
+
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
@@ -24,6 +24,7 @@ export class AuthService {
 
       hasPermission(permission: string): boolean {
         const permissions = JSON.parse(localStorage.getItem('permissions') || '[]');
+        console.log('Checking permission:', permission, 'against', permissions);
         return permissions.includes(permission);
       }
 

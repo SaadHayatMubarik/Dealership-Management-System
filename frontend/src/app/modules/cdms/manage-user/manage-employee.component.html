@@ -10,6 +10,7 @@
         label="New"
         styleClass="p-button-sm p-button-rounded"
         (onclick)="openModal()"
+        *appPermission="'add.users'"
       ></app-button>
     </div>
   </div>
@@ -19,11 +20,7 @@
     <app-datatable
       [data]="data"
       [cols]="columns"
-      [globalFilterFields]="[
-        'username',
-        'email',
-        'role',
-      ]"
+      [globalFilterFields]="['username', 'email', 'role']"
       [actions]="actions"
     ></app-datatable>
   </div>
@@ -157,17 +154,16 @@
                 </div> -->
 
                 <div class="p-field">
-                <p-dropdown
-                [required]="true"
-                name="password"
-                [options]="roles"
-                optionLabel="role_name"
-                [(ngModel)]="user.role" 
-                [showClear]="true" 
-                placeholder="Select a Role"
-                  
+                  <p-dropdown
+                    [required]="true"
+                    name="password"
+                    [options]="roles"
+                    optionLabel="role_name"
+                    [(ngModel)]="user.role"
+                    [showClear]="true"
+                    placeholder="Select a Role"
                   ></p-dropdown>
-              </div>
+                </div>
               </div>
             </div>
             <br />
