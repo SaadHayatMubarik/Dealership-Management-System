@@ -17,15 +17,19 @@ import { Picture } from '../picture/entity/Picture';
 import { PictureService } from '../picture/picture.service';
 import { S3Service } from '../picture/aws-s3.service';
 import { CustomerAndInvestor } from '../customer/entity/CustomerAndInvestor';
+import { AccountService } from '../account/account.service';
+import { TranscationService } from '../transcation/transcation.service';
+import { Account } from '../account/entity/Account';
+import { Transaction } from '../transcation/entity/Transcation';
 
 // import { Showroom } from '../showroom/entity/Showroom';
 // import { VehicleType } from '../vehicle-type/Vehicle-type';
 // import { VehicleTypeModule } from '../vehicle-type/vehicle-type.module';
 @Module({
 
-  imports: [TypeOrmModule.forFeature([Inventory,Showroom,VehicleType,StockAttributeValue,MultiValueAttribute,VehicleTypeAttribute,Investment,Picture,CustomerAndInvestor])],
+  imports: [TypeOrmModule.forFeature([Inventory,Showroom,VehicleType,StockAttributeValue,MultiValueAttribute,VehicleTypeAttribute,Investment,Picture,CustomerAndInvestor,Account,Transaction])],
 
   controllers: [InventoryController],
-  providers: [InventoryService,PictureService,S3Service]
+  providers: [InventoryService,PictureService,S3Service,AccountService,TranscationService]
 })
 export class InventoryModule {}

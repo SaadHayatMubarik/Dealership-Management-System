@@ -15,6 +15,12 @@ import { PictureService } from '../picture/picture.service';
 import * as AWS from 'aws-sdk';
 import { Picture } from '../picture/entity/Picture';
 import { CustomerAndInvestor } from '../customer/entity/CustomerAndInvestor';
+import { Account } from '../account/entity/Account';
+import { AccountType } from '../account/account-type.enum';
+import { AccountCategory } from '../account/account-category.enum';
+import { AccountService } from '../account/account.service';
+import { TranscationService } from '../transcation/transcation.service';
+import { TransactionType } from '../transcation/transaction-type.enum';
 // import { Connection } from 'mysql2';
 
 
@@ -27,7 +33,9 @@ export class InventoryService {
       secretAccessKey: '4YpYV6CeGv8Dq12QJXBt3dmErCaWvd+7RsbMoqVx',
     });
     constructor (
-      private pictureService: PictureService,
+        private accountService: AccountService,
+        private transactionService: TranscationService,
+        private pictureService: PictureService,
         @InjectRepository(Inventory)
         private inventoryRepository: Repository<Inventory>,
         @InjectRepository(Showroom)
@@ -57,6 +65,7 @@ export class InventoryService {
     
         if (investment.length > 0) {
             return await this.entityManager.transaction(async transactionalEntityManager => {
+
                 const inventory = new Inventory();
                 inventory.make = vehicleMake.toUpperCase();
                 inventory.model = vehicleModel.toUpperCase();
@@ -75,9 +84,18 @@ export class InventoryService {
                 inventory.reg_no = regNo.toUpperCase();
                 inventory.mileage = mileage;
                 inventory.vehicleType = vehicleType;
-                inventory.showroom = await transactionalEntityManager.findOne(Showroom, { where: { showroom_id: showroomId } });
+                inventory.account = await this.accountService.createAccount(
+                    `${vehicleMake.toUpperCase()} + ${vehicleModel.toUpperCase()} + 
+                    ${vehicleVariant.toUpperCase()} + ${modelYear}`,
+                    AccountType.ASSETS,
+                     AccountCategory.INVENTORY,
+                    costPrice,
+                    showroomId
+                    );
+                inventory.showroom = inventory.account.showroom;
                 inventory.seller = await transactionalEntityManager.findOne(CustomerAndInvestor, { where: { customer_and_investor_id: sellerId } });
     
+                await this.transactionService.createTransaction('inventory purchased', inventory.price,TransactionType.DEBIT, inventory.account);
                 await transactionalEntityManager.save(Inventory,inventory);
     
                 const inventoryId = inventory.inventory_id;
@@ -91,7 +109,7 @@ export class InventoryService {
                     stockAttributeattrValue.inventory = inventoryObj;
                     await transactionalEntityManager.save(StockAttributeValue,stockAttributeattrValue);
                 }
-    
+
                 for (let i = 0; i < investment.length; i++) {
                     // const investorId = await this.customerInvestorRepository.getId(investor[i]);
                     const { customer_and_investor_id, investment_amount } = addInventoryDto.investment[i];
@@ -108,7 +126,7 @@ export class InventoryService {
                     }
     
                     const investment = new Investment();
-                    investment.investment_date = new Date();
+                    investment.investment_date = inventory.account.account_creation_date;
                     investment.investment_amount = investment_amount;
                     investment.inventory = inventoryObj;
                     investment.investor = await transactionalEntityManager.findOneBy(CustomerAndInvestor,{customer_and_investor_id})
