@@ -54,7 +54,7 @@ import { InvestmentsComponent } from './investments/investments.component';
 import { ExpenseTrackerComponent } from './expense-tracker/expense-tracker.component';
 import { ViewDocumentComponent } from './view-document/view-document.component';
 import { PermissionDirective } from 'src/app/shared/custom-directive/permission.directive';
-
+import { RippleModule } from 'primeng/ripple';
 
 
 
@@ -129,6 +129,7 @@ import { PermissionDirective } from 'src/app/shared/custom-directive/permission.
     TableModule,
     ReactiveFormsModule,
     MultiSelectModule,
+    RippleModule,
    
 
 

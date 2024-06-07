@@ -3,6 +3,10 @@ import { BaseComponent } from 'src/app/shared/base.component';
 import { NgForm } from '@angular/forms';
 
 
+
+import { AuthService } from 'src/app/shared/services/auth.service';
+
+
 import {
   DataTableColumn,
   IDataTableAction,
@@ -40,8 +44,7 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
   data: IObject[] = [];
   constructor(private readonly apiService: ApiHelperService, 
     private toast : ToastService, 
-    private dialogService: DialogControlService, 
-    private router: Router) {
+    private authService: AuthService) {
     super();
   }
 //   public noWhitespaceValidator(control: FormControl) {
@@ -80,6 +83,7 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
               }
                 );         
         },
+        permission: 'delete.vehicleType'
         
         
       },
@@ -90,9 +94,11 @@ export class VehicleTypeComponent extends BaseComponent implements OnInit {
           this.vehicleId = event.type_id;
           this.updateSidebarVisible = true;
         },
+        permission: 'update.vehicleType'
       },
 
     ];
+    this.actions = this.actions.filter(action => !action.permission || this.authService.hasPermission(action.permission));
   }
 
   @ViewChild('vehicleTypeForm') typeForm!: NgForm;

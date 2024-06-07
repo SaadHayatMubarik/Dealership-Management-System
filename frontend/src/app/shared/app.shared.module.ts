@@ -42,7 +42,6 @@ import { InputTextModule } from 'primeng/inputtext';
 import { AppConfigModule } from './layout/config/config.module';
 import { TreetableComponent } from './components/treetable/treetable.component';
 import { MessageService } from 'primeng/api';
-import { PermissionDirective } from './custom-directive/permission.directive';
 
 const modules = [
     PrimeAccordionModule,
@@ -103,7 +102,7 @@ const components = [
 @NgModule({
     declarations: [
      ...components,
-    //  PermissionDirective
+     
         
     ],
     imports: [   

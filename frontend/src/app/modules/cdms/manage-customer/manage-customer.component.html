@@ -7,7 +7,10 @@
       <h3>Manage Customer</h3>
     </div>
     <div class="comp-btns">
-      <app-button label="New" styleClass="p-button-sm p-button-rounded" (onclick)="openModal()"></app-button>
+      <app-button label="New" styleClass="p-button-sm p-button-rounded" 
+      (onclick)="openModal()"
+      *appPermission="'add.manageCustomers'">
+      </app-button>
     </div>
     <br>
   </div>

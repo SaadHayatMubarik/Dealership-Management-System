@@ -379,18 +379,14 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   }
 
   postInventory() {
-
     this.calculateInvestments();
-
     if (this.remainingInvestment !== 0) {
       this.toast.showError('Total investment does not match the cost price.');
       return;
     }
-
     if (this.SellerForm.valid) {
       this.vehicleInventory.investment = this.investorForms;
       console.log('this.vehicleInventory', this.vehicleInventory);
-      
       this.apiService
         .postLogin('/inventory/addInventory', this.vehicleInventory)
         .subscribe({
@@ -536,7 +532,11 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
   submitForm() {
     const pictureTypeImages = 'inventory pictures';
     const pictureTypeDocuments = 'inventory documents';
-  
+
+    if(this.selectImages.length <= 0 || this.selectedDocuments.length <= 0  ) {
+      this.toast.showError('Please upload image for vehicle and document.')
+
+    }
     // Upload images
     if (this.selectedImages.length > 0) {
       const formObjImages = new FormData();
@@ -548,7 +548,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
           console.log('Upload Images:', response);
          
         }, error => {
-          console.error('Upload Image error:', error);
+          
           this.toast.showError('Error Uploading Images');
         });
     }
@@ -567,7 +567,6 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
           this.SellerForm.reset();
           this.uploadForm.reset();
         }, error => {
-          console.error('Upload Documents error:', error);
           this.toast.showError('Error Uploading Documents');
          
         });

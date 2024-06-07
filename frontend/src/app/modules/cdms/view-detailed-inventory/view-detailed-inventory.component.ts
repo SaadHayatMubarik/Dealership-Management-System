@@ -5,10 +5,11 @@ import { ToastService } from 'src/app/shared/services/toast.service';
 import { BaseComponent } from 'src/app/shared/base.component';
 import { ActivatedRoute } from '@angular/router';
 import { INotification } from '../../interfaces';
+import { Router } from '@angular/router';
 
 
 const typeImages = 'inventory pictures';
-const typeDocuments = 'inventory documents';
+
 
 const getFileUrl = (type: string, key: string): string => {
   return `https://d-m-s.s3.ap-southeast-2.amazonaws.com/${type}/${key}`;
@@ -25,7 +26,8 @@ export class ViewDetailedInventoryComponent extends BaseComponent implements OnI
 
 constructor(private apiService:ApiHelperService, 
   private route: ActivatedRoute,
-  private toast:ToastService)
+  private toast:ToastService, 
+  private router: Router)
   {
   super();
 }
@@ -81,6 +83,7 @@ notification : INotification =
   .subscribe(
     (data) => {
       this.vehicleDetails = data;
+      
     }
   );
   }
@@ -97,7 +100,7 @@ notification : INotification =
       .subscribe(
         (data: any[]) => {
           this.loadImages = data;
-          console.log('load images:', this.loadImages);
+          console.log('inventory images:', this.loadImages);
           this.loadImagesUrls = this.loadImages.map((obj: any) => getFileUrl(typeImages,obj.link));
           console.log('url from s3:', this.loadImagesUrls);
           this.images = this.loadImagesUrls.map(url => ({ itemImageSrc: url }));
@@ -105,6 +108,8 @@ notification : INotification =
         }
       );
   }
+
+
 
 
   disableButton(){
@@ -137,6 +142,13 @@ notification : INotification =
         console.log('error:', this.notification);
       },
     });
+  }
+
+  navigateToDocuments() {
+
+    console.log('document button working');
+    console.log('id',this.inventoryId)
+    this.router.navigate([`/documents/${this.inventoryId}`]);
   }
 
   

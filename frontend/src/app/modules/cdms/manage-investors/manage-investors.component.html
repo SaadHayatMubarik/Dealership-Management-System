@@ -11,7 +11,8 @@
       <div class="comp-btns">
         <app-button label="New" 
         styleClass="p-button-sm p-button-rounded" 
-        (onclick)="openModal()"></app-button>
+        (onclick)="openModal()"
+        *appPermission="'add.manageInvestors'"></app-button>
       </div>
     </div>
 

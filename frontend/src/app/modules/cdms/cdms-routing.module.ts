@@ -25,6 +25,7 @@ import { UpdateInventoryComponent } from './update-inventory/update-inventory.co
 import { EmployeesDetailComponent } from './employees-detail/employees-detail.component';
 import { InvestmentsComponent } from './investments/investments.component';
 import { ExpenseTrackerComponent } from './expense-tracker/expense-tracker.component';
+import { ViewDocumentComponent } from './view-document/view-document.component';
 
 
 
@@ -135,8 +136,10 @@ const routes: Routes = [
       path:'expense',
       component:ExpenseTrackerComponent
     },
-
-
+    {
+      path: 'documents/:inventoryId', 
+      component: ViewDocumentComponent
+    },
 
     ],
   }, 

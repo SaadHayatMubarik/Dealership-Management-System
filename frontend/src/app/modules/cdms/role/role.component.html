@@ -6,7 +6,11 @@
       <h3>Manage Roles and Permissions</h3>
     </div>
     <div class="comp-btns">
-      <app-button label="New" styleClass="p-button-sm p-button-rounded" (click)="openModal()"></app-button>
+      <app-button label="New" 
+      styleClass="p-button-sm p-button-rounded" 
+      (click)="openModal()"
+      *appPermission="'add.roles'">
+      </app-button>
     </div>
   </div>
 

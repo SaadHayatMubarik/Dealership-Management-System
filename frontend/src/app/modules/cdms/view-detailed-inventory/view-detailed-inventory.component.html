@@ -190,8 +190,9 @@
           <!-- <p><strong>Status:</strong> {{ vehicleDetails.status}}</p> -->
           <p><strong>Color:</strong> {{ vehicleDetails.color}}</p>
           <p><strong>Comments:</strong> {{ vehicleDetails.comments}}</p>
+          
           <div class="mt-2 text-center">
-            <button pButton pRipple label="View Documents"  style="width: 200px;"></button>
+            <button pButton pRipple label="View Documents" (click)="navigateToDocuments()"  style="width: 200px;"></button>
           </div>
         </div>
       </div>
@@ -199,7 +200,6 @@
   </div>
   
   
-
 
 
 

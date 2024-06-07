@@ -126,6 +126,7 @@ export interface IDataTableAction {
   dataLength?: number;
   values?: any[];
   buttonClass?: string;
+  permission?: string;
 
 }
 

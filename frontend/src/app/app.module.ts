@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppLayoutModule } from './shared/layout/app.layout.module';
 import { CdmsModule } from './modules/cdms/cdms.module';
 import { AppSharedModule } from './shared/app.shared.module';
+// import { PermissionDirective } from './shared/custom-directive/permission.directive';
 
 
 
@@ -16,7 +17,7 @@ import { AppSharedModule } from './shared/app.shared.module';
 @NgModule({
   declarations: [
     AppComponent,
-
+    // PermissionDirective
   ],
   imports: [
     AppRoutingModule,

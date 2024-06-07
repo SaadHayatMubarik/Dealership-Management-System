@@ -1,1 +1,40 @@
-<p>view-document works!</p>
+
+
+  
+
+  <div class="col-12 xl:col-12">
+    <div class="card">
+  
+    <div class="flex justify-content-between">
+        <h4>Documents</h4>
+        <br> 
+    </div>
+    <div class="container mt-4">
+    
+        
+        <!-- <p-galleria
+    [(value)]="documents"
+    [indicatorsPosition]="position"
+    [showIndicators]="true"
+    [showThumbnails]="false"
+    [showIndicatorsOnItem]="showIndicatorsOnItem"
+    [responsiveOptions]="responsiveOptions"
+    [containerStyle]="{ 'max-width': '640px', 'margin-top': '2em' }"
+>
+    <ng-template pTemplate="item" let-item>
+        <img [src]="item.itemImageSrc" style="width: 100%; display: block;" />
+    </ng-template>
+</p-galleria> -->
+
+        <div class="row mt-4" *ngIf="images.length === 0">
+          <div class="col-12">
+            <p>No documents available.</p>
+          </div>
+        </div>
+      </div>
+  
+            </div>    
+        </div>    
+  
+  
+  

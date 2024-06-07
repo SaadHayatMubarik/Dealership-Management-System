@@ -40,7 +40,7 @@ getVehicleDetails() {
     this.vehicleDetails = attributes;
     console.log(this.vehicleDetails);
     attributes.forEach((vehicleDetails: IVehicleDetails) => {
-      console.log(vehicleDetails.vehicleMake);
+    console.log('vehicle details', vehicleDetails.vehicleMake);
     });
   });
 } 
