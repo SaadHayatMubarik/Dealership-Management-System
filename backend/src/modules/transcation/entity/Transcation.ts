@@ -16,7 +16,7 @@ export class Transaction {
     description: string;
 
     @Column()
-    transaction_amount: number;
+    transaction_amount: number; 
 
     @Column()
     transaction_type: TransactionType;

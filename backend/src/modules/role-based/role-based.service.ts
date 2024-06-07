@@ -42,7 +42,7 @@ export class RoleBasedService {
     async addRolePermission (addRolePermissionDto: AddRolePermissionDto): Promise<RolePermission[]>{
         const { roleName, modulePermissions, showroomId } = addRolePermissionDto;
         const enums = [ActionType.ADD,ActionType.DELETE,ActionType.UPDATE,ActionType.VIEW];
-        let permissionObj: Permission[] = [];
+        const permissionObj: Permission[] = [];
         const role = new Role();
         role.role_name = roleName;
         role.showroom = await this.showroomRepository.findOneBy({showroom_id:showroomId});
@@ -53,17 +53,18 @@ export class RoleBasedService {
             // for(let j=0; j<enums.length;j++){
                 // console.log(`${permissions}.${enums[j]}`);
                 if( permissions.ADD == true)
-                  permissionObj  =  await this.permissionRepository.findBy({action_type:ActionType.ADD, component:{component_id:component_id}});
+                  permissionObj.push(await this.permissionRepository.findOneBy({action_type:ActionType.ADD, component:{component_id:component_id}}));
                 if(permissions.DELETE == true)
-                    permissionObj  =  await this.permissionRepository.findBy({action_type:ActionType.DELETE, component:{component_id:component_id}});
+                    permissionObj.push(await this.permissionRepository.findOneBy({action_type:ActionType.DELETE, component:{component_id:component_id}}));
                 if( permissions.UPDATE == true)
-                    permissionObj  =  await this.permissionRepository.findBy({action_type:ActionType.UPDATE, component:{component_id:component_id}});
+                    permissionObj.push(await this.permissionRepository.findOneBy({action_type:ActionType.UPDATE, component:{component_id:component_id}}));
                 if( permissions.VIEW == true)
-                    permissionObj  =  await this.permissionRepository.findBy({action_type:ActionType.VIEW, component:{component_id:component_id}});
+                    permissionObj.push(await this.permissionRepository.findOneBy({action_type:ActionType.VIEW, component:{component_id:component_id}}));
             // }
             
         }
-        console.log(permissionObj+"array")
+        console.log(permissionObj+"array");
+        console.log(permissionObj.length);
         let rolePermissionObj: RolePermission[] = [];
         
         for(let k=0; k<permissionObj.length; k++){
