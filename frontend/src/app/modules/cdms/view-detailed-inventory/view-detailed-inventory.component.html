@@ -1,165 +1,211 @@
+<!-- first card -->
+ <!-- images -->
+  <div  class="card col d-flex flex-column align-items-center justify-content-center">
+      <div class="text-center mb-4">
+          <h4> {{ vehicleDetails.model }}  {{ vehicleDetails.make }} {{ vehicleDetails.year }} </h4>
+      </div>
+      
 
-<!-- <p-splitter [panelSizes]="[30,70]" [style]="{ height: '657px' }">
-    <ng-template pTemplate>
-        <div class="col align-items-center justify-content-center">
-            <h4 class="text-center mb-4">Vehicle Details</h4>
-
-    <p><strong>Make:</strong>{{ vehicleDetails.make }}</p>
-      <p><strong>Model:</strong> {{ vehicleDetails.model}}</p>
-      <p><strong>Variant:</strong> {{ vehicleDetails.variant }}</p>
-      <p><strong>Year:</strong> {{ vehicleDetails.year }}</p>
-      <p><strong>Chassis No:</strong> {{ vehicleDetails.chasis_no }}</p>
-      <p><strong>Price:</strong> {{ vehicleDetails.price}}</p>
-      <p><strong>Demand:</strong> {{ vehicleDetails.demand }}</p>
-      <p><strong>Date of Purchase:</strong>  {{ vehicleDetails.date_of_purchase}}</p>
-      <p><strong>Date of Sale:</strong> {{ vehicleDetails.date_of_sale }}</p>
-      <p><strong>Status:</strong> {{ vehicleDetails.status }}</p>
-      <p><strong>Color:</strong> {{ vehicleDetails.color }}</p>
-      <p><strong>Engine No:</strong> {{ vehicleDetails.engine_no }}</p>
-      <p><strong>Grade:</strong> {{ vehicleDetails.grade }}</p>
-      <p><strong>Registration No:</strong> {{ vehicleDetails.reg_no }}</p>
-      <p><strong>Mileage:</strong> {{ vehicleDetails.mileage }}</p>
-      <p><strong>Comments:</strong>{{ vehicleDetails.comments }}</p>
-          </div>
-    </ng-template>
-    <ng-template pTemplate>
-        <div class="mx-auto mt-3">
-            <div class=" align-items-center justify-content-center">
-            <h4 class="text-center mb-7">Vehicle Gallery</h4>
-            <p-galleria [value]="images" [showIndicators]="true" [showThumbnails]="false" [containerStyle]="{ 'max-width': '640px' }">
-                <ng-template pTemplate="item" let-item>
-                  <img [src]="item.itemImageSrc" style="width: 100%; display: block;" />
-                </ng-template>
-              </p-galleria>
-        </div>       
-
+  <div class="mx-auto mt-3">
+    <div class="align-items-center justify-content-center center">
+      <div *ngFor="let image of images">
+        <img [src]="image.itemImageSrc" style="width: 100%; margin: 0 auto;" />
+      </div>
     </div>
-    </ng-template>
-</p-splitter> -->
+  </div>
+  
+      <div class= "flex mt-4">
+          <div style="flex: 1; text-align: center; border: 1px solid lightgrey; border-right: none; padding: 10px; border-radius: 3px;"> 
+              <i class="pi pi-money-bill" style="color: slateblue; font-size: 30px;" ></i>
+              <p style="color: rgb(148, 148, 148); margin-bottom: 0;">Demand</p>
+              <!-- <br> -->
+              <p>{{ vehicleDetails.demand | number: '1.0-0' }}</p>
+          </div>
 
+          <div style="flex: 1; text-align: center; border: 1px solid lightgrey; border-right: none; padding: 10px; border-radius: 3px;">
+              <i class="pi pi-calendar" style="color: slateblue; font-size: 30px;" ></i>
+              <p style="color: rgb(148, 148, 148); margin-bottom: 0;">Model</p>
+              <!-- <br > -->
+              <p>{{ vehicleDetails.year}}</p>
+          </div>
 
-<div class="row flex">
-    <!-- First Card -->
-    <div  class="card col d-flex flex-column align-items-center justify-content-center">
-        <div class="text-center mb-4">
-            <h4> {{ vehicleDetails.model }}  {{ vehicleDetails.make }} {{ vehicleDetails.year }} </h4>
+          <div style="flex: 1; text-align: center; border: 1px solid lightgrey; border-right: none; padding: 10px; border-radius: 3px;">
+              <i class="pi pi-star" style="color: slateblue; font-size: 30px;" ></i>
+              <p style="color: rgb(148, 148, 148); margin-bottom: 0;">Grade</p>
+              <!-- <br> -->
+              <p>{{ vehicleDetails.grade}}</p>
+          </div>
+
+          <div style="flex: 1; text-align: center; border: 1px solid lightgrey; padding: 10px; border-radius: 3px;">
+              <i class="pi pi-clock" style="color: slateblue; font-size: 30px;" ></i>
+              <p style="color: rgb(148, 148, 148); margin-bottom: 0;">Mileage</p>
+              
+              <p>{{ vehicleDetails.mileage | number: '1.0-0'}} Km</p>
+          </div>
+      </div>
+  </div>
+  
+  <!-- <div class="flex">
+  <div class="col-7 mb-3 card col d-flex flex-column align-items-center justify-content-center"style="padding: 0; width:55%">
+    <div class="card d-flex flex-column align-items-center justify-content-center" style=" width: 100%;">
+      <div class="text-center mb-5">
+        <h4>Vehicle Details</h4>
+      </div>
+      <div class="">
+        <p><strong>Make:</strong> {{ vehicleDetails.make}}</p>
+        <p><strong>Model:</strong> {{ vehicleDetails.model}}</p>
+        <p><strong>Variant:</strong> {{ vehicleDetails.variant }}</p>
+        <p><strong>Chasis_No:</strong> {{ vehicleDetails.chasis_no}}</p>
+        <p><strong>Status:</strong> {{ vehicleDetails.status}}</p>
+        <p><strong>Registration No:</strong> {{ vehicleDetails.reg_no}}</p>
+        <p><strong>Demand:</strong> {{ vehicleDetails.demand  | number: '1.0-0'}}</p>
+        <p><strong>Date Of Purchase:</strong> {{ vehicleDetails.date_of_purchase}}</p>
+        <p><strong>Color:</strong> {{ vehicleDetails.color}}</p>
+        <p><strong>Comments:</strong> {{ vehicleDetails.comments}}</p>
+        
+        <div class="mt-2 text-center">
+          <button pButton pRipple label="View Documents" (click)="navigateToDocuments()"  style="width: 200px;"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class=" ml-3 card col d-flex flex-column align-items-center justify-content-center" style="width: 00px; height: 40%;">
+      <div style="display: flex; justify-content: center; align-items: center; ">
+          <h5>Request Vehicle Sale</h5>
+        </div>
+        <div style="display: flex; justify-content: center; align-items: center; ">
+          <h6>Make An Offer</h6>
+        </div>
+  
+        <div>
+          <p-slider [(ngModel)]="range" 
+          [range]="true" [min]="800000" 
+          [max]="10000000" 
+          [step]="100000" 
+          (onSlideEnd)="updateMinMaxValues()"
+          ></p-slider>
+          <br>
+        </div>
+        <div class="p-grid">
+          <div class="p-col">
+            <label for="minValue">Min Value: </label>
+            <input id="minValue" pInputText type="number" [(ngModel)]="minValue" [min]="800000" [max]="range[1]" [step]="100000">
+          </div>
+          <div class="dash">
+          <h2>-</h2>  
+          </div>
+          <div class="p-col">
+            <label for="maxValue">Max Value: </label>
+            <input id="maxValue" pInputText type="number" [(ngModel)]="maxValue" [min]="range[0]" [max]="10000000" [step]="100000">
+          </div>
         </div>
         
-        <!-- <div class="mx-auto mt-3">
-            <div class=" align-items-center justify-content-center center">
-            <p-galleria [value]="images" [showIndicators]="true" [showThumbnails]="false" [containerStyle]="{ 'max-width': '600px', 'display': 'flex', 'justify-content': 'center' }">
-                <ng-template pTemplate="item" let-item>
-                  <img [src]="item.itemImageSrc" style="width: 100%; margin: 0 auto;" />
-                </ng-template>
-              </p-galleria>
-        </div>   
-    </div> -->
+        <div class="mt-2 text-center">
+          <button pButton pRipple label="Send Request"
+           class="p-button-success" 
+           (click)="sendNotification()"
+           [disabled]="disableButton()"
+           style="width: 200px;"
+           ></button>
+        </div>    
+  </div>
 
-    <div class="mx-auto mt-3">
-      <div class="align-items-center justify-content-center center">
-        <div *ngFor="let image of images">
-          <img [src]="image.itemImageSrc" style="width: 100%; margin: 0 auto;" />
-        </div>
+    <div class=" ml-3 card col d-flex flex-column align-items-center justify-content-center" style="width: 500px; height: 52%;">
+      <div class="text-center mb-5">
+          <h4> Showroom Details </h4>
       </div>
-    </div>
 
-
-    <!-- <div class="mx-auto mt-3">
-      <div class="align-items-center justify-content-center center">
-        <p-galleria [value]="images" [showIndicators]="true" [showThumbnails]="false" [containerStyle]="{ 'max-width': '600px', 'display': 'flex', 'justify-content': 'center' }">
-          <ng-template let-image pTemplate="item">
-            <img [src]="image.itemImageSrc" style="width: 100%; margin: 0 auto;" />
-          </ng-template>
-        </p-galleria>
-      </div>
-    </div> -->
-
+      <div>
+      <p><strong>Showroom Name:</strong> {{ vehicleDetails.showroom.showroom_name}}</p>
+      <p><strong>State:</strong> {{ vehicleDetails.showroom.state}}</p>
+      <p><strong>City:</strong> {{ vehicleDetails.showroom.city }}</p>
+      <p><strong>Address:</strong> {{ vehicleDetails.showroom.address}}</p>
+      <p><strong>Contact No:</strong> {{ vehicleDetails.showroom.contact_no}}</p>
     
-        <div class= "flex mt-4">
-            <div style="flex: 1; text-align: center; border: 1px solid lightgrey; border-right: none; padding: 10px; border-radius: 3px;"> 
-                <i class="pi pi-money-bill" style="color: slateblue; font-size: 30px;" ></i>
-                <p style="color: rgb(148, 148, 148); margin-bottom: 0;">Demand</p>
-                <!-- <br> -->
-                <p>{{ vehicleDetails.demand | number: '1.0-0' }}</p>
-            </div>
+  </div>
+  </div> 
+  </div>
+</div> -->
 
-            <div style="flex: 1; text-align: center; border: 1px solid lightgrey; border-right: none; padding: 10px; border-radius: 3px;">
-                <i class="pi pi-calendar" style="color: slateblue; font-size: 30px;" ></i>
-                <p style="color: rgb(148, 148, 148); margin-bottom: 0;">Model</p>
-                <!-- <br > -->
-                <p>{{ vehicleDetails.year}}</p>
-            </div>
 
-            <div style="flex: 1; text-align: center; border: 1px solid lightgrey; border-right: none; padding: 10px; border-radius: 3px;">
-                <i class="pi pi-star" style="color: slateblue; font-size: 30px;" ></i>
-                <p style="color: rgb(148, 148, 148); margin-bottom: 0;">Grade</p>
-                <!-- <br> -->
-                <p>{{ vehicleDetails.grade}}</p>
-            </div>
-
-            <div style="flex: 1; text-align: center; border: 1px solid lightgrey; padding: 10px; border-radius: 3px;">
-                <i class="pi pi-clock" style="color: slateblue; font-size: 30px;" ></i>
-                <p style="color: rgb(148, 148, 148); margin-bottom: 0;">Mileage</p>
-                
-                <p>{{ vehicleDetails.mileage | number: '1.0-0'}} Km</p>
-            </div>
+<div class="flex">
+  <div class="col-7 mb-3 card col d-flex flex-column align-items-center justify-content-center" style="padding: 0; width:55%">
+    <div class="card d-flex flex-column align-items-center justify-content-center" style="width: 100%; border: 0;">
+      <div class="text-center mb-5">
+        <h4>Vehicle Details</h4>
+      </div>
+      <!-- Vehicle details content -->
+      <div class="">
+        <p><strong>Make:</strong> {{ vehicleDetails.make}}</p>
+        <p><strong>Model:</strong> {{ vehicleDetails.model}}</p>
+        <p><strong>Variant:</strong> {{ vehicleDetails.variant }}</p>
+        <p><strong>Chasis_No:</strong> {{ vehicleDetails.chasis_no}}</p>
+        <p><strong>Status:</strong> {{ vehicleDetails.status}}</p>
+        <p><strong>Registration No:</strong> {{ vehicleDetails.reg_no}}</p>
+        <p><strong>Demand:</strong> {{ vehicleDetails.demand  | number: '1.0-0'}}</p>
+        <p><strong>Date Of Purchase:</strong> {{ vehicleDetails.date_of_purchase}}</p>
+        <p><strong>Color:</strong> {{ vehicleDetails.color}}</p>
+        <p><strong>Comments:</strong> {{ vehicleDetails.comments}}</p>
+        
+        <br>
+        <div class="mt-2 text-center">
+          <button pButton pRipple label="View Documents" (click)="navigateToDocuments()"  style="width: 200px;"></button>
         </div>
-
-   
+      </div>
     </div>
-  
-    <!-- Second Card -->
-    <div >
-   
-         <!-- Send req -->
-      <div class=" ml-3 card col align-items-center justify-content-center" style="width: 500px; height: 210px;">
-        <div style="display: flex; justify-content: center; align-items: center; ">
-            <h5>Request Vehicle Sale</h5>
-          </div>
-          <div style="display: flex; justify-content: center; align-items: center; ">
-            <h6>Make An Offer</h6>
-          </div>
+  </div>
 
-          <div>
-            <p-slider [(ngModel)]="range" 
-            [range]="true" [min]="800000" 
-            [max]="10000000" 
-            [step]="100000" 
-            (onSlideEnd)="updateMinMaxValues()"
-            ></p-slider>
-            <br>
-          </div>
-          <div class="p-grid">
-            <div class="p-col">
-              <label for="minValue">Min Value: </label>
-              <input id="minValue" pInputText type="number" [(ngModel)]="minValue" [min]="800000" [max]="range[1]" [step]="100000">
-            </div>
-            <div class="dash">
-            <h2>-</h2>  
-            </div>
-            <div class="p-col">
-              <label for="maxValue">Max Value: </label>
-              <input id="maxValue" pInputText type="number" [(ngModel)]="maxValue" [min]="range[0]" [max]="10000000" [step]="100000">
-            </div>
-          </div>
-          
+  <div class="col" style="padding-top: 0;">
+    <div class="ml-3 card d-flex flex-column align-items-center justify-content-center" style="width: 100%;">
+      <div style="display: flex; justify-content: center; align-items: center; ">
+        <h5>Request Vehicle Sale</h5>
+      </div>
+      <!-- Request Vehicle Sale content -->
+      <div style="display: flex; justify-content: center; align-items: center; ">
+        <h6>Make An Offer</h6>
+      </div>
 
-
-          <div class="mt-2 text-center">
-            <button pButton pRipple label="Send Request"
-             class="p-button-success" 
-             (click)="sendNotification()"
-             [disabled]="disableButton()"
-             style="width: 200px;"
-             ></button>
-          </div>    
-    </div>
-   
-      <div class=" ml-3 card col d-flex flex-column align-items-center justify-content-center" style="width: 500px; height: 57%;">
-        <div class="text-center mb-5">
-            <h4> Showroom Details </h4>
+      <div>
+        <p-slider [(ngModel)]="range" 
+        [range]="true" [min]="800000" 
+        [max]="10000000" 
+        [step]="100000" 
+        (onSlideEnd)="updateMinMaxValues()"
+        ></p-slider>
+        <br>
+      </div>
+      <div class="p-grid">
+        <div class="p-col">
+          <label for="minValue">Min Value: </label>
+          <input id="minValue" pInputText type="number" [(ngModel)]="minValue" [min]="800000" [max]="range[1]" [step]="100000">
         </div>
-        <div class= >
+        <div class="dash">
+        <h2>-</h2>  
+        </div>
+        <div class="p-col">
+          <label for="maxValue">Max Value: </label>
+          <input id="maxValue" pInputText type="number" [(ngModel)]="maxValue" [min]="range[0]" [max]="10000000" [step]="100000">
+        </div>
+      </div>
+      
+      <div class="mt-2 text-center">
+        <button pButton pRipple label="Send Request"
+         class="p-button-success" 
+         (click)="sendNotification()"
+         [disabled]="disableButton()"
+         style="width: 200px;"
+         ></button>
+      </div> 
+    </div>
+
+    <div class="ml-3 card d-flex flex-column align-items-center justify-content-center" style="width: 100%;">
+      <div class="text-center mb-5">
+        <h4>Showroom Details</h4>
+      </div>
+      <!-- Showroom details content -->
+      <div>
         <p><strong>Showroom Name:</strong> {{ vehicleDetails.showroom.showroom_name}}</p>
         <p><strong>State:</strong> {{ vehicleDetails.showroom.state}}</p>
         <p><strong>City:</strong> {{ vehicleDetails.showroom.city }}</p>
@@ -167,57 +213,14 @@
         <p><strong>Contact No:</strong> {{ vehicleDetails.showroom.contact_no}}</p>
       
     </div>
-    </div>  
-
-</div>
-  </div>
-
-  <div class="row flex">
-    <div class="col-7 mb-3 card col d-flex flex-column align-items-center justify-content-center"style="padding: 0; width:55%">
-      <div class="card d-flex flex-column align-items-center justify-content-center" style=" width: 100%;">
-        <div class="text-center mb-5">
-          <h4>Vehicle Details</h4>
-        </div>
-        <div class="">
-          <p><strong>Make:</strong> {{ vehicleDetails.make}}</p>
-          <p><strong>Model:</strong> {{ vehicleDetails.model}}</p>
-          <p><strong>Variant:</strong> {{ vehicleDetails.variant }}</p>
-          <p><strong>Chasis_No:</strong> {{ vehicleDetails.chasis_no}}</p>
-          <p><strong>Status:</strong> {{ vehicleDetails.status}}</p>
-          <p><strong>Registration No:</strong> {{ vehicleDetails.reg_no}}</p>
-          <p><strong>Demand:</strong> {{ vehicleDetails.demand  | number: '1.0-0'}}</p>
-          <p><strong>Date Of Purchase:</strong> {{ vehicleDetails.date_of_purchase}}</p>
-          <!-- <p><strong>Status:</strong> {{ vehicleDetails.status}}</p> -->
-          <p><strong>Color:</strong> {{ vehicleDetails.color}}</p>
-          <p><strong>Comments:</strong> {{ vehicleDetails.comments}}</p>
-          
-          <div class="mt-2 text-center">
-            <button pButton pRipple label="View Documents" (click)="navigateToDocuments()"  style="width: 200px;"></button>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
-  
-  
-
-
-
-
-
-
+</div>
 
 
 
   
-
-  
   
 
-
-
-
-    
-       
-   
-       
+ 
+  
