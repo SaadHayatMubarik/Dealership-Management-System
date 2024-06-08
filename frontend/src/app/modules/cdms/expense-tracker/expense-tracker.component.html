@@ -6,7 +6,9 @@
       <h3>Expense Tracker</h3>
     </div>
     <div class="comp-btns">
-      <app-button label="New" styleClass="p-button-sm p-button-rounded" (click)="showDialog()"></app-button>
+      <app-button label="New" styleClass="p-button-sm p-button-rounded"
+       (click)="showDialog()"
+       *appPermission="'add.expense'"></app-button>
     </div>
   </div>
 
@@ -47,7 +49,7 @@
                   </div>
                   <div class="col-4">
                     <div class="p-field ">
-                        <label><b>Expense Name:</b></label> <br>
+                        <label><b>Expense Amount:</b></label> <br>
                         <input
                           name="expense_amount"
                           type="text"

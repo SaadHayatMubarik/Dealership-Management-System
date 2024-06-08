@@ -6,6 +6,7 @@ import {
   IDataTableAction,
   IObject,
 } from 'src/app/shared/interfaces/common';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 
 import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
@@ -52,7 +53,11 @@ export class EmployeesDetailComponent extends BaseComponent implements OnInit {
  
 
 
-  constructor(private apiService : ApiHelperService, private toast : ToastService )
+  constructor(
+    private apiService : ApiHelperService, 
+    private toast : ToastService,
+    private authService: AuthService
+   )
   {
     super();
   }
@@ -109,23 +114,23 @@ export class EmployeesDetailComponent extends BaseComponent implements OnInit {
           } 
             );
         },
+        permission: 'delete.manageEmployee'
       },
       {
         label: 'Update',
         icon: 'pi pi-pencil',
         command: (event) => {
-       
-  
+          this.employeeId = event.employee_id;
         },
+        permission: 'update.manageEmployee'
       }
+      
      ];
+     this.actions = this.actions.filter(action => !action.permission || this.authService.hasPermission(action.permission));
 
   }
+    
   @ViewChild('employee') EmployeeForm!: NgForm;
-
- 
-
-  
 
   validateAlphabeticInput(event: KeyboardEvent) {
     // Get the character being typed

@@ -1,6 +1,7 @@
 
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BaseComponent } from 'src/app/shared/base.component';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 import {
   DataTableColumn,
@@ -73,7 +74,9 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
   customer_form_input : string= '';
   investors: string[] = [];
 
-  constructor(private apiService : ApiHelperService, private toast : ToastService )
+  constructor(private apiService : ApiHelperService, 
+    private toast : ToastService,
+    private authService: AuthService )
   {
     super();
   }
@@ -160,6 +163,7 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
                 }
         })
       },
+       permission: 'delete.manageCustomers'
     },
     {
       label: 'Update',
@@ -170,9 +174,11 @@ export class ManageCustomerComponent extends BaseComponent implements OnInit {
         this.getCustomerById(this.customerId);
 
       },
+      permission: 'update.manageCustomers'
     }
    ];
-
+   
+   this.actions = this.actions.filter(action => !action.permission || this.authService.hasPermission(action.permission));
   }
 
   @ViewChild('Seller') SellerForm!: NgForm;

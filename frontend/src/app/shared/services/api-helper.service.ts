@@ -129,7 +129,7 @@ export class ApiHelperService {
     };
   }
 
-  private vehicleTypes: any[] = [];
+  // private vehicleTypes: any[] = [];
 
 
 

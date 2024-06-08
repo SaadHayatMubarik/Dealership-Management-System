@@ -11,6 +11,7 @@ import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
 
 import { NgForm } from '@angular/forms';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-expense-tracker',
@@ -41,7 +42,8 @@ export class ExpenseTrackerComponent extends BaseComponent {
   
   constructor(
     private readonly apiService: ApiHelperService,
-    private toast: ToastService
+    private toast: ToastService,
+    private authService: AuthService
   ){
    super()
   } 
@@ -61,6 +63,26 @@ export class ExpenseTrackerComponent extends BaseComponent {
         fieldTitle: 'Date',
       },
       ];
+
+      this.actions = [
+        {
+          label: 'Update',
+          icon: 'pi pi-file-edit',
+          command: (event) => {
+
+          },
+          permission: 'update.expense'
+        },
+        {
+          label: 'Delete',
+          icon: 'pi pi-file-edit',
+          command: (event) => {
+
+          },
+          permission: 'delete.expense'
+        },
+      ]
+      this.actions = this.actions.filter(action => !action.permission || this.authService.hasPermission(action.permission));
   }
 
  

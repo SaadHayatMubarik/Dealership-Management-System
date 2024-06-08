@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BaseComponent } from 'src/app/shared/base.component';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 import {
   DataTableColumn,
@@ -61,7 +62,8 @@ export class ManageInvestorsComponent extends BaseComponent implements OnInit{
 
   constructor(private apiService : ApiHelperService, 
     private toast : ToastService,
-    private router: Router  )
+    private router: Router,
+    private authService : AuthService )
   {
     super();
   }
@@ -113,6 +115,7 @@ export class ManageInvestorsComponent extends BaseComponent implements OnInit{
           }
             );           
             },
+            permission: 'delete.manageInvestors'
           },
       {
         label: 'Update',
@@ -123,6 +126,7 @@ export class ManageInvestorsComponent extends BaseComponent implements OnInit{
         this.getInvestorById(this.investorId);
         
         },
+        permission: 'update.manageInvestors'
       },
       {
         label: 'View',
@@ -135,8 +139,10 @@ export class ManageInvestorsComponent extends BaseComponent implements OnInit{
           // console.log(this.investorId);
 
         },
+         permission: 'view.manageInvestors'
       }
     ];
+    this.actions = this.actions.filter(action => !action.permission || this.authService.hasPermission(action.permission));
   }
 
   @ViewChild('investorForm') investorForm!: NgForm;
