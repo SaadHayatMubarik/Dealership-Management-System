@@ -12,7 +12,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { SearchMarketComponent } from './search-market/search-market.component';
 import { ManageEmployeeComponent } from './manage-user/manage-employee.component';
-import { IsAuthGuard } from 'src/app/shared/guard/auth.guard';
+// import { IsAuthGuard } from 'src/app/shared/guard/auth.guard';
 import { ViewShowroomComponent } from './view-showroom/view-showroom.component';
 import { ViewDetailedInventoryComponent } from './view-detailed-inventory/view-detailed-inventory.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
@@ -26,6 +26,7 @@ import { EmployeesDetailComponent } from './employees-detail/employees-detail.co
 import { InvestmentsComponent } from './investments/investments.component';
 import { ExpenseTrackerComponent } from './expense-tracker/expense-tracker.component';
 import { ViewDocumentComponent } from './view-document/view-document.component';
+import { authGuard } from 'src/app/shared/guard/auth.guard';
 
 
 
@@ -63,82 +64,102 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component:DashboardComponent,
+        canActivate: [authGuard]
         // canActivate: [IsAuthGuard]
         
       }
       ,{
       path: 'vehicle-type', 
       component: VehicleTypeComponent,
+      canActivate: [authGuard]
     },
     {
       path:'vehicle-type-attributes', 
-      component:VehicleTypeAttributesComponent,
+      component:VehicleTypeAttributesComponent, 
+      canActivate: [authGuard]
+
     },
     {
       path:'add-inventory', 
       component:AddInventoryFormComponent,
+      canActivate: [authGuard]
     },
     {
       path:'market-search', 
       component:SearchMarketComponent,
+      canActivate: [authGuard]
      
     },
     {
       path:'manage-users',
-      component: ManageEmployeeComponent
+      component: ManageEmployeeComponent,
+      canActivate: [authGuard]
     },
     {
       path:'view-showroom',
       component: ViewShowroomComponent,
+      canActivate: [authGuard]
       
     },
     {
       path:'detail-view/:inventoryId',
       component: ViewDetailedInventoryComponent,
+      canActivate: [authGuard]
     },
     {
       path:'change-password',
       component: ChangePasswordComponent,
+      canActivate: [authGuard]
     },
     {
       path:'notification',
       component: NotificationComponent,
+      canActivate: [authGuard]
     },
     {
       path:'investors',
       component: ManageInvestorsComponent,
+      canActivate: [authGuard]
     },
     {
       path: 'customers', 
-      component: ManageCustomerComponent
+      component: ManageCustomerComponent,
+      canActivate: [authGuard]
     },
     {
       path: 'sell-inventory/:inventoryId', 
-      component: SellInventoryComponent
+      component: SellInventoryComponent,
+      canActivate: [authGuard]
     },
     {
       path: 'roles', 
-      component:RoleComponent
+      component:RoleComponent,
+      canActivate: [authGuard]
     },
     {
       path: 'update-inventory/:inventoryId', 
-      component:UpdateInventoryComponent
+      component:UpdateInventoryComponent,
+      canActivate: [authGuard]
     },
     {
       path:'manage-employee',
-      component:EmployeesDetailComponent
+      component:EmployeesDetailComponent,
+      canActivate: [authGuard]
     },
     {
       path:'manage-investments/:investorId',
-      component:InvestmentsComponent
+      component:InvestmentsComponent,
+      canActivate: [authGuard]
     },
     {
       path:'expense',
-      component:ExpenseTrackerComponent
+      component:ExpenseTrackerComponent,
+      canActivate: [authGuard]
     },
     {
       path: 'documents/:inventoryId', 
-      component: ViewDocumentComponent
+      component: ViewDocumentComponent,
+      canActivate: [authGuard]
     },
 
     ],

@@ -121,6 +121,7 @@ export class EmployeesDetailComponent extends BaseComponent implements OnInit {
         icon: 'pi pi-pencil',
         command: (event) => {
           this.employeeId = event.employee_id;
+          this.showDialog();
         },
         permission: 'update.manageEmployee'
       }
@@ -132,10 +133,15 @@ export class EmployeesDetailComponent extends BaseComponent implements OnInit {
     
   @ViewChild('employee') EmployeeForm!: NgForm;
 
+
+  display: boolean = false;
+  showDialog() {
+    this.display = true;
+  }
+
   validateAlphabeticInput(event: KeyboardEvent) {
-    // Get the character being typed
+    
     const char = event.key;
-  
     // Allow alphabetic characters (letters), spaces, and navigation keys (e.g., backspace, delete)
     if (!((char >= 'a' && char <= 'z') || (char >= 'A' && char <= 'Z') || char === ' ') && !['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.code)) {
         event.preventDefault();
@@ -143,10 +149,8 @@ export class EmployeesDetailComponent extends BaseComponent implements OnInit {
   }
 
   validateNumericInput(event: KeyboardEvent) {
-    // Get the character being typed
+    
     const char = event.key;
-
-    // Allow only numbers (0-9) and navigation keys (e.g., backspace, delete)
     if (!(char >= '0' && char <= '9') && !['Backspace', 'Delete',].includes(event.code)) {
         event.preventDefault();
     }

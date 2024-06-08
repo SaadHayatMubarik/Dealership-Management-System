@@ -46,9 +46,6 @@ export class LoginComponent implements OnInit{
     private toast:ToastService,
     private auth:AuthService,
      ) { }
-
- 
-
      navigateToSignUp() {
       this.router.navigate(['']); 
     }
@@ -95,16 +92,5 @@ export class LoginComponent implements OnInit{
       }
     }
 
- 
-
-  
-   
-
-    // onLogin(){
-    //   if(this.loginForm.valid){
-    //     this.auth.login('/auth/login', this.userData);
-    //     console.log("working")
-    //   }
-      
     }
 

@@ -299,27 +299,6 @@
               </div>
               <br>
               <div class="row-form grid">
-              
-
-                <!-- <div class="col-4">
-                  <div class="p-field">
-                    <span class="p-float-label">
-                        <p-inputNumber
-                          class="p-inputtext-lg"
-                          mode="currency"
-                          currency="PKR"
-                          locale="en-US"
-                          name="costPrice"
-                          [(ngModel)]="employee.bonus"
-                          pattern="^\d+$"
-                        >
-                        </p-inputNumber>
-                        <label for="float-label">Bonus (optional)</label>
-                      </span>
-                  </div>
-                </div> -->
-
-
                 <div class="col-4">
                   <div class="p-field">
                 <span class="p-float-label">
@@ -403,3 +382,248 @@
     </form>
   </p-sidebar> 
   </div>
+
+  <p-dialog  header="Update Employee" [(visible)]="display" [modal]="true" [closable]="true" [dismissableMask]="true" [style]="{width: '80vw'}">
+    <div class="ui-g ui-fluid">
+        <div class="ui-g-12">
+          <div class="card">
+            <form (ngSubmit)="onSubmit()" #expenses="ngForm" >
+                <div class="row-form grid">
+                  <div class="col-4">
+                    <div class="p-field">
+                      <label><b>Employee Name:</b></label> <br>
+                      <input class="p-inputtext-lg"
+                      required
+                      pInputText
+                      name="employeeName"
+                      minlength="4"
+                      maxlength="30"
+                      required
+                      pattern="^\S(?:\s*\S)*$"
+                      (keypress)="validateAlphabeticInput($event)"
+                      />    
+                      <!-- <div *ngIf="fullName.invalid && (fullName.dirty || fullName.touched)" class="p-error">
+                          <span *ngIf="fullName.errors?.['required']">
+                            Full Name Required.</span>   
+                            <br>
+                            <span *ngIf="fullName.errors?.['pattern']">
+                              Avoid unneccessary spaces.</span>  
+                        </div> -->
+                      
+  
+                  
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="p-field">
+                      <label><b>Employee Cnic:</b></label> <br>
+                      
+                        <input 
+                         class="p-inputtext-lg"
+                         pInputText 
+                         name="cnic"
+                         #cnic = "ngModel"
+                         required
+                         minlength="13"
+                         maxlength="13"
+                         pattern="[0-9]*"
+                         [(ngModel)]="employee.employeeCnic"
+  
+                         />
+                         <div *ngIf="cnic.invalid && (cnic.dirty || cnic.touched)" class="p-error">
+                          <span *ngIf="cnic.errors?.['required']">
+                            Please Enter Cnic Number.</span>  
+                              <br>
+                              <span *ngIf="cnic.errors?.['pattern' || 'minlength' || 'maxlength']"> 
+                              Enter Valid Cnic Number.
+                            </span>
+                        </div>
+                         
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="p-field">
+                      <label><b>Position:</b></label> <br>
+                          <input class="p-inputtext-lg"
+                          required
+                          pInputText
+                          name="position"
+                          [(ngModel)]="employee.employeePosition"
+                          minlength="2"
+                          maxlength="30"
+                          required
+                          pattern="^\S(?:\s*\S)*$"
+                          (keypress)="validateAlphabeticInput($event)"
+                          #position ="ngModel"
+                          />    
+                          <div *ngIf="position.invalid && (position.dirty || position.touched)" class="p-error">
+                              <span *ngIf="position.errors?.['required']">
+                                Position is Required.</span>   
+                                <br>
+                                <span *ngIf="position.errors?.['pattern']">
+                                  Avoid unneccessary spaces.</span>  
+                            </div>
+                         
+                  
+                    </div>
+                  </div>
+                </div>
+                <div class="row-form grid">
+                  <div class="col-4">
+                    <div class="p-field">
+                      <label><b>Status:</b></label> <br>
+                          <p-dropdown
+                          [required]="true"
+                          placeholder="Status"
+                           [options]="status" 
+                           class="p-inputtext-lg" 
+                           name="customer_type"
+                           [(ngModel)]="employee.employeeStatus"
+                           #Status = "ngModel"
+                           ></p-dropdown>
+      
+                           <div *ngIf="Status.invalid && (Status.dirty || Status.touched)" class="p-error">
+                            <span *ngIf="Status.errors?.['required']">
+                              Status is required.</span>    
+                          </div>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="p-field">
+                      <label><b>Phone No:</b></label> <br>
+                          <input
+                          name="phone number"
+                          type="text"
+                          pInputText
+                          class="p-inputtext-lg"
+                          required
+                          minlength="11"
+                          maxlength="11"
+                          [(ngModel)]="employee.employeePhoneNo"
+                          pattern="^(03\d{9})$"
+                          (keypress)="validateNumericInput($event)"
+                          #phoneNo ='ngModel'
+                        />
+                        <div *ngIf="phoneNo.invalid && (phoneNo.dirty || phoneNo.touched)" class="p-error">
+                          <span *ngIf="phoneNo.errors?.['required']">
+                           Phone Number is required.</span>   
+                            <br>
+                            <span *ngIf="phoneNo.errors?.['pattern']">
+                              Phone Number must be 11 digits long and should start with 03.</span>  
+                        </div>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="p-field">
+                      <label><b>Email:</b></label> <br>
+                      
+                          <input
+                          name="email"
+                          type="email"
+                          pInputText
+                          class="p-inputtext-lg"
+                          pTooltip="Please enter valid email"
+                          required
+                          email
+                          [(ngModel)]="employee.employeeEmail"
+                          #email = "ngModel"
+                        />
+        
+                        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="p-error">
+                          <span *ngIf="email.errors?.['required']">
+                            Please Enter Email.</span>   
+                          
+                            <span *ngIf="email.errors?.['email']">
+                              Please Enter A Valid Email.</span>  
+                        </div>          
+                    </div>
+                  </div>
+                  </div>
+                  <div class="row-form grid">
+                    <div class="col-4">
+                      <div class="p-field">
+                        <label><b>Salary:</b></label> <br>
+                            <p-inputNumber
+                              class="p-inputtext-lg"
+                              mode="currency"
+                              currency="PKR"
+                              locale="en-US"
+                              name="costPrice"
+                              [(ngModel)]="employee.employeeSalary"
+                              [required]="true"
+                              pattern="^\d+$"
+                              #cost="ngModel"
+                            >
+                            </p-inputNumber>
+    
+                            <div *ngIf="cost.invalid && (cost.dirty || cost.touched)" class="p-error">
+                              <span *ngIf="cost.errors?.['required']">
+                                Please Enter Salary of the employee
+                              </span>
+                              <br>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="p-field">
+                        <label><b>Joining Date:</b></label> <br>
+                        <p-calendar
+                        [readonlyInput]="true"
+                        class="p-inputtext-lg"
+                        name="joining date"
+                        [disabled]="true"
+                      ></p-calendar>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="p-field">
+                        <label><b>Shift Time:</b></label> <br>
+                            <input
+                            name="time"
+                            type="text"
+                            pInputText
+                            class="p-inputtext-lg"
+                            required
+                            [(ngModel)]="employee.shiftTime"
+                            #shift = "ngModel"
+                          />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row-form grid">
+                    <div class="col-4">
+                      <div class="p-field">
+                        <label><b>Total Allowed Leaves (yearly):</b></label> <br>
+                        <input
+                        name="leaves"
+                        type="leaves"
+                        pInputText
+                        class="p-inputtext-lg"
+                        required
+                        [(ngModel)]="employee.totalLeaves"
+                        #leaves="ngModel"
+                         [min]="0"
+                         [max]="365"
+                        pattern="\d*"
+                      />
+                      <div *ngIf="leaves.invalid && (leaves.dirty || leaves.touched)" class="p-error">
+                              <span *ngIf="leaves.errors?.['required']">
+                                Please Enter leaves days.
+                              </span>
+                              <br>
+                       </div>
+                      </div>
+                    </div>
+                  </div>
+                  <br>
+                  <br>
+                  <br>
+                  <div class="sidebar-footer flex justify-content-end">
+                      <app-button label="Save" styleClass="p-button-sm p-button-rounded" type="submit" ></app-button>
+                    </div>
+              </form>
+            </div>
+        </div>
+     
+    </div>
+  </p-dialog>

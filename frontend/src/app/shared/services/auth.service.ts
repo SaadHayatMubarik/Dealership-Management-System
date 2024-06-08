@@ -10,7 +10,6 @@ import { Router } from "@angular/router";
 export class AuthService {
 
     private tokenExpirationTimer : any;
-
     constructor(private http:HttpClient,
                 private apiService:ApiHelperService,
                 private router: Router,){}
@@ -50,13 +49,21 @@ export class AuthService {
         this.router.navigate(['/login']);
         localStorage.removeItem('jwtToken');
         localStorage.removeItem('Showroom Id');
-        localStorage.removeItem('user Id')
+        localStorage.removeItem('user Id');
+        localStorage.removeItem('userRole');
+          localStorage.removeItem('permissions');
 
         if (this.tokenExpirationTimer)
         {
             clearTimeout(this.tokenExpirationTimer);
         }
         this.tokenExpirationTimer = null;
+      }
+
+
+      isLoggedIn(): boolean {
+        const token = localStorage.getItem('jwtToken');
+        return !!token; // Returns true if token exists
       }
 
       autoLogout(expirationDuration : number){

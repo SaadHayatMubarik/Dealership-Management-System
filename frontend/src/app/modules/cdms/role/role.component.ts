@@ -48,6 +48,8 @@ export class RoleComponent extends BaseComponent implements OnInit {
       },
       ];
   }
+
+  @ViewChild('roleForm') roleForm!: NgForm;
  
   
   modules: { name: string }[] = [];
@@ -131,8 +133,9 @@ export class RoleComponent extends BaseComponent implements OnInit {
         rolePermissionsData.modulePermissions.push({ component_id: component_id, permissions: permissions });
       }
     });
-    
-    this.apiService
+
+    if (this.roleForm.valid){
+      this.apiService
       .post('/role-based/addRolePermission', rolePermissionsData)
       .subscribe(
         (response) => {
@@ -144,7 +147,11 @@ export class RoleComponent extends BaseComponent implements OnInit {
           this.toast.showError('Error saving role permissions');
         }
       );
+    }
 
+    else if (!this.roleForm.valid){
+      this.toast.showError('Please fill the role name field.')
+    }
   }
 
 
