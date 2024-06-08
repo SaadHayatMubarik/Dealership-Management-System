@@ -32,8 +32,8 @@ export class PictureController {
       return this.pictureService.addPictures(pictures,pictureType,inventoryId);
     }
 
-    @Get('getPicture/:inventoryId')
-    getPictures(@Param('inventoryId') inventoryId: number): Promise<Picture[]>{
-      return this.pictureService.getPictures(inventoryId);
+    @Get('getPicture/:inventoryId/:type')
+    getPictures(@Param('inventoryId') inventoryId: number,@Param('type') type: string): Promise<Picture[]>{
+      return this.pictureService.getPictures(inventoryId,type);
     }
 }

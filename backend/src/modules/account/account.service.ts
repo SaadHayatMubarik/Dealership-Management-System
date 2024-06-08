@@ -14,12 +14,12 @@ export class AccountService {
         private showroomRepository: Repository<Showroom>,
         @InjectRepository(Account)
         private accountRepository: Repository<Account>,
-        private entityManager: EntityManager
+        // private entityManager: EntityManager
     ){}
 
 
-    async createAccount(accountName: string, accountType:AccountType, accountCategory: AccountCategory, price: number, showroomId: number): Promise<Account>{
-        return await this.entityManager.transaction(async transactionalEntityManager => {
+    async createAccount(accountName: string, accountType:AccountType, accountCategory: AccountCategory, price: number, showroomId: number,entityManager: EntityManager): Promise<Account>{
+        return await entityManager.transaction(async transactionalEntityManager => {
         const account = new Account();
                 account.account_name = accountName;
                 account.account_type = accountType;
