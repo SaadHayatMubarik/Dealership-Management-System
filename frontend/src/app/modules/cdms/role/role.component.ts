@@ -118,33 +118,27 @@ export class RoleComponent extends BaseComponent implements OnInit {
   showroom_id = localStorage.getItem('Showroom Id');
 
   saveRolePermissions() {
-
-
     const rolePermissionsData: RolePermission = {
       modulePermissions: [],
       roleName: this.roleName,
       showroomId: this.showroom_id,
-
       // showroomId: Number(localStorage.getItem('Showroom Id'))
-
     };
-
     Object.keys(this.rolePermissions).forEach(moduleName => {
       const permissions: ModulePermission = this.rolePermissions[moduleName];
       const component_id = this.components.find(component => component.component_name === moduleName)?.component_id;
-      if (component_id !== undefined) { // Ensure component_id is found
+      if (component_id !== undefined) { 
         rolePermissionsData.modulePermissions.push({ component_id: component_id, permissions: permissions });
       }
     });
     
-  
     this.apiService
       .post('/role-based/addRolePermission', rolePermissionsData)
       .subscribe(
         (response) => {
           this.toast.showSuccess('Role permissions saved successfully');  
           this.closeModal();
-          console.log('permissions', rolePermissionsData)
+          this.getRoles();
         },
         (error) => {
           this.toast.showError('Error saving role permissions');
@@ -156,11 +150,9 @@ export class RoleComponent extends BaseComponent implements OnInit {
 
 
   getRoles(){
-    
     this.apiService.get(`/role-based/getRole/${this.showroom_id}`).subscribe((data) => {
       this.data = data;
     });
-  
 }
 
 }

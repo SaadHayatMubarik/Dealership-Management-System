@@ -1,10 +1,12 @@
 import { Component, ErrorHandler, OnInit, ViewChild } from '@angular/core';
 import { BaseComponent } from 'src/app/shared/base.component';
-import { IMultiValue, IVehicleTypeAttribute } from '../../interfaces/inventory';
+import {  IVehicleTypeAttribute } from '../../interfaces/inventory';
 import { DialogControlService } from 'src/app/shared/services/dialog.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
 
 import { IUpdateAttr, IUpdateVehicleAttr, IUpdateVehicleType } from '../../interfaces/update';
+
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 
 import {
@@ -13,7 +15,7 @@ import {
   IObject,
 } from 'src/app/shared/interfaces/common';
 import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
-import { empty } from 'rxjs';
+
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -49,8 +51,8 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
 
   
   constructor(private readonly apiService: ApiHelperService, 
-              private dialogService: DialogControlService ,
-              private toastService:ToastService) {
+              private toastService:ToastService,
+              private authService: AuthService) {
     super()
       
   }
@@ -113,7 +115,6 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
         icon: 'pi pi-trash',
         command: (event) => {
           this.selectedVehicleTypeAttributeId = event.vehicleAttributeId;
-          
               this.apiService.delete(`/vehicle-type-attribute/${this.selectedVehicleTypeAttributeId}`).subscribe({
                 next: (response) => {
                   this.getVehicleTypes();
@@ -129,7 +130,9 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
                 }
               }
                 );
-              }
+              },
+              permission: 'delete.vehicleTypeAttribute'
+              
              
             },
       {
@@ -143,8 +146,11 @@ export class VehicleTypeAttributesComponent  extends BaseComponent implements On
           this.getVehicleAtt(this.vehicle_attribute_id);
 
         },
+        permission: 'update.vehicleTypeAttribute'
       },
     ];
+
+    this.actions = this.actions.filter(action => !action.permission || this.authService.hasPermission(action.permission));
   }
 
 

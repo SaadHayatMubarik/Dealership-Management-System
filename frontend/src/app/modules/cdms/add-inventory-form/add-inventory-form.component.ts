@@ -162,6 +162,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
             },
           });
         },
+        permission: 'delete.inventory'
       },
       {
         label: 'View',
@@ -169,6 +170,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
         command: (event) => {
           this.router.navigate(['/detail-view', event.inventoryId]);
         },
+        permission: 'view.inventory'
       },
       {
         label: 'Update',
@@ -176,6 +178,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
         command: (event) => {
           this.router.navigate(['/update-inventory', event.inventoryId]);
         },
+        permission: 'update.inventory'
       },
       {
         label: 'Sell',
@@ -184,8 +187,10 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
           this.router.navigate(['/sell-inventory', event.inventoryId]);
           // console.log(event.inventoryId);
         },
+        permission: 'update.inventory'
       },
     ];
+    this.actions = this.actions.filter(action => !action.permission || this.authService.hasPermission(action.permission));
   }
 
   @ViewChild('Inventory') InventoryForm!: NgForm;

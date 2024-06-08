@@ -1,6 +1,7 @@
 import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { LayoutService } from '../service/app.layout.service';
+import { PermissionDirective } from '../../custom-directive/permission.directive';
 
 @Component({
     selector: 'app-menu',
@@ -69,8 +70,7 @@ export class AppMenuComponent implements OnInit {
                     { label: 'Manage Employee', 
                     icon: 'pi pi-fw pi-id-card', 
                     routerLink: ['/cdms/manage-employee'] },
-                ],
-                
+                ],  
             },
             {
                 label: 'Roles/Permission',
@@ -79,7 +79,6 @@ export class AppMenuComponent implements OnInit {
                     icon: 'pi pi-fw pi-plus', 
                     routerLink: ['/cdms/roles'] },
                 ],
-                
             },
             { 
                 label: 'Accounting',

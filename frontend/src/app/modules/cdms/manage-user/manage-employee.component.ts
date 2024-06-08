@@ -9,6 +9,7 @@ import {
 import { IUser } from '../../interfaces';
 import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 import { NgForm } from '@angular/forms';
 import { IUpdateUser } from '../../interfaces/update';
@@ -52,7 +53,8 @@ export class ManageEmployeeComponent extends BaseComponent implements OnInit {
   constructor(
     private apiService: ApiHelperService,
     private toast: ToastService,
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private authService: AuthService
   ) {
     super();
   }
@@ -91,8 +93,10 @@ export class ManageEmployeeComponent extends BaseComponent implements OnInit {
             error: () => {
               this.toast.showError('System Error');
             },
+            
           });
         },
+        permission: 'delete.manageUsers'
       },
       {
         label: 'Update',
@@ -102,8 +106,10 @@ export class ManageEmployeeComponent extends BaseComponent implements OnInit {
           this.updateSidebarVisible = true;
           this.getUserById(this.userId);
         },
+        permission: 'update.manageUsers'
       },
     ];
+    this.actions = this.actions.filter(action => !action.permission || this.authService.hasPermission(action.permission));
   }
 
   onSubmit() {
