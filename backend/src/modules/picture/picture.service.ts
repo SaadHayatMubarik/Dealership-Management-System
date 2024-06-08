@@ -41,7 +41,18 @@ export class PictureService {
         return await this.uploadImage(pictures,pictureType,inventoryObj);
       }
 
-      async getPictures(inventoryId: number): Promise<Picture[]>{
-        return await this.pictureRepository.find({select:['link'],where:{inventory:{inventory_id:inventoryId}}});
+      async getPictures(inventoryId: number,type: string): Promise<Picture[]>{
+        let PicturesObj: Picture[] ;
+        let filteredPictures: Picture[]=[];
+        PicturesObj = await this.pictureRepository.find({select:['link'],where:{inventory:{inventory_id:inventoryId}}})
+        // console.log(filteredPictures);
+        for(let i=0; i<PicturesObj.length; i++){
+          if (PicturesObj[i].link.includes(type) ){
+            // console.log(PicturesObj[i]);
+           filteredPictures.push(PicturesObj[i]);
+          }
+        }
+        
+        return filteredPictures;
       }
 }

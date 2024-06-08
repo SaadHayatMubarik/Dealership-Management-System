@@ -10,11 +10,11 @@ export class TranscationService {
     constructor(
         @InjectRepository(Transaction)
         private transactionRepository: Repository<Transaction>,
-        private entityManager: EntityManager
+        // private entityManager: EntityManager
     ){}
 
-    async createTransaction(description: string, transactionAmount: number, transactionType: TransactionType, accountObj: Account): Promise<Transaction>{
-        return await this.entityManager.transaction(async transactionalEntityManager => {
+    async createTransaction(description: string, transactionAmount: number, transactionType: TransactionType, accountObj: Account,entityManager: EntityManager): Promise<Transaction>{
+        return await entityManager.transaction(async transactionalEntityManager => {
         const transaction = new Transaction();
         transaction.Transaction_date = new Date();
         transaction.description = description;
