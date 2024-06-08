@@ -18,6 +18,9 @@ import { IVehicleDetails } from '../../interfaces/inventory';
 })
 export class DashboardComponent extends BaseComponent implements OnInit {
 
+  revenue: any;
+  months: any;
+
   constructor(private router: Router, private apiService: ApiHelperService) {
     super()
    }
@@ -29,9 +32,45 @@ export class DashboardComponent extends BaseComponent implements OnInit {
    
   
   ngOnInit(){
+
+    this.months = {
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: 'Months'
+          }
+        },
+        y: {
+          title: {
+            display: true,
+            text: 'Revenue'
+          }
+        }
+      }
+    };
+
+    this.revenue = {
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+      datasets: [
+        {
+          label: 'Revenue',
+          backgroundColor: '#42A5F5',
+          borderColor: '#1E88E5',
+          data: [5000, 7000, 8000, 12000, 15000, 17000, 20000, 18000, 22000, 24000, 26000, 30000]
+        }
+      ]
+    };
+    
     this.getVehicleDetails();
     this.getInventoryCount();
+
   }
+
+
+  
+  
+
 
 getVehicleDetails() {
   this.apiService

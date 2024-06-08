@@ -55,6 +55,7 @@ import { ExpenseTrackerComponent } from './expense-tracker/expense-tracker.compo
 import { ViewDocumentComponent } from './view-document/view-document.component';
 import { PermissionDirective } from 'src/app/shared/custom-directive/permission.directive';
 import { RippleModule } from 'primeng/ripple';
+import { ChartModule } from 'primeng/chart';
 
 
 
@@ -130,6 +131,7 @@ import { RippleModule } from 'primeng/ripple';
     ReactiveFormsModule,
     MultiSelectModule,
     RippleModule,
+    ChartModule,
    
 
 
