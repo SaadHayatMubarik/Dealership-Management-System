@@ -9,6 +9,7 @@ import { Account } from "src/modules/account/entity/Account";
 import { Employee } from "src/modules/employee/entity/Employee";
 import { Role } from "src/modules/role-based/entities/Role";
 import { CustomerAndInvestor } from "src/modules/customer/entity/CustomerAndInvestor";
+import { Expense } from "src/modules/expense/entity/Expense";
 // import { CustomerAndInvestor } from "src/modules/customer/entity/Customer";
 
 
@@ -55,4 +56,7 @@ export class Showroom {
 
     @OneToMany(() => Role, (role) =>  role.showroom)
     roles : Role[] ;
+
+    @OneToMany(() => Expense, (expense) => expense.showroom)
+    expenses: Expense[];
 }

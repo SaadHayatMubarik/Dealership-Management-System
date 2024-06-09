@@ -22,6 +22,7 @@ import { PictureModule } from './modules/picture/picture.module';
 import { EmployeeModule } from './modules/employee/employee.module';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { RoleBasedModule } from './modules/role-based/role-based.module';
+import { ExpenseModule } from './modules/expense/expense.module';
 
 @Module({
   imports: [
@@ -42,7 +43,8 @@ import { RoleBasedModule } from './modules/role-based/role-based.module';
     InvestorModule,
     EmployeeModule,
     DashboardModule,
-    RoleBasedModule
+    RoleBasedModule,
+    ExpenseModule
   ],
   controllers: [AppController],
   providers: [

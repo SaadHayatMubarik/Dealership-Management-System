@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Showroom } from "src/modules/showroom/entity/Showroom";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({name:'expense'})
 export class Expense{
@@ -16,4 +17,7 @@ export class Expense{
 
     @Column()
     expense_description: string;
+
+    @ManyToOne(() => Showroom, (showroom) => showroom.expenses)
+    showroom: Showroom;
 }

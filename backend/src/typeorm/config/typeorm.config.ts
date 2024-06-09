@@ -5,6 +5,7 @@ import { CustomerAndInvestor } from "src/modules/customer/entity/CustomerAndInve
 // import { CustomerAndInvestor } from "src/modules/customer/entity/Customer";
 // import { Customer } from "src/modules/customer/entity/Customer";
 import { Employee } from "src/modules/employee/entity/Employee";
+import { Expense } from "src/modules/expense/entity/Expense";
 import { Inventory } from "src/modules/inventory/entity/Inventory";
 import { Investment } from "src/modules/investment/entity/Investment";
 // import { Investor } from "src/modules/investor/entity/Investor";
@@ -28,7 +29,7 @@ export const typeOrmConfig: TypeOrmModuleOptions  = {
     username: 'root',
     password: 'root',
     database: 'd_m_s',
-    entities: [Inventory, MultiValueAttribute, StockAttributeValue , VehicleType, VehicleTypeAttribute ,User,Showroom,CustomerAndInvestor,Notification,Investment,Picture,Transaction,Account, Employee,Role,Component,Permission,RolePermission],
+    entities: [Inventory, MultiValueAttribute, StockAttributeValue , VehicleType, VehicleTypeAttribute ,User,Showroom,CustomerAndInvestor,Notification,Investment,Picture,Transaction,Account, Employee,Role,Component,Permission,RolePermission, Expense],
     synchronize: false, 
     
 }
