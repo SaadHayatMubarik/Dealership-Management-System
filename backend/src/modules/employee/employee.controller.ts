@@ -1,8 +1,9 @@
-import { Body, Controller, Post, Headers, Get, Delete, Param } from '@nestjs/common';
+import { Body, Controller, Post, Headers, Get, Delete, Param, Put } from '@nestjs/common';
 import { EmployeeService } from './employee.service';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
 import { Employee } from './entity/Employee';
 import { DeleteResult } from 'typeorm';
+import { UpdateEmployeeDto } from './dto/update-employee.dto';
 
 @Controller('employee')
 export class EmployeeController {
@@ -27,4 +28,9 @@ export class EmployeeController {
     // getActiveEmployee( @Param('showroomId') showroomId: number) : Promise <number>{
     //     return this.employeeService.getActiveEmployees(showroomId);
     // }
+
+    @Put('updateEmployee')
+    updateEmployee(updateEmployeeDto:UpdateEmployeeDto): Promise<Employee>{
+        return this.employeeService.updateEmployee(updateEmployeeDto);
+    }
 }

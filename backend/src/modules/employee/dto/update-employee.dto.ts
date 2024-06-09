@@ -1,4 +1,4 @@
-import { IsNotEmpty } from "class-validator";
+import { IsNotEmpty, IsOptional } from "class-validator";
 import { EmployeeStatus } from "../employee-status.enum";
 
 export class UpdateEmployeeDto{
@@ -23,6 +23,24 @@ export class UpdateEmployeeDto{
     @IsNotEmpty()
     employee_email: string;
 
-    // @IsNotEmpty()    
+    @IsNotEmpty()    
+    employee_salary: number;
+
+    @IsNotEmpty()
+    joining_date: Date;
+
+    @IsOptional()
+    Termination_date: Date;
+
+    @IsNotEmpty()
+    shift_time: string;
+
+    @IsNotEmpty()
+    total_leaves: number;
+
+    @IsNotEmpty()
+    available_leaves: number;
+
+    
 
 }

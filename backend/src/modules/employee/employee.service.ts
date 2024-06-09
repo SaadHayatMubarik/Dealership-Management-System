@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository } from 'typeorm';
 import { Showroom } from '../showroom/entity/Showroom';
 import { EmployeeStatus } from './employee-status.enum';
+import { UpdateEmployeeDto } from './dto/update-employee.dto';
 
 @Injectable()
 export class EmployeeService {
@@ -46,9 +47,27 @@ export class EmployeeService {
         }
     }
 
-    async updateEmployee(): Promise<Employee>{
-        
-        return
+    async updateEmployee(updateEmployeeDto: UpdateEmployeeDto): Promise<Employee>{
+        const {
+             employee_id, Termination_date, available_leaves, employee_cnic, employee_email, employee_name, 
+            employee_phone_no, employee_position, employee_salary, employee_status, 
+            joining_date, shift_time, total_leaves 
+        } = updateEmployeeDto;
+        const employee = await this.employeeRepo.findOneBy({employee_id:employee_id});
+        employee.Termination_date = Termination_date;
+        employee.available_leaves = available_leaves;
+        employee.employee_cnic = employee_cnic;
+        employee.employee_email = employee_email;
+        employee.employee_name = employee_name;
+        employee.employee_phone_no = employee_phone_no;
+        employee.employee_position = employee_position;
+        employee.employee_salary = employee_salary;
+        employee.employee_status = employee_status;
+        employee.joining_date = joining_date;
+        employee.shift_time = shift_time;
+        employee.total_leaves = total_leaves;
+
+        return await this.employeeRepo.save(employee);
     }
 
 //     async getActiveEmployees(showroomId:number):Promise<number>{
