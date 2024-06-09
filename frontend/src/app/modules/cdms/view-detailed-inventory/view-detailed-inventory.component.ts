@@ -93,10 +93,11 @@ notification : INotification =
   loadImages: any[] = [];
    loadImagesUrls: string[] = [];
    images:any[] =[];
+   type:string ='inventory pictures'
 
    getImages() {
     this.apiService
-      .get(`/picture/getPicture/${this.inventoryId}`)
+      .get(`/picture/getPicture/${this.inventoryId}/${this.type}`)
       .subscribe(
         (data: any[]) => {
           this.loadImages = data;
@@ -147,7 +148,6 @@ notification : INotification =
   }
 
   navigateToDocuments() {
-
     console.log('document button working');
     console.log('id',this.inventoryId)
     this.router.navigate([`/documents/${this.inventoryId}`]);

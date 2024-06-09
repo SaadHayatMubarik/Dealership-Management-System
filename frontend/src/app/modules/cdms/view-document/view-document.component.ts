@@ -20,7 +20,7 @@ export class ViewDocumentComponent implements OnInit {
   loadImages: any[] = [];
   loadImagesUrls: string[] = [];
   images:any[] =[];
-
+  type:string ='inventory documents' 
 
   constructor(
     private apiService : ApiHelperService,
@@ -40,7 +40,7 @@ export class ViewDocumentComponent implements OnInit {
 
   loadDocuments(){
 
-      this.apiService.get(`/picture/getPicture/${this.inventoryId}`)
+      this.apiService.get(`/picture/getPicture/${this.inventoryId}/${this.type}`)
       .subscribe(
         (data: any[]) => {
           this.loadImages = data;
