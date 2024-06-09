@@ -6,7 +6,7 @@ import { EmployeePerformance } from "../employee-performance.enum";
 import { EmployeeStatus } from "../employee-status.enum";
 
 @Entity({ name: 'employee'})
-@Unique(['employee_cnic','employee_phone_no',])
+@Unique(['employee_phone_no',])
 export class Employee{
 
     @PrimaryGeneratedColumn()

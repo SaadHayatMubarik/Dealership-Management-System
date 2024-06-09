@@ -37,7 +37,7 @@ export class InventoryController {
     }
 
     @Get('getMarketInventory/:showroomId/:status')
-    getMarketInventory(@Param('showroomId') showroomId:number, @Param('status') status: InventoryStatus): Promise <GetInventroyDto[]>{
+    getMarketInventory(@Param('showroomId') showroomId:number, @Param('status') status: InventoryStatus): Promise <Inventory[]>{
         // console.log(getInventoryByFilterDto);
         // console.log(showroomId,status)
         return this.inventoryService.getMarketInventory(showroomId, status);

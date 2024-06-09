@@ -165,12 +165,13 @@ export class InventoryService {
          
     }
 
-    async getMarketInventory(showroomId: number, status:InventoryStatus): Promise<GetInventroyDto[]>{
+    async getMarketInventory(showroomId: number, status:InventoryStatus): Promise<Inventory[]>{
 
         // const { status, Keyword, showroomId } = getInventoryByFilterDto;
                 // console.log(showroomId,status)
         const getData = this.inventoryRepository.createQueryBuilder('inventory')
         .leftJoin(VehicleType,'vehicleType', 'inventory.vehicleTypeTypeId = vehicleType.type_id')
+        // .leftJoin(Picture,'picture','inventory.inventory_id = picture.inventoryInventoryId')
         .select(['inventory_id as  inventoryId','make as vehicleMake','model as vehicleModel', 'variant as vehicleVariant', 'year as modelYear','demand', 'mileage', 'comments', 'vehicleType.type_name as vehicleType','grade'])
         .where('inventory.status = :status',{status})
         // .orWhere('(LOWER(`inventory`.`make`) LIKE LOWER(:Keyword) OR LOWER(inventory.model) LIKE LOWER(:Keyword) OR LOWER(inventory.variant) LIKE LOWER(:Keyword) OR inventory.year LIKE :Keyword OR inventory.demand LIKE :Keyword OR LOWER(inventory.color) LIKE LOWER(:Keyword) OR inventory.grade LIKE :Keyword )')
@@ -178,6 +179,7 @@ export class InventoryService {
         // if(Keyword)
         // getData.where('(LOWER(`inventory`.`make`) LIKE LOWER(:Keyword) OR LOWER(inventory.model) LIKE LOWER(:Keyword) OR LOWER(inventory.variant) LIKE LOWER(:Keyword) OR inventory.year LIKE :Keyword OR inventory.demand LIKE :Keyword OR LOWER(inventory.color) LIKE LOWER(:Keyword) OR inventory.grade LIKE :Keyword )')
         const result = await getData.getRawMany();
+        // const result = await this.inventoryRepository.find({select:['inventory_id','make','model','variant','year','demand','mileage','comments','vehicleType','grade','pictures'],where:{showroom:{showroom_id:showroomId},status:status}});
         // console.log(result);
         return result;
     }

@@ -46,6 +46,11 @@ export class EmployeeService {
         }
     }
 
+    async updateEmployee(): Promise<Employee>{
+        
+        return
+    }
+
 //     async getActiveEmployees(showroomId:number):Promise<number>{
 //         return 
 // }
