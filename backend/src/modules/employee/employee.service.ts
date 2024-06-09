@@ -38,6 +38,9 @@ export class EmployeeService {
     async getEmployees(showroomId:number): Promise<Employee[]>{
         return await this.employeeRepo.findBy({showroom: {showroom_id:showroomId}})
     }
+    async getEmployeeDetailsById(employeeId): Promise<Employee>{
+        return await this.employeeRepo.findOneBy({employee_id:employeeId});
+    }
 
     async deleteEmployee(employeeId: number): Promise<DeleteResult>{
         try{
@@ -46,6 +49,7 @@ export class EmployeeService {
             throw new BadRequestException('This employee can not be deleted');
         }
     }
+
 
     async updateEmployee(updateEmployeeDto: UpdateEmployeeDto): Promise<Employee>{
         const {
