@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Permission } from './entities/permission';
 import { privateDecrypt } from 'crypto';
-import { In, Repository } from 'typeorm';
+import { DeleteResult, In, Repository } from 'typeorm';
 import { ActionType } from './action-type.enum';
 import { Component } from './entities/component';
 // import { GetComponentWithPermissionDto} from './getComponentWithPermission.dto';
@@ -63,8 +63,8 @@ export class RoleBasedService {
             // }
             
         }
-        console.log(permissionObj+"array");
-        console.log(permissionObj.length);
+        // console.log(permissionObj+"array");
+        // console.log(permissionObj.length);
         let rolePermissionObj: RolePermission[] = [];
         
         for(let k=0; k<permissionObj.length; k++){
@@ -74,6 +74,10 @@ export class RoleBasedService {
             rolePermissionObj.push(await this.rolePermissionRepository.save(rolePermission));
         }
         return rolePermissionObj;
+    }
+
+    async deleteRole(): Promise<DeleteResult>{
+        return await this.roleRepository.delete
     }
 
     async getComponent (): Promise<Component[]>{
