@@ -1,5 +1,6 @@
 import { IsNotEmpty, IsNumber, IsOptional, IsString, MaxLength, MinLength } from "class-validator";
 import { UserRole } from "../user-role.enum";
+import { Role } from "src/modules/role-based/entities/Role";
 
 export class UpdateUserDto{
     
@@ -18,5 +19,5 @@ export class UpdateUserDto{
     email?: string;
 
     @IsOptional()
-    role?: UserRole;
+    role?: Role;
 }
