@@ -387,7 +387,7 @@
     <div class="ui-g ui-fluid">
         <div class="ui-g-12">
           <div class="card">
-            <form (ngSubmit)="onSubmit()" #expenses="ngForm" >
+            <form (ngSubmit)="onUpdate()" #updated_employee="ngForm" >
                 <div class="row-form grid">
                   <div class="col-4">
                     <div class="p-field">
@@ -401,6 +401,7 @@
                       required
                       pattern="^\S(?:\s*\S)*$"
                       (keypress)="validateAlphabeticInput($event)"
+                      [(ngModel)]="update_employee.employee_name"
                       />    
                       <!-- <div *ngIf="fullName.invalid && (fullName.dirty || fullName.touched)" class="p-error">
                           <span *ngIf="fullName.errors?.['required']">
@@ -427,7 +428,7 @@
                          minlength="13"
                          maxlength="13"
                          pattern="[0-9]*"
-                         [(ngModel)]="employee.employeeCnic"
+                         [(ngModel)]="update_employee.employee_cnic"
   
                          />
                          <div *ngIf="cnic.invalid && (cnic.dirty || cnic.touched)" class="p-error">
@@ -448,7 +449,7 @@
                           required
                           pInputText
                           name="position"
-                          [(ngModel)]="employee.employeePosition"
+                          [(ngModel)]="update_employee.employee_position"
                           minlength="2"
                           maxlength="30"
                           required
@@ -478,7 +479,7 @@
                            [options]="status" 
                            class="p-inputtext-lg" 
                            name="customer_type"
-                           [(ngModel)]="employee.employeeStatus"
+                           [(ngModel)]="update_employee.employee_status"
                            #Status = "ngModel"
                            ></p-dropdown>
       
@@ -499,7 +500,7 @@
                           required
                           minlength="11"
                           maxlength="11"
-                          [(ngModel)]="employee.employeePhoneNo"
+                          [(ngModel)]="update_employee.employee_phone_no"
                           pattern="^(03\d{9})$"
                           (keypress)="validateNumericInput($event)"
                           #phoneNo ='ngModel'
@@ -525,7 +526,7 @@
                           pTooltip="Please enter valid email"
                           required
                           email
-                          [(ngModel)]="employee.employeeEmail"
+                          [(ngModel)]="update_employee.employee_email"
                           #email = "ngModel"
                         />
         
@@ -549,7 +550,7 @@
                               currency="PKR"
                               locale="en-US"
                               name="costPrice"
-                              [(ngModel)]="employee.employeeSalary"
+                              [(ngModel)]="update_employee.employee_salary"
                               [required]="true"
                               pattern="^\d+$"
                               #cost="ngModel"
@@ -566,15 +567,25 @@
                     </div>
                     <div class="col-4">
                       <div class="p-field">
-                        <label><b>Joining Date:</b></label> <br>
+                        <label><b>Termination Date:</b></label> <br>
                         <p-calendar
                         [readonlyInput]="true"
                         class="p-inputtext-lg"
-                        name="joining date"
-                        [disabled]="true"
+                        name="termination_date"
+                        [(ngModel)]="update_employee.Termination_date"
+                        [required]="true"
+                        #dop = "ngModel"
                       ></p-calendar>
+    
+                      <div *ngIf="dop.invalid && (dop.dirty || dop.touched)" class="p-error">
+                        <span *ngIf="dop.errors?.['required']">
+                         Termination date is required.
+                        </span>
+                        <br>
+                    </div>
                       </div>
                     </div>
+                   
                     <div class="col-4">
                       <div class="p-field">
                         <label><b>Shift Time:</b></label> <br>
@@ -584,7 +595,7 @@
                             pInputText
                             class="p-inputtext-lg"
                             required
-                            [(ngModel)]="employee.shiftTime"
+                            [(ngModel)]="update_employee.shift_time"
                             #shift = "ngModel"
                           />
                       </div>
@@ -595,12 +606,12 @@
                       <div class="p-field">
                         <label><b>Total Allowed Leaves (yearly):</b></label> <br>
                         <input
-                        name="leaves"
-                        type="leaves"
+                        name="leaves_allowed"
+                        type="text"
                         pInputText
                         class="p-inputtext-lg"
                         required
-                        [(ngModel)]="employee.totalLeaves"
+                        [(ngModel)]="update_employee.total_leaves"
                         #leaves="ngModel"
                          [min]="0"
                          [max]="365"
@@ -619,11 +630,11 @@
                         <label><b>Available Leaves:</b></label> <br>
                         <input
                         name="leaves"
-                        type="leaves"
+                        type="text"
                         pInputText
                         class="p-inputtext-lg"
                         required
-                        [(ngModel)]="employee.totalLeaves"
+                        [(ngModel)]="update_employee.available_leaves"
                         #leaves="ngModel"
                          [min]="0"
                          [max]="365"
@@ -639,22 +650,24 @@
                     </div>
                     <div class="col-4">
                       <div class="p-field">
-                        <label><b>Termination Date:</b></label> <br>
-                        <p-calendar
+                        <label><b>Joining Date:</b></label> <br>
+                        <input
+                        name="join_date"
+                        type="text"
+                        pInputText
+                        class="p-inputtext-lg"
+                        [disabled]="true"
+                        [(ngModel)]="update_employee.joining_date"
+                        #joining_date="ngModel"
+                        
+                      />
+                        <!-- <p-calendar
                         [readonlyInput]="true"
                         class="p-inputtext-lg"
                         name="joining date"
-                        [(ngModel)]="employee.joiningDate"
-                        [required]="true"
-                        #dop = "ngModel"
-                      ></p-calendar>
-    
-                      <div *ngIf="dop.invalid && (dop.dirty || dop.touched)" class="p-error">
-                        <span *ngIf="dop.errors?.['required']">
-                         Termination date is required.
-                        </span>
-                        <br>
-                    </div>
+                        [disabled]="true"
+                        [(ngModel)]="update_employee.joining_date"
+                      ></p-calendar> -->
                       </div>
                     </div>
 
