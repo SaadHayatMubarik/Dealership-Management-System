@@ -34,6 +34,7 @@ export class EmployeesDetailComponent extends BaseComponent implements OnInit {
 
   update_employee : IUpdateEmployee = 
   {
+    employee_id: 0,
     employee_name : '',
     employee_cnic: '',
     employee_position: '',

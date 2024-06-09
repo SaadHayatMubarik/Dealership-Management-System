@@ -75,6 +75,7 @@ export interface IUpdateInventory {
 
 export interface IUpdateEmployee
 {
+  employee_id:number;
   employee_name: string,
   employee_cnic: string,
   employee_position: string,
