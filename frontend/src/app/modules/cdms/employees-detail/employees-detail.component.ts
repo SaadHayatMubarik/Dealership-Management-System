@@ -13,6 +13,7 @@ import { ApiHelperService } from 'src/app/shared/services/api-helper.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
 import { NgForm } from '@angular/forms';
 import { IEmployee } from '../../interfaces';
+import { IUpdateEmployee } from '../../interfaces/update';
 
 @Component({
   selector: 'app-employees-detail',
@@ -30,6 +31,26 @@ export class EmployeesDetailComponent extends BaseComponent implements OnInit {
   showroomId : any = localStorage.getItem('Showroom Id'); 
 
   employeeId:any='';
+
+  update_employee : IUpdateEmployee = 
+  {
+    employee_name : '',
+    employee_cnic: '',
+    employee_position: '',
+    employee_status: '',
+    employee_phone_no: '',
+    employee_email: '',
+    employee_salary:0,
+    joining_date: new Date(),
+    Termination_date: new Date(),
+    shift_time: '',
+    bonus: 0,
+    total_leaves:0,
+    available_leaves:0,
+    performance:'',
+    showroomId: +this.showroomId
+
+  }
 
   employee : IEmployee = 
   { 
@@ -122,6 +143,8 @@ export class EmployeesDetailComponent extends BaseComponent implements OnInit {
         command: (event) => {
           this.employeeId = event.employee_id;
           this.showDialog();
+          this.getEmployeeId(this.employeeId);
+          
         },
         permission: 'update.manageEmployee'
       }
@@ -132,6 +155,7 @@ export class EmployeesDetailComponent extends BaseComponent implements OnInit {
   }
     
   @ViewChild('employee') EmployeeForm!: NgForm;
+  @ViewChild('updated_employee') updated_employee!: NgForm;
 
 
   display: boolean = false;
@@ -163,6 +187,43 @@ getEmployee(){
     console.log('employee data:', this.data);
   });
 }
+
+getEmployeeId(employeeid: number){
+  this.apiService.get(`/employee/getEmployeeDetailsById/${employeeid}`).subscribe((data: IUpdateEmployee) => 
+    {
+      this.update_employee = data;
+      console.log('data by id of employee', this.update_employee);
+      console.log(this.update_employee);
+      
+    })
+}
+
+onUpdate(){
+
+  if (this.updated_employee.valid){
+    this.apiService.put('/employee/updateEmployee', this.update_employee).subscribe({
+      next: (response) => {
+        this.toast.showSuccess('User information updated.');
+        this.display = false;
+        this.getEmployee();
+        console.log('updated_user', this.update_employee);
+        this.updated_employee.reset();
+      },
+      error: () => {
+        this.toast.showError('Server Error! Please try again later.');
+        console.log('updated_user', this.update_employee);
+      },
+    });
+  }
+
+  else {
+    this.toast.showError('Please fill the form correctly');
+  }
+
+}
+
+
+
 
 
   onSubmit(){

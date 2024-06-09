@@ -155,9 +155,11 @@ export class ManageEmployeeComponent extends BaseComponent implements OnInit {
         this.toast.showSuccess('User information updated.');
         this.updateSidebarVisible = false;
         this.getemployee();
+        console.log('updated_user', this.update_user);
       },
       error: () => {
         this.toast.showError('Server Error! Please try again later.');
+        console.log('updated_user', this.update_user);
       },
     });
   }

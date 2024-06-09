@@ -72,3 +72,22 @@ export interface IUpdateInventory {
     date_of_purchase: Date | string ;
  
 }
+
+export interface IUpdateEmployee
+{
+  employee_name: string,
+  employee_cnic: string,
+  employee_position: string,
+  employee_status: string,
+  employee_phone_no: string,
+  employee_email: string,
+  employee_salary: number,
+  joining_date: Date,
+  Termination_date: Date,
+  shift_time: string,
+  bonus: number,
+  total_leaves:number,
+  available_leaves:number,
+  performance:string;
+  showroomId: number;
+}
