@@ -6,6 +6,7 @@ import { Component } from './entities/component';
 import { RolePermission } from './entities/Role-Permission';
 import { AddRolePermissionDto } from './dto/addRolePermission.dto';
 import { Role } from './entities/Role';
+import { DeleteResult } from 'typeorm';
 
 @Controller('role-based')
 export class RoleBasedController {
@@ -43,8 +44,8 @@ export class RoleBasedController {
     }
 
     @Delete('deleteRole/:roleId')
-    deleteRole(@Param('roleId') roleId: number): Promise<Role>{
-        return
+    deleteRole(@Param('roleId') roleId: number): Promise<DeleteResult>{
+        return this.roleBasedService.deleteRole(roleId);
     }
 
     @Patch('updateRole/:roleId/:roleName')

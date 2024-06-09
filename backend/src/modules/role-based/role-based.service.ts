@@ -76,8 +76,11 @@ export class RoleBasedService {
         return rolePermissionObj;
     }
 
-    async deleteRole(): Promise<DeleteResult>{
-        return await this.roleRepository.delete
+    async deleteRole(roleId: number): Promise<DeleteResult>{
+        if(roleId){
+        await this.rolePermissionRepository.delete({role:{role_id:roleId}});
+        return await this.roleRepository.delete({role_id:roleId});
+        }
     }
 
     async getComponent (): Promise<Component[]>{
