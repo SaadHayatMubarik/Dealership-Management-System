@@ -192,7 +192,7 @@ export class AuthService {
     const user = await this.userRepository.findOneBy({user_id:user_Id});
     user.user_name = user_name;
     user.email = email;
-    user.role.role_name = role;
+    user.role = role;
   return await this.userRepository.save(user);
   }
 

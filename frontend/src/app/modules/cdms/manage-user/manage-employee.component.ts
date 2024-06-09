@@ -150,6 +150,7 @@ export class ManageEmployeeComponent extends BaseComponent implements OnInit {
   }
 
   update() {
+    console.log(this.update_user);
     this.apiService.put('/auth/updateUserDetails', this.update_user).subscribe({
       next: (response) => {
         this.toast.showSuccess('User information updated.');

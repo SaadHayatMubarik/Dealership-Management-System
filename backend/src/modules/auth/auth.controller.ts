@@ -45,7 +45,7 @@ export class AuthController {
 
   @Put('updateUserDetails')
   updateUserDetails(@Body() updateUserDto:UpdateUserDto):Promise <User>{
-    // console.log(updateUserDto);
+    console.log(updateUserDto);
     return this.authService.updateUserDetails(updateUserDto);
   }
 
