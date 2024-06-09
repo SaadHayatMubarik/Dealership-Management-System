@@ -614,6 +614,50 @@
                        </div>
                       </div>
                     </div>
+                    <div class="col-4">
+                      <div class="p-field">
+                        <label><b>Available Leaves:</b></label> <br>
+                        <input
+                        name="leaves"
+                        type="leaves"
+                        pInputText
+                        class="p-inputtext-lg"
+                        required
+                        [(ngModel)]="employee.totalLeaves"
+                        #leaves="ngModel"
+                         [min]="0"
+                         [max]="365"
+                        pattern="\d*"
+                      />
+                      <div *ngIf="leaves.invalid && (leaves.dirty || leaves.touched)" class="p-error">
+                              <span *ngIf="leaves.errors?.['required']">
+                                Please Enter leaves days.
+                              </span>
+                              <br>
+                       </div>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="p-field">
+                        <label><b>Termination Date:</b></label> <br>
+                        <p-calendar
+                        [readonlyInput]="true"
+                        class="p-inputtext-lg"
+                        name="joining date"
+                        [(ngModel)]="employee.joiningDate"
+                        [required]="true"
+                        #dop = "ngModel"
+                      ></p-calendar>
+    
+                      <div *ngIf="dop.invalid && (dop.dirty || dop.touched)" class="p-error">
+                        <span *ngIf="dop.errors?.['required']">
+                         Termination date is required.
+                        </span>
+                        <br>
+                    </div>
+                      </div>
+                    </div>
+
                   </div>
                   <br>
                   <br>
