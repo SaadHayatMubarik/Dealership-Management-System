@@ -35,6 +35,7 @@ export class ExpenseTrackerComponent extends BaseComponent {
 
   @ViewChild('expenses') expenseForm!: NgForm;
   display: boolean = false;
+  expense_id: number = 0;
 
   showDialog() {
     this.display = true;
@@ -77,6 +78,18 @@ export class ExpenseTrackerComponent extends BaseComponent {
           label: 'Delete',
           icon: 'pi pi-file-edit',
           command: (event) => {
+            this.expense_id = event.expense_id;
+            this.apiService.delete(`/auth/deleteUser/`).subscribe({
+              next: (response) => {
+                this.getExpenses();
+                this.toast.showSuccess(`Record deleted.`);
+              },
+              error: () => {
+                this.toast.showError('System Error');
+              },
+              
+            });
+            
 
           },
           permission: 'delete.expense'
@@ -114,6 +127,11 @@ export class ExpenseTrackerComponent extends BaseComponent {
   }
 
   getExpenses(){
+    this.apiService
+    .get(`/auth/getUsers/`)
+    .subscribe((data) => {
+      this.data = data;
+    });
 
   }
 }
