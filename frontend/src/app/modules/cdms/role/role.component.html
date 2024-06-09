@@ -94,3 +94,38 @@
     </div>
   </p-sidebar>
 </div>
+
+
+<p-dialog  header="Update Role Name" [(visible)]="display" [modal]="true" [closable]="true" [dismissableMask]="true" [style]="{width: '50vw'}">
+  <div class="ui-g ui-fluid">
+      <div class="ui-g-12">
+        <div class="card">
+          <form (ngSubmit)="updateRole()" #updatedRoleForm="ngForm" >
+              <div class="row-form grid">
+                <div class="col-4">
+                  <div class="p-field ">
+                    <label><b>Role Name:</b></label> <br>
+                    <input
+                      name="updated_name"
+                      type="text"
+                      pInputText
+                      class="w-full md:w-20rem mb-5"
+                      style="padding: 1rem"
+                      minlength="4"
+                      maxlength="30"
+                      required
+                      [(ngModel)]="updateRoleName"
+                    />
+                  </div> 
+                </div>
+              </div>
+               
+                <div class="sidebar-footer flex justify-content-end">
+                    <app-button label="Update" styleClass="p-button-sm p-button-rounded" type="submit" ></app-button>
+                  </div>
+            </form>
+          </div>
+      </div>
+   
+  </div>
+</p-dialog>

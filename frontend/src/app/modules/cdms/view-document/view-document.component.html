@@ -1,15 +1,23 @@
 
 
+<div class="mx-auto mt-3">
+  <div class="align-items-center justify-content-center center">
+    <div *ngFor="let image of images">
+      <img [src]="image.itemImageSrc" style="width: 100%; margin: 0 auto;" />
+    </div>
+  </div>
+</div>
+
   
 
-  <div class="col-12 xl:col-12">
+  <!-- <div class="col-12 xl:col-12">
     <div class="card">
   
     <div class="flex justify-content-between">
         <h4>Documents</h4>
         <br> 
     </div>
-    <div class="container mt-4">
+    <div class="container mt-4"> -->
     
         
         <!-- <p-galleria
@@ -26,7 +34,7 @@
     </ng-template>
 </p-galleria> -->
 
-        <div class="row mt-4" *ngIf="images.length === 0">
+        <!-- <div class="row mt-4" *ngIf="images.length === 0">
           <div class="col-12">
             <p>No documents available.</p>
           </div>
@@ -35,6 +43,6 @@
   
             </div>    
         </div>    
-  
+   -->
   
   
