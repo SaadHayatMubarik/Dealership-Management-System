@@ -8,11 +8,11 @@ import { INotification } from '../../interfaces';
 import { Router } from '@angular/router';
 
 
-const typeImages = 'inventory pictures';
+// const typeImages = 'inventory pictures';
 
 
-const getFileUrl = (type: string, key: string): string => {
-  return `https://d-m-s.s3.ap-southeast-2.amazonaws.com/${type}/${key}`;
+const getFileUrl = (key: string): string => {
+  return `https://d-m-s.s3.ap-southeast-2.amazonaws.com/${key}`;
 };
 
 @Component({
@@ -102,7 +102,7 @@ notification : INotification =
         (data: any[]) => {
           this.loadImages = data;
           console.log('inventory images:', this.loadImages);
-          this.loadImagesUrls = this.loadImages.map((obj: any) => getFileUrl(typeImages,obj.link));
+          this.loadImagesUrls = this.loadImages.map((obj: any) => getFileUrl(obj.link));
           console.log('url from s3:', this.loadImagesUrls);
           this.images = this.loadImagesUrls.map(url => ({ itemImageSrc: url }));
           console.log('images',this.images)
