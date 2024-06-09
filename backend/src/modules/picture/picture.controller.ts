@@ -25,10 +25,7 @@ export class PictureController {
       pictures: Express.Multer.File[],
       @Param('pictureType') pictureType: string,
       @Param('inventoryId') inventoryId: number
-    ): Promise<Picture> {
-      // console.log("pictures",pictures)
-      // console.log("type", pictureType)
-      // console.log("id",inventoryId)
+    ): Promise<Picture[]> {
       return this.pictureService.addPictures(pictures,pictureType,inventoryId);
     }
 

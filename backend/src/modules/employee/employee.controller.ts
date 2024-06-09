@@ -36,6 +36,7 @@ export class EmployeeController {
 
     @Put('updateEmployee')
     updateEmployee(updateEmployeeDto:UpdateEmployeeDto): Promise<Employee>{
+        console.log(updateEmployeeDto);
         return this.employeeService.updateEmployee(updateEmployeeDto);
     }
 }

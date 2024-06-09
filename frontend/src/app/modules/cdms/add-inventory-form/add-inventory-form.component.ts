@@ -548,6 +548,7 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
       for (let i = 0; i < this.selectedImages.length; i++) {
         formObjImages.append('files', this.selectedImages[i]);
       }
+      // console.log(formObjImages);
       this.apiService.postPicture(`/picture/${pictureTypeImages}/${this.inventoryObj.inventory_id}`, formObjImages)
         .subscribe(response => {
           console.log('Upload Images:', response);
@@ -567,10 +568,11 @@ export class AddInventoryFormComponent extends BaseComponent implements OnInit {
         .subscribe(response => {
           console.log('Upload Documents:', response);
           this.toast.showSuccess('Vehicle Added');
-          this.closeModal();
           this.InventoryForm.reset();
           this.SellerForm.reset();
           this.uploadForm.reset();
+          this.closeModal();
+          this.getInventory();
         }, error => {
           this.toast.showError('Error Uploading Documents');
          
