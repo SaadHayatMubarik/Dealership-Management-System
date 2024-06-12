@@ -15,9 +15,9 @@ export class S3Service {
     // initializing s3 client
     this.s3 = new S3Client({
       credentials: {
-        accessKeyId: 'AKIAZI2LGWUFHKKODIOG',
+        accessKeyId: 'xxxxxxxxxxxxxxx',
         secretAccessKey:
-          '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',
+          'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
       },
       region: 'ap-southeast-2',
     });
